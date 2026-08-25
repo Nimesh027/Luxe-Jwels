@@ -10,7 +10,7 @@ interface BadgeProps {
 }
 
 const variantClasses: Record<BadgeVariant, string> = {
-  count: "flex h-5 w-5 items-center justify-center rounded-full bg-gold text-[10px] font-semibold text-ink",
+  count: "flex h-4 w-4 sm:h-4.5 sm:w-4.5 items-center justify-center rounded-full bg-wine text-[9px] sm:text-[10px] font-semibold text-surface shadow-xs",
   status: "px-2 py-0.5 text-[10px] uppercase tracking-wide bg-cream-dark text-ink",
   sale: "px-2 py-0.5 text-[10px] uppercase tracking-wide bg-ink text-cream",
 };
