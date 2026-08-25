@@ -6,7 +6,12 @@ export interface Product {
   compareAtPrice?: number;
   image: string;
   category: string; // category slug
+  gender?: "men" | "women" | "unisex";
+  collections?: string[];
   isBestseller?: boolean;
+  isMostViewed?: boolean;
+  isMostSold?: boolean;
+  badge?: string;
   description?: string;
 }
 

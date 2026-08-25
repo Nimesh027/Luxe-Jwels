@@ -3,9 +3,7 @@ import { notFound } from "next/navigation";
 import { categoriesData } from "@/store/slices/categoriesSlice";
 import CategoryProductsClient from "./CategoryProductsClient";
 
-export function generateStaticParams() {
-  return categoriesData.map((category) => ({ slug: category.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
@@ -28,12 +26,30 @@ export async function generateMetadata({
 
 export default async function CategoryPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { slug } = await params;
   const exists = categoriesData.some((item) => item.slug === slug);
   if (!exists) notFound();
 
-  return <CategoryProductsClient slug={slug} />;
+  const resolvedSearchParams = searchParams ? await searchParams : {};
+  const initialGender =
+    typeof resolvedSearchParams.gender === "string"
+      ? resolvedSearchParams.gender
+      : undefined;
+  const initialCollection =
+    typeof resolvedSearchParams.collection === "string"
+      ? resolvedSearchParams.collection
+      : undefined;
+
+  return (
+    <CategoryProductsClient
+      slug={slug}
+      initialGender={initialGender}
+      initialCollection={initialCollection}
+    />
+  );
 }

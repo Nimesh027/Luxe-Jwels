@@ -100,7 +100,6 @@ export default function CategoryGrid() {
     <Section className="bg-white">
       {/* Common Section Header */}
       <SectionTitle
-        tagline="CURATED COLLECTIONS"
         title="Shop By Collection"
         description="Discover masterfully crafted jewellery across our signature collections."
         align="center"

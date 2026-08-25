@@ -1,20 +1,44 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo } from "react";
+import { useMemo, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Section from "@/components/common/Section";
 import ProductCard from "@/components/common/ProductCard";
 import { useAppSelector } from "@/store/hooks";
+import { filterProducts } from "@/lib/productFilter";
 
-export default function CollectionDetailClient({ slug }: { slug: string }) {
+function CollectionDetailContent({
+  slug,
+  initialGender,
+  initialCategory,
+}: {
+  slug: string;
+  initialGender?: string;
+  initialCategory?: string;
+}) {
+  const searchParams = useSearchParams();
+  const searchParamGender = searchParams.get("gender");
+  const searchParamCategory = searchParams.get("category");
+
+  const rawGender = searchParamGender !== null ? searchParamGender : initialGender;
+  const rawCategory = searchParamCategory !== null ? searchParamCategory : initialCategory;
+
+  const activeGender = rawGender ? rawGender.toLowerCase().trim() : undefined;
+  const activeCategory = rawCategory ? rawCategory.toLowerCase().trim() : undefined;
+
   const collection = useAppSelector((state) =>
     state.collections.items.find((item) => item.slug === slug)
   );
   const allProducts = useAppSelector((state) => state.products.items);
+
   const products = useMemo(() => {
-    const matchingCategory = allProducts.filter((item) => item.category === slug);
-    return matchingCategory.length > 0 ? matchingCategory : allProducts;
-  }, [allProducts, slug]);
+    return filterProducts(allProducts, {
+      collection: slug,
+      gender: activeGender,
+      category: activeCategory,
+    });
+  }, [allProducts, slug, activeGender, activeCategory]);
 
   if (!collection) return null;
 
@@ -38,13 +62,59 @@ export default function CollectionDetailClient({ slug }: { slug: string }) {
         </div>
       </Section>
 
-      <Section title="Shop The Collection">
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+      <Section title="Shop The Collection" subtitle={`${products.length} products`}>
+        {products.length === 0 ? (
+          <p className="text-sm text-muted">No products found in this collection.</p>
+        ) : (
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
       </Section>
     </>
+  );
+}
+
+function CollectionDetailWrapper({
+  slug,
+  initialGender,
+  initialCategory,
+}: {
+  slug: string;
+  initialGender?: string;
+  initialCategory?: string;
+}) {
+  const searchParams = useSearchParams();
+  const searchKey = `${slug}-${searchParams.toString()}-${initialGender || ""}-${initialCategory || ""}`;
+
+  return (
+    <CollectionDetailContent
+      key={searchKey}
+      slug={slug}
+      initialGender={initialGender}
+      initialCategory={initialCategory}
+    />
+  );
+}
+
+export default function CollectionDetailClient({
+  slug,
+  initialGender,
+  initialCategory,
+}: {
+  slug: string;
+  initialGender?: string;
+  initialCategory?: string;
+}) {
+  return (
+    <Suspense fallback={<div className="min-h-[40vh]" />}>
+      <CollectionDetailWrapper
+        slug={slug}
+        initialGender={initialGender}
+        initialCategory={initialCategory}
+      />
+    </Suspense>
   );
 }

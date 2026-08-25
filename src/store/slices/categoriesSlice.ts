@@ -13,6 +13,7 @@ const initialState: CategoriesState = {
     { id: "cat-bracelets", name: "Bracelets", slug: "bracelets", image: "/images/category/bracelets.jpg" },
     { id: "cat-pendants", name: "Pendants", slug: "pendants", image: "/images/category/pendants.jpg" },
     { id: "cat-mens", name: "Men's Collection", slug: "mens-collection", image: "/images/category/mens-collection.jpg" },
+    { id: "cat-womens", name: "Women's Collection", slug: "womens-collection", image: "/images/product/women-necklace-showcase.png" },
   ],
 };
 

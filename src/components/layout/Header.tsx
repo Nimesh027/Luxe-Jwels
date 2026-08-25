@@ -56,7 +56,7 @@ export default function Header() {
       onMouseLeave={handleMouseLeave}
     >
       {/* TOP ROW: Logo | Search | Other Icons */}
-      <div className="border-b border-border/60 py-3 relative z-50 bg-surface">
+      <div className="py-3 relative z-50 bg-surface">
         <div className="container mx-auto flex items-center justify-between gap-4">
           {/* Mobile Menu Hamburger */}
           <button

@@ -157,7 +157,7 @@ const initialState: SiteContentState = {
   newCollection: {
     title: "Modern Designs. Timeless Craftsmanship.",
     subtitle: "New Collection",
-    image: "https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?auto=format&fit=crop&w=1600&q=85",
+    image: "/images/banner/hero-banner-4.png",
     cta: { label: "Explore New In", href: "/collections" },
   },
   whyChooseUs: [
@@ -215,18 +215,18 @@ const initialState: SiteContentState = {
   brandStory: {
     title: "A Legacy of Perfection",
     body: "Since our inception, Luxe Jewels has stood for uncompromising artistry, ethical sourcing, and timeless design. Each creation represents hundreds of hours of delicate hand-setting by master goldsmiths.",
-    image: "https://images.unsplash.com/photo-1531995811006-35cb42e1a022?auto=format&fit=crop&w=900&q=80",
+    image: "/images/collections/gold-collection.jpg",
     cta: { label: "Our Story", href: "/about" },
   },
   instagram: {
     handle: "@luxe.jewels",
     images: [
-      "/images/product/women-rings-showcase.png",
-      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=500&q=80",
-      "/images/product/women-necklace-showcase.png",
-      "/images/category/mens-collection.jpg",
-      "/images/product/women-festive-showcase.png",
-      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80",
+      "/images/product/diamond-ring.jpg",
+      "/images/product/gold-chain.jpg",
+      "/images/product/black-onyx-bracelet.jpg",
+      "/images/product/cross-pendant.jpg",
+      "/images/product/grand-floral-heritage-necklace.jpg",
+      "/images/product/mens-black-onyx-signet-ring.jpg",
     ],
   },
   newsletter: {

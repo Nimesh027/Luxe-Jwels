@@ -27,14 +27,34 @@ export async function generateMetadata({
   };
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function CollectionPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { slug } = await params;
   const exists = collectionsData.some((item) => item.slug === slug);
   if (!exists) notFound();
 
-  return <CollectionDetailClient slug={slug} />;
+  const resolvedSearchParams = searchParams ? await searchParams : {};
+  const initialGender =
+    typeof resolvedSearchParams.gender === "string"
+      ? resolvedSearchParams.gender
+      : undefined;
+  const initialCategory =
+    typeof resolvedSearchParams.category === "string"
+      ? resolvedSearchParams.category
+      : undefined;
+
+  return (
+    <CollectionDetailClient
+      slug={slug}
+      initialGender={initialGender}
+      initialCategory={initialCategory}
+    />
+  );
 }
