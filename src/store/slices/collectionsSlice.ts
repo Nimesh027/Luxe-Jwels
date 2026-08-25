@@ -11,7 +11,7 @@ const initialState: CollectionsState = {
       id: "col-diamond",
       name: "Diamond Collection",
       slug: "diamond-collection",
-      tagline: "Radiate Brilliance",
+      tagline: "Radiant Brilliance",
       image: "/images/collections/diamond-collection.jpg",
     },
     {

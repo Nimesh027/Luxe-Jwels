@@ -27,7 +27,7 @@ export default function WhyChooseUs() {
       />
 
       {/* 4 Responsive Benefit Cards with Whitespace & Hover Accents */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
         {items.map((item) => {
           const IconComponent = iconMap[item.icon] || featureIconComponents[item.icon] || CertifiedIcon;
 

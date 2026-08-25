@@ -8,116 +8,109 @@ import Button from "@/components/ui/Button";
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 import { useAppSelector } from "@/store/hooks";
 import { cn } from "@/lib/utils";
-import type { Collection } from "@/types";
+import type { Category } from "@/types";
 
 export default function CategoryGrid() {
-  const collections = useAppSelector((state) => state.collections.items);
+  const categories = useAppSelector((state) => state.categories.items);
 
-  if (!collections || collections.length === 0) return null;
+  if (!categories || categories.length === 0) return null;
 
-  const displayCollections = collections.slice(0, 3);
-  const heroItem = displayCollections[0];
-  const secondaryItems = displayCollections.slice(1, 3);
+  // Select the 5 primary jewelry product categories
+  const mainCategories = categories.filter(
+    (c) => c.slug !== "mens-collection" && c.slug !== "womens-collection"
+  );
+  const displayCategories =
+    mainCategories.length >= 5 ? mainCategories.slice(0, 5) : categories.slice(0, 5);
 
-  // Single reusable card render function for all collections with clean, consistent layout & positioning
-  const renderCollectionCard = (
-    item: Collection,
-    isHero: boolean
-  ) => (
-    <Link
-      key={item.id}
-      href={`/collections/${item.slug}`}
-      className={cn(
-        "group relative block w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-ink/20 shadow-sm hover:shadow-xl transition-all duration-500",
-        isHero
-          ? "h-[260px] sm:h-[300px] md:h-[500px] lg:h-[540px]"
-          : "h-[260px] sm:h-[300px] md:h-[238px] lg:h-[258px]"
-      )}
-    >
-      <Image
-        src={item.image}
-        alt={item.name}
-        fill
-        priority={isHero}
-        sizes="(max-width: 768px) 100vw, 50vw"
-        className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-      />
+  const heroCategory = displayCategories[0]; // Hero category (Necklaces)
+  const subCategories = displayCategories.slice(1); // 4 other categories (Earrings, Rings, Bracelets, Pendants)
 
-      {/* Smooth integrated gradient scrim for high-contrast, crystal-clear typography */}
-      <div
-        aria-hidden="true"
+  const categoryTaglines: Record<string, string> = {
+    necklaces: "Chokers & Heritage Chains",
+    earrings: "Studs & Drops",
+    rings: "Solitaires & Bands",
+    bracelets: "Cuffs & Tennis Bangles",
+    pendants: "Diamond Charms",
+  };
+
+  const renderCategoryCard = (item: Category, isHero: boolean) => {
+    const tagline = categoryTaglines[item.slug] || "Handcrafted Fine Jewellery";
+
+    return (
+      <Link
+        key={item.id}
+        href={`/category/${item.slug}`}
         className={cn(
-          "absolute inset-0 transition-opacity duration-500",
+          "group relative block w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-ink/20 shadow-sm hover:shadow-xl transition-all duration-500",
           isHero
-            ? "bg-gradient-to-t from-black/90 via-black/40 to-transparent"
-            : "bg-gradient-to-t from-black/90 via-black/40 to-transparent md:bg-gradient-to-l md:from-black/90 md:via-black/45 md:to-transparent"
-        )}
-      />
-
-      {/* Typography Overlay - Properly aligned, responsive, and legible */}
-      <div
-        className={cn(
-          "absolute inset-0 p-5 sm:p-7 md:p-8 lg:p-10 flex flex-col transition-all duration-300 z-10",
-          isHero
-            ? "justify-end items-center text-center"
-            : "justify-end md:justify-center items-start md:items-end text-left md:text-right"
+            ? "h-[280px] sm:h-[340px] md:h-[500px] lg:h-[520px]"
+            : "h-[220px] sm:h-[240px] md:h-[238px] lg:h-[248px]"
         )}
       >
-        {/* Subtitle / Tagline */}
-        {item.tagline && (
-          <span className="text-[10px] sm:text-xs font-semibold tracking-[0.25em] uppercase text-gold mb-1 sm:mb-1.5 drop-shadow-xs">
-            {item.tagline}
-          </span>
-        )}
+        <Image
+          src={item.image}
+          alt={item.name}
+          fill
+          priority={isHero}
+          sizes={isHero ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
+          className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+        />
 
-        {/* Collection Title */}
-        <h3
-          className={cn(
-            "font-display text-cream font-normal tracking-wide leading-tight drop-shadow-md group-hover:text-gold transition-colors duration-300",
-            isHero
-              ? "text-2xl sm:text-3xl lg:text-4xl"
-              : "text-xl sm:text-2xl lg:text-3xl"
-          )}
-        >
-          {item.name}
-        </h3>
-
-        {/* CTA Link with Arrow */}
+        {/* Multi-stage gradient scrim */}
         <div
-          className={cn(
-            "mt-2 sm:mt-2.5 inline-flex items-center gap-1.5 text-[11px] sm:text-xs tracking-wider uppercase text-gold font-medium drop-shadow-xs group-hover:text-cream transition-colors",
-            isHero && "justify-center"
-          )}
-        >
-          <span>{isHero ? "Explore Collection" : "Shop Now"}</span>
-          <ArrowRightIcon className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-500 group-hover:opacity-90"
+        />
+
+        {/* Subtle border glow on hover */}
+        <div className="absolute inset-0 rounded-2xl sm:rounded-3xl border border-white/10 transition-colors duration-500 group-hover:border-gold/50" />
+
+        {/* Content Typography */}
+        <div className="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col justify-end items-start text-left transition-all duration-300 z-10">
+          <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-1 drop-shadow-xs">
+            {tagline}
+          </span>
+
+          <h3
+            className={cn(
+              "font-display text-cream font-normal tracking-wide leading-tight drop-shadow-md group-hover:text-gold transition-colors duration-300",
+              isHero ? "text-2xl sm:text-3xl lg:text-4xl" : "text-xl sm:text-2xl"
+            )}
+          >
+            {item.name}
+          </h3>
+
+          <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] sm:text-xs tracking-wider uppercase text-gold font-medium drop-shadow-xs group-hover:text-cream transition-colors">
+            <span>Explore {item.name}</span>
+            <ArrowRightIcon className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+          </div>
         </div>
-      </div>
-    </Link>
-  );
+      </Link>
+    );
+  };
 
   return (
     <Section className="bg-white">
-      {/* Common Section Header */}
+      {/* Category Section Header */}
       <SectionTitle
-        title="Shop By Collection"
-        description="Discover masterfully crafted jewellery across our signature collections."
+        title="Shop By Category"
+        description="Discover masterfully crafted jewellery across our signature categories."
         align="center"
       />
 
       <div className="max-w-7xl mx-auto">
-        {/* Asymmetric Bento Layout using single reusable card renderer */}
+        {/* Asymmetric Bento Layout: 1 Hero Category on left, 4 Grid Categories on right */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-          {/* Main Hero Card (1st item) */}
-          {heroItem && renderCollectionCard(heroItem, true)}
+          {/* Main Hero Category Card */}
+          {heroCategory && renderCategoryCard(heroCategory, true)}
 
-          {/* Secondary Stacked Cards (2nd & 3rd items) in a single loop */}
-          <div className="flex flex-col gap-4 sm:gap-6 justify-between h-full">
-            {secondaryItems.map((item) => renderCollectionCard(item, false))}
+          {/* 4 Secondary Category Cards in 2x2 grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            {subCategories.map((item) => renderCategoryCard(item, false))}
           </div>
         </div>
 
-        {/* View All Collections Button */}
+        {/* View All Categories Button */}
         <div className="mt-8 sm:mt-12 text-center">
           <Button
             href="/collections"
@@ -127,7 +120,7 @@ export default function CategoryGrid() {
             rightIcon={<ArrowRightIcon className="w-4 h-4" />}
             className="hover:shadow-md"
           >
-            View All Collections
+            View All Categories
           </Button>
         </div>
       </div>
