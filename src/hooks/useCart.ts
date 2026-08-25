@@ -18,7 +18,9 @@ export function useCart() {
   const subtotal = useAppSelector(selectCartSubtotal);
 
   const add = useCallback(
-    (product: Product, quantity = 1) => dispatch(addItem({ product, quantity })),
+    (product: Product, quantity = 1) => {
+      dispatch(addItem({ product, quantity }));
+    },
     [dispatch]
   );
   const remove = useCallback(

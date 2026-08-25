@@ -8,7 +8,11 @@ import MobileDrawer from "@/components/layout/MobileDrawer";
 import MegaMenu from "@/components/layout/MegaMenu";
 import SearchBar from "@/components/layout/SearchBar";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setMobileDrawerOpen } from "@/store/slices/uiSlice";
+import {
+  setMobileDrawerOpen,
+  setCartDrawerOpen,
+  setWishlistDrawerOpen,
+} from "@/store/slices/uiSlice";
 import { selectCartCount } from "@/store/slices/cartSlice";
 import { selectWishlistItems } from "@/store/slices/wishlistSlice";
 import type { NavLink } from "@/types";
@@ -132,10 +136,11 @@ export default function Header() {
             </Link>
 
             {/* Wishlist / Heart Icon */}
-            <Link
-              href="/wishlist"
-              aria-label="Wishlist"
-              className="relative text-wine hover:text-wine-dark transition-colors p-1"
+            <button
+              type="button"
+              aria-label="Open Wishlist"
+              onClick={() => dispatch(setWishlistDrawerOpen(true))}
+              className="relative text-wine hover:text-wine-dark transition-colors p-1 cursor-pointer"
             >
               <svg
                 className="w-5 h-5 sm:w-[22px] sm:h-[22px]"
@@ -151,13 +156,14 @@ export default function Header() {
               {wishlistCount > 0 && (
                 <Badge className="absolute -right-1.5 -top-1">{wishlistCount}</Badge>
               )}
-            </Link>
+            </button>
 
             {/* Cart / Luxury Shopping Bag Icon */}
-            <Link
-              href="/cart"
-              aria-label="Cart"
-              className="relative text-wine hover:text-wine-dark transition-colors p-1"
+            <button
+              type="button"
+              aria-label="Open Cart"
+              onClick={() => dispatch(setCartDrawerOpen(true))}
+              className="relative text-wine hover:text-wine-dark transition-colors p-1 cursor-pointer"
             >
               <svg
                 className="w-5 h-5 sm:w-[22px] sm:h-[22px]"
@@ -175,7 +181,7 @@ export default function Header() {
               {cartCount > 0 && (
                 <Badge className="absolute -right-1.5 -top-1">{cartCount}</Badge>
               )}
-            </Link>
+            </button>
           </div>
         </div>
       </div>

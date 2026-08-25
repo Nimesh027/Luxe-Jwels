@@ -4,6 +4,8 @@ import ReduxProvider from "@/providers/ReduxProvider";
 import AnnouncementBar from "@/components/layout/AnnouncementBar";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import CartDrawer from "@/components/cart/CartDrawer";
+import WishlistDrawer from "@/components/wishlist/WishlistDrawer";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -52,6 +54,8 @@ export default function RootLayout({
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
+          <CartDrawer />
+          <WishlistDrawer />
         </ReduxProvider>
       </body>
     </html>

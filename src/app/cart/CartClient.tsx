@@ -1,22 +1,92 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import { DeleteOutlined } from "@ant-design/icons";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Section from "@/components/common/Section";
+import SectionTitle from "@/components/common/SectionTitle";
 import Button from "@/components/ui/Button";
 import { useCart } from "@/hooks/useCart";
+import { useWishlist } from "@/hooks/useWishlist";
 import { formatPrice } from "@/lib/utils";
+import {
+  VisaBadge,
+  MastercardBadge,
+  AmexBadge,
+  PaypalBadge,
+  UpiBadge,
+  ApplePayBadge,
+} from "@/components/icons/PaymentIcons";
 
 export default function CartClient() {
-  const { items, subtotal, remove, setQuantity } = useCart();
+  const router = useRouter();
+  const { items, subtotal, count, remove, setQuantity, clear } = useCart();
+  const { toggle: toggleWishlist, isWishlisted } = useWishlist();
 
+  const [promoCode, setPromoCode] = useState("");
+  const [promoApplied, setPromoApplied] = useState(false);
+  const [promoDiscount, setPromoDiscount] = useState(0);
+  const [promoError, setPromoError] = useState("");
+  const [orderNote, setOrderNote] = useState("");
+  const [noteOpen, setNoteOpen] = useState(false);
+
+  const handleApplyPromo = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!promoCode.trim()) return;
+
+    if (promoCode.trim().toUpperCase() === "LUXE10") {
+      const discount = Math.round(subtotal * 0.1);
+      setPromoDiscount(discount);
+      setPromoApplied(true);
+      setPromoError("");
+    } else if (promoCode.trim().toUpperCase() === "WELCOME") {
+      const discount = 2000;
+      setPromoDiscount(discount);
+      setPromoApplied(true);
+      setPromoError("");
+    } else {
+      setPromoError("Invalid code. Try LUXE10 for 10% off!");
+    }
+  };
+
+  const handleRemovePromo = () => {
+    setPromoApplied(false);
+    setPromoDiscount(0);
+    setPromoCode("");
+    setPromoError("");
+  };
+
+  const finalTotal = Math.max(0, subtotal - promoDiscount);
+
+  // Empty Cart View
   if (items.length === 0) {
     return (
-      <Section title="Your Cart">
-        <div className="flex flex-col items-start gap-4">
-          <p className="text-sm text-muted">Your cart is currently empty.</p>
-          <Button href="/collections" variant="dark">
-            Continue Shopping
+      <Section className="py-16 sm:py-24 bg-white">
+        <div className="mx-auto flex max-w-lg flex-col items-center justify-center text-center px-4">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#f6efe9] text-wine mb-6 shadow-xs border border-wine/10">
+            <svg className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+          </div>
+
+          <h1 className="font-display text-2xl sm:text-3xl font-medium text-ink tracking-tight mb-2.5">
+            Your shopping bag is empty
+          </h1>
+          <p className="text-xs sm:text-sm text-muted font-light leading-relaxed mb-8 max-w-sm">
+            Discover our handcrafted collections of rings, necklaces, bracelets, and heirloom jewellery to start building your look.
+          </p>
+
+          <Button
+            href="/collections"
+            variant="fill"
+            colorTheme="wine"
+            size="lg"
+            className="rounded-full px-8 uppercase tracking-wider text-xs sm:text-sm font-semibold shadow-md hover:shadow-lg"
+          >
+            Explore Collections
           </Button>
         </div>
       </Section>
@@ -24,63 +94,349 @@ export default function CartClient() {
   }
 
   return (
-    <Section title="Your Cart">
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
-        <div className="flex flex-col gap-4 lg:col-span-2">
-          {items.map(({ product, quantity }) => (
-            <div key={product.id} className="flex items-center gap-4 border-b border-border pb-4">
-              <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-cream-dark">
-                <Image src={product.image} alt={product.name} fill sizes="80px" className="object-cover" />
+    <div className="bg-[#fcfaf7] min-h-screen py-10 sm:py-14">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Page Header */}
+        <SectionTitle
+          title="Shopping Bag"
+          description="Review your chosen fine jewellery pieces before seamless insured checkout."
+          align="center"
+          className="mb-8 sm:mb-10"
+        />
+
+        {/* Complimentary Insured Shipping Progress Banner */}
+        <div className="mb-8 rounded-2xl border border-gold/30 bg-gradient-to-r from-[#fffcf7] via-[#faf5ec] to-[#fffcf7] p-4 sm:p-5 shadow-2xs">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold-dark font-semibold text-sm">
+                ✦
               </div>
-              <div className="flex flex-1 flex-col gap-1">
-                <span className="text-sm text-ink">{product.name}</span>
-                <span className="text-sm text-muted">{formatPrice(product.price)}</span>
+              <div>
+                <p className="text-xs sm:text-sm font-semibold text-ink">
+                  You Have Unlocked Complimentary Insured Delivery!
+                </p>
+                <p className="text-[11px] sm:text-xs text-muted font-light">
+                  Includes certified hallmarking certificate & signature velvet presentation box.
+                </p>
               </div>
-              <div className="flex items-center border border-border">
-                <button
-                  type="button"
-                  aria-label="Decrease quantity"
-                  className="px-3 py-1 text-ink hover:text-gold"
-                  onClick={() => setQuantity(product.id, quantity - 1)}
-                >
-                  −
-                </button>
-                <span className="w-8 text-center text-sm text-ink">{quantity}</span>
-                <button
-                  type="button"
-                  aria-label="Increase quantity"
-                  className="px-3 py-1 text-ink hover:text-gold"
-                  onClick={() => setQuantity(product.id, quantity + 1)}
-                >
-                  +
-                </button>
-              </div>
-              <span className="w-24 text-right text-sm text-ink">
-                {formatPrice(product.price * quantity)}
-              </span>
-              <button
-                type="button"
-                aria-label="Remove item"
-                onClick={() => remove(product.id)}
-                className="text-muted hover:text-red-500"
-              >
-                <DeleteOutlined />
-              </button>
             </div>
-          ))}
+            <span className="shrink-0 rounded-full bg-gold/20 px-3 py-1 text-[11px] font-semibold text-gold-dark uppercase tracking-wider">
+              Free Shipping Applied
+            </span>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-4 border border-border p-6">
-          <div className="flex items-center justify-between text-sm text-ink">
-            <span>Subtotal</span>
-            <span>{formatPrice(subtotal)}</span>
+        {/* Main 2-Column Cart Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+          {/* Left Column: Cart Items List (8 cols) */}
+          <div className="lg:col-span-8 space-y-6">
+            <div className="rounded-2xl border border-neutral-200/80 bg-white p-5 sm:p-7 shadow-xs">
+              {/* Header Bar */}
+              <div className="hidden sm:grid grid-cols-12 border-b border-neutral-100 pb-3 text-xs uppercase tracking-wider font-semibold text-neutral-500">
+                <span className="col-span-6">Product</span>
+                <span className="col-span-2 text-center">Price</span>
+                <span className="col-span-2 text-center">Quantity</span>
+                <span className="col-span-2 text-right">Total</span>
+              </div>
+
+              {/* Items List */}
+              <div className="divide-y divide-neutral-100">
+                {items.map(({ product, quantity }) => {
+                  const saved = isWishlisted(product.id);
+
+                  return (
+                    <div
+                      key={product.id}
+                      className="py-5 sm:py-6 flex flex-col sm:grid sm:grid-cols-12 sm:items-center gap-4"
+                    >
+                      {/* Product Thumbnail & Details (6 cols on sm) */}
+                      <div className="sm:col-span-6 flex items-center gap-4">
+                        <div className="relative h-20 w-20 sm:h-24 sm:w-24 shrink-0 overflow-hidden rounded-xl border border-neutral-200/80 bg-neutral-50">
+                          <Link href={`/products/${product.slug}`}>
+                            <Image
+                              src={product.image}
+                              alt={product.name}
+                              fill
+                              sizes="96px"
+                              className="object-cover object-center transition-transform duration-500 hover:scale-105"
+                            />
+                          </Link>
+                        </div>
+
+                        <div className="flex-1 min-w-0">
+                          <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-gold">
+                            {product.category?.replace(/-/g, " ") || "Fine Jewellery"}
+                          </span>
+                          <Link href={`/products/${product.slug}`}>
+                            <h3 className="font-display text-sm sm:text-base font-normal text-ink hover:text-wine transition-colors line-clamp-1 mt-0.5">
+                              {product.name}
+                            </h3>
+                          </Link>
+                          <p className="text-[11px] text-muted font-light mt-0.5">
+                            18K Solid Gold • Certified Hallmarked
+                          </p>
+
+                          {/* Mobile-only Price display */}
+                          <div className="sm:hidden mt-1.5 flex items-baseline gap-2">
+                            <span className="text-sm font-semibold text-ink">
+                              {formatPrice(product.price * quantity)}
+                            </span>
+                            {quantity > 1 && (
+                              <span className="text-xs text-muted">
+                                ({formatPrice(product.price)} each)
+                              </span>
+                            )}
+                          </div>
+
+                          {/* Item Action Links */}
+                          <div className="mt-2.5 flex items-center gap-3 text-[11px] text-muted">
+                            <button
+                              type="button"
+                              onClick={() => toggleWishlist(product)}
+                              className="hover:text-wine transition-colors flex items-center gap-1 cursor-pointer"
+                            >
+                              <span>{saved ? "❤️ Saved" : "♡ Save for later"}</span>
+                            </button>
+                            <span>•</span>
+                            <button
+                              type="button"
+                              onClick={() => remove(product.id)}
+                              className="hover:text-red-600 transition-colors cursor-pointer"
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Desktop Unit Price (2 cols) */}
+                      <div className="hidden sm:block sm:col-span-2 text-center text-sm font-medium text-ink">
+                        {formatPrice(product.price)}
+                      </div>
+
+                      {/* Quantity Controller (2 cols) */}
+                      <div className="sm:col-span-2 flex justify-start sm:justify-center">
+                        <div className="inline-flex h-8 items-center rounded-lg border border-neutral-200 bg-neutral-50 shadow-2xs">
+                          <button
+                            type="button"
+                            onClick={() => setQuantity(product.id, Math.max(1, quantity - 1))}
+                            aria-label="Decrease quantity"
+                            className="flex h-8 w-8 items-center justify-center text-neutral-600 hover:bg-neutral-200/50 transition-colors rounded-l-lg cursor-pointer"
+                          >
+                            −
+                          </button>
+                          <span className="w-8 text-center text-xs font-semibold text-neutral-800">
+                            {quantity}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => setQuantity(product.id, quantity + 1)}
+                            aria-label="Increase quantity"
+                            className="flex h-8 w-8 items-center justify-center text-neutral-600 hover:bg-neutral-200/50 transition-colors rounded-r-lg cursor-pointer"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Line Total (2 cols) */}
+                      <div className="hidden sm:block sm:col-span-2 text-right font-display text-sm sm:text-base font-semibold text-ink">
+                        {formatPrice(product.price * quantity)}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Bottom Cart Bar */}
+              <div className="mt-4 pt-4 border-t border-neutral-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                <Link
+                  href="/collections"
+                  className="text-wine hover:text-wine-dark font-medium underline underline-offset-4 transition-colors"
+                >
+                  ← Continue Shopping
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={clear}
+                  className="text-neutral-400 hover:text-red-600 transition-colors cursor-pointer"
+                >
+                  Clear Entire Bag
+                </button>
+              </div>
+            </div>
+
+            {/* Special Instructions & Gifting Note */}
+            <div className="rounded-2xl border border-neutral-200/80 bg-white p-5 sm:p-6 shadow-xs">
+              <button
+                type="button"
+                onClick={() => setNoteOpen(!noteOpen)}
+                className="flex w-full items-center justify-between text-left text-xs sm:text-sm font-semibold text-ink cursor-pointer"
+              >
+                <span className="inline-flex items-center gap-2">
+                  <span className="text-gold text-base">✍</span>
+                  <span>Add Gift Message or Custom Ring Sizing Note</span>
+                </span>
+                <span className="text-sm">{noteOpen ? "−" : "+"}</span>
+              </button>
+
+              {noteOpen && (
+                <div className="mt-3">
+                  <textarea
+                    rows={3}
+                    value={orderNote}
+                    onChange={(e) => setOrderNote(e.target.value)}
+                    placeholder="Provide special delivery instructions, custom engraving message, or gift card greetings..."
+                    className="w-full rounded-xl border border-neutral-300 bg-neutral-50 p-3 text-xs sm:text-sm text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+                  />
+                  <p className="text-[11px] text-muted font-light mt-1.5">
+                    We will handwrite your note on our embossed gold foil stationery at no extra cost.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Assurance Badges Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="rounded-xl border border-neutral-200/60 bg-white p-3.5 text-center shadow-2xs">
+                <span className="text-base sm:text-lg block mb-1">🛡️</span>
+                <p className="text-[11px] font-semibold text-ink">BIS Hallmarked</p>
+                <p className="text-[10px] text-muted">100% Certified Gold</p>
+              </div>
+              <div className="rounded-xl border border-neutral-200/60 bg-white p-3.5 text-center shadow-2xs">
+                <span className="text-base sm:text-lg block mb-1">✈️</span>
+                <p className="text-[11px] font-semibold text-ink">Insured Shipping</p>
+                <p className="text-[10px] text-muted">Doorstep Delivery</p>
+              </div>
+              <div className="rounded-xl border border-neutral-200/60 bg-white p-3.5 text-center shadow-2xs">
+                <span className="text-base sm:text-lg block mb-1">🔄</span>
+                <p className="text-[11px] font-semibold text-ink">30-Day Returns</p>
+                <p className="text-[10px] text-muted">Hassle-Free Exchange</p>
+              </div>
+              <div className="rounded-xl border border-neutral-200/60 bg-white p-3.5 text-center shadow-2xs">
+                <span className="text-base sm:text-lg block mb-1">🎁</span>
+                <p className="text-[11px] font-semibold text-ink">Luxury Box</p>
+                <p className="text-[10px] text-muted">Signature Packaging</p>
+              </div>
+            </div>
           </div>
-          <p className="text-xs text-muted">Shipping and taxes calculated at checkout.</p>
-          <Button variant="dark" fullWidth>
-            Checkout
-          </Button>
+
+          {/* Right Column: Order Summary & Checkout Card (4 cols) */}
+          <div className="lg:col-span-4">
+            <div className="sticky top-28 space-y-6">
+              <div className="rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-xs">
+                <h2 className="font-display text-base font-semibold text-ink uppercase tracking-wider border-b border-neutral-100 pb-3 mb-4">
+                  Order Summary
+                </h2>
+
+                {/* Subtotal Calculation */}
+                <div className="space-y-2.5 text-xs sm:text-sm text-neutral-600">
+                  <div className="flex justify-between">
+                    <span>Cart Subtotal ({count} items)</span>
+                    <span className="font-medium text-ink">{formatPrice(subtotal)}</span>
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <span>Insured Delivery</span>
+                    <span className="font-semibold text-emerald-600 text-xs uppercase bg-emerald-50 px-2 py-0.5 rounded">
+                      FREE
+                    </span>
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <span>Luxury Velvet Presentation Box</span>
+                    <span className="font-semibold text-emerald-600 text-xs uppercase bg-emerald-50 px-2 py-0.5 rounded">
+                      FREE
+                    </span>
+                  </div>
+
+                  {promoApplied && (
+                    <div className="flex justify-between text-emerald-600 font-medium">
+                      <span>Promo Discount ({promoCode.toUpperCase()})</span>
+                      <span>− {formatPrice(promoDiscount)}</span>
+                    </div>
+                  )}
+
+                  <div className="border-t border-neutral-100 pt-3 flex items-baseline justify-between text-base font-bold text-ink">
+                    <span>Estimated Total</span>
+                    <span className="font-display text-xl text-wine font-bold">
+                      {formatPrice(finalTotal)}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Promo Code Input */}
+                <div className="mt-5 border-t border-neutral-100 pt-4">
+                  <label className="block text-[11px] font-semibold uppercase tracking-wider text-neutral-600 mb-1.5">
+                    Promotional Code
+                  </label>
+
+                  {promoApplied ? (
+                    <div className="flex items-center justify-between rounded-xl bg-emerald-50 border border-emerald-200 p-2.5 text-xs text-emerald-800">
+                      <span>Coupon &quot;{promoCode.toUpperCase()}&quot; Applied!</span>
+                      <button
+                        type="button"
+                        onClick={handleRemovePromo}
+                        className="font-semibold text-emerald-900 hover:underline cursor-pointer"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ) : (
+                    <form onSubmit={handleApplyPromo} className="flex gap-2">
+                      <input
+                        type="text"
+                        value={promoCode}
+                        onChange={(e) => setPromoCode(e.target.value)}
+                        placeholder="e.g. LUXE10"
+                        className="flex-1 rounded-xl border border-neutral-300 bg-neutral-50 px-3 py-2 text-xs text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none uppercase"
+                      />
+                      <button
+                        type="submit"
+                        className="rounded-xl bg-ink px-4 py-2 text-xs font-semibold text-cream hover:bg-wine transition-colors cursor-pointer"
+                      >
+                        Apply
+                      </button>
+                    </form>
+                  )}
+
+                  {promoError && (
+                    <p className="mt-1 text-[11px] text-red-600 font-medium">{promoError}</p>
+                  )}
+                </div>
+
+                {/* Checkout CTA Button */}
+                <button
+                  type="button"
+                  onClick={() => router.push("/checkout")}
+                  className="mt-6 w-full h-12 rounded-full bg-wine text-white text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-md hover:bg-wine-dark hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>Proceed to Checkout</span>
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </button>
+
+                {/* Trust & Payment Badges */}
+                <div className="mt-5 border-t border-neutral-100 pt-4 text-center">
+                  <p className="text-[10px] uppercase tracking-wider font-semibold text-neutral-400 mb-2.5">
+                    Guaranteed Safe & Secure Checkout
+                  </p>
+                  <div className="flex items-center justify-center gap-2 flex-wrap">
+                    <VisaBadge />
+                    <MastercardBadge />
+                    <AmexBadge />
+                    <PaypalBadge />
+                    <UpiBadge />
+                    <ApplePayBadge />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </Section>
+    </div>
   );
 }

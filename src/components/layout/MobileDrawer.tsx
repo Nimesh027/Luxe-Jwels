@@ -10,7 +10,11 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setMobileDrawerOpen } from "@/store/slices/uiSlice";
+import {
+  setMobileDrawerOpen,
+  setCartDrawerOpen,
+  setWishlistDrawerOpen,
+} from "@/store/slices/uiSlice";
 import JewelryIcon from "./JewelryIcon";
 import { cn } from "@/lib/utils";
 
@@ -174,14 +178,28 @@ export default function MobileDrawer() {
             <UserOutlined className="text-base" />
             <span>Account</span>
           </Link>
-          <Link href="/wishlist" onClick={close} className="flex flex-col items-center gap-1 text-xs hover:text-wine">
+          <button
+            type="button"
+            onClick={() => {
+              close();
+              dispatch(setWishlistDrawerOpen(true));
+            }}
+            className="flex flex-col items-center gap-1 text-xs hover:text-wine cursor-pointer"
+          >
             <HeartOutlined className="text-base" />
             <span>Wishlist</span>
-          </Link>
-          <Link href="/cart" onClick={close} className="flex flex-col items-center gap-1 text-xs hover:text-wine">
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              close();
+              dispatch(setCartDrawerOpen(true));
+            }}
+            className="flex flex-col items-center gap-1 text-xs hover:text-wine cursor-pointer"
+          >
             <ShoppingCartOutlined className="text-base" />
             <span>Cart</span>
-          </Link>
+          </button>
         </div>
       </div>
     </div>
