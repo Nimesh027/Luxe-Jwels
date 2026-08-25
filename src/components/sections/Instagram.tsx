@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import Section from "@/components/common/Section";
 import Button from "@/components/ui/Button";
@@ -27,44 +26,13 @@ function InstagramIcon({ className = "w-4 h-4" }: { className?: string }) {
 
 export default function Instagram() {
   const instagram = useAppSelector((state) => state.siteContent.instagram);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [itemsPerView, setItemsPerView] = useState(6);
-
   const images = instagram?.images || [];
-  const total = images.length;
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setItemsPerView(2);
-      } else if (window.innerWidth < 1024) {
-        setItemsPerView(3);
-      } else {
-        setItemsPerView(6);
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const maxIndex = Math.max(0, total - itemsPerView);
-
-  // Auto slide on responsive/mobile/tablet screens
-  useEffect(() => {
-    if (isPaused || maxIndex <= 0) return;
-
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, [isPaused, maxIndex]);
+  // Duplicate images for seamless 50% translation infinite loop
+  const loopImages = [...images, ...images];
 
   return (
-    <Section className="bg-white" containerClassName="!max-w-full">
+    <Section className="bg-white overflow-hidden" containerClassName="!max-w-full !px-0">
       {/* Centered Editorial Section Header */}
       <div className="text-center mb-8 sm:mb-12">
         <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-normal text-ink tracking-tight">
@@ -81,42 +49,31 @@ export default function Instagram() {
         </a>
       </div>
 
-      {/* Responsive Auto-Sliding Track */}
-      <div
-        className="relative overflow-hidden"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-        onTouchStart={() => setIsPaused(true)}
-        onTouchEnd={() => setIsPaused(false)}
-      >
-        <div
-          className="flex transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
-          style={{
-            transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`,
-          }}
-        >
-          {images.map((image, index) => (
+      {/* Infinite Seamless Loop Marquee Track */}
+      <div className="group relative w-full overflow-hidden">
+        <div className="flex w-max animate-marquee hover:[animation-play-state:paused] focus-within:[animation-play-state:paused]">
+          {loopImages.map((image, index) => (
             <div
               key={index}
-              className="w-1/2 xs:w-1/2 sm:w-1/3 lg:w-1/6 shrink-0 px-1.5 sm:px-2"
+              className="w-[180px] xs:w-[210px] sm:w-[240px] md:w-[270px] lg:w-[290px] shrink-0 px-2 sm:px-2.5"
             >
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative block aspect-[1/1.12] w-full overflow-hidden rounded-lg sm:rounded-xl bg-ink/10 shadow-2xs transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
+                className="group/card relative block aspect-[1/1.12] w-full overflow-hidden rounded-xl bg-ink/10 shadow-2xs transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
               >
                 <Image
                   src={image}
-                  alt={`Luxe Jewels Instagram Showcase ${index + 1}`}
+                  alt={`Luxe Jewels Instagram Showcase ${(index % images.length) + 1}`}
                   fill
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
-                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-108"
+                  sizes="(max-width: 640px) 210px, 290px"
+                  className="object-cover object-center transition-transform duration-700 ease-out group-hover/card:scale-108"
                 />
 
                 {/* Smooth Dark Scrim & Hover Overlay with Instagram Icon */}
-                <div className="absolute inset-0 bg-ink/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-ink shadow-md transform scale-75 group-hover:scale-100 transition-transform duration-300">
+                <div className="absolute inset-0 bg-ink/30 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-ink shadow-md transform scale-75 group-hover/card:scale-100 transition-transform duration-300">
                     <InstagramIcon className="h-5 w-5 text-ink" />
                   </div>
                 </div>
@@ -127,7 +84,7 @@ export default function Instagram() {
       </div>
 
       {/* View More On Instagram CTA Button */}
-      <div className="mt-8 sm:mt-10 lg:mt-12 text-center">
+      <div className="mt-8 sm:mt-10 lg:mt-12 text-center px-4">
         <Button
           href="https://instagram.com"
           variant="border"
