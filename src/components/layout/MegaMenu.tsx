@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRightOutlined } from "@ant-design/icons";
 import type { MegaMenuData } from "@/types";
 import JewelryIcon from "./JewelryIcon";
 import { cn } from "@/lib/utils";

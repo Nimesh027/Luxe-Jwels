@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 import { cn } from "@/lib/utils";
 
 interface SectionProps {
@@ -35,9 +36,10 @@ export default function Section({
             {viewAllHref && (
               <Link
                 href={viewAllHref}
-                className="shrink-0 text-xs uppercase tracking-wide text-ink underline underline-offset-4 hover:text-gold"
+                className="group shrink-0 inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-wine hover:text-wine-dark font-medium underline-offset-4 hover:underline transition-colors"
               >
-                View All
+                <span>View All</span>
+                <ArrowRightIcon className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
               </Link>
             )}
           </div>

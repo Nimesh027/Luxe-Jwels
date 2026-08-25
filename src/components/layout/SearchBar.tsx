@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import regalDiamondImg from "@/assets/images/Regal_Diamond.png";
 import diamondRingImg from "@/assets/images/Diamond_Ring.png";
 import diamondPendantImg from "@/assets/images/Diamond_Pendant.png";
+import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 
 const ROTATING_PLACEHOLDERS = [
   "gold necklace",
@@ -234,9 +235,7 @@ export default function SearchBar({
                             ₹{product.price.toLocaleString("en-IN")}
                           </span>
                         </div>
-                        <span className="text-sm text-muted/50 group-hover:text-wine group-hover:translate-x-1 transition-all">
-                          →
-                        </span>
+                        <ArrowRightIcon className="w-4 h-4 text-muted/50 group-hover:text-wine group-hover:translate-x-1 transition-all shrink-0" />
                       </Link>
                     ))}
 
@@ -244,9 +243,10 @@ export default function SearchBar({
                       <button
                         type="button"
                         onClick={handleSearchSubmit}
-                        className="text-xs font-semibold text-wine hover:text-wine-dark cursor-pointer"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-wine hover:text-wine-dark cursor-pointer mx-auto"
                       >
-                        View all results for &quot;{query}&quot; →
+                        <span>View all results for &quot;{query}&quot;</span>
+                        <ArrowRightIcon className="w-3.5 h-3.5" />
                       </button>
                     </div>
                   </div>
