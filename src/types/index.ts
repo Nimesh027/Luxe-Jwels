@@ -33,9 +33,13 @@ export interface Collection {
 export interface Testimonial {
   id: string;
   name: string;
-  avatar: string;
+  avatar?: string;
   rating: number;
   quote: string;
+  purchase?: string;
+  verified?: boolean;
+  date?: string;
+  location?: string;
 }
 
 export interface MegaMenuItem {
