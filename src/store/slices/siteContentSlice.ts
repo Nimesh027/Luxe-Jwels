@@ -225,12 +225,13 @@ const initialState: SiteContentState = {
   instagram: {
     handle: "@luxe.jewels",
     images: [
-      "/images/product/diamond-ring.jpg",
-      "/images/product/gold-chain.jpg",
-      "/images/product/black-onyx-bracelet.jpg",
-      "/images/product/cross-pendant.jpg",
-      "/images/product/grand-floral-heritage-necklace.jpg",
-      "/images/product/mens-black-onyx-signet-ring.jpg",
+      "/images/instagram/insta-1.png",
+      "/images/instagram/insta-2.png",
+      "/images/instagram/insta-3.png",
+      "/images/instagram/insta-4.png",
+      "/images/instagram/insta-5.png",
+      "/images/instagram/insta-6.png",
+      "/images/instagram/insta-7.png",
     ],
   },
   newsletter: {

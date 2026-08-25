@@ -59,21 +59,23 @@ export default function Header() {
       <div className="py-3 relative z-50 bg-surface">
         <div className="container mx-auto flex items-center justify-between gap-4">
           {/* Mobile Menu Hamburger */}
-          <button
-            type="button"
-            aria-label="Open menu"
-            className="text-xl text-ink lg:hidden cursor-pointer hover:text-wine transition-colors p-1"
-            onClick={() => dispatch(setMobileDrawerOpen(true))}
-          >
-            <MenuOutlined />
-          </button>
+          <div className="flex items-center gap-4">
+            <button
+              type="button"
+              aria-label="Open menu"
+              className="text-ink lg:hidden cursor-pointer hover:text-wine transition-colors p-1"
+              onClick={() => dispatch(setMobileDrawerOpen(true))}
+            >
+              <MenuOutlined />
+            </button>
 
-          {/* Logo */}
-          <Link href="/" className="flex items-center shrink-0">
-            <span className="font-display text-xl tracking-[0.2em] text-ink font-semibold">
-              LUXE JEWELS
-            </span>
-          </Link>
+            {/* Logo */}
+            <Link href="/" className="flex items-center shrink-0">
+              <span className="font-display text-xl tracking-[0.2em] text-ink font-semibold">
+                LUXE JEWELS
+              </span>
+            </Link>
+          </div>
 
           {/* Centered Search Bar */}
           <div className="hidden md:flex flex-1 max-w-xl mx-6 lg:mx-10 justify-center relative z-50">
@@ -203,16 +205,14 @@ export default function Header() {
                 >
                   <Link
                     href={link.href}
-                    className={`flex items-center gap-1.5 text-xs uppercase tracking-wider transition-colors duration-150 py-1 ${
-                      isOpen ? "text-wine font-semibold" : "text-ink hover:text-wine"
-                    }`}
+                    className={`flex items-center gap-1.5 text-xs uppercase tracking-wider transition-colors duration-150 py-1 ${isOpen ? "text-wine font-semibold" : "text-ink hover:text-wine"
+                      }`}
                   >
                     <span>{link.label}</span>
                     {hasDropdown && (
                       <DownOutlined
-                        className={`text-[9px] transition-transform duration-200 ${
-                          isOpen ? "rotate-180 text-wine" : "text-muted"
-                        }`}
+                        className={`text-[9px] transition-transform duration-200 ${isOpen ? "rotate-180 text-wine" : "text-muted"
+                          }`}
                       />
                     )}
                   </Link>

@@ -2,7 +2,55 @@
 
 import Link from "next/link";
 import { useAppSelector } from "@/store/hooks";
-import { socialIconMap } from "@/lib/icons";
+import {
+  InstagramIcon,
+  PinterestIcon,
+  FacebookIcon,
+  YoutubeIcon,
+} from "@/components/icons/SocialIcons";
+import {
+  VisaBadge,
+  MastercardBadge,
+  AmexBadge,
+  PaypalBadge,
+  UpiBadge,
+  ApplePayBadge,
+} from "@/components/icons/PaymentIcons";
+
+const socialSvgMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  instagram: InstagramIcon,
+  pinterest: PinterestIcon,
+  facebook: FacebookIcon,
+  youtube: YoutubeIcon,
+};
+
+function renderPaymentBadge(badge: string) {
+  const normalized = badge.toLowerCase().trim();
+  switch (normalized) {
+    case "visa":
+      return <VisaBadge key={badge} />;
+    case "mastercard":
+      return <MastercardBadge key={badge} />;
+    case "amex":
+      return <AmexBadge key={badge} />;
+    case "paypal":
+      return <PaypalBadge key={badge} />;
+    case "upi":
+      return <UpiBadge key={badge} />;
+    case "apple pay":
+    case "applepay":
+      return <ApplePayBadge key={badge} />;
+    default:
+      return (
+        <span
+          key={badge}
+          className="flex h-7 items-center justify-center rounded-md border border-neutral-700 bg-white/10 px-2.5 text-[11px] font-medium tracking-wider uppercase text-cream/80"
+        >
+          {badge}
+        </span>
+      );
+  }
+}
 
 export default function Footer() {
   const footer = useAppSelector((state) => state.siteContent.footer);
@@ -12,7 +60,7 @@ export default function Footer() {
       {/* Top Gold Hairline Glow Accent */}
       <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
 
-      <div className="container ">
+      <div className="container">
         {/* Main Footer Grid: 4-cols for Brand, 8-cols for Navigation */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
           {/* Brand Intro Column */}
@@ -27,10 +75,10 @@ export default function Footer() {
               {footer.brandBlurb}
             </p>
 
-            {/* Social Icons (Evenly spaced & larger) */}
+            {/* Proper Social Icons (Crisp SVGs with gold halo on hover) */}
             <div className="mt-6 flex items-center gap-3">
               {footer.socials.map((social) => {
-                const Icon = socialIconMap[social.icon];
+                const Icon = socialSvgMap[social.icon] || InstagramIcon;
                 return (
                   <a
                     key={social.id}
@@ -38,9 +86,9 @@ export default function Footer() {
                     aria-label={social.label}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-base sm:text-lg text-cream/80 transition-all duration-300 hover:border-gold hover:bg-gold/10 hover:text-gold hover:scale-105"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-cream/80 transition-all duration-300 hover:border-gold hover:bg-gold/15 hover:text-gold hover:scale-105 shadow-xs"
                   >
-                    <Icon />
+                    <Icon className="h-4 w-4" />
                   </a>
                 );
               })}
@@ -72,17 +120,10 @@ export default function Footer() {
         </div>
 
         {/* Divider & Bottom Row */}
-        <div className="mt-12 sm:mt-14 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          {/* Payment Methods (Consistent box sizing) */}
-          <div className="flex items-center gap-2 flex-wrap justify-center">
-            {footer.paymentBadges.map((badge) => (
-              <span
-                key={badge}
-                className="h-7 px-3 rounded border border-white/15 bg-white/5 text-[11px] font-medium tracking-wider uppercase text-cream/70 flex items-center justify-center shadow-xs"
-              >
-                {badge}
-              </span>
-            ))}
+        <div className="mt-12 sm:mt-14 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-5">
+          {/* Authentic Payment Logos */}
+          <div className="flex items-center gap-2.5 flex-wrap justify-center sm:justify-start">
+            {footer.paymentBadges.map((badge) => renderPaymentBadge(badge))}
           </div>
 
           {/* Copyright Text */}
