@@ -116,6 +116,7 @@ export interface FeatureItem {
   icon: FeatureIconKey;
   title: string;
   subtitle?: string;
+  trustBadge?: string;
 }
 
 export interface FooterLink {

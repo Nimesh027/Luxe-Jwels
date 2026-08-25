@@ -1,26 +1,65 @@
 "use client";
 
 import Section from "@/components/common/Section";
-import { featureIconMap } from "@/lib/icons";
+import SectionTitle from "@/components/common/SectionTitle";
+import { featureIconComponents, CertifiedIcon, CareIcon, ShippingIcon, ReturnsIcon } from "@/components/icons/FeatureIcons";
 import { useAppSelector } from "@/store/hooks";
 
 export default function WhyChooseUs() {
   const items = useAppSelector((state) => state.siteContent.whyChooseUs);
 
+  // Icon mapping with fallback
+  const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+    certified: CertifiedIcon,
+    care: CareIcon,
+    shipping: ShippingIcon,
+    returns: ReturnsIcon,
+  };
+
   return (
-    <Section title="Why Choose Luxe Jewels?" className="bg-cream-dark/40">
-      <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
+    <Section>
+      {/* Premium Centered Section Heading */}
+      <SectionTitle
+        // tagline="THE LUXE COMMITMENT"
+        title="The Luxe Jewels Difference"
+        description="Uncompromising purity, artisan heritage, and lifelong peace of mind crafted into every design."
+        align="center"
+      />
+
+      {/* 4 Responsive Benefit Cards with Whitespace & Hover Accents */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">
         {items.map((item) => {
-          const Icon = featureIconMap[item.icon];
+          const IconComponent = iconMap[item.icon] || featureIconComponents[item.icon] || CertifiedIcon;
+
           return (
-            <div key={item.id} className="flex flex-col items-center gap-3 text-center">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full border border-gold text-xl text-gold">
-                <Icon />
+            <div
+              key={item.id}
+              className="group relative flex flex-col items-center text-center p-7 sm:p-8 rounded-2xl bg-surface border border-gold/25 hover:border-gold/70 shadow-2xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            >
+              {/* Gold Icon Halo Container */}
+              <div className="w-16 h-16 rounded-full bg-[#fbf8f2] border border-gold/40 flex items-center justify-center p-3.5 shadow-xs group-hover:scale-110 group-hover:border-gold group-hover:bg-gold/10 group-hover:shadow-md group-hover:shadow-gold/10 transition-all duration-300 mb-4">
+                <IconComponent className="w-8 h-8 text-gold/90 group-hover:text-gold transition-colors duration-300" />
               </div>
-              <div>
-                <p className="text-xs font-medium uppercase tracking-wide text-ink">{item.title}</p>
-                {item.subtitle && <p className="mt-1 text-[11px] text-muted">{item.subtitle}</p>}
-              </div>
+
+              {/* Title */}
+              <h3 className="font-display text-lg font-medium text-ink tracking-tight group-hover:text-wine transition-colors duration-300">
+                {item.title}
+              </h3>
+
+              {/* Shortened Description */}
+              <p className="mt-2 text-xs sm:text-[13px] text-muted leading-relaxed">
+                {item.subtitle}
+              </p>
+
+              {/* Micro Trust Tag */}
+              {item.trustBadge && (
+                <div className="mt-5 pt-3 border-t border-border/40 w-full flex items-center justify-center">
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-medium tracking-wide text-gold">
+                    <span className="h-1.5 w-1.5 rounded-full bg-gold shrink-0" />
+                    {item.trustBadge}
+                  </span>
+                </div>
+              )}
             </div>
           );
         })}
