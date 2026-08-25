@@ -40,7 +40,7 @@ export default function ForHimForHer() {
             <Link
               key={tile.id}
               href={tile.href}
-              className="group relative block min-h-[420px] sm:min-h-[480px] lg:min-h-[520px] w-full overflow-hidden rounded-3xl bg-ink text-cream shadow-md transition-all duration-500 hover:shadow-2xl"
+              className="group relative block min-h-[460px] sm:min-h-[500px] lg:min-h-[540px] w-full overflow-hidden rounded-3xl bg-ink text-cream shadow-md transition-all duration-500 hover:shadow-2xl"
             >
               {/* Background Image with Smooth Hover Zoom */}
               <Image
@@ -60,14 +60,13 @@ export default function ForHimForHer() {
 
               {/* Content Overlay */}
               <div className="relative z-10 flex h-full flex-col justify-between p-6 sm:p-8 lg:p-10">
-                {/* Top Badge */}
+                {/* Top Row: Badge + Corner Arrow Indicator */}
                 <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-2 rounded-full border border-cream/20 bg-ink/40 px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.2em] text-cream/90 backdrop-blur-md transition-colors duration-300 group-hover:border-gold/60 group-hover:text-gold">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-cream/20 bg-ink/50 px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.2em] text-cream/90 backdrop-blur-md transition-colors duration-300 group-hover:border-gold/60 group-hover:text-gold">
                     <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse" />
                     {meta.badge}
                   </span>
 
-                  {/* Corner Arrow Indicator */}
                   <span className="flex h-10 w-10 items-center justify-center rounded-full border border-cream/20 bg-cream/10 text-cream backdrop-blur-md transition-all duration-300 group-hover:border-gold group-hover:bg-gold group-hover:text-ink group-hover:rotate-[-45deg]">
                     <ArrowRightIcon className="h-4 w-4" />
                   </span>
@@ -99,7 +98,7 @@ export default function ForHimForHer() {
                     </div>
                   </div>
 
-                  {/* CTA Link Button */}
+                  {/* CTA Button */}
                   <div className="pt-2">
                     <span className="inline-flex items-center gap-2.5 rounded-full bg-gold px-6 py-3 text-xs font-semibold uppercase tracking-wider text-ink shadow-lg shadow-gold/10 transition-all duration-300 group-hover:bg-cream group-hover:shadow-gold/25">
                       <span>{tile.cta}</span>
