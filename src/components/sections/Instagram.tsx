@@ -28,7 +28,7 @@ export default function Instagram() {
   const instagram = useAppSelector((state) => state.siteContent.instagram);
 
   return (
-    <Section containerClassName="!max-w-full">
+    <Section className="bg-white" containerClassName="!max-w-full">
       {/* Centered Editorial Section Header */}
       <div className="mx-auto max-w-2xl text-center mb-10 sm:mb-14">
         <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-normal text-ink tracking-tight">
