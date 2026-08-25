@@ -44,7 +44,7 @@ function CollectionDetailContent({
 
   return (
     <>
-      <Section className="py-0" containerClassName="max-w-none px-0">
+      <Section className="!p-0" containerClassName="!p-0 !max-w-full">
         <div className="relative h-64 w-full overflow-hidden sm:h-80">
           <Image
             src={collection.image}

@@ -9,7 +9,7 @@ export default function NewCollection() {
   const newCollection = useAppSelector((state) => state.siteContent.newCollection);
 
   return (
-    <Section className="py-0" containerClassName="max-w-none px-0">
+    <Section className="!p-0" containerClassName="!p-0 !max-w-full">
       <div className="relative flex h-80 w-full items-center overflow-hidden sm:h-96">
         <Image
           src={newCollection.image}
