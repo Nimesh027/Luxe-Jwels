@@ -46,8 +46,10 @@ body::-webkit-scrollbar {
 
 html,
 body {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
   background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-body);
@@ -85,6 +87,7 @@ span {
   0% {
     transform: translateX(0%);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -92,4 +95,15 @@ span {
 
 .animate-marquee {
   animation: marquee 22s linear infinite;
+}
+
+:focus,
+:focus-visible {
+  outline: none;
+  border: none;
+}
+
+select:focus {
+  border: none !important;
+  outline: none !important;
 }
