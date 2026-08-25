@@ -21,7 +21,7 @@ export default function Section({
 }: SectionProps) {
   return (
     <section className={cn("py-12 md:py-16", className)}>
-      <div className={cn("mx-auto max-w-7xl px-4 sm:px-6 lg:px-8", containerClassName)}>
+      <div className={cn("container", containerClassName)}>
         {(title || viewAllHref) && (
           <div className="mb-8 flex items-end justify-between gap-4">
             <div>

@@ -60,10 +60,14 @@ const initialState: SiteContentState = {
   heroSlides: [
     {
       id: "hero-1",
-      heading: "Timeless Elegance.",
-      headingAccent: "Crafted for You.",
-      subtext: "Fine jewellery for every moment that defines you.",
-      image: "https://picsum.photos/seed/luxe-hero-1/1600/900",
+      tagline: "THE CELEBRATION COLLECTION",
+      heading: "Radiate Glamour.",
+      headingAccent: "Celebrate Life.",
+      subtext:
+        "Contemporary statement jewellery handcrafted with certified gold and sparkling diamonds.",
+      image: "/images/hero-banner-1.png",
+      position: "right",
+      theme: "dark",
       ctas: [
         { label: "Shop Men", href: "/category/mens-collection", variant: "primary" },
         { label: "Shop Women", href: "/collections", variant: "secondary" },
@@ -82,10 +86,14 @@ const initialState: SiteContentState = {
     },
     {
       id: "hero-3",
-      heading: "Radiate Brilliance.",
-      headingAccent: "Every Single Day.",
-      subtext: "Certified, hallmarked jewellery trusted by thousands.",
-      image: "https://picsum.photos/seed/luxe-hero-3/1600/900",
+      tagline: "NATURE-INSPIRED CRAFTSMANSHIP",
+      heading: "Botanical Allure.",
+      headingAccent: "Delicate Forms.",
+      subtext:
+        "Artistic floral motifs encrusted with ethically sourced natural diamonds and fine 18k gold.",
+      image: "/images/hero-banner-3.png",
+      position: "right",
+      theme: "dark",
       ctas: [
         { label: "Shop Men", href: "/category/mens-collection", variant: "primary" },
         { label: "Shop Women", href: "/collections", variant: "secondary" },

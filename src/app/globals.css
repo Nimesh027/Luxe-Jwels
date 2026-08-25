@@ -30,7 +30,18 @@
   --font-body: var(--font-body);
 }
 
+/* Hide scrollbar for Chrome, Safari, Opera, Edge, Firefox while keeping page scrollable */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+html,
 body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
   background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-body);
