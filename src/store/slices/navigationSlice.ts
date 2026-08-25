@@ -7,7 +7,7 @@ export interface NavigationState {
 
 const initialState: NavigationState = {
   links: [
-    { id: "nav-new-in", label: "New In", href: "/collections" },
+    { id: "nav-shop", label: "Shop", href: "/shop" },
     {
       id: "nav-men",
       label: "Men",

@@ -250,7 +250,7 @@ const initialState: SiteContentState = {
         links: [
           { label: "Men", href: "/category/mens-collection" },
           { label: "Women", href: "/collections" },
-          { label: "New In", href: "/collections" },
+          { label: "Shop All", href: "/shop" },
           { label: "Bestsellers", href: "/collections" },
           { label: "Gift Cards", href: "/collections/gift-collection" },
         ],
