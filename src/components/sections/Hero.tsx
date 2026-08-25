@@ -20,7 +20,7 @@ export default function Hero() {
   const isDark = slide.theme === "dark";
 
   return (
-    <Section className="!p-0" containerClassName="!p-0">
+    <Section className="!p-0" containerClassName="!p-0 !max-w-full">
       <div className="relative p-0 h-[480px] sm:h-[540px] md:h-[580px] lg:h-[640px] xl:h-[680px] w-full overflow-hidden select-none">
         <Image
           src={slide.image}
