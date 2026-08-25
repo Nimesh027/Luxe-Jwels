@@ -9,7 +9,7 @@ export default function FeatureStrip() {
   const features = useAppSelector((state) => state.siteContent.featureStrip);
 
   return (
-    <Section className="border-b border-border/60 bg-cream/40 py-10 sm:py-14 md:py-16">
+    <Section className="bg-cream/40 py-10 sm:py-14 md:py-16">
       {/* Reusable Common SectionTitle Component */}
       <SectionTitle
         title="Luxe Promises – Excellence You Can Trust"

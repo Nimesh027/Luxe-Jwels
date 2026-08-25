@@ -65,7 +65,7 @@ const initialState: ProductsState = {
       name: "Men's Signet Ring",
       slug: "mens-signet-ring",
       price: 24999,
-      image: "/images/men-ring-showcase.png",
+      image: "/images/category/mens-collection.jpg",
       category: "mens-collection",
       isBestseller: true,
       description: "A bold signet ring crafted for the modern gentleman.",

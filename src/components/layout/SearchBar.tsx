@@ -7,9 +7,6 @@ import { useRouter } from "next/navigation";
 import { CloseOutlined } from "@ant-design/icons";
 import { useAppSelector } from "@/store/hooks";
 import { cn } from "@/lib/utils";
-import regalDiamondImg from "@/assets/images/Regal_Diamond.png";
-import diamondRingImg from "@/assets/images/Diamond_Ring.png";
-import diamondPendantImg from "@/assets/images/Diamond_Pendant.png";
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 
 const ROTATING_PLACEHOLDERS = [
@@ -309,17 +306,17 @@ export default function SearchBar({
                   {[
                     {
                       title: "Regal Diamond Encrusted Square..",
-                      image: regalDiamondImg,
+                      image: "/images/product/Regal_Diamond.png",
                       href: "/products/diamond-studs",
                     },
                     {
                       title: "Modish Links Diamond Ring",
-                      image: diamondRingImg,
+                      image: "/images/product/Diamond_Ring.png",
                       href: "/products/diamond-ring",
                     },
                     {
                       title: "Teardrop Shaped Yellow Gold And.",
-                      image: diamondPendantImg,
+                      image: "/images/product/Diamond_Pendant.png",
                       href: "/products/gold-chain",
                     },
                   ].map((item, idx) => (
