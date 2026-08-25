@@ -122,27 +122,13 @@ export default function CartDrawer() {
                     {/* Product Details */}
                     <div className="flex flex-1 flex-col justify-between">
                       <div>
-                        <div className="flex items-start justify-between gap-2">
-                          <Link
-                            href={`/products/${product.slug}`}
-                            onClick={closeDrawer}
-                            className="font-display text-sm font-normal text-ink hover:text-wine transition-colors line-clamp-1"
-                          >
-                            {product.name}
-                          </Link>
-
-                          {/* Trash / Remove Icon */}
-                          <button
-                            type="button"
-                            onClick={() => remove(product.id)}
-                            aria-label={`Remove ${product.name} from cart`}
-                            className="text-neutral-400 hover:text-red-600 transition-colors p-0.5 cursor-pointer shrink-0"
-                          >
-                            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                          </button>
-                        </div>
+                        <Link
+                          href={`/products/${product.slug}`}
+                          onClick={closeDrawer}
+                          className="font-display text-sm font-normal text-ink hover:text-wine transition-colors line-clamp-1 block"
+                        >
+                          {product.name}
+                        </Link>
 
                         {/* Specs: Weight / Purity / Category */}
                         <div className="mt-1 flex items-center gap-2 text-[11px] text-muted font-light">
@@ -166,23 +152,23 @@ export default function CartDrawer() {
 
                       {/* Quantity Selector: − 1 + */}
                       <div className="mt-3 flex items-center justify-between">
-                        <div className="inline-flex h-8 items-center rounded-lg border border-neutral-200 bg-neutral-50/80 shadow-2xs">
+                        <div className="inline-flex h-8 items-center rounded-xl border border-neutral-200 bg-[#fbf9f6] shadow-2xs">
                           <button
                             type="button"
                             onClick={() => setQuantity(product.id, Math.max(1, quantity - 1))}
                             aria-label="Decrease quantity"
-                            className="flex h-8 w-8 items-center justify-center text-neutral-600 hover:bg-neutral-200/50 transition-colors rounded-l-lg cursor-pointer"
+                            className="flex h-8 w-7 items-center justify-center text-neutral-600 hover:text-wine hover:bg-wine/10 transition-colors rounded-l-xl cursor-pointer text-xs"
                           >
                             −
                           </button>
-                          <span className="w-8 text-center text-xs font-semibold text-neutral-800">
+                          <span className="w-7 text-center text-xs font-semibold text-neutral-900">
                             {quantity}
                           </span>
                           <button
                             type="button"
                             onClick={() => setQuantity(product.id, quantity + 1)}
                             aria-label="Increase quantity"
-                            className="flex h-8 w-8 items-center justify-center text-neutral-600 hover:bg-neutral-200/50 transition-colors rounded-r-lg cursor-pointer"
+                            className="flex h-8 w-7 items-center justify-center text-neutral-600 hover:text-wine hover:bg-wine/10 transition-colors rounded-r-xl cursor-pointer text-xs"
                           >
                             +
                           </button>
@@ -191,9 +177,12 @@ export default function CartDrawer() {
                         <button
                           type="button"
                           onClick={() => remove(product.id)}
-                          className="text-[11px] text-muted hover:text-red-600 underline underline-offset-2 transition-colors cursor-pointer"
+                          className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-medium text-neutral-500 hover:text-red-700 hover:bg-red-50/80 border border-neutral-200/80 transition-all duration-200 cursor-pointer"
                         >
-                          Remove
+                          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                          <span>Remove</span>
                         </button>
                       </div>
                     </div>

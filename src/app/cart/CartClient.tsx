@@ -188,22 +188,54 @@ export default function CartClient() {
                             )}
                           </div>
 
-                          {/* Item Action Links */}
-                          <div className="mt-2.5 flex items-center gap-3 text-[11px] text-muted">
+                          {/* Item Action Buttons with Theme Styling */}
+                          <div className="mt-3 flex items-center gap-2 pt-0.5">
+                            {/* Save to Wishlist Button */}
                             <button
                               type="button"
                               onClick={() => toggleWishlist(product)}
-                              className="hover:text-wine transition-colors flex items-center gap-1 cursor-pointer"
+                              className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium transition-all duration-200 cursor-pointer ${
+                                saved
+                                  ? "bg-wine/10 text-wine border border-wine/30 shadow-2xs"
+                                  : "bg-[#fbf7f2] text-neutral-600 hover:text-wine hover:bg-wine/5 border border-neutral-200/80"
+                              }`}
                             >
-                              <span>{saved ? "❤️ Saved" : "♡ Save for later"}</span>
+                              <svg
+                                className={`h-3.5 w-3.5 ${
+                                  saved ? "fill-wine text-wine" : "fill-none stroke-current"
+                                }`}
+                                viewBox="0 0 24 24"
+                                strokeWidth="1.8"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                                />
+                              </svg>
+                              <span>{saved ? "Saved in Wishlist" : "Save for later"}</span>
                             </button>
-                            <span>•</span>
+
+                            {/* Remove Item Button */}
                             <button
                               type="button"
                               onClick={() => remove(product.id)}
-                              className="hover:text-red-600 transition-colors cursor-pointer"
+                              className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-medium text-neutral-500 hover:text-red-700 hover:bg-red-50/80 border border-neutral-200/80 transition-all duration-200 cursor-pointer"
                             >
-                              Remove
+                              <svg
+                                className="h-3.5 w-3.5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth="1.8"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                />
+                              </svg>
+                              <span>Remove</span>
                             </button>
                           </div>
                         </div>
@@ -216,23 +248,23 @@ export default function CartClient() {
 
                       {/* Quantity Controller (2 cols) */}
                       <div className="sm:col-span-2 flex justify-start sm:justify-center">
-                        <div className="inline-flex h-8 items-center rounded-lg border border-neutral-200 bg-neutral-50 shadow-2xs">
+                        <div className="inline-flex h-8.5 items-center rounded-xl border border-neutral-200 bg-[#fbf9f6] shadow-2xs">
                           <button
                             type="button"
                             onClick={() => setQuantity(product.id, Math.max(1, quantity - 1))}
                             aria-label="Decrease quantity"
-                            className="flex h-8 w-8 items-center justify-center text-neutral-600 hover:bg-neutral-200/50 transition-colors rounded-l-lg cursor-pointer"
+                            className="flex h-8.5 w-8 items-center justify-center text-neutral-600 hover:text-wine hover:bg-wine/10 transition-colors rounded-l-xl cursor-pointer"
                           >
                             −
                           </button>
-                          <span className="w-8 text-center text-xs font-semibold text-neutral-800">
+                          <span className="w-8 text-center text-xs font-semibold text-neutral-900">
                             {quantity}
                           </span>
                           <button
                             type="button"
                             onClick={() => setQuantity(product.id, quantity + 1)}
                             aria-label="Increase quantity"
-                            className="flex h-8 w-8 items-center justify-center text-neutral-600 hover:bg-neutral-200/50 transition-colors rounded-r-lg cursor-pointer"
+                            className="flex h-8.5 w-8 items-center justify-center text-neutral-600 hover:text-wine hover:bg-wine/10 transition-colors rounded-r-xl cursor-pointer"
                           >
                             +
                           </button>
