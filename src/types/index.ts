@@ -33,11 +33,45 @@ export interface Testimonial {
   quote: string;
 }
 
+export interface MegaMenuItem {
+  id: string;
+  name: string;
+  href: string;
+  icon?: string;
+  badge?: string;
+}
+
+export interface MegaMenuTab {
+  id: string;
+  label: string;
+  items: MegaMenuItem[];
+  bottomBanner?: {
+    heading: string;
+    subheading: string;
+    thumbnails: string[];
+    buttonText: string;
+    buttonHref: string;
+  };
+  featuredCard?: {
+    image: string;
+    title: string;
+    subtitle?: string;
+    href: string;
+    ctaLabel: string;
+  };
+}
+
+export interface MegaMenuData {
+  tabs: MegaMenuTab[];
+  defaultTabId?: string;
+}
+
 export interface NavLink {
   id: string;
   label: string;
   href: string;
   children?: NavLink[];
+  megaMenu?: MegaMenuData;
 }
 
 export interface HeroCta {
@@ -53,6 +87,9 @@ export interface HeroSlide {
   subtext: string;
   image: string;
   ctas: HeroCta[];
+  position?: "left" | "right" | "center";
+  theme?: "light" | "dark";
+  tagline?: string;
 }
 
 export type FeatureIconKey =
