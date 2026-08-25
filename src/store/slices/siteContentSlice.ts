@@ -150,7 +150,7 @@ const initialState: SiteContentState = {
       title: "For Her",
       tagline: "Elegant. Graceful. You.",
       image: "/images/product/women-necklace-showcase.png",
-      href: "/collections",
+     href: "/category/womens-collection",
       cta: "Shop Now",
     },
   ],
