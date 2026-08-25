@@ -7,100 +7,118 @@ import SectionTitle from "@/components/common/SectionTitle";
 import Button from "@/components/ui/Button";
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 import { useAppSelector } from "@/store/hooks";
+import { cn } from "@/lib/utils";
+import type { Collection } from "@/types";
 
 export default function CategoryGrid() {
-  const categories = useAppSelector((state) => state.categories.items);
+  const collections = useAppSelector((state) => state.collections.items);
 
-  if (!categories || categories.length === 0) return null;
+  if (!collections || collections.length === 0) return null;
 
-  // Keep only 3 main categories visible initially based on the reference layout
-  const mainCategories = categories.slice(0, 3);
-  const heroCategory = mainCategories[0];
-  const stackedCategories = mainCategories.slice(1, 3);
+  const displayCollections = collections.slice(0, 3);
+  const heroItem = displayCollections[0];
+  const secondaryItems = displayCollections.slice(1, 3);
+
+  // Single reusable card render function for all collections with clean, consistent layout & positioning
+  const renderCollectionCard = (
+    item: Collection,
+    isHero: boolean
+  ) => (
+    <Link
+      key={item.id}
+      href={`/collections/${item.slug}`}
+      className={cn(
+        "group relative block w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-ink/20 shadow-sm hover:shadow-xl transition-all duration-500",
+        isHero
+          ? "h-[260px] sm:h-[300px] md:h-[500px] lg:h-[540px]"
+          : "h-[260px] sm:h-[300px] md:h-[238px] lg:h-[258px]"
+      )}
+    >
+      <Image
+        src={item.image}
+        alt={item.name}
+        fill
+        priority={isHero}
+        sizes="(max-width: 768px) 100vw, 50vw"
+        className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+      />
+
+      {/* Smooth integrated gradient scrim for high-contrast, crystal-clear typography */}
+      <div
+        aria-hidden="true"
+        className={cn(
+          "absolute inset-0 transition-opacity duration-500",
+          isHero
+            ? "bg-gradient-to-t from-black/90 via-black/40 to-transparent"
+            : "bg-gradient-to-t from-black/90 via-black/40 to-transparent md:bg-gradient-to-l md:from-black/90 md:via-black/45 md:to-transparent"
+        )}
+      />
+
+      {/* Typography Overlay - Properly aligned, responsive, and legible */}
+      <div
+        className={cn(
+          "absolute inset-0 p-5 sm:p-7 md:p-8 lg:p-10 flex flex-col transition-all duration-300 z-10",
+          isHero
+            ? "justify-end items-center text-center"
+            : "justify-end md:justify-center items-start md:items-end text-left md:text-right"
+        )}
+      >
+        {/* Subtitle / Tagline */}
+        {item.tagline && (
+          <span className="text-[10px] sm:text-xs font-semibold tracking-[0.25em] uppercase text-gold mb-1 sm:mb-1.5 drop-shadow-xs">
+            {item.tagline}
+          </span>
+        )}
+
+        {/* Collection Title */}
+        <h3
+          className={cn(
+            "font-display text-cream font-normal tracking-wide leading-tight drop-shadow-md group-hover:text-gold transition-colors duration-300",
+            isHero
+              ? "text-2xl sm:text-3xl lg:text-4xl"
+              : "text-xl sm:text-2xl lg:text-3xl"
+          )}
+        >
+          {item.name}
+        </h3>
+
+        {/* CTA Link with Arrow */}
+        <div
+          className={cn(
+            "mt-2 sm:mt-2.5 inline-flex items-center gap-1.5 text-[11px] sm:text-xs tracking-wider uppercase text-gold font-medium drop-shadow-xs group-hover:text-cream transition-colors",
+            isHero && "justify-center"
+          )}
+        >
+          <span>{isHero ? "Explore Collection" : "Shop Now"}</span>
+          <ArrowRightIcon className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+        </div>
+      </div>
+    </Link>
+  );
 
   return (
-    <Section className="py-12 sm:py-16 md:py-20 bg-white">
+    <Section className="bg-white">
       {/* Common Section Header */}
       <SectionTitle
-        tagline="CURATED CATEGORIES"
-        title="Shop By Category"
-        description="Discover masterfully crafted jewellery across our signature categories."
+        tagline="CURATED COLLECTIONS"
+        title="Shop By Collection"
+        description="Discover masterfully crafted jewellery across our signature collections."
         align="center"
       />
 
       <div className="max-w-7xl mx-auto">
-        {/* 3-Card Asymmetric Bento Layout Matching Reference UI */}
+        {/* Asymmetric Bento Layout using single reusable card renderer */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-          {/* Left Main Large Hero Card (Necklaces) */}
-          {heroCategory && (
-            <Link
-              href={`/category/${heroCategory.slug}`}
-              className="group relative block w-full h-[340px] sm:h-[420px] md:h-[480px] lg:h-[520px] rounded-2xl sm:rounded-3xl overflow-hidden bg-ink/10 shadow-xs hover:shadow-lg transition-all duration-500"
-            >
-              <Image
-                src={heroCategory.image}
-                alt={heroCategory.name}
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-              {/* Subtle Gradient Shadow for Typography Contrast */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent transition-opacity duration-300" />
+          {/* Main Hero Card (1st item) */}
+          {heroItem && renderCollectionCard(heroItem, true)}
 
-              {/* Bottom-Centered Typography Overlay Matching Reference Image */}
-              <div className="absolute inset-0 p-6 sm:p-8 md:p-10 flex flex-col justify-end items-center text-center">
-                <span className="text-[11px] sm:text-xs font-semibold tracking-[0.25em] uppercase text-gold mb-1 sm:mb-2">
-                  SIGNATURE COLLECTION
-                </span>
-                <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl text-cream font-normal tracking-wide drop-shadow-md group-hover:text-gold transition-colors duration-300">
-                  {heroCategory.name}
-                </h3>
-                <div className="mt-2.5 inline-flex items-center gap-1.5 text-xs tracking-wider uppercase text-gold font-medium opacity-90 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">
-                  <span>Explore Collection</span>
-                  <ArrowRightIcon className="w-3.5 h-3.5" />
-                </div>
-              </div>
-            </Link>
-          )}
-
-          {/* Right Stacked 2 Cards (Earrings & Rings) */}
+          {/* Secondary Stacked Cards (2nd & 3rd items) in a single loop */}
           <div className="flex flex-col gap-4 sm:gap-6 justify-between h-full">
-            {stackedCategories.map((cat, idx) => (
-              <Link
-                key={cat.id}
-                href={`/category/${cat.slug}`}
-                className="group relative block w-full h-[160px] sm:h-[198px] md:h-[228px] lg:h-[248px] rounded-2xl sm:rounded-3xl overflow-hidden bg-ink/10 shadow-xs hover:shadow-lg transition-all duration-500"
-              >
-                <Image
-                  src={cat.image}
-                  alt={cat.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                {/* Soft directional gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent sm:bg-gradient-to-l sm:from-black/65 sm:via-black/25 sm:to-transparent transition-opacity duration-300" />
-
-                {/* Side-aligned Typography Overlay Matching Reference Image */}
-                <div className="absolute inset-0 p-5 sm:p-6 lg:p-8 flex flex-col justify-end sm:justify-center items-start sm:items-end text-left sm:text-right">
-                  <span className="text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] uppercase text-gold mb-1">
-                    {idx === 0 ? "ELEGANT DESIGNS" : "18KT FINE GOLD"}
-                  </span>
-                  <h3 className="font-display text-xl sm:text-2xl lg:text-3xl text-cream font-normal tracking-wide drop-shadow-md group-hover:text-gold transition-colors duration-300">
-                    {cat.name}
-                  </h3>
-                  <div className="mt-1.5 inline-flex items-center gap-1.5 text-xs tracking-wider uppercase text-gold font-medium opacity-90 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">
-                    <span>Shop Now</span>
-                    <ArrowRightIcon className="w-3.5 h-3.5" />
-                  </div>
-                </div>
-              </Link>
-            ))}
+            {secondaryItems.map((item) => renderCollectionCard(item, false))}
           </div>
         </div>
 
-        {/* View All Categories Button */}
+        {/* View All Collections Button */}
         <div className="mt-8 sm:mt-12 text-center">
           <Button
             href="/collections"
@@ -110,7 +128,7 @@ export default function CategoryGrid() {
             rightIcon={<ArrowRightIcon className="w-4 h-4" />}
             className="hover:shadow-md"
           >
-            View All Categories
+            View All Collections
           </Button>
         </div>
       </div>
