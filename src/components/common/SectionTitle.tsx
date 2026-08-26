@@ -72,7 +72,7 @@ export default function SectionTitle({
 
           {/* Subtitle / Description */}
           {description && (
-            <p
+            <div
               className={cn(
                 "mt-2 sm:mt-2.5 text-xs sm:text-sm text-muted leading-relaxed",
                 isCentered && "max-w-xl mx-auto",
@@ -80,7 +80,7 @@ export default function SectionTitle({
               )}
             >
               {description}
-            </p>
+            </div>
           )}
         </div>
 

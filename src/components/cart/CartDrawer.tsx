@@ -8,6 +8,7 @@ import { useCart } from "@/hooks/useCart";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setCartDrawerOpen } from "@/store/slices/uiSlice";
 import { formatPrice } from "@/lib/utils";
+import QuantitySelector from "@/components/ui/QuantitySelector";
 
 export default function CartDrawer() {
   const router = useRouter();
@@ -150,29 +151,13 @@ export default function CartDrawer() {
                         </div>
                       </div>
 
-                      {/* Quantity Selector: − 1 + */}
+                      {/* Quantity Selector */}
                       <div className="mt-3 flex items-center justify-between">
-                        <div className="inline-flex h-8 items-center rounded-xl border border-neutral-200 bg-[#fbf9f6] shadow-2xs">
-                          <button
-                            type="button"
-                            onClick={() => setQuantity(product.id, Math.max(1, quantity - 1))}
-                            aria-label="Decrease quantity"
-                            className="flex h-8 w-7 items-center justify-center text-neutral-600 hover:text-wine hover:bg-wine/10 transition-colors rounded-l-xl cursor-pointer text-xs"
-                          >
-                            −
-                          </button>
-                          <span className="w-7 text-center text-xs font-semibold text-neutral-900">
-                            {quantity}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => setQuantity(product.id, quantity + 1)}
-                            aria-label="Increase quantity"
-                            className="flex h-8 w-7 items-center justify-center text-neutral-600 hover:text-wine hover:bg-wine/10 transition-colors rounded-r-xl cursor-pointer text-xs"
-                          >
-                            +
-                          </button>
-                        </div>
+                        <QuantitySelector
+                          value={quantity}
+                          onChange={(newQty) => setQuantity(product.id, newQty)}
+                          size="sm"
+                        />
 
                         <button
                           type="button"

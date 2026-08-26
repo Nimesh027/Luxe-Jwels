@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Section from "@/components/common/Section";
 import SectionTitle from "@/components/common/SectionTitle";
+import ReviewCard from "@/components/common/ReviewCard";
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 import { useAppSelector } from "@/store/hooks";
 
@@ -55,11 +56,6 @@ export default function Testimonials() {
     setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
   };
 
-  // Get initial character from customer name
-  const getInitial = (name: string) => {
-    return name ? name.trim().charAt(0).toUpperCase() : "L";
-  };
-
   return (
     <Section className="bg-[#fdfaf7] border-y border-[#f2eae1] py-14 sm:py-18 md:py-20">
       {/* Section Header matching Reference */}
@@ -106,52 +102,17 @@ export default function Testimonials() {
             {testimonials.map((item) => (
               <div
                 key={item.id}
-                className="w-full sm:w-1/2 lg:w-1/4 shrink-0 px-2.5"
+                className="w-full sm:w-1/2 lg:w-1/4 shrink-0 px-2.5 flex"
               >
-                <div className="flex h-full flex-col justify-between rounded-2xl border border-neutral-100 bg-white p-6 sm:p-7 shadow-xs hover:shadow-md transition-all duration-300 min-h-[300px] sm:min-h-[320px]">
-                  {/* Top Row: 5 Gold Stars + Date */}
-                  <div>
-                    <div className="flex items-center justify-between">
-                      {/* 5 Solid Gold Stars */}
-                      <div className="flex items-center gap-1 text-amber-400 text-sm">
-                        {Array.from({ length: item.rating || 5 }).map((_, sIdx) => (
-                          <span key={sIdx}>★</span>
-                        ))}
-                      </div>
-
-                      {/* Review Date */}
-                      {item.date && (
-                        <span className="text-[11px] font-medium uppercase tracking-wider text-neutral-400">
-                          {item.date}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Customer Review Quote Body */}
-                    <p className="mt-4 text-xs sm:text-[13px] text-neutral-600 leading-relaxed line-clamp-6">
-                      {item.quote}
-                    </p>
-                  </div>
-
-                  {/* Bottom Row: Customer Initial Avatar + Name + Store Location */}
-                  <div className="mt-5 pt-4 border-t border-neutral-100 flex items-center gap-3">
-                    {/* Warm Champagne Circle Initial Badge */}
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#f3eae0] text-sm font-medium text-neutral-800 shadow-2xs">
-                      {getInitial(item.name)}
-                    </div>
-
-                    <div className="overflow-hidden">
-                      <h4 className="font-display text-sm font-medium text-neutral-900 truncate">
-                        {item.name}
-                      </h4>
-                      {item.location && (
-                        <p className="text-[11px] text-neutral-500 truncate mt-0.5 font-light">
-                          {item.location}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </div>
+                <ReviewCard
+                  name={item.name}
+                  rating={item.rating || 5}
+                  date={item.date}
+                  quote={item.quote}
+                  location={item.location}
+                  verified={false}
+                  className="w-full"
+                />
               </div>
             ))}
           </div>

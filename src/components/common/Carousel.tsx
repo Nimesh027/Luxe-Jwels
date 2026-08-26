@@ -59,7 +59,7 @@ export default function Carousel({
             type="button"
             aria-label="Previous"
             onClick={prev}
-            className="absolute left-0 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-surface text-ink shadow-md hover:bg-cream-dark"
+            className="absolute left-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-ink shadow-md backdrop-blur-xs hover:bg-white hover:scale-105 transition-all"
           >
             <LeftOutlined />
           </button>
@@ -67,7 +67,7 @@ export default function Carousel({
             type="button"
             aria-label="Next"
             onClick={next}
-            className="absolute right-0 top-1/2 flex h-10 w-10 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-surface text-ink shadow-md hover:bg-cream-dark"
+            className="absolute right-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-ink shadow-md backdrop-blur-xs hover:bg-white hover:scale-105 transition-all"
           >
             <RightOutlined />
           </button>

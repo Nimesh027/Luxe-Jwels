@@ -9,10 +9,10 @@ interface RatingProps {
 
 export default function Rating({ value, max = 5, className }: RatingProps) {
   return (
-    <div className={cn("flex items-center gap-0.5 text-gold", className)} aria-label={`${value} out of ${max} stars`}>
+    <span className={cn("inline-flex items-center gap-0.5 text-gold", className)} aria-label={`${value} out of ${max} stars`}>
       {Array.from({ length: max }, (_, index) =>
         index < value ? <StarFilled key={index} /> : <StarOutlined key={index} />
       )}
-    </div>
+    </span>
   );
 }

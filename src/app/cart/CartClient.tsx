@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Section from "@/components/common/Section";
 import SectionTitle from "@/components/common/SectionTitle";
 import Button from "@/components/ui/Button";
+import QuantitySelector from "@/components/ui/QuantitySelector";
 import { useCart } from "@/hooks/useCart";
 import { useWishlist } from "@/hooks/useWishlist";
 import { formatPrice } from "@/lib/utils";
@@ -248,27 +249,11 @@ export default function CartClient() {
 
                       {/* Quantity Controller (2 cols) */}
                       <div className="sm:col-span-2 flex justify-start sm:justify-center">
-                        <div className="inline-flex h-8.5 items-center rounded-xl border border-neutral-200 bg-[#fbf9f6] shadow-2xs">
-                          <button
-                            type="button"
-                            onClick={() => setQuantity(product.id, Math.max(1, quantity - 1))}
-                            aria-label="Decrease quantity"
-                            className="flex h-8.5 w-8 items-center justify-center text-neutral-600 hover:text-wine hover:bg-wine/10 transition-colors rounded-l-xl cursor-pointer"
-                          >
-                            −
-                          </button>
-                          <span className="w-8 text-center text-xs font-semibold text-neutral-900">
-                            {quantity}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => setQuantity(product.id, quantity + 1)}
-                            aria-label="Increase quantity"
-                            className="flex h-8.5 w-8 items-center justify-center text-neutral-600 hover:text-wine hover:bg-wine/10 transition-colors rounded-r-xl cursor-pointer"
-                          >
-                            +
-                          </button>
-                        </div>
+                        <QuantitySelector
+                          value={quantity}
+                          onChange={(newQty) => setQuantity(product.id, newQty)}
+                          size="sm"
+                        />
                       </div>
 
                       {/* Line Total (2 cols) */}
