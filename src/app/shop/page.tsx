@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import ShopClient from "./ShopClient";
+import Testimonials from "@/components/sections/Testimonials";
+import ServiceStrip from "@/components/sections/ServiceStrip";
+import Instagram from "@/components/sections/Instagram";
 
 export const metadata: Metadata = {
   title: "Shop All Jewellery | Luxe Jewels",
@@ -13,5 +16,12 @@ export const metadata: Metadata = {
 };
 
 export default function ShopPage() {
-  return <ShopClient />;
+  return (
+    <>
+      <ShopClient />
+      <Testimonials />
+      <ServiceStrip />
+      <Instagram />
+    </>
+  );
 }

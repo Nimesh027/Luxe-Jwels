@@ -10,7 +10,6 @@ import Testimonials from "@/components/sections/Testimonials";
 import BrandStory from "@/components/sections/BrandStory";
 import ServiceStrip from "@/components/sections/ServiceStrip";
 import Instagram from "@/components/sections/Instagram";
-import Newsletter from "@/components/sections/Newsletter";
 
 export default function Home() {
   return (
@@ -27,7 +26,6 @@ export default function Home() {
       <BrandStory />
       <ServiceStrip />
       <Instagram />
-      <Newsletter />
     </>
   );
 }

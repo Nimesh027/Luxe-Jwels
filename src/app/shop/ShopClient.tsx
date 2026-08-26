@@ -2,38 +2,14 @@
 
 import { useMemo, useState, useRef, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import Image from "next/image";
+import ShopHero from "@/components/shop/ShopHero";
+import ShopFilter, { CATEGORIES, COLLECTIONS, PRICE_RANGES } from "@/components/shop/ShopFilter";
 import ProductCard from "@/components/common/ProductCard";
 import Button from "@/components/ui/Button";
 import Select from "@/components/ui/Select";
 import { useAppSelector } from "@/store/hooks";
 import { filterProducts } from "@/lib/productFilter";
 import type { Product } from "@/types";
-
-// ─── Filter Definitions ───────────────────────────────────────────────────────
-
-const CATEGORIES = [
-  { label: "Rings", value: "rings" },
-  { label: "Necklaces", value: "necklaces" },
-  { label: "Earrings", value: "earrings" },
-  { label: "Bracelets", value: "bracelets" },
-  { label: "Pendants", value: "pendants" },
-];
-
-const COLLECTIONS = [
-  { label: "Diamond", value: "diamond-collection" },
-  { label: "Gold", value: "gold-collection" },
-  { label: "Men's", value: "mens-collection" },
-  { label: "Couple", value: "couple-collection" },
-  { label: "Gifts", value: "gift-collection" },
-];
-
-const PRICE_RANGES = [
-  { label: "Under ₹25,000", value: "under-25k", min: 0, max: 25000 },
-  { label: "₹25,000 – ₹50,000", value: "25k-50k", min: 25000, max: 50000 },
-  { label: "₹50,000 – ₹1,00,000", value: "50k-1l", min: 50000, max: 100000 },
-  { label: "Above ₹1,00,000", value: "above-1l", min: 100000, max: Infinity },
-];
 
 const SORT_OPTIONS = [
   { label: "Featured", value: "featured" },
@@ -42,7 +18,7 @@ const SORT_OPTIONS = [
   { label: "Name A–Z", value: "name-asc" },
 ];
 
-const PRODUCTS_PER_PAGE = 21;
+const PRODUCTS_PER_PAGE = 18;
 
 // ─── Price Filter Helper ──────────────────────────────────────────────────────
 
@@ -50,96 +26,6 @@ function applyPriceFilter(products: Product[], priceRange: string): Product[] {
   const range = PRICE_RANGES.find((r) => r.value === priceRange);
   if (!range) return products;
   return products.filter((p) => p.price >= range.min && p.price < range.max);
-}
-
-// ─── Checkbox ────────────────────────────────────────────────────────────────
-
-function FilterCheckbox({
-  label,
-  checked,
-  onChange,
-}: {
-  label: string;
-  checked: boolean;
-  onChange: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onChange}
-      className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-all duration-200 cursor-pointer group ${checked
-        ? "bg-wine/10 border border-wine/30"
-        : "border border-transparent hover:bg-ink/5 hover:border-border"
-        }`}
-    >
-      {/* Custom checkbox box */}
-      <span
-        className={`w-[15px] h-[15px] shrink-0 rounded-[4px] border-[1.5px] flex items-center justify-center transition-all duration-200 ${checked
-          ? "bg-wine border-wine shadow-sm shadow-wine/30"
-          : "border-border/70 bg-surface group-hover:border-wine/50"
-          }`}
-      >
-        {checked && (
-          <svg className="w-[9px] h-[9px] text-white" viewBox="0 0 10 10" fill="none">
-            <path
-              d="M1.5 5l2.5 2.5 4.5-4.5"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        )}
-      </span>
-      <span
-        className={`text-[13px] leading-none transition-colors duration-150 ${checked ? "text-wine font-medium" : "text-ink/80 group-hover:text-ink"
-          }`}
-      >
-        {label}
-      </span>
-    </button>
-  );
-}
-
-// ─── Radio ───────────────────────────────────────────────────────────────────
-
-function FilterRadio({
-  label,
-  checked,
-  onChange,
-}: {
-  label: string;
-  checked: boolean;
-  onChange: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onChange}
-      className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-all duration-200 cursor-pointer group ${checked
-        ? "bg-wine/10 border border-wine/30"
-        : "border border-transparent hover:bg-ink/5 hover:border-border"
-        }`}
-    >
-      {/* Custom radio circle */}
-      <span
-        className={`w-[15px] h-[15px] shrink-0 rounded-full border-[1.5px] flex items-center justify-center transition-all duration-200 ${checked
-          ? "border-wine"
-          : "border-border/70 bg-surface group-hover:border-wine/50"
-          }`}
-      >
-        {checked && (
-          <span className="w-[7px] h-[7px] rounded-full bg-wine block shadow-sm shadow-wine/40" />
-        )}
-      </span>
-      <span
-        className={`text-[13px] leading-none transition-colors duration-150 ${checked ? "text-wine font-medium" : "text-ink/80 group-hover:text-ink"
-          }`}
-      >
-        {label}
-      </span>
-    </button>
-  );
 }
 
 // ─── Pagination Component ────────────────────────────────────────────────────
@@ -234,116 +120,6 @@ function Pagination({
         Next
       </Button>
     </div>
-  );
-}
-
-
-
-// ─── Filter Section ───────────────────────────────────────────────────────────
-
-function FilterSection({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div>
-      <div className="flex items-center gap-2 mb-2.5">
-        <p className="text-[9px] font-extrabold uppercase tracking-[0.28em] text-muted/70">
-          {title}
-        </p>
-        <span className="flex-1 h-px bg-border/50" />
-      </div>
-      <div className="flex flex-col gap-0.5">{children}</div>
-    </div>
-  );
-}
-
-// ─── Sidebar ─────────────────────────────────────────────────────────────────
-
-function Sidebar({
-  activeCategories,
-  activeCollections,
-  activePrice,
-  onToggleCategory,
-  onToggleCollection,
-  onSetPrice,
-  onClearAll,
-  activeFilterCount,
-}: {
-  activeCategories: string[];
-  activeCollections: string[];
-  activePrice: string;
-  onToggleCategory: (val: string) => void;
-  onToggleCollection: (val: string) => void;
-  onSetPrice: (val: string) => void;
-  onClearAll: () => void;
-  activeFilterCount: number;
-}) {
-  return (
-    <aside>
-      {/* Header */}
-      <div className="flex items-center justify-between mb-5 pb-3 border-b border-border/60">
-        <div className="flex items-center gap-2">
-          <svg className="w-3.5 h-3.5 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="4" y1="6" x2="20" y2="6" /><line x1="7" y1="12" x2="17" y2="12" /><line x1="10" y1="18" x2="14" y2="18" />
-          </svg>
-          <h2 className="text-[14px] font-extrabold uppercase tracking-[0.2em] text-ink">
-            Filter By
-          </h2>
-        </div>
-        {activeFilterCount > 0 && (
-          <button
-            onClick={onClearAll}
-            className="text-[10px] text-wine/80 hover:text-wine border border-wine/20 hover:border-wine/40 rounded-full px-2.5 py-0.5 transition-all duration-150 cursor-pointer font-semibold tracking-wide"
-          >
-            Clear {activeFilterCount}
-          </button>
-        )}
-      </div>
-
-      <div className="space-y-6">
-        {/* Category */}
-        <FilterSection title="Category">
-          {CATEGORIES.map((cat) => (
-            <FilterCheckbox
-              key={cat.value}
-              label={cat.label}
-              checked={activeCategories.includes(cat.value)}
-              onChange={() => onToggleCategory(cat.value)}
-            />
-          ))}
-        </FilterSection>
-
-        {/* Collection */}
-        <FilterSection title="Collection">
-          {COLLECTIONS.map((col) => (
-            <FilterCheckbox
-              key={col.value}
-              label={col.label}
-              checked={activeCollections.includes(col.value)}
-              onChange={() => onToggleCollection(col.value)}
-            />
-          ))}
-        </FilterSection>
-
-        {/* Price */}
-        <FilterSection title="Price">
-          {PRICE_RANGES.map((range) => (
-            <FilterRadio
-              key={range.value}
-              label={range.label}
-              checked={activePrice === range.value}
-              onChange={() =>
-                onSetPrice(activePrice === range.value ? "" : range.value)
-              }
-            />
-          ))}
-        </FilterSection>
-      </div>
-    </aside>
   );
 }
 
@@ -454,73 +230,7 @@ function ShopContent() {
   return (
     <div className="bg-cream">
       {/* ── Page Hero ────────────────────────────────────────────── */}
-      <div className="relative overflow-hidden bg-ink py-16 md:py-20 lg:py-24 border-b border-border/40">
-        {/* Background Image */}
-        <Image
-          src="/images/banners/gold-star-jewellery-model.png"
-          alt="Shop fine jewellery"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[75%_center] opacity-40 mix-blend-luminosity"
-        />
-
-        {/* Rich Radial & Linear Gradients for depth and readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/90 via-55% to-ink/40" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(212,175,55,0.15),transparent_50%)]" />
-
-        {/* Gold Border Accent */}
-        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
-
-        {/* Content Container */}
-        <div className="container relative z-10 mx-auto px-4 sm:px-6">
-          <div className="max-w-2xl">
-            {/* Tagline Badge */}
-            <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 mb-5 backdrop-blur-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
-              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold">
-                Luxe Jewels Collection
-              </p>
-            </div>
-
-            {/* Main Title */}
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-[56px] text-cream font-light leading-[1.1] tracking-tight drop-shadow-sm">
-              Shop Fine Jewellery
-            </h1>
-
-            {/* Subtitle */}
-            <p className="mt-4 text-sm sm:text-base text-cream/80 max-w-lg leading-relaxed font-light">
-              Explore our complete range of certified luxury jewellery — meticulously handcrafted in hallmarked 18K gold &amp; ethically sourced diamonds.
-            </p>
-
-            {/* Stats / Highlights */}
-            <div className="mt-8 flex flex-wrap items-center gap-6 sm:gap-10 pt-6 border-t border-cream/15">
-              <div className="flex flex-col">
-                <span className="font-display text-2xl sm:text-3xl text-gold font-light">
-                  {allProducts.length}+
-                </span>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-cream/60 mt-0.5 font-medium">
-                  Exclusive Pieces
-                </span>
-              </div>
-              <div className="w-px h-9 bg-cream/15 hidden sm:block" />
-              <div className="flex flex-col">
-                <span className="font-display text-2xl sm:text-3xl text-gold font-light">18K</span>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-cream/60 mt-0.5 font-medium">
-                  Gold &amp; Diamond
-                </span>
-              </div>
-              <div className="w-px h-9 bg-cream/15 hidden sm:block" />
-              <div className="flex flex-col">
-                <span className="font-display text-2xl sm:text-3xl text-gold font-light">BIS</span>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-cream/60 mt-0.5 font-medium">
-                  100% Hallmarked
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ShopHero />
 
       <div className="py-12 md:py-16">
         <div className="container">
@@ -582,8 +292,8 @@ function ShopContent() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* ── Desktop Sidebar — col-span-3 ─────────────────── */}
             <div className="hidden lg:block lg:col-span-3">
-              <div className="sticky top-24 bg-surface border border-border/60 rounded-2xl p-5 shadow-sm">
-                <Sidebar {...sidebarProps} />
+              <div className="bg-surface border border-border/60 rounded-2xl p-5 shadow-sm">
+                <ShopFilter {...sidebarProps} />
               </div>
             </div>
 
@@ -619,7 +329,7 @@ function ShopContent() {
                     />
                   </div>
                   <div className="flex-1 overflow-y-auto px-5 py-5">
-                    <Sidebar {...sidebarProps} />
+                    <ShopFilter {...sidebarProps} />
                   </div>
                   <div className="px-5 py-4 border-t border-border">
                     <Button
