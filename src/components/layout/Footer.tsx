@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useAppSelector } from "@/store/hooks";
 import {
   InstagramIcon,
@@ -54,11 +55,14 @@ function renderPaymentBadge(badge: string) {
 }
 
 export default function Footer() {
+  const pathname = usePathname();
   const footer = useAppSelector((state) => state.siteContent.footer);
+
+  const isAuthPage = pathname === "/login" || pathname === "/register";
 
   return (
     <>
-      <Newsletter />
+      {!isAuthPage && <Newsletter />}
 
       <footer className="relative bg-[#100f0e] border-t border-gold/30 text-cream pt-14 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
         {/* Top Gold Hairline Glow Accent */}
