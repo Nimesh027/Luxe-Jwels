@@ -30,9 +30,6 @@ export default function Header() {
 
   const [activeLinkId, setActiveLinkId] = useState<string | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-
-  const isAuthPage = pathname === "/login" || pathname === "/register";
-  if (isAuthPage) return null;
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -46,6 +43,9 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const isAuthPage = pathname === "/login" || pathname === "/register";
+  if (isAuthPage) return null;
 
   const handleMouseEnter = (id: string) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);

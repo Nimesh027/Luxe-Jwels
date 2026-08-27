@@ -9,9 +9,6 @@ export default function AnnouncementBar() {
   const items = useAppSelector((state) => state.siteContent.announcementBar);
   const [isVisible, setIsVisible] = useState(true);
 
-  const isAuthPage = pathname === "/login" || pathname === "/register";
-  if (isAuthPage) return null;
-
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 45) {
@@ -25,6 +22,9 @@ export default function AnnouncementBar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const isAuthPage = pathname === "/login" || pathname === "/register";
+  if (isAuthPage) return null;
 
   if (!items || items.length === 0) return null;
 
