@@ -44,7 +44,8 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isAuthPage = pathname === "/login" || pathname === "/register";
+  const isAuthPage =
+    pathname === "/login" || pathname === "/register" || pathname === "/forgot-password";
   if (isAuthPage) return null;
 
   const handleMouseEnter = (id: string) => {

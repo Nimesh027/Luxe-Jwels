@@ -145,13 +145,12 @@ export default function LoginClient() {
             onChange={(e) => setPassword(e.target.value)}
             required
             labelAction={
-              <button
-                type="button"
-                onClick={() => setForgotNotice(true)}
+              <Link
+                href="/forgot-password"
                 className="text-[12px] text-gold/90 hover:text-gold underline underline-offset-2 transition-colors cursor-pointer"
               >
                 Forgot Password?
-              </button>
+              </Link>
             }
             leadingIcon={
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

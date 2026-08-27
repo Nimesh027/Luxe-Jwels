@@ -23,7 +23,8 @@ export default function AnnouncementBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isAuthPage = pathname === "/login" || pathname === "/register";
+  const isAuthPage =
+    pathname === "/login" || pathname === "/register" || pathname === "/forgot-password";
   if (isAuthPage) return null;
 
   if (!items || items.length === 0) return null;

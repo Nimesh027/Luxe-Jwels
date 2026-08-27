@@ -58,7 +58,8 @@ export default function Footer() {
   const pathname = usePathname();
   const footer = useAppSelector((state) => state.siteContent.footer);
 
-  const isAuthPage = pathname === "/login" || pathname === "/register";
+  const isAuthPage =
+    pathname === "/login" || pathname === "/register" || pathname === "/forgot-password";
   if (isAuthPage) return null;
 
   return (
