@@ -214,9 +214,13 @@ export default function RegisterClient() {
               />
               <span className="text-xs text-cream/70 group-hover:text-cream transition-colors leading-relaxed">
                 I agree to the{" "}
-                <span className="text-gold underline underline-offset-2">Terms of Service</span>{" "}
+                <Link href="/terms" className="text-gold underline underline-offset-2 hover:text-cream">
+                  Terms of Service
+                </Link>{" "}
                 and{" "}
-                <span className="text-gold underline underline-offset-2">Privacy Policy</span>, and wish to receive VIP offers.
+                <Link href="/privacy-policy" className="text-gold underline underline-offset-2 hover:text-cream">
+                  Privacy Policy
+                </Link>, and wish to receive VIP offers.
               </span>
             </label>
           </div>
