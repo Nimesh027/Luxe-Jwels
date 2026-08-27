@@ -1,50 +1,126 @@
-import type { InputHTMLAttributes, ReactNode } from "react";
-import { useId } from "react";
+"use client";
+
+import { useId, type InputHTMLAttributes, type ReactNode, forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
-interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "className"> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  error?: string;
+  labelAction?: ReactNode;
   leadingIcon?: ReactNode;
   trailingIcon?: ReactNode;
+  error?: string;
+  helperText?: string;
+  variant?: "dark" | "light";
   containerClassName?: string;
+  inputClassName?: string;
 }
 
-export default function Input({
-  label,
-  error,
-  leadingIcon,
-  trailingIcon,
-  containerClassName,
-  id,
-  ...rest
-}: InputProps) {
-  const generatedId = useId();
-  const inputId = id ?? generatedId;
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      label,
+      labelAction,
+      leadingIcon,
+      trailingIcon,
+      error,
+      helperText,
+      variant = "dark",
+      containerClassName,
+      inputClassName,
+      id,
+      className,
+      disabled,
+      ...props
+    },
+    ref
+  ) => {
+    const generatedId = useId();
+    const inputId = id ?? generatedId;
 
-  return (
-    <div className={cn("flex flex-col gap-1.5", containerClassName)}>
-      {label && (
-        <label htmlFor={inputId} className="text-sm text-ink">
-          {label}
-        </label>
-      )}
-      <div
-        className={cn(
-          "flex items-center gap-2 border bg-surface px-4 py-3",
-          error ? "border-red-500" : "border-border focus-within:border-gold"
+    const isDark = variant === "dark";
+
+    return (
+      <div className={cn("w-full flex flex-col", containerClassName)}>
+        {/* Label & Label Action Row */}
+        {(label || labelAction) && (
+          <div className="flex items-center justify-between mb-1.5">
+            {label && (
+              <label
+                htmlFor={inputId}
+                className={cn(
+                  "block text-xs uppercase tracking-wider font-medium cursor-pointer",
+                  isDark ? "text-cream/80" : "text-ink/80"
+                )}
+              >
+                {label}
+              </label>
+            )}
+            {labelAction && <div className="text-xs">{labelAction}</div>}
+          </div>
         )}
-      >
-        {leadingIcon && <span className="text-muted">{leadingIcon}</span>}
-        <input
-          id={inputId}
-          className="w-full bg-transparent text-sm text-ink placeholder:text-muted focus:outline-none"
-          {...rest}
-        />
-        {trailingIcon && <span className="text-muted">{trailingIcon}</span>}
+
+        {/* Input Wrapper Container */}
+        <div className="relative flex items-center w-full">
+          {/* Leading Icon */}
+          {leadingIcon && (
+            <div
+              className={cn(
+                "absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none",
+                isDark ? "text-cream/40" : "text-muted"
+              )}
+            >
+              {leadingIcon}
+            </div>
+          )}
+
+          {/* Input Element */}
+          <input
+            ref={ref}
+            id={inputId}
+            disabled={disabled}
+            className={cn(
+              "w-full rounded-xl py-2.5 sm:py-3 text-xs sm:text-sm transition-all duration-200 outline-hidden border",
+              leadingIcon ? "pl-10" : "pl-3.5",
+              trailingIcon ? "pr-10" : "pr-3.5",
+              isDark
+                ? "bg-white/5 text-cream placeholder-cream/30 border-white/15 focus:border-gold focus:ring-1 focus:ring-gold"
+                : "bg-surface text-ink placeholder-muted border-border focus:border-wine focus:ring-1 focus:ring-wine",
+              error && (isDark ? "border-red-500/80 ring-1 ring-red-500/50" : "border-red-500 ring-1 ring-red-500/50"),
+              disabled && "opacity-50 cursor-not-allowed",
+              inputClassName,
+              className
+            )}
+            {...props}
+          />
+
+          {/* Trailing Icon / Action */}
+          {trailingIcon && (
+            <div
+              className={cn(
+                "absolute inset-y-0 right-0 pr-3.5 flex items-center",
+                isDark ? "text-cream/40" : "text-muted"
+              )}
+            >
+              {trailingIcon}
+            </div>
+          )}
+        </div>
+
+        {/* Error or Helper Message */}
+        {error ? (
+          <p className={cn("text-[11px] sm:text-xs mt-1.5 font-medium", isDark ? "text-red-400" : "text-red-500")}>
+            {error}
+          </p>
+        ) : helperText ? (
+          <p className={cn("text-[11px] sm:text-xs mt-1.5 font-light", isDark ? "text-cream/50" : "text-muted")}>
+            {helperText}
+          </p>
+        ) : null}
       </div>
-      {error && <span className="text-xs text-red-500">{error}</span>}
-    </div>
-  );
-}
+    );
+  }
+);
+
+Input.displayName = "Input";
+
+export default Input;

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { DownOutlined, MenuOutlined } from "@ant-design/icons";
 import Badge from "@/components/ui/Badge";
 import MobileDrawer from "@/components/layout/MobileDrawer";
@@ -15,16 +16,23 @@ import {
 } from "@/store/slices/uiSlice";
 import { selectCartCount } from "@/store/slices/cartSlice";
 import { selectWishlistItems } from "@/store/slices/wishlistSlice";
+import { logout } from "@/store/slices/authSlice";
 import type { NavLink } from "@/types";
 
 export default function Header() {
+  const pathname = usePathname();
   const dispatch = useAppDispatch();
   const links = useAppSelector((state) => state.navigation.links);
   const cartCount = useAppSelector(selectCartCount);
   const wishlistCount = useAppSelector(selectWishlistItems).length;
+  const { user, isAuthenticated } = useAppSelector((state) => state.auth);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
 
   const [activeLinkId, setActiveLinkId] = useState<string | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const isAuthPage = pathname === "/login" || pathname === "/register";
+  if (isAuthPage) return null;
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -115,25 +123,62 @@ export default function Header() {
               </svg>
             </button>
 
-            {/* Account / User Icon */}
-            <Link
-              href="/login"
-              aria-label="Account"
-              className="text-wine hover:text-wine-dark transition-colors p-1"
-            >
-              <svg
-                className="w-5 h-5 sm:w-[22px] sm:h-[22px]"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+            {/* Account / User Icon & Dropdown */}
+            {isAuthenticated && user ? (
+              <div className="relative">
+                <button
+                  type="button"
+                  aria-label="Account Menu"
+                  onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                  className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-wine text-cream text-xs sm:text-sm font-bold uppercase shadow-xs hover:bg-wine-dark hover:scale-105 transition-all cursor-pointer"
+                >
+                  {user.name.charAt(0)}
+                </button>
+
+                {userDropdownOpen && (
+                  <div
+                    className="absolute right-0 top-full mt-2 w-48 bg-surface border border-border rounded-xl shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-1"
+                    onMouseLeave={() => setUserDropdownOpen(false)}
+                  >
+                    <div className="px-4 py-2 border-b border-border">
+                      <p className="text-xs font-semibold text-ink truncate">{user.name}</p>
+                      <p className="text-[11px] text-muted truncate">{user.email}</p>
+                    </div>
+                    <div className="py-1">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          dispatch(logout());
+                          setUserDropdownOpen(false);
+                        }}
+                        className="w-full text-left px-4 py-2 text-xs text-red-600 hover:bg-red-50 font-medium transition-colors cursor-pointer"
+                      >
+                        Sign Out
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                aria-label="Account"
+                className="text-wine hover:text-wine-dark transition-colors p-1"
               >
-                <circle cx="12" cy="7" r="4" />
-                <path d="M5.5 21a6.5 6.5 0 0 1 13 0" />
-              </svg>
-            </Link>
+                <svg
+                  className="w-5 h-5 sm:w-[22px] sm:h-[22px]"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="7" r="4" />
+                  <path d="M5.5 21a6.5 6.5 0 0 1 13 0" />
+                </svg>
+              </Link>
+            )}
 
             {/* Wishlist / Heart Icon */}
             <button

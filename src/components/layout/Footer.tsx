@@ -59,10 +59,11 @@ export default function Footer() {
   const footer = useAppSelector((state) => state.siteContent.footer);
 
   const isAuthPage = pathname === "/login" || pathname === "/register";
+  if (isAuthPage) return null;
 
   return (
     <>
-      {!isAuthPage && <Newsletter />}
+      <Newsletter />
 
       <footer className="relative bg-[#100f0e] border-t border-gold/30 text-cream pt-14 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
         {/* Top Gold Hairline Glow Accent */}

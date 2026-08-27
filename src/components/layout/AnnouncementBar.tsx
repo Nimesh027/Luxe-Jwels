@@ -1,11 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { useAppSelector } from "@/store/hooks";
 
 export default function AnnouncementBar() {
+  const pathname = usePathname();
   const items = useAppSelector((state) => state.siteContent.announcementBar);
   const [isVisible, setIsVisible] = useState(true);
+
+  const isAuthPage = pathname === "/login" || pathname === "/register";
+  if (isAuthPage) return null;
 
   useEffect(() => {
     const handleScroll = () => {
