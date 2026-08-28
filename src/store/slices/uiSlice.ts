@@ -4,6 +4,7 @@ export interface UiState {
   mobileDrawerOpen: boolean;
   cartDrawerOpen: boolean;
   wishlistDrawerOpen: boolean;
+  userDrawerOpen: boolean;
   activeModal: string | null;
   searchOpen: boolean;
 }
@@ -12,6 +13,7 @@ const initialState: UiState = {
   mobileDrawerOpen: false,
   cartDrawerOpen: false,
   wishlistDrawerOpen: false,
+  userDrawerOpen: false,
   activeModal: null,
   searchOpen: false,
 };
@@ -29,6 +31,9 @@ const uiSlice = createSlice({
     setWishlistDrawerOpen: (state, action: PayloadAction<boolean>) => {
       state.wishlistDrawerOpen = action.payload;
     },
+    setUserDrawerOpen: (state, action: PayloadAction<boolean>) => {
+      state.userDrawerOpen = action.payload;
+    },
     openModal: (state, action: PayloadAction<string>) => {
       state.activeModal = action.payload;
     },
@@ -45,6 +50,7 @@ export const {
   setMobileDrawerOpen,
   setCartDrawerOpen,
   setWishlistDrawerOpen,
+  setUserDrawerOpen,
   openModal,
   closeModal,
   setSearchOpen,

@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { DownOutlined, MenuOutlined } from "@ant-design/icons";
 import Badge from "@/components/ui/Badge";
 import MobileDrawer from "@/components/layout/MobileDrawer";
+import UserDrawer from "@/components/layout/UserDrawer";
+import UserModals from "@/components/layout/UserModals";
 import MegaMenu from "@/components/layout/MegaMenu";
 import SearchBar from "@/components/layout/SearchBar";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -13,6 +15,7 @@ import {
   setMobileDrawerOpen,
   setCartDrawerOpen,
   setWishlistDrawerOpen,
+  setUserDrawerOpen,
 } from "@/store/slices/uiSlice";
 import { selectCartCount } from "@/store/slices/cartSlice";
 import { selectWishlistItems } from "@/store/slices/wishlistSlice";
@@ -124,48 +127,18 @@ export default function Header() {
               </svg>
             </button>
 
-            {/* Account / User Icon & Dropdown */}
-            {isAuthenticated && user ? (
-              <div className="relative">
-                <button
-                  type="button"
-                  aria-label="Account Menu"
-                  onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                  className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-wine text-cream text-xs sm:text-sm font-bold uppercase shadow-xs hover:bg-wine-dark hover:scale-105 transition-all cursor-pointer"
-                >
+            {/* Account / User Icon (Opens Right Slide Drawer) */}
+            <button
+              type="button"
+              aria-label="Account Menu"
+              onClick={() => dispatch(setUserDrawerOpen(true))}
+              className="flex items-center justify-center text-wine hover:text-wine-dark transition-colors p-1 cursor-pointer"
+            >
+              {isAuthenticated && user ? (
+                <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-wine text-cream text-xs sm:text-sm font-bold uppercase shadow-xs hover:bg-wine-dark hover:scale-105 transition-all">
                   {user.name.charAt(0)}
-                </button>
-
-                {userDropdownOpen && (
-                  <div
-                    className="absolute right-0 top-full mt-2 w-48 bg-surface border border-border rounded-xl shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-1"
-                    onMouseLeave={() => setUserDropdownOpen(false)}
-                  >
-                    <div className="px-4 py-2 border-b border-border">
-                      <p className="text-xs font-semibold text-ink truncate">{user.name}</p>
-                      <p className="text-[11px] text-muted truncate">{user.email}</p>
-                    </div>
-                    <div className="py-1">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          dispatch(logout());
-                          setUserDropdownOpen(false);
-                        }}
-                        className="w-full text-left px-4 py-2 text-xs text-red-600 hover:bg-red-50 font-medium transition-colors cursor-pointer"
-                      >
-                        Sign Out
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <Link
-                href="/login"
-                aria-label="Account"
-                className="text-wine hover:text-wine-dark transition-colors p-1"
-              >
+                </div>
+              ) : (
                 <svg
                   className="w-5 h-5 sm:w-[22px] sm:h-[22px]"
                   viewBox="0 0 24 24"
@@ -178,8 +151,8 @@ export default function Header() {
                   <circle cx="12" cy="7" r="4" />
                   <path d="M5.5 21a6.5 6.5 0 0 1 13 0" />
                 </svg>
-              </Link>
-            )}
+              )}
+            </button>
 
             {/* Wishlist / Heart Icon */}
             <button
@@ -316,8 +289,10 @@ export default function Header() {
         </div>
       )}
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer, User Drawer & Account Modals */}
       <MobileDrawer />
+      <UserDrawer />
+      <UserModals />
     </header>
   );
 }
