@@ -163,7 +163,7 @@ export default function UserDrawer() {
 
             {/* 4. Contact Us */}
             <Link
-              href="/privacy-policy"
+              href="/contact"
               onClick={() => {
                 setActiveTab("contact-us");
                 handleClose();
