@@ -679,13 +679,6 @@ export default function AccountClient() {
                   <form onSubmit={handleAddPaymentSubmit} className="bg-surface rounded-2xl border border-wine/30 p-6 shadow-md space-y-5 animate-in fade-in duration-200">
                     <div className="flex items-center justify-between pb-3 border-b border-border">
                       <h3 className="font-display text-lg font-semibold text-wine">Add New Payment Method</h3>
-                      <button
-                        type="button"
-                        onClick={() => setShowAddPaymentForm(false)}
-                        className="text-xs text-muted hover:text-wine font-semibold"
-                      >
-                        &times; Close
-                      </button>
                     </div>
 
                     {/* Payment Type Selection Tabs */}
@@ -864,13 +857,15 @@ export default function AccountClient() {
 
                     {/* Submit Actions */}
                     <div className="flex items-center justify-end gap-3 pt-3 border-t border-border">
-                      <button
-                        type="button"
-                        onClick={() => setShowAddPaymentForm(false)}
-                        className="px-4 py-2 border border-border text-xs font-medium rounded-xl hover:bg-wine/5 transition-colors cursor-pointer"
-                      >
-                        Cancel
-                      </button>
+                      {paymentMethods.length > 0 && (
+                        <button
+                          type="button"
+                          onClick={() => setShowAddPaymentForm(false)}
+                          className="px-4 py-2 border border-border text-xs font-medium rounded-xl hover:bg-wine/5 transition-colors cursor-pointer"
+                        >
+                          Cancel
+                        </button>
+                      )}
                       <button
                         type="submit"
                         className="px-5 py-2.5 bg-wine text-white text-xs sm:text-sm font-semibold rounded-xl hover:bg-wine-dark transition-all cursor-pointer shadow-xs"
@@ -994,13 +989,6 @@ export default function AccountClient() {
                       <h3 className="font-display text-lg font-semibold text-wine">
                         {editingAddressId ? "Edit Address Details" : "Add New Delivery Address"}
                       </h3>
-                      <button
-                        type="button"
-                        onClick={() => setShowAddressForm(false)}
-                        className="text-xs text-muted hover:text-wine font-semibold"
-                      >
-                        &times; Close
-                      </button>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1121,13 +1109,15 @@ export default function AccountClient() {
 
                     {/* Submit Actions */}
                     <div className="flex items-center justify-end gap-3 pt-3 border-t border-border">
-                      <button
-                        type="button"
-                        onClick={() => setShowAddressForm(false)}
-                        className="px-4 py-2 border border-border text-xs font-medium rounded-xl hover:bg-wine/5 transition-colors cursor-pointer"
-                      >
-                        Cancel
-                      </button>
+                      {addresses.length > 0 && (
+                        <button
+                          type="button"
+                          onClick={() => setShowAddressForm(false)}
+                          className="px-4 py-2 border border-border text-xs font-medium rounded-xl hover:bg-wine/5 transition-colors cursor-pointer"
+                        >
+                          Cancel
+                        </button>
+                      )}
                       <button
                         type="submit"
                         className="px-5 py-2.5 bg-wine text-white text-xs sm:text-sm font-semibold rounded-xl hover:bg-wine-dark transition-all cursor-pointer shadow-xs"

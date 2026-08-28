@@ -56,79 +56,77 @@ export default function WishlistClient() {
   }
 
   return (
-    <Section className="py-10 sm:py-16">
-      <div className="container max-w-4xl mx-auto px-4 sm:px-6">
-        <SectionTitle
-          title="My Wishlist"
-          description="Your saved pieces, all in one place"
-          align="left"
-          className="mb-8"
-        />
+    <Section>
+      <SectionTitle
+        title="My Wishlist"
+        description="Your saved pieces, all in one place"
+        align="left"
+        className="mb-8"
+      />
 
-        {/* HORIZONTAL WISHLIST PRODUCT CARDS LIST (MATCHING SCREENSHOT) */}
-        <div className="bg-surface rounded-2xl border border-border/70 p-6 sm:p-8 shadow-xs divide-y divide-border/50">
-          {items.map((product) => (
-            <div
-              key={product.id}
-              className="py-6 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 transition-all"
-            >
-              {/* Left: Product Thumbnail & Details */}
-              <div className="flex items-center gap-4 sm:gap-6">
-                <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden bg-neutral-100 flex-shrink-0 border border-border/40 shadow-2xs">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <h3 className="font-display font-semibold text-base sm:text-lg text-ink">
-                    {product.name}
-                  </h3>
-                  <p className="text-xs text-muted font-medium">
-                    18K Solid Gold • {product.category ? product.category.toUpperCase() : "Rings"}
-                  </p>
-
-                  <div className="flex items-center gap-2 pt-0.5 pb-1">
-                    <span className="font-semibold text-ink text-sm sm:text-base">
-                      ₹{product.price.toLocaleString("en-IN")}
-                    </span>
-                    {product.compareAtPrice && (
-                      <span className="text-xs text-muted line-through font-normal">
-                        ₹{product.compareAtPrice.toLocaleString("en-IN")}
-                      </span>
-                    )}
-                  </div>
-
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => handleAddToCart(product)}
-                      className="px-5 py-2 bg-slate-950 hover:bg-slate-800 text-white rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-150 shadow-xs hover:shadow-md cursor-pointer active:scale-95"
-                    >
-                      ADD TO CART
-                    </button>
-                  </div>
-                </div>
+      {/* HORIZONTAL WISHLIST PRODUCT CARDS LIST (MATCHING SCREENSHOT) */}
+      <div className="bg-surface rounded-2xl border border-border/70 p-6 sm:p-8 shadow-xs divide-y divide-border/50">
+        {items.map((product) => (
+          <div
+            key={product.id}
+            className="py-6 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 transition-all"
+          >
+            {/* Left: Product Thumbnail & Details */}
+            <div className="flex items-center gap-4 sm:gap-6">
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden bg-neutral-100 flex-shrink-0 border border-border/40 shadow-2xs">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-cover"
+                />
               </div>
 
-              {/* Right: Remove Pill Button */}
-              <button
-                type="button"
-                onClick={() => handleRemove(product.id)}
-                className="px-3.5 py-1.5 bg-white border border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-900 rounded-full text-xs font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5 self-start sm:self-center"
-                title="Remove from Wishlist"
-              >
-                <svg className="w-3.5 h-3.5 text-gray-500 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6" />
-                </svg>
-                <span>Remove</span>
-              </button>
+              <div className="space-y-1">
+                <h3 className="font-display font-semibold text-base sm:text-lg text-ink">
+                  {product.name}
+                </h3>
+                <p className="text-xs text-muted font-medium">
+                  18K Solid Gold • {product.category ? product.category.toUpperCase() : "Rings"}
+                </p>
+
+                <div className="flex items-center gap-2 pt-0.5 pb-1">
+                  <span className="font-semibold text-ink text-sm sm:text-base">
+                    ₹{product.price.toLocaleString("en-IN")}
+                  </span>
+                  {product.compareAtPrice && (
+                    <span className="text-xs text-muted line-through font-normal">
+                      ₹{product.compareAtPrice.toLocaleString("en-IN")}
+                    </span>
+                  )}
+                </div>
+
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => handleAddToCart(product)}
+                    className="px-5 py-2 bg-slate-950 hover:bg-slate-800 text-white rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-150 shadow-xs hover:shadow-md cursor-pointer active:scale-95"
+                  >
+                    ADD TO CART
+                  </button>
+                </div>
+              </div>
             </div>
-          ))}
-        </div>
+
+            {/* Right: Remove Pill Button */}
+            <button
+              type="button"
+              onClick={() => handleRemove(product.id)}
+              className="px-3.5 py-1.5 bg-white border border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-900 rounded-full text-xs font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5 self-start sm:self-center"
+              title="Remove from Wishlist"
+            >
+              <svg className="w-3.5 h-3.5 text-gray-500 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6" />
+              </svg>
+              <span>Remove</span>
+            </button>
+          </div>
+        ))}
       </div>
     </Section>
   );

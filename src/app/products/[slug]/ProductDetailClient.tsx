@@ -9,10 +9,14 @@ import CustomerReviewsSection from "@/components/product/CustomerReviewsSection"
 import RelatedProductsSection from "@/components/product/RelatedProductsSection";
 import LightboxModal from "@/components/product/LightboxModal";
 import SizeGuideModal from "@/components/product/SizeGuideModal";
+import StickyAddToCartBar from "@/components/product/StickyAddToCartBar";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { addItem as addToCart } from "@/store/slices/cartSlice";
+import { setCartDrawerOpen } from "@/store/slices/uiSlice";
 
 export default function ProductDetailClient({ slug }: { slug: string }) {
+  const dispatch = useAppDispatch();
   const allProducts = useAppSelector((state) => state.products.items);
   const product = allProducts.find((item) => item.slug === slug);
   const category = useAppSelector((state) =>
@@ -24,6 +28,11 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
 
   if (!product) return null;
+
+  const handleStickyAddToCart = () => {
+    dispatch(addToCart({ product, quantity: 1 }));
+    dispatch(setCartDrawerOpen(true));
+  };
 
   const relatedProducts = allProducts
     .filter((item) => item.id !== product.id && item.category === product.category)
@@ -58,11 +67,17 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
       {/* Section 4: Explore Similar Designs Within Your Budget */}
       <BudgetExploreSection currentProduct={product} allProducts={allProducts} />
 
-      {/* Section 4: Customer Reviews & Ratings */}
+      {/* Section 5: Customer Reviews & Ratings */}
       <CustomerReviewsSection />
 
-      {/* Section 5: Related Products Recommendations */}
+      {/* Section 6: Related Products Recommendations */}
       <RelatedProductsSection relatedProducts={relatedProducts} />
+
+      {/* FIXED STICKY BOTTOM ACTION BAR (MATCHING SCREENSHOT) */}
+      <StickyAddToCartBar
+        product={product}
+        onAddToCart={handleStickyAddToCart}
+      />
 
       {/* Lightbox Slider Modal */}
       <LightboxModal
