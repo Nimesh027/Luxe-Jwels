@@ -92,12 +92,11 @@ export default function UserDrawer() {
           <nav className="space-y-3" aria-label="User Account Options">
 
             {/* 1. Order History */}
-            <button
-              type="button"
+            <Link
+              href="/account?tab=order-history"
               onClick={() => {
                 setActiveTab("order-history");
                 handleClose();
-                dispatch(openModal("orderHistory"));
               }}
               className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left transition-all duration-200 cursor-pointer ${activeTab === "order-history"
                   ? "bg-[#FAF0F2] border border-wine/30 text-wine shadow-xs"
@@ -113,15 +112,14 @@ export default function UserDrawer() {
                 </svg>
               </div>
               <span className="font-display font-medium text-sm sm:text-base">Order History</span>
-            </button>
+            </Link>
 
             {/* 2. Gift Card Balance */}
-            <button
-              type="button"
+            <Link
+              href="/account?tab=gift-card"
               onClick={() => {
                 setActiveTab("gift-card");
                 handleClose();
-                dispatch(openModal("giftCard"));
               }}
               className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left transition-all duration-200 cursor-pointer ${activeTab === "gift-card"
                   ? "bg-[#FAF0F2] border border-wine/30 text-wine shadow-xs"
@@ -136,15 +134,14 @@ export default function UserDrawer() {
                 </svg>
               </div>
               <span className="font-display font-medium text-sm sm:text-base">Gift Card Balance</span>
-            </button>
+            </Link>
 
             {/* 3. Track Order */}
-            <button
-              type="button"
+            <Link
+              href="/account?tab=track-order"
               onClick={() => {
                 setActiveTab("track-order");
                 handleClose();
-                dispatch(openModal("trackOrder"));
               }}
               className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left transition-all duration-200 cursor-pointer ${activeTab === "track-order"
                   ? "bg-[#FAF0F2] border border-wine/40 text-wine font-semibold shadow-xs"
@@ -159,7 +156,7 @@ export default function UserDrawer() {
                 </svg>
               </div>
               <span className="font-display font-medium text-sm sm:text-base">Track Order</span>
-            </button>
+            </Link>
 
             {/* 4. Contact Us */}
             <Link

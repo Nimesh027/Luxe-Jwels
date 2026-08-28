@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Modal from "@/components/ui/Modal";
+import Input from "@/components/ui/Input";
 
 export default function UserModals() {
   // Track order state
@@ -35,19 +36,17 @@ export default function UserModals() {
             Enter your order tracking number or Order ID (e.g. LX-89241) to check real-time delivery status.
           </p>
 
-          <form onSubmit={handleTrackSubmit} className="space-y-3">
-            <div>
-              <label htmlFor="user-modal-order-id" className="block text-xs font-semibold text-ink mb-1">Order Number / AWB</label>
-              <input
-                id="user-modal-order-id"
-                type="text"
-                value={orderId}
-                onChange={(e) => setOrderId(e.target.value)}
-                placeholder="e.g. LX-89241"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-xs focus:outline-none focus:border-wine transition-colors"
-                required
-              />
-            </div>
+          <form onSubmit={handleTrackSubmit} className="space-y-4">
+            <Input
+              id="user-modal-order-id"
+              label="Order Number / AWB"
+              type="text"
+              variant="light"
+              value={orderId}
+              onChange={(e) => setOrderId(e.target.value)}
+              placeholder="e.g. LX-89241"
+              required
+            />
             <button
               type="submit"
               className="w-full py-2.5 bg-wine text-white rounded-xl text-xs font-semibold hover:bg-wine-dark transition-colors cursor-pointer"
@@ -110,19 +109,18 @@ export default function UserModals() {
             Check the available store credit or redeem a Luxe Jewels digital gift card code.
           </p>
 
-          <form onSubmit={handleGiftCardCheck} className="space-y-3">
-            <div>
-              <label htmlFor="user-modal-gift-card-code" className="block text-xs font-semibold text-ink mb-1">Gift Card Code</label>
-              <input
-                id="user-modal-gift-card-code"
-                type="text"
-                value={giftCardCode}
-                onChange={(e) => setGiftCardCode(e.target.value)}
-                placeholder="e.g. LUXE-GIFT-2026"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-xs focus:outline-none focus:border-wine transition-colors uppercase tracking-wider"
-                required
-              />
-            </div>
+          <form onSubmit={handleGiftCardCheck} className="space-y-4">
+            <Input
+              id="user-modal-gift-card-code"
+              label="Gift Card Code"
+              type="text"
+              variant="light"
+              value={giftCardCode}
+              onChange={(e) => setGiftCardCode(e.target.value)}
+              placeholder="e.g. LUXE-GIFT-2026"
+              inputClassName="uppercase tracking-wider"
+              required
+            />
             <button
               type="submit"
               className="w-full py-2.5 bg-wine text-white rounded-xl text-xs font-semibold hover:bg-wine-dark transition-colors cursor-pointer"

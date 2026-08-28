@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Breadcrumbs from "@/components/common/Breadcrumbs";
 
 interface NavSection {
   id: string;
@@ -42,6 +43,7 @@ export default function PrivacyPolicyClient() {
   return (
     <div className="min-h-screen bg-surface text-ink py-10 sm:py-16">
       <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+        <Breadcrumbs items={[{ label: "Privacy Policy" }]} />
         {/* Top Header Row with Title */}
         <div className="mb-10 pb-4 border-b border-border">
           <h1 className="font-display text-3xl sm:text-4xl text-wine font-semibold tracking-wide">
@@ -52,12 +54,12 @@ export default function PrivacyPolicyClient() {
         {/* 2-Column Documentation Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 relative items-start">
           {/* LEFT SIDEBAR NAVIGATION MENU (4 cols) */}
-          <div className="lg:col-span-4 sticky top-24 z-20">
-            <div className="bg-surface rounded-xl border border-border shadow-sm p-4 relative overflow-hidden">
-              {/* Vertical Wine Line Accent on Sidebar Right Edge (Matching Screenshot) */}
-              <div className="hidden lg:block absolute right-0 top-6 bottom-6 w-1 bg-wine rounded-r-md" />
+          <div className="lg:col-span-4 sticky top-[130px] z-20">
+            <div className="bg-surface rounded-2xl border border-border/80 shadow-xs p-3.5 relative overflow-hidden">
+              {/* Vertical Wine Line Accent on Sidebar Right Edge */}
+              <div className="hidden lg:block absolute right-0 top-6 bottom-6 w-1 bg-wine rounded-l-md" />
 
-              <nav className="space-y-1 max-h-[calc(100vh-160px)] overflow-y-auto pr-2" aria-label="Privacy Sections">
+              <nav className="space-y-0.5 pr-2 scrollbar-none" aria-label="Privacy Sections">
                 {navSections.map((section) => {
                   const isActive = activeId === section.id;
                   return (
@@ -65,8 +67,8 @@ export default function PrivacyPolicyClient() {
                       key={section.id}
                       type="button"
                       onClick={() => handleScrollToSection(section.id)}
-                      className={`w-full text-left px-3.5 py-2.5 rounded-lg text-xs sm:text-[13px] transition-all duration-200 cursor-pointer block ${isActive
-                        ? "font-bold text-wine bg-wine/10 border-l-2 border-wine"
+                      className={`w-full text-left px-3.5 py-2 rounded-xl text-xs sm:text-[13px] transition-all duration-200 cursor-pointer block ${isActive
+                        ? "font-bold text-wine bg-[#FAF0F2] border-l-4 border-wine"
                         : "font-medium text-ink/75 hover:text-wine hover:bg-wine/5"
                         }`}
                     >

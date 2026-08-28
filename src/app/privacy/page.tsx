@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PrivacyPolicyClient from "../privacy-policy/PrivacyPolicyClient";
+import PrivacyPolicyClient from "@/app/privacy-policy/PrivacyPolicyClient";
 
 export const metadata: Metadata = {
   title: "Privacy Notice",

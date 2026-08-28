@@ -16,6 +16,7 @@ import QuantitySelector from "@/components/ui/QuantitySelector";
 import { useCart } from "@/hooks/useCart";
 import { formatPrice } from "@/lib/utils";
 import Section from "../common/Section";
+import Breadcrumbs, { BreadcrumbItem } from "@/components/common/Breadcrumbs";
 
 interface ProductHeroSectionProps {
   product: Product;
@@ -47,29 +48,12 @@ export default function ProductHeroSection({
   return (
     <Section>
       {/* Breadcrumb Navigation */}
-      <nav
-        aria-label="Breadcrumb"
-        className="mb-8 flex items-center gap-2 text-xs uppercase tracking-wider text-muted"
-      >
-        <Link href="/" className="hover:text-gold transition-colors">
-          Home
-        </Link>
-        <RightOutlined className="text-[9px] text-muted/60" />
-        {category && (
-          <>
-            <Link
-              href={`/category/${category.slug}`}
-              className="hover:text-gold transition-colors"
-            >
-              {category.name}
-            </Link>
-            <RightOutlined className="text-[9px] text-muted/60" />
-          </>
-        )}
-        <span className="font-semibold text-ink truncate max-w-[200px] md:max-w-none">
-          {product.name}
-        </span>
-      </nav>
+      <Breadcrumbs
+        items={[
+          ...(category ? [{ label: category.name, href: `/category/${category.slug}` }] : []),
+          { label: product.name },
+        ]}
+      />
 
       {/* Hero Section Grid */}
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">

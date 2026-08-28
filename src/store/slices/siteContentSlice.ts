@@ -282,12 +282,10 @@ const initialState: SiteContentState = {
         title: "Information",
         links: [
           { label: "About Us", href: "/about" },
-          { label: "Our Story", href: "/about" },
           { label: "Privacy Notice", href: "/privacy-policy" },
           { label: "Terms & Conditions", href: "/terms" },
           { label: "Care Guide", href: "/care-guide" },
           { label: "Blog", href: "/blog" },
-          { label: "Size Guide", href: "/size-guide" },
         ],
       },
     ],

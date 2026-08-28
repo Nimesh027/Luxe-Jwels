@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Section from "@/components/common/Section";
+import Breadcrumbs from "@/components/common/Breadcrumbs";
 
 interface FAQItem {
   id: string;
@@ -54,16 +55,7 @@ export default function ContactClient() {
     <Section>
 
       {/* BREADCRUMB NAVIGATION */}
-      <nav
-        aria-label="Breadcrumb"
-        className="mb-8 flex items-center gap-2 text-xs uppercase tracking-wider text-muted"
-      >
-        <Link href="/" className="hover:text-wine transition-colors">
-          Home
-        </Link>
-        <span>/</span>
-        <span className="font-semibold text-wine">Help & Contact</span>
-      </nav>
+      <Breadcrumbs items={[{ label: "Help & Contact" }]} />
 
       {/* MAIN PAGE TITLE */}
       <h1 className="font-display text-3xl sm:text-4xl text-wine font-semibold tracking-wide text-center mb-10 sm:mb-12">

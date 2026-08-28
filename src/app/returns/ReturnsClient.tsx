@@ -2,21 +2,13 @@
 
 import Link from "next/link";
 import Section from "@/components/common/Section";
+import Breadcrumbs from "@/components/common/Breadcrumbs";
 
 export default function ReturnsClient() {
   return (
     <Section>
       {/* BREADCRUMB NAVIGATION */}
-      <nav
-        aria-label="Breadcrumb"
-        className="mb-8 flex items-center gap-2 text-xs uppercase tracking-wider text-muted"
-      >
-        <Link href="/" className="hover:text-wine transition-colors">
-          Home
-        </Link>
-        <span>/</span>
-        <span className="font-semibold text-wine">Returns & Exchange Policy</span>
-      </nav>
+      <Breadcrumbs items={[{ label: "Returns & Exchange Policy" }]} />
 
       {/* MAIN PAGE TITLE */}
       <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">

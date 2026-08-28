@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -19,6 +20,7 @@ type TabType =
   | "address-book"
   | "wishlist"
   | "order-history"
+  | "track-order"
   | "gift-card";
 
 interface PaymentMethod {
@@ -60,7 +62,15 @@ export default function AccountClient() {
     dispatch(removeFromWishlist(productId));
   };
 
+  const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<TabType>("overview");
+
+  useEffect(() => {
+    const tabParam = searchParams.get("tab") as TabType | null;
+    if (tabParam && ["overview", "saved-payments", "address-book", "wishlist", "order-history", "gift-card"].includes(tabParam)) {
+      setActiveTab(tabParam);
+    }
+  }, [searchParams]);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -307,12 +317,20 @@ export default function AccountClient() {
     );
   };
 
+  useEffect(() => {
+    const tabParam = searchParams.get("tab") as TabType | null;
+    if (tabParam && ["overview", "saved-payments", "address-book", "wishlist", "order-history", "track-order", "gift-card"].includes(tabParam)) {
+      setActiveTab(tabParam);
+    }
+  }, [searchParams]);
+
   const navItems: { id: TabType; label: string; icon: string }[] = [
     { id: "overview", label: "Overview", icon: "👤" },
     { id: "saved-payments", label: "Saved Payments Method", icon: "💳" },
     { id: "address-book", label: "Address Book", icon: "📍" },
     { id: "wishlist", label: "Wishlist", icon: "🖤" },
     { id: "order-history", label: "Order History", icon: "📜" },
+    { id: "track-order", label: "Track Order", icon: "📦" },
     { id: "gift-card", label: "Gift Card Balance", icon: "🎁" },
   ];
 
@@ -1439,6 +1457,129 @@ export default function AccountClient() {
                         )}
                       </div>
                     )}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* 7. TRACK ORDER TAB */}
+            {activeTab === "track-order" && (
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <h2 className="font-display text-2xl font-semibold text-wine">
+                    Track Your Order
+                  </h2>
+                </div>
+
+                <div className="bg-surface rounded-2xl border border-border p-6 shadow-sm space-y-6">
+                  <div className="space-y-2">
+                    <h3 className="font-display text-lg font-semibold text-wine">
+                      Live Delivery Tracker
+                    </h3>
+                    <p className="text-xs text-muted leading-relaxed">
+                      Enter your Order ID (e.g. LX-89241) or AWB Tracking Number to check real-time courier status.
+                    </p>
+                  </div>
+
+                  <form onSubmit={(e) => { e.preventDefault(); setSaveSuccess(true); setTimeout(() => setSaveSuccess(false), 3000); }} className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <Input
+                        label="Order ID / AWB Number"
+                        type="text"
+                        variant="light"
+                        placeholder="e.g. LX-89241"
+                        defaultValue="LX-89241"
+                        required
+                      />
+                      <Input
+                        label="Mobile Number / Email"
+                        type="text"
+                        variant="light"
+                        placeholder="+91 9876543210"
+                        defaultValue="+91 6353147401"
+                        required
+                      />
+                    </div>
+
+                    <Button type="submit" variant="fill" colorTheme="wine" size="md">
+                      Track Delivery Status
+                    </Button>
+                  </form>
+
+                  {/* ACTIVE ORDER TRACKING PROGRESS CARD */}
+                  <div className="pt-6 border-t border-border space-y-6">
+                    <div className="p-4 bg-wine/5 rounded-2xl border border-wine/15 flex flex-wrap items-center justify-between gap-4">
+                      <div>
+                        <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold uppercase tracking-wider">
+                          IN TRANSIT 🚚
+                        </span>
+                        <h4 className="font-display font-semibold text-wine text-base mt-1">
+                          Order #LX-89241 • Royal Solitaire Diamond Ring
+                        </h4>
+                        <p className="text-xs text-muted">
+                          Insured Express Courier: <span className="text-ink font-medium">BlueDart Express (AWB: SQL-98234109)</span>
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-[10px] uppercase font-bold text-muted tracking-wider block">Estimated Delivery</span>
+                        <span className="font-display font-bold text-wine text-base">Tomorrow by 5:00 PM</span>
+                      </div>
+                    </div>
+
+                    {/* TIMELINE STEPPER */}
+                    <div className="space-y-4 pt-2">
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-muted">Shipment Journey</h4>
+                      <div className="space-y-6 pt-1">
+                        {[
+                          {
+                            title: "Order Placed & Certified",
+                            desc: "Aug 26, 2026 • BIS Hallmark & IGI Diamond verification complete.",
+                            status: "completed",
+                            icon: "✓",
+                          },
+                          {
+                            title: "Handed to BlueDart Express",
+                            desc: "Aug 27, 2026 • Sealed in armored tamper-proof luxury vault box.",
+                            status: "completed",
+                            icon: "✓",
+                          },
+                          {
+                            title: "Out for Delivery",
+                            desc: "Aug 28, 2026 • Expected delivery by 5:00 PM (OTP signature required).",
+                            status: "active",
+                            icon: "🚚",
+                          },
+                        ].map((step, idx, arr) => {
+                          const isLast = idx === arr.length - 1;
+                          return (
+                            <div key={idx} className="relative flex items-start gap-4">
+                              {/* Connecting Line Segment (Stops at last icon point) */}
+                              {!isLast && (
+                                <span
+                                  aria-hidden="true"
+                                  className="absolute left-[11px] top-6 bottom-0 w-[2px] bg-wine/30 -mb-6"
+                                />
+                              )}
+
+                              {/* Step Icon Badge */}
+                              <div className={`relative z-10 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 shadow-xs ${
+                                step.status === "completed"
+                                  ? "bg-emerald-500 text-white"
+                                  : "bg-wine text-white ring-4 ring-wine/20 animate-pulse"
+                              }`}>
+                                {step.icon}
+                              </div>
+
+                              {/* Step Text Content */}
+                              <div className="space-y-0.5 pt-0.5">
+                                <p className="text-xs font-bold text-wine">{step.title}</p>
+                                <p className="text-[11px] text-muted leading-relaxed">{step.desc}</p>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
