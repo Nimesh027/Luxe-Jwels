@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function AccountPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-surface py-20 text-center text-xs text-muted">Loading account...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-surface py-20 text-center text-caption text-muted">Loading account...</div>}>
       <AccountClient />
     </Suspense>
   );

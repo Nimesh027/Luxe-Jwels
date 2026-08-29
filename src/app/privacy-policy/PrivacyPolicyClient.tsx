@@ -46,7 +46,7 @@ export default function PrivacyPolicyClient() {
         <Breadcrumbs items={[{ label: "Privacy Policy" }]} />
         {/* Top Header Row with Title */}
         <div className="mb-10 pb-4 border-b border-border">
-          <h1 className="font-display text-3xl sm:text-4xl text-wine font-semibold tracking-wide">
+          <h1 className="font-display text-h2 text-wine font-semibold tracking-wide">
             Privacy Notice
           </h1>
         </div>
@@ -67,7 +67,7 @@ export default function PrivacyPolicyClient() {
                       key={section.id}
                       type="button"
                       onClick={() => handleScrollToSection(section.id)}
-                      className={`w-full text-left px-3.5 py-2 rounded-xl text-xs sm:text-[13px] transition-all duration-200 cursor-pointer block ${isActive
+                      className={`w-full text-left px-3.5 py-2 rounded-xl text-caption sm:text-[13px] transition-all duration-200 cursor-pointer block ${isActive
                         ? "font-bold text-wine bg-[#FAF0F2] border-l-4 border-wine"
                         : "font-medium text-ink/75 hover:text-wine hover:bg-wine/5"
                         }`}
@@ -81,7 +81,7 @@ export default function PrivacyPolicyClient() {
           </div>
 
           {/* RIGHT CONTENT PANEL (8 cols) */}
-          <div className="lg:col-span-8 space-y-10 text-xs sm:text-sm text-ink/80 leading-relaxed font-light">
+          <div className="lg:col-span-8 space-y-10 text-body text-ink/80 leading-relaxed font-light">
             {/* Introduction */}
             <section id="introduction" className="scroll-mt-28 space-y-3 pb-6 border-b border-border">
               <h2 className="font-display text-[18px] text-wine font-semibold">
@@ -94,7 +94,7 @@ export default function PrivacyPolicyClient() {
 
             {/* 1. Personal and Sensitive Personal Data */}
             <section id="section-1" className="scroll-mt-28 space-y-3 pb-6 border-b border-border">
-              <h2 className="font-display text-xl text-wine font-semibold">
+              <h2 className="font-display text-h4 text-wine font-semibold">
                 1. Personal and Sensitive Personal Data
               </h2>
               <p>
@@ -104,7 +104,7 @@ export default function PrivacyPolicyClient() {
 
             {/* 2. Categories of Personal Data */}
             <section id="section-2" className="scroll-mt-28 space-y-3 pb-6 border-b border-border">
-              <h2 className="font-display text-xl text-wine font-semibold">
+              <h2 className="font-display text-h4 text-wine font-semibold">
                 2. Categories of Personal Data
               </h2>
               <ul className="list-disc pl-5 space-y-1.5">
@@ -117,7 +117,7 @@ export default function PrivacyPolicyClient() {
 
             {/* 3. Sources of Personal Data */}
             <section id="section-3" className="scroll-mt-28 space-y-3 pb-6 border-b border-border">
-              <h2 className="font-display text-xl text-wine font-semibold">
+              <h2 className="font-display text-h4 text-wine font-semibold">
                 3. Sources of Personal Data
               </h2>
               <p>
@@ -127,7 +127,7 @@ export default function PrivacyPolicyClient() {
 
             {/* 4. Purpose for Collecting Personal Data */}
             <section id="section-4" className="scroll-mt-28 space-y-3 pb-6 border-b border-border">
-              <h2 className="font-display text-xl text-wine font-semibold">
+              <h2 className="font-display text-h4 text-wine font-semibold">
                 4. Purpose for Collecting Personal Data
               </h2>
               <p>
@@ -137,7 +137,7 @@ export default function PrivacyPolicyClient() {
 
             {/* 5. Lawful Basis of Processing */}
             <section id="section-5" className="scroll-mt-28 space-y-3 pb-6 border-b border-border">
-              <h2 className="font-display text-xl text-wine font-semibold">
+              <h2 className="font-display text-h4 text-wine font-semibold">
                 5. Lawful Basis of Processing
               </h2>
               <p>
@@ -147,7 +147,7 @@ export default function PrivacyPolicyClient() {
 
             {/* 6. Disclosure of your Personal Data */}
             <section id="section-6" className="scroll-mt-28 space-y-3 pb-6 border-b border-border">
-              <h2 className="font-display text-xl text-wine font-semibold">
+              <h2 className="font-display text-h4 text-wine font-semibold">
                 6. Disclosure of your Personal Data and Categories of Third Parties
               </h2>
               <p>
@@ -163,7 +163,7 @@ export default function PrivacyPolicyClient() {
 
             {/* 7. Cross Border Transfer (Matching Screenshots Exactly!) */}
             <section id="section-7" className="scroll-mt-28 space-y-4 pb-6 border-b border-border">
-              <h2 className="font-display text-xl text-wine font-semibold">
+              <h2 className="font-display text-h4 text-wine font-semibold">
                 7. Cross Border Transfer
               </h2>
               <p>
@@ -171,13 +171,13 @@ export default function PrivacyPolicyClient() {
               </p>
 
               <div className="space-y-3 pt-2">
-                <h3 className="text-xs sm:text-sm font-semibold text-ink">
+                <h3 className="text-body font-semibold text-ink">
                   Data Transfer Mechanisms:
                 </h3>
 
                 <div className="pl-4 border-l-2 border-gold/60 space-y-3">
                   <div>
-                    <h4 className="text-xs sm:text-sm font-semibold text-ink">
+                    <h4 className="text-body font-semibold text-ink">
                       Standard Contractual Clauses (SCCs):
                     </h4>
                     <p className="mt-0.5">
@@ -186,7 +186,7 @@ export default function PrivacyPolicyClient() {
                   </div>
 
                   <div>
-                    <h4 className="text-xs sm:text-sm font-semibold text-ink">
+                    <h4 className="text-body font-semibold text-ink">
                       Adequacy Decisions:
                     </h4>
                     <p className="mt-0.5">
@@ -195,7 +195,7 @@ export default function PrivacyPolicyClient() {
                   </div>
 
                   <div>
-                    <h4 className="text-xs sm:text-sm font-semibold text-ink">
+                    <h4 className="text-body font-semibold text-ink">
                       Binding Corporate Rules (BCRs):
                     </h4>
                     <p className="mt-0.5">
@@ -208,7 +208,7 @@ export default function PrivacyPolicyClient() {
 
             {/* 8. Data Storage & Retention */}
             <section id="section-8" className="scroll-mt-28 space-y-3 pb-6 border-b border-border">
-              <h2 className="font-display text-xl text-wine font-semibold">
+              <h2 className="font-display text-h4 text-wine font-semibold">
                 8. Data Storage &amp; Retention
               </h2>
               <p>
@@ -218,7 +218,7 @@ export default function PrivacyPolicyClient() {
 
             {/* 9. Data Subject Rights */}
             <section id="section-9" className="scroll-mt-28 space-y-3 pb-6 border-b border-border">
-              <h2 className="font-display text-xl text-wine font-semibold">
+              <h2 className="font-display text-h4 text-wine font-semibold">
                 9. Data Subject Rights
               </h2>
               <p>
@@ -228,7 +228,7 @@ export default function PrivacyPolicyClient() {
 
             {/* 10. How to Exercise your Rights */}
             <section id="section-10" className="scroll-mt-28 space-y-3 pb-6 border-b border-border">
-              <h2 className="font-display text-xl text-wine font-semibold">
+              <h2 className="font-display text-h4 text-wine font-semibold">
                 10. How to Exercise your Rights
               </h2>
               <p>
@@ -238,7 +238,7 @@ export default function PrivacyPolicyClient() {
 
             {/* 11. Minor's Personal Data */}
             <section id="section-11" className="scroll-mt-28 space-y-3 pb-6 border-b border-border">
-              <h2 className="font-display text-xl text-wine font-semibold">
+              <h2 className="font-display text-h4 text-wine font-semibold">
                 11. Minor&apos;s Personal Data
               </h2>
               <p>
@@ -248,7 +248,7 @@ export default function PrivacyPolicyClient() {
 
             {/* 12. Data Security Measures */}
             <section id="section-12" className="scroll-mt-28 space-y-3 pb-6 border-b border-border">
-              <h2 className="font-display text-xl text-wine font-semibold">
+              <h2 className="font-display text-h4 text-wine font-semibold">
                 12. Data Security Measures
               </h2>
               <p>
@@ -258,7 +258,7 @@ export default function PrivacyPolicyClient() {
 
             {/* 13. Automatic Data Collection */}
             <section id="section-13" className="scroll-mt-28 space-y-3 pb-6 border-b border-border">
-              <h2 className="font-display text-xl text-wine font-semibold">
+              <h2 className="font-display text-h4 text-wine font-semibold">
                 13. Automatic Data Collection
               </h2>
               <p>
@@ -268,13 +268,13 @@ export default function PrivacyPolicyClient() {
 
             {/* 14. Contact Us */}
             <section id="section-14" className="scroll-mt-28 space-y-3 pb-6 border-b border-border">
-              <h2 className="font-display text-xl text-wine font-semibold">
+              <h2 className="font-display text-h4 text-wine font-semibold">
                 14. Contact Us
               </h2>
               <p>
                 If you have questions or concerns regarding this Privacy Notice or our data handling practices, please write to us at:
               </p>
-              <div className="p-4 bg-white/50 border border-border rounded-lg text-xs space-y-1">
+              <div className="p-4 bg-white/50 border border-border rounded-lg text-caption space-y-1">
                 <p className="font-semibold text-wine">Luxe Jewels Privacy Office</p>
                 <p>Luxe Tower, MG Road, Bengaluru, Karnataka 560001, India</p>
                 <p>Email: privacy@luxe-jewels.com | Phone: +91 (80) 4000-8888</p>
@@ -283,7 +283,7 @@ export default function PrivacyPolicyClient() {
 
             {/* 15. Changes to Privacy Notice */}
             <section id="section-15" className="scroll-mt-28 space-y-3">
-              <h2 className="font-display text-xl text-wine font-semibold">
+              <h2 className="font-display text-h4 text-wine font-semibold">
                 15. Changes to Privacy Notice
               </h2>
               <p>

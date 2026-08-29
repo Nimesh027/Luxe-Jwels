@@ -32,21 +32,21 @@ export default function QuantitySelector({
   };
 
   const sizeClasses = {
-    sm: "h-8 px-1 text-xs",
-    md: "h-11 px-2 text-sm",
-    lg: "h-12 px-3 text-base",
+    sm: "h-8 px-1 text-caption",
+    md: "h-11 px-2 text-small",
+    lg: "h-12 px-3 text-body",
   };
 
   const btnClasses = {
-    sm: "h-6 w-6 text-xs",
-    md: "h-8 w-8 text-sm",
-    lg: "h-9 w-9 text-base",
+    sm: "h-6 w-6 text-caption",
+    md: "h-8 w-8 text-small",
+    lg: "h-9 w-9 text-body",
   };
 
   const textWidthClasses = {
-    sm: "w-6 text-xs",
-    md: "w-8 text-sm",
-    lg: "w-10 text-base",
+    sm: "w-6 text-caption",
+    md: "w-8 text-small",
+    lg: "w-10 text-body",
   };
 
   return (

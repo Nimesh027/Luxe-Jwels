@@ -38,7 +38,7 @@ export default function NewCollection() {
             </div>
 
             {/* 2-Line Controlled Sized Luxury Headline */}
-            <h2 className="font-display text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-light leading-[1.18] text-cream tracking-tight drop-shadow-md">
+            <h2 className="font-display text-h3 xs:text-h2 md:text-h1 lg:text-[52px] font-light leading-[1.18] text-cream tracking-tight drop-shadow-md">
               Modern Designs.
               <br />
               Timeless Craftsmanship.
@@ -50,7 +50,7 @@ export default function NewCollection() {
             </div>
 
             {/* Shortened Supporting Copy */}
-            <p className="max-w-md sm:max-w-lg text-xs sm:text-sm md:text-[15px] font-light leading-relaxed text-cream/90">
+            <p className="max-w-md sm:max-w-lg text-body md:text-[15px] font-light leading-relaxed text-cream/90">
               Discover brilliant diamonds and 18K gold creations, crafted for modern celebrations.
             </p>
 
@@ -62,7 +62,7 @@ export default function NewCollection() {
                 colorTheme="gold"
                 size="lg"
                 rightIcon={<ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />}
-                className="h-11 sm:h-12 px-7 sm:px-9 shadow-lg shadow-gold/20 hover:shadow-gold/35 font-semibold text-xs sm:text-sm"
+                className="h-11 sm:h-12 px-7 sm:px-9 shadow-lg shadow-gold/20 hover:shadow-gold/35 font-semibold text-body"
               >
                 {newCollection.cta.label || "Discover New Arrivals"}
               </Button>

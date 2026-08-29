@@ -15,17 +15,17 @@ export default function SizeGuideModal({ isOpen, onClose }: SizeGuideModalProps)
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
       <div className="w-full max-w-md rounded-3xl bg-surface p-6 shadow-xl border border-border">
         <div className="flex items-center justify-between border-b border-border pb-4">
-          <h3 className="font-display text-xl font-medium text-ink">Jewellery Size Guide</h3>
+          <h3 className="font-display text-h4 font-medium text-ink">Jewellery Size Guide</h3>
           <button
             type="button"
             onClick={onClose}
-            className="text-muted hover:text-ink text-lg cursor-pointer"
+            className="text-muted hover:text-ink text-h5 cursor-pointer"
           >
             <CloseOutlined />
           </button>
         </div>
 
-        <div className="mt-4 space-y-3 text-xs text-muted">
+        <div className="mt-4 space-y-3 text-caption text-muted">
           <p>Measure your existing necklace, chain, or ring to find the perfect luxury fit:</p>
 
           <div className="rounded-xl bg-cream/40 p-3 space-y-1.5 text-ink font-mono text-[11px]">

@@ -67,20 +67,20 @@ export default function CategoryGrid() {
 
         {/* Content Typography */}
         <div className="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col justify-end items-start text-left transition-all duration-300 z-10">
-          <span className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-1 drop-shadow-xs">
+          <span className="text-[10px] sm:text-caption font-semibold tracking-[0.2em] uppercase text-gold mb-1 drop-shadow-xs">
             {tagline}
           </span>
 
           <h3
             className={cn(
               "font-display text-cream font-normal tracking-wide leading-tight drop-shadow-md group-hover:text-gold transition-colors duration-300",
-              isHero ? "text-2xl sm:text-3xl lg:text-4xl" : "text-xl sm:text-2xl"
+              isHero ? "text-h2 lg:text-h2" : "text-h3"
             )}
           >
             {item.name}
           </h3>
 
-          <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] sm:text-xs tracking-wider uppercase text-gold font-medium drop-shadow-xs group-hover:text-cream transition-colors">
+          <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] sm:text-caption tracking-wider uppercase text-gold font-medium drop-shadow-xs group-hover:text-cream transition-colors">
             <span>Explore {item.name}</span>
             <ArrowRightIcon className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
           </div>

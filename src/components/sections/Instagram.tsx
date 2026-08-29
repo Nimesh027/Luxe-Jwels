@@ -35,14 +35,14 @@ export default function Instagram() {
     <Section className="bg-white overflow-hidden" containerClassName="!max-w-full !px-0">
       {/* Centered Editorial Section Header */}
       <div className="text-center mb-8 sm:mb-12">
-        <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-normal text-ink tracking-tight">
+        <h2 className="font-display text-h2 md:text-h2 font-normal text-ink tracking-tight">
           Follow the Luxe Jewels Story
         </h2>
         <a
           href="https://instagram.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-2.5 inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium tracking-wider text-muted hover:text-gold transition-colors"
+          className="mt-2.5 inline-flex items-center gap-1.5 text-body font-medium tracking-wider text-muted hover:text-gold transition-colors"
         >
           <InstagramIcon className="h-3.5 w-3.5 text-gold" />
           <span>{instagram.handle || "@luxe.jewels"}</span>

@@ -105,10 +105,10 @@ export default function CareGuideClient() {
               <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-wine/80">Luxe Lifetime Care</span>
               <span className="h-[1px] w-8 bg-gold/60" />
             </div>
-            <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl text-wine font-semibold tracking-tight leading-[1.15]">
+            <h1 className="font-display text-h1 text-wine font-semibold tracking-tight leading-[1.15]">
               Jewellery Care Guide
             </h1>
-            <p className="text-xs sm:text-base text-muted font-light leading-relaxed max-w-2xl mx-auto">
+            <p className="text-body text-muted font-light leading-relaxed max-w-2xl mx-auto">
               Fine gold, certified diamonds, and precious gemstones are designed to endure for generations. Follow our master goldsmiths’ care instructions to preserve their eternal fire and brilliance.
             </p>
           </div>
@@ -121,7 +121,7 @@ export default function CareGuideClient() {
                   key={cat.id}
                   type="button"
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`px-5 py-3 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${
+                  className={`px-5 py-3 rounded-full text-caption font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${
                     activeCategory === cat.id
                       ? "bg-[#80222F] text-white shadow-md"
                       : "bg-surface border border-border/80 text-ink/80 hover:border-wine/40 hover:text-wine"
@@ -142,8 +142,8 @@ export default function CareGuideClient() {
                   className="bg-surface rounded-3xl border border-wine/20 p-6 sm:p-10 shadow-xs space-y-6 animate-in fade-in duration-300"
                 >
                   <div className="flex items-center gap-3 border-b border-border/60 pb-4">
-                    <span className="text-3xl">{cat.icon}</span>
-                    <h2 className="font-display text-xl sm:text-2xl font-semibold text-wine">
+                    <span className="text-h2">{cat.icon}</span>
+                    <h2 className="font-display text-h3 font-semibold text-wine">
                       {cat.title} Care Tips
                     </h2>
                   </div>
@@ -152,9 +152,9 @@ export default function CareGuideClient() {
                     {cat.tips.map((tip, idx) => (
                       <li
                         key={idx}
-                        className="flex items-start gap-3 bg-[#FAF0F2]/50 rounded-2xl p-4 border border-wine/10 text-xs sm:text-sm text-ink/80 leading-relaxed"
+                        className="flex items-start gap-3 bg-[#FAF0F2]/50 rounded-2xl p-4 border border-wine/10 text-body text-ink/80 leading-relaxed"
                       >
-                        <span className="w-6 h-6 rounded-full bg-wine/10 text-wine flex items-center justify-center shrink-0 font-bold text-xs">
+                        <span className="w-6 h-6 rounded-full bg-wine/10 text-wine flex items-center justify-center shrink-0 font-bold text-caption">
                           {idx + 1}
                         </span>
                         <span>{tip}</span>
@@ -168,10 +168,10 @@ export default function CareGuideClient() {
           {/* DO'S & DON'TS GRID */}
           <div className="mb-16">
             <div className="text-center space-y-2 mb-10">
-              <h2 className="font-display text-2xl sm:text-3xl font-semibold text-wine">
+              <h2 className="font-display text-h2 font-semibold text-wine">
                 Essential Do’s & Don’ts
               </h2>
-              <p className="text-xs sm:text-sm text-muted">
+              <p className="text-body text-muted">
                 Simple habits to protect your heirloom jewellery every single day.
               </p>
             </div>
@@ -195,10 +195,10 @@ export default function CareGuideClient() {
                   >
                     {item.type === "do" ? "✓ RECOMMENDED" : "✕ AVOID"}
                   </span>
-                  <h3 className="font-display font-semibold text-wine text-base pt-1">
+                  <h3 className="font-display font-semibold text-wine text-body pt-1">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-muted leading-relaxed">
+                  <p className="text-caption text-muted leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
@@ -208,17 +208,17 @@ export default function CareGuideClient() {
 
           {/* COMPLIMENTARY BOUTIQUE SERVICE BOX */}
           <div className="bg-gradient-to-r from-wine/10 via-wine/5 to-wine/10 rounded-3xl border border-wine/20 p-8 sm:p-10 text-center max-w-3xl mx-auto space-y-4 shadow-sm">
-            <span className="text-3xl block">✨</span>
-            <h3 className="font-display text-xl sm:text-2xl font-semibold text-wine">
+            <span className="text-h2 block">✨</span>
+            <h3 className="font-display text-h3 font-semibold text-wine">
               Complimentary Lifetime Care at Luxe Boutiques
             </h3>
-            <p className="text-xs sm:text-sm text-muted leading-relaxed max-w-lg mx-auto">
+            <p className="text-body text-muted leading-relaxed max-w-lg mx-auto">
               Every Luxe Jewels piece includes lifetime complimentary cleaning, gold polishing, and stone tightening. Visit any flagship boutique worldwide for white-glove spa care.
             </p>
             <div className="pt-2">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center px-8 py-3 bg-[#80222F] hover:bg-wine-dark text-white rounded-full text-xs font-bold uppercase tracking-widest transition-all shadow-md cursor-pointer active:scale-95"
+                className="inline-flex items-center justify-center px-8 py-3 bg-[#80222F] hover:bg-wine-dark text-white rounded-full text-caption font-bold uppercase tracking-widest transition-all shadow-md cursor-pointer active:scale-95"
               >
                 BOOK CARE APPOINTMENT
               </Link>

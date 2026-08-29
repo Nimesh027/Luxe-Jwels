@@ -22,8 +22,8 @@ export interface SelectProps {
 
 const sizeClasses = {
   sm: "text-[14px] pl-3.5 pr-8 py-2 rounded-lg",
-  md: "text-sm pl-4 pr-9 py-2.5 rounded-lg",
-  lg: "text-base pl-4 pr-10 py-3 rounded-xl",
+  md: "text-small pl-4 pr-9 py-2.5 rounded-lg",
+  lg: "text-body pl-4 pr-10 py-3 rounded-xl",
 };
 
 export default function Select({
@@ -58,7 +58,7 @@ export default function Select({
 
   return (
     <div className={cn("flex flex-col gap-1.5 relative", containerClassName)}>
-      {label && <label className="text-xs text-muted uppercase tracking-wider font-medium">{label}</label>}
+      {label && <label className="text-caption text-muted uppercase tracking-wider font-medium">{label}</label>}
 
       <div ref={ref} className="relative inline-block w-full">
         {/* Select Trigger */}

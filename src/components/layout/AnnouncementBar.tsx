@@ -43,7 +43,7 @@ export default function AnnouncementBar() {
       <div className="flex w-max animate-marquee hover:[animation-play-state:paused] items-center">
         {repeatedItems.map((item, index) => (
           <div key={index} className="flex items-center shrink-0">
-            <span className="text-xs uppercase tracking-[0.2em] font-medium px-8 text-cream/90">
+            <span className="text-caption uppercase tracking-[0.2em] font-medium px-8 text-cream/90">
               {item}
             </span>
             <span className="text-gold/70 text-[9px] select-none">

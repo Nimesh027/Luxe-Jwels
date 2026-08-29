@@ -31,37 +31,37 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
         {/* CONTENT CONTAINER */}
         <div className="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between space-y-6">
           <div className="space-y-3.5">
-            <div className="flex items-center gap-3 text-xs text-muted font-medium">
+            <div className="flex items-center gap-3 text-caption text-muted font-medium">
               <span className="text-wine font-semibold uppercase tracking-wider">{post.category}</span>
               <span>•</span>
               <span>{post.readTime}</span>
             </div>
 
             <Link href={`/blog/${post.slug}`}>
-              <h2 className="font-display text-xl sm:text-3xl text-wine font-semibold tracking-tight leading-snug group-hover:text-wine-dark transition-colors">
+              <h2 className="font-display text-h4 sm:text-h2 text-wine font-semibold tracking-tight leading-snug group-hover:text-wine-dark transition-colors">
                 {post.title}
               </h2>
             </Link>
 
-            <p className="text-xs sm:text-sm text-muted font-light leading-relaxed line-clamp-3">
+            <p className="text-body text-muted font-light leading-relaxed line-clamp-3">
               {post.excerpt}
             </p>
           </div>
 
           <div className="pt-4 border-t border-border/60 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full bg-wine/10 text-wine flex items-center justify-center font-bold text-sm">
+              <div className="w-8 h-8 rounded-full bg-wine/10 text-wine flex items-center justify-center font-bold text-small">
                 {post.author.avatar}
               </div>
               <div>
-                <p className="text-xs font-semibold text-ink">{post.author.name}</p>
+                <p className="text-caption font-semibold text-ink">{post.author.name}</p>
                 <p className="text-[10px] text-muted">{post.date}</p>
               </div>
             </div>
 
             <Link
               href={`/blog/${post.slug}`}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-wine hover:text-wine-dark uppercase tracking-wider transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-caption font-bold text-wine hover:text-wine-dark uppercase tracking-wider transition-colors cursor-pointer"
             >
               <span>Read Story</span>
               <span>→</span>
@@ -99,17 +99,17 @@ export default function BlogCard({ post, featured = false }: BlogCardProps) {
           </div>
 
           <Link href={`/blog/${post.slug}`} className="block">
-            <h3 className="font-display font-semibold text-base sm:text-lg text-wine line-clamp-2 leading-snug group-hover:text-wine-dark transition-colors">
+            <h3 className="font-display font-semibold text-h5 text-wine line-clamp-2 leading-snug group-hover:text-wine-dark transition-colors">
               {post.title}
             </h3>
           </Link>
 
-          <p className="text-xs text-muted font-light leading-relaxed line-clamp-2 pt-1">
+          <p className="text-caption text-muted font-light leading-relaxed line-clamp-2 pt-1">
             {post.excerpt}
           </p>
         </div>
 
-        <div className="pt-3 border-t border-border/50 flex items-center justify-between text-xs">
+        <div className="pt-3 border-t border-border/50 flex items-center justify-between text-caption">
           <span className="text-[11px] text-muted font-medium">By {post.author.name}</span>
           <Link
             href={`/blog/${post.slug}`}

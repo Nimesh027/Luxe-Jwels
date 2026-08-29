@@ -40,7 +40,7 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                 onMouseEnter={() => setActiveTabId(tab.id)}
                 onClick={() => setActiveTabId(tab.id)}
                 className={cn(
-                  "text-left px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-150 whitespace-nowrap cursor-pointer",
+                  "text-left px-4 py-2.5 rounded-full text-small font-medium transition-all duration-150 whitespace-nowrap cursor-pointer",
                   isActive
                     ? "bg-wine-soft text-wine border border-wine/20 shadow-xs font-semibold"
                     : "text-muted hover:text-wine hover:bg-cream"
@@ -67,7 +67,7 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                   <JewelryIcon name={item.name} className="w-8 h-8" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <span className="text-sm font-normal text-ink group-hover:text-wine transition-colors duration-150 block truncate">
+                  <span className="text-small font-normal text-ink group-hover:text-wine transition-colors duration-150 block truncate">
                     {item.name}
                   </span>
                   {item.badge && (
@@ -104,10 +104,10 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                   </div>
                 )}
                 <div>
-                  <h4 className="text-sm font-display font-semibold text-ink leading-tight">
+                  <h4 className="text-small font-display font-semibold text-ink leading-tight">
                     {activeTab.bottomBanner.heading}
                   </h4>
-                  <p className="text-xs text-muted mt-0.5">
+                  <p className="text-caption text-muted mt-0.5">
                     {activeTab.bottomBanner.subheading}
                   </p>
                 </div>
@@ -116,7 +116,7 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
               <Link
                 href={activeTab.bottomBanner.buttonHref}
                 onClick={onClose}
-                className="shrink-0 inline-flex items-center justify-center px-6 py-2 rounded-full bg-wine text-white text-xs font-semibold tracking-wide hover:bg-wine-dark transition-all duration-150 shadow-xs hover:shadow active:scale-95"
+                className="shrink-0 inline-flex items-center justify-center px-6 py-2 rounded-full bg-wine text-white text-caption font-semibold tracking-wide hover:bg-wine-dark transition-all duration-150 shadow-xs hover:shadow active:scale-95"
               >
                 {activeTab.bottomBanner.buttonText}
               </Link>
@@ -142,10 +142,10 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <p className="font-display text-sm font-medium text-ink mt-3 leading-snug line-clamp-2 group-hover:text-wine transition-colors duration-150">
+              <p className="font-display text-small font-medium text-ink mt-3 leading-snug line-clamp-2 group-hover:text-wine transition-colors duration-150">
                 {activeTab.featuredCard.title}
               </p>
-              <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-wine hover:text-gold mt-2 transition-colors duration-150">
+              <div className="inline-flex items-center gap-1.5 text-caption font-semibold text-wine hover:text-gold mt-2 transition-colors duration-150">
                 <span>{activeTab.featuredCard.ctaLabel}</span>
                 <span className="text-[10px] transform group-hover:translate-x-1 transition-transform">
                   ↗

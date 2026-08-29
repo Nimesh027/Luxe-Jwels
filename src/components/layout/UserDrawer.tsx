@@ -39,7 +39,7 @@ export default function UserDrawer() {
 
         {/* HEADER WITH CLOSE BUTTON */}
         <div className="p-4 px-5 bg-surface border-b border-border/40 flex items-center justify-between">
-          <span className="font-display font-semibold text-wine text-base tracking-wide">
+          <span className="font-display font-semibold text-wine text-body tracking-wide">
             My Account
           </span>
           <button
@@ -75,7 +75,7 @@ export default function UserDrawer() {
                 </div>
 
                 <div>
-                  <h3 className="font-display text-lg font-semibold tracking-wide text-white lowercase">
+                  <h3 className="font-display text-h5 font-semibold tracking-wide text-white lowercase">
                     {displayName}
                   </h3>
                   <p className="text-[11px] text-white/80 font-medium">Manage Profile & Account &rarr;</p>
@@ -111,7 +111,7 @@ export default function UserDrawer() {
                   </g>
                 </svg>
               </div>
-              <span className="font-display font-medium text-sm sm:text-base">Order History</span>
+              <span className="font-display font-medium text-body">Order History</span>
             </Link>
 
             {/* 2. Gift Card Balance */}
@@ -133,7 +133,7 @@ export default function UserDrawer() {
                   </g>
                 </svg>
               </div>
-              <span className="font-display font-medium text-sm sm:text-base">Gift Card Balance</span>
+              <span className="font-display font-medium text-body">Gift Card Balance</span>
             </Link>
 
             {/* 3. Track Order */}
@@ -155,7 +155,7 @@ export default function UserDrawer() {
                   </g>
                 </svg>
               </div>
-              <span className="font-display font-medium text-sm sm:text-base">Track Order</span>
+              <span className="font-display font-medium text-body">Track Order</span>
             </Link>
 
             {/* 4. Contact Us */}
@@ -177,7 +177,7 @@ export default function UserDrawer() {
                   </g>
                 </svg>
               </div>
-              <span className="font-display font-medium text-sm sm:text-base">Contact Us</span>
+              <span className="font-display font-medium text-body">Contact Us</span>
             </Link>
 
             {/* 5. Log Out / Sign In */}
@@ -198,7 +198,7 @@ export default function UserDrawer() {
                     </g>
                   </svg>
                 </div>
-                <span className="font-display font-medium text-sm sm:text-base">Log Out</span>
+                <span className="font-display font-medium text-body">Log Out</span>
               </button>
             ) : (
               <Link
@@ -214,7 +214,7 @@ export default function UserDrawer() {
                     </g>
                   </svg>
                 </div>
-                <span className="font-display font-medium text-sm sm:text-base">Log In / Register</span>
+                <span className="font-display font-medium text-body">Log In / Register</span>
               </Link>
             )}
           </nav>

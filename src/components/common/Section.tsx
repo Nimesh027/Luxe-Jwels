@@ -27,16 +27,16 @@ export default function Section({
           <div className="mb-8 flex items-end justify-between gap-4">
             <div>
               {title && (
-                <h2 className="font-display text-2xl tracking-wide text-ink md:text-3xl">
+                <h2 className="font-display text-h3 tracking-wide text-ink md:text-h2">
                   {title}
                 </h2>
               )}
-              {subtitle && <p className="mt-1 text-sm text-muted">{subtitle}</p>}
+              {subtitle && <p className="mt-1 text-small text-muted">{subtitle}</p>}
             </div>
             {viewAllHref && (
               <Link
                 href={viewAllHref}
-                className="group shrink-0 inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-wine hover:text-wine-dark font-medium underline-offset-4 hover:underline transition-colors"
+                className="group shrink-0 inline-flex items-center gap-1.5 text-caption uppercase tracking-wider text-wine hover:text-wine-dark font-medium underline-offset-4 hover:underline transition-colors"
               >
                 <span>View All</span>
                 <ArrowRightIcon className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />

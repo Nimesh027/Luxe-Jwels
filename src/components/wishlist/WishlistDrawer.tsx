@@ -52,10 +52,10 @@ export default function WishlistDrawer() {
           {/* Drawer Header */}
           <div className="flex items-center justify-between border-b border-neutral-200/80 px-6 py-4.5 bg-[#fbf9f6]">
             <div className="flex items-center gap-2">
-              <h2 className="font-display text-lg sm:text-xl font-medium text-ink">
+              <h2 className="font-display text-h5 sm:text-h4 font-medium text-ink">
                 Your Wishlist
               </h2>
-              <span className="flex h-5.5 min-w-5.5 items-center justify-center rounded-full bg-wine text-white text-xs font-semibold px-1.5">
+              <span className="flex h-5.5 min-w-5.5 items-center justify-center rounded-full bg-wine text-white text-caption font-semibold px-1.5">
                 {items.length}
               </span>
             </div>
@@ -82,10 +82,10 @@ export default function WishlistDrawer() {
                 </svg>
               </div>
 
-              <h3 className="font-display text-xl font-medium text-ink mb-2">
+              <h3 className="font-display text-h4 font-medium text-ink mb-2">
                 Your wishlist is empty
               </h3>
-              <p className="text-xs sm:text-sm text-muted font-light max-w-xs leading-relaxed mb-6">
+              <p className="text-body text-muted font-light max-w-xs leading-relaxed mb-6">
                 Explore our fine jewellery creations and save your favorite heirloom pieces.
               </p>
 
@@ -95,7 +95,7 @@ export default function WishlistDrawer() {
                   closeDrawer();
                   router.push("/collections");
                 }}
-                className="inline-flex h-11 items-center justify-center rounded-full bg-ink px-8 text-xs font-semibold uppercase tracking-wider text-cream shadow-md transition-all hover:bg-wine hover:shadow-lg cursor-pointer"
+                className="inline-flex h-11 items-center justify-center rounded-full bg-ink px-8 text-caption font-semibold uppercase tracking-wider text-cream shadow-md transition-all hover:bg-wine hover:shadow-lg cursor-pointer"
               >
                 Continue Shopping
               </button>
@@ -127,7 +127,7 @@ export default function WishlistDrawer() {
                         <Link
                           href={`/products/${product.slug}`}
                           onClick={closeDrawer}
-                          className="font-display text-sm font-normal text-ink hover:text-wine transition-colors line-clamp-1 block"
+                          className="font-display text-small font-normal text-ink hover:text-wine transition-colors line-clamp-1 block"
                         >
                           {product.name}
                         </Link>
@@ -141,11 +141,11 @@ export default function WishlistDrawer() {
 
                         {/* Price */}
                         <div className="mt-1.5 flex items-baseline gap-2">
-                          <span className="text-sm font-semibold text-ink">
+                          <span className="text-small font-semibold text-ink">
                             {formatPrice(product.price)}
                           </span>
                           {product.compareAtPrice && product.compareAtPrice > product.price && (
-                            <span className="text-xs text-muted line-through">
+                            <span className="text-caption text-muted line-through">
                               {formatPrice(product.compareAtPrice)}
                             </span>
                           )}
@@ -199,7 +199,7 @@ export default function WishlistDrawer() {
               <button
                 type="button"
                 onClick={handleViewWishlist}
-                className="w-full h-11.5 rounded-full bg-wine text-white text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-md hover:bg-wine-dark hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full h-11.5 rounded-full bg-wine text-white text-body font-semibold uppercase tracking-wider shadow-md hover:bg-wine-dark hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>View Wishlist</span>
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">

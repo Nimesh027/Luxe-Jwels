@@ -40,7 +40,7 @@ export default function ReviewCard({
           <div className="flex items-center gap-2">
             <Rating value={rating} />
             {title && (
-              <span className="text-xs font-semibold text-ink line-clamp-1">{title}</span>
+              <span className="text-caption font-semibold text-ink line-clamp-1">{title}</span>
             )}
           </div>
 
@@ -52,7 +52,7 @@ export default function ReviewCard({
         </div>
 
         {/* Review Quote Body */}
-        <p className="mt-3.5 text-xs sm:text-[13px] text-muted leading-relaxed font-light">
+        <p className="mt-3.5 text-caption sm:text-[13px] text-muted leading-relaxed font-light">
           &quot;{quote}&quot;
         </p>
       </div>
@@ -61,12 +61,12 @@ export default function ReviewCard({
       <div className="mt-5 pt-4 border-t border-neutral-100 flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           {/* Avatar Initial Circle */}
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f4ebe1] text-xs sm:text-sm font-semibold text-ink shadow-2xs">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f4ebe1] text-body font-semibold text-ink shadow-2xs">
             {initial}
           </div>
 
           <div className="overflow-hidden">
-            <h4 className="font-display text-xs sm:text-sm font-medium text-ink truncate">
+            <h4 className="font-display text-body font-medium text-ink truncate">
               {name}
             </h4>
             {location && (

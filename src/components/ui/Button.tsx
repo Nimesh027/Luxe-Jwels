@@ -42,10 +42,10 @@ const roundedClasses: Record<ButtonRounded, string> = {
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  xs: "px-3 py-1.5 text-xs gap-1.5",
-  sm: "px-4 py-2 text-xs gap-2",
-  md: "px-6 py-2.5 sm:py-3 text-xs sm:text-sm gap-2.5",
-  lg: "px-8 py-3.5 sm:py-4 text-sm sm:text-base gap-3",
+  xs: "px-3 py-1.5 text-caption gap-1.5",
+  sm: "px-4 py-2 text-caption gap-2",
+  md: "px-6 py-2.5 sm:py-3 text-body gap-2.5",
+  lg: "px-8 py-3.5 sm:py-4 text-body gap-3",
   icon: "p-2.5 sm:p-3 aspect-square items-center justify-center",
 };
 

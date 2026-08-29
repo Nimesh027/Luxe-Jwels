@@ -54,16 +54,16 @@ export default function Collections() {
 
             {/* Bottom-Left Aligned Text & Hover Action */}
             <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7 z-10 flex flex-col justify-end">
-              <h3 className="font-display text-xl sm:text-2xl font-normal text-cream tracking-wide leading-snug drop-shadow-md transition-colors duration-300 group-hover:text-gold">
+              <h3 className="font-display text-h3 font-normal text-cream tracking-wide leading-snug drop-shadow-md transition-colors duration-300 group-hover:text-gold">
                 {collection.name}
               </h3>
 
-              <p className="mt-1.5 text-xs sm:text-sm font-light tracking-wide text-cream/80 drop-shadow-xs">
+              <p className="mt-1.5 text-body font-light tracking-wide text-cream/80 drop-shadow-xs">
                 {collection.tagline}
               </p>
 
               {/* Smooth Slide-in Action Link */}
-              <div className="mt-4 flex items-center gap-1.5 text-xs font-medium tracking-widest uppercase text-gold">
+              <div className="mt-4 flex items-center gap-1.5 text-caption font-medium tracking-widest uppercase text-gold">
                 <span>Explore Collection</span>
                 <ArrowRightIcon className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
               </div>

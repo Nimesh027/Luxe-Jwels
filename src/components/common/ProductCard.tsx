@@ -76,9 +76,9 @@ export default function ProductCard({ product }: ProductCardProps) {
             className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface/90 text-ink backdrop-blur-xs shadow-sm transition-all duration-200 hover:bg-wine hover:text-white active:scale-95 cursor-pointer"
           >
             {wishlisted ? (
-              <HeartFilled className="text-gold text-xs" />
+              <HeartFilled className="text-gold text-caption" />
             ) : (
-              <HeartOutlined className="text-xs" />
+              <HeartOutlined className="text-caption" />
             )}
           </button>
 
@@ -89,7 +89,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             title="Quick View"
             className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface/90 text-ink backdrop-blur-xs shadow-sm transition-all duration-200 hover:bg-wine hover:text-white active:scale-95 cursor-pointer"
           >
-            <EyeOutlined className="text-xs" />
+            <EyeOutlined className="text-caption" />
           </Link>
         </div>
 
@@ -105,7 +105,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               e.preventDefault();
               add(product);
             }}
-            className="text-xs font-medium tracking-widest uppercase shadow-md hover:shadow-lg"
+            className="text-caption font-medium tracking-widest uppercase shadow-md hover:shadow-lg"
           >
             Add to Cart
           </Button>
@@ -122,13 +122,13 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Product Title */}
         <Link
           href={`/products/${product.slug}`}
-          className="font-display text-sm sm:text-base text-ink font-normal tracking-wide hover:text-wine transition-colors line-clamp-1 mb-1"
+          className="font-display text-body text-ink font-normal tracking-wide hover:text-wine transition-colors line-clamp-1 mb-1"
         >
           {product.name}
         </Link>
 
         {/* Price Display */}
-        <div className="flex items-baseline justify-center gap-1.5 text-xs sm:text-sm">
+        <div className="flex items-baseline justify-center gap-1.5 text-body">
           <span className="text-[11px] text-muted/75 font-normal">From</span>
           <span className="font-display text-ink font-medium">
             {formatPrice(product.price)}

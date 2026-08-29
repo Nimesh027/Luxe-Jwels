@@ -62,10 +62,10 @@ function CollectionsContent() {
 
         {/* Thematic Collections */}
         <div className="border-t border-border pt-12">
-          <h2 className="font-display text-2xl font-semibold text-ink text-center mb-2">
+          <h2 className="font-display text-h3 font-semibold text-ink text-center mb-2">
             Featured Collections
           </h2>
-          <p className="text-sm text-muted text-center mb-8">
+          <p className="text-small text-muted text-center mb-8">
             Curated assortments crafted for your special celebrations.
           </p>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -85,8 +85,8 @@ function CollectionsContent() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-5">
-                  <p className="font-display text-xl text-cream">{collection.name}</p>
-                  <p className="text-sm text-cream/75">{collection.tagline}</p>
+                  <p className="font-display text-h4 text-cream">{collection.name}</p>
+                  <p className="text-small text-cream/75">{collection.tagline}</p>
                 </div>
               </Card>
             ))}

@@ -34,14 +34,14 @@ export default function MobileDrawer() {
       <div className="absolute inset-0 bg-ink/60 transition-opacity" onClick={close} />
       <div className="relative flex h-full w-84 max-w-[88vw] flex-col bg-surface shadow-2xl">
         <div className="flex items-center justify-between border-b border-border px-5 py-4 bg-surface">
-          <span className="font-display text-lg tracking-[0.2em] text-ink font-semibold">
+          <span className="font-display text-h5 tracking-[0.2em] text-ink font-semibold">
             LUXE JEWELS
           </span>
           <button
             type="button"
             aria-label="Close menu"
             onClick={close}
-            className="text-xl text-ink hover:text-wine cursor-pointer p-1"
+            className="text-h4 text-ink hover:text-wine cursor-pointer p-1"
           >
             <CloseOutlined />
           </button>
@@ -69,7 +69,7 @@ export default function MobileDrawer() {
                   <Link
                     href={link.href}
                     onClick={close}
-                    className="flex-1 px-3 py-2.5 text-xs font-medium uppercase tracking-wider text-ink hover:text-wine"
+                    className="flex-1 px-3 py-2.5 text-caption font-medium uppercase tracking-wider text-ink hover:text-wine"
                   >
                     {link.label}
                   </Link>
@@ -106,7 +106,7 @@ export default function MobileDrawer() {
                               setActiveTabId((prev) => ({ ...prev, [link.id]: tab.id }))
                             }
                             className={cn(
-                              "px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors",
+                              "px-3 py-1.5 rounded-full text-caption font-medium whitespace-nowrap transition-colors",
                               isTabActive
                                 ? "bg-wine-soft text-wine border border-wine/30 font-semibold"
                                 : "text-muted hover:text-ink bg-cream/70"
@@ -129,7 +129,7 @@ export default function MobileDrawer() {
                             className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-surface transition-colors"
                           >
                             <JewelryIcon name={item.name} className="w-5 h-5 shrink-0" />
-                            <span className="text-xs text-ink truncate hover:text-wine">
+                            <span className="text-caption text-ink truncate hover:text-wine">
                               {item.name}
                             </span>
                           </Link>
@@ -143,7 +143,7 @@ export default function MobileDrawer() {
                         <Link
                           href={currentTab.bottomBanner.buttonHref}
                           onClick={close}
-                          className="inline-block w-full py-2 rounded-lg bg-wine text-white text-xs font-medium hover:bg-wine-dark"
+                          className="inline-block w-full py-2 rounded-lg bg-wine text-white text-caption font-medium hover:bg-wine-dark"
                         >
                           {currentTab.bottomBanner.buttonText} - {currentTab.bottomBanner.heading}
                         </Link>
@@ -160,7 +160,7 @@ export default function MobileDrawer() {
                         key={child.id}
                         href={child.href}
                         onClick={close}
-                        className="block py-1.5 px-2 text-xs text-muted hover:text-wine hover:bg-cream rounded"
+                        className="block py-1.5 px-2 text-caption text-muted hover:text-wine hover:bg-cream rounded"
                       >
                         {child.label}
                       </Link>
@@ -174,8 +174,8 @@ export default function MobileDrawer() {
 
         {/* Bottom User Actions */}
         <div className="flex items-center justify-around border-t border-border px-5 py-4 bg-surface text-ink">
-          <Link href="/login" onClick={close} className="flex flex-col items-center gap-1 text-xs hover:text-wine">
-            <UserOutlined className="text-base" />
+          <Link href="/login" onClick={close} className="flex flex-col items-center gap-1 text-caption hover:text-wine">
+            <UserOutlined className="text-body" />
             <span>Account</span>
           </Link>
           <button
@@ -184,9 +184,9 @@ export default function MobileDrawer() {
               close();
               dispatch(setWishlistDrawerOpen(true));
             }}
-            className="flex flex-col items-center gap-1 text-xs hover:text-wine cursor-pointer"
+            className="flex flex-col items-center gap-1 text-caption hover:text-wine cursor-pointer"
           >
-            <HeartOutlined className="text-base" />
+            <HeartOutlined className="text-body" />
             <span>Wishlist</span>
           </button>
           <button
@@ -195,9 +195,9 @@ export default function MobileDrawer() {
               close();
               dispatch(setCartDrawerOpen(true));
             }}
-            className="flex flex-col items-center gap-1 text-xs hover:text-wine cursor-pointer"
+            className="flex flex-col items-center gap-1 text-caption hover:text-wine cursor-pointer"
           >
-            <ShoppingCartOutlined className="text-base" />
+            <ShoppingCartOutlined className="text-body" />
             <span>Cart</span>
           </button>
         </div>

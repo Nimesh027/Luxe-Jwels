@@ -127,10 +127,10 @@ export default function ProductHeroSection({
           <div>
             {/* Category Pill & Rating */}
             <div className="mb-2 flex items-center justify-between">
-              <span className="text-xs font-semibold uppercase tracking-widest text-gold-dark">
+              <span className="text-caption font-semibold uppercase tracking-widest text-gold-dark">
                 {category?.name || "Luxe Jewellery"}
               </span>
-              <div className="flex items-center gap-1.5 text-xs text-muted">
+              <div className="flex items-center gap-1.5 text-caption text-muted">
                 <Rating value={5} />
                 <span className="font-semibold text-ink">4.9</span>
                 <span>(124 reviews)</span>
@@ -138,7 +138,7 @@ export default function ProductHeroSection({
             </div>
 
             {/* Product Title */}
-            <h1 className="font-display text-3xl font-medium text-ink md:text-4xl">
+            <h1 className="font-display text-h2 font-medium text-ink md:text-h2">
               {product.name}
             </h1>
           </div>
@@ -146,26 +146,26 @@ export default function ProductHeroSection({
           {/* Price Breakdown */}
           <div className="rounded-2xl border border-border/80 bg-surface p-4 shadow-2xs">
             <div className="flex items-baseline gap-3">
-              <span className="font-display text-3xl font-semibold text-wine">
+              <span className="font-display text-h2 font-semibold text-wine">
                 {formatPrice(product.price)}
               </span>
               {product.compareAtPrice && (
-                <span className="text-lg text-muted line-through">
+                <span className="text-h5 text-muted line-through">
                   {formatPrice(product.compareAtPrice)}
                 </span>
               )}
               {product.compareAtPrice && (
-                <span className="rounded-md bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-800">
+                <span className="rounded-md bg-emerald-100 px-2 py-0.5 text-caption font-bold text-emerald-800">
                   Save {formatPrice(product.compareAtPrice - product.price)}
                 </span>
               )}
             </div>
-            <p className="mt-1 text-xs text-muted">
+            <p className="mt-1 text-caption text-muted">
               Inclusive of all taxes. Free insured shipping across India.
             </p>
 
             {/* No-cost EMI Banner */}
-            <div className="mt-3 flex items-center gap-2 rounded-xl bg-wine-soft/60 px-3 py-2 text-xs text-wine font-medium">
+            <div className="mt-3 flex items-center gap-2 rounded-xl bg-wine-soft/60 px-3 py-2 text-caption text-wine font-medium">
               <ThunderboltOutlined />
               <span>
                 Or 3 interest-free payments of{" "}
@@ -176,7 +176,7 @@ export default function ProductHeroSection({
 
           {/* Metal Swatch Selection */}
           <div>
-            <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-ink">
+            <label className="mb-2 block text-caption font-semibold uppercase tracking-wider text-ink">
               Select Metal Color:{" "}
               <span className="font-normal text-muted capitalize">{selectedMetal} Gold</span>
             </label>
@@ -184,7 +184,7 @@ export default function ProductHeroSection({
               <button
                 type="button"
                 onClick={() => setSelectedMetal("yellow")}
-                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-medium transition-all cursor-pointer ${selectedMetal === "yellow"
+                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${selectedMetal === "yellow"
                   ? "border-wine bg-wine/5 font-semibold text-wine shadow-xs"
                   : "border-border text-ink hover:border-gold"
                   }`}
@@ -195,7 +195,7 @@ export default function ProductHeroSection({
               <button
                 type="button"
                 onClick={() => setSelectedMetal("white")}
-                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-medium transition-all cursor-pointer ${selectedMetal === "white"
+                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${selectedMetal === "white"
                   ? "border-wine bg-wine/5 font-semibold text-wine shadow-xs"
                   : "border-border text-ink hover:border-gold"
                   }`}
@@ -206,7 +206,7 @@ export default function ProductHeroSection({
               <button
                 type="button"
                 onClick={() => setSelectedMetal("rose")}
-                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-medium transition-all cursor-pointer ${selectedMetal === "rose"
+                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${selectedMetal === "rose"
                   ? "border-wine bg-wine/5 font-semibold text-wine shadow-xs"
                   : "border-border text-ink hover:border-gold"
                   }`}
@@ -220,13 +220,13 @@ export default function ProductHeroSection({
           {/* Size Selector */}
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <label className="text-xs font-semibold uppercase tracking-wider text-ink">
+              <label className="text-caption font-semibold uppercase tracking-wider text-ink">
                 Select Size / Length
               </label>
               <button
                 type="button"
                 onClick={onOpenSizeGuide}
-                className="text-xs text-wine underline hover:text-wine-dark cursor-pointer"
+                className="text-caption text-wine underline hover:text-wine-dark cursor-pointer"
               >
                 Size Guide
               </button>
@@ -237,7 +237,7 @@ export default function ProductHeroSection({
                   key={sz}
                   type="button"
                   onClick={() => setSelectedSize(sz)}
-                  className={`rounded-xl border px-4 py-2 text-xs font-medium transition-all cursor-pointer ${selectedSize === sz
+                  className={`rounded-xl border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${selectedSize === sz
                     ? "border-wine bg-wine text-white shadow-xs"
                     : "border-border bg-white text-ink hover:border-gold"
                     }`}
@@ -250,7 +250,7 @@ export default function ProductHeroSection({
 
           {/* Custom Engraving Option */}
           <div className="rounded-2xl border border-border/80 bg-surface p-4 shadow-2xs">
-            <label className="flex items-center gap-2 text-xs font-medium text-ink cursor-pointer">
+            <label className="flex items-center gap-2 text-caption font-medium text-ink cursor-pointer">
               <input
                 type="checkbox"
                 checked={addEngraving}
@@ -267,7 +267,7 @@ export default function ProductHeroSection({
                   placeholder="Enter up to 12 characters (e.g. A & K ❤️)"
                   value={engravingText}
                   onChange={(e) => setEngravingText(e.target.value)}
-                  className="w-full rounded-xl border border-border bg-cream/30 px-3.5 py-2 text-xs text-ink placeholder:text-muted/60 focus:border-wine focus:outline-none"
+                  className="w-full rounded-xl border border-border bg-cream/30 px-3.5 py-2 text-caption text-ink placeholder:text-muted/60 focus:border-wine focus:outline-none"
                 />
                 <span className="mt-1 block text-[10px] text-muted">
                   {12 - engravingText.length} characters remaining
@@ -284,10 +284,10 @@ export default function ProductHeroSection({
             {/* Add to Cart */}
             <Button
               variant="dark"
-              className="flex-1 h-12 rounded-xl text-sm font-medium shadow-sm hover:shadow-md flex items-center justify-center gap-2 cursor-pointer"
+              className="flex-1 h-12 rounded-xl text-small font-medium shadow-sm hover:shadow-md flex items-center justify-center gap-2 cursor-pointer"
               onClick={() => add(product, quantity)}
             >
-              <ShoppingOutlined className="text-base" /> Add To Cart
+              <ShoppingOutlined className="text-body" /> Add To Cart
             </Button>
           </div>
         </div>

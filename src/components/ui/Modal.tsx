@@ -34,7 +34,7 @@ export default function Modal({ id, title, children }: ModalProps) {
         >
           <CloseOutlined />
         </button>
-        {title && <h2 className="mb-4 font-display text-xl text-ink">{title}</h2>}
+        {title && <h2 className="mb-4 font-display text-h4 text-ink">{title}</h2>}
         {children}
       </div>
     </div>

@@ -31,12 +31,12 @@ export default function BrandStory() {
           {/* Content Column: 55% width on desktop, second on mobile */}
           <div className="order-2 lg:order-2 lg:col-span-7 flex flex-col items-start gap-4 sm:gap-5">
             {/* Overline Eyebrow */}
-            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.25em] text-gold">
+            <span className="text-[10px] sm:text-caption font-semibold uppercase tracking-[0.25em] text-gold">
               Artisan Heritage
             </span>
 
             {/* Main Headline */}
-            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl xl:text-[42px] font-normal leading-[1.18] text-ink tracking-tight">
+            <h2 className="font-display text-h2 lg:text-h2 xl:text-[42px] font-normal leading-[1.18] text-ink tracking-tight">
               {brandStory.title}
             </h2>
 
@@ -44,7 +44,7 @@ export default function BrandStory() {
             <div className="h-[2px] w-12 bg-gold/80" />
 
             {/* Story Description with 540px Max-Width & Generous Line-Height */}
-            <p className="max-w-[540px] text-sm sm:text-base font-light leading-[1.8] text-muted">
+            <p className="max-w-[540px] text-body font-light leading-[1.8] text-muted">
               {brandStory.body}
             </p>
 
@@ -52,7 +52,7 @@ export default function BrandStory() {
             <div className="pt-2">
               <Link
                 href={brandStory.cta.href}
-                className="inline-flex h-11 items-center gap-2.5 rounded-full bg-ink px-7 text-xs sm:text-sm font-semibold uppercase tracking-wider text-cream shadow-md transition-all duration-300 hover:bg-gold hover:text-ink hover:shadow-lg hover:shadow-gold/20"
+                className="inline-flex h-11 items-center gap-2.5 rounded-full bg-ink px-7 text-body font-semibold uppercase tracking-wider text-cream shadow-md transition-all duration-300 hover:bg-gold hover:text-ink hover:shadow-lg hover:shadow-gold/20"
               >
                 <span>{brandStory.cta.label}</span>
                 <ArrowRightIcon className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />

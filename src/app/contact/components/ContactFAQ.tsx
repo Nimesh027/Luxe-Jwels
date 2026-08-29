@@ -57,7 +57,7 @@ export default function ContactFAQ() {
         description="Find instant answers to common queries regarding orders, sizing, and authentications."
         align="center"
         className="mb-4"
-        titleClassName="text-wine font-semibold text-2xl sm:text-3xl"
+        titleClassName="text-wine font-semibold text-h2"
       />
 
       <div className="space-y-3 pt-4">
@@ -71,18 +71,18 @@ export default function ContactFAQ() {
               <button
                 type="button"
                 onClick={() => toggleFaq(faq.id)}
-                className="w-full flex items-center justify-between p-5 text-left text-xs sm:text-sm font-semibold text-ink hover:text-wine cursor-pointer transition-colors"
+                className="w-full flex items-center justify-between p-5 text-left text-body font-semibold text-ink hover:text-wine cursor-pointer transition-colors"
               >
                 <span>{faq.question}</span>
                 <span
-                  className={`w-6 h-6 rounded-full bg-wine/5 text-wine flex items-center justify-center font-bold text-sm shrink-0 transition-transform ${isOpen ? "rotate-45" : ""
+                  className={`w-6 h-6 rounded-full bg-wine/5 text-wine flex items-center justify-center font-bold text-small shrink-0 transition-transform ${isOpen ? "rotate-45" : ""
                     }`}
                 >
                   +
                 </span>
               </button>
               {isOpen && (
-                <div className="px-5 pb-5 pt-0 text-xs sm:text-sm text-muted leading-relaxed border-t border-border/40 animate-in fade-in duration-200">
+                <div className="px-5 pb-5 pt-0 text-body text-muted leading-relaxed border-t border-border/40 animate-in fade-in duration-200">
                   <p className="pt-3">{faq.answer}</p>
                 </div>
               )}

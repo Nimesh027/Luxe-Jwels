@@ -56,15 +56,15 @@ function CollectionDetailContent({
           />
           <div className="absolute inset-0 bg-ink/45" />
           <div className="relative flex h-full flex-col items-center justify-center gap-2 text-center">
-            <h1 className="font-display text-3xl text-cream sm:text-4xl">{collection.name}</h1>
-            <p className="text-sm text-cream/85">{collection.tagline}</p>
+            <h1 className="font-display text-h2 text-cream sm:text-h2">{collection.name}</h1>
+            <p className="text-small text-cream/85">{collection.tagline}</p>
           </div>
         </div>
       </Section>
 
       <Section title="Shop The Collection" subtitle={`${products.length} products`}>
         {products.length === 0 ? (
-          <p className="text-sm text-muted">No products found in this collection.</p>
+          <p className="text-small text-muted">No products found in this collection.</p>
         ) : (
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {products.map((product) => (

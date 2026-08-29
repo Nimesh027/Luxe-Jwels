@@ -41,10 +41,10 @@ export default function BlogClient() {
               </span>
               <span className="h-[1px] w-8 bg-gold/60" />
             </div>
-            <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl text-wine font-semibold tracking-tight leading-[1.15]">
+            <h1 className="font-display text-h1 text-wine font-semibold tracking-tight leading-[1.15]">
               The Luxe Journal
             </h1>
-            <p className="text-xs sm:text-base text-muted font-light leading-relaxed max-w-2xl mx-auto">
+            <p className="text-body text-muted font-light leading-relaxed max-w-2xl mx-auto">
               Explore style guides, gold purity insights, diamond buying tutorials, and royal bridal couture trends curated by our master gemologists.
             </p>
           </div>
@@ -58,7 +58,7 @@ export default function BlogClient() {
                   key={cat}
                   type="button"
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                  className={`px-4 py-2 rounded-full text-caption font-semibold whitespace-nowrap transition-all cursor-pointer ${
                     selectedCategory === cat
                       ? "bg-[#80222F] text-white shadow-xs"
                       : "bg-surface border border-border/80 text-ink/80 hover:border-wine/40 hover:text-wine"
@@ -76,14 +76,14 @@ export default function BlogClient() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search journal..."
-                className="w-full px-4 py-2 pl-9 rounded-full border border-wine/25 bg-surface text-xs text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-2 focus:ring-wine/15 transition-all shadow-xs"
+                className="w-full px-4 py-2 pl-9 rounded-full border border-wine/25 bg-surface text-caption text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-2 focus:ring-wine/15 transition-all shadow-xs"
               />
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted text-xs">🔍</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted text-caption">🔍</span>
               {searchQuery && (
                 <button
                   type="button"
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted hover:text-wine font-bold cursor-pointer"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-caption text-muted hover:text-wine font-bold cursor-pointer"
                 >
                   ✕
                 </button>
@@ -105,16 +105,16 @@ export default function BlogClient() {
             </div>
           ) : (
             <div className="text-center py-16 bg-surface rounded-3xl border border-border/80 p-8 space-y-3">
-              <span className="text-3xl block">📖</span>
-              <h3 className="font-display font-semibold text-lg text-wine">No Journal Articles Found</h3>
-              <p className="text-xs text-muted">Try searching with a different keyword or select another category.</p>
+              <span className="text-h2 block">📖</span>
+              <h3 className="font-display font-semibold text-h5 text-wine">No Journal Articles Found</h3>
+              <p className="text-caption text-muted">Try searching with a different keyword or select another category.</p>
               <button
                 type="button"
                 onClick={() => {
                   setSelectedCategory("All");
                   setSearchQuery("");
                 }}
-                className="mt-2 px-5 py-2 bg-wine text-white rounded-full text-xs font-bold uppercase tracking-wider hover:bg-wine-dark transition-all cursor-pointer"
+                className="mt-2 px-5 py-2 bg-wine text-white rounded-full text-caption font-bold uppercase tracking-wider hover:bg-wine-dark transition-all cursor-pointer"
               >
                 Reset Filters
               </button>

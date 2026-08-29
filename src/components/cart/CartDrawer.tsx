@@ -49,10 +49,10 @@ export default function CartDrawer() {
           {/* Drawer Header */}
           <div className="flex items-center justify-between border-b border-neutral-200/80 px-6 py-4.5 bg-[#fbf9f6]">
             <div className="flex items-center gap-2">
-              <h2 className="font-display text-lg sm:text-xl font-medium text-ink">
+              <h2 className="font-display text-h5 sm:text-h4 font-medium text-ink">
                 Your Cart
               </h2>
-              <span className="flex h-5.5 min-w-5.5 items-center justify-center rounded-full bg-wine text-white text-xs font-semibold px-1.5">
+              <span className="flex h-5.5 min-w-5.5 items-center justify-center rounded-full bg-wine text-white text-caption font-semibold px-1.5">
                 {count}
               </span>
             </div>
@@ -81,10 +81,10 @@ export default function CartDrawer() {
                 </svg>
               </div>
 
-              <h3 className="font-display text-xl font-medium text-ink mb-2">
+              <h3 className="font-display text-h4 font-medium text-ink mb-2">
                 Your cart is empty
               </h3>
-              <p className="text-xs sm:text-sm text-muted font-light max-w-xs leading-relaxed mb-6">
+              <p className="text-body text-muted font-light max-w-xs leading-relaxed mb-6">
                 Explore our fine jewellery creations and add your favorite pieces to begin.
               </p>
 
@@ -94,7 +94,7 @@ export default function CartDrawer() {
                   closeDrawer();
                   router.push("/collections");
                 }}
-                className="inline-flex h-11 items-center justify-center rounded-full bg-ink px-8 text-xs font-semibold uppercase tracking-wider text-cream shadow-md transition-all hover:bg-wine hover:shadow-lg cursor-pointer"
+                className="inline-flex h-11 items-center justify-center rounded-full bg-ink px-8 text-caption font-semibold uppercase tracking-wider text-cream shadow-md transition-all hover:bg-wine hover:shadow-lg cursor-pointer"
               >
                 Start Shopping
               </button>
@@ -126,7 +126,7 @@ export default function CartDrawer() {
                         <Link
                           href={`/products/${product.slug}`}
                           onClick={closeDrawer}
-                          className="font-display text-sm font-normal text-ink hover:text-wine transition-colors line-clamp-1 block"
+                          className="font-display text-small font-normal text-ink hover:text-wine transition-colors line-clamp-1 block"
                         >
                           {product.name}
                         </Link>
@@ -140,7 +140,7 @@ export default function CartDrawer() {
 
                         {/* Unit & Total Price */}
                         <div className="mt-1.5 flex items-baseline gap-2">
-                          <span className="text-sm font-semibold text-ink">
+                          <span className="text-small font-semibold text-ink">
                             {formatPrice(product.price * quantity)}
                           </span>
                           {quantity > 1 && (
@@ -185,7 +185,7 @@ export default function CartDrawer() {
                 <button
                   type="button"
                   onClick={() => setInstructionsOpen(!instructionsOpen)}
-                  className="flex w-full items-center justify-between text-left text-xs font-medium text-neutral-700 hover:text-ink cursor-pointer"
+                  className="flex w-full items-center justify-between text-left text-caption font-medium text-neutral-700 hover:text-ink cursor-pointer"
                 >
                   <span className="inline-flex items-center gap-1.5">
                     <svg className="h-3.5 w-3.5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -193,7 +193,7 @@ export default function CartDrawer() {
                     </svg>
                     <span>Order Special Instructions / Gift Note</span>
                   </span>
-                  <span className="text-sm font-semibold">{instructionsOpen ? "−" : "+"}</span>
+                  <span className="text-small font-semibold">{instructionsOpen ? "−" : "+"}</span>
                 </button>
 
                 {instructionsOpen && (
@@ -203,7 +203,7 @@ export default function CartDrawer() {
                       value={orderNote}
                       onChange={(e) => setOrderNote(e.target.value)}
                       placeholder="Add custom engraving note or special delivery instructions..."
-                      className="w-full rounded-lg border border-neutral-300 bg-white p-2.5 text-xs text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+                      className="w-full rounded-lg border border-neutral-300 bg-white p-2.5 text-caption text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
                     />
                   </div>
                 )}
@@ -211,10 +211,10 @@ export default function CartDrawer() {
 
               {/* Subtotal & Estimated Total */}
               <div className="flex items-baseline justify-between mb-1.5">
-                <span className="text-xs uppercase tracking-wider font-semibold text-neutral-600">
+                <span className="text-caption uppercase tracking-wider font-semibold text-neutral-600">
                   Estimated Total
                 </span>
-                <span className="font-display text-lg sm:text-xl font-bold text-ink">
+                <span className="font-display text-h5 sm:text-h4 font-bold text-ink">
                   {formatPrice(subtotal)}
                 </span>
               </div>
@@ -229,7 +229,7 @@ export default function CartDrawer() {
                 <button
                   type="button"
                   onClick={handleCheckout}
-                  className="w-full h-11.5 rounded-full bg-wine text-white text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-md hover:bg-wine-dark hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full h-11.5 rounded-full bg-wine text-white text-body font-semibold uppercase tracking-wider shadow-md hover:bg-wine-dark hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Check Out</span>
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -240,7 +240,7 @@ export default function CartDrawer() {
                 <button
                   type="button"
                   onClick={handleViewCart}
-                  className="w-full h-11 rounded-full border border-neutral-300 bg-white text-ink text-xs sm:text-sm font-medium uppercase tracking-wider hover:bg-neutral-100/80 transition-all duration-200 flex items-center justify-center cursor-pointer"
+                  className="w-full h-11 rounded-full border border-neutral-300 bg-white text-ink text-body font-medium uppercase tracking-wider hover:bg-neutral-100/80 transition-all duration-200 flex items-center justify-center cursor-pointer"
                 >
                   View Cart
                 </button>

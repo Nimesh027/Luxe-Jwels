@@ -76,12 +76,12 @@ export default function Footer() {
             {/* Brand Intro Column */}
             <div className="lg:col-span-4 flex flex-col items-start">
               <Link href="/" className="inline-block">
-                <span className="font-display text-xl sm:text-2xl font-normal tracking-[0.25em] text-cream">
+                <span className="font-display text-h3 font-normal tracking-[0.25em] text-cream">
                   LUXE JEWELS
                 </span>
               </Link>
               <div className="h-[1.5px] w-10 bg-gold/70 mt-2 mb-3" />
-              <p className="max-w-sm text-xs sm:text-[13px] font-light leading-relaxed text-cream/70">
+              <p className="max-w-sm text-caption sm:text-[13px] font-light leading-relaxed text-cream/70">
                 {footer.brandBlurb}
               </p>
 
@@ -109,7 +109,7 @@ export default function Footer() {
             <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
               {footer.columns.map((column) => (
                 <div key={column.id}>
-                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-cream/90 mb-4">
+                  <h3 className="text-caption font-semibold uppercase tracking-[0.2em] text-cream/90 mb-4">
                     {column.title}
                   </h3>
                   <ul className="space-y-2">
@@ -117,7 +117,7 @@ export default function Footer() {
                       <li key={link.label}>
                         <Link
                           href={link.href}
-                          className="text-xs sm:text-[13px] font-light text-cream/70 hover:text-gold transition-colors duration-200 block py-0.5"
+                          className="text-caption sm:text-[13px] font-light text-cream/70 hover:text-gold transition-colors duration-200 block py-0.5"
                         >
                           {link.label}
                         </Link>
@@ -137,7 +137,7 @@ export default function Footer() {
             </div>
 
             {/* Copyright Text */}
-            <p className="text-center sm:text-right text-xs text-cream/50 tracking-wide font-light">
+            <p className="text-center sm:text-right text-caption text-cream/50 tracking-wide font-light">
               {footer.copyright}
             </p>
           </div>

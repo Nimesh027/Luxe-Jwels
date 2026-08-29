@@ -53,13 +53,13 @@ export default function Hero() {
           >
             {/* Tagline */}
             {slide.tagline && (
-              <span className="inline-block text-[11px] sm:text-xs font-semibold tracking-[0.25em] uppercase mb-2.5 text-gold">
+              <span className="inline-block text-[11px] sm:text-caption font-semibold tracking-[0.25em] uppercase mb-2.5 text-gold">
                 {slide.tagline}
               </span>
             )}
 
             {/* Title & Accent */}
-            <h1 className="font-display text-2xl sm:text-4xl lg:text-5xl font-normal leading-[1.15] tracking-tight mb-3 sm:mb-4 text-cream">
+            <h1 className="font-display text-h3 sm:text-h2 lg:text-h1 font-normal leading-[1.15] tracking-tight mb-3 sm:mb-4 text-cream">
               {slide.heading}
               <br />
               <span className="font-medium italic text-gold">
@@ -68,7 +68,7 @@ export default function Hero() {
             </h1>
 
             {/* Description */}
-            <p className="text-xs sm:text-sm lg:text-base leading-relaxed max-w-md mb-6 text-cream/90">
+            <p className="text-body lg:text-body leading-relaxed max-w-md mb-6 text-cream/90">
               {slide.subtext}
             </p>
 

@@ -88,13 +88,13 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 >
                   <div className="flex items-center gap-3">
                     <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-cream text-gold-dark">
-                      <GoldOutlined className="text-lg" />
+                      <GoldOutlined className="text-h5" />
                     </span>
-                    <span className="text-xs font-semibold tracking-wider uppercase text-ink">
+                    <span className="text-caption font-semibold tracking-wider uppercase text-ink">
                       Metal Details
                     </span>
                   </div>
-                  <span className={`text-xs text-muted transition-transform duration-300 ${openAccordion === "metal" ? "rotate-180" : ""}`}>
+                  <span className={`text-caption text-muted transition-transform duration-300 ${openAccordion === "metal" ? "rotate-180" : ""}`}>
                     <DownOutlined />
                   </span>
                 </button>
@@ -109,26 +109,26 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                     <div className="bg-cream/20 px-6 py-5">
                       <div className="grid grid-cols-2 gap-y-5 gap-x-6 sm:grid-cols-3">
                         <div>
-                          <div className="font-display text-xl font-medium text-ink">18K</div>
-                          <div className="mt-0.5 text-xs text-muted">Karatage</div>
+                          <div className="font-display text-h4 font-medium text-ink">18K</div>
+                          <div className="mt-0.5 text-caption text-muted">Karatage</div>
                         </div>
                         <div>
-                          <div className="font-display text-xl font-medium text-ink">Yellow</div>
-                          <div className="mt-0.5 text-xs text-muted">Material Colour</div>
+                          <div className="font-display text-h4 font-medium text-ink">Yellow</div>
+                          <div className="mt-0.5 text-caption text-muted">Material Colour</div>
                         </div>
                         <div>
-                          <div className="font-display text-xl font-medium text-ink">
+                          <div className="font-display text-h4 font-medium text-ink">
                             {goldWeightGrams}g
                           </div>
-                          <div className="mt-0.5 text-xs text-muted">Gross Weight</div>
+                          <div className="mt-0.5 text-caption text-muted">Gross Weight</div>
                         </div>
                         <div>
-                          <div className="font-display text-xl font-medium text-ink">Gold</div>
-                          <div className="mt-0.5 text-xs text-muted">Metal</div>
+                          <div className="font-display text-h4 font-medium text-ink">Gold</div>
+                          <div className="mt-0.5 text-caption text-muted">Metal</div>
                         </div>
                         <div>
-                          <div className="font-display text-xl font-medium text-ink">Standard</div>
-                          <div className="mt-0.5 text-xs text-muted">Size</div>
+                          <div className="font-display text-h4 font-medium text-ink">Standard</div>
+                          <div className="mt-0.5 text-caption text-muted">Size</div>
                         </div>
                       </div>
                     </div>
@@ -145,13 +145,13 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 >
                   <div className="flex items-center gap-3">
                     <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-cream text-gold-dark">
-                      <StarOutlined className="text-lg" />
+                      <StarOutlined className="text-h5" />
                     </span>
-                    <span className="text-xs font-semibold tracking-wider uppercase text-ink">
+                    <span className="text-caption font-semibold tracking-wider uppercase text-ink">
                       Diamond Details
                     </span>
                   </div>
-                  <span className={`text-xs text-muted transition-transform duration-300 ${openAccordion === "diamond" ? "rotate-180" : ""}`}>
+                  <span className={`text-caption text-muted transition-transform duration-300 ${openAccordion === "diamond" ? "rotate-180" : ""}`}>
                     <DownOutlined />
                   </span>
                 </button>
@@ -166,24 +166,24 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                     <div className="bg-cream/20 px-6 py-5">
                       <div className="grid grid-cols-2 gap-y-5 gap-x-6 sm:grid-cols-3">
                         <div>
-                          <div className="font-display text-xl font-medium text-ink">SI2 / VS1</div>
-                          <div className="mt-0.5 text-xs text-muted">Diamond Clarity</div>
+                          <div className="font-display text-h4 font-medium text-ink">SI2 / VS1</div>
+                          <div className="mt-0.5 text-caption text-muted">Diamond Clarity</div>
                         </div>
                         <div>
-                          <div className="font-display text-xl font-medium text-ink">G-H</div>
-                          <div className="mt-0.5 text-xs text-muted">Diamond Color</div>
+                          <div className="font-display text-h4 font-medium text-ink">G-H</div>
+                          <div className="mt-0.5 text-caption text-muted">Diamond Color</div>
                         </div>
                         <div>
-                          <div className="font-display text-xl font-medium text-ink">09</div>
-                          <div className="mt-0.5 text-xs text-muted">No Of Diamonds</div>
+                          <div className="font-display text-h4 font-medium text-ink">09</div>
+                          <div className="mt-0.5 text-caption text-muted">No Of Diamonds</div>
                         </div>
                         <div>
-                          <div className="font-display text-xl font-medium text-ink">Prong</div>
-                          <div className="mt-0.5 text-xs text-muted">Diamond Setting</div>
+                          <div className="font-display text-h4 font-medium text-ink">Prong</div>
+                          <div className="mt-0.5 text-caption text-muted">Diamond Setting</div>
                         </div>
                         <div>
-                          <div className="font-display text-xl font-medium text-ink">Round</div>
-                          <div className="mt-0.5 text-xs text-muted">Diamond Shape</div>
+                          <div className="font-display text-h4 font-medium text-ink">Round</div>
+                          <div className="mt-0.5 text-caption text-muted">Diamond Shape</div>
                         </div>
                       </div>
                     </div>
@@ -200,13 +200,13 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 >
                   <div className="flex items-center gap-3">
                     <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-cream text-gold-dark">
-                      <CrownOutlined className="text-lg" />
+                      <CrownOutlined className="text-h5" />
                     </span>
-                    <span className="text-xs font-semibold tracking-wider uppercase text-ink">
+                    <span className="text-caption font-semibold tracking-wider uppercase text-ink">
                       General Details
                     </span>
                   </div>
-                  <span className={`text-xs text-muted transition-transform duration-300 ${openAccordion === "general" ? "rotate-180" : ""}`}>
+                  <span className={`text-caption text-muted transition-transform duration-300 ${openAccordion === "general" ? "rotate-180" : ""}`}>
                     <DownOutlined />
                   </span>
                 </button>
@@ -221,30 +221,30 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                     <div className="bg-cream/20 px-6 py-5">
                       <div className="grid grid-cols-2 gap-y-5 gap-x-6 sm:grid-cols-3">
                         <div>
-                          <div className="font-display text-xl font-medium text-ink capitalize">
+                          <div className="font-display text-h4 font-medium text-ink capitalize">
                             {product.category}
                           </div>
-                          <div className="mt-0.5 text-xs text-muted">Jewellery Type</div>
+                          <div className="mt-0.5 text-caption text-muted">Jewellery Type</div>
                         </div>
                         <div>
-                          <div className="font-display text-xl font-medium text-ink">Luxe Jewels</div>
-                          <div className="mt-0.5 text-xs text-muted">Brand</div>
+                          <div className="font-display text-h4 font-medium text-ink">Luxe Jewels</div>
+                          <div className="mt-0.5 text-caption text-muted">Brand</div>
                         </div>
                         <div>
-                          <div className="font-display text-xl font-medium text-ink">
+                          <div className="font-display text-h4 font-medium text-ink">
                             {product.isBestseller ? "Bestsellers" : "Signature"}
                           </div>
-                          <div className="mt-0.5 text-xs text-muted">Collection</div>
+                          <div className="mt-0.5 text-caption text-muted">Collection</div>
                         </div>
                         <div>
-                          <div className="font-display text-xl font-medium text-ink capitalize">
+                          <div className="font-display text-h4 font-medium text-ink capitalize">
                             {product.gender || "Women"}
                           </div>
-                          <div className="mt-0.5 text-xs text-muted">Gender</div>
+                          <div className="mt-0.5 text-caption text-muted">Gender</div>
                         </div>
                         <div>
-                          <div className="font-display text-xl font-medium text-ink">Bridal Wear</div>
-                          <div className="mt-0.5 text-xs text-muted">Occasion</div>
+                          <div className="font-display text-h4 font-medium text-ink">Bridal Wear</div>
+                          <div className="mt-0.5 text-caption text-muted">Occasion</div>
                         </div>
                       </div>
                     </div>
@@ -261,13 +261,13 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 >
                   <div className="flex items-center gap-3">
                     <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-cream text-gold-dark">
-                      <ReadOutlined className="text-lg" />
+                      <ReadOutlined className="text-h5" />
                     </span>
-                    <span className="text-xs font-semibold tracking-wider uppercase text-ink">
+                    <span className="text-caption font-semibold tracking-wider uppercase text-ink">
                       Description
                     </span>
                   </div>
-                  <span className={`text-xs text-muted transition-transform duration-300 ${openAccordion === "description" ? "rotate-180" : ""}`}>
+                  <span className={`text-caption text-muted transition-transform duration-300 ${openAccordion === "description" ? "rotate-180" : ""}`}>
                     <DownOutlined />
                   </span>
                 </button>
@@ -280,7 +280,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 >
                   <div className="overflow-hidden">
                     <div className="bg-cream/20 px-6 py-5">
-                      <p className="text-sm leading-relaxed text-muted">
+                      <p className="text-small leading-relaxed text-muted">
                         {product.description ||
                           "Crafted in 18 Karat yellow gold, this diamond piece celebrates luxury and beauty with a touch of modern elegance. Stone Clarity: SI2. Embracing a minimalist design, this jewellery piece holds the power to captivate hearts with its unmatched brilliance."}
                         {!showFullDesc && (
@@ -298,7 +298,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                         )}
                       </p>
                       {showFullDesc && (
-                        <p className="mt-3 text-sm leading-relaxed text-muted">
+                        <p className="mt-3 text-small leading-relaxed text-muted">
                           Every piece comes with a hallmark certificate verifying the purity of gold
                           and diamond authenticity. Handcrafted by master artisans with precision and
                           care.
@@ -317,11 +317,11 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 {/* Yellow Gold Item */}
                 <div className="rounded-2xl border border-border/80 bg-white p-4 shadow-2xs">
                   <div className="flex items-center justify-between border-b border-border/40 pb-2.5">
-                    <span className="flex items-center gap-2 text-xs font-semibold text-ink">
+                    <span className="flex items-center gap-2 text-caption font-semibold text-ink">
                       <span className="h-3 w-3 rounded-full bg-amber-400 border border-amber-600/30" />
                       Yellow Gold 18KT
                     </span>
-                    <span className="font-display text-sm font-semibold text-ink">
+                    <span className="font-display text-small font-semibold text-ink">
                       {formatPrice(goldValue)}
                     </span>
                   </div>
@@ -334,11 +334,11 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 {/* Stone / Diamond Item */}
                 <div className="rounded-2xl border border-border/80 bg-white p-4 shadow-2xs">
                   <div className="flex items-center justify-between border-b border-border/40 pb-2.5">
-                    <span className="flex items-center gap-2 text-xs font-semibold text-ink">
+                    <span className="flex items-center gap-2 text-caption font-semibold text-ink">
                       <span className="h-3 w-3 rounded-full bg-slate-300 border border-slate-400/40" />
                       Stone / Diamond
                     </span>
-                    <span className="font-display text-sm font-semibold text-ink">
+                    <span className="font-display text-small font-semibold text-ink">
                       {formatPrice(stoneValue)}
                     </span>
                   </div>
@@ -348,40 +348,40 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 </div>
 
                 {/* Making Charges */}
-                <div className="rounded-2xl border border-border/80 bg-white p-4 flex items-center justify-between text-xs shadow-2xs">
+                <div className="rounded-2xl border border-border/80 bg-white p-4 flex items-center justify-between text-caption shadow-2xs">
                   <span className="font-medium text-ink">Making Charges</span>
-                  <span className="font-display text-sm font-semibold text-ink">{formatPrice(makingCharges)}</span>
+                  <span className="font-display text-small font-semibold text-ink">{formatPrice(makingCharges)}</span>
                 </div>
 
                 {/* Sub Total */}
-                <div className="rounded-2xl border border-border/80 bg-cream/40 p-4 flex items-center justify-between text-xs">
+                <div className="rounded-2xl border border-border/80 bg-cream/40 p-4 flex items-center justify-between text-caption">
                   <span className="font-medium text-ink">Sub Total ({goldWeightGrams}g Gross Wt.)</span>
-                  <span className="font-display text-sm font-semibold text-ink">{formatPrice(subtotalBeforeDiscount)}</span>
+                  <span className="font-display text-small font-semibold text-ink">{formatPrice(subtotalBeforeDiscount)}</span>
                 </div>
 
                 {/* Discount */}
-                <div className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-4 flex items-center justify-between text-xs text-emerald-800">
+                <div className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-4 flex items-center justify-between text-caption text-emerald-800">
                   <span className="font-medium">Special Discount</span>
-                  <span className="font-bold text-sm">-{formatPrice(discount)}</span>
+                  <span className="font-bold text-small">-{formatPrice(discount)}</span>
                 </div>
 
                 {/* GST (3%) */}
-                <div className="rounded-2xl border border-border/80 bg-white p-4 flex items-center justify-between text-xs text-muted shadow-2xs">
+                <div className="rounded-2xl border border-border/80 bg-white p-4 flex items-center justify-between text-caption text-muted shadow-2xs">
                   <span>GST (3% Included)</span>
                   <span className="font-medium text-ink">{formatPrice(gst)}</span>
                 </div>
 
                 {/* Grand Total */}
                 <div className="rounded-2xl border-2 border-wine bg-wine/5 p-4 flex items-center justify-between text-wine">
-                  <span className="font-display text-sm font-semibold">Grand Total</span>
-                  <span className="font-display text-lg font-bold">{formatPrice(grandTotal)}</span>
+                  <span className="font-display text-small font-semibold">Grand Total</span>
+                  <span className="font-display text-h5 font-bold">{formatPrice(grandTotal)}</span>
                 </div>
               </div>
 
               {/* 2. Desktop Detailed Table View (Shown on >= 640px) */}
               <div className="hidden sm:block overflow-hidden rounded-2xl border border-border bg-white shadow-xs">
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs">
+                  <table className="w-full text-left text-caption">
                     <thead className="border-b border-border bg-cream/40 font-semibold tracking-wider text-muted uppercase">
                       <tr>
                         <th className="py-3.5 px-4">Product Details</th>
@@ -466,9 +466,9 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                         </td>
                       </tr>
                       <tr className="bg-wine/5 font-semibold text-ink">
-                        <td className="py-4 px-4 font-display text-sm">Grand Total</td>
+                        <td className="py-4 px-4 font-display text-small">Grand Total</td>
                         <td className="py-4 px-4" colSpan={3}></td>
-                        <td className="py-4 px-4 text-right font-display text-base text-wine">
+                        <td className="py-4 px-4 text-right font-display text-body text-wine">
                           {formatPrice(grandTotal)}
                         </td>
                       </tr>
@@ -497,9 +497,9 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
               />
             </div>
 
-            <div className="flex items-center gap-3 rounded-2xl border border-gold/30 bg-gold/5 p-4 text-xs text-ink">
+            <div className="flex items-center gap-3 rounded-2xl border border-gold/30 bg-gold/5 p-4 text-caption text-ink">
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/20 text-gold-dark">
-                <StarOutlined className="text-base" />
+                <StarOutlined className="text-body" />
               </span>
               <p className="leading-tight">
                 Enjoy sparkling jewellery! We provide <strong>free jewellery cleaning services</strong>!

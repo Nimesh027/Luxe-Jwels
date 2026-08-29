@@ -340,12 +340,12 @@ export default function AccountClient() {
         
         {/* BREADCRUMB & HEADER */}
         <div className="mb-8 pb-4 border-b border-border">
-          <div className="flex items-center gap-2 text-xs text-muted mb-2">
+          <div className="flex items-center gap-2 text-caption text-muted mb-2">
             <Link href="/" className="hover:text-wine transition-colors">Home</Link>
             <span>/</span>
             <span className="text-wine font-medium">My Account</span>
           </div>
-          <h1 className="font-display text-3xl sm:text-4xl text-wine font-semibold tracking-wide">
+          <h1 className="font-display text-h2 text-wine font-semibold tracking-wide">
             My Account
           </h1>
         </div>
@@ -355,10 +355,10 @@ export default function AccountClient() {
           {/* Active Tab Bar with Menu Button */}
           <div className="flex items-center justify-between p-3.5 bg-surface rounded-2xl border border-wine/30 shadow-2xs">
             <div className="flex items-center gap-3">
-              <span className="text-xl">{navItems.find((n) => n.id === activeTab)?.icon}</span>
+              <span className="text-h4">{navItems.find((n) => n.id === activeTab)?.icon}</span>
               <div>
                 <span className="text-[10px] text-muted uppercase font-bold tracking-wider block">Current Section</span>
-                <span className="font-display font-semibold text-wine text-sm">
+                <span className="font-display font-semibold text-wine text-small">
                   {navItems.find((n) => n.id === activeTab)?.label}
                 </span>
               </div>
@@ -368,7 +368,7 @@ export default function AccountClient() {
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(true)}
-              className="px-3.5 py-2 bg-[#80222F] text-white rounded-xl text-xs font-semibold hover:bg-wine-dark transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs active:scale-95"
+              className="px-3.5 py-2 bg-[#80222F] text-white rounded-xl text-caption font-semibold hover:bg-wine-dark transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs active:scale-95"
             >
               <svg className="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2">
                 <line x1="4" y1="6" x2="20" y2="6" />
@@ -393,8 +393,8 @@ export default function AccountClient() {
                 {/* Drawer Header */}
                 <div className="p-4 px-5 bg-surface border-b border-border/60 flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-base">🎛️</span>
-                    <span className="font-display font-semibold text-wine text-base">
+                    <span className="text-body">🎛️</span>
+                    <span className="font-display font-semibold text-wine text-body">
                       Account Navigation
                     </span>
                   </div>
@@ -402,7 +402,7 @@ export default function AccountClient() {
                     type="button"
                     onClick={() => setIsMobileMenuOpen(false)}
                     aria-label="Close menu"
-                    className="w-8 h-8 rounded-full bg-wine/10 text-wine hover:bg-wine hover:text-white flex items-center justify-center font-bold text-sm transition-colors cursor-pointer"
+                    className="w-8 h-8 rounded-full bg-wine/10 text-wine hover:bg-wine hover:text-white flex items-center justify-center font-bold text-small transition-colors cursor-pointer"
                   >
                     &times;
                   </button>
@@ -421,14 +421,14 @@ export default function AccountClient() {
                             setActiveTab(item.id);
                             setIsMobileMenuOpen(false);
                           }}
-                          className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-left text-xs font-semibold transition-all duration-150 cursor-pointer ${
+                          className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-left text-caption font-semibold transition-all duration-150 cursor-pointer ${
                             isActive
                               ? "bg-[#80222F] text-white shadow-xs"
                               : "text-ink/80 hover:bg-wine/5 hover:text-wine bg-neutral-50/50"
                           }`}
                         >
                           <div className="flex items-center gap-3">
-                            <span className="text-base">{item.icon}</span>
+                            <span className="text-body">{item.icon}</span>
                             <span>{item.label}</span>
                           </div>
                           <span className={isActive ? "text-white" : "text-muted"}>&rsaquo;</span>
@@ -438,8 +438,8 @@ export default function AccountClient() {
                   </nav>
 
                   {/* CUSTOMER SERVICE SUPPORT HELP CARD */}
-                  <div className="bg-wine/5 rounded-xl border border-wine/15 p-4 text-xs space-y-2 leading-relaxed">
-                    <h4 className="font-display font-semibold text-wine text-xs flex items-center gap-1.5">
+                  <div className="bg-wine/5 rounded-xl border border-wine/15 p-4 text-caption space-y-2 leading-relaxed">
+                    <h4 className="font-display font-semibold text-wine text-caption flex items-center gap-1.5">
                       💬 Customer Support
                     </h4>
                     <p className="text-[11px] text-ink/80">
@@ -458,7 +458,7 @@ export default function AccountClient() {
                         dispatch(logout());
                         setIsMobileMenuOpen(false);
                       }}
-                      className="w-full py-2.5 bg-red-50 hover:bg-red-100 text-red-700 rounded-xl border border-red-200 text-xs font-semibold transition-colors cursor-pointer"
+                      className="w-full py-2.5 bg-red-50 hover:bg-red-100 text-red-700 rounded-xl border border-red-200 text-caption font-semibold transition-colors cursor-pointer"
                     >
                       Log Out of Account
                     </button>
@@ -483,14 +483,14 @@ export default function AccountClient() {
                       key={item.id}
                       type="button"
                       onClick={() => setActiveTab(item.id)}
-                      className={`w-full flex items-center justify-between px-5 py-3.5 text-left text-xs sm:text-sm font-medium transition-all duration-150 cursor-pointer ${
+                      className={`w-full flex items-center justify-between px-5 py-3.5 text-left text-body font-medium transition-all duration-150 cursor-pointer ${
                         isActive
                           ? "bg-[#80222F] text-white font-semibold shadow-xs"
                           : "text-ink/80 hover:bg-wine/5 hover:text-wine"
                       }`}
                     >
                       <div className="flex items-center gap-3">
-                        <span className="text-base">{item.icon}</span>
+                        <span className="text-body">{item.icon}</span>
                         <span>{item.label}</span>
                       </div>
                       <span className={isActive ? "text-white" : "text-muted"}>&rsaquo;</span>
@@ -501,8 +501,8 @@ export default function AccountClient() {
             </div>
 
             {/* CUSTOMER SERVICE SUPPORT HELP CARD */}
-            <div className="bg-wine/5 rounded-2xl border border-wine/15 p-5 text-xs space-y-3 leading-relaxed">
-              <h4 className="font-display font-semibold text-wine text-sm flex items-center gap-2">
+            <div className="bg-wine/5 rounded-2xl border border-wine/15 p-5 text-caption space-y-3 leading-relaxed">
+              <h4 className="font-display font-semibold text-wine text-small flex items-center gap-2">
                 💬 Need Assistance?
               </h4>
               <p className="text-ink/80">
@@ -522,7 +522,7 @@ export default function AccountClient() {
               <button
                 type="button"
                 onClick={() => dispatch(logout())}
-                className="w-full py-3 bg-red-50 hover:bg-red-100 text-red-700 rounded-2xl border border-red-200 text-xs sm:text-sm font-semibold transition-colors cursor-pointer"
+                className="w-full py-3 bg-red-50 hover:bg-red-100 text-red-700 rounded-2xl border border-red-200 text-body font-semibold transition-colors cursor-pointer"
               >
                 Log Out of Account
               </button>
@@ -534,9 +534,9 @@ export default function AccountClient() {
             
             {/* SAVE SUCCESS ALERT */}
             {saveSuccess && (
-              <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-xs font-medium flex items-center justify-between animate-in fade-in duration-200">
+              <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-caption font-medium flex items-center justify-between animate-in fade-in duration-200">
                 <span>✓ Changes updated successfully!</span>
-                <button type="button" onClick={() => setSaveSuccess(false)} className="text-emerald-800 font-bold text-base hover:text-emerald-900">&times;</button>
+                <button type="button" onClick={() => setSaveSuccess(false)} className="text-emerald-800 font-bold text-body hover:text-emerald-900">&times;</button>
               </div>
             )}
 
@@ -544,7 +544,7 @@ export default function AccountClient() {
             {activeTab === "overview" && (
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                  <h2 className="font-display text-2xl font-semibold text-wine">
+                  <h2 className="font-display text-h3 font-semibold text-wine">
                     Account Overview
                   </h2>
                 </div>
@@ -552,7 +552,7 @@ export default function AccountClient() {
                 {/* EDIT FORM MODE */}
                 {isEditing ? (
                   <form onSubmit={handleSaveDetails} className="bg-surface rounded-2xl border border-border p-6 shadow-sm space-y-5">
-                    <h3 className="font-display text-lg font-semibold text-wine pb-3 border-b border-border">
+                    <h3 className="font-display text-h5 font-semibold text-wine pb-3 border-b border-border">
                       Edit Personal Information
                     </h3>
 
@@ -621,20 +621,20 @@ export default function AccountClient() {
                   <div className="bg-surface rounded-2xl border border-wine/30 shadow-xs overflow-hidden">
                     {/* Pink/Wine Tint Header */}
                     <div className="bg-[#FAF0F2] px-6 py-3.5 border-b border-wine/20 flex items-center justify-between">
-                      <span className="font-display font-semibold text-wine text-sm">
+                      <span className="font-display font-semibold text-wine text-small">
                         Personal Information
                       </span>
                       <button
                         type="button"
                         onClick={() => setIsEditing(true)}
-                        className="px-3 py-1 border border-wine text-wine bg-white hover:bg-wine hover:text-white rounded-lg text-xs font-semibold transition-all cursor-pointer shadow-2xs"
+                        className="px-3 py-1 border border-wine text-wine bg-white hover:bg-wine hover:text-white rounded-lg text-caption font-semibold transition-all cursor-pointer shadow-2xs"
                       >
                         Edit Details
                       </button>
                     </div>
 
                     {/* Table View of Personal Details */}
-                    <div className="p-6 divide-y divide-border/40 text-xs sm:text-sm">
+                    <div className="p-6 divide-y divide-border/40 text-body">
                       <div className="grid grid-cols-12 py-3">
                         <span className="col-span-4 font-semibold text-ink">Name</span>
                         <span className="col-span-1 text-muted">:</span>
@@ -676,16 +676,16 @@ export default function AccountClient() {
               <div className="space-y-6">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h2 className="font-display text-2xl font-semibold text-wine">
+                    <h2 className="font-display text-h3 font-semibold text-wine">
                       Saved Payments Method
                     </h2>
-                    <p className="text-xs text-muted mt-0.5">Manage your saved credit/debit cards, UPI handles, and payment options for faster checkout.</p>
+                    <p className="text-caption text-muted mt-0.5">Manage your saved credit/debit cards, UPI handles, and payment options for faster checkout.</p>
                   </div>
                   {!showAddPaymentForm && (
                     <button
                       type="button"
                       onClick={() => setShowAddPaymentForm(true)}
-                      className="px-4 py-2 bg-wine text-white rounded-xl text-xs font-semibold hover:bg-wine-dark transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
+                      className="px-4 py-2 bg-wine text-white rounded-xl text-caption font-semibold hover:bg-wine-dark transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
                     >
                       <span>+</span> Add New Payment Method
                     </button>
@@ -696,7 +696,7 @@ export default function AccountClient() {
                 {showAddPaymentForm ? (
                   <form onSubmit={handleAddPaymentSubmit} className="bg-surface rounded-2xl border border-wine/30 p-6 shadow-md space-y-5 animate-in fade-in duration-200">
                     <div className="flex items-center justify-between pb-3 border-b border-border">
-                      <h3 className="font-display text-lg font-semibold text-wine">Add New Payment Method</h3>
+                      <h3 className="font-display text-h5 font-semibold text-wine">Add New Payment Method</h3>
                     </div>
 
                     {/* Payment Type Selection Tabs */}
@@ -704,7 +704,7 @@ export default function AccountClient() {
                       <button
                         type="button"
                         onClick={() => setNewPaymentType("card")}
-                        className={`py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold border transition-all cursor-pointer ${
+                        className={`py-2.5 px-3 rounded-xl text-body font-semibold border transition-all cursor-pointer ${
                           newPaymentType === "card"
                             ? "bg-wine text-white border-wine shadow-xs"
                             : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5"
@@ -715,7 +715,7 @@ export default function AccountClient() {
                       <button
                         type="button"
                         onClick={() => setNewPaymentType("upi")}
-                        className={`py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold border transition-all cursor-pointer ${
+                        className={`py-2.5 px-3 rounded-xl text-body font-semibold border transition-all cursor-pointer ${
                           newPaymentType === "upi"
                             ? "bg-wine text-white border-wine shadow-xs"
                             : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5"
@@ -726,7 +726,7 @@ export default function AccountClient() {
                       <button
                         type="button"
                         onClick={() => setNewPaymentType("netbanking")}
-                        className={`py-2.5 px-3 rounded-xl text-xs sm:text-sm font-semibold border transition-all cursor-pointer ${
+                        className={`py-2.5 px-3 rounded-xl text-body font-semibold border transition-all cursor-pointer ${
                           newPaymentType === "netbanking"
                             ? "bg-wine text-white border-wine shadow-xs"
                             : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5"
@@ -740,7 +740,7 @@ export default function AccountClient() {
                     {newPaymentType === "card" && (
                       <div className="space-y-4">
                         <div>
-                          <label htmlFor="card-number-input" className="block text-xs font-semibold text-ink mb-1.5">Card Number</label>
+                          <label htmlFor="card-number-input" className="block text-caption font-semibold text-ink mb-1.5">Card Number</label>
                           <input
                             id="card-number-input"
                             type="text"
@@ -748,44 +748,44 @@ export default function AccountClient() {
                             onChange={(e) => setNewPaymentForm({ ...newPaymentForm, cardNumber: e.target.value })}
                             placeholder="4532 •••• •••• 8821"
                             maxLength={19}
-                            className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-xs sm:text-sm text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150 font-mono"
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150 font-mono"
                             required
                           />
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
-                            <label htmlFor="card-holder-input" className="block text-xs font-semibold text-ink mb-1.5">Cardholder Name</label>
+                            <label htmlFor="card-holder-input" className="block text-caption font-semibold text-ink mb-1.5">Cardholder Name</label>
                             <input
                               id="card-holder-input"
                               type="text"
                               value={newPaymentForm.cardHolder}
                               onChange={(e) => setNewPaymentForm({ ...newPaymentForm, cardHolder: e.target.value })}
                               placeholder="Name on card"
-                              className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-xs sm:text-sm text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150 uppercase"
+                              className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150 uppercase"
                               required
                             />
                           </div>
                           <div>
-                            <label htmlFor="bank-name-input" className="block text-xs font-semibold text-ink mb-1.5">Bank Name / Label</label>
+                            <label htmlFor="bank-name-input" className="block text-caption font-semibold text-ink mb-1.5">Bank Name / Label</label>
                             <input
                               id="bank-name-input"
                               type="text"
                               value={newPaymentForm.bankName}
                               onChange={(e) => setNewPaymentForm({ ...newPaymentForm, bankName: e.target.value })}
                               placeholder="e.g. HDFC Bank, ICICI Bank"
-                              className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-xs sm:text-sm text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                              className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
                               required
                             />
                           </div>
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                           <div>
-                            <label htmlFor="card-expiry-month" className="block text-xs font-semibold text-ink mb-1.5">Expiry Month</label>
+                            <label htmlFor="card-expiry-month" className="block text-caption font-semibold text-ink mb-1.5">Expiry Month</label>
                             <select
                               id="card-expiry-month"
                               value={newPaymentForm.expiryMonth}
                               onChange={(e) => setNewPaymentForm({ ...newPaymentForm, expiryMonth: e.target.value })}
-                              className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-xs sm:text-sm text-ink focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150 cursor-pointer"
+                              className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150 cursor-pointer"
                             >
                               {Array.from({ length: 12 }, (_, i) => {
                                 const m = (i + 1).toString().padStart(2, "0");
@@ -794,12 +794,12 @@ export default function AccountClient() {
                             </select>
                           </div>
                           <div>
-                            <label htmlFor="card-expiry-year" className="block text-xs font-semibold text-ink mb-1.5">Expiry Year</label>
+                            <label htmlFor="card-expiry-year" className="block text-caption font-semibold text-ink mb-1.5">Expiry Year</label>
                             <select
                               id="card-expiry-year"
                               value={newPaymentForm.expiryYear}
                               onChange={(e) => setNewPaymentForm({ ...newPaymentForm, expiryYear: e.target.value })}
-                              className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-xs sm:text-sm text-ink focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150 cursor-pointer"
+                              className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150 cursor-pointer"
                             >
                               {Array.from({ length: 10 }, (_, i) => {
                                 const y = (2026 + i).toString();
@@ -815,25 +815,25 @@ export default function AccountClient() {
                     {newPaymentType === "upi" && (
                       <div className="space-y-4">
                         <div>
-                          <label htmlFor="upi-id-input" className="block text-xs font-semibold text-ink mb-1.5">Virtual Payment Address (UPI ID)</label>
+                          <label htmlFor="upi-id-input" className="block text-caption font-semibold text-ink mb-1.5">Virtual Payment Address (UPI ID)</label>
                           <input
                             id="upi-id-input"
                             type="text"
                             value={newPaymentForm.upiId}
                             onChange={(e) => setNewPaymentForm({ ...newPaymentForm, upiId: e.target.value })}
                             placeholder="e.g. user@okaxis / mobile@paytm"
-                            className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-xs sm:text-sm text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
                             required
                           />
                         </div>
                         <div>
-                          <label htmlFor="upi-name-input" className="block text-xs font-semibold text-ink mb-1.5">Account Holder Name</label>
+                          <label htmlFor="upi-name-input" className="block text-caption font-semibold text-ink mb-1.5">Account Holder Name</label>
                           <input
                             id="upi-name-input"
                             type="text"
                             value={newPaymentForm.cardHolder}
                             onChange={(e) => setNewPaymentForm({ ...newPaymentForm, cardHolder: e.target.value })}
-                            className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-xs sm:text-sm text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
                             required
                           />
                         </div>
@@ -844,12 +844,12 @@ export default function AccountClient() {
                     {newPaymentType === "netbanking" && (
                       <div className="space-y-4">
                         <div>
-                          <label htmlFor="netbank-select" className="block text-xs font-semibold text-ink mb-1.5">Select Bank</label>
+                          <label htmlFor="netbank-select" className="block text-caption font-semibold text-ink mb-1.5">Select Bank</label>
                           <select
                             id="netbank-select"
                             value={newPaymentForm.bankName}
                             onChange={(e) => setNewPaymentForm({ ...newPaymentForm, bankName: e.target.value })}
-                            className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-xs sm:text-sm text-ink focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150 cursor-pointer"
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150 cursor-pointer"
                           >
                             <option value="State Bank of India">State Bank of India (SBI)</option>
                             <option value="HDFC Bank">HDFC Bank</option>
@@ -870,7 +870,7 @@ export default function AccountClient() {
                         onChange={(e) => setNewPaymentForm({ ...newPaymentForm, setAsDefault: e.target.checked })}
                         className="rounded border-border text-wine focus:ring-wine accent-wine w-4 h-4 cursor-pointer"
                       />
-                      <label htmlFor="set-as-default-pm" className="text-xs text-ink cursor-pointer font-medium">Set as default payment method for fast checkout</label>
+                      <label htmlFor="set-as-default-pm" className="text-caption text-ink cursor-pointer font-medium">Set as default payment method for fast checkout</label>
                     </div>
 
                     {/* Submit Actions */}
@@ -879,14 +879,14 @@ export default function AccountClient() {
                         <button
                           type="button"
                           onClick={() => setShowAddPaymentForm(false)}
-                          className="px-4 py-2 border border-border text-xs font-medium rounded-xl hover:bg-wine/5 transition-colors cursor-pointer"
+                          className="px-4 py-2 border border-border text-caption font-medium rounded-xl hover:bg-wine/5 transition-colors cursor-pointer"
                         >
                           Cancel
                         </button>
                       )}
                       <button
                         type="submit"
-                        className="px-5 py-2.5 bg-wine text-white text-xs sm:text-sm font-semibold rounded-xl hover:bg-wine-dark transition-all cursor-pointer shadow-xs"
+                        className="px-5 py-2.5 bg-wine text-white text-body font-semibold rounded-xl hover:bg-wine-dark transition-all cursor-pointer shadow-xs"
                       >
                         Save Payment Method
                       </button>
@@ -906,7 +906,7 @@ export default function AccountClient() {
                       >
                         {/* Top Row: Bank Label & Default Badge */}
                         <div className="flex items-center justify-between">
-                          <span className={`text-xs font-semibold uppercase tracking-wider ${pm.type === "card" ? "text-slate-200" : "text-wine"}`}>
+                          <span className={`text-caption font-semibold uppercase tracking-wider ${pm.type === "card" ? "text-slate-200" : "text-wine"}`}>
                             {pm.bank}
                           </span>
                           <div className="flex items-center gap-2">
@@ -915,7 +915,7 @@ export default function AccountClient() {
                                 Default
                               </span>
                             )}
-                            <span className={`text-xs font-bold ${pm.type === "card" ? "text-white" : "text-ink"}`}>
+                            <span className={`text-caption font-bold ${pm.type === "card" ? "text-white" : "text-ink"}`}>
                               {pm.brand}
                             </span>
                           </div>
@@ -923,14 +923,14 @@ export default function AccountClient() {
 
                         {/* Card / UPI Number */}
                         <div>
-                          <p className={`font-mono text-sm sm:text-base tracking-widest ${pm.type === "card" ? "text-white" : "text-wine font-semibold"}`}>
+                          <p className={`font-mono text-body tracking-widest ${pm.type === "card" ? "text-white" : "text-wine font-semibold"}`}>
                             {pm.number}
                           </p>
                           <span className="text-[11px] text-muted block mt-0.5 font-medium">{pm.title}</span>
                         </div>
 
                         {/* Cardholder & Actions Row */}
-                        <div className={`pt-3 border-t flex items-center justify-between text-xs ${pm.type === "card" ? "border-slate-700/60" : "border-wine/15"}`}>
+                        <div className={`pt-3 border-t flex items-center justify-between text-caption ${pm.type === "card" ? "border-slate-700/60" : "border-wine/15"}`}>
                           <div>
                             <span className={`block text-[10px] uppercase font-semibold ${pm.type === "card" ? "text-slate-400" : "text-muted"}`}>Holder Name</span>
                             <span className="font-semibold">{pm.holder}</span>
@@ -958,7 +958,7 @@ export default function AccountClient() {
                             <button
                               type="button"
                               onClick={() => handleRemovePayment(pm.id)}
-                              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5 ${
+                              className={`px-3 py-1.5 rounded-full text-caption font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5 ${
                                 pm.type === "card"
                                   ? "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 hover:border-slate-500"
                                   : "bg-white border border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-900"
@@ -984,16 +984,16 @@ export default function AccountClient() {
               <div className="space-y-6">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h2 className="font-display text-2xl font-semibold text-wine">
+                    <h2 className="font-display text-h3 font-semibold text-wine">
                       Address Book
                     </h2>
-                    <p className="text-xs text-muted mt-0.5">Manage your home, office, and luxury gift delivery addresses.</p>
+                    <p className="text-caption text-muted mt-0.5">Manage your home, office, and luxury gift delivery addresses.</p>
                   </div>
                   {!showAddressForm && (
                     <button
                       type="button"
                       onClick={handleOpenAddAddress}
-                      className="px-4 py-2 bg-wine text-white rounded-xl text-xs font-semibold hover:bg-wine-dark transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
+                      className="px-4 py-2 bg-wine text-white rounded-xl text-caption font-semibold hover:bg-wine-dark transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
                     >
                       <span>+</span> Add New Address
                     </button>
@@ -1004,85 +1004,85 @@ export default function AccountClient() {
                 {showAddressForm ? (
                   <form onSubmit={handleSaveAddressSubmit} className="bg-surface rounded-2xl border border-wine/30 p-6 shadow-md space-y-5 animate-in fade-in duration-200">
                     <div className="flex items-center justify-between pb-3 border-b border-border">
-                      <h3 className="font-display text-lg font-semibold text-wine">
+                      <h3 className="font-display text-h5 font-semibold text-wine">
                         {editingAddressId ? "Edit Address Details" : "Add New Delivery Address"}
                       </h3>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="address-form-name" className="block text-xs font-semibold text-ink mb-1.5">Full Name</label>
+                        <label htmlFor="address-form-name" className="block text-caption font-semibold text-ink mb-1.5">Full Name</label>
                         <input
                           id="address-form-name"
                           type="text"
                           value={addressForm.name}
                           onChange={(e) => setAddressForm({ ...addressForm, name: e.target.value })}
                           placeholder="Recipient Full Name"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-xs sm:text-sm text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
                           required
                         />
                       </div>
                       <div>
-                        <label htmlFor="address-form-phone" className="block text-xs font-semibold text-ink mb-1.5">Phone Number</label>
+                        <label htmlFor="address-form-phone" className="block text-caption font-semibold text-ink mb-1.5">Phone Number</label>
                         <input
                           id="address-form-phone"
                           type="text"
                           value={addressForm.phone}
                           onChange={(e) => setAddressForm({ ...addressForm, phone: e.target.value })}
                           placeholder="+91 9876543210"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-xs sm:text-sm text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
                           required
                         />
                       </div>
                       <div className="sm:col-span-2">
-                        <label htmlFor="address-form-street" className="block text-xs font-semibold text-ink mb-1.5">Flat / House No / Building / Street</label>
+                        <label htmlFor="address-form-street" className="block text-caption font-semibold text-ink mb-1.5">Flat / House No / Building / Street</label>
                         <input
                           id="address-form-street"
                           type="text"
                           value={addressForm.street}
                           onChange={(e) => setAddressForm({ ...addressForm, street: e.target.value })}
                           placeholder="e.g. Flat 302, Luxe Residency, MG Road"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-xs sm:text-sm text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
                           required
                         />
                       </div>
                       <div className="sm:col-span-2">
-                        <label htmlFor="address-form-locality" className="block text-xs font-semibold text-ink mb-1.5">Area / Locality / Landmark</label>
+                        <label htmlFor="address-form-locality" className="block text-caption font-semibold text-ink mb-1.5">Area / Locality / Landmark</label>
                         <input
                           id="address-form-locality"
                           type="text"
                           value={addressForm.locality}
                           onChange={(e) => setAddressForm({ ...addressForm, locality: e.target.value })}
                           placeholder="e.g. Near Trinity Metro Station"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-xs sm:text-sm text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
                         />
                       </div>
                       <div>
-                        <label htmlFor="address-form-city" className="block text-xs font-semibold text-ink mb-1.5">City</label>
+                        <label htmlFor="address-form-city" className="block text-caption font-semibold text-ink mb-1.5">City</label>
                         <input
                           id="address-form-city"
                           type="text"
                           value={addressForm.city}
                           onChange={(e) => setAddressForm({ ...addressForm, city: e.target.value })}
                           placeholder="Bengaluru"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-xs sm:text-sm text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
                           required
                         />
                       </div>
                       <div>
-                        <label htmlFor="address-form-state" className="block text-xs font-semibold text-ink mb-1.5">State</label>
+                        <label htmlFor="address-form-state" className="block text-caption font-semibold text-ink mb-1.5">State</label>
                         <input
                           id="address-form-state"
                           type="text"
                           value={addressForm.state}
                           onChange={(e) => setAddressForm({ ...addressForm, state: e.target.value })}
                           placeholder="Karnataka"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-xs sm:text-sm text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
                           required
                         />
                       </div>
                       <div>
-                        <label htmlFor="address-form-pincode" className="block text-xs font-semibold text-ink mb-1.5">Pincode</label>
+                        <label htmlFor="address-form-pincode" className="block text-caption font-semibold text-ink mb-1.5">Pincode</label>
                         <input
                           id="address-form-pincode"
                           type="text"
@@ -1090,15 +1090,15 @@ export default function AccountClient() {
                           onChange={(e) => setAddressForm({ ...addressForm, pincode: e.target.value })}
                           placeholder="560001"
                           maxLength={6}
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-xs sm:text-sm text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
                           required
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold text-ink mb-1.5">Address Type</label>
+                        <label className="block text-caption font-semibold text-ink mb-1.5">Address Type</label>
                         <div className="flex items-center gap-3 pt-1">
                           {(["Home", "Work", "Other"] as const).map((t) => (
-                            <label key={t} className="flex items-center gap-1.5 text-xs text-ink cursor-pointer font-medium">
+                            <label key={t} className="flex items-center gap-1.5 text-caption text-ink cursor-pointer font-medium">
                               <input
                                 type="radio"
                                 name="address-type-radio"
@@ -1122,7 +1122,7 @@ export default function AccountClient() {
                         onChange={(e) => setAddressForm({ ...addressForm, isDefault: e.target.checked })}
                         className="rounded border-border text-wine focus:ring-wine accent-wine w-4 h-4 cursor-pointer"
                       />
-                      <label htmlFor="set-as-default-address" className="text-xs text-ink cursor-pointer font-medium">Set as default shipping address</label>
+                      <label htmlFor="set-as-default-address" className="text-caption text-ink cursor-pointer font-medium">Set as default shipping address</label>
                     </div>
 
                     {/* Submit Actions */}
@@ -1131,14 +1131,14 @@ export default function AccountClient() {
                         <button
                           type="button"
                           onClick={() => setShowAddressForm(false)}
-                          className="px-4 py-2 border border-border text-xs font-medium rounded-xl hover:bg-wine/5 transition-colors cursor-pointer"
+                          className="px-4 py-2 border border-border text-caption font-medium rounded-xl hover:bg-wine/5 transition-colors cursor-pointer"
                         >
                           Cancel
                         </button>
                       )}
                       <button
                         type="submit"
-                        className="px-5 py-2.5 bg-wine text-white text-xs sm:text-sm font-semibold rounded-xl hover:bg-wine-dark transition-all cursor-pointer shadow-xs"
+                        className="px-5 py-2.5 bg-wine text-white text-body font-semibold rounded-xl hover:bg-wine-dark transition-all cursor-pointer shadow-xs"
                       >
                         Save Address
                       </button>
@@ -1168,11 +1168,11 @@ export default function AccountClient() {
 
                         {/* Address Details */}
                         <div>
-                          <h3 className="font-semibold text-ink text-sm">{addr.name}</h3>
-                          <p className="text-xs text-muted leading-relaxed mt-1">
+                          <h3 className="font-semibold text-ink text-small">{addr.name}</h3>
+                          <p className="text-caption text-muted leading-relaxed mt-1">
                             {addr.street}, {addr.locality ? `${addr.locality}, ` : ""}{addr.city}, {addr.state} - {addr.pincode}
                           </p>
-                          <p className="text-xs text-ink font-medium mt-1">Phone: {addr.phone}</p>
+                          <p className="text-caption text-ink font-medium mt-1">Phone: {addr.phone}</p>
                         </div>
 
                         {/* Card Actions Footer */}
@@ -1181,7 +1181,7 @@ export default function AccountClient() {
                             <button
                               type="button"
                               onClick={() => handleOpenEditAddress(addr)}
-                              className="px-3.5 py-1.5 bg-white border border-wine/30 text-wine hover:bg-wine hover:text-white rounded-full text-xs font-semibold shadow-2xs transition-all duration-150 cursor-pointer flex items-center gap-1.5"
+                              className="px-3.5 py-1.5 bg-white border border-wine/30 text-wine hover:bg-wine hover:text-white rounded-full text-caption font-semibold shadow-2xs transition-all duration-150 cursor-pointer flex items-center gap-1.5"
                             >
                               <svg className="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
@@ -1192,7 +1192,7 @@ export default function AccountClient() {
                               <button
                                 type="button"
                                 onClick={() => handleSetDefaultAddress(addr.id)}
-                                className="px-3 py-1.5 text-xs text-muted hover:text-wine font-semibold transition-colors cursor-pointer"
+                                className="px-3 py-1.5 text-caption text-muted hover:text-wine font-semibold transition-colors cursor-pointer"
                               >
                                 Set as Default
                               </button>
@@ -1201,7 +1201,7 @@ export default function AccountClient() {
                           <button
                             type="button"
                             onClick={() => handleRemoveAddress(addr.id)}
-                            className="px-3.5 py-1.5 bg-white border border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-900 rounded-full text-xs font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5"
+                            className="px-3.5 py-1.5 bg-white border border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-900 rounded-full text-caption font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5"
                             title="Remove Address"
                           >
                             <svg className="w-3.5 h-3.5 text-gray-500 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1220,7 +1220,7 @@ export default function AccountClient() {
             {/* 4. WISHLIST TAB */}
             {activeTab === "wishlist" && (
               <div className="space-y-6">
-                <h2 className="font-display text-2xl font-semibold text-wine">
+                <h2 className="font-display text-h3 font-semibold text-wine">
                   Wishlist
                 </h2>
                 {wishlistItems.length === 0 ? (
@@ -1233,17 +1233,17 @@ export default function AccountClient() {
                     </div>
 
                     {/* Heading & Subtitle */}
-                    <h3 className="font-display text-2xl font-semibold text-ink tracking-tight mb-2">
+                    <h3 className="font-display text-h3 font-semibold text-ink tracking-tight mb-2">
                       Your wishlist is empty
                     </h3>
-                    <p className="text-xs sm:text-sm text-muted font-normal leading-relaxed mb-8 max-w-sm">
+                    <p className="text-body text-muted font-normal leading-relaxed mb-8 max-w-sm">
                       Explore our fine jewellery creations and save your favorite heirloom pieces.
                     </p>
 
                     {/* Continue Shopping Black Pill CTA Button */}
                     <Link
                       href="/collections"
-                      className="inline-flex items-center justify-center rounded-full bg-slate-950 text-white px-8 py-3.5 text-xs font-bold uppercase tracking-widest hover:bg-slate-800 transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer active:scale-95"
+                      className="inline-flex items-center justify-center rounded-full bg-slate-950 text-white px-8 py-3.5 text-caption font-bold uppercase tracking-widest hover:bg-slate-800 transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer active:scale-95"
                     >
                       CONTINUE SHOPPING
                     </Link>
@@ -1268,19 +1268,19 @@ export default function AccountClient() {
                           </div>
 
                           <div className="space-y-1">
-                            <h3 className="font-display font-semibold text-base sm:text-lg text-ink">
+                            <h3 className="font-display font-semibold text-h5 text-ink">
                               {product.name}
                             </h3>
-                            <p className="text-xs text-muted font-medium">
+                            <p className="text-caption text-muted font-medium">
                               18K Solid Gold • {product.category ? product.category.toUpperCase() : "Rings"}
                             </p>
 
                             <div className="flex items-center gap-2 pt-0.5 pb-1">
-                              <span className="font-semibold text-ink text-sm sm:text-base">
+                              <span className="font-semibold text-ink text-body">
                                 ₹{product.price.toLocaleString("en-IN")}
                               </span>
                               {product.compareAtPrice && (
-                                <span className="text-xs text-muted line-through font-normal">
+                                <span className="text-caption text-muted line-through font-normal">
                                   ₹{product.compareAtPrice.toLocaleString("en-IN")}
                                 </span>
                               )}
@@ -1290,7 +1290,7 @@ export default function AccountClient() {
                               <button
                                 type="button"
                                 onClick={() => handleAddToCart(product)}
-                                className="px-5 py-2 bg-slate-950 hover:bg-slate-800 text-white rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-150 shadow-xs hover:shadow-md cursor-pointer active:scale-95"
+                                className="px-5 py-2 bg-slate-950 hover:bg-slate-800 text-white rounded-full text-caption font-bold uppercase tracking-wider transition-all duration-150 shadow-xs hover:shadow-md cursor-pointer active:scale-95"
                               >
                                 ADD TO CART
                               </button>
@@ -1302,7 +1302,7 @@ export default function AccountClient() {
                         <button
                           type="button"
                           onClick={() => handleRemoveFromWishlist(product.id)}
-                          className="px-3.5 py-1.5 bg-white border border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-900 rounded-full text-xs font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5 self-start sm:self-center"
+                          className="px-3.5 py-1.5 bg-white border border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-900 rounded-full text-caption font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5 self-start sm:self-center"
                           title="Remove from Wishlist"
                         >
                           <svg className="w-3.5 h-3.5 text-gray-500 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1320,45 +1320,45 @@ export default function AccountClient() {
             {/* 5. ORDER HISTORY TAB */}
             {activeTab === "order-history" && (
               <div className="space-y-6">
-                <h2 className="font-display text-2xl font-semibold text-wine">
+                <h2 className="font-display text-h3 font-semibold text-wine">
                   Order History
                 </h2>
                 <div className="space-y-4">
                   <div className="p-5 bg-surface rounded-2xl border border-border shadow-xs space-y-3">
                     <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-border">
                       <div>
-                        <span className="font-display font-semibold text-wine text-base">Order #LX-89241</span>
-                        <p className="text-xs text-muted">Placed on Aug 24, 2026</p>
+                        <span className="font-display font-semibold text-wine text-body">Order #LX-89241</span>
+                        <p className="text-caption text-muted">Placed on Aug 24, 2026</p>
                       </div>
-                      <span className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-semibold">
+                      <span className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-caption font-semibold">
                         Delivered
                       </span>
                     </div>
-                    <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center justify-between text-caption">
                       <div>
-                        <p className="font-semibold text-ink text-sm">Royal Solitaire Diamond Ring (18K Gold)</p>
+                        <p className="font-semibold text-ink text-small">Royal Solitaire Diamond Ring (18K Gold)</p>
                         <p className="text-muted">Qty: 1 | Size: 14 IN</p>
                       </div>
-                      <span className="font-display font-bold text-wine text-base">₹1,45,000</span>
+                      <span className="font-display font-bold text-wine text-body">₹1,45,000</span>
                     </div>
                   </div>
 
                   <div className="p-5 bg-surface rounded-2xl border border-border shadow-xs space-y-3">
                     <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-border">
                       <div>
-                        <span className="font-display font-semibold text-wine text-base">Order #LX-77319</span>
-                        <p className="text-xs text-muted">Placed on May 12, 2026</p>
+                        <span className="font-display font-semibold text-wine text-body">Order #LX-77319</span>
+                        <p className="text-caption text-muted">Placed on May 12, 2026</p>
                       </div>
-                      <span className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-semibold">
+                      <span className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-caption font-semibold">
                         Delivered
                       </span>
                     </div>
-                    <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center justify-between text-caption">
                       <div>
-                        <p className="font-semibold text-ink text-sm">Heritage Kundan Bridal Necklace</p>
+                        <p className="font-semibold text-ink text-small">Heritage Kundan Bridal Necklace</p>
                         <p className="text-muted">Qty: 1 | BIS Hallmarked 22K</p>
                       </div>
-                      <span className="font-display font-bold text-wine text-base">₹2,80,000</span>
+                      <span className="font-display font-bold text-wine text-body">₹2,80,000</span>
                     </div>
                   </div>
                 </div>
@@ -1371,14 +1371,14 @@ export default function AccountClient() {
                 <div className="bg-surface rounded-2xl border border-wine/25 shadow-xs overflow-hidden">
                   {/* Pink Header Banner matching screenshot */}
                   <div className="bg-[#FAF0F2] px-6 py-4 border-b border-wine/20">
-                    <h3 className="font-display font-semibold text-[#80222F] text-base sm:text-lg">
+                    <h3 className="font-display font-semibold text-[#80222F] text-h5">
                       Gift Card Balance
                     </h3>
                   </div>
 
                   {/* Body Container matching screenshot */}
                   <div className="p-6 sm:p-8 space-y-6">
-                    <p className="text-xs sm:text-sm text-ink/80 font-medium leading-relaxed">
+                    <p className="text-body text-ink/80 font-medium leading-relaxed">
                       To View Your Card Balance Enter The 16 Digit Card Number And The 6 Digit Security Code(PIN).
                     </p>
 
@@ -1391,7 +1391,7 @@ export default function AccountClient() {
                           onChange={(e) => setGiftCardForm({ ...giftCardForm, cardNumber: e.target.value })}
                           placeholder="Gift card Number"
                           maxLength={19}
-                          className="w-full px-4 py-3 rounded-lg border border-border bg-white text-xs sm:text-sm text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all font-mono"
+                          className="w-full px-4 py-3 rounded-lg border border-border bg-white text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all font-mono"
                           required
                         />
                       </div>
@@ -1404,7 +1404,7 @@ export default function AccountClient() {
                           onChange={(e) => setGiftCardForm({ ...giftCardForm, pin: e.target.value })}
                           placeholder="6- Digit PIN"
                           maxLength={6}
-                          className="w-full px-4 py-3 pr-10 rounded-lg border border-border bg-white text-xs sm:text-sm text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all font-mono"
+                          className="w-full px-4 py-3 pr-10 rounded-lg border border-border bg-white text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all font-mono"
                           required
                         />
                         <button
@@ -1430,7 +1430,7 @@ export default function AccountClient() {
                       <div className="md:col-span-3">
                         <button
                           type="submit"
-                          className="w-full py-3 px-6 bg-[#80222F] hover:bg-[#681B26] text-white text-xs sm:text-sm font-semibold rounded-lg shadow-sm transition-all duration-150 cursor-pointer whitespace-nowrap active:scale-98"
+                          className="w-full py-3 px-6 bg-[#80222F] hover:bg-[#681B26] text-white text-body font-semibold rounded-lg shadow-sm transition-all duration-150 cursor-pointer whitespace-nowrap active:scale-98"
                         >
                           Check Balance
                         </button>
@@ -1439,7 +1439,7 @@ export default function AccountClient() {
 
                     {/* Result Card */}
                     {giftCardCheckResult && (
-                      <div className={`p-4 rounded-xl border text-xs sm:text-sm animate-in fade-in duration-200 ${
+                      <div className={`p-4 rounded-xl border text-body animate-in fade-in duration-200 ${
                         giftCardCheckResult.success
                           ? "bg-emerald-50 border-emerald-200 text-emerald-900"
                           : "bg-red-50 border-red-200 text-red-800"
@@ -1448,9 +1448,9 @@ export default function AccountClient() {
                           <div className="flex items-center justify-between">
                             <div>
                               <p className="font-semibold text-emerald-800">✓ {giftCardCheckResult.message}</p>
-                              <p className="text-xs text-emerald-700 mt-0.5">Card Number: •••• •••• •••• {giftCardForm.cardNumber.slice(-4) || "8821"}</p>
+                              <p className="text-caption text-emerald-700 mt-0.5">Card Number: •••• •••• •••• {giftCardForm.cardNumber.slice(-4) || "8821"}</p>
                             </div>
-                            <span className="font-display font-bold text-lg text-emerald-900">₹{giftCardCheckResult.balance?.toLocaleString("en-IN")}</span>
+                            <span className="font-display font-bold text-h5 text-emerald-900">₹{giftCardCheckResult.balance?.toLocaleString("en-IN")}</span>
                           </div>
                         ) : (
                           <p>⚠️ {giftCardCheckResult.message}</p>
@@ -1466,17 +1466,17 @@ export default function AccountClient() {
             {activeTab === "track-order" && (
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                  <h2 className="font-display text-2xl font-semibold text-wine">
+                  <h2 className="font-display text-h3 font-semibold text-wine">
                     Track Your Order
                   </h2>
                 </div>
 
                 <div className="bg-surface rounded-2xl border border-border p-6 shadow-sm space-y-6">
                   <div className="space-y-2">
-                    <h3 className="font-display text-lg font-semibold text-wine">
+                    <h3 className="font-display text-h5 font-semibold text-wine">
                       Live Delivery Tracker
                     </h3>
-                    <p className="text-xs text-muted leading-relaxed">
+                    <p className="text-caption text-muted leading-relaxed">
                       Enter your Order ID (e.g. LX-89241) or AWB Tracking Number to check real-time courier status.
                     </p>
                   </div>
@@ -1513,22 +1513,22 @@ export default function AccountClient() {
                         <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold uppercase tracking-wider">
                           IN TRANSIT 🚚
                         </span>
-                        <h4 className="font-display font-semibold text-wine text-base mt-1">
+                        <h4 className="font-display font-semibold text-wine text-body mt-1">
                           Order #LX-89241 • Royal Solitaire Diamond Ring
                         </h4>
-                        <p className="text-xs text-muted">
+                        <p className="text-caption text-muted">
                           Insured Express Courier: <span className="text-ink font-medium">BlueDart Express (AWB: SQL-98234109)</span>
                         </p>
                       </div>
                       <div className="text-right">
                         <span className="text-[10px] uppercase font-bold text-muted tracking-wider block">Estimated Delivery</span>
-                        <span className="font-display font-bold text-wine text-base">Tomorrow by 5:00 PM</span>
+                        <span className="font-display font-bold text-wine text-body">Tomorrow by 5:00 PM</span>
                       </div>
                     </div>
 
                     {/* TIMELINE STEPPER */}
                     <div className="space-y-4 pt-2">
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-muted">Shipment Journey</h4>
+                      <h4 className="text-caption font-bold uppercase tracking-wider text-muted">Shipment Journey</h4>
                       <div className="space-y-6 pt-1">
                         {[
                           {
@@ -1572,7 +1572,7 @@ export default function AccountClient() {
 
                               {/* Step Text Content */}
                               <div className="space-y-0.5 pt-0.5">
-                                <p className="text-xs font-bold text-wine">{step.title}</p>
+                                <p className="text-caption font-bold text-wine">{step.title}</p>
                                 <p className="text-[11px] text-muted leading-relaxed">{step.desc}</p>
                               </div>
                             </div>

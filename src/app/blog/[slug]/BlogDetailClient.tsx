@@ -31,18 +31,18 @@ export default function BlogDetailClient({ post }: BlogDetailClientProps) {
 
           {/* ARTICLE CATEGORY & HEADER */}
           <div className="text-center space-y-4 mb-10">
-            <span className="inline-block px-4 py-1.5 bg-wine/10 text-wine rounded-full text-xs font-bold uppercase tracking-widest border border-wine/20">
+            <span className="inline-block px-4 py-1.5 bg-wine/10 text-wine rounded-full text-caption font-bold uppercase tracking-widest border border-wine/20">
               {post.category}
             </span>
 
-            <h1 className="font-display text-3xl sm:text-5xl text-wine font-semibold tracking-tight leading-tight max-w-3xl mx-auto">
+            <h1 className="font-display text-h1 text-wine font-semibold tracking-tight leading-tight max-w-3xl mx-auto">
               {post.title}
             </h1>
 
             {/* AUTHOR METADATA & DATE BAR */}
-            <div className="pt-2 flex flex-wrap items-center justify-center gap-4 text-xs text-muted">
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-4 text-caption text-muted">
               <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-full bg-wine/10 text-wine flex items-center justify-center font-bold text-xs">
+                <div className="w-7 h-7 rounded-full bg-wine/10 text-wine flex items-center justify-center font-bold text-caption">
                   {post.author.avatar}
                 </div>
                 <span className="font-semibold text-ink">{post.author.name}</span>
@@ -67,22 +67,22 @@ export default function BlogDetailClient({ post }: BlogDetailClientProps) {
           </div>
 
           {/* ARTICLE CONTENT BODY */}
-          <article className="prose prose-wine max-w-none space-y-8 text-xs sm:text-base text-ink/85 leading-relaxed font-light">
+          <article className="prose prose-wine max-w-none space-y-8 text-body text-ink/85 leading-relaxed font-light">
             {/* Intro Paragraph */}
-            <p className="text-sm sm:text-lg text-ink font-normal leading-relaxed border-l-4 border-wine pl-4 bg-wine/5 py-3 rounded-r-xl">
+            <p className="text-small sm:text-h5 text-ink font-normal leading-relaxed border-l-4 border-wine pl-4 bg-wine/5 py-3 rounded-r-xl">
               {post.content.intro}
             </p>
 
             {/* Sections */}
             {post.content.sections.map((section, idx) => (
               <div key={idx} className="space-y-3 pt-4">
-                <h2 className="font-display text-xl sm:text-2xl font-semibold text-wine tracking-tight">
+                <h2 className="font-display text-h3 font-semibold text-wine tracking-tight">
                   {section.heading}
                 </h2>
                 <p>{section.body}</p>
 
                 {section.quote && (
-                  <blockquote className="my-6 p-6 rounded-2xl bg-[#FAF0F2] border border-wine/20 text-wine font-display italic text-sm sm:text-base leading-relaxed">
+                  <blockquote className="my-6 p-6 rounded-2xl bg-[#FAF0F2] border border-wine/20 text-wine font-display italic text-body leading-relaxed">
                     &ldquo;{section.quote}&rdquo;
                   </blockquote>
                 )}
@@ -91,7 +91,7 @@ export default function BlogDetailClient({ post }: BlogDetailClientProps) {
 
             {/* Conclusion */}
             <div className="pt-6 border-t border-border/80 space-y-3">
-              <h3 className="font-display text-lg font-semibold text-wine">
+              <h3 className="font-display text-h5 font-semibold text-wine">
                 Final Reflections
               </h3>
               <p>{post.content.conclusion}</p>
@@ -99,11 +99,11 @@ export default function BlogDetailClient({ post }: BlogDetailClientProps) {
 
             {/* TAGS BAR */}
             <div className="pt-6 flex flex-wrap items-center gap-2 border-t border-border/60">
-              <span className="text-xs font-semibold uppercase tracking-wider text-muted">TAGS:</span>
+              <span className="text-caption font-semibold uppercase tracking-wider text-muted">TAGS:</span>
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 bg-surface border border-border rounded-full text-xs text-ink/80"
+                  className="px-3 py-1 bg-surface border border-border rounded-full text-caption text-ink/80"
                 >
                   #{tag}
                 </span>
@@ -114,12 +114,12 @@ export default function BlogDetailClient({ post }: BlogDetailClientProps) {
           {/* RELATED ARTICLES SECTION USING REUSABLE BlogCard */}
           <div className="mt-16 sm:mt-20 pt-12 border-t border-border/80">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="font-display text-2xl sm:text-3xl font-semibold text-wine">
+              <h2 className="font-display text-h2 font-semibold text-wine">
                 Related Stories
               </h2>
               <Link
                 href="/blog"
-                className="text-xs font-bold text-wine hover:text-wine-dark uppercase tracking-wider transition-colors"
+                className="text-caption font-bold text-wine hover:text-wine-dark uppercase tracking-wider transition-colors"
               >
                 View All Articles →
               </Link>

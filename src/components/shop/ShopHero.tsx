@@ -48,13 +48,13 @@ export default function ShopHero({
           )}
 
           {/* Main Title */}
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-[56px] text-cream font-light leading-[1.1] tracking-tight drop-shadow-sm">
+          <h1 className="font-display text-h1 lg:text-[56px] text-cream font-light leading-[1.1] tracking-tight drop-shadow-sm">
             {title}
           </h1>
 
           {/* Subtitle */}
           {subtitle && (
-            <p className="mt-4 text-sm sm:text-base text-cream/80 max-w-lg leading-relaxed font-light">
+            <p className="mt-4 text-body text-cream/80 max-w-lg leading-relaxed font-light">
               {subtitle}
             </p>
           )}

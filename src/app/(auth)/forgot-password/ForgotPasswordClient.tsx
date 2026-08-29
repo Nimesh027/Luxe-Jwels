@@ -35,7 +35,7 @@ export default function ForgotPasswordClient() {
         {/* Top Brand Header */}
         <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-8">
           <div>
-            <span className="font-display text-lg tracking-[0.25em] text-cream uppercase font-semibold">
+            <span className="font-display text-h5 tracking-[0.25em] text-cream uppercase font-semibold">
               LUXE JEWELS
             </span>
             <p className="text-[11px] text-cream/50 tracking-wider uppercase mt-0.5 font-light">
@@ -45,7 +45,7 @@ export default function ForgotPasswordClient() {
 
           <Link
             href="/login"
-            className="flex items-center gap-1.5 text-xs text-gold/90 hover:text-gold transition-colors font-medium"
+            className="flex items-center gap-1.5 text-caption text-gold/90 hover:text-gold transition-colors font-medium"
           >
             <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
               <path d="M22 11H4.414l5.293-5.293a1 1 0 1 0-1.414-1.414l-7 7a1 1 0 0 0 0 1.414l7 7a1 1 0 0 0 1.414-1.414L4.414 13H22a1 1 0 0 0 0-2" />
@@ -58,10 +58,10 @@ export default function ForgotPasswordClient() {
           <>
             {/* Heading */}
             <div className="mb-8">
-              <h1 className="font-display text-2xl sm:text-3xl text-cream font-normal tracking-wide">
+              <h1 className="font-display text-h2 text-cream font-normal tracking-wide">
                 Forgot Your Password?
               </h1>
-              <p className="text-xs sm:text-sm text-cream/60 mt-1 font-light leading-relaxed">
+              <p className="text-body text-cream/60 mt-1 font-light leading-relaxed">
                 Enter your registered email address below. We&apos;ll send a secure password reset link to your inbox.
               </p>
             </div>
@@ -92,7 +92,7 @@ export default function ForgotPasswordClient() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold to-[#b59247] hover:from-[#dcb96b] hover:to-gold text-ink font-semibold text-xs uppercase tracking-[0.15em] transition-all duration-300 transform active:scale-[0.99] shadow-lg shadow-gold/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+                className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold to-[#b59247] hover:from-[#dcb96b] hover:to-gold text-ink font-semibold text-caption uppercase tracking-[0.15em] transition-all duration-300 transform active:scale-[0.99] shadow-lg shadow-gold/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
               >
                 {isLoading ? (
                   <>
@@ -122,21 +122,21 @@ export default function ForgotPasswordClient() {
         ) : (
           /* SUCCESS CONFIRMATION SCREEN */
           <div className="text-center py-4 space-y-6 animate-in fade-in zoom-in-95 duration-200">
-            <div className="w-16 h-16 rounded-full bg-gold/15 border border-gold/40 text-gold flex items-center justify-center mx-auto text-2xl">
+            <div className="w-16 h-16 rounded-full bg-gold/15 border border-gold/40 text-gold flex items-center justify-center mx-auto text-h3">
               📩
             </div>
 
             <div>
-              <h2 className="font-display text-2xl text-cream font-normal">
+              <h2 className="font-display text-h3 text-cream font-normal">
                 Check Your Inbox
               </h2>
-              <p className="text-xs sm:text-sm text-cream/70 mt-2 leading-relaxed max-w-sm mx-auto font-light">
+              <p className="text-body text-cream/70 mt-2 leading-relaxed max-w-sm mx-auto font-light">
                 We have sent password recovery instructions to{" "}
                 <span className="text-gold font-medium">{email}</span>. Please check your email inbox and follow the link provided.
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-xs text-cream/60 font-light">
+            <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-caption text-cream/60 font-light">
               Didn&apos;t receive the email? Check your spam folder or{" "}
               <button
                 type="button"
@@ -150,7 +150,7 @@ export default function ForgotPasswordClient() {
             <div className="pt-2">
               <Link
                 href="/login"
-                className="inline-flex items-center justify-center w-full py-3 px-6 rounded-xl bg-white/10 hover:bg-white/20 text-cream font-medium text-xs uppercase tracking-wider transition-colors"
+                className="inline-flex items-center justify-center w-full py-3 px-6 rounded-xl bg-white/10 hover:bg-white/20 text-cream font-medium text-caption uppercase tracking-wider transition-colors"
               >
                 Return To Sign In
               </Link>

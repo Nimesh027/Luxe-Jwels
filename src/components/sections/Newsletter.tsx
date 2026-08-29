@@ -36,7 +36,7 @@ export default function Newsletter() {
               placeholder={newsletter.placeholder || "Enter your email address"}
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              className="h-12 w-full rounded-full border border-neutral-300 bg-white px-5 text-xs sm:text-sm text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold shadow-xs"
+              className="h-12 w-full rounded-full border border-neutral-300 bg-white px-5 text-body text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold shadow-xs"
             />
           </div>
 
@@ -44,14 +44,14 @@ export default function Newsletter() {
             type="submit"
             variant="fill"
             colorTheme="wine"
-            className="h-12 w-full sm:w-auto px-8 rounded-full font-semibold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg shrink-0"
+            className="h-12 w-full sm:w-auto px-8 rounded-full font-semibold text-body uppercase tracking-wider shadow-md hover:shadow-lg shrink-0"
           >
             {newsletter.cta || "Subscribe"}
           </Button>
         </form>
 
         {submitted ? (
-          <p className="text-xs text-wine font-medium mt-3">
+          <p className="text-caption text-wine font-medium mt-3">
             Thank you for subscribing to Luxe Jewels updates!
           </p>
         ) : (

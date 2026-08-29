@@ -55,7 +55,7 @@ function CategoryContent({
   return (
     <Section title={displayTitle} subtitle={`${products.length} products`}>
       {products.length === 0 ? (
-        <p className="text-sm text-muted">No products found in this category yet.</p>
+        <p className="text-small text-muted">No products found in this category yet.</p>
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {products.map((product) => (

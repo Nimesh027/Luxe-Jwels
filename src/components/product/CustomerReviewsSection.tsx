@@ -32,8 +32,8 @@ export default function CustomerReviewsSection() {
           description={
             <span className="flex items-center gap-3 mt-1">
               <Rating value={5} />
-              <span className="text-sm font-semibold text-ink">4.9 out of 5</span>
-              <span className="text-xs text-muted">(124 verified ratings)</span>
+              <span className="text-small font-semibold text-ink">4.9 out of 5</span>
+              <span className="text-caption text-muted">(124 verified ratings)</span>
             </span>
           }
           align="left"
@@ -72,11 +72,11 @@ export default function CustomerReviewsSection() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
           <div className="w-full max-w-md rounded-3xl bg-surface p-6 shadow-xl border border-border">
             <div className="flex items-center justify-between border-b border-border pb-4">
-              <h3 className="font-display text-xl font-medium text-ink">Write a Product Review</h3>
+              <h3 className="font-display text-h4 font-medium text-ink">Write a Product Review</h3>
               <button
                 type="button"
                 onClick={() => setIsReviewModalOpen(false)}
-                className="text-muted hover:text-ink text-lg cursor-pointer"
+                className="text-muted hover:text-ink text-h5 cursor-pointer"
               >
                 <CloseOutlined />
               </button>
@@ -84,17 +84,17 @@ export default function CustomerReviewsSection() {
 
             {reviewSubmitted ? (
               <div className="py-8 text-center space-y-2">
-                <CheckCircleOutlined className="text-4xl text-emerald-600" />
-                <h4 className="font-display text-lg font-medium text-ink">Thank you!</h4>
-                <p className="text-xs text-muted">Your verified review has been published.</p>
+                <CheckCircleOutlined className="text-h2 text-emerald-600" />
+                <h4 className="font-display text-h5 font-medium text-ink">Thank you!</h4>
+                <p className="text-caption text-muted">Your verified review has been published.</p>
               </div>
             ) : (
               <form onSubmit={handleReviewSubmit} className="mt-4 space-y-4">
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+                  <label className="block text-caption font-semibold uppercase tracking-wider text-ink mb-1.5">
                     Your Rating
                   </label>
-                  <div className="flex gap-2 text-2xl text-gold cursor-pointer">
+                  <div className="flex gap-2 text-h3 text-gold cursor-pointer">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <button
                         key={star}
@@ -111,7 +111,7 @@ export default function CustomerReviewsSection() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-ink mb-1.5">
+                  <label className="block text-caption font-semibold uppercase tracking-wider text-ink mb-1.5">
                     Your Review
                   </label>
                   <textarea
@@ -120,7 +120,7 @@ export default function CustomerReviewsSection() {
                     placeholder="Share your thoughts about quality, craftsmanship, and fit..."
                     value={newReviewText}
                     onChange={(e) => setNewReviewText(e.target.value)}
-                    className="w-full rounded-xl border border-border p-3 text-xs text-ink focus:border-wine focus:outline-none"
+                    className="w-full rounded-xl border border-border p-3 text-caption text-ink focus:border-wine focus:outline-none"
                   ></textarea>
                 </div>
 

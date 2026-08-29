@@ -424,10 +424,10 @@ function ShopContent() {
                     </svg>
                   </div>
                   <div>
-                    <p className="font-display text-xl text-ink mb-1.5">
+                    <p className="font-display text-h4 text-ink mb-1.5">
                       No products found
                     </p>
-                    <p className="text-sm text-muted">
+                    <p className="text-small text-muted">
                       Try adjusting your filters to see more results.
                     </p>
                   </div>

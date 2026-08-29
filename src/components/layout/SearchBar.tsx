@@ -125,7 +125,7 @@ export default function SearchBar({
 
         {/* Dynamic Placeholder overlay if query is empty */}
         {!query && (
-          <div className="absolute left-12 pointer-events-none flex items-center text-xs sm:text-sm select-none">
+          <div className="absolute left-12 pointer-events-none flex items-center text-body select-none">
             <span className="text-muted/60 font-normal">Search for&nbsp;</span>
             <span
               className={cn(
@@ -149,7 +149,7 @@ export default function SearchBar({
             updateIsOpen(true);
           }}
           onFocus={() => updateIsOpen(true)}
-          className="w-full h-full bg-transparent text-xs sm:text-sm text-ink placeholder-transparent focus:outline-none z-10 pr-2"
+          className="w-full h-full bg-transparent text-body text-ink placeholder-transparent focus:outline-none z-10 pr-2"
         />
 
         {/* Clear Button (when text is entered) */}
@@ -160,7 +160,7 @@ export default function SearchBar({
               setQuery("");
               inputRef.current?.focus();
             }}
-            className="text-muted hover:text-ink text-xs p-1 z-10 cursor-pointer shrink-0"
+            className="text-muted hover:text-ink text-caption p-1 z-10 cursor-pointer shrink-0"
             aria-label="Clear search"
           >
             <CloseOutlined className="text-[10px]" />
@@ -177,7 +177,7 @@ export default function SearchBar({
               {/* Filtered Categories */}
               {filteredCategories.length > 0 && (
                 <div className="mb-4 pb-3 border-b border-border/60">
-                  <span className="text-xs font-semibold text-muted tracking-wide block mb-2">
+                  <span className="text-caption font-semibold text-muted tracking-wide block mb-2">
                     Categories
                   </span>
                   <div className="flex flex-wrap gap-2">
@@ -189,7 +189,7 @@ export default function SearchBar({
                           updateIsOpen(false);
                           onCloseMobile?.();
                         }}
-                        className="text-xs px-3.5 py-1.5 bg-cream hover:bg-wine-soft hover:text-wine rounded-full transition-colors font-medium text-ink flex items-center gap-1.5"
+                        className="text-caption px-3.5 py-1.5 bg-cream hover:bg-wine-soft hover:text-wine rounded-full transition-colors font-medium text-ink flex items-center gap-1.5"
                       >
                         <span className="text-gold">✦</span>
                         {cat.name}
@@ -201,7 +201,7 @@ export default function SearchBar({
 
               {/* Filtered Products List */}
               <div>
-                <span className="text-xs font-semibold text-muted tracking-wide block mb-3">
+                <span className="text-caption font-semibold text-muted tracking-wide block mb-3">
                   Matching Products ({filteredProducts.length})
                 </span>
 
@@ -225,10 +225,10 @@ export default function SearchBar({
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h5 className="text-xs font-medium text-ink group-hover:text-wine truncate transition-colors">
+                          <h5 className="text-caption font-medium text-ink group-hover:text-wine truncate transition-colors">
                             {product.name}
                           </h5>
-                          <span className="text-xs font-semibold text-wine mt-0.5 block">
+                          <span className="text-caption font-semibold text-wine mt-0.5 block">
                             ₹{product.price.toLocaleString("en-IN")}
                           </span>
                         </div>
@@ -240,7 +240,7 @@ export default function SearchBar({
                       <button
                         type="button"
                         onClick={handleSearchSubmit}
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-wine hover:text-wine-dark cursor-pointer mx-auto"
+                        className="inline-flex items-center gap-1.5 text-caption font-semibold text-wine hover:text-wine-dark cursor-pointer mx-auto"
                       >
                         <span>View all results for &quot;{query}&quot;</span>
                         <ArrowRightIcon className="w-3.5 h-3.5" />
@@ -248,7 +248,7 @@ export default function SearchBar({
                     </div>
                   </div>
                 ) : (
-                  <div className="py-6 text-center text-xs text-muted">
+                  <div className="py-6 text-center text-caption text-muted">
                     No matching jewellery found for &quot;{query}&quot;.
                   </div>
                 )}
@@ -259,7 +259,7 @@ export default function SearchBar({
             <div className="space-y-5">
               {/* SECTION 1: Popular Searches with Trending Arrow Chips */}
               <div>
-                <span className="text-xs text-muted/80 font-normal block mb-2.5">
+                <span className="text-caption text-muted/80 font-normal block mb-2.5">
                   Popular Searches
                 </span>
                 <div className="flex flex-wrap gap-2">
@@ -276,7 +276,7 @@ export default function SearchBar({
                         setQuery(chip.label);
                         inputRef.current?.focus();
                       }}
-                      className="px-3.5 py-1.5 rounded-xl border border-border/80 bg-surface hover:border-wine/60 hover:text-wine text-ink text-xs font-normal transition-all duration-150 inline-flex items-center gap-1.5 cursor-pointer shadow-2xs hover:bg-wine-soft/30"
+                      className="px-3.5 py-1.5 rounded-xl border border-border/80 bg-surface hover:border-wine/60 hover:text-wine text-ink text-caption font-normal transition-all duration-150 inline-flex items-center gap-1.5 cursor-pointer shadow-2xs hover:bg-wine-soft/30"
                     >
                       {/* Upward trending arrow icon */}
                       <svg
@@ -299,7 +299,7 @@ export default function SearchBar({
 
               {/* SECTION 2: Trending Products (3-Column Image Cards) */}
               <div>
-                <span className="text-xs text-muted/80 font-normal block mb-2.5">
+                <span className="text-caption text-muted/80 font-normal block mb-2.5">
                   Trending Products
                 </span>
                 <div className="grid grid-cols-3 gap-3">
@@ -338,7 +338,7 @@ export default function SearchBar({
                           className="object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
-                      <p className="font-body text-[11px] sm:text-xs text-ink/90 group-hover:text-wine mt-1.5 line-clamp-2 leading-tight transition-colors">
+                      <p className="font-body text-[11px] sm:text-caption text-ink/90 group-hover:text-wine mt-1.5 line-clamp-2 leading-tight transition-colors">
                         {item.title}
                       </p>
                     </Link>
@@ -348,7 +348,7 @@ export default function SearchBar({
 
               {/* SECTION 3: Bottom Pink/Blush Store Banner */}
               <div className="p-3.5 sm:p-4 rounded-2xl bg-[#faedf0] border border-[#f5dede] text-center shadow-xs">
-                <p className="font-display text-xs sm:text-sm text-ink leading-snug">
+                <p className="font-display text-body text-ink leading-snug">
                   <span className="text-ink/80 font-normal">Loved It Online? </span>
                   <span className="text-wine font-semibold">Find It At A Luxe Store Near You!</span>
                 </p>

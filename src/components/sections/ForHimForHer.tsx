@@ -79,7 +79,7 @@ export default function ForHimForHer() {
                     {meta.categories.map((cat, idx) => (
                       <span
                         key={idx}
-                        className="rounded-full bg-cream/10 px-3 py-1 text-xs text-cream/80 backdrop-blur-xs transition-colors duration-300 group-hover:bg-cream/15 group-hover:text-cream"
+                        className="rounded-full bg-cream/10 px-3 py-1 text-caption text-cream/80 backdrop-blur-xs transition-colors duration-300 group-hover:bg-cream/15 group-hover:text-cream"
                       >
                         {cat}
                       </span>
@@ -87,12 +87,12 @@ export default function ForHimForHer() {
                   </div>
 
                   <div>
-                    <h3 className="font-display text-3xl font-normal text-cream sm:text-4xl lg:text-5xl">
+                    <h3 className="font-display text-h2 font-normal text-cream sm:text-h2 lg:text-h1">
                       {tile.title}
                     </h3>
                     <div className="mt-2 flex items-center gap-3">
                       <span className="h-[2px] w-8 bg-gold transition-all duration-500 group-hover:w-14" />
-                      <p className="text-sm font-light tracking-wide text-cream/85 sm:text-base">
+                      <p className="text-small font-light tracking-wide text-cream/85 sm:text-body">
                         {tile.tagline}
                       </p>
                     </div>
@@ -100,7 +100,7 @@ export default function ForHimForHer() {
 
                   {/* CTA Button */}
                   <div className="pt-2">
-                    <span className="inline-flex items-center gap-2.5 rounded-full bg-gold px-6 py-3 text-xs font-semibold uppercase tracking-wider text-ink shadow-lg shadow-gold/10 transition-all duration-300 group-hover:bg-cream group-hover:shadow-gold/25">
+                    <span className="inline-flex items-center gap-2.5 rounded-full bg-gold px-6 py-3 text-caption font-semibold uppercase tracking-wider text-ink shadow-lg shadow-gold/10 transition-all duration-300 group-hover:bg-cream group-hover:shadow-gold/25">
                       <span>{tile.cta}</span>
                       <ArrowRightIcon className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                     </span>

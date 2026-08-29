@@ -36,17 +36,17 @@ export default function WishlistClient() {
           </div>
 
           {/* Heading & Subtitle */}
-          <h1 className="font-display text-2xl sm:text-3xl font-semibold text-ink tracking-tight mb-3">
+          <h1 className="font-display text-h2 font-semibold text-ink tracking-tight mb-3">
             Your wishlist is empty
           </h1>
-          <p className="text-xs sm:text-sm text-muted font-normal leading-relaxed mb-8 max-w-sm">
+          <p className="text-body text-muted font-normal leading-relaxed mb-8 max-w-sm">
             Explore our fine jewellery creations and save your favorite heirloom pieces.
           </p>
 
           {/* Continue Shopping Black Pill CTA Button */}
           <Link
             href="/collections"
-            className="inline-flex items-center justify-center rounded-full bg-slate-950 text-white px-8 py-3.5 text-xs font-bold uppercase tracking-widest hover:bg-slate-800 transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer active:scale-95"
+            className="inline-flex items-center justify-center rounded-full bg-slate-950 text-white px-8 py-3.5 text-caption font-bold uppercase tracking-widest hover:bg-slate-800 transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer active:scale-95"
           >
             CONTINUE SHOPPING
           </Link>
@@ -83,19 +83,19 @@ export default function WishlistClient() {
               </div>
 
               <div className="space-y-1">
-                <h3 className="font-display font-semibold text-base sm:text-lg text-ink">
+                <h3 className="font-display font-semibold text-h5 text-ink">
                   {product.name}
                 </h3>
-                <p className="text-xs text-muted font-medium">
+                <p className="text-caption text-muted font-medium">
                   18K Solid Gold • {product.category ? product.category.toUpperCase() : "Rings"}
                 </p>
 
                 <div className="flex items-center gap-2 pt-0.5 pb-1">
-                  <span className="font-semibold text-ink text-sm sm:text-base">
+                  <span className="font-semibold text-ink text-body">
                     ₹{product.price.toLocaleString("en-IN")}
                   </span>
                   {product.compareAtPrice && (
-                    <span className="text-xs text-muted line-through font-normal">
+                    <span className="text-caption text-muted line-through font-normal">
                       ₹{product.compareAtPrice.toLocaleString("en-IN")}
                     </span>
                   )}
@@ -105,7 +105,7 @@ export default function WishlistClient() {
                   <button
                     type="button"
                     onClick={() => handleAddToCart(product)}
-                    className="px-5 py-2 bg-slate-950 hover:bg-slate-800 text-white rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-150 shadow-xs hover:shadow-md cursor-pointer active:scale-95"
+                    className="px-5 py-2 bg-slate-950 hover:bg-slate-800 text-white rounded-full text-caption font-bold uppercase tracking-wider transition-all duration-150 shadow-xs hover:shadow-md cursor-pointer active:scale-95"
                   >
                     ADD TO CART
                   </button>
@@ -117,7 +117,7 @@ export default function WishlistClient() {
             <button
               type="button"
               onClick={() => handleRemove(product.id)}
-              className="px-3.5 py-1.5 bg-white border border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-900 rounded-full text-xs font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5 self-start sm:self-center"
+              className="px-3.5 py-1.5 bg-white border border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-900 rounded-full text-caption font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5 self-start sm:self-center"
               title="Remove from Wishlist"
             >
               <svg className="w-3.5 h-3.5 text-gray-500 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

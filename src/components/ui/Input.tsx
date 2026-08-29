@@ -48,14 +48,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               <label
                 htmlFor={inputId}
                 className={cn(
-                  "block text-xs uppercase tracking-wider font-medium cursor-pointer",
+                  "block text-caption uppercase tracking-wider font-medium cursor-pointer",
                   isDark ? "text-cream/80" : "text-ink/80"
                 )}
               >
                 {label}
               </label>
             )}
-            {labelAction && <div className="text-xs">{labelAction}</div>}
+            {labelAction && <div className="text-caption">{labelAction}</div>}
           </div>
         )}
 
@@ -79,7 +79,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             id={inputId}
             disabled={disabled}
             className={cn(
-              "w-full rounded-xl py-2.5 sm:py-3 text-xs sm:text-sm transition-all duration-200 outline-hidden border",
+              "w-full rounded-xl py-2.5 sm:py-3 text-body transition-all duration-200 outline-hidden border",
               leadingIcon ? "pl-10" : "pl-3.5",
               trailingIcon ? "pr-10" : "pr-3.5",
               isDark
@@ -108,11 +108,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
         {/* Error or Helper Message */}
         {error ? (
-          <p className={cn("text-[11px] sm:text-xs mt-1.5 font-medium", isDark ? "text-red-400" : "text-red-500")}>
+          <p className={cn("text-[11px] sm:text-caption mt-1.5 font-medium", isDark ? "text-red-400" : "text-red-500")}>
             {error}
           </p>
         ) : helperText ? (
-          <p className={cn("text-[11px] sm:text-xs mt-1.5 font-light", isDark ? "text-cream/50" : "text-muted")}>
+          <p className={cn("text-[11px] sm:text-caption mt-1.5 font-light", isDark ? "text-cream/50" : "text-muted")}>
             {helperText}
           </p>
         ) : null}

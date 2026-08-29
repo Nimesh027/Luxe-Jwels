@@ -55,7 +55,7 @@ export default function Tabs<T extends string = string>({
                 type="button"
                 onClick={(e) => handleTabClick(opt.id, e)}
                 className={cn(
-                  "rounded-full px-6 py-2.5 text-xs sm:text-sm font-medium transition-all duration-300 cursor-pointer select-none",
+                  "rounded-full px-6 py-2.5 text-body font-medium transition-all duration-300 cursor-pointer select-none",
                   isActive
                     ? "bg-wine text-white shadow-md scale-102"
                     : "text-ink hover:text-wine hover:bg-cream/40"
@@ -88,7 +88,7 @@ export default function Tabs<T extends string = string>({
               type="button"
               onClick={(e) => handleTabClick(opt.id, e)}
               className={cn(
-                "flex flex-col items-center shrink-0 rounded-2xl px-5 py-2.5 text-xs transition-all duration-300 ease-out active:scale-95 cursor-pointer select-none",
+                "flex flex-col items-center shrink-0 rounded-2xl px-5 py-2.5 text-caption transition-all duration-300 ease-out active:scale-95 cursor-pointer select-none",
                 isActive
                   ? "bg-wine text-white shadow-md font-semibold border border-wine"
                   : "border border-border bg-cream/40 text-ink hover:border-gold hover:bg-cream"
@@ -128,7 +128,7 @@ export default function Tabs<T extends string = string>({
             type="button"
             onClick={(e) => handleTabClick(opt.id, e)}
             className={cn(
-              "pb-3 text-sm font-medium transition-all duration-200 cursor-pointer border-b-2 whitespace-nowrap",
+              "pb-3 text-small font-medium transition-all duration-200 cursor-pointer border-b-2 whitespace-nowrap",
               isActive
                 ? "border-wine text-wine font-semibold"
                 : "border-transparent text-muted hover:text-ink hover:border-border"

@@ -45,10 +45,10 @@ export default function OurStoryClient() {
               <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-wine/80">Est. 1994 • Royal Jewellery House</span>
               <span className="h-[1px] w-8 bg-gold/60" />
             </div>
-            <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl text-wine font-semibold tracking-tight leading-[1.15]">
+            <h1 className="font-display text-h1 text-wine font-semibold tracking-tight leading-[1.15]">
               Crafting Timeless Heirloom Luxury
             </h1>
-            <p className="text-xs sm:text-base text-muted font-light leading-relaxed max-w-2xl mx-auto">
+            <p className="text-body text-muted font-light leading-relaxed max-w-2xl mx-auto">
               Luxe Jewels bridges centuries of traditional royal goldsmithing with contemporary haute joaillerie. Every creation is an embodiment of purity, elegance, and everlasting value.
             </p>
           </div>
@@ -68,9 +68,9 @@ export default function OurStoryClient() {
 
             {/* Top Right Floating Stat Badge */}
             <div className="absolute top-6 right-6 hidden sm:flex items-center gap-3 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 px-4 py-2.5 shadow-lg text-white">
-              <span className="text-xl">✨</span>
+              <span className="text-h4">✨</span>
               <div className="text-left">
-                <span className="text-xs font-bold block text-gold">30+ Years</span>
+                <span className="text-caption font-bold block text-gold">30+ Years</span>
                 <span className="text-[10px] text-cream/80 block">Royal Craft Heritage</span>
               </div>
             </div>
@@ -81,10 +81,10 @@ export default function OurStoryClient() {
                 <span className="h-2 w-2 rounded-full bg-gold animate-pulse" />
                 <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">The Luxe Standard</span>
               </div>
-              <h2 className="font-display text-2xl sm:text-3xl font-semibold leading-snug tracking-tight text-cream">
+              <h2 className="font-display text-h2 font-semibold leading-snug tracking-tight text-cream">
                 Where Artistry Meets Pure 22K & 18K Solid Gold
               </h2>
-              <p className="text-xs sm:text-sm text-cream/90 font-light leading-relaxed">
+              <p className="text-body text-cream/90 font-light leading-relaxed">
                 Hand-finished by master craftsmen with meticulous attention to stone setting, polish, and comfort.
               </p>
             </div>
@@ -93,10 +93,10 @@ export default function OurStoryClient() {
           {/* LUXE PROMISES GRID */}
           <div className="mb-16">
             <div className="text-center space-y-2 mb-10">
-              <h2 className="font-display text-2xl sm:text-3xl font-semibold text-wine">
+              <h2 className="font-display text-h2 font-semibold text-wine">
                 Luxe Promises – Excellence You Can Trust
               </h2>
-              <p className="text-xs sm:text-sm text-muted">
+              <p className="text-body text-muted">
                 Uncompromising standards designed for discerning jewellery connoisseurs.
               </p>
             </div>
@@ -107,13 +107,13 @@ export default function OurStoryClient() {
                   key={idx}
                   className="bg-surface rounded-2xl border border-border/80 p-6 text-center space-y-3 shadow-2xs hover:border-wine/30 transition-all hover:shadow-xs"
                 >
-                  <div className="w-12 h-12 rounded-full bg-wine/5 text-wine flex items-center justify-center mx-auto text-xl">
+                  <div className="w-12 h-12 rounded-full bg-wine/5 text-wine flex items-center justify-center mx-auto text-h4">
                     {pillar.icon}
                   </div>
-                  <h3 className="font-display font-semibold text-wine text-base">
+                  <h3 className="font-display font-semibold text-wine text-body">
                     {pillar.title}
                   </h3>
-                  <p className="text-xs text-muted leading-relaxed">
+                  <p className="text-caption text-muted leading-relaxed">
                     {pillar.description}
                   </p>
                 </div>

@@ -87,7 +87,7 @@ export default function Header() {
 
             {/* Logo */}
             <Link href="/" className="flex items-center shrink-0">
-              <span className="font-display text-xl tracking-[0.2em] text-ink font-semibold">
+              <span className="font-display text-h4 tracking-[0.2em] text-ink font-semibold">
                 LUXE JEWELS
               </span>
             </Link>
@@ -135,7 +135,7 @@ export default function Header() {
               className="flex items-center justify-center text-wine hover:text-wine-dark transition-colors p-1 cursor-pointer"
             >
               {isAuthenticated && user ? (
-                <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-wine text-cream text-xs sm:text-sm font-bold uppercase shadow-xs hover:bg-wine-dark hover:scale-105 transition-all">
+                <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-wine text-cream text-body font-bold uppercase shadow-xs hover:bg-wine-dark hover:scale-105 transition-all">
                   {user.name.charAt(0)}
                 </div>
               ) : (
@@ -230,7 +230,7 @@ export default function Header() {
                 >
                   <Link
                     href={link.href}
-                    className={`flex items-center gap-1.5 text-xs uppercase tracking-wider transition-colors duration-150 py-1 ${isOpen ? "text-wine font-semibold" : "text-ink hover:text-wine"
+                    className={`flex items-center gap-1.5 text-caption uppercase tracking-wider transition-colors duration-150 py-1 ${isOpen ? "text-wine font-semibold" : "text-ink hover:text-wine"
                       }`}
                   >
                     <span>{link.label}</span>
@@ -250,7 +250,7 @@ export default function Header() {
                           key={child.id}
                           href={child.href}
                           onClick={() => setActiveLinkId(null)}
-                          className="block px-4 py-2 text-xs uppercase tracking-wide text-ink hover:bg-wine-soft hover:text-wine transition-colors"
+                          className="block px-4 py-2 text-caption uppercase tracking-wide text-ink hover:bg-wine-soft hover:text-wine transition-colors"
                         >
                           {child.label}
                         </Link>

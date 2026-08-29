@@ -73,10 +73,10 @@ export default function CartClient() {
             </svg>
           </div>
 
-          <h1 className="font-display text-2xl sm:text-3xl font-medium text-ink tracking-tight mb-2.5">
+          <h1 className="font-display text-h2 font-medium text-ink tracking-tight mb-2.5">
             Your shopping bag is empty
           </h1>
-          <p className="text-xs sm:text-sm text-muted font-light leading-relaxed mb-8 max-w-sm">
+          <p className="text-body text-muted font-light leading-relaxed mb-8 max-w-sm">
             Discover our handcrafted collections of rings, necklaces, bracelets, and heirloom jewellery to start building your look.
           </p>
 
@@ -85,7 +85,7 @@ export default function CartClient() {
             variant="fill"
             colorTheme="wine"
             size="lg"
-            className="rounded-full px-8 uppercase tracking-wider text-xs sm:text-sm font-semibold shadow-md hover:shadow-lg"
+            className="rounded-full px-8 uppercase tracking-wider text-body font-semibold shadow-md hover:shadow-lg"
           >
             Explore Collections
           </Button>
@@ -109,14 +109,14 @@ export default function CartClient() {
         <div className="mb-8 rounded-2xl border border-gold/30 bg-gradient-to-r from-[#fffcf7] via-[#faf5ec] to-[#fffcf7] p-4 sm:p-5 shadow-2xs">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold-dark font-semibold text-sm">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold-dark font-semibold text-small">
                 ✦
               </div>
               <div>
-                <p className="text-xs sm:text-sm font-semibold text-ink">
+                <p className="text-body font-semibold text-ink">
                   You Have Unlocked Complimentary Insured Delivery!
                 </p>
-                <p className="text-[11px] sm:text-xs text-muted font-light">
+                <p className="text-[11px] sm:text-caption text-muted font-light">
                   Includes certified hallmarking certificate & signature velvet presentation box.
                 </p>
               </div>
@@ -133,7 +133,7 @@ export default function CartClient() {
           <div className="lg:col-span-8 space-y-6">
             <div className="rounded-2xl border border-neutral-200/80 bg-white p-5 sm:p-7 shadow-xs">
               {/* Header Bar */}
-              <div className="hidden sm:grid grid-cols-12 border-b border-neutral-100 pb-3 text-xs uppercase tracking-wider font-semibold text-neutral-500">
+              <div className="hidden sm:grid grid-cols-12 border-b border-neutral-100 pb-3 text-caption uppercase tracking-wider font-semibold text-neutral-500">
                 <span className="col-span-6">Product</span>
                 <span className="col-span-2 text-center">Price</span>
                 <span className="col-span-2 text-center">Quantity</span>
@@ -169,7 +169,7 @@ export default function CartClient() {
                             {product.category?.replace(/-/g, " ") || "Fine Jewellery"}
                           </span>
                           <Link href={`/products/${product.slug}`}>
-                            <h3 className="font-display text-sm sm:text-base font-normal text-ink hover:text-wine transition-colors line-clamp-1 mt-0.5">
+                            <h3 className="font-display text-body font-normal text-ink hover:text-wine transition-colors line-clamp-1 mt-0.5">
                               {product.name}
                             </h3>
                           </Link>
@@ -179,11 +179,11 @@ export default function CartClient() {
 
                           {/* Mobile-only Price display */}
                           <div className="sm:hidden mt-1.5 flex items-baseline gap-2">
-                            <span className="text-sm font-semibold text-ink">
+                            <span className="text-small font-semibold text-ink">
                               {formatPrice(product.price * quantity)}
                             </span>
                             {quantity > 1 && (
-                              <span className="text-xs text-muted">
+                              <span className="text-caption text-muted">
                                 ({formatPrice(product.price)} each)
                               </span>
                             )}
@@ -243,7 +243,7 @@ export default function CartClient() {
                       </div>
 
                       {/* Desktop Unit Price (2 cols) */}
-                      <div className="hidden sm:block sm:col-span-2 text-center text-sm font-medium text-ink">
+                      <div className="hidden sm:block sm:col-span-2 text-center text-small font-medium text-ink">
                         {formatPrice(product.price)}
                       </div>
 
@@ -257,7 +257,7 @@ export default function CartClient() {
                       </div>
 
                       {/* Line Total (2 cols) */}
-                      <div className="hidden sm:block sm:col-span-2 text-right font-display text-sm sm:text-base font-semibold text-ink">
+                      <div className="hidden sm:block sm:col-span-2 text-right font-display text-body font-semibold text-ink">
                         {formatPrice(product.price * quantity)}
                       </div>
                     </div>
@@ -266,7 +266,7 @@ export default function CartClient() {
               </div>
 
               {/* Bottom Cart Bar */}
-              <div className="mt-4 pt-4 border-t border-neutral-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+              <div className="mt-4 pt-4 border-t border-neutral-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-caption">
                 <Link
                   href="/collections"
                   className="text-wine hover:text-wine-dark font-medium underline underline-offset-4 transition-colors"
@@ -289,13 +289,13 @@ export default function CartClient() {
               <button
                 type="button"
                 onClick={() => setNoteOpen(!noteOpen)}
-                className="flex w-full items-center justify-between text-left text-xs sm:text-sm font-semibold text-ink cursor-pointer"
+                className="flex w-full items-center justify-between text-left text-body font-semibold text-ink cursor-pointer"
               >
                 <span className="inline-flex items-center gap-2">
-                  <span className="text-gold text-base">✍</span>
+                  <span className="text-gold text-body">✍</span>
                   <span>Add Gift Message or Custom Ring Sizing Note</span>
                 </span>
-                <span className="text-sm">{noteOpen ? "−" : "+"}</span>
+                <span className="text-small">{noteOpen ? "−" : "+"}</span>
               </button>
 
               {noteOpen && (
@@ -305,7 +305,7 @@ export default function CartClient() {
                     value={orderNote}
                     onChange={(e) => setOrderNote(e.target.value)}
                     placeholder="Provide special delivery instructions, custom engraving message, or gift card greetings..."
-                    className="w-full rounded-xl border border-neutral-300 bg-neutral-50 p-3 text-xs sm:text-sm text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+                    className="w-full rounded-xl border border-neutral-300 bg-neutral-50 p-3 text-body text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
                   />
                   <p className="text-[11px] text-muted font-light mt-1.5">
                     We will handwrite your note on our embossed gold foil stationery at no extra cost.
@@ -317,22 +317,22 @@ export default function CartClient() {
             {/* Assurance Badges Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               <div className="rounded-xl border border-neutral-200/60 bg-white p-3.5 text-center shadow-2xs">
-                <span className="text-base sm:text-lg block mb-1">🛡️</span>
+                <span className="text-h5 block mb-1">🛡️</span>
                 <p className="text-[11px] font-semibold text-ink">BIS Hallmarked</p>
                 <p className="text-[10px] text-muted">100% Certified Gold</p>
               </div>
               <div className="rounded-xl border border-neutral-200/60 bg-white p-3.5 text-center shadow-2xs">
-                <span className="text-base sm:text-lg block mb-1">✈️</span>
+                <span className="text-h5 block mb-1">✈️</span>
                 <p className="text-[11px] font-semibold text-ink">Insured Shipping</p>
                 <p className="text-[10px] text-muted">Doorstep Delivery</p>
               </div>
               <div className="rounded-xl border border-neutral-200/60 bg-white p-3.5 text-center shadow-2xs">
-                <span className="text-base sm:text-lg block mb-1">🔄</span>
+                <span className="text-h5 block mb-1">🔄</span>
                 <p className="text-[11px] font-semibold text-ink">30-Day Returns</p>
                 <p className="text-[10px] text-muted">Hassle-Free Exchange</p>
               </div>
               <div className="rounded-xl border border-neutral-200/60 bg-white p-3.5 text-center shadow-2xs">
-                <span className="text-base sm:text-lg block mb-1">🎁</span>
+                <span className="text-h5 block mb-1">🎁</span>
                 <p className="text-[11px] font-semibold text-ink">Luxury Box</p>
                 <p className="text-[10px] text-muted">Signature Packaging</p>
               </div>
@@ -343,12 +343,12 @@ export default function CartClient() {
           <div className="lg:col-span-4">
             <div className="sticky top-28 space-y-6">
               <div className="rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-xs">
-                <h2 className="font-display text-base font-semibold text-ink uppercase tracking-wider border-b border-neutral-100 pb-3 mb-4">
+                <h2 className="font-display text-body font-semibold text-ink uppercase tracking-wider border-b border-neutral-100 pb-3 mb-4">
                   Order Summary
                 </h2>
 
                 {/* Subtotal Calculation */}
-                <div className="space-y-2.5 text-xs sm:text-sm text-neutral-600">
+                <div className="space-y-2.5 text-body text-neutral-600">
                   <div className="flex justify-between">
                     <span>Cart Subtotal ({count} items)</span>
                     <span className="font-medium text-ink">{formatPrice(subtotal)}</span>
@@ -356,14 +356,14 @@ export default function CartClient() {
 
                   <div className="flex justify-between items-center">
                     <span>Insured Delivery</span>
-                    <span className="font-semibold text-emerald-600 text-xs uppercase bg-emerald-50 px-2 py-0.5 rounded">
+                    <span className="font-semibold text-emerald-600 text-caption uppercase bg-emerald-50 px-2 py-0.5 rounded">
                       FREE
                     </span>
                   </div>
 
                   <div className="flex justify-between items-center">
                     <span>Luxury Velvet Presentation Box</span>
-                    <span className="font-semibold text-emerald-600 text-xs uppercase bg-emerald-50 px-2 py-0.5 rounded">
+                    <span className="font-semibold text-emerald-600 text-caption uppercase bg-emerald-50 px-2 py-0.5 rounded">
                       FREE
                     </span>
                   </div>
@@ -375,9 +375,9 @@ export default function CartClient() {
                     </div>
                   )}
 
-                  <div className="border-t border-neutral-100 pt-3 flex items-baseline justify-between text-base font-bold text-ink">
+                  <div className="border-t border-neutral-100 pt-3 flex items-baseline justify-between text-body font-bold text-ink">
                     <span>Estimated Total</span>
-                    <span className="font-display text-xl text-wine font-bold">
+                    <span className="font-display text-h4 text-wine font-bold">
                       {formatPrice(finalTotal)}
                     </span>
                   </div>
@@ -390,7 +390,7 @@ export default function CartClient() {
                   </label>
 
                   {promoApplied ? (
-                    <div className="flex items-center justify-between rounded-xl bg-emerald-50 border border-emerald-200 p-2.5 text-xs text-emerald-800">
+                    <div className="flex items-center justify-between rounded-xl bg-emerald-50 border border-emerald-200 p-2.5 text-caption text-emerald-800">
                       <span>Coupon &quot;{promoCode.toUpperCase()}&quot; Applied!</span>
                       <button
                         type="button"
@@ -407,11 +407,11 @@ export default function CartClient() {
                         value={promoCode}
                         onChange={(e) => setPromoCode(e.target.value)}
                         placeholder="e.g. LUXE10"
-                        className="flex-1 rounded-xl border border-neutral-300 bg-neutral-50 px-3 py-2 text-xs text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none uppercase"
+                        className="flex-1 rounded-xl border border-neutral-300 bg-neutral-50 px-3 py-2 text-caption text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none uppercase"
                       />
                       <button
                         type="submit"
-                        className="rounded-xl bg-ink px-4 py-2 text-xs font-semibold text-cream hover:bg-wine transition-colors cursor-pointer"
+                        className="rounded-xl bg-ink px-4 py-2 text-caption font-semibold text-cream hover:bg-wine transition-colors cursor-pointer"
                       >
                         Apply
                       </button>
@@ -427,7 +427,7 @@ export default function CartClient() {
                 <button
                   type="button"
                   onClick={() => router.push("/checkout")}
-                  className="mt-6 w-full h-12 rounded-full bg-wine text-white text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-md hover:bg-wine-dark hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                  className="mt-6 w-full h-12 rounded-full bg-wine text-white text-body font-semibold uppercase tracking-wider shadow-md hover:bg-wine-dark hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Proceed to Checkout</span>
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">

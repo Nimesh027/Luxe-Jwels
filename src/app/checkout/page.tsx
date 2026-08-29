@@ -38,13 +38,13 @@ export default function CheckoutPage() {
             </svg>
           </div>
 
-          <span className="text-xs uppercase tracking-[0.25em] font-semibold text-gold mb-2 block">
+          <span className="text-caption uppercase tracking-[0.25em] font-semibold text-gold mb-2 block">
             ORDER CONFIRMED
           </span>
-          <h1 className="font-display text-2xl sm:text-3xl font-medium text-ink mb-3">
+          <h1 className="font-display text-h2 font-medium text-ink mb-3">
             Thank you for your order!
           </h1>
-          <p className="text-xs sm:text-sm text-muted font-light leading-relaxed mb-6">
+          <p className="text-body text-muted font-light leading-relaxed mb-6">
             Your heirloom jewellery order is being carefully prepared and insured. A confirmation email and tracking link have been dispatched.
           </p>
 
@@ -53,7 +53,7 @@ export default function CheckoutPage() {
             variant="fill"
             colorTheme="wine"
             size="lg"
-            className="rounded-full px-8 uppercase tracking-wider text-xs sm:text-sm font-semibold shadow-md"
+            className="rounded-full px-8 uppercase tracking-wider text-body font-semibold shadow-md"
           >
             Return to Home
           </Button>
@@ -66,10 +66,10 @@ export default function CheckoutPage() {
     return (
       <Section className="py-16 sm:py-24 bg-white text-center">
         <div className="mx-auto max-w-md">
-          <h1 className="font-display text-2xl font-medium text-ink mb-3">
+          <h1 className="font-display text-h3 font-medium text-ink mb-3">
             No items to checkout
           </h1>
-          <p className="text-xs sm:text-sm text-muted mb-6">
+          <p className="text-body text-muted mb-6">
             Your cart is currently empty. Explore our fine jewellery collections to add items.
           </p>
           <Button href="/collections" variant="fill" colorTheme="wine">
@@ -85,13 +85,13 @@ export default function CheckoutPage() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Checkout Header */}
         <div className="mb-8">
-          <Link href="/cart" className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold text-wine hover:underline mb-2">
+          <Link href="/cart" className="inline-flex items-center gap-1.5 text-caption uppercase tracking-wider font-semibold text-wine hover:underline mb-2">
             <span>← Return to Cart</span>
           </Link>
-          <h1 className="font-display text-2xl sm:text-3xl lg:text-4xl font-medium text-ink tracking-tight">
+          <h1 className="font-display text-h2 lg:text-h2 font-medium text-ink tracking-tight">
             Secure Luxury Checkout
           </h1>
-          <p className="text-xs sm:text-sm text-muted font-light mt-1">
+          <p className="text-body text-muted font-light mt-1">
             Complimentary insured delivery & certified authenticity included.
           </p>
         </div>
@@ -101,26 +101,26 @@ export default function CheckoutPage() {
           <div className="lg:col-span-7 space-y-6">
             {/* Contact Information */}
             <div className="rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-xs">
-              <h2 className="font-display text-base font-semibold text-ink uppercase tracking-wider mb-4">
+              <h2 className="font-display text-body font-semibold text-ink uppercase tracking-wider mb-4">
                 1. Contact Information
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-neutral-700 mb-1">Email Address</label>
+                  <label className="block text-caption font-medium text-neutral-700 mb-1">Email Address</label>
                   <input
                     type="email"
                     required
                     placeholder="you@example.com"
-                    className="w-full h-11 rounded-xl border border-neutral-300 bg-neutral-50 px-4 text-xs sm:text-sm text-ink focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+                    className="w-full h-11 rounded-xl border border-neutral-300 bg-neutral-50 px-4 text-body text-ink focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-neutral-700 mb-1">Phone Number</label>
+                  <label className="block text-caption font-medium text-neutral-700 mb-1">Phone Number</label>
                   <input
                     type="tel"
                     required
                     placeholder="+91 98765 43210"
-                    className="w-full h-11 rounded-xl border border-neutral-300 bg-neutral-50 px-4 text-xs sm:text-sm text-ink focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+                    className="w-full h-11 rounded-xl border border-neutral-300 bg-neutral-50 px-4 text-body text-ink focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
                   />
                 </div>
               </div>
@@ -128,53 +128,53 @@ export default function CheckoutPage() {
 
             {/* Shipping Address */}
             <div className="rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-xs">
-              <h2 className="font-display text-base font-semibold text-ink uppercase tracking-wider mb-4">
+              <h2 className="font-display text-body font-semibold text-ink uppercase tracking-wider mb-4">
                 2. Shipping Address
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-neutral-700 mb-1">First Name</label>
+                  <label className="block text-caption font-medium text-neutral-700 mb-1">First Name</label>
                   <input
                     type="text"
                     required
                     placeholder="Priya"
-                    className="w-full h-11 rounded-xl border border-neutral-300 bg-neutral-50 px-4 text-xs sm:text-sm text-ink focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+                    className="w-full h-11 rounded-xl border border-neutral-300 bg-neutral-50 px-4 text-body text-ink focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-neutral-700 mb-1">Last Name</label>
+                  <label className="block text-caption font-medium text-neutral-700 mb-1">Last Name</label>
                   <input
                     type="text"
                     required
                     placeholder="Sharma"
-                    className="w-full h-11 rounded-xl border border-neutral-300 bg-neutral-50 px-4 text-xs sm:text-sm text-ink focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+                    className="w-full h-11 rounded-xl border border-neutral-300 bg-neutral-50 px-4 text-body text-ink focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
                   />
                 </div>
                 <div className="sm:col-span-2">
-                  <label className="block text-xs font-medium text-neutral-700 mb-1">Street Address</label>
+                  <label className="block text-caption font-medium text-neutral-700 mb-1">Street Address</label>
                   <input
                     type="text"
                     required
                     placeholder="Flat / House No., Landmark, Street"
-                    className="w-full h-11 rounded-xl border border-neutral-300 bg-neutral-50 px-4 text-xs sm:text-sm text-ink focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+                    className="w-full h-11 rounded-xl border border-neutral-300 bg-neutral-50 px-4 text-body text-ink focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-neutral-700 mb-1">City</label>
+                  <label className="block text-caption font-medium text-neutral-700 mb-1">City</label>
                   <input
                     type="text"
                     required
                     placeholder="Mumbai"
-                    className="w-full h-11 rounded-xl border border-neutral-300 bg-neutral-50 px-4 text-xs sm:text-sm text-ink focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+                    className="w-full h-11 rounded-xl border border-neutral-300 bg-neutral-50 px-4 text-body text-ink focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-neutral-700 mb-1">PIN Code</label>
+                  <label className="block text-caption font-medium text-neutral-700 mb-1">PIN Code</label>
                   <input
                     type="text"
                     required
                     placeholder="400001"
-                    className="w-full h-11 rounded-xl border border-neutral-300 bg-neutral-50 px-4 text-xs sm:text-sm text-ink focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+                    className="w-full h-11 rounded-xl border border-neutral-300 bg-neutral-50 px-4 text-body text-ink focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
                   />
                 </div>
               </div>
@@ -182,7 +182,7 @@ export default function CheckoutPage() {
 
             {/* Payment Method */}
             <div className="rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-xs">
-              <h2 className="font-display text-base font-semibold text-ink uppercase tracking-wider mb-4">
+              <h2 className="font-display text-body font-semibold text-ink uppercase tracking-wider mb-4">
                 3. Payment Method
               </h2>
               <div className="space-y-3">
@@ -203,7 +203,7 @@ export default function CheckoutPage() {
                       className="accent-wine"
                     />
                     <div>
-                      <p className="text-xs sm:text-sm font-semibold text-ink">UPI / Instant Transfer</p>
+                      <p className="text-body font-semibold text-ink">UPI / Instant Transfer</p>
                       <p className="text-[11px] text-muted">Google Pay, PhonePe, Paytm, BHIM</p>
                     </div>
                   </div>
@@ -227,7 +227,7 @@ export default function CheckoutPage() {
                       className="accent-wine"
                     />
                     <div>
-                      <p className="text-xs sm:text-sm font-semibold text-ink">Credit / Debit Card</p>
+                      <p className="text-body font-semibold text-ink">Credit / Debit Card</p>
                       <p className="text-[11px] text-muted">Visa, Mastercard, American Express</p>
                     </div>
                   </div>
@@ -255,7 +255,7 @@ export default function CheckoutPage() {
                       className="accent-wine"
                     />
                     <div>
-                      <p className="text-xs sm:text-sm font-semibold text-ink">PayPal</p>
+                      <p className="text-body font-semibold text-ink">PayPal</p>
                       <p className="text-[11px] text-muted">Pay securely with PayPal balance or card</p>
                     </div>
                   </div>
@@ -269,10 +269,10 @@ export default function CheckoutPage() {
           <div className="lg:col-span-5">
             <div className="sticky top-28 rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-xs">
               <div className="flex items-center justify-between border-b border-neutral-100 pb-4 mb-4">
-                <h2 className="font-display text-base font-semibold text-ink uppercase tracking-wider">
+                <h2 className="font-display text-body font-semibold text-ink uppercase tracking-wider">
                   Order Summary
                 </h2>
-                <span className="text-xs font-semibold text-gold">
+                <span className="text-caption font-semibold text-gold">
                   {count} {count === 1 ? "Item" : "Items"}
                 </span>
               </div>
@@ -291,10 +291,10 @@ export default function CheckoutPage() {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-medium text-ink truncate">{item.product.name}</p>
+                      <p className="text-caption font-medium text-ink truncate">{item.product.name}</p>
                       <p className="text-[11px] text-muted">Qty: {item.quantity}</p>
                     </div>
-                    <span className="text-xs font-semibold text-ink">
+                    <span className="text-caption font-semibold text-ink">
                       {formatPrice(item.product.price * item.quantity)}
                     </span>
                   </div>
@@ -302,7 +302,7 @@ export default function CheckoutPage() {
               </div>
 
               {/* Totals Calculation */}
-              <div className="space-y-2 border-t border-neutral-100 pt-4 text-xs text-neutral-600">
+              <div className="space-y-2 border-t border-neutral-100 pt-4 text-caption text-neutral-600">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
                   <span className="font-medium text-ink">{formatPrice(subtotal)}</span>
@@ -311,16 +311,16 @@ export default function CheckoutPage() {
                   <span>Insured Delivery</span>
                   <span className="font-semibold text-emerald-600">FREE</span>
                 </div>
-                <div className="flex justify-between border-t border-neutral-100 pt-3 text-sm font-bold text-ink">
+                <div className="flex justify-between border-t border-neutral-100 pt-3 text-small font-bold text-ink">
                   <span>Total Amount</span>
-                  <span className="font-display text-lg text-wine">{formatPrice(total)}</span>
+                  <span className="font-display text-h5 text-wine">{formatPrice(total)}</span>
                 </div>
               </div>
 
               {/* Place Order CTA Button */}
               <button
                 type="submit"
-                className="mt-6 w-full h-12 rounded-full bg-wine text-white text-xs sm:text-sm font-semibold uppercase tracking-wider shadow-md hover:bg-wine-dark hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="mt-6 w-full h-12 rounded-full bg-wine text-white text-body font-semibold uppercase tracking-wider shadow-md hover:bg-wine-dark hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Place Order • {formatPrice(total)}</span>
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">

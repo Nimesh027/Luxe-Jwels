@@ -34,7 +34,7 @@ export default function FeatureStrip() {
 
               {/* Title & Subtitle */}
               <div className="px-1">
-                <h3 className="text-xs sm:text-[13px] font-medium text-ink group-hover:text-wine transition-colors tracking-normal leading-snug">
+                <h3 className="text-caption sm:text-[13px] font-medium text-ink group-hover:text-wine transition-colors tracking-normal leading-snug">
                   {feature.title}
                 </h3>
                 {feature.subtitle && (

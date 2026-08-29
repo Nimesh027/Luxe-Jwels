@@ -113,7 +113,7 @@ export default function ServiceStrip() {
 
               {/* Service Title & Subtitle */}
               <div className="flex flex-col">
-                <p className="text-xs sm:text-[13px] font-medium tracking-wider uppercase text-cream">
+                <p className="text-caption sm:text-[13px] font-medium tracking-wider uppercase text-cream">
                   {service.title}
                 </p>
                 {service.subtitle && (

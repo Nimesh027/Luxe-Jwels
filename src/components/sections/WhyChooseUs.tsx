@@ -42,12 +42,12 @@ export default function WhyChooseUs() {
               </div>
 
               {/* Title */}
-              <h3 className="font-display text-lg font-medium text-ink tracking-tight group-hover:text-wine transition-colors duration-300">
+              <h3 className="font-display text-h5 font-medium text-ink tracking-tight group-hover:text-wine transition-colors duration-300">
                 {item.title}
               </h3>
 
               {/* Shortened Description */}
-              <p className="mt-2 text-xs sm:text-[13px] text-muted leading-relaxed">
+              <p className="mt-2 text-caption sm:text-[13px] text-muted leading-relaxed">
                 {item.subtitle}
               </p>
 
