@@ -66,7 +66,7 @@ export default function ReviewCard({
           </div>
 
           <div className="overflow-hidden">
-            <h4 className="font-display text-body font-medium text-ink truncate">
+            <h4 className="font-display !text-h6 font-medium text-ink truncate">
               {name}
             </h4>
             {location && (

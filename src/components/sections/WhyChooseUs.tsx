@@ -42,7 +42,7 @@ export default function WhyChooseUs() {
               </div>
 
               {/* Title */}
-              <h3 className="font-display text-h5 font-medium text-ink tracking-tight group-hover:text-wine transition-colors duration-300">
+              <h3 className="font-display !text-h6 font-medium text-ink tracking-tight group-hover:text-wine transition-colors duration-300">
                 {item.title}
               </h3>
 

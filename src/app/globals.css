@@ -103,6 +103,18 @@ body {
   font-size: clamp(13px, calc(12.62px + 0.096vw), 14px);
 }
 
+@utility text-h1 { font-size: clamp(36px, calc(31.38px + 1.154vw), 48px); }
+@utility text-h2 { font-size: clamp(32px, calc(28.92px + 0.769vw), 40px); }
+@utility text-h3 { font-size: clamp(26px, calc(23.69px + 0.577vw), 32px); }
+@utility text-h4 { font-size: clamp(22px, calc(20.46px + 0.385vw), 26px); }
+@utility text-h5 { font-size: clamp(20px, calc(19.23px + 0.192vw), 22px); }
+@utility text-h6 { font-size: 18px; }
+@utility text-body { font-size: clamp(15px, calc(14.62px + 0.096vw), 16px); }
+@utility text-small { font-size: 14px; }
+@utility text-caption { font-size: 12px; }
+@utility text-btn { font-size: clamp(15px, calc(14.62px + 0.096vw), 16px); }
+@utility text-label { font-size: clamp(13px, calc(12.62px + 0.096vw), 14px); }
+
 .container {
   max-width: 1440px;
   width: 100%;
