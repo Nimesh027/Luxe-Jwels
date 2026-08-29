@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import StaticPageLayout from "@/components/layout/StaticPageLayout";
+import Section from "@/components/common/Section";
+import SectionTitle from "@/components/common/SectionTitle";
 
 interface AccordionItem {
   id: string;
@@ -281,62 +284,58 @@ export default function TermsClient() {
   ];
 
   return (
-    <div className="min-h-screen bg-surface text-ink py-10 sm:py-16">
-      <div className="container max-w-4xl mx-auto px-4 sm:px-6">
-        {/* Title Heading */}
-        <div className="mb-8 pb-4 border-b border-border">
-          <h1 className="font-display text-h2 text-wine font-semibold uppercase tracking-wider">
-            TERMS AND CONDITIONS
-          </h1>
-        </div>
+    <StaticPageLayout
+      pageTitle="Terms & Conditions"
+      breadcrumbLabel="Terms & Conditions"
+      description="Please read these Terms and Conditions carefully before using the Luxe Jewels Website."
+    >
+      <Section className="bg-surface/50 py-12 sm:py-20 relative overflow-hidden">
+        {/* Subtle decorative background elements */}
+        <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-wine/5 to-transparent pointer-events-none" />
 
-        {/* Intro Paragraph matching screenshot */}
-        <p className="text-body text-ink/80 leading-relaxed font-light mb-8">
-          This website, www.luxe-jewels.com (&quot;Website&quot;), is owned and operated by Luxe Jewels Fine Jewellery Ltd (hereinafter referred as &quot;Luxe Jewels&quot; or &quot;Company&quot; or &quot;we&quot; or &quot;us&quot; or &quot;our&quot;) having its registered office at No 3, Luxe Tower, MG Road, Bengaluru, Karnataka 560001. Please read these Terms and Conditions carefully before using the Website. In accessing and using the services provided by our Website you signify your consent and agreement to be bound by the Terms and Conditions specified herein. Luxe Jewels reserves the right to change these terms and conditions from time to time without any obligation to inform you and it is your responsibility to check for the recent updates. Any updates to these Terms of Conditions shall take effect immediately upon the date of posting and you agree to be bound by the terms of these updates and amendments.
-        </p>
+        {/* Header Note */}
+        <SectionTitle
+          title="Terms & Conditions"
+          titleClassName="!text-h3 text-wine font-semibold uppercase tracking-wider"
+          align="center"
+          className="mb-8 sm:mb-12"
+        />
 
         {/* Accordion Container */}
-        <div className="space-y-3">
+        <div className="space-y-4">
           {sections.map((section) => {
             const isOpen = openIds.includes(section.id);
             return (
               <div
                 key={section.id}
-                className={`rounded-lg border transition-all duration-200 overflow-hidden ${
-                  isOpen
-                    ? "border-wine/60 bg-wine/5 shadow-xs"
-                    : "border-border bg-surface hover:border-wine/40"
-                }`}
+                className="bg-white rounded-2xl border border-border/80 overflow-hidden shadow-sm transition-all hover:border-wine/30 hover:shadow-md"
               >
-                {/* Accordion Trigger Header */}
                 <button
                   type="button"
                   onClick={() => toggleAccordion(section.id)}
-                  className="w-full px-5 py-4 flex items-center justify-between text-left cursor-pointer transition-colors"
+                  className="w-full flex items-center justify-between p-5 text-left font-display text-lg font-semibold text-ink hover:text-wine cursor-pointer transition-colors"
                 >
+                  <span className="pr-4">{section.title}</span>
                   <span
-                    className={`text-[18px] font-semibold tracking-wide ${
-                      isOpen ? "text-wine" : "text-wine hover:text-wine-dark"
-                    }`}
+                    className={`w-7 h-7 rounded-full bg-wine/5 text-wine flex items-center justify-center font-bold shrink-0 transition-transform duration-300 ${isOpen ? "rotate-45 bg-wine text-white" : ""
+                      }`}
                   >
-                    {section.title}
-                  </span>
-                  <span className="text-h5 font-bold text-wine ml-3 shrink-0">
-                    {isOpen ? "−" : "+"}
+                    +
                   </span>
                 </button>
 
-                {/* Accordion Content Body */}
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-1 border-t border-wine/10 animate-in fade-in slide-in-from-top-1 duration-200">
-                    {section.content}
+                  <div className="px-5 pb-5 pt-0 text-body text-ink leading-relaxed font-light border-t border-border/40 animate-in fade-in duration-300">
+                    <div className="pt-4 space-y-3">
+                      {section.content}
+                    </div>
                   </div>
                 )}
               </div>
             );
           })}
         </div>
-      </div>
-    </div>
+      </Section>
+    </StaticPageLayout>
   );
 }

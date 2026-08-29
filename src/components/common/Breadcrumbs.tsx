@@ -22,7 +22,7 @@ export default function Breadcrumbs({ items, className = "mb-8", isDarkBackgroun
   return (
     <nav
       aria-label="Breadcrumb"
-      className={`flex flex-wrap items-center gap-2 text-caption uppercase tracking-wider ${baseTextColor} ${className}`}
+      className={`flex flex-wrap items-center gap-2 !text-body uppercase tracking-wider ${baseTextColor} ${className}`}
     >
       <Link href="/" className={`${hoverColor} transition-colors`}>
         Home
