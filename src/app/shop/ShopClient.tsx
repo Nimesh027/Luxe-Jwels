@@ -310,7 +310,7 @@ function ShopContent() {
                       <svg className="w-3.5 h-3.5 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="4" y1="6" x2="20" y2="6" /><line x1="7" y1="12" x2="17" y2="12" /><line x1="10" y1="18" x2="14" y2="18" />
                       </svg>
-                      <span className="text-[14px] font-extrabold uppercase tracking-[0.2em] text-ink">
+                      <span className="!text-small font-extrabold uppercase tracking-[0.2em] text-ink">
                         Filter By
                       </span>
                     </div>

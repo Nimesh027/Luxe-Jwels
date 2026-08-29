@@ -37,15 +37,7 @@ export default function ShopHero({
       {/* Content Container */}
       <div className="container relative z-10 mx-auto px-4 sm:px-6">
         <div className="max-w-2xl">
-          {/* Tagline Badge */}
-          {badge && (
-            <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 mb-5 backdrop-blur-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
-              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold">
-                {badge}
-              </p>
-            </div>
-          )}
+
 
           {/* Main Title */}
           <h1 className="font-display text-h1 lg:text-[56px] text-cream font-light leading-[1.1] tracking-tight drop-shadow-sm">

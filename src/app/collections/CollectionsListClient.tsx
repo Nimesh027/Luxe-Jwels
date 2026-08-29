@@ -9,6 +9,7 @@ import Card from "@/components/ui/Card";
 import ProductCard from "@/components/common/ProductCard";
 import { useAppSelector } from "@/store/hooks";
 import { filterProducts } from "@/lib/productFilter";
+import Collections from "@/components/sections/Collections";
 
 function CollectionsContent() {
   const searchParams = useSearchParams();
@@ -59,40 +60,8 @@ function CollectionsContent() {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
-
-        {/* Thematic Collections */}
-        <div className="border-t border-border pt-12">
-          <h2 className="font-display text-h3 font-semibold text-ink text-center mb-2">
-            Featured Collections
-          </h2>
-          <p className="text-small text-muted text-center mb-8">
-            Curated assortments crafted for your special celebrations.
-          </p>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {collections.map((collection) => (
-              <Card
-                key={collection.id}
-                variant="collection"
-                href={`/collections/${collection.slug}`}
-                className="aspect-[4/3]"
-              >
-                <Image
-                  src={collection.image}
-                  alt={collection.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />
-                <div className="absolute bottom-0 left-0 p-5">
-                  <p className="font-display text-h4 text-cream">{collection.name}</p>
-                  <p className="text-small text-cream/75">{collection.tagline}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
       </Section>
+      <Collections />
     </>
   );
 }
