@@ -22,7 +22,6 @@ const SECTIONS = [
       { label: "Privacy Notice", href: "/privacy-policy" },
       { label: "Terms & Conditions", href: "/terms" },
       { label: "Care Guide", href: "/care-guide" },
-      { label: "Blog", href: "/blog" },
     ],
   },
 ];
