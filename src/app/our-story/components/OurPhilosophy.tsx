@@ -22,7 +22,7 @@ export default function OurPhilosophy() {
   return (
     <Section className="py-16 sm:py-24 bg-gradient-to-b from-background to-[#FAF0F2]/40">
       <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-        
+
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <span className="text-caption font-bold uppercase tracking-[0.25em] text-gold">
@@ -39,14 +39,14 @@ export default function OurPhilosophy() {
         {/* Philosophy Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10">
           {philosophies.map((item, idx) => (
-            <div 
+            <div
               key={idx}
               className="bg-white/60 backdrop-blur-sm border border-wine/10 rounded-[2rem] p-8 sm:p-10 text-center space-y-4 shadow-sm hover:shadow-md transition-all duration-300 hover:border-gold/30"
             >
               <div className="w-14 h-14 mx-auto rounded-full bg-wine/5 flex items-center justify-center mb-6">
                 <span className="text-gold text-h5">✦</span>
               </div>
-              <h3 className="font-display font-semibold text-h5 text-ink">
+              <h3 className="font-display font-semibold !text-h5 text-ink">
                 {item.title}
               </h3>
               <p className="text-body text-muted font-light leading-relaxed">
