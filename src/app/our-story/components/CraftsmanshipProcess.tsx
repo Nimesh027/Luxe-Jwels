@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Section from "@/components/common/Section";
+import SectionTitle from "@/components/common/SectionTitle";
 
 export default function CraftsmanshipProcess() {
   const processes = [
@@ -38,27 +39,23 @@ export default function CraftsmanshipProcess() {
   return (
     <Section className="py-16 sm:py-24 bg-white">
       <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-        
+
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <span className="text-caption font-bold uppercase tracking-[0.25em] text-gold">
-            The Making of a Masterpiece
-          </span>
-          <h2 className="font-display text-h3 sm:text-h2 font-semibold text-wine leading-tight">
-            Our Craftsmanship Process
-          </h2>
-          <p className="text-body text-muted font-light leading-relaxed">
-            Witness the journey from a simple sketch to a timeless heirloom, shaped by hands that have perfected their art over decades.
-          </p>
-        </div>
+        <SectionTitle
+          tagline="The Making of a Masterpiece"
+          taglineClassName="text-gold tracking-[0.25em]"
+          title="Our Craftsmanship Process"
+          titleClassName="text-wine"
+          description="Witness the journey from a simple sketch to a timeless heirloom, shaped by hands that have perfected their art over decades."
+        />
 
         {/* Process Timeline (Alternating) */}
         <div className="space-y-16 sm:space-y-24">
           {processes.map((process, idx) => {
             const isEven = idx % 2 === 1;
-            
+
             return (
-              <div 
+              <div
                 key={process.id}
                 className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16"
               >
@@ -72,7 +69,7 @@ export default function CraftsmanshipProcess() {
                   />
                   <div className="absolute inset-0 bg-wine/5 mix-blend-overlay" />
                 </div>
-                
+
                 {/* Text Column */}
                 <div className={`w-full lg:w-1/2 space-y-6 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
                   <span className="font-display text-h2 text-gold/30 font-bold block mb-2">

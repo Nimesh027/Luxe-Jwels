@@ -1,4 +1,5 @@
 import Section from "@/components/common/Section";
+import SectionTitle from "@/components/common/SectionTitle";
 
 export default function CustomerPromise() {
   const promises = [
@@ -24,14 +25,11 @@ export default function CustomerPromise() {
     <Section className="py-16 sm:py-20 bg-wine-dark text-white">
       <div className="container max-w-6xl mx-auto px-4 sm:px-6">
 
-        <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
-          <h2 className="font-display text-h3 sm:text-h2 font-semibold text-white tracking-wide">
-            The Luxe Jewels Promise
-          </h2>
-          <p className="text-body text-white/80 font-light leading-relaxed max-w-2xl mx-auto">
-            When you invest in our heritage, we invest in you. Our promises are the bedrock of the trust we have built over decades.
-          </p>
-        </div>
+        <SectionTitle
+          title="The Luxe Jewels Promise"
+          titleClassName="text-white tracking-wide"
+          description="When you invest in our heritage, we invest in you. Our promises are the bedrock of the trust we have built over decades."
+        />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
           {promises.map((promise, idx) => (

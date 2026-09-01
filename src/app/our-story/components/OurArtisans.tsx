@@ -1,5 +1,6 @@
 import Section from "@/components/common/Section";
 import Image from "next/image";
+import SectionTitle from "@/components/common/SectionTitle";
 
 export default function OurArtisans() {
   const artisans = [
@@ -29,25 +30,21 @@ export default function OurArtisans() {
   return (
     <Section className="py-16 sm:py-24 bg-[#F9F7F5]">
       <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-        
+
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <span className="text-caption font-bold uppercase tracking-[0.25em] text-gold">
-            The Hands Behind the Magic
-          </span>
-          <h2 className="font-display text-h3 sm:text-h2 font-semibold text-wine leading-tight">
-            Meet Our Master Artisans
-          </h2>
-          <p className="text-body text-muted font-light leading-relaxed">
-            Our workshop is home to over 300 legacy karigars (craftsmen) hailing from families that have served Indian royalty for centuries. We are proud to share their stories.
-          </p>
-        </div>
+        <SectionTitle
+          tagline="The Hands Behind the Magic"
+          taglineClassName="text-gold tracking-[0.25em]"
+          title="Meet Our Master Artisans"
+          titleClassName="text-wine"
+          description="Our workshop is home to over 300 legacy karigars (craftsmen) hailing from families that have served Indian royalty for centuries. We are proud to share their stories."
+        />
 
         {/* Artisans Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {artisans.map((artisan, idx) => (
             <div key={idx} className="group relative overflow-hidden rounded-[2rem] bg-white shadow-sm hover:shadow-xl transition-all duration-500 border border-border/80 hover:border-gold/30">
-              
+
               {/* Image Container */}
               <div className="relative h-72 w-full overflow-hidden bg-surface">
                 <Image
@@ -74,9 +71,9 @@ export default function OurArtisans() {
                     </span>
                   </div>
                 </div>
-                
+
                 <div className="w-8 h-[1px] bg-gold/50" />
-                
+
                 <p className="text-body text-muted leading-relaxed font-light italic">
                   "{artisan.quote}"
                 </p>

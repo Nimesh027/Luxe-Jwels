@@ -1,4 +1,5 @@
 import Section from "@/components/common/Section";
+import SectionTitle from "@/components/common/SectionTitle";
 
 export default function AwardsRecognition() {
   const awards = [
@@ -33,17 +34,13 @@ export default function AwardsRecognition() {
       <div className="container max-w-6xl mx-auto px-4 sm:px-6">
 
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
-          <span className="text-caption font-bold uppercase tracking-[0.25em] text-gold">
-            Honors & Accolades
-          </span>
-          <h2 className="font-display text-h3 sm:text-h2 font-semibold text-wine leading-tight">
-            Recognized for Excellence
-          </h2>
-          <p className="text-body text-muted font-light leading-relaxed">
-            Our unwavering commitment to purity, design, and craftsmanship has been celebrated by the most prestigious institutions in the global jewellery industry.
-          </p>
-        </div>
+        <SectionTitle
+          tagline="Honors & Accolades"
+          taglineClassName="text-gold tracking-[0.25em]"
+          title="Recognized for Excellence"
+          titleClassName="text-wine"
+          description="Our unwavering commitment to purity, design, and craftsmanship has been celebrated by the most prestigious institutions in the global jewellery industry."
+        />
 
         {/* Awards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

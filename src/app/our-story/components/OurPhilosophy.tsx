@@ -1,4 +1,5 @@
 import Section from "@/components/common/Section";
+import SectionTitle from "@/components/common/SectionTitle";
 
 export default function OurPhilosophy() {
   const philosophies = [
@@ -24,17 +25,13 @@ export default function OurPhilosophy() {
       <div className="container max-w-6xl mx-auto px-4 sm:px-6">
 
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <span className="text-caption font-bold uppercase tracking-[0.25em] text-gold">
-            Our Philosophy
-          </span>
-          <h2 className="font-display text-h3 sm:text-h2 font-semibold text-wine leading-tight">
-            What We Believe In
-          </h2>
-          <p className="text-body text-muted font-light leading-relaxed">
-            At Luxe Jewels, we measure our success not by the volume we produce, but by the emotional resonance of the pieces we craft.
-          </p>
-        </div>
+        <SectionTitle
+          tagline="Our Philosophy"
+          taglineClassName="text-gold tracking-[0.25em]"
+          title="What We Believe In"
+          titleClassName="text-wine"
+          description="At Luxe Jewels, we measure our success not by the volume we produce, but by the emotional resonance of the pieces we craft."
+        />
 
         {/* Philosophy Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10">
