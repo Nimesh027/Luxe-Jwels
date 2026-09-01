@@ -25,57 +25,67 @@ export default function Milestones() {
   ];
 
   return (
-    <Section className="py-16 sm:py-24 bg-surface relative overflow-hidden">
-      
+    <Section className="relative overflow-hidden">
+
       {/* Decorative Background Elements */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-wine/5 rounded-full blur-3xl pointer-events-none -z-10" />
 
-      <div className="container max-w-5xl mx-auto px-4 sm:px-6">
-        
-        {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
-          <span className="text-caption font-bold uppercase tracking-[0.25em] text-gold">
-            Our Journey
-          </span>
-          <h2 className="font-display text-h3 sm:text-h2 font-semibold text-wine leading-tight">
-            Milestones of Excellence
-          </h2>
-        </div>
 
-        {/* Horizontal Scrollable/Responsive Timeline */}
+      {/* Header */}
+      <div className="text-center max-w-2xl mx-auto mb-20 space-y-4">
+        <span className="text-caption font-bold uppercase tracking-[0.25em] text-gold">
+          Our Journey
+        </span>
+        <h2 className="font-display text-h3 sm:text-h2 font-semibold text-wine leading-tight">
+          Milestones of Excellence
+        </h2>
+      </div>
+
+        {/* Timeline container */}
         <div className="relative">
           
-          {/* Connecting Line (Hidden on Mobile, Visible on md+) */}
-          <div className="hidden md:block absolute top-[4.5rem] left-0 w-full h-[2px] bg-wine/10" />
+          <div className="space-y-16 md:space-y-24">
+            {milestones.map((item, idx) => {
+              const isEven = idx % 2 === 0;
+              const isLast = idx === milestones.length - 1;
+              return (
+                <div key={idx} className={`relative flex flex-col md:flex-row items-start md:items-start ${isEven ? 'md:flex-row-reverse' : ''} group`}>
+                  
+                  {/* Connecting Line to next item */}
+                  {!isLast && (
+                    <div className="absolute left-8 md:left-1/2 top-8 md:top-14 w-[2px] h-[calc(100%+4rem)] md:h-[calc(100%+6rem)] bg-gold/20 md:-translate-x-1/2 -z-10" />
+                  )}
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-4 relative z-10">
-            {milestones.map((item, idx) => (
-              <div key={idx} className="relative flex flex-col items-center text-center space-y-4">
-                
-                {/* Year Marker */}
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white border border-gold/40 shadow-sm flex items-center justify-center relative z-10 mx-auto">
-                  <span className="font-display font-semibold text-h4 sm:text-h3 text-wine">
-                    {item.year}
-                  </span>
-                </div>
+                  {/* Content Box */}
+                  <div className={`ml-20 md:ml-0 md:w-1/2 ${isEven ? 'md:pl-16' : 'md:pr-16 md:text-right'} transition-transform duration-500 group-hover:-translate-y-2`}>
+                    <div className="bg-white p-8 md:p-10 rounded-[2rem] border border-border/80 shadow-sm group-hover:shadow-xl group-hover:border-gold/30 transition-all duration-300 relative z-10">
+                      <div className="text-gold text-small font-bold uppercase mb-3 tracking-widest">{item.year}</div>
+                      <h3 className="font-display font-semibold text-h4 text-ink mb-4">
+                        {item.title}
+                      </h3>
+                      <p className="text-body text-muted font-light leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
 
-                {/* Content */}
-                <div className="pt-4 px-2 space-y-2">
-                  <h3 className="font-display font-semibold text-body text-ink">
-                    {item.title}
-                  </h3>
-                  <p className="text-caption text-muted font-light leading-relaxed">
-                    {item.description}
-                  </p>
+                  {/* Year Marker / Dot */}
+                  <div className="absolute left-8 md:left-1/2 top-8 md:top-14 -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
+                    <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-surface border-[4px] border-white shadow-md flex items-center justify-center ring-1 ring-border group-hover:ring-gold group-hover:scale-110 transition-all duration-500 overflow-hidden relative">
+                      <div className="absolute inset-0 bg-gradient-to-br from-wine/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <span className="font-display font-semibold text-h5 md:text-h4 text-wine relative z-10">
+                        {item.year}
+                      </span>
+                    </div>
+                  </div>
+
                 </div>
-                
-              </div>
-            ))}
+              );
+            })}
           </div>
 
         </div>
 
-      </div>
     </Section>
   );
 }

@@ -31,7 +31,7 @@ export default function AwardsRecognition() {
   return (
     <Section className="py-16 sm:py-24 bg-gradient-to-b from-surface to-background border-t border-border/40">
       <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-        
+
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
           <span className="text-caption font-bold uppercase tracking-[0.25em] text-gold">
@@ -54,7 +54,7 @@ export default function AwardsRecognition() {
               </div>
               <div className="space-y-2 flex-grow flex flex-col justify-center">
                 <span className="text-caption font-bold text-gold tracking-widest">{award.year}</span>
-                <h3 className="font-display font-semibold text-body text-ink leading-snug">
+                <h3 className="font-display font-semibold !text-h5 text-ink leading-snug">
                   {award.title}
                 </h3>
               </div>

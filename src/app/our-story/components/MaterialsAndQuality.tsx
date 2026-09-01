@@ -1,5 +1,6 @@
 import Section from "@/components/common/Section";
 import Image from "next/image";
+import SectionTitle from "@/components/common/SectionTitle";
 
 export default function MaterialsAndQuality() {
   const materials = [
@@ -24,17 +25,13 @@ export default function MaterialsAndQuality() {
     <Section>
 
       {/* Header */}
-      <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-        <span className="text-caption font-bold uppercase tracking-[0.25em] text-gold">
-          Pure Elements
-        </span>
-        <h2 className="font-display text-h3 sm:text-h2 font-semibold text-wine leading-tight">
-          Materials & Unyielding Quality
-        </h2>
-        <p className="text-body text-muted font-light leading-relaxed">
-          A masterpiece is only as enduring as the elements from which it is forged. We travel the world to ethically source the finest materials nature has to offer.
-        </p>
-      </div>
+      <SectionTitle
+        tagline="Pure Elements"
+        taglineClassName="text-gold tracking-[0.25em]"
+        title="Materials & Unyielding Quality"
+        titleClassName="text-wine"
+        description="A masterpiece is only as enduring as the elements from which it is forged. We travel the world to ethically source the finest materials nature has to offer."
+      />
 
       {/* Materials Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
