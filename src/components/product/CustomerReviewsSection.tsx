@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { StarFilled, CheckCircleOutlined, CloseOutlined } from "@ant-design/icons";
+import { StarIcon, CheckCircleIcon, CloseIcon } from "@/components/icons";
 import Button from "@/components/ui/Button";
 import Rating from "@/components/ui/Rating";
 import SectionTitle from "@/components/common/SectionTitle";
@@ -76,15 +76,16 @@ export default function CustomerReviewsSection() {
               <button
                 type="button"
                 onClick={() => setIsReviewModalOpen(false)}
-                className="text-muted hover:text-ink text-h5 cursor-pointer"
+                className="text-muted hover:text-ink p-1 cursor-pointer"
+                aria-label="Close review modal"
               >
-                <CloseOutlined />
+                <CloseIcon size={18} />
               </button>
             </div>
 
             {reviewSubmitted ? (
               <div className="py-8 text-center space-y-2">
-                <CheckCircleOutlined className="text-h2 text-emerald-600" />
+                <CheckCircleIcon size={36} className="text-emerald-600 mx-auto" />
                 <h4 className="font-display text-h5 font-medium text-ink">Thank you!</h4>
                 <p className="text-caption text-muted">Your verified review has been published.</p>
               </div>
@@ -94,16 +95,18 @@ export default function CustomerReviewsSection() {
                   <label className="block text-caption font-semibold uppercase tracking-wider text-ink mb-1.5">
                     Your Rating
                   </label>
-                  <div className="flex gap-2 text-h3 text-gold cursor-pointer">
+                  <div className="flex gap-2 text-gold cursor-pointer">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <button
                         key={star}
                         type="button"
                         onClick={() => setNewRating(star)}
-                        className="hover:scale-110 transition-transform cursor-pointer"
+                        className="hover:scale-110 transition-transform cursor-pointer p-0.5"
                       >
-                        <StarFilled
-                          className={star <= newRating ? "text-gold" : "text-slate-200"}
+                        <StarIcon
+                          size={24}
+                          filled={star <= newRating}
+                          className={star <= newRating ? "text-gold" : "text-border"}
                         />
                       </button>
                     ))}

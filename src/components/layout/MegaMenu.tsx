@@ -6,6 +6,7 @@ import Image from "next/image";
 import type { MegaMenuData } from "@/types";
 import JewelryIcon from "./JewelryIcon";
 import { cn } from "@/lib/utils";
+import Button from "@/components/ui/Button";
 
 interface MegaMenuProps {
   data: MegaMenuData;
@@ -104,22 +105,25 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                   </div>
                 )}
                 <div>
-                  <h4 className="text-small font-display font-semibold text-ink leading-tight">
+                  <p className="text-small font-display font-semibold text-ink leading-tight">
                     {activeTab.bottomBanner.heading}
-                  </h4>
+                  </p>
                   <p className="text-caption text-muted mt-0.5">
                     {activeTab.bottomBanner.subheading}
                   </p>
                 </div>
               </div>
 
-              <Link
+              <Button
                 href={activeTab.bottomBanner.buttonHref}
                 onClick={onClose}
-                className="shrink-0 inline-flex items-center justify-center px-6 py-2 rounded-full bg-wine text-white text-caption font-semibold tracking-wide hover:bg-wine-dark transition-all duration-150 shadow-xs hover:shadow active:scale-95"
+                colorTheme="wine"
+                size="xs"
+                rounded="full"
+                className="shrink-0 px-5 text-caption font-semibold tracking-wide shadow-xs hover:shadow"
               >
                 {activeTab.bottomBanner.buttonText}
-              </Link>
+              </Button>
             </div>
           )}
         </div>

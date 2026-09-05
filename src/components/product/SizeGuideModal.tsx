@@ -1,6 +1,6 @@
 "use client";
 
-import { CloseOutlined } from "@ant-design/icons";
+import { CloseIcon } from "@/components/icons";
 import Button from "@/components/ui/Button";
 
 interface SizeGuideModalProps {
@@ -19,9 +19,10 @@ export default function SizeGuideModal({ isOpen, onClose }: SizeGuideModalProps)
           <button
             type="button"
             onClick={onClose}
-            className="text-muted hover:text-ink text-h5 cursor-pointer"
+            className="text-muted hover:text-ink p-1 cursor-pointer"
+            aria-label="Close size guide"
           >
-            <CloseOutlined />
+            <CloseIcon size={18} />
           </button>
         </div>
 

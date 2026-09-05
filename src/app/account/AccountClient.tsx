@@ -696,7 +696,7 @@ export default function AccountClient() {
                 {showAddPaymentForm ? (
                   <form onSubmit={handleAddPaymentSubmit} className="bg-surface rounded-2xl border border-wine/30 p-6 shadow-md space-y-5 animate-in fade-in duration-200">
                     <div className="flex items-center justify-between pb-3 border-b border-border">
-                      <h3 className="font-display text-h5 font-semibold text-wine">Add New Payment Method</h3>
+                      <h3 className="font-display text-body sm:text-[17px] font-semibold text-wine">Add New Payment Method</h3>
                     </div>
 
                     {/* Payment Type Selection Tabs */}
@@ -1004,7 +1004,7 @@ export default function AccountClient() {
                 {showAddressForm ? (
                   <form onSubmit={handleSaveAddressSubmit} className="bg-surface rounded-2xl border border-wine/30 p-6 shadow-md space-y-5 animate-in fade-in duration-200">
                     <div className="flex items-center justify-between pb-3 border-b border-border">
-                      <h3 className="font-display text-h5 font-semibold text-wine">
+                      <h3 className="font-display text-body sm:text-[17px] font-semibold text-wine">
                         {editingAddressId ? "Edit Address Details" : "Add New Delivery Address"}
                       </h3>
                     </div>
@@ -1268,7 +1268,7 @@ export default function AccountClient() {
                           </div>
 
                           <div className="space-y-1">
-                            <h3 className="font-display font-semibold text-h5 text-ink">
+                            <h3 className="font-display font-semibold text-small sm:text-body text-ink">
                               {product.name}
                             </h3>
                             <p className="text-caption text-muted font-medium">
@@ -1287,29 +1287,35 @@ export default function AccountClient() {
                             </div>
 
                             <div>
-                              <button
-                                type="button"
+                              <Button
+                                size="xs"
+                                colorTheme="dark"
+                                rounded="full"
                                 onClick={() => handleAddToCart(product)}
-                                className="px-5 py-2 bg-slate-950 hover:bg-slate-800 text-white rounded-full text-caption font-bold uppercase tracking-wider transition-all duration-150 shadow-xs hover:shadow-md cursor-pointer active:scale-95"
+                                className="px-5 font-bold uppercase tracking-wider shadow-xs hover:shadow-md"
                               >
                                 ADD TO CART
-                              </button>
+                              </Button>
                             </div>
                           </div>
                         </div>
 
                         {/* Right: Remove Pill Button */}
-                        <button
-                          type="button"
+                        <Button
+                          variant="border"
+                          size="xs"
+                          rounded="full"
                           onClick={() => handleRemoveFromWishlist(product.id)}
-                          className="px-3.5 py-1.5 bg-white border border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-900 rounded-full text-caption font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5 self-start sm:self-center"
+                          className="text-gray-600 hover:!text-red-700 hover:!bg-red-50/80 !border-gray-300 self-start sm:self-center"
                           title="Remove from Wishlist"
+                          leftIcon={
+                            <svg className="w-3.5 h-3.5 text-gray-500 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6" />
+                            </svg>
+                          }
                         >
-                          <svg className="w-3.5 h-3.5 text-gray-500 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6" />
-                          </svg>
-                          <span>Remove</span>
-                        </button>
+                          Remove
+                        </Button>
                       </div>
                     ))}
                   </div>
@@ -1473,7 +1479,7 @@ export default function AccountClient() {
 
                 <div className="bg-surface rounded-2xl border border-border p-6 shadow-sm space-y-6">
                   <div className="space-y-2">
-                    <h3 className="font-display text-h5 font-semibold text-wine">
+                    <h3 className="font-display text-body sm:text-[17px] font-semibold text-wine">
                       Live Delivery Tracker
                     </h3>
                     <p className="text-caption text-muted leading-relaxed">
@@ -1513,7 +1519,7 @@ export default function AccountClient() {
                         <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold uppercase tracking-wider">
                           IN TRANSIT 🚚
                         </span>
-                        <h4 className="font-display font-semibold text-wine text-body mt-1">
+                        <h4 className="font-display font-semibold text-wine text-small sm:text-body mt-1">
                           Order #LX-89241 • Royal Solitaire Diamond Ring
                         </h4>
                         <p className="text-caption text-muted">
@@ -1522,13 +1528,13 @@ export default function AccountClient() {
                       </div>
                       <div className="text-right">
                         <span className="text-[10px] uppercase font-bold text-muted tracking-wider block">Estimated Delivery</span>
-                        <span className="font-display font-bold text-wine text-body">Tomorrow by 5:00 PM</span>
+                        <span className="font-display font-bold text-wine text-small sm:text-body">Tomorrow by 5:00 PM</span>
                       </div>
                     </div>
 
                     {/* TIMELINE STEPPER */}
                     <div className="space-y-4 pt-2">
-                      <h4 className="text-caption font-bold uppercase tracking-wider text-muted">Shipment Journey</h4>
+                      <h4 className="text-[11px] font-bold uppercase tracking-wider text-muted">Shipment Journey</h4>
                       <div className="space-y-6 pt-1">
                         {[
                           {

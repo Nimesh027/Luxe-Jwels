@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { FilterIcon, CheckIcon } from "@/components/icons";
 
 export const CATEGORIES = [
   { label: "Rings", value: "rings" },
@@ -44,17 +45,7 @@ function FilterCheckbox({ label, checked, onChange }: FilterCheckboxProps) {
             : "border-border/70 bg-surface group-hover:border-wine/50"
           }`}
       >
-        {checked && (
-          <svg className="w-[9px] h-[9px] text-white" viewBox="0 0 10 10" fill="none">
-            <path
-              d="M1.5 5l2.5 2.5 4.5-4.5"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        )}
+        {checked && <CheckIcon size={10} className="text-white stroke-[2.5]" />}
       </span>
       <span
         className={`text-[13px] leading-none transition-colors duration-150 ${checked ? "text-wine font-semibold" : "text-ink/80 group-hover:text-ink"
@@ -145,11 +136,7 @@ export default function ShopFilter({
       {/* Header */}
       <div className="flex items-center justify-between mb-5 pb-3 border-b border-border/60">
         <div className="flex items-center gap-2">
-          <svg className="w-3.5 h-3.5 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="4" y1="6" x2="20" y2="6" />
-            <line x1="7" y1="12" x2="17" y2="12" />
-            <line x1="10" y1="18" x2="14" y2="18" />
-          </svg>
+          <FilterIcon size={16} className="text-wine" />
           <h2 className="!text-small font-extrabold uppercase tracking-[0.2em] text-ink">
             Filter By
           </h2>

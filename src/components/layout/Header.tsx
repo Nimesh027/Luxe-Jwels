@@ -3,7 +3,14 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { DownOutlined, MenuOutlined } from "@ant-design/icons";
+import {
+  MenuIcon,
+  SearchIcon,
+  UserIcon,
+  HeartIcon,
+  ShoppingBagIcon,
+  ChevronDownIcon,
+} from "@/components/icons";
 import Badge from "@/components/ui/Badge";
 import MobileDrawer from "@/components/layout/MobileDrawer";
 import UserDrawer from "@/components/layout/UserDrawer";
@@ -82,7 +89,7 @@ export default function Header() {
               className="text-ink lg:hidden cursor-pointer hover:text-wine transition-colors p-1"
               onClick={() => dispatch(setMobileDrawerOpen(true))}
             >
-              <MenuOutlined />
+              <MenuIcon size={20} />
             </button>
 
             {/* Logo */}
@@ -113,18 +120,7 @@ export default function Header() {
               onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
               className="md:hidden text-wine hover:text-wine-dark transition-colors p-1 cursor-pointer"
             >
-              <svg
-                className="w-5 h-5 sm:w-[22px] sm:h-[22px]"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="11" cy="11" r="7" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              </svg>
+              <SearchIcon size={20} />
             </button>
 
             {/* Account / User Icon (Opens Right Slide Drawer) */}
@@ -139,18 +135,7 @@ export default function Header() {
                   {user.name.charAt(0)}
                 </div>
               ) : (
-                <svg
-                  className="w-5 h-5 sm:w-[22px] sm:h-[22px]"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="12" cy="7" r="4" />
-                  <path d="M5.5 21a6.5 6.5 0 0 1 13 0" />
-                </svg>
+                <UserIcon size={20} />
               )}
             </button>
 
@@ -161,17 +146,7 @@ export default function Header() {
               onClick={() => dispatch(setWishlistDrawerOpen(true))}
               className="relative text-wine hover:text-wine-dark transition-colors p-1 cursor-pointer"
             >
-              <svg
-                className="w-5 h-5 sm:w-[22px] sm:h-[22px]"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-              </svg>
+              <HeartIcon size={20} />
               {wishlistCount > 0 && (
                 <Badge className="absolute -right-1.5 -top-1">{wishlistCount}</Badge>
               )}
@@ -184,19 +159,7 @@ export default function Header() {
               onClick={() => dispatch(setCartDrawerOpen(true))}
               className="relative text-wine hover:text-wine-dark transition-colors p-1 cursor-pointer"
             >
-              <svg
-                className="w-5 h-5 sm:w-[22px] sm:h-[22px]"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <path d="M16 10a4 4 0 0 1-8 0" />
-              </svg>
+              <ShoppingBagIcon size={20} />
               {cartCount > 0 && (
                 <Badge className="absolute -right-1.5 -top-1">{cartCount}</Badge>
               )}
@@ -235,8 +198,9 @@ export default function Header() {
                   >
                     <span>{link.label}</span>
                     {hasDropdown && (
-                      <DownOutlined
-                        className={`text-[9px] transition-transform duration-200 ${isOpen ? "rotate-180 text-wine" : "text-muted"
+                      <ChevronDownIcon
+                        size={12}
+                        className={`transition-transform duration-200 ${isOpen ? "rotate-180 text-wine" : "text-muted"
                           }`}
                       />
                     )}

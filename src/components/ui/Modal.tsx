@@ -1,6 +1,6 @@
 "use client";
 
-import { CloseOutlined } from "@ant-design/icons";
+import { CloseIcon } from "@/components/icons";
 import type { ReactNode } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { closeModal } from "@/store/slices/uiSlice";
@@ -23,16 +23,16 @@ export default function Modal({ id, title, children }: ModalProps) {
       onClick={() => dispatch(closeModal())}
     >
       <div
-        className="relative w-full max-w-md bg-surface p-6"
+        className="relative w-full max-w-md bg-surface p-6 rounded-2xl shadow-2xl border border-border"
         onClick={(event) => event.stopPropagation()}
       >
         <button
           type="button"
           aria-label="Close"
-          className="absolute right-4 top-4 text-ink"
+          className="absolute right-4 top-4 text-muted hover:text-ink cursor-pointer p-1"
           onClick={() => dispatch(closeModal())}
         >
-          <CloseOutlined />
+          <CloseIcon size={18} />
         </button>
         {title && <h2 className="mb-4 font-display text-h4 text-ink">{title}</h2>}
         {children}

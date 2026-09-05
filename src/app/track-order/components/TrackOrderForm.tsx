@@ -1,6 +1,7 @@
 import React from "react";
 import Input from "@/components/ui/Input";
 import Section from "@/components/common/Section";
+import Button from "@/components/ui/Button";
 
 interface TrackOrderFormProps {
   trackType: "order" | "awb";
@@ -85,20 +86,22 @@ export default function TrackOrderForm({
             required
           />
 
-          <button
+          <Button
             type="submit"
+            colorTheme="wine"
+            size="md"
+            rounded="lg"
+            fullWidth
             disabled={isLoading}
-            className="w-full py-4 bg-[#80222F] hover:bg-[#681B26] text-white rounded-xl text-body font-bold uppercase tracking-widest transition-all shadow-md hover:shadow-lg cursor-pointer active:scale-95 flex items-center justify-center gap-2 mt-2"
+            className="font-bold uppercase tracking-widest shadow-md hover:shadow-lg mt-2"
+            rightIcon={!isLoading && <span className="text-body">→</span>}
           >
             {isLoading ? (
               <span className="inline-block animate-spin text-h5">⏳</span>
             ) : (
-              <>
-                <span>TRACK SHIPMENT</span>
-                <span className="text-body">→</span>
-              </>
+              "TRACK SHIPMENT"
             )}
-          </button>
+          </Button>
         </form>
       </div>
     </Section>

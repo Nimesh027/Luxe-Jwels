@@ -1,6 +1,6 @@
 "use client";
 
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
 import type { ReactNode } from "react";
 import { useCarousel } from "@/hooks/useCarousel";
 import { cn } from "@/lib/utils";
@@ -59,17 +59,17 @@ export default function Carousel({
             type="button"
             aria-label="Previous"
             onClick={prev}
-            className="absolute left-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-ink shadow-md backdrop-blur-xs hover:bg-white hover:scale-105 transition-all"
+            className="absolute left-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-ink shadow-md backdrop-blur-xs hover:bg-white hover:scale-105 transition-all cursor-pointer"
           >
-            <LeftOutlined />
+            <ChevronLeftIcon size={20} />
           </button>
           <button
             type="button"
             aria-label="Next"
             onClick={next}
-            className="absolute right-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-ink shadow-md backdrop-blur-xs hover:bg-white hover:scale-105 transition-all"
+            className="absolute right-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-ink shadow-md backdrop-blur-xs hover:bg-white hover:scale-105 transition-all cursor-pointer"
           >
-            <RightOutlined />
+            <ChevronRightIcon size={20} />
           </button>
         </>
       )}

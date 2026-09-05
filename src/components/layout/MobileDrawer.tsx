@@ -1,14 +1,14 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import Link from "next/link";
 import {
-  CloseOutlined,
-  DownOutlined,
-  HeartOutlined,
-  ShoppingCartOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+  CloseIcon,
+  ChevronDownIcon,
+  HeartIcon,
+  ShoppingBagIcon,
+  UserIcon,
+} from "@/components/icons";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   setMobileDrawerOpen,
@@ -17,6 +17,7 @@ import {
 } from "@/store/slices/uiSlice";
 import JewelryIcon from "./JewelryIcon";
 import { cn } from "@/lib/utils";
+import Button from "@/components/ui/Button";
 
 export default function MobileDrawer() {
   const dispatch = useAppDispatch();
@@ -41,9 +42,9 @@ export default function MobileDrawer() {
             type="button"
             aria-label="Close menu"
             onClick={close}
-            className="text-h4 text-ink hover:text-wine cursor-pointer p-1"
+            className="text-ink hover:text-wine cursor-pointer p-1"
           >
-            <CloseOutlined />
+            <CloseIcon size={20} />
           </button>
         </div>
 
@@ -81,9 +82,10 @@ export default function MobileDrawer() {
                       onClick={() => setExpandedId(isExpanded ? null : link.id)}
                       className="px-3 py-2.5 text-ink hover:text-wine cursor-pointer"
                     >
-                      <DownOutlined
+                      <ChevronDownIcon
+                        size={14}
                         className={cn(
-                          "text-[10px] transition-transform duration-200",
+                          "transition-transform duration-200",
                           isExpanded && "rotate-180 text-wine"
                         )}
                       />
@@ -140,13 +142,17 @@ export default function MobileDrawer() {
                     {/* Bottom Link */}
                     {currentTab?.bottomBanner && (
                       <div className="mt-2.5 text-center">
-                        <Link
+                        <Button
                           href={currentTab.bottomBanner.buttonHref}
                           onClick={close}
-                          className="inline-block w-full py-2 rounded-lg bg-wine text-white text-caption font-medium hover:bg-wine-dark"
+                          colorTheme="wine"
+                          size="xs"
+                          rounded="md"
+                          fullWidth
+                          className="text-caption font-medium tracking-wide"
                         >
                           {currentTab.bottomBanner.buttonText} - {currentTab.bottomBanner.heading}
-                        </Link>
+                        </Button>
                       </div>
                     )}
                   </div>
@@ -175,7 +181,7 @@ export default function MobileDrawer() {
         {/* Bottom User Actions */}
         <div className="flex items-center justify-around border-t border-border px-5 py-4 bg-surface text-ink">
           <Link href="/login" onClick={close} className="flex flex-col items-center gap-1 text-caption hover:text-wine">
-            <UserOutlined className="text-body" />
+            <UserIcon size={20} />
             <span>Account</span>
           </Link>
           <button
@@ -186,7 +192,7 @@ export default function MobileDrawer() {
             }}
             className="flex flex-col items-center gap-1 text-caption hover:text-wine cursor-pointer"
           >
-            <HeartOutlined className="text-body" />
+            <HeartIcon size={20} />
             <span>Wishlist</span>
           </button>
           <button
@@ -197,7 +203,7 @@ export default function MobileDrawer() {
             }}
             className="flex flex-col items-center gap-1 text-caption hover:text-wine cursor-pointer"
           >
-            <ShoppingCartOutlined className="text-body" />
+            <ShoppingBagIcon size={20} />
             <span>Cart</span>
           </button>
         </div>

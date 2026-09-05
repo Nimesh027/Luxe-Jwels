@@ -318,15 +318,21 @@ export default function CheckoutPage() {
               </div>
 
               {/* Place Order CTA Button */}
-              <button
+              <Button
                 type="submit"
-                className="mt-6 w-full h-12 rounded-full bg-wine text-white text-body font-semibold uppercase tracking-wider shadow-md hover:bg-wine-dark hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+                colorTheme="wine"
+                size="md"
+                rounded="full"
+                fullWidth
+                className="mt-6 uppercase font-semibold text-body tracking-wider shadow-md hover:shadow-lg"
+                rightIcon={
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                }
               >
-                <span>Place Order • {formatPrice(total)}</span>
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </button>
+                Place Order • {formatPrice(total)}
+              </Button>
 
               <div className="mt-4 flex items-center justify-center gap-2 text-[10px] text-muted">
                 <svg className="h-3.5 w-3.5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">

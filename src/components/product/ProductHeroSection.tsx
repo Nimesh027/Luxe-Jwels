@@ -4,11 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import {
-  SafetyCertificateOutlined,
-  ThunderboltOutlined,
-  ShoppingOutlined,
-  RightOutlined,
-} from "@ant-design/icons";
+  SafetyCertificateIcon,
+  ThunderboltIcon,
+  ShoppingBagIcon,
+} from "@/components/icons";
 import type { Product, Category } from "@/types";
 import Button from "@/components/ui/Button";
 import Rating from "@/components/ui/Rating";
@@ -105,8 +104,8 @@ export default function ProductHeroSection({
 
               {/* Floating Badges */}
               <div className="absolute top-4 left-4 flex flex-col gap-2 z-10">
-                <span className="inline-flex items-center gap-1 rounded-full bg-wine/90 px-3.5 py-1 text-[11px] font-medium tracking-wide text-white backdrop-blur-md shadow-xs">
-                  <SafetyCertificateOutlined /> 18K Hallmarked Gold
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-wine/90 px-3.5 py-1 text-[11px] font-medium tracking-wide text-white backdrop-blur-md shadow-xs">
+                  <SafetyCertificateIcon size={14} /> 18K Hallmarked Gold
                 </span>
                 {product.compareAtPrice && (
                   <span className="inline-flex items-center gap-1 rounded-full bg-gold px-3.5 py-1 text-[11px] font-semibold tracking-wide text-ink shadow-xs">
@@ -166,7 +165,7 @@ export default function ProductHeroSection({
 
             {/* No-cost EMI Banner */}
             <div className="mt-3 flex items-center gap-2 rounded-xl bg-wine-soft/60 px-3 py-2 text-caption text-wine font-medium">
-              <ThunderboltOutlined />
+              <ThunderboltIcon size={16} />
               <span>
                 Or 3 interest-free payments of{" "}
                 <strong>{formatPrice(Math.round(product.price / 3))}</strong> with Zest/Klarna.
@@ -287,7 +286,7 @@ export default function ProductHeroSection({
               className="flex-1 h-12 rounded-xl text-small font-medium shadow-sm hover:shadow-md flex items-center justify-center gap-2 cursor-pointer"
               onClick={() => add(product, quantity)}
             >
-              <ShoppingOutlined className="text-body" /> Add To Cart
+              <ShoppingBagIcon size={18} /> Add To Cart
             </Button>
           </div>
         </div>

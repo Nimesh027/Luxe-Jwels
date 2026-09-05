@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { HeartFilled, HeartOutlined, EyeOutlined } from "@ant-design/icons";
+import { HeartIcon, EyeIcon } from "@/components/icons";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import { useCart } from "@/hooks/useCart";
@@ -75,11 +75,11 @@ export default function ProductCard({ product }: ProductCardProps) {
             }}
             className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface/90 text-ink backdrop-blur-xs shadow-sm transition-all duration-200 hover:bg-wine hover:text-white active:scale-95 cursor-pointer"
           >
-            {wishlisted ? (
-              <HeartFilled className="text-gold text-caption" />
-            ) : (
-              <HeartOutlined className="text-caption" />
-            )}
+            <HeartIcon
+              size={15}
+              filled={wishlisted}
+              className={wishlisted ? "text-gold" : "currentColor"}
+            />
           </button>
 
           {/* Quick View */}
@@ -89,7 +89,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             title="Quick View"
             className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface/90 text-ink backdrop-blur-xs shadow-sm transition-all duration-200 hover:bg-wine hover:text-white active:scale-95 cursor-pointer"
           >
-            <EyeOutlined className="text-caption" />
+            <EyeIcon size={15} />
           </Link>
         </div>
 

@@ -3,13 +3,13 @@
 import Image from "next/image";
 import { useState } from "react";
 import {
-  DownOutlined,
-  UpOutlined,
-  GoldOutlined,
-  CrownOutlined,
-  ReadOutlined,
-  StarOutlined,
-} from "@ant-design/icons";
+  ChevronDownIcon,
+  GoldBarIcon,
+  CrownIcon,
+  BookOpenIcon,
+  StarIcon,
+  DiamondIcon,
+} from "@/components/icons";
 import SectionTitle from "@/components/common/SectionTitle";
 import Tabs, { TabOption } from "@/components/ui/Tabs";
 import type { Product } from "@/types";
@@ -88,14 +88,14 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 >
                   <div className="flex items-center gap-3">
                     <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-cream text-gold-dark">
-                      <GoldOutlined className="text-h5" />
+                      <GoldBarIcon size={18} />
                     </span>
                     <span className="text-caption font-semibold tracking-wider uppercase text-ink">
                       Metal Details
                     </span>
                   </div>
                   <span className={`text-caption text-muted transition-transform duration-300 ${openAccordion === "metal" ? "rotate-180" : ""}`}>
-                    <DownOutlined />
+                    <ChevronDownIcon size={16} />
                   </span>
                 </button>
 
@@ -145,14 +145,14 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 >
                   <div className="flex items-center gap-3">
                     <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-cream text-gold-dark">
-                      <StarOutlined className="text-h5" />
+                      <DiamondIcon size={18} />
                     </span>
                     <span className="text-caption font-semibold tracking-wider uppercase text-ink">
                       Diamond Details
                     </span>
                   </div>
                   <span className={`text-caption text-muted transition-transform duration-300 ${openAccordion === "diamond" ? "rotate-180" : ""}`}>
-                    <DownOutlined />
+                    <ChevronDownIcon size={16} />
                   </span>
                 </button>
 
@@ -200,14 +200,14 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 >
                   <div className="flex items-center gap-3">
                     <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-cream text-gold-dark">
-                      <CrownOutlined className="text-h5" />
+                      <CrownIcon size={18} />
                     </span>
                     <span className="text-caption font-semibold tracking-wider uppercase text-ink">
                       General Details
                     </span>
                   </div>
                   <span className={`text-caption text-muted transition-transform duration-300 ${openAccordion === "general" ? "rotate-180" : ""}`}>
-                    <DownOutlined />
+                    <ChevronDownIcon size={16} />
                   </span>
                 </button>
 
@@ -261,14 +261,14 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 >
                   <div className="flex items-center gap-3">
                     <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-cream text-gold-dark">
-                      <ReadOutlined className="text-h5" />
+                      <BookOpenIcon size={18} />
                     </span>
                     <span className="text-caption font-semibold tracking-wider uppercase text-ink">
                       Description
                     </span>
                   </div>
                   <span className={`text-caption text-muted transition-transform duration-300 ${openAccordion === "description" ? "rotate-180" : ""}`}>
-                    <DownOutlined />
+                    <ChevronDownIcon size={16} />
                   </span>
                 </button>
 
@@ -499,7 +499,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
 
             <div className="flex items-center gap-3 rounded-2xl border border-gold/30 bg-gold/5 p-4 text-caption text-ink">
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/20 text-gold-dark">
-                <StarOutlined className="text-body" />
+                <StarIcon size={16} filled={true} />
               </span>
               <p className="leading-tight">
                 Enjoy sparkling jewellery! We provide <strong>free jewellery cleaning services</strong>!

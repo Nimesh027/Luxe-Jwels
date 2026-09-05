@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Modal from "@/components/ui/Modal";
 import Input from "@/components/ui/Input";
+import Button from "@/components/ui/Button";
 
 export default function UserModals() {
   // Track order state
@@ -47,12 +48,16 @@ export default function UserModals() {
               placeholder="e.g. LX-89241"
               required
             />
-            <button
+            <Button
               type="submit"
-              className="w-full py-2.5 bg-wine text-white rounded-xl text-caption font-semibold hover:bg-wine-dark transition-colors cursor-pointer"
+              colorTheme="wine"
+              rounded="lg"
+              size="sm"
+              fullWidth
+              className="text-caption font-semibold"
             >
               Track Status
-            </button>
+            </Button>
           </form>
 
           {trackingResult && (
@@ -121,12 +126,16 @@ export default function UserModals() {
               inputClassName="uppercase tracking-wider"
               required
             />
-            <button
+            <Button
               type="submit"
-              className="w-full py-2.5 bg-wine text-white rounded-xl text-caption font-semibold hover:bg-wine-dark transition-colors cursor-pointer"
+              colorTheme="wine"
+              rounded="lg"
+              size="sm"
+              fullWidth
+              className="text-caption font-semibold"
             >
               Check Balance
-            </button>
+            </Button>
           </form>
 
           {cardBalance !== null && (

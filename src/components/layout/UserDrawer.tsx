@@ -9,6 +9,11 @@ import {
   openModal,
 } from "@/store/slices/uiSlice";
 import { logout } from "@/store/slices/authSlice";
+import {
+  CloseIcon,
+  UserIcon,
+  ChevronRightIcon,
+} from "@/components/icons";
 
 export default function UserDrawer() {
   const dispatch = useAppDispatch();
@@ -48,9 +53,7 @@ export default function UserDrawer() {
             aria-label="Close"
             className="w-8 h-8 rounded-full bg-wine/5 hover:bg-wine/10 text-wine flex items-center justify-center transition-colors cursor-pointer"
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <CloseIcon size={16} />
           </button>
         </div>
 
@@ -69,22 +72,18 @@ export default function UserDrawer() {
             <div className="flex items-center justify-between relative z-10">
               <div className="flex items-center gap-3.5">
                 <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-white/40 bg-white/10 backdrop-blur-xs flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                  <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
+                  <UserIcon size={22} className="text-white" />
                 </div>
 
                 <div>
-                  <h3 className="font-display text-h5 font-semibold tracking-wide text-white lowercase">
+                  <p className="font-display text-h6 font-semibold tracking-wide text-white lowercase leading-tight">
                     {displayName}
-                  </h3>
+                  </p>
                   <p className="text-[11px] text-white/80 font-medium">Manage Profile & Account &rarr;</p>
                 </div>
               </div>
 
-              <svg className="w-5 h-5 text-white/80 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
+              <ChevronRightIcon size={18} className="text-white/80 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
 
@@ -99,8 +98,8 @@ export default function UserDrawer() {
                 handleClose();
               }}
               className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left transition-all duration-200 cursor-pointer ${activeTab === "order-history"
-                  ? "bg-[#FAF0F2] border border-wine/30 text-wine shadow-xs"
-                  : "bg-surface text-ink/80 hover:bg-wine/5 hover:text-wine"
+                ? "bg-[#FAF0F2] border border-wine/30 text-wine shadow-xs"
+                : "bg-surface text-ink/80 hover:bg-wine/5 hover:text-wine"
                 }`}
             >
               <div className="w-8 h-8 rounded-full bg-wine/10 flex items-center justify-center text-wine shrink-0">
@@ -122,8 +121,8 @@ export default function UserDrawer() {
                 handleClose();
               }}
               className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left transition-all duration-200 cursor-pointer ${activeTab === "gift-card"
-                  ? "bg-[#FAF0F2] border border-wine/30 text-wine shadow-xs"
-                  : "bg-surface text-ink/80 hover:bg-wine/5 hover:text-wine"
+                ? "bg-[#FAF0F2] border border-wine/30 text-wine shadow-xs"
+                : "bg-surface text-ink/80 hover:bg-wine/5 hover:text-wine"
                 }`}
             >
               <div className="w-8 h-8 rounded-full bg-wine/10 flex items-center justify-center text-wine shrink-0">
@@ -144,8 +143,8 @@ export default function UserDrawer() {
                 handleClose();
               }}
               className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left transition-all duration-200 cursor-pointer ${activeTab === "track-order"
-                  ? "bg-[#FAF0F2] border border-wine/40 text-wine font-semibold shadow-xs"
-                  : "bg-surface text-ink/80 hover:bg-wine/5 hover:text-wine"
+                ? "bg-[#FAF0F2] border border-wine/40 text-wine font-semibold shadow-xs"
+                : "bg-surface text-ink/80 hover:bg-wine/5 hover:text-wine"
                 }`}
             >
               <div className="w-8 h-8 rounded-full bg-wine/10 flex items-center justify-center text-wine shrink-0">
@@ -166,8 +165,8 @@ export default function UserDrawer() {
                 handleClose();
               }}
               className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left transition-all duration-200 cursor-pointer ${activeTab === "contact-us"
-                  ? "bg-[#FAF0F2] border border-wine/30 text-wine shadow-xs"
-                  : "bg-surface text-ink/80 hover:bg-wine/5 hover:text-wine"
+                ? "bg-[#FAF0F2] border border-wine/30 text-wine shadow-xs"
+                : "bg-surface text-ink/80 hover:bg-wine/5 hover:text-wine"
                 }`}
             >
               <div className="w-8 h-8 rounded-full bg-wine/10 flex items-center justify-center text-wine shrink-0">

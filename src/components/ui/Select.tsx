@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { ChevronDownIcon } from "@/components/icons";
 
 export interface SelectOption {
   label: string;
@@ -77,19 +78,13 @@ export default function Select({
           )}
         >
           <span className="truncate">{selectedOption ? selectedOption.label : placeholder}</span>
-          <svg
+          <ChevronDownIcon
+            size={14}
             className={cn(
-              "w-3.5 h-3.5 shrink-0 transition-transform duration-200",
+              "shrink-0 transition-transform duration-200",
               open ? "rotate-180 text-wine" : "text-muted"
             )}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          >
-            <path d="M6 9l6 6 6-6" />
-          </svg>
+          />
         </button>
 
         {/* Dropdown Menu */}

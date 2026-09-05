@@ -50,37 +50,32 @@ body::-webkit-scrollbar,
   scrollbar-width: none !important;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+:where(h1, h2, h3, h4, h5, h6) {
   font-family: var(--font-display);
 }
 
-h1 {
-  font-size: clamp(36px, calc(31.38px + 1.154vw), 48px);
+:where(h1) {
+  font-size: clamp(30px, calc(26px + 0.8vw), 38px);
 }
 
-h2 {
-  font-size: clamp(32px, calc(28.92px + 0.769vw), 40px);
+:where(h2) {
+  font-size: clamp(24px, calc(21px + 0.6vw), 30px);
 }
 
-h3 {
-  font-size: clamp(26px, calc(23.69px + 0.577vw), 32px);
+:where(h3) {
+  font-size: clamp(19px, calc(17px + 0.4vw), 23px);
 }
 
-h4 {
-  font-size: clamp(22px, calc(20.46px + 0.385vw), 26px);
+:where(h4) {
+  font-size: clamp(16px, calc(15px + 0.25vw), 18px);
 }
 
-h5 {
-  font-size: clamp(20px, calc(19.23px + 0.192vw), 22px);
+:where(h5) {
+  font-size: clamp(14px, calc(13.5px + 0.15vw), 16px);
 }
 
-h6 {
-  font-size: 18px;
+:where(h6) {
+  font-size: 14px;
 }
 
 body {

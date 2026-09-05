@@ -1,6 +1,8 @@
 "use client";
 
 import type { Product } from "@/types";
+import Button from "@/components/ui/Button";
+import { ShoppingBagIcon } from "@/components/icons";
 
 interface StickyAddToCartBarProps {
   product: Product;
@@ -46,19 +48,17 @@ export default function StickyAddToCartBar({
       </div>
 
       {/* 2. ADD TO CART BUTTON */}
-      <button
+      <Button
         type="button"
+        colorTheme="wine"
+        rounded="full"
+        size="sm"
         onClick={onAddToCart}
-        className="px-4 sm:px-7 py-2 sm:py-2.5 bg-[#80222F] hover:bg-[#681B26] text-white font-semibold rounded-full text-body flex items-center gap-1.5 sm:gap-2 shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer active:scale-95 whitespace-nowrap shrink-0"
+        className="px-4 sm:px-7 font-semibold text-caption sm:text-body uppercase tracking-wider shadow-md hover:shadow-lg shrink-0"
+        leftIcon={<ShoppingBagIcon size={16} />}
       >
-        {/* Shopping Bag Icon */}
-        <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-          <line x1="3" y1="6" x2="21" y2="6" />
-          <path d="M16 10a4 4 0 0 1-8 0" />
-        </svg>
-        <span>Add to Cart</span>
-      </button>
+        Add to Cart
+      </Button>
 
     </div>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { CloseOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { CloseIcon, ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
 
 interface LightboxModalProps {
   isOpen: boolean;
@@ -28,10 +28,10 @@ export default function LightboxModal({
       <button
         type="button"
         onClick={onClose}
-        className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-h4 text-white transition-colors hover:bg-white/20 hover:text-gold cursor-pointer"
+        className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 hover:text-gold cursor-pointer"
         aria-label="Close Lightbox"
       >
-        <CloseOutlined />
+        <CloseIcon size={22} />
       </button>
 
       {/* Middle Slider Container */}
@@ -43,7 +43,7 @@ export default function LightboxModal({
           onClick={() => onNavigate((activeIndex - 1 + images.length) % images.length)}
           className="absolute left-2 sm:left-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-black/50 text-white shadow-lg backdrop-blur-xs transition-all hover:bg-wine hover:scale-110 cursor-pointer"
         >
-          <LeftOutlined className="text-h5" />
+          <ChevronLeftIcon size={24} />
         </button>
 
         {/* Main Lightbox Image */}
@@ -64,7 +64,7 @@ export default function LightboxModal({
           onClick={() => onNavigate((activeIndex + 1) % images.length)}
           className="absolute right-2 sm:right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-black/50 text-white shadow-lg backdrop-blur-xs transition-all hover:bg-wine hover:scale-110 cursor-pointer"
         >
-          <RightOutlined className="text-h5" />
+          <ChevronRightIcon size={24} />
         </button>
       </div>
     </div>

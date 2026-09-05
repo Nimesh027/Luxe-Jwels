@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Section from "@/components/common/Section";
 import SectionTitle from "@/components/common/SectionTitle";
+import Button from "@/components/ui/Button";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { removeItem, selectWishlistItems } from "@/store/slices/wishlistSlice";
 import { addItem as addToCart } from "@/store/slices/cartSlice";
@@ -44,12 +45,15 @@ export default function WishlistClient() {
           </p>
 
           {/* Continue Shopping Black Pill CTA Button */}
-          <Link
+          <Button
             href="/collections"
-            className="inline-flex items-center justify-center rounded-full bg-slate-950 text-white px-8 py-3.5 text-caption font-bold uppercase tracking-widest hover:bg-slate-800 transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer active:scale-95"
+            colorTheme="dark"
+            rounded="full"
+            size="md"
+            className="px-8 font-bold uppercase tracking-widest shadow-md hover:shadow-lg"
           >
             CONTINUE SHOPPING
-          </Link>
+          </Button>
         </div>
       </Section>
     );
@@ -102,29 +106,35 @@ export default function WishlistClient() {
                 </div>
 
                 <div>
-                  <button
-                    type="button"
+                  <Button
+                    size="xs"
+                    colorTheme="dark"
+                    rounded="full"
                     onClick={() => handleAddToCart(product)}
-                    className="px-5 py-2 bg-slate-950 hover:bg-slate-800 text-white rounded-full text-caption font-bold uppercase tracking-wider transition-all duration-150 shadow-xs hover:shadow-md cursor-pointer active:scale-95"
+                    className="px-5 font-bold uppercase tracking-wider shadow-xs hover:shadow-md"
                   >
                     ADD TO CART
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
 
             {/* Right: Remove Pill Button */}
-            <button
-              type="button"
+            <Button
+              variant="border"
+              size="xs"
+              rounded="full"
               onClick={() => handleRemove(product.id)}
-              className="px-3.5 py-1.5 bg-white border border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-900 rounded-full text-caption font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5 self-start sm:self-center"
+              className="text-gray-600 hover:!text-red-700 hover:!bg-red-50/80 !border-gray-300 self-start sm:self-center"
               title="Remove from Wishlist"
+              leftIcon={
+                <svg className="w-3.5 h-3.5 text-gray-500 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6" />
+                </svg>
+              }
             >
-              <svg className="w-3.5 h-3.5 text-gray-500 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6" />
-              </svg>
-              <span>Remove</span>
-            </button>
+              Remove
+            </Button>
           </div>
         ))}
       </div>

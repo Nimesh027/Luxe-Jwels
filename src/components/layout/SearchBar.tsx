@@ -4,10 +4,9 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { CloseOutlined } from "@ant-design/icons";
+import { SearchIcon, CloseIcon, ArrowRightIcon } from "@/components/icons";
 import { useAppSelector } from "@/store/hooks";
 import { cn } from "@/lib/utils";
-import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 
 const ROTATING_PLACEHOLDERS = [
   "gold necklace",
@@ -109,18 +108,7 @@ export default function SearchBar({
       >
         {/* Maroon Search Magnifying Glass Icon */}
         <span className="text-wine mr-3 shrink-0 flex items-center select-none">
-          <svg
-            className="w-4 h-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="11" cy="11" r="7" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
+          <SearchIcon size={16} />
         </span>
 
         {/* Dynamic Placeholder overlay if query is empty */}
@@ -163,7 +151,7 @@ export default function SearchBar({
             className="text-muted hover:text-ink text-caption p-1 z-10 cursor-pointer shrink-0"
             aria-label="Clear search"
           >
-            <CloseOutlined className="text-[10px]" />
+            <CloseIcon size={14} />
           </button>
         )}
       </form>
