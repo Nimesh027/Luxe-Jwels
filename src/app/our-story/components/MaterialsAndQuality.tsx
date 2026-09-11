@@ -7,17 +7,17 @@ export default function MaterialsAndQuality() {
     {
       title: "22K & 18K Solid Gold",
       description: "Our foundation is built on uncompromising purity. We exclusively use solid 22-karat and 18-karat gold, revered globally for its rich color and lasting value. Every piece carries the official BIS Hallmark, a government guarantee of authenticity.",
-      image: "/images/collections/temple-collection.jpg",
+      image: "/images/collections/gold-collection.jpg",
     },
     {
       title: "Conflict-Free Diamonds",
       description: "We source only natural, untreated diamonds graded EF (colorless) and VVS (very, very slightly included). Every diamond over 0.30 carats is independently certified by IGI or SGL, guaranteeing ethical sourcing via the Kimberley Process.",
-      image: "/images/collections/wedding-collection.jpg",
+      image: "/images/collections/diamond-collection.jpg",
     },
     {
       title: "Precious Gemstones",
       description: "From vivid Colombian emeralds to deep Burmese rubies, our colored gemstones are hand-selected for optimal hue, saturation, and tone. We trace our gems from ethical mines to our workshops to ensure responsible practices.",
-      image: "/images/collections/classic-collection.jpg",
+      image: "/images/category/necklaces.jpg",
     },
   ];
 

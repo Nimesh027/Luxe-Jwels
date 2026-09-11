@@ -1,5 +1,6 @@
 import Section from "@/components/common/Section";
 import SectionTitle from "@/components/common/SectionTitle";
+import { TrophyIcon, SparklesIcon, LeafIcon, MedalIcon } from "@/components/icons";
 
 export default function AwardsRecognition() {
   const awards = [
@@ -7,26 +8,26 @@ export default function AwardsRecognition() {
       year: "2024",
       title: "National Jewellery Excellence Award",
       issuer: "Gems & Jewellery Trade Council of India",
-      icon: "🏆"
+      icon: <TrophyIcon size={28} className="text-wine group-hover:text-gold transition-colors" />,
     },
     {
       year: "2023",
       title: "Best Bridal Collection of the Year",
       issuer: "Retail Jeweller India Awards",
-      icon: "✨"
+      icon: <SparklesIcon size={28} className="text-wine group-hover:text-gold transition-colors" />,
     },
     {
       year: "2021",
       title: "Pioneer in Sustainable Sourcing",
       issuer: "Ethical Luxury Forum",
-      icon: "🌿"
+      icon: <LeafIcon size={28} className="text-wine group-hover:text-gold transition-colors" />,
     },
     {
       year: "2019",
       title: "Master Goldsmith Recognition",
       issuer: "World Gold Council",
-      icon: "🏅"
-    }
+      icon: <MedalIcon size={28} className="text-wine group-hover:text-gold transition-colors" />,
+    },
   ];
 
   return (
@@ -45,8 +46,8 @@ export default function AwardsRecognition() {
         {/* Awards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {awards.map((award, idx) => (
-            <div key={idx} className="bg-white rounded-3xl p-8 border border-border/60 shadow-sm text-center flex flex-col items-center justify-between space-y-4 hover:shadow-md hover:border-gold/30 transition-all duration-300">
-              <div className="w-16 h-16 rounded-full bg-surface flex items-center justify-center text-h3 mb-2">
+            <div key={idx} className="group bg-white rounded-3xl p-8 border border-border/60 shadow-sm text-center flex flex-col items-center justify-between space-y-4 hover:shadow-xl hover:border-gold/40 transition-all duration-300">
+              <div className="w-16 h-16 rounded-2xl bg-[#FAF0F2] group-hover:bg-wine/10 border border-wine/15 group-hover:border-wine/30 flex items-center justify-center mb-2 shadow-2xs transition-colors duration-300">
                 {award.icon}
               </div>
               <div className="space-y-2 flex-grow flex flex-col justify-center">

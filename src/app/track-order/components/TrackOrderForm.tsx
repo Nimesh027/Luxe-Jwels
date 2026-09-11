@@ -2,6 +2,7 @@ import React from "react";
 import Input from "@/components/ui/Input";
 import Section from "@/components/common/Section";
 import Button from "@/components/ui/Button";
+import { TagIcon, SmartphoneIcon } from "@/components/icons";
 
 interface TrackOrderFormProps {
   trackType: "order" | "awb";
@@ -70,7 +71,7 @@ export default function TrackOrderForm({
             onChange={(e) => setOrderIdInput(e.target.value)}
             placeholder={trackType === "order" ? "LX-89210" : "SQL-98234109"}
             inputClassName="font-mono uppercase tracking-wider"
-            trailingIcon={<span className="text-caption">🏷️</span>}
+            trailingIcon={<TagIcon size={16} className="text-muted" />}
             required
           />
 
@@ -82,7 +83,7 @@ export default function TrackOrderForm({
             value={contactInput}
             onChange={(e) => setContactInput(e.target.value)}
             placeholder="+91 9876543210"
-            trailingIcon={<span className="text-caption">📱</span>}
+            trailingIcon={<SmartphoneIcon size={16} className="text-muted" />}
             required
           />
 
@@ -97,7 +98,7 @@ export default function TrackOrderForm({
             rightIcon={!isLoading && <span className="text-body">→</span>}
           >
             {isLoading ? (
-              <span className="inline-block animate-spin text-h5">⏳</span>
+              <span className="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
             ) : (
               "TRACK SHIPMENT"
             )}

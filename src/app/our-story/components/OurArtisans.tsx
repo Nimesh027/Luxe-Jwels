@@ -9,21 +9,21 @@ export default function OurArtisans() {
       role: "Master Gem Setter",
       experience: "35 Years of Experience",
       quote: "The stone speaks to you if you are patient enough to listen. Every setting is a silent promise of security and brilliance.",
-      image: "/images/collections/temple-collection.jpg",
+      image: "/images/for-him-for-her/for-him-1.jpg",
     },
     {
       name: "Abdul Kadir",
       role: "Head Polisher & Finisher",
       experience: "28 Years of Experience",
       quote: "Polishing gold is not just about making it shine. It is about revealing the metal's soul, removing imperfections until only pure light remains.",
-      image: "/images/collections/wedding-collection.jpg",
+      image: "/images/for-him-for-her/for-him-3.jpg",
     },
     {
       name: "Meenakshi Desai",
       role: "Lead Enamel Artist",
       experience: "20 Years of Experience",
       quote: "Meenakari is painting with fire and glass. It requires a steady hand and a calm mind to bring vibrant colors to life on cold metal.",
-      image: "/images/collections/classic-collection.jpg",
+      image: "/images/for-him-for-her/for-her-1.jpg",
     },
   ];
 

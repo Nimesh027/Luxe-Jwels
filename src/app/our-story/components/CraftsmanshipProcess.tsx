@@ -8,19 +8,19 @@ export default function CraftsmanshipProcess() {
       id: "01",
       title: "Design & Conception",
       description: "Every masterpiece begins as a hand-drawn sketch. Our visionary designers translate raw inspiration into detailed technical drawings, carefully plotting the placement of each gemstone and the precise curvature of the metal.",
-      image: "/images/collections/wedding-collection.jpg",
+      image: "/images/brand/brand-story.jpg",
     },
     {
       id: "02",
       title: "Casting & Forging",
       description: "Using ethically sourced 22K and 18K gold, our master casters melt and pour the metal into custom molds. The gold is then forged, annealed, and shaped to create a structurally flawless foundation.",
-      image: "/images/collections/temple-collection.jpg",
+      image: "/images/collections/gold-collection.jpg",
     },
     {
       id: "03",
       title: "Precision Setting",
       description: "Our setters meticulously place each certified diamond and precious gemstone. Using microscopic precision, stones are secured in prong, bezel, or pavé settings to maximize brilliance and ensure lifelong durability.",
-      image: "/images/collections/classic-collection.jpg",
+      image: "/images/collections/diamond-collection.jpg",
     },
     {
       id: "04",
@@ -32,7 +32,7 @@ export default function CraftsmanshipProcess() {
       id: "05",
       title: "Quality Assurance & Hallmark",
       description: "Before reaching you, each piece passes a strict 15-point quality inspection. Finally, it receives the official Government of India BIS Hallmark—the ultimate seal of 100% purity and authenticity.",
-      image: "/images/collections/wedding-collection.jpg",
+      image: "/images/collections/gift-collection.jpg",
     },
   ];
 

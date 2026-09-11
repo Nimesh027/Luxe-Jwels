@@ -147,7 +147,7 @@ export default function Button({
   const content = (
     <>
       {leftIcon && <span className="inline-flex shrink-0 items-center justify-center">{leftIcon}</span>}
-      {children && <span>{children}</span>}
+      {children && <span className="inline-flex items-center gap-2">{children}</span>}
       {rightIcon && <span className="inline-flex shrink-0 items-center justify-center">{rightIcon}</span>}
     </>
   );

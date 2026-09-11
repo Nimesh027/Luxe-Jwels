@@ -43,7 +43,7 @@ export default function DesignPhilosophy() {
             {/* Primary Large Image */}
             <div className="absolute top-0 right-0 w-[70%] h-[65%] rounded-[2rem] overflow-hidden shadow-2xl border border-gold/20 z-10">
               <Image
-                src="/images/collections/wedding-collection.jpg"
+                src="/images/collections/diamond-collection.jpg"
                 alt="Intricate traditional design"
                 fill
                 className="object-cover"

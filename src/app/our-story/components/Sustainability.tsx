@@ -1,27 +1,28 @@
 import Section from "@/components/common/Section";
+import { GlobeIcon, RecycleIcon, DiamondIcon, GiftIcon } from "@/components/icons";
 
 export default function Sustainability() {
   const initiatives = [
     {
       title: "Ethical Sourcing",
       description: "We trace our gold and gemstones directly to responsible mines that adhere strictly to human rights and labor standards. We never compromise on origin.",
-      icon: "🌍"
+      icon: <GlobeIcon size={24} className="text-emerald-700" />,
     },
     {
       title: "Recycled Metals",
       description: "Over 40% of our production utilizes refined, recycled 22K and 18K gold, significantly reducing our environmental footprint without sacrificing purity.",
-      icon: "♻️"
+      icon: <RecycleIcon size={24} className="text-emerald-700" />,
     },
     {
       title: "Responsible Diamonds",
       description: "Every diamond is conflict-free and compliant with the Kimberley Process. We also offer lab-grown alternatives for the eco-conscious connoisseur.",
-      icon: "💎"
+      icon: <DiamondIcon size={24} className="text-emerald-700" />,
     },
     {
       title: "Sustainable Packaging",
       description: "Our signature Luxe Jewels boxes are crafted from FSC-certified paper and recycled velvet, designed to be kept forever or recycled completely.",
-      icon: "🎁"
-    }
+      icon: <GiftIcon size={24} className="text-emerald-700" />,
+    },
   ];
 
   return (
@@ -49,7 +50,9 @@ export default function Sustainability() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
               {initiatives.map((item, idx) => (
                 <div key={idx} className="bg-surface/50 rounded-[2rem] p-8 border border-emerald-900/10 hover:border-emerald-900/30 transition-colors shadow-2xs">
-                  <div className="text-h4 mb-4 opacity-80">{item.icon}</div>
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-50/80 border border-emerald-200/60 flex items-center justify-center mb-5 shadow-2xs">
+                    {item.icon}
+                  </div>
                   <h3 className="font-display font-semibold !text-h5 text-ink mb-2">
                     {item.title}
                   </h3>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { LinkIcon, CheckIcon, PhoneIcon, LockIcon } from "@/components/icons";
 
 interface TrackingHeaderProps {
   orderId: string;
@@ -38,15 +39,26 @@ export default function TrackingHeader({ orderId }: TrackingHeaderProps) {
           <button
             type="button"
             onClick={handleCopyLink}
-            className="px-3.5 py-2 bg-white border border-border hover:border-wine/40 text-ink rounded-xl text-caption font-medium transition-all shadow-2xs flex items-center gap-1.5 cursor-pointer"
+            className="px-3.5 py-2 bg-white border border-border hover:border-wine/40 text-ink rounded-xl text-caption font-medium transition-all shadow-2xs flex items-center gap-2 cursor-pointer"
           >
-            <span>{copiedLink ? "✓ Copied!" : "🔗 Share Link"}</span>
+            {copiedLink ? (
+              <>
+                <CheckIcon size={14} className="text-emerald-600 shrink-0" />
+                <span>Copied!</span>
+              </>
+            ) : (
+              <>
+                <LinkIcon size={14} className="text-muted shrink-0" />
+                <span>Share Link</span>
+              </>
+            )}
           </button>
           <Link
             href="/contact"
-            className="px-3.5 py-2 bg-wine/10 hover:bg-wine/20 text-wine rounded-xl text-caption font-semibold transition-all flex items-center gap-1.5"
+            className="px-3.5 py-2 bg-wine/10 hover:bg-wine/20 text-wine rounded-xl text-caption font-semibold transition-all flex items-center gap-2"
           >
-            <span>📞 Contact Agent</span>
+            <PhoneIcon size={14} className="shrink-0" />
+            <span>Contact Agent</span>
           </Link>
         </div>
       </div>
@@ -60,8 +72,9 @@ export default function TrackingHeader({ orderId }: TrackingHeaderProps) {
           <span className="font-display font-bold text-h5 text-wine block">
             Today by 5:00 PM
           </span>
-          <span className="text-[11px] text-emerald-700 font-semibold flex items-center gap-1">
-            <span>🔒</span> OTP Verification Required
+          <span className="text-[11px] text-emerald-700 font-semibold flex items-center gap-1.5">
+            <LockIcon size={13} className="shrink-0 text-emerald-600" />
+            OTP Verification Required
           </span>
         </div>
 

@@ -12,6 +12,21 @@ import { setCartDrawerOpen } from "@/store/slices/uiSlice";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import Select from "@/components/ui/Select";
+import {
+  UserIcon,
+  CreditCardIcon,
+  MapPinIcon,
+  HeartIcon,
+  HistoryIcon,
+  PackageIcon,
+  GiftIcon,
+  MessageSquareIcon,
+  MenuIcon,
+  BankIcon,
+  SmartphoneIcon,
+  TruckIcon,
+  CheckIcon,
+} from "@/components/icons";
 import type { Product } from "@/types";
 
 type TabType =
@@ -324,14 +339,14 @@ export default function AccountClient() {
     }
   }, [searchParams]);
 
-  const navItems: { id: TabType; label: string; icon: string }[] = [
-    { id: "overview", label: "Overview", icon: "👤" },
-    { id: "saved-payments", label: "Saved Payments Method", icon: "💳" },
-    { id: "address-book", label: "Address Book", icon: "📍" },
-    { id: "wishlist", label: "Wishlist", icon: "🖤" },
-    { id: "order-history", label: "Order History", icon: "📜" },
-    { id: "track-order", label: "Track Order", icon: "📦" },
-    { id: "gift-card", label: "Gift Card Balance", icon: "🎁" },
+  const navItems: { id: TabType; label: string; icon: React.ReactNode }[] = [
+    { id: "overview", label: "Overview", icon: <UserIcon size={18} /> },
+    { id: "saved-payments", label: "Saved Payments Method", icon: <CreditCardIcon size={18} /> },
+    { id: "address-book", label: "Address Book", icon: <MapPinIcon size={18} /> },
+    { id: "wishlist", label: "Wishlist", icon: <HeartIcon size={18} /> },
+    { id: "order-history", label: "Order History", icon: <HistoryIcon size={18} /> },
+    { id: "track-order", label: "Track Order", icon: <PackageIcon size={18} /> },
+    { id: "gift-card", label: "Gift Card Balance", icon: <GiftIcon size={18} /> },
   ];
 
   return (
@@ -355,7 +370,9 @@ export default function AccountClient() {
           {/* Active Tab Bar with Menu Button */}
           <div className="flex items-center justify-between p-3.5 bg-surface rounded-2xl border border-wine/30 shadow-2xs">
             <div className="flex items-center gap-3">
-              <span className="text-h4">{navItems.find((n) => n.id === activeTab)?.icon}</span>
+              <span className="w-8 h-8 rounded-lg bg-wine/10 text-wine flex items-center justify-center shrink-0">
+                {navItems.find((n) => n.id === activeTab)?.icon}
+              </span>
               <div>
                 <span className="text-[10px] text-muted uppercase font-bold tracking-wider block">Current Section</span>
                 <span className="font-display font-semibold text-wine text-small">
@@ -370,11 +387,7 @@ export default function AccountClient() {
               onClick={() => setIsMobileMenuOpen(true)}
               className="px-3.5 py-2 bg-[#80222F] text-white rounded-xl text-caption font-semibold hover:bg-wine-dark transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs active:scale-95"
             >
-              <svg className="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2">
-                <line x1="4" y1="6" x2="20" y2="6" />
-                <line x1="4" y1="12" x2="20" y2="12" />
-                <line x1="4" y1="18" x2="20" y2="18" />
-              </svg>
+              <MenuIcon size={16} />
               <span>Menu</span>
             </button>
           </div>
@@ -393,7 +406,7 @@ export default function AccountClient() {
                 {/* Drawer Header */}
                 <div className="p-4 px-5 bg-surface border-b border-border/60 flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-body">🎛️</span>
+                    <MenuIcon size={18} className="text-wine" />
                     <span className="font-display font-semibold text-wine text-body">
                       Account Navigation
                     </span>
@@ -428,7 +441,9 @@ export default function AccountClient() {
                           }`}
                         >
                           <div className="flex items-center gap-3">
-                            <span className="text-body">{item.icon}</span>
+                            <span className={`shrink-0 ${isActive ? "text-white" : "text-wine"}`}>
+                              {item.icon}
+                            </span>
                             <span>{item.label}</span>
                           </div>
                           <span className={isActive ? "text-white" : "text-muted"}>&rsaquo;</span>
@@ -440,7 +455,8 @@ export default function AccountClient() {
                   {/* CUSTOMER SERVICE SUPPORT HELP CARD */}
                   <div className="bg-wine/5 rounded-xl border border-wine/15 p-4 text-caption space-y-2 leading-relaxed">
                     <h4 className="font-display font-semibold text-wine text-caption flex items-center gap-1.5">
-                      💬 Customer Support
+                      <MessageSquareIcon size={16} className="text-wine shrink-0" />
+                      Customer Support
                     </h4>
                     <p className="text-[11px] text-ink/80">
                       Need help? Reach our luxury client concierge:
@@ -490,7 +506,9 @@ export default function AccountClient() {
                       }`}
                     >
                       <div className="flex items-center gap-3">
-                        <span className="text-body">{item.icon}</span>
+                        <span className={`shrink-0 ${isActive ? "text-white" : "text-wine"}`}>
+                          {item.icon}
+                        </span>
                         <span>{item.label}</span>
                       </div>
                       <span className={isActive ? "text-white" : "text-muted"}>&rsaquo;</span>
@@ -503,7 +521,8 @@ export default function AccountClient() {
             {/* CUSTOMER SERVICE SUPPORT HELP CARD */}
             <div className="bg-wine/5 rounded-2xl border border-wine/15 p-5 text-caption space-y-3 leading-relaxed">
               <h4 className="font-display font-semibold text-wine text-small flex items-center gap-2">
-                💬 Need Assistance?
+                <MessageSquareIcon size={18} className="text-wine shrink-0" />
+                Need Assistance?
               </h4>
               <p className="text-ink/80">
                 If you have any questions or issues with an order, please contact our Customer Service team at:
@@ -704,35 +723,38 @@ export default function AccountClient() {
                       <button
                         type="button"
                         onClick={() => setNewPaymentType("card")}
-                        className={`py-2.5 px-3 rounded-xl text-body font-semibold border transition-all cursor-pointer ${
+                        className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition-all cursor-pointer flex items-center justify-center gap-2 ${
                           newPaymentType === "card"
                             ? "bg-wine text-white border-wine shadow-xs"
                             : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5"
                         }`}
                       >
-                        💳 Card
+                        <CreditCardIcon size={16} className={newPaymentType === "card" ? "text-white" : "text-wine"} />
+                        <span>Card</span>
                       </button>
                       <button
                         type="button"
                         onClick={() => setNewPaymentType("upi")}
-                        className={`py-2.5 px-3 rounded-xl text-body font-semibold border transition-all cursor-pointer ${
+                        className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition-all cursor-pointer flex items-center justify-center gap-2 ${
                           newPaymentType === "upi"
                             ? "bg-wine text-white border-wine shadow-xs"
                             : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5"
                         }`}
                       >
-                        📱 UPI ID
+                        <SmartphoneIcon size={16} className={newPaymentType === "upi" ? "text-white" : "text-wine"} />
+                        <span>UPI ID</span>
                       </button>
                       <button
                         type="button"
                         onClick={() => setNewPaymentType("netbanking")}
-                        className={`py-2.5 px-3 rounded-xl text-body font-semibold border transition-all cursor-pointer ${
+                        className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition-all cursor-pointer flex items-center justify-center gap-2 ${
                           newPaymentType === "netbanking"
                             ? "bg-wine text-white border-wine shadow-xs"
                             : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5"
                         }`}
                       >
-                        🏦 NetBanking
+                        <BankIcon size={16} className={newPaymentType === "netbanking" ? "text-white" : "text-wine"} />
+                        <span>NetBanking</span>
                       </button>
                     </div>
 
@@ -779,34 +801,26 @@ export default function AccountClient() {
                           </div>
                         </div>
                         <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <label htmlFor="card-expiry-month" className="block text-caption font-semibold text-ink mb-1.5">Expiry Month</label>
-                            <select
-                              id="card-expiry-month"
-                              value={newPaymentForm.expiryMonth}
-                              onChange={(e) => setNewPaymentForm({ ...newPaymentForm, expiryMonth: e.target.value })}
-                              className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150 cursor-pointer"
-                            >
-                              {Array.from({ length: 12 }, (_, i) => {
-                                const m = (i + 1).toString().padStart(2, "0");
-                                return <option key={m} value={m}>{m}</option>;
-                              })}
-                            </select>
-                          </div>
-                          <div>
-                            <label htmlFor="card-expiry-year" className="block text-caption font-semibold text-ink mb-1.5">Expiry Year</label>
-                            <select
-                              id="card-expiry-year"
-                              value={newPaymentForm.expiryYear}
-                              onChange={(e) => setNewPaymentForm({ ...newPaymentForm, expiryYear: e.target.value })}
-                              className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150 cursor-pointer"
-                            >
-                              {Array.from({ length: 10 }, (_, i) => {
-                                const y = (2026 + i).toString();
-                                return <option key={y} value={y}>{y}</option>;
-                              })}
-                            </select>
-                          </div>
+                          <Select
+                            label="Expiry Month"
+                            value={newPaymentForm.expiryMonth}
+                            onChange={(val) => setNewPaymentForm({ ...newPaymentForm, expiryMonth: val })}
+                            options={Array.from({ length: 12 }, (_, i) => {
+                              const m = (i + 1).toString().padStart(2, "0");
+                              return { value: m, label: m };
+                            })}
+                            size="md"
+                          />
+                          <Select
+                            label="Expiry Year"
+                            value={newPaymentForm.expiryYear}
+                            onChange={(val) => setNewPaymentForm({ ...newPaymentForm, expiryYear: val })}
+                            options={Array.from({ length: 10 }, (_, i) => {
+                              const y = (2026 + i).toString();
+                              return { value: y, label: y };
+                            })}
+                            size="md"
+                          />
                         </div>
                       </div>
                     )}
@@ -843,21 +857,19 @@ export default function AccountClient() {
                     {/* NetBanking Form */}
                     {newPaymentType === "netbanking" && (
                       <div className="space-y-4">
-                        <div>
-                          <label htmlFor="netbank-select" className="block text-caption font-semibold text-ink mb-1.5">Select Bank</label>
-                          <select
-                            id="netbank-select"
-                            value={newPaymentForm.bankName}
-                            onChange={(e) => setNewPaymentForm({ ...newPaymentForm, bankName: e.target.value })}
-                            className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150 cursor-pointer"
-                          >
-                            <option value="State Bank of India">State Bank of India (SBI)</option>
-                            <option value="HDFC Bank">HDFC Bank</option>
-                            <option value="ICICI Bank">ICICI Bank</option>
-                            <option value="Axis Bank">Axis Bank</option>
-                            <option value="Kotak Mahindra Bank">Kotak Mahindra Bank</option>
-                          </select>
-                        </div>
+                        <Select
+                          label="Select Bank"
+                          value={newPaymentForm.bankName || "State Bank of India"}
+                          onChange={(val) => setNewPaymentForm({ ...newPaymentForm, bankName: val })}
+                          options={[
+                            { value: "State Bank of India", label: "State Bank of India (SBI)" },
+                            { value: "HDFC Bank", label: "HDFC Bank" },
+                            { value: "ICICI Bank", label: "ICICI Bank" },
+                            { value: "Axis Bank", label: "Axis Bank" },
+                            { value: "Kotak Mahindra Bank", label: "Kotak Mahindra Bank" },
+                          ]}
+                          size="md"
+                        />
                       </div>
                     )}
 
@@ -1516,8 +1528,8 @@ export default function AccountClient() {
                   <div className="pt-6 border-t border-border space-y-6">
                     <div className="p-4 bg-wine/5 rounded-2xl border border-wine/15 flex flex-wrap items-center justify-between gap-4">
                       <div>
-                        <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold uppercase tracking-wider">
-                          IN TRANSIT 🚚
+                        <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold uppercase tracking-wider inline-flex items-center gap-1.5">
+                          IN TRANSIT <TruckIcon size={12} className="shrink-0" />
                         </span>
                         <h4 className="font-display font-semibold text-wine text-small sm:text-body mt-1">
                           Order #LX-89241 • Royal Solitaire Diamond Ring
@@ -1541,19 +1553,19 @@ export default function AccountClient() {
                             title: "Order Placed & Certified",
                             desc: "Aug 26, 2026 • BIS Hallmark & IGI Diamond verification complete.",
                             status: "completed",
-                            icon: "✓",
+                            icon: <CheckIcon size={12} />,
                           },
                           {
                             title: "Handed to BlueDart Express",
                             desc: "Aug 27, 2026 • Sealed in armored tamper-proof luxury vault box.",
                             status: "completed",
-                            icon: "✓",
+                            icon: <CheckIcon size={12} />,
                           },
                           {
                             title: "Out for Delivery",
                             desc: "Aug 28, 2026 • Expected delivery by 5:00 PM (OTP signature required).",
                             status: "active",
-                            icon: "🚚",
+                            icon: <TruckIcon size={12} />,
                           },
                         ].map((step, idx, arr) => {
                           const isLast = idx === arr.length - 1;

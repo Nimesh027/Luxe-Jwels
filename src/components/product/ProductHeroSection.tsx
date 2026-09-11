@@ -283,10 +283,11 @@ export default function ProductHeroSection({
             {/* Add to Cart */}
             <Button
               variant="dark"
-              className="flex-1 h-12 rounded-xl text-small font-medium shadow-sm hover:shadow-md flex items-center justify-center gap-2 cursor-pointer"
+              leftIcon={<ShoppingBagIcon size={18} />}
+              className="flex-1 h-12 rounded-xl text-small font-medium shadow-sm hover:shadow-md cursor-pointer"
               onClick={() => add(product, quantity)}
             >
-              <ShoppingBagIcon size={18} /> Add To Cart
+              Add To Cart
             </Button>
           </div>
         </div>

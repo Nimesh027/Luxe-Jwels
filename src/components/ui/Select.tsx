@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { ChevronDownIcon } from "@/components/icons";
+import { ChevronDownIcon, CheckIcon } from "@/components/icons";
 
 export interface SelectOption {
   label: string;
@@ -14,6 +14,7 @@ export interface SelectProps {
   value: string;
   onChange: (value: string) => void;
   label?: string;
+  labelClassName?: string;
   placeholder?: string;
   className?: string;
   containerClassName?: string;
@@ -22,8 +23,8 @@ export interface SelectProps {
 }
 
 const sizeClasses = {
-  sm: "text-[14px] pl-3.5 pr-8 py-2 rounded-lg",
-  md: "text-small pl-4 pr-9 py-2.5 rounded-lg",
+  sm: "text-[14px] pl-3.5 pr-8 py-2 rounded-xl",
+  md: "text-body pl-3.5 pr-9 py-2.5 rounded-xl",
   lg: "text-body pl-4 pr-10 py-3 rounded-xl",
 };
 
@@ -32,6 +33,7 @@ export default function Select({
   value,
   onChange,
   label,
+  labelClassName,
   placeholder = "Select an option",
   className,
   containerClassName,
@@ -58,8 +60,12 @@ export default function Select({
   }, [open]);
 
   return (
-    <div className={cn("flex flex-col gap-1.5 relative", containerClassName)}>
-      {label && <label className="text-caption text-muted uppercase tracking-wider font-medium">{label}</label>}
+    <div className={cn("flex flex-col gap-1.5 relative w-full", containerClassName)}>
+      {label && (
+        <label className={cn("block text-caption font-semibold text-ink cursor-pointer", labelClassName)}>
+          {label}
+        </label>
+      )}
 
       <div ref={ref} className="relative inline-block w-full">
         {/* Select Trigger */}
@@ -71,7 +77,7 @@ export default function Select({
             "w-full inline-flex items-center justify-between gap-2 font-medium border bg-surface text-ink transition-all duration-150 cursor-pointer select-none",
             "disabled:opacity-50 disabled:cursor-not-allowed",
             open
-              ? "border-wine/50 bg-wine/5 text-wine shadow-xs"
+              ? "border-wine bg-wine/5 text-wine shadow-xs ring-1 ring-wine/20"
               : "border-border hover:border-wine/40 hover:text-wine",
             sizeClasses[size],
             className
@@ -89,7 +95,7 @@ export default function Select({
 
         {/* Dropdown Menu */}
         {open && (
-          <div className="absolute right-0 top-[calc(100%+6px)] z-50 min-w-[170px] w-full bg-surface rounded-xl shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-1 duration-150">
+          <div className="absolute left-0 right-0 top-[calc(100%+6px)] z-50 min-w-full bg-surface border border-wine/20 rounded-xl shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-1 duration-150">
             <div className="h-[2px] bg-gradient-to-r from-wine/60 via-gold/40 to-transparent" />
             <div className="py-1.5 max-h-60 overflow-y-auto">
               {options.map((opt) => {
@@ -103,19 +109,14 @@ export default function Select({
                       setOpen(false);
                     }}
                     className={cn(
-                      "w-full flex items-center gap-2.5 px-4 py-2.5 text-[12px] text-left transition-colors duration-100 cursor-pointer",
+                      "w-full flex items-center justify-between px-3.5 py-2.5 text-caption sm:text-body text-left transition-colors duration-100 cursor-pointer",
                       isActive
-                        ? "bg-wine/8 text-wine font-semibold"
+                        ? "bg-wine/10 text-wine font-bold"
                         : "text-ink hover:bg-wine/5 hover:text-wine"
                     )}
                   >
-                    {/* <span
-                      className={cn(
-                        "w-1.5 h-1.5 rounded-full shrink-0 transition-all",
-                        isActive ? "bg-wine" : "bg-transparent"
-                      )}
-                    /> */}
                     <span className="truncate">{opt.label}</span>
+                    {isActive && <CheckIcon size={14} className="text-wine shrink-0" />}
                   </button>
                 );
               })}
