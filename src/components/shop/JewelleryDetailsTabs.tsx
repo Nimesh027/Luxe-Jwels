@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, memo } from "react";
 import {
   ChevronDownIcon,
   GoldBarIcon,
@@ -12,6 +12,7 @@ import {
 } from "@/components/icons";
 import SectionTitle from "@/components/common/SectionTitle";
 import Tabs, { TabOption } from "@/components/ui/Tabs";
+import Button from "@/components/ui/Button";
 import type { Product } from "@/types";
 import { formatPrice } from "@/lib/utils";
 import Section from "../common/Section";
@@ -23,7 +24,7 @@ interface JewelleryDetailsTabsProps {
 type TabType = "details" | "price";
 type AccordionKey = "metal" | "diamond" | "general" | "description";
 
-export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsProps) {
+function JewelleryDetailsTabsComponent({ product }: JewelleryDetailsTabsProps) {
   const [activeTab, setActiveTab] = useState<TabType>("details");
   const [openAccordion, setOpenAccordion] = useState<AccordionKey | null>("metal");
   const [showFullDesc, setShowFullDesc] = useState(false);
@@ -81,8 +82,8 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
             <div className="space-y-4">
               {/* 1. Metal Details Accordion */}
               <div className="overflow-hidden rounded-2xl border border-border bg-white transition-all">
-                <button
-                  type="button"
+                <Button
+                  variant="unstyled"
                   onClick={() => toggleAccordion("metal")}
                   className="flex w-full items-center justify-between px-6 py-4 text-left font-medium text-ink hover:bg-cream/40 cursor-pointer"
                 >
@@ -97,7 +98,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                   <span className={`text-caption text-muted transition-transform duration-300 ${openAccordion === "metal" ? "rotate-180" : ""}`}>
                     <ChevronDownIcon size={16} />
                   </span>
-                </button>
+                </Button>
 
                 <div
                   className={`grid transition-all duration-300 ease-in-out ${openAccordion === "metal"
@@ -138,8 +139,8 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
 
               {/* 2. Diamond Details Accordion */}
               <div className="overflow-hidden rounded-2xl border border-border bg-white transition-all">
-                <button
-                  type="button"
+                <Button
+                  variant="unstyled"
                   onClick={() => toggleAccordion("diamond")}
                   className="flex w-full items-center justify-between px-6 py-4 text-left font-medium text-ink hover:bg-cream/40 cursor-pointer"
                 >
@@ -154,7 +155,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                   <span className={`text-caption text-muted transition-transform duration-300 ${openAccordion === "diamond" ? "rotate-180" : ""}`}>
                     <ChevronDownIcon size={16} />
                   </span>
-                </button>
+                </Button>
 
                 <div
                   className={`grid transition-all duration-300 ease-in-out ${openAccordion === "diamond"
@@ -193,8 +194,8 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
 
               {/* 3. General Details Accordion */}
               <div className="overflow-hidden rounded-2xl border border-border bg-white transition-all">
-                <button
-                  type="button"
+                <Button
+                  variant="unstyled"
                   onClick={() => toggleAccordion("general")}
                   className="flex w-full items-center justify-between px-6 py-4 text-left font-medium text-ink hover:bg-cream/40 cursor-pointer"
                 >
@@ -209,7 +210,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                   <span className={`text-caption text-muted transition-transform duration-300 ${openAccordion === "general" ? "rotate-180" : ""}`}>
                     <ChevronDownIcon size={16} />
                   </span>
-                </button>
+                </Button>
 
                 <div
                   className={`grid transition-all duration-300 ease-in-out ${openAccordion === "general"
@@ -254,8 +255,8 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
 
               {/* 4. Description Accordion */}
               <div className="overflow-hidden rounded-2xl border border-border bg-white transition-all">
-                <button
-                  type="button"
+                <Button
+                  variant="unstyled"
                   onClick={() => toggleAccordion("description")}
                   className="flex w-full items-center justify-between px-6 py-4 text-left font-medium text-ink hover:bg-cream/40 cursor-pointer"
                 >
@@ -270,7 +271,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                   <span className={`text-caption text-muted transition-transform duration-300 ${openAccordion === "description" ? "rotate-180" : ""}`}>
                     <ChevronDownIcon size={16} />
                   </span>
-                </button>
+                </Button>
 
                 <div
                   className={`grid transition-all duration-300 ease-in-out ${openAccordion === "description"
@@ -287,13 +288,13 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                           <span>
                             {" "}
                             ...{" "}
-                            <button
-                              type="button"
+                            <Button
+                              variant="unstyled"
                               onClick={() => setShowFullDesc(true)}
                               className="font-medium text-wine hover:underline cursor-pointer"
                             >
                               See more
-                            </button>
+                            </Button>
                           </span>
                         )}
                       </p>
@@ -511,3 +512,5 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
     </Section>
   );
 }
+
+export default memo(JewelleryDetailsTabsComponent);

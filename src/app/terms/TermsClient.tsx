@@ -5,6 +5,7 @@ import Link from "next/link";
 import StaticPageLayout from "@/components/layout/StaticPageLayout";
 import Section from "@/components/common/Section";
 import SectionTitle from "@/components/common/SectionTitle";
+import Button from "@/components/ui/Button";
 
 interface AccordionItem {
   id: string;
@@ -310,8 +311,9 @@ export default function TermsClient() {
                 key={section.id}
                 className="bg-white rounded-2xl border border-border/80 overflow-hidden shadow-sm transition-all hover:border-wine/30 hover:shadow-md"
               >
-                <button
+                <Button
                   type="button"
+                  variant="unstyled"
                   onClick={() => toggleAccordion(section.id)}
                   className="w-full flex items-center justify-between p-5 text-left font-display text-lg font-semibold text-ink hover:text-wine cursor-pointer transition-colors"
                 >
@@ -322,7 +324,7 @@ export default function TermsClient() {
                   >
                     +
                   </span>
-                </button>
+                </Button>
 
                 {isOpen && (
                   <div className="px-5 pb-5 pt-0 text-body text-ink leading-relaxed font-light border-t border-border/40 animate-in fade-in duration-300">

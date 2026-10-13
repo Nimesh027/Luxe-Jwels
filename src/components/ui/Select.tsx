@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 import { cn } from "@/lib/utils";
 import { ChevronDownIcon, CheckIcon } from "@/components/icons";
+import Button from "@/components/ui/Button";
 
 export interface SelectOption {
   label: string;
@@ -28,7 +29,7 @@ const sizeClasses = {
   lg: "text-body pl-4 pr-10 py-3 rounded-xl",
 };
 
-export default function Select({
+function SelectComponent({
   options,
   value,
   onChange,
@@ -69,8 +70,8 @@ export default function Select({
 
       <div ref={ref} className="relative inline-block w-full">
         {/* Select Trigger */}
-        <button
-          type="button"
+        <Button
+          variant="unstyled"
           disabled={disabled}
           onClick={() => setOpen((prev) => !prev)}
           className={cn(
@@ -91,7 +92,7 @@ export default function Select({
               open ? "rotate-180 text-wine" : "text-muted"
             )}
           />
-        </button>
+        </Button>
 
         {/* Dropdown Menu */}
         {open && (
@@ -101,9 +102,9 @@ export default function Select({
               {options.map((opt) => {
                 const isActive = opt.value === value;
                 return (
-                  <button
+                  <Button
                     key={opt.value}
-                    type="button"
+                    variant="unstyled"
                     onClick={() => {
                       onChange(opt.value);
                       setOpen(false);
@@ -115,9 +116,9 @@ export default function Select({
                         : "text-ink hover:bg-wine/5 hover:text-wine"
                     )}
                   >
-                    <span className="truncate">{opt.label}</span>
-                    {isActive && <CheckIcon size={14} className="text-wine shrink-0" />}
-                  </button>
+                    <span>{opt.label}</span>
+                    {isActive && <CheckIcon size={14} className="text-wine shrink-0 stroke-[2.5]" />}
+                  </Button>
                 );
               })}
             </div>
@@ -127,3 +128,5 @@ export default function Select({
     </div>
   );
 }
+
+export default memo(SelectComponent);

@@ -62,9 +62,9 @@ export default function ProductHeroSection({
             {/* Thumbnail Strip */}
             <div className="flex gap-3 overflow-x-auto scroll-smooth shrink-0 md:w-20 md:flex-col md:overflow-y-visible [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
               {images.map((img, idx) => (
-                <button
+                <Button
                   key={idx}
-                  type="button"
+                  variant="unstyled"
                   onClick={(e) => {
                     onSelectImage(idx);
                     e.currentTarget.scrollIntoView({
@@ -73,10 +73,11 @@ export default function ProductHeroSection({
                       block: "nearest",
                     });
                   }}
-                  className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border-2 transition-all duration-200 cursor-pointer ${activeImageIndex === idx
-                    ? "border-wine shadow-md ring-2 ring-wine/20 scale-95"
-                    : "border-border/80 hover:border-gold opacity-75 hover:opacity-100 bg-white"
-                    }`}
+                  className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border-2 transition-all duration-200 cursor-pointer ${
+                    activeImageIndex === idx
+                      ? "border-wine shadow-md ring-2 ring-wine/20 scale-95"
+                      : "border-border/80 hover:border-gold opacity-75 hover:opacity-100 bg-white"
+                  }`}
                 >
                   <Image
                     src={img || "/images/product/diamond-ring.jpg"}
@@ -84,7 +85,7 @@ export default function ProductHeroSection({
                     fill
                     className="object-cover"
                   />
-                </button>
+                </Button>
               ))}
             </div>
 
@@ -180,39 +181,42 @@ export default function ProductHeroSection({
               <span className="font-normal text-muted capitalize">{selectedMetal} Gold</span>
             </label>
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
-              <button
-                type="button"
+              <Button
+                variant="unstyled"
                 onClick={() => setSelectedMetal("yellow")}
-                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${selectedMetal === "yellow"
-                  ? "border-wine bg-wine/5 font-semibold text-wine shadow-xs"
-                  : "border-border text-ink hover:border-gold"
-                  }`}
+                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${
+                  selectedMetal === "yellow"
+                    ? "border-wine bg-wine/5 font-semibold text-wine shadow-xs"
+                    : "border-border text-ink hover:border-gold"
+                }`}
               >
                 <span className="h-4 w-4 rounded-full bg-amber-400 border border-amber-600/30"></span>
                 Yellow Gold
-              </button>
-              <button
-                type="button"
+              </Button>
+              <Button
+                variant="unstyled"
                 onClick={() => setSelectedMetal("white")}
-                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${selectedMetal === "white"
-                  ? "border-wine bg-wine/5 font-semibold text-wine shadow-xs"
-                  : "border-border text-ink hover:border-gold"
-                  }`}
+                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${
+                  selectedMetal === "white"
+                    ? "border-wine bg-wine/5 font-semibold text-wine shadow-xs"
+                    : "border-border text-ink hover:border-gold"
+                }`}
               >
                 <span className="h-4 w-4 rounded-full bg-slate-200 border border-slate-400/40"></span>
                 White Gold
-              </button>
-              <button
-                type="button"
+              </Button>
+              <Button
+                variant="unstyled"
                 onClick={() => setSelectedMetal("rose")}
-                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${selectedMetal === "rose"
-                  ? "border-wine bg-wine/5 font-semibold text-wine shadow-xs"
-                  : "border-border text-ink hover:border-gold"
-                  }`}
+                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${
+                  selectedMetal === "rose"
+                    ? "border-wine bg-wine/5 font-semibold text-wine shadow-xs"
+                    : "border-border text-ink hover:border-gold"
+                }`}
               >
                 <span className="h-4 w-4 rounded-full bg-rose-300 border border-rose-500/40"></span>
                 Rose Gold
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -222,27 +226,28 @@ export default function ProductHeroSection({
               <label className="text-caption font-semibold uppercase tracking-wider text-ink">
                 Select Size / Length
               </label>
-              <button
-                type="button"
+              <Button
+                variant="unstyled"
                 onClick={onOpenSizeGuide}
                 className="text-caption text-wine underline hover:text-wine-dark cursor-pointer"
               >
                 Size Guide
-              </button>
+              </Button>
             </div>
             <div className="flex flex-wrap gap-2">
               {["14 INCHES", "16 INCHES", "18 INCHES", "20 INCHES"].map((sz) => (
-                <button
+                <Button
                   key={sz}
-                  type="button"
+                  variant="unstyled"
                   onClick={() => setSelectedSize(sz)}
-                  className={`rounded-xl border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${selectedSize === sz
-                    ? "border-wine bg-wine text-white shadow-xs"
-                    : "border-border bg-white text-ink hover:border-gold"
-                    }`}
+                  className={`rounded-xl border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${
+                    selectedSize === sz
+                      ? "border-wine bg-wine text-white shadow-xs"
+                      : "border-border bg-white text-ink hover:border-gold"
+                  }`}
                 >
                   {sz}
-                </button>
+                </Button>
               ))}
             </div>
           </div>

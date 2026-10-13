@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, memo } from "react";
 import { cn } from "@/lib/utils";
+import Button from "@/components/ui/Button";
 
 export interface TabOption<T extends string = string> {
   id: T;
@@ -19,7 +20,7 @@ export interface TabsProps<T extends string = string> {
   className?: string;
 }
 
-export default function Tabs<T extends string = string>({
+function TabsComponent<T extends string = string>({
   options,
   activeId,
   onChange,
@@ -50,9 +51,9 @@ export default function Tabs<T extends string = string>({
           {options.map((opt) => {
             const isActive = activeId === opt.id;
             return (
-              <button
+              <Button
                 key={opt.id}
-                type="button"
+                variant="unstyled"
                 onClick={(e) => handleTabClick(opt.id, e)}
                 className={cn(
                   "rounded-full px-6 py-2.5 text-body font-medium transition-all duration-300 cursor-pointer select-none",
@@ -62,7 +63,7 @@ export default function Tabs<T extends string = string>({
                 )}
               >
                 {opt.label}
-              </button>
+              </Button>
             );
           })}
         </div>
@@ -83,9 +84,9 @@ export default function Tabs<T extends string = string>({
         {options.map((opt) => {
           const isActive = activeId === opt.id;
           return (
-            <button
+            <Button
               key={opt.id}
-              type="button"
+              variant="unstyled"
               onClick={(e) => handleTabClick(opt.id, e)}
               className={cn(
                 "flex flex-col items-center shrink-0 rounded-2xl px-5 py-2.5 text-caption transition-all duration-300 ease-out active:scale-95 cursor-pointer select-none",
@@ -105,7 +106,7 @@ export default function Tabs<T extends string = string>({
                   {opt.subtitle}
                 </span>
               )}
-            </button>
+            </Button>
           );
         })}
       </div>
@@ -123,9 +124,9 @@ export default function Tabs<T extends string = string>({
       {options.map((opt) => {
         const isActive = activeId === opt.id;
         return (
-          <button
+          <Button
             key={opt.id}
-            type="button"
+            variant="unstyled"
             onClick={(e) => handleTabClick(opt.id, e)}
             className={cn(
               "pb-3 text-small font-medium transition-all duration-200 cursor-pointer border-b-2 whitespace-nowrap",
@@ -135,9 +136,13 @@ export default function Tabs<T extends string = string>({
             )}
           >
             {opt.label}
-          </button>
+          </Button>
         );
       })}
     </div>
   );
 }
+
+const Tabs = memo(TabsComponent) as typeof TabsComponent;
+
+export default Tabs;

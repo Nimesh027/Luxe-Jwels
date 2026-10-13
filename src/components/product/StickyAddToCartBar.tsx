@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import type { Product } from "@/types";
 import Button from "@/components/ui/Button";
 import { ShoppingBagIcon } from "@/components/icons";
@@ -9,7 +10,7 @@ interface StickyAddToCartBarProps {
   onAddToCart: () => void;
 }
 
-export default function StickyAddToCartBar({
+function StickyAddToCartBarComponent({
   product,
   onAddToCart,
 }: StickyAddToCartBarProps) {
@@ -59,7 +60,8 @@ export default function StickyAddToCartBar({
       >
         Add to Cart
       </Button>
-
     </div>
   );
 }
+
+export default memo(StickyAddToCartBarComponent);

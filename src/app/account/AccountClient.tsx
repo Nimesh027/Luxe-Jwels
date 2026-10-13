@@ -382,14 +382,15 @@ export default function AccountClient() {
             </div>
 
             {/* Click to open left menu drawer */}
-            <button
+            <Button
               type="button"
+              variant="unstyled"
               onClick={() => setIsMobileMenuOpen(true)}
               className="px-3.5 py-2 bg-[#80222F] text-white rounded-xl text-caption font-semibold hover:bg-wine-dark transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs active:scale-95"
             >
               <MenuIcon size={16} />
               <span>Menu</span>
-            </button>
+            </Button>
           </div>
 
           {/* LEFT SLIDE-OUT MENU DRAWER */}
@@ -411,14 +412,15 @@ export default function AccountClient() {
                       Account Navigation
                     </span>
                   </div>
-                  <button
+                  <Button
                     type="button"
+                    variant="unstyled"
                     onClick={() => setIsMobileMenuOpen(false)}
                     aria-label="Close menu"
                     className="w-8 h-8 rounded-full bg-wine/10 text-wine hover:bg-wine hover:text-white flex items-center justify-center font-bold text-small transition-colors cursor-pointer"
                   >
                     &times;
-                  </button>
+                  </Button>
                 </div>
 
                 {/* Drawer Navigation List */}
@@ -427,9 +429,10 @@ export default function AccountClient() {
                     {navItems.map((item) => {
                       const isActive = activeTab === item.id;
                       return (
-                        <button
+                        <Button
                           key={item.id}
                           type="button"
+                          variant="unstyled"
                           onClick={() => {
                             setActiveTab(item.id);
                             setIsMobileMenuOpen(false);
@@ -447,7 +450,7 @@ export default function AccountClient() {
                             <span>{item.label}</span>
                           </div>
                           <span className={isActive ? "text-white" : "text-muted"}>&rsaquo;</span>
-                        </button>
+                        </Button>
                       );
                     })}
                   </nav>
@@ -468,8 +471,9 @@ export default function AccountClient() {
 
                   {/* LOG OUT BUTTON */}
                   {isAuthenticated && (
-                    <button
+                    <Button
                       type="button"
+                      variant="unstyled"
                       onClick={() => {
                         dispatch(logout());
                         setIsMobileMenuOpen(false);
@@ -477,7 +481,7 @@ export default function AccountClient() {
                       className="w-full py-2.5 bg-red-50 hover:bg-red-100 text-red-700 rounded-xl border border-red-200 text-caption font-semibold transition-colors cursor-pointer"
                     >
                       Log Out of Account
-                    </button>
+                    </Button>
                   )}
                 </div>
               </div>
@@ -495,9 +499,10 @@ export default function AccountClient() {
                 {navItems.map((item) => {
                   const isActive = activeTab === item.id;
                   return (
-                    <button
+                    <Button
                       key={item.id}
                       type="button"
+                      variant="unstyled"
                       onClick={() => setActiveTab(item.id)}
                       className={`w-full flex items-center justify-between px-5 py-3.5 text-left text-body font-medium transition-all duration-150 cursor-pointer ${
                         isActive
@@ -512,7 +517,7 @@ export default function AccountClient() {
                         <span>{item.label}</span>
                       </div>
                       <span className={isActive ? "text-white" : "text-muted"}>&rsaquo;</span>
-                    </button>
+                    </Button>
                   );
                 })}
               </nav>
@@ -538,13 +543,14 @@ export default function AccountClient() {
 
             {/* LOG OUT BUTTON */}
             {isAuthenticated && (
-              <button
+              <Button
                 type="button"
+                variant="unstyled"
                 onClick={() => dispatch(logout())}
                 className="w-full py-3 bg-red-50 hover:bg-red-100 text-red-700 rounded-2xl border border-red-200 text-body font-semibold transition-colors cursor-pointer"
               >
                 Log Out of Account
-              </button>
+              </Button>
             )}
           </div>
 
@@ -555,7 +561,7 @@ export default function AccountClient() {
             {saveSuccess && (
               <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-caption font-medium flex items-center justify-between animate-in fade-in duration-200">
                 <span>✓ Changes updated successfully!</span>
-                <button type="button" onClick={() => setSaveSuccess(false)} className="text-emerald-800 font-bold text-body hover:text-emerald-900">&times;</button>
+                <Button variant="unstyled" onClick={() => setSaveSuccess(false)} className="text-emerald-800 font-bold text-body hover:text-emerald-900 cursor-pointer">&times;</Button>
               </div>
             )}
 
@@ -643,13 +649,14 @@ export default function AccountClient() {
                       <span className="font-display font-semibold text-wine text-small">
                         Personal Information
                       </span>
-                      <button
+                      <Button
                         type="button"
+                        variant="unstyled"
                         onClick={() => setIsEditing(true)}
                         className="px-3 py-1 border border-wine text-wine bg-white hover:bg-wine hover:text-white rounded-lg text-caption font-semibold transition-all cursor-pointer shadow-2xs"
                       >
                         Edit Details
-                      </button>
+                      </Button>
                     </div>
 
                     {/* Table View of Personal Details */}
@@ -701,13 +708,14 @@ export default function AccountClient() {
                     <p className="text-caption text-muted mt-0.5">Manage your saved credit/debit cards, UPI handles, and payment options for faster checkout.</p>
                   </div>
                   {!showAddPaymentForm && (
-                    <button
+                    <Button
                       type="button"
+                      variant="unstyled"
                       onClick={() => setShowAddPaymentForm(true)}
                       className="px-4 py-2 bg-wine text-white rounded-xl text-caption font-semibold hover:bg-wine-dark transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
                     >
                       <span>+</span> Add New Payment Method
-                    </button>
+                    </Button>
                   )}
                 </div>
 
@@ -720,8 +728,9 @@ export default function AccountClient() {
 
                     {/* Payment Type Selection Tabs */}
                     <div className="grid grid-cols-3 gap-2">
-                      <button
+                      <Button
                         type="button"
+                        variant="unstyled"
                         onClick={() => setNewPaymentType("card")}
                         className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition-all cursor-pointer flex items-center justify-center gap-2 ${
                           newPaymentType === "card"
@@ -731,9 +740,10 @@ export default function AccountClient() {
                       >
                         <CreditCardIcon size={16} className={newPaymentType === "card" ? "text-white" : "text-wine"} />
                         <span>Card</span>
-                      </button>
-                      <button
+                      </Button>
+                      <Button
                         type="button"
+                        variant="unstyled"
                         onClick={() => setNewPaymentType("upi")}
                         className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition-all cursor-pointer flex items-center justify-center gap-2 ${
                           newPaymentType === "upi"
@@ -743,9 +753,10 @@ export default function AccountClient() {
                       >
                         <SmartphoneIcon size={16} className={newPaymentType === "upi" ? "text-white" : "text-wine"} />
                         <span>UPI ID</span>
-                      </button>
-                      <button
+                      </Button>
+                      <Button
                         type="button"
+                        variant="unstyled"
                         onClick={() => setNewPaymentType("netbanking")}
                         className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition-all cursor-pointer flex items-center justify-center gap-2 ${
                           newPaymentType === "netbanking"
@@ -755,7 +766,7 @@ export default function AccountClient() {
                       >
                         <BankIcon size={16} className={newPaymentType === "netbanking" ? "text-white" : "text-wine"} />
                         <span>NetBanking</span>
-                      </button>
+                      </Button>
                     </div>
 
                     {/* Card Form */}
@@ -888,20 +899,22 @@ export default function AccountClient() {
                     {/* Submit Actions */}
                     <div className="flex items-center justify-end gap-3 pt-3 border-t border-border">
                       {paymentMethods.length > 0 && (
-                        <button
+                        <Button
                           type="button"
+                          variant="unstyled"
                           onClick={() => setShowAddPaymentForm(false)}
                           className="px-4 py-2 border border-border text-caption font-medium rounded-xl hover:bg-wine/5 transition-colors cursor-pointer"
                         >
                           Cancel
-                        </button>
+                        </Button>
                       )}
-                      <button
+                      <Button
                         type="submit"
+                        variant="unstyled"
                         className="px-5 py-2.5 bg-wine text-white text-body font-semibold rounded-xl hover:bg-wine-dark transition-all cursor-pointer shadow-xs"
                       >
                         Save Payment Method
-                      </button>
+                      </Button>
                     </div>
                   </form>
                 ) : (
@@ -955,8 +968,9 @@ export default function AccountClient() {
                           )}
                           <div className="flex items-center gap-2">
                             {!pm.isDefault && (
-                              <button
+                              <Button
                                 type="button"
+                                variant="unstyled"
                                 onClick={() => handleSetDefaultPayment(pm.id)}
                                 className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all cursor-pointer ${
                                   pm.type === "card"
@@ -965,10 +979,11 @@ export default function AccountClient() {
                                 }`}
                               >
                                 Set Default
-                              </button>
+                              </Button>
                             )}
-                            <button
+                            <Button
                               type="button"
+                              variant="unstyled"
                               onClick={() => handleRemovePayment(pm.id)}
                               className={`px-3 py-1.5 rounded-full text-caption font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5 ${
                                 pm.type === "card"
@@ -981,7 +996,7 @@ export default function AccountClient() {
                                 <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6" />
                               </svg>
                               <span>Remove</span>
-                            </button>
+                            </Button>
                           </div>
                         </div>
                       </div>
@@ -1001,14 +1016,15 @@ export default function AccountClient() {
                     </h2>
                     <p className="text-caption text-muted mt-0.5">Manage your home, office, and luxury gift delivery addresses.</p>
                   </div>
-                  {!showAddressForm && (
-                    <button
+                    {!showAddressForm && (
+                    <Button
                       type="button"
+                      variant="unstyled"
                       onClick={handleOpenAddAddress}
                       className="px-4 py-2 bg-wine text-white rounded-xl text-caption font-semibold hover:bg-wine-dark transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
                     >
                       <span>+</span> Add New Address
-                    </button>
+                    </Button>
                   )}
                 </div>
 
@@ -1140,20 +1156,22 @@ export default function AccountClient() {
                     {/* Submit Actions */}
                     <div className="flex items-center justify-end gap-3 pt-3 border-t border-border">
                       {addresses.length > 0 && (
-                        <button
+                        <Button
                           type="button"
+                          variant="unstyled"
                           onClick={() => setShowAddressForm(false)}
                           className="px-4 py-2 border border-border text-caption font-medium rounded-xl hover:bg-wine/5 transition-colors cursor-pointer"
                         >
                           Cancel
-                        </button>
+                        </Button>
                       )}
-                      <button
+                      <Button
                         type="submit"
+                        variant="unstyled"
                         className="px-5 py-2.5 bg-wine text-white text-body font-semibold rounded-xl hover:bg-wine-dark transition-all cursor-pointer shadow-xs"
                       >
                         Save Address
-                      </button>
+                      </Button>
                     </div>
                   </form>
                 ) : (
@@ -1190,8 +1208,9 @@ export default function AccountClient() {
                         {/* Card Actions Footer */}
                         <div className="pt-3.5 border-t border-wine/15 flex items-center justify-between gap-2">
                           <div className="flex items-center gap-2">
-                            <button
+                            <Button
                               type="button"
+                              variant="unstyled"
                               onClick={() => handleOpenEditAddress(addr)}
                               className="px-3.5 py-1.5 bg-white border border-wine/30 text-wine hover:bg-wine hover:text-white rounded-full text-caption font-semibold shadow-2xs transition-all duration-150 cursor-pointer flex items-center gap-1.5"
                             >
@@ -1199,19 +1218,21 @@ export default function AccountClient() {
                                 <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
                               </svg>
                               <span>Edit Details</span>
-                            </button>
+                            </Button>
                             {!addr.isDefault && (
-                              <button
+                              <Button
                                 type="button"
+                                variant="unstyled"
                                 onClick={() => handleSetDefaultAddress(addr.id)}
                                 className="px-3 py-1.5 text-caption text-muted hover:text-wine font-semibold transition-colors cursor-pointer"
                               >
                                 Set as Default
-                              </button>
+                              </Button>
                             )}
                           </div>
-                          <button
+                          <Button
                             type="button"
+                            variant="unstyled"
                             onClick={() => handleRemoveAddress(addr.id)}
                             className="px-3.5 py-1.5 bg-white border border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-900 rounded-full text-caption font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5"
                             title="Remove Address"
@@ -1220,7 +1241,7 @@ export default function AccountClient() {
                               <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6" />
                             </svg>
                             <span>Remove</span>
-                          </button>
+                          </Button>
                         </div>
                       </div>
                     ))}
@@ -1425,8 +1446,9 @@ export default function AccountClient() {
                           className="w-full px-4 py-3 pr-10 rounded-lg border border-border bg-white text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all font-mono"
                           required
                         />
-                        <button
+                        <Button
                           type="button"
+                          variant="unstyled"
                           onClick={() => setShowGiftCardPin(!showGiftCardPin)}
                           className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-wine p-1 cursor-pointer transition-colors"
                           title={showGiftCardPin ? "Hide PIN" : "Show PIN"}
@@ -1441,17 +1463,18 @@ export default function AccountClient() {
                               <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24M1 1l22 22" />
                             </svg>
                           )}
-                        </button>
+                        </Button>
                       </div>
 
                       {/* Button: Check Balance matching screenshot */}
                       <div className="md:col-span-3">
-                        <button
+                        <Button
                           type="submit"
+                          variant="unstyled"
                           className="w-full py-3 px-6 bg-[#80222F] hover:bg-[#681B26] text-white text-body font-semibold rounded-lg shadow-sm transition-all duration-150 cursor-pointer whitespace-nowrap active:scale-98"
                         >
                           Check Balance
-                        </button>
+                        </Button>
                       </div>
                     </form>
 

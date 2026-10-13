@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import React, { forwardRef, memo, type ButtonHTMLAttributes, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 export type ButtonVariant =
@@ -13,10 +13,11 @@ export type ButtonVariant =
   | "dark"
   | "wine"
   | "gold"
-  | "ghost";
+  | "ghost"
+  | "unstyled";
 
 export type ButtonColorTheme = "wine" | "gold" | "dark" | "light" | "cream" | "ink";
-export type ButtonSize = "xs" | "sm" | "md" | "lg" | "icon";
+export type ButtonSize = "xs" | "sm" | "md" | "lg" | "icon" | "none";
 export type ButtonRounded = "none" | "sm" | "md" | "lg" | "full";
 
 export interface ButtonProps
@@ -31,6 +32,7 @@ export interface ButtonProps
   rightIcon?: ReactNode;
   children?: ReactNode;
   className?: string;
+  type?: "button" | "submit" | "reset";
 }
 
 const roundedClasses: Record<ButtonRounded, string> = {
@@ -42,6 +44,7 @@ const roundedClasses: Record<ButtonRounded, string> = {
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
+  none: "",
   xs: "px-3 py-1.5 text-caption gap-1.5",
   sm: "px-4 py-2 text-caption gap-2",
   md: "px-6 py-2.5 sm:py-3 text-body gap-2.5",
@@ -49,20 +52,61 @@ const sizeClasses: Record<ButtonSize, string> = {
   icon: "p-2.5 sm:p-3 aspect-square items-center justify-center",
 };
 
-export default function Button({
-  variant = "fill",
-  colorTheme = "wine",
-  size = "md",
-  rounded = "full",
-  fullWidth = false,
-  href,
-  leftIcon,
-  rightIcon,
-  children,
-  className,
-  disabled,
-  ...rest
-}: ButtonProps) {
+const ButtonComponent = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  {
+    variant = "fill",
+    colorTheme = "wine",
+    size = "md",
+    rounded = "full",
+    fullWidth = false,
+    href,
+    leftIcon,
+    rightIcon,
+    children,
+    className,
+    disabled,
+    type = "button",
+    ...rest
+  },
+  ref
+) {
+  // If variant is 'unstyled', allow custom styling without intrusive defaults
+  if (variant === "unstyled") {
+    const unstyledClasses = cn(
+      "cursor-pointer select-none transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none",
+      fullWidth && "w-full",
+      className
+    );
+
+    const content = (
+      <>
+        {leftIcon && <span className="inline-flex shrink-0 items-center justify-center">{leftIcon}</span>}
+        {children}
+        {rightIcon && <span className="inline-flex shrink-0 items-center justify-center">{rightIcon}</span>}
+      </>
+    );
+
+    if (href) {
+      return (
+        <Link href={href} className={unstyledClasses}>
+          {content}
+        </Link>
+      );
+    }
+
+    return (
+      <button
+        ref={ref}
+        type={type}
+        disabled={disabled}
+        className={unstyledClasses}
+        {...rest}
+      >
+        {content}
+      </button>
+    );
+  }
+
   // Resolve computed variant style
   const getVariantStyles = (): string => {
     // 1. Icon Only Button Variant
@@ -161,8 +205,18 @@ export default function Button({
   }
 
   return (
-    <button disabled={disabled} className={combinedClasses} {...rest}>
+    <button
+      ref={ref}
+      type={type}
+      disabled={disabled}
+      className={combinedClasses}
+      {...rest}
+    >
       {content}
     </button>
   );
-}
+});
+
+ButtonComponent.displayName = "Button";
+
+export default memo(ButtonComponent);

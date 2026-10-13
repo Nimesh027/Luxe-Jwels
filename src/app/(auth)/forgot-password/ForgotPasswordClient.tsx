@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import Input from "@/components/ui/Input";
+import Button from "@/components/ui/Button";
 
 export default function ForgotPasswordClient() {
   const [email, setEmail] = useState("");
@@ -89,8 +90,9 @@ export default function ForgotPasswordClient() {
               />
 
               {/* Submit Button */}
-              <button
+              <Button
                 type="submit"
+                variant="unstyled"
                 disabled={isLoading}
                 className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold to-[#b59247] hover:from-[#dcb96b] hover:to-gold text-ink font-semibold text-caption uppercase tracking-[0.15em] transition-all duration-300 transform active:scale-[0.99] shadow-lg shadow-gold/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
               >
@@ -116,7 +118,7 @@ export default function ForgotPasswordClient() {
                 ) : (
                   <span>Send Recovery Link</span>
                 )}
-              </button>
+              </Button>
             </form>
           </>
         ) : (
@@ -138,13 +140,14 @@ export default function ForgotPasswordClient() {
 
             <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-caption text-cream/60 font-light">
               Didn&apos;t receive the email? Check your spam folder or{" "}
-              <button
+              <Button
                 type="button"
+                variant="unstyled"
                 onClick={() => setIsSubmitted(false)}
                 className="text-gold underline underline-offset-2 hover:text-cream font-medium cursor-pointer"
               >
                 try another email address
-              </button>.
+              </Button>.
             </div>
 
             <div className="pt-2">

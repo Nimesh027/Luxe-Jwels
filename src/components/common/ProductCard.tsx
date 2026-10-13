@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { HeartIcon, EyeIcon } from "@/components/icons";
@@ -14,7 +15,7 @@ interface ProductCardProps {
   product: Product;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+function ProductCardComponent({ product }: ProductCardProps) {
   const { add } = useCart();
   const { toggle, isWishlisted } = useWishlist();
   const wishlisted = isWishlisted(product.id);
@@ -65,8 +66,8 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Right-Side Action Icons - Visible on hover */}
         <div className="absolute top-3 right-3 z-10 flex flex-col gap-1.5 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto">
           {/* Wishlist */}
-          <button
-            type="button"
+          <Button
+            variant="unstyled"
             aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
             title="Wishlist"
             onClick={(e) => {
@@ -80,7 +81,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               filled={wishlisted}
               className={wishlisted ? "text-gold" : "currentColor"}
             />
-          </button>
+          </Button>
 
           {/* Quick View */}
           <Link
@@ -143,3 +144,5 @@ export default function ProductCard({ product }: ProductCardProps) {
     </Card>
   );
 }
+
+export default memo(ProductCardComponent);

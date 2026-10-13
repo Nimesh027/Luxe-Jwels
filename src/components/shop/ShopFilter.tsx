@@ -1,30 +1,15 @@
 "use client";
 
-import React from "react";
+import React, { memo } from "react";
 import { FilterIcon, CheckIcon } from "@/components/icons";
+import Button from "@/components/ui/Button";
+import {
+  filterCategoriesData as CATEGORIES,
+  filterCollectionsData as COLLECTIONS,
+  filterPriceRangesData as PRICE_RANGES,
+} from "@/data";
 
-export const CATEGORIES = [
-  { label: "Rings", value: "rings" },
-  { label: "Necklaces", value: "necklaces" },
-  { label: "Earrings", value: "earrings" },
-  { label: "Bracelets", value: "bracelets" },
-  { label: "Pendants", value: "pendants" },
-];
-
-export const COLLECTIONS = [
-  { label: "Diamond", value: "diamond-collection" },
-  { label: "Gold", value: "gold-collection" },
-  { label: "Men's", value: "mens-collection" },
-  { label: "Couple", value: "couple-collection" },
-  { label: "Gifts", value: "gift-collection" },
-];
-
-export const PRICE_RANGES = [
-  { label: "Under ₹25,000", value: "under-25k", min: 0, max: 25000 },
-  { label: "₹25,000 – ₹50,000", value: "25k-50k", min: 25000, max: 50000 },
-  { label: "₹50,000 – ₹1,00,000", value: "50k-1l", min: 50000, max: 100000 },
-  { label: "Above ₹1,00,000", value: "above-1l", min: 100000, max: Infinity },
-];
+export { CATEGORIES, COLLECTIONS, PRICE_RANGES };
 
 interface FilterCheckboxProps {
   label: string;
@@ -32,30 +17,32 @@ interface FilterCheckboxProps {
   onChange: () => void;
 }
 
-function FilterCheckbox({ label, checked, onChange }: FilterCheckboxProps) {
+const FilterCheckbox = memo(function FilterCheckbox({ label, checked, onChange }: FilterCheckboxProps) {
   return (
-    <button
-      type="button"
+    <Button
+      variant="unstyled"
       onClick={onChange}
       className="w-full flex items-center gap-3 px-2 py-1.5 rounded-lg text-left transition-all duration-200 cursor-pointer group hover:bg-ink/5"
     >
       <span
-        className={`w-[15px] h-[15px] shrink-0 rounded-[4px] border-[1.5px] flex items-center justify-center transition-all duration-200 ${checked
+        className={`w-[15px] h-[15px] shrink-0 rounded-[4px] border-[1.5px] flex items-center justify-center transition-all duration-200 ${
+          checked
             ? "bg-wine border-wine shadow-sm shadow-wine/30"
             : "border-border/70 bg-surface group-hover:border-wine/50"
-          }`}
+        }`}
       >
         {checked && <CheckIcon size={10} className="text-white stroke-[2.5]" />}
       </span>
       <span
-        className={`text-[13px] leading-none transition-colors duration-150 ${checked ? "text-wine font-semibold" : "text-ink/80 group-hover:text-ink"
-          }`}
+        className={`text-[13px] leading-none transition-colors duration-150 ${
+          checked ? "text-wine font-semibold" : "text-ink/80 group-hover:text-ink"
+        }`}
       >
         {label}
       </span>
-    </button>
+    </Button>
   );
-}
+});
 
 interface FilterRadioProps {
   label: string;
@@ -63,32 +50,34 @@ interface FilterRadioProps {
   onChange: () => void;
 }
 
-function FilterRadio({ label, checked, onChange }: FilterRadioProps) {
+const FilterRadio = memo(function FilterRadio({ label, checked, onChange }: FilterRadioProps) {
   return (
-    <button
-      type="button"
+    <Button
+      variant="unstyled"
       onClick={onChange}
       className="w-full flex items-center gap-3 px-2 py-1.5 rounded-lg text-left transition-all duration-200 cursor-pointer group hover:bg-ink/5"
     >
       <span
-        className={`w-[15px] h-[15px] shrink-0 rounded-full border-[1.5px] flex items-center justify-center transition-all duration-200 ${checked
+        className={`w-[15px] h-[15px] shrink-0 rounded-full border-[1.5px] flex items-center justify-center transition-all duration-200 ${
+          checked
             ? "border-wine"
             : "border-border/70 bg-surface group-hover:border-wine/50"
-          }`}
+        }`}
       >
         {checked && (
           <span className="w-[7px] h-[7px] rounded-full bg-wine block shadow-sm shadow-wine/40" />
         )}
       </span>
       <span
-        className={`text-[13px] leading-none transition-colors duration-150 ${checked ? "text-wine font-semibold" : "text-ink/80 group-hover:text-ink"
-          }`}
+        className={`text-[13px] leading-none transition-colors duration-150 ${
+          checked ? "text-wine font-semibold" : "text-ink/80 group-hover:text-ink"
+        }`}
       >
         {label}
       </span>
-    </button>
+    </Button>
   );
-}
+});
 
 function FilterSection({
   title,
@@ -121,7 +110,7 @@ export interface ShopFilterProps {
   activeFilterCount: number;
 }
 
-export default function ShopFilter({
+function ShopFilterComponent({
   activeCategories,
   activeCollections,
   activePrice,
@@ -142,12 +131,13 @@ export default function ShopFilter({
           </h2>
         </div>
         {activeFilterCount > 0 && (
-          <button
+          <Button
+            variant="unstyled"
             onClick={onClearAll}
             className="text-[10px] text-wine/80 hover:text-wine border border-wine/20 hover:border-wine/40 rounded-full px-2.5 py-0.5 transition-all duration-150 cursor-pointer font-semibold tracking-wide"
           >
             Clear {activeFilterCount}
-          </button>
+          </Button>
         )}
       </div>
 
@@ -193,3 +183,5 @@ export default function ShopFilter({
     </aside>
   );
 }
+
+export default memo(ShopFilterComponent);

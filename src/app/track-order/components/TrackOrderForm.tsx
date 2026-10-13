@@ -33,8 +33,9 @@ export default function TrackOrderForm({
 
         {/* Toggle Mode Tabs */}
         <div className="grid grid-cols-2 gap-2 p-1.5 bg-[#F8EFEF]/80 rounded-2xl mb-6 border border-wine/10">
-          <button
+          <Button
             type="button"
+            variant="unstyled"
             onClick={() => setTrackType("order")}
             className={`py-2.5 px-4 text-body font-semibold rounded-xl transition-all cursor-pointer ${trackType === "order"
               ? "bg-white text-wine shadow-sm"
@@ -42,9 +43,10 @@ export default function TrackOrderForm({
               }`}
           >
             Order ID & Mobile
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="unstyled"
             onClick={() => setTrackType("awb")}
             className={`py-2.5 px-4 text-body font-semibold rounded-xl transition-all cursor-pointer ${trackType === "awb"
               ? "bg-white text-wine shadow-sm"
@@ -52,7 +54,7 @@ export default function TrackOrderForm({
               }`}
           >
             AWB Tracking Number
-          </button>
+          </Button>
         </div>
 
         {/* Input Form */}

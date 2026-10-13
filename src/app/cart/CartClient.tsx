@@ -192,8 +192,8 @@ export default function CartClient() {
                           {/* Item Action Buttons with Theme Styling */}
                           <div className="mt-3 flex items-center gap-2 pt-0.5">
                             {/* Save to Wishlist Button */}
-                            <button
-                              type="button"
+                            <Button
+                              variant="unstyled"
                               onClick={() => toggleWishlist(product)}
                               className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium transition-all duration-200 cursor-pointer ${
                                 saved
@@ -215,7 +215,7 @@ export default function CartClient() {
                                 />
                               </svg>
                               <span>{saved ? "Saved in Wishlist" : "Save for later"}</span>
-                            </button>
+                            </Button>
 
                             {/* Remove Item Button */}
                             <Button
@@ -278,20 +278,20 @@ export default function CartClient() {
                   ← Continue Shopping
                 </Link>
 
-                <button
-                  type="button"
+                <Button
+                  variant="unstyled"
                   onClick={clear}
-                  className="text-neutral-400 hover:text-red-600 transition-colors cursor-pointer"
+                  className="text-neutral-400 hover:text-red-600 transition-colors cursor-pointer text-caption"
                 >
                   Clear Entire Bag
-                </button>
+                </Button>
               </div>
             </div>
 
             {/* Special Instructions & Gifting Note */}
             <div className="rounded-2xl border border-neutral-200/80 bg-white p-5 sm:p-6 shadow-xs">
-              <button
-                type="button"
+              <Button
+                variant="unstyled"
                 onClick={() => setNoteOpen(!noteOpen)}
                 className="flex w-full items-center justify-between text-left text-body font-semibold text-ink cursor-pointer"
               >
@@ -300,7 +300,7 @@ export default function CartClient() {
                   <span>Add Gift Message or Custom Ring Sizing Note</span>
                 </span>
                 <span className="text-small">{noteOpen ? "−" : "+"}</span>
-              </button>
+              </Button>
 
               {noteOpen && (
                 <div className="mt-3">
@@ -396,13 +396,13 @@ export default function CartClient() {
                   {promoApplied ? (
                     <div className="flex items-center justify-between rounded-xl bg-emerald-50 border border-emerald-200 p-2.5 text-caption text-emerald-800">
                       <span>Coupon &quot;{promoCode.toUpperCase()}&quot; Applied!</span>
-                      <button
-                        type="button"
+                      <Button
+                        variant="unstyled"
                         onClick={handleRemovePromo}
-                        className="font-semibold text-emerald-900 hover:underline cursor-pointer"
+                        className="font-semibold text-emerald-900 hover:underline cursor-pointer text-caption"
                       >
                         Remove
-                      </button>
+                      </Button>
                     </div>
                   ) : (
                     <form onSubmit={handleApplyPromo} className="flex gap-2">

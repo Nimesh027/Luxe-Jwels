@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, memo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -12,6 +12,7 @@ import {
   ChevronDownIcon,
 } from "@/components/icons";
 import Badge from "@/components/ui/Badge";
+import Button from "@/components/ui/Button";
 import MobileDrawer from "@/components/layout/MobileDrawer";
 import UserDrawer from "@/components/layout/UserDrawer";
 import UserModals from "@/components/layout/UserModals";
@@ -26,17 +27,14 @@ import {
 } from "@/store/slices/uiSlice";
 import { selectCartCount } from "@/store/slices/cartSlice";
 import { selectWishlistItems } from "@/store/slices/wishlistSlice";
-import { logout } from "@/store/slices/authSlice";
-import type { NavLink } from "@/types";
 
-export default function Header() {
+function HeaderComponent() {
   const pathname = usePathname();
   const dispatch = useAppDispatch();
   const links = useAppSelector((state) => state.navigation.links);
   const cartCount = useAppSelector(selectCartCount);
   const wishlistCount = useAppSelector(selectWishlistItems).length;
   const { user, isAuthenticated } = useAppSelector((state) => state.auth);
-  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
 
   const [activeLinkId, setActiveLinkId] = useState<string | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -75,33 +73,33 @@ export default function Header() {
 
   return (
     <header
-      className="sticky top-0 z-50 border-b border-border bg-surface shadow-xs"
+      className="sticky top-0 z-50 border-b border-border bg-surface shadow-xs w-full"
       onMouseLeave={handleMouseLeave}
     >
       {/* TOP ROW: Logo | Search | Other Icons */}
-      <div className="py-3 relative z-50 bg-surface">
-        <div className="container mx-auto flex items-center justify-between gap-4">
-          {/* Mobile Menu Hamburger */}
-          <div className="flex items-center gap-4">
-            <button
-              type="button"
+      <div className="py-2.5 sm:py-3.5 relative z-50 bg-surface">
+        <div className="container mx-auto flex items-center justify-between gap-3 px-4 sm:px-6">
+          {/* Mobile Menu Hamburger + Logo */}
+          <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+            <Button
+              variant="unstyled"
               aria-label="Open menu"
-              className="text-ink lg:hidden cursor-pointer hover:text-wine transition-colors p-1"
+              className="text-ink lg:hidden cursor-pointer hover:text-wine transition-colors p-1 shrink-0 -ml-1"
               onClick={() => dispatch(setMobileDrawerOpen(true))}
             >
-              <MenuIcon size={20} />
-            </button>
+              <MenuIcon size={22} />
+            </Button>
 
             {/* Logo */}
-            <Link href="/" className="flex items-center shrink-0">
-              <span className="font-display text-h4 tracking-[0.2em] text-ink font-semibold">
+            <Link href="/" className="flex items-center shrink min-w-0">
+              <span className="font-display text-[17px] xs:text-[19px] sm:text-xl md:text-h4 tracking-[0.14em] sm:tracking-[0.2em] text-ink font-semibold whitespace-nowrap select-none">
                 LUXE JEWELS
               </span>
             </Link>
           </div>
 
-          {/* Centered Search Bar */}
-          <div className="hidden md:flex flex-1 max-w-xl mx-6 lg:mx-10 justify-center relative z-50">
+          {/* Centered Search Bar: Desktop only */}
+          <div className="hidden lg:flex flex-1 max-w-xl mx-8 xl:mx-10 justify-center relative z-50">
             <SearchBar
               className="w-full"
               onOpenChange={(open) => {
@@ -111,66 +109,68 @@ export default function Header() {
             />
           </div>
 
-          {/* Right Action Icons */}
-          <div className="flex items-center gap-4 sm:gap-6 text-wine shrink-0">
-            {/* Mobile Search Toggle Icon */}
-            <button
-              type="button"
+          {/* Right Action Cluster */}
+          <div className="flex items-center gap-1.5 sm:gap-3 lg:gap-5 xl:gap-6 text-wine shrink-0">
+            {/* Mobile-only: Search Icon */}
+            <Button
+              variant="unstyled"
               aria-label="Toggle Search"
               onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
-              className="md:hidden text-wine hover:text-wine-dark transition-colors p-1 cursor-pointer"
+              className="lg:hidden text-wine hover:text-wine-dark transition-colors p-1.5 cursor-pointer flex items-center justify-center"
             >
               <SearchIcon size={20} />
-            </button>
+            </Button>
 
-            {/* Account / User Icon (Opens Right Slide Drawer) */}
-            <button
-              type="button"
+            {/* Desktop-only: Account / User Icon (Opens Right Slide Drawer) */}
+            <Button
+              variant="unstyled"
               aria-label="Account Menu"
               onClick={() => dispatch(setUserDrawerOpen(true))}
-              className="flex items-center justify-center text-wine hover:text-wine-dark transition-colors p-1 cursor-pointer"
+              className="hidden lg:flex items-center justify-center text-wine hover:text-wine-dark transition-colors p-1 cursor-pointer"
             >
               {isAuthenticated && user ? (
-                <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-wine text-cream text-body font-bold uppercase shadow-xs hover:bg-wine-dark hover:scale-105 transition-all">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-wine text-cream text-body font-bold uppercase shadow-xs hover:bg-wine-dark hover:scale-105 transition-all">
                   {user.name.charAt(0)}
                 </div>
               ) : (
-                <UserIcon size={20} />
+                <UserIcon size={21} />
               )}
-            </button>
+            </Button>
 
-            {/* Wishlist / Heart Icon */}
-            <button
-              type="button"
+            {/* Wishlist / Heart Icon (Mobile & Desktop) */}
+            <Button
+              variant="unstyled"
               aria-label="Open Wishlist"
+              id="header-wishlist-btn"
               onClick={() => dispatch(setWishlistDrawerOpen(true))}
-              className="relative text-wine hover:text-wine-dark transition-colors p-1 cursor-pointer"
+              className="relative text-wine hover:text-wine-dark transition-colors p-1.5 cursor-pointer flex items-center justify-center"
             >
               <HeartIcon size={20} />
               {wishlistCount > 0 && (
-                <Badge className="absolute -right-1.5 -top-1">{wishlistCount}</Badge>
+                <Badge className="absolute -right-1 -top-0.5 scale-90 sm:scale-100">{wishlistCount}</Badge>
               )}
-            </button>
+            </Button>
 
-            {/* Cart / Luxury Shopping Bag Icon */}
-            <button
-              type="button"
+            {/* Cart / Luxury Shopping Bag Icon (Mobile & Desktop) */}
+            <Button
+              variant="unstyled"
               aria-label="Open Cart"
+              id="header-cart-btn"
               onClick={() => dispatch(setCartDrawerOpen(true))}
-              className="relative text-wine hover:text-wine-dark transition-colors p-1 cursor-pointer"
+              className="relative text-wine hover:text-wine-dark transition-colors p-1.5 cursor-pointer flex items-center justify-center"
             >
               <ShoppingBagIcon size={20} />
               {cartCount > 0 && (
-                <Badge className="absolute -right-1.5 -top-1">{cartCount}</Badge>
+                <Badge className="absolute -right-1 -top-0.5 scale-90 sm:scale-100">{cartCount}</Badge>
               )}
-            </button>
+            </Button>
           </div>
         </div>
       </div>
 
       {/* Mobile Search Bar Dropdown (when toggled on mobile) */}
       {mobileSearchOpen && (
-        <div className="md:hidden border-b border-border px-4 py-3 bg-surface shadow-md animate-in fade-in slide-in-from-top-1">
+        <div className="lg:hidden border-b border-border px-4 py-3 bg-surface shadow-md animate-in fade-in slide-in-from-top-1 w-full">
           <SearchBar autoFocus onCloseMobile={() => setMobileSearchOpen(false)} />
         </div>
       )}
@@ -193,15 +193,17 @@ export default function Header() {
                 >
                   <Link
                     href={link.href}
-                    className={`flex items-center gap-1.5 text-caption uppercase tracking-wider transition-colors duration-150 py-1 ${isOpen ? "text-wine font-semibold" : "text-ink hover:text-wine"
-                      }`}
+                    className={`flex items-center gap-1.5 text-caption uppercase tracking-wider transition-colors duration-150 py-1 ${
+                      isOpen ? "text-wine font-semibold" : "text-ink hover:text-wine"
+                    }`}
                   >
                     <span>{link.label}</span>
                     {hasDropdown && (
                       <ChevronDownIcon
                         size={12}
-                        className={`transition-transform duration-200 ${isOpen ? "rotate-180 text-wine" : "text-muted"
-                          }`}
+                        className={`transition-transform duration-200 ${
+                          isOpen ? "rotate-180 text-wine" : "text-muted"
+                        }`}
                       />
                     )}
                   </Link>
@@ -261,3 +263,4 @@ export default function Header() {
   );
 }
 
+export default memo(HeaderComponent);

@@ -35,9 +35,9 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
           {data.tabs.map((tab) => {
             const isActive = tab.id === activeTabId;
             return (
-              <button
+              <Button
                 key={tab.id}
-                type="button"
+                variant="unstyled"
                 onMouseEnter={() => setActiveTabId(tab.id)}
                 onClick={() => setActiveTabId(tab.id)}
                 className={cn(
@@ -48,7 +48,7 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                 )}
               >
                 {tab.label}
-              </button>
+              </Button>
             );
           })}
         </div>

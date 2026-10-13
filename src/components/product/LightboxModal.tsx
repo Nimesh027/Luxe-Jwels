@@ -1,7 +1,9 @@
 "use client";
 
+import { memo } from "react";
 import Image from "next/image";
 import { CloseIcon, ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
+import Button from "@/components/ui/Button";
 
 interface LightboxModalProps {
   isOpen: boolean;
@@ -12,7 +14,7 @@ interface LightboxModalProps {
   onNavigate: (index: number) => void;
 }
 
-export default function LightboxModal({
+function LightboxModalComponent({
   isOpen,
   images,
   activeIndex,
@@ -25,26 +27,26 @@ export default function LightboxModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 sm:p-6 backdrop-blur-md transition-all">
       {/* Top Right Close Button */}
-      <button
-        type="button"
+      <Button
+        variant="unstyled"
         onClick={onClose}
         className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 hover:text-gold cursor-pointer"
         aria-label="Close Lightbox"
       >
         <CloseIcon size={22} />
-      </button>
+      </Button>
 
       {/* Middle Slider Container */}
       <div className="relative flex h-full w-full max-w-6xl items-center justify-center py-6">
         {/* Previous Image Button */}
-        <button
-          type="button"
+        <Button
+          variant="unstyled"
           aria-label="Previous Image"
           onClick={() => onNavigate((activeIndex - 1 + images.length) % images.length)}
           className="absolute left-2 sm:left-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-black/50 text-white shadow-lg backdrop-blur-xs transition-all hover:bg-wine hover:scale-110 cursor-pointer"
         >
           <ChevronLeftIcon size={24} />
-        </button>
+        </Button>
 
         {/* Main Lightbox Image */}
         <div className="relative h-full w-full max-h-[85vh] max-w-[85vw] flex items-center justify-center">
@@ -58,15 +60,17 @@ export default function LightboxModal({
         </div>
 
         {/* Next Image Button */}
-        <button
-          type="button"
+        <Button
+          variant="unstyled"
           aria-label="Next Image"
           onClick={() => onNavigate((activeIndex + 1) % images.length)}
           className="absolute right-2 sm:right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-black/50 text-white shadow-lg backdrop-blur-xs transition-all hover:bg-wine hover:scale-110 cursor-pointer"
         >
           <ChevronRightIcon size={24} />
-        </button>
+        </Button>
       </div>
     </div>
   );
 }
+
+export default memo(LightboxModalComponent);

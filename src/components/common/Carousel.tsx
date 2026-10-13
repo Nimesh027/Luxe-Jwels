@@ -1,9 +1,10 @@
 "use client";
 
+import { memo, type ReactNode } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
-import type { ReactNode } from "react";
 import { useCarousel } from "@/hooks/useCarousel";
 import { cn } from "@/lib/utils";
+import Button from "@/components/ui/Button";
 
 interface CarouselProps {
   items: ReactNode[];
@@ -15,7 +16,7 @@ interface CarouselProps {
   itemClassName?: string;
 }
 
-export default function Carousel({
+function CarouselComponent({
   items,
   itemsPerView = 1,
   autoplayMs,
@@ -38,7 +39,7 @@ export default function Carousel({
     <div className={cn("relative", className)}>
       <div className="overflow-hidden">
         <div
-          className="flex transition-transform duration-300 ease-out"
+          className="flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${translate}%)` }}
         >
           {items.map((item, itemIndex) => (
@@ -55,35 +56,35 @@ export default function Carousel({
 
       {showArrows && maxIndex > 0 && (
         <>
-          <button
-            type="button"
+          <Button
+            variant="unstyled"
             aria-label="Previous"
             onClick={prev}
             className="absolute left-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-ink shadow-md backdrop-blur-xs hover:bg-white hover:scale-105 transition-all cursor-pointer"
           >
             <ChevronLeftIcon size={20} />
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
+            variant="unstyled"
             aria-label="Next"
             onClick={next}
             className="absolute right-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-ink shadow-md backdrop-blur-xs hover:bg-white hover:scale-105 transition-all cursor-pointer"
           >
             <ChevronRightIcon size={20} />
-          </button>
+          </Button>
         </>
       )}
 
       {showDots && maxIndex > 0 && (
         <div className="mt-6 flex items-center justify-center gap-2">
           {Array.from({ length: maxIndex + 1 }, (_, dotIndex) => (
-            <button
+            <Button
               key={dotIndex}
-              type="button"
+              variant="unstyled"
               aria-label={`Go to slide ${dotIndex + 1}`}
               onClick={() => goTo(dotIndex)}
               className={cn(
-                "h-2 w-2 rounded-full transition-colors",
+                "h-2 w-2 rounded-full transition-colors cursor-pointer",
                 dotIndex === index ? "bg-gold" : "bg-border"
               )}
             />
@@ -93,3 +94,5 @@ export default function Carousel({
     </div>
   );
 }
+
+export default memo(CarouselComponent);

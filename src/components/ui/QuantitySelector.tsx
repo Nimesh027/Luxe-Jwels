@@ -1,6 +1,8 @@
 "use client";
 
+import { memo } from "react";
 import { cn } from "@/lib/utils";
+import Button from "@/components/ui/Button";
 
 interface QuantitySelectorProps {
   value: number;
@@ -11,7 +13,7 @@ interface QuantitySelectorProps {
   className?: string;
 }
 
-export default function QuantitySelector({
+function QuantitySelectorComponent({
   value,
   onChange,
   min = 1,
@@ -57,8 +59,8 @@ export default function QuantitySelector({
         className
       )}
     >
-      <button
-        type="button"
+      <Button
+        variant="unstyled"
         aria-label="Decrease quantity"
         disabled={value <= min}
         onClick={handleDecrement}
@@ -68,7 +70,7 @@ export default function QuantitySelector({
         )}
       >
         −
-      </button>
+      </Button>
 
       <span
         className={cn(
@@ -79,8 +81,8 @@ export default function QuantitySelector({
         {value}
       </span>
 
-      <button
-        type="button"
+      <Button
+        variant="unstyled"
         aria-label="Increase quantity"
         disabled={value >= max}
         onClick={handleIncrement}
@@ -90,7 +92,9 @@ export default function QuantitySelector({
         )}
       >
         +
-      </button>
+      </Button>
     </div>
   );
 }
+
+export default memo(QuantitySelectorComponent);

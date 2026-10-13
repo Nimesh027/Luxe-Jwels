@@ -11,12 +11,8 @@ import { useAppSelector } from "@/store/hooks";
 import { filterProducts } from "@/lib/productFilter";
 import type { Product } from "@/types";
 
-const SORT_OPTIONS = [
-  { label: "Featured", value: "featured" },
-  { label: "Price: Low to High", value: "price-asc" },
-  { label: "Price: High to Low", value: "price-desc" },
-  { label: "Name A–Z", value: "name-asc" },
-];
+import { sortOptionsData as SORT_OPTIONS } from "@/data";
+import Drawer from "@/components/ui/Drawer";
 
 const PRODUCTS_PER_PAGE = 18;
 
@@ -88,16 +84,18 @@ function Pagination({
               &hellip;
             </span>
           ) : (
-            <button
+            <Button
               key={page}
+              variant="unstyled"
               onClick={() => onPageChange(page as number)}
-              className={`w-9 h-9 flex items-center justify-center text-[12px] font-medium rounded-lg border transition-all duration-150 cursor-pointer ${currentPage === page
-                ? "bg-wine border-wine text-white shadow-sm shadow-wine/20"
-                : "border-border text-ink hover:border-wine/50 hover:text-wine hover:bg-wine/5"
-                }`}
+              className={`w-9 h-9 flex items-center justify-center text-[12px] font-medium rounded-lg border transition-all duration-150 cursor-pointer ${
+                currentPage === page
+                  ? "bg-wine border-wine text-white shadow-sm shadow-wine/20"
+                  : "border-border text-ink hover:border-wine/50 hover:text-wine hover:bg-wine/5"
+              }`}
             >
               {page}
-            </button>
+            </Button>
           )
         )}
       </div>
@@ -297,55 +295,40 @@ function ShopContent() {
               </div>
             </div>
 
-            {/* ── Mobile Sidebar Overlay ─────────────────────────── */}
-            {sidebarOpen && (
-              <div className="fixed inset-0 z-50 lg:hidden">
-                <div
-                  className="absolute inset-0 bg-ink/40 backdrop-blur-sm"
-                  onClick={() => setSidebarOpen(false)}
-                />
-                <div className="absolute left-0 top-0 bottom-0 w-[300px] bg-surface shadow-2xl animate-in slide-in-from-left duration-300 flex flex-col">
-                  <div className="flex items-center justify-between px-5 py-4 border-b border-border">
-                    <div className="flex items-center gap-2">
-                      <svg className="w-3.5 h-3.5 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="4" y1="6" x2="20" y2="6" /><line x1="7" y1="12" x2="17" y2="12" /><line x1="10" y1="18" x2="14" y2="18" />
-                      </svg>
-                      <span className="!text-small font-extrabold uppercase tracking-[0.2em] text-ink">
-                        Filter By
-                      </span>
-                    </div>
-                    <Button
-                      onClick={() => setSidebarOpen(false)}
-                      variant="ghost"
-                      colorTheme="ink"
-                      size="sm"
-                      rounded="md"
-                      aria-label="Close filters"
-                      leftIcon={
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-                          <path d="M18 6L6 18M6 6l12 12" />
-                        </svg>
-                      }
-                    />
-                  </div>
-                  <div className="flex-1 overflow-y-auto px-5 py-5">
-                    <ShopFilter {...sidebarProps} />
-                  </div>
-                  <div className="px-5 py-4 border-t border-border">
-                    <Button
-                      onClick={() => setSidebarOpen(false)}
-                      variant="fill"
-                      colorTheme="wine"
-                      size="md"
-                      rounded="lg"
-                      fullWidth
-                    >
-                      View {products.length} {products.length === 1 ? "product" : "products"}
-                    </Button>
-                  </div>
+            {/* ── Mobile Sidebar Drawer ─────────────────────────── */}
+            <Drawer
+              isOpen={sidebarOpen}
+              onClose={() => setSidebarOpen(false)}
+              position="left"
+              maxWidth="max-w-[320px]"
+              ariaLabel="Filters"
+              title={
+                <div className="flex items-center gap-2">
+                  <svg className="w-3.5 h-3.5 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="4" y1="6" x2="20" y2="6" /><line x1="7" y1="12" x2="17" y2="12" /><line x1="10" y1="18" x2="14" y2="18" />
+                  </svg>
+                  <span className="!text-small font-extrabold uppercase tracking-[0.2em] text-ink">
+                    Filter By
+                  </span>
                 </div>
+              }
+              footer={
+                <Button
+                  onClick={() => setSidebarOpen(false)}
+                  variant="fill"
+                  colorTheme="wine"
+                  size="md"
+                  rounded="lg"
+                  fullWidth
+                >
+                  View {products.length} {products.length === 1 ? "product" : "products"}
+                </Button>
+              }
+            >
+              <div className="p-5">
+                <ShopFilter {...sidebarProps} />
               </div>
-            )}
+            </Drawer>
 
             {/* ── Product Grid — col-span-9 ──────────────────────── */}
             <div className="lg:col-span-9">

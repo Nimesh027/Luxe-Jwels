@@ -1,13 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import Section from "@/components/common/Section";
 import SectionTitle from "@/components/common/SectionTitle";
 import ReviewCard from "@/components/common/ReviewCard";
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
+import Button from "@/components/ui/Button";
 import { useAppSelector } from "@/store/hooks";
 
-export default function Testimonials() {
+function TestimonialsComponent() {
   const testimonials = useAppSelector((state) => state.testimonials.items);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -32,21 +33,18 @@ export default function Testimonials() {
     return () => window.removeEventListener("resize", updateItemsPerView);
   }, []);
 
-  // Max sliding index
   const maxIndex = Math.max(0, total - itemsPerView);
 
-  // Auto slide smoothly every 3.5s (pauses on mouse hover)
+  // Auto-play interval
   useEffect(() => {
-    if (isPaused || total <= itemsPerView) return;
+    if (isPaused || maxIndex <= 0) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, 3500);
+    }, 4500);
 
     return () => clearInterval(interval);
-  }, [isPaused, maxIndex, total, itemsPerView]);
-
-  if (!testimonials || total === 0) return null;
+  }, [isPaused, maxIndex]);
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
@@ -56,40 +54,41 @@ export default function Testimonials() {
     setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
   };
 
+  if (!testimonials || testimonials.length === 0) return null;
+
   return (
-    <Section className="bg-[#fdfaf7] border-y border-[#f2eae1] py-14 sm:py-18 md:py-20">
-      {/* Section Header matching Reference */}
+    <Section className="py-16 sm:py-24 bg-surface border-y border-border/60 overflow-hidden">
       <SectionTitle
-        title="Hear From Our Customers"
-        description="Loved by customers across every purchase."
-        align="center"
+        title="HEAR FROM OUR HAPPY CUSTOMERS"
+        description="Voices of elegance and delight from our cherished patrons"
         className="mb-8 sm:mb-12"
       />
 
+      {/* Carousel Container */}
       <div
         className="relative px-3 sm:px-6"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
         {/* Floating Left Carousel Navigation Arrow */}
-        <button
-          type="button"
+        <Button
+          variant="unstyled"
           onClick={handlePrev}
           aria-label="Previous customer reviews"
-          className="absolute -left-1 sm:-left-3 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-700 shadow-md hover:bg-neutral-50 hover:text-black transition-all cursor-pointer"
+          className="absolute left-0 sm:-left-3 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-neutral-200 bg-white/95 text-neutral-700 shadow-md hover:bg-neutral-50 hover:text-black transition-all cursor-pointer backdrop-blur-xs"
         >
-          <ArrowRightIcon className="h-4 w-4 rotate-180" />
-        </button>
+          <ArrowRightIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4 rotate-180" />
+        </Button>
 
         {/* Floating Right Carousel Navigation Arrow */}
-        <button
-          type="button"
+        <Button
+          variant="unstyled"
           onClick={handleNext}
           aria-label="Next customer reviews"
-          className="absolute -right-1 sm:-right-3 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-700 shadow-md hover:bg-neutral-50 hover:text-black transition-all cursor-pointer"
+          className="absolute right-0 sm:-right-3 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-neutral-200 bg-white/95 text-neutral-700 shadow-md hover:bg-neutral-50 hover:text-black transition-all cursor-pointer backdrop-blur-xs"
         >
-          <ArrowRightIcon className="h-4 w-4" />
-        </button>
+          <ArrowRightIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+        </Button>
 
         {/* Smooth Sliding Carousel Window */}
         <div className="overflow-hidden py-2 -mx-2.5">
@@ -118,7 +117,7 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {/* Dynamic Scaling Carousel Pagination Dots matching Reference */}
+        {/* Dynamic Scaling Carousel Pagination Dots */}
         <div className="mt-8 sm:mt-10 flex items-center justify-center gap-2 sm:gap-2.5 h-6">
           {Array.from({ length: total }).map((_, idx) => {
             const distance = Math.abs(idx - currentIndex);
@@ -134,9 +133,9 @@ export default function Testimonials() {
             }
 
             return (
-              <button
+              <Button
                 key={idx}
-                type="button"
+                variant="unstyled"
                 onClick={() => setCurrentIndex(Math.min(idx, maxIndex))}
                 aria-label={`Go to review ${idx + 1}`}
                 className={`rounded-full transition-all duration-300 cursor-pointer ${sizeClasses}`}
@@ -148,3 +147,5 @@ export default function Testimonials() {
     </Section>
   );
 }
+
+export default memo(TestimonialsComponent);

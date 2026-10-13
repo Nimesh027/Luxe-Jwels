@@ -143,9 +143,9 @@ export default function Hero() {
         {slides.length > 1 && (
           <div className="absolute bottom-5 sm:bottom-7 left-1/2 -translate-x-1/2 flex items-center gap-2 sm:gap-2.5 z-20">
             {slides.map((item, dotIndex) => (
-              <button
+              <Button
                 key={item.id}
-                type="button"
+                variant="unstyled"
                 aria-label={`Go to slide ${dotIndex + 1}`}
                 onClick={() => goTo(dotIndex)}
                 className={cn(

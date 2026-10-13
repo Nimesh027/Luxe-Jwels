@@ -1,23 +1,18 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { SearchIcon, CloseIcon, ArrowRightIcon } from "@/components/icons";
 import { useAppSelector } from "@/store/hooks";
 import { cn } from "@/lib/utils";
-
-const ROTATING_PLACEHOLDERS = [
-  "gold necklace",
-  "diamond jewellery",
-  "gold rings",
-  "bridal necklaces",
-  "solitaire earrings",
-  "gold bangles",
-  "men's chains",
-  "gift collections",
-];
+import Button from "@/components/ui/Button";
+import {
+  searchPlaceholdersData as ROTATING_PLACEHOLDERS,
+  popularSearchesData,
+  searchTrendingProductsData,
+} from "@/data";
 
 interface SearchBarProps {
   className?: string;
@@ -26,7 +21,7 @@ interface SearchBarProps {
   onOpenChange?: (open: boolean) => void;
 }
 
-export default function SearchBar({
+function SearchBarComponent({
   className,
   autoFocus = false,
   onCloseMobile,
@@ -142,8 +137,8 @@ export default function SearchBar({
 
         {/* Clear Button (when text is entered) */}
         {query && (
-          <button
-            type="button"
+          <Button
+            variant="unstyled"
             onClick={() => {
               setQuery("");
               inputRef.current?.focus();
@@ -152,13 +147,13 @@ export default function SearchBar({
             aria-label="Clear search"
           >
             <CloseIcon size={14} />
-          </button>
+          </Button>
         )}
       </form>
 
-      {/* Live Search Popup Dropdown - Centered beneath search bar */}
+      {/* Live Search Popup Dropdown */}
       {isOpen && (
-        <div className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-full min-w-[300px] sm:min-w-[480px] md:min-w-[540px] lg:min-w-[580px] max-w-xl bg-surface border border-border/80 shadow-2xl rounded-2xl lg:rounded-3xl p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-150 max-h-[80vh] overflow-y-auto">
+        <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 sm:mt-3 w-[calc(100vw-24px)] max-w-[calc(100vw-24px)] sm:w-full sm:min-w-[480px] md:min-w-[540px] lg:min-w-[580px] sm:max-w-xl bg-surface border border-border/80 shadow-2xl rounded-2xl lg:rounded-3xl p-3.5 sm:p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-150 max-h-[80vh] overflow-y-auto">
           {query.trim() ? (
             /* Filtered Search Results View when user types */
             <div>
@@ -225,14 +220,14 @@ export default function SearchBar({
                     ))}
 
                     <div className="pt-3 text-center border-t border-border/60">
-                      <button
-                        type="button"
+                      <Button
+                        variant="unstyled"
                         onClick={handleSearchSubmit}
                         className="inline-flex items-center gap-1.5 text-caption font-semibold text-wine hover:text-wine-dark cursor-pointer mx-auto"
                       >
                         <span>View all results for &quot;{query}&quot;</span>
                         <ArrowRightIcon className="w-3.5 h-3.5" />
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 ) : (
@@ -243,30 +238,24 @@ export default function SearchBar({
               </div>
             </div>
           ) : (
-            /* DEFAULT SEARCH VIEW (MATCHING REFERENCE IMAGE) */
+            /* DEFAULT SEARCH VIEW */
             <div className="space-y-5">
-              {/* SECTION 1: Popular Searches with Trending Arrow Chips */}
+              {/* SECTION 1: Popular Searches */}
               <div>
                 <span className="text-caption text-muted/80 font-normal block mb-2.5">
                   Popular Searches
                 </span>
                 <div className="flex flex-wrap gap-2">
-                  {[
-                    { label: "Gemstone", query: "gemstone" },
-                    { label: "Auspicious Jewellery", query: "auspicious" },
-                    { label: "Special Coins", query: "gold coins" },
-                    { label: "Pendants Under 30k", query: "pendants" },
-                  ].map((chip) => (
-                    <button
+                  {popularSearchesData.map((chip) => (
+                    <Button
                       key={chip.label}
-                      type="button"
+                      variant="unstyled"
                       onClick={() => {
                         setQuery(chip.label);
                         inputRef.current?.focus();
                       }}
                       className="px-3.5 py-1.5 rounded-xl border border-border/80 bg-surface hover:border-wine/60 hover:text-wine text-ink text-caption font-normal transition-all duration-150 inline-flex items-center gap-1.5 cursor-pointer shadow-2xs hover:bg-wine-soft/30"
                     >
-                      {/* Upward trending arrow icon */}
                       <svg
                         className="w-3.5 h-3.5 text-muted/70 group-hover:text-wine"
                         viewBox="0 0 24 24"
@@ -280,34 +269,18 @@ export default function SearchBar({
                         <polyline points="17 6 23 6 23 12" />
                       </svg>
                       <span>{chip.label}</span>
-                    </button>
+                    </Button>
                   ))}
                 </div>
               </div>
 
-              {/* SECTION 2: Trending Products (3-Column Image Cards) */}
+              {/* SECTION 2: Trending Products */}
               <div>
                 <span className="text-caption text-muted/80 font-normal block mb-2.5">
                   Trending Products
                 </span>
                 <div className="grid grid-cols-3 gap-3">
-                  {[
-                    {
-                      title: "Regal Diamond Encrusted Square..",
-                      image: "/images/product/Regal_Diamond.png",
-                      href: "/products/diamond-studs",
-                    },
-                    {
-                      title: "Modish Links Diamond Ring",
-                      image: "/images/product/Diamond_Ring.png",
-                      href: "/products/diamond-ring",
-                    },
-                    {
-                      title: "Teardrop Shaped Yellow Gold And.",
-                      image: "/images/product/Diamond_Pendant.png",
-                      href: "/products/gold-chain",
-                    },
-                  ].map((item, idx) => (
+                  {searchTrendingProductsData.map((item, idx) => (
                     <Link
                       key={idx}
                       href={item.href}
@@ -334,7 +307,7 @@ export default function SearchBar({
                 </div>
               </div>
 
-              {/* SECTION 3: Bottom Pink/Blush Store Banner */}
+              {/* SECTION 3: Bottom Store Banner */}
               <div className="p-3.5 sm:p-4 rounded-2xl bg-[#faedf0] border border-[#f5dede] text-center shadow-xs">
                 <p className="font-display text-body text-ink leading-snug">
                   <span className="text-ink/80 font-normal">Loved It Online? </span>
@@ -351,3 +324,5 @@ export default function SearchBar({
     </div>
   );
 }
+
+export default memo(SearchBarComponent);
