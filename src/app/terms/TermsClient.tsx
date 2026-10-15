@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import StaticPageLayout from "@/components/layout/StaticPageLayout";
 import Section from "@/components/common/Section";
+import Collapse from "@/components/ui/Collapse";
 import SectionTitle from "@/components/common/SectionTitle";
 
 interface AccordionItem {
@@ -117,7 +118,7 @@ export default function TermsClient() {
           </p>
           <p>
             You can also track your shipment anytime by visiting the{" "}
-            <Link href="/track-order" className="text-wine underline font-medium">
+            <Link href="/track-order" className="text-brown underline font-medium">
               Track Order
             </Link>{" "}
             page on our website.
@@ -289,14 +290,14 @@ export default function TermsClient() {
       breadcrumbLabel="Terms & Conditions"
       description="Please read these Terms and Conditions carefully before using the Luxe Jewels Website."
     >
-      <Section className="bg-surface/50 py-12 sm:py-20 relative overflow-hidden">
+      <Section className="bg-white/50 relative overflow-hidden">
         {/* Subtle decorative background elements */}
-        <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-wine/5 to-transparent pointer-events-none" />
+        <div className="absolute top-0 left-0 w-full h-64 bg-linear-to-b from-brown/5 to-transparent pointer-events-none" />
 
         {/* Header Note */}
         <SectionTitle
           title="Terms & Conditions"
-          titleClassName="!text-h3 text-wine font-semibold uppercase tracking-wider"
+          titleClassName="!text-h3 text-brown font-semibold tracking-wider"
           align="center"
           className="mb-8 sm:mb-12"
         />
@@ -308,29 +309,27 @@ export default function TermsClient() {
             return (
               <div
                 key={section.id}
-                className="bg-white rounded-2xl border border-border/80 overflow-hidden shadow-sm transition-all hover:border-wine/30 hover:shadow-md"
+                className="bg-white rounded-2xl border border-border/80 overflow-hidden shadow-sm transition-all hover:border-brown/30 hover:shadow-md"
               >
                 <button
                   type="button"
                   onClick={() => toggleAccordion(section.id)}
-                  className="w-full flex items-center justify-between p-5 text-left font-display text-lg font-semibold text-ink hover:text-wine cursor-pointer transition-colors"
+                  className="w-full flex items-center justify-between p-5 text-left font-display text-lg font-semibold text-ink hover:text-brown cursor-pointer transition-colors"
                 >
                   <span className="pr-4">{section.title}</span>
                   <span
-                    className={`w-7 h-7 rounded-full bg-wine/5 text-wine flex items-center justify-center font-bold shrink-0 transition-transform duration-300 ${isOpen ? "rotate-45 bg-wine text-white" : ""
+                    className={`w-7 h-7 rounded-full bg-brown/5 text-brown flex items-center justify-center font-bold shrink-0 transition-transform duration-300 ${isOpen ? "rotate-45 bg-brown text-white" : ""
                       }`}
                   >
                     +
                   </span>
                 </button>
 
-                {isOpen && (
-                  <div className="px-5 pb-5 pt-0 text-body text-ink leading-relaxed font-light border-t border-border/40 animate-in fade-in duration-300">
+                <Collapse open={isOpen} className="px-5 pb-5 pt-0 text-body text-ink leading-relaxed font-light border-t border-border/40">
                     <div className="pt-4 space-y-3">
                       {section.content}
                     </div>
-                  </div>
-                )}
+                  </Collapse>
               </div>
             );
           })}

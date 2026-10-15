@@ -31,6 +31,10 @@ export default function Newsletter() {
         >
           <div className="relative w-full flex-1">
             <input
+              id="newsletter-email"
+              name="email"
+              aria-label="Email address"
+              autoComplete="email"
               type="email"
               required
               placeholder={newsletter.placeholder || "Enter your email address"}
@@ -43,19 +47,19 @@ export default function Newsletter() {
           <Button
             type="submit"
             variant="fill"
-            colorTheme="wine"
-            className="h-12 w-full sm:w-auto px-8 rounded-full font-semibold text-body uppercase tracking-wider shadow-md hover:shadow-lg shrink-0"
+            colorTheme="brown"
+            className="w-full sm:w-auto tracking-wider shadow-md hover:shadow-lg shrink-0"
           >
             {newsletter.cta || "Subscribe"}
           </Button>
         </form>
 
         {submitted ? (
-          <p className="text-caption text-wine font-medium mt-3">
+          <p className="text-caption text-brown font-medium mt-3">
             Thank you for subscribing to Luxe Jewels updates!
           </p>
         ) : (
-          <p className="text-[11px] text-muted font-light mt-3">
+          <p className="text-micro text-muted font-light mt-3">
             By subscribing, you agree to our Privacy Policy. Unsubscribe anytime.
           </p>
         )}

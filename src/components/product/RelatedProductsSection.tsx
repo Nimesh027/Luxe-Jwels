@@ -15,7 +15,7 @@ export default function RelatedProductsSection({ relatedProducts }: RelatedProdu
   return (
     <Section className="bg-white">
       <SectionTitle title="You May Also Like" align="center" className="mb-8" />
-      <div className="grid grid-cols-2 gap-3.5 sm:gap-6 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-grid lg:grid-cols-4">
         {relatedProducts.map((relProduct) => (
           <ProductCard key={relProduct.id} product={relProduct} />
         ))}

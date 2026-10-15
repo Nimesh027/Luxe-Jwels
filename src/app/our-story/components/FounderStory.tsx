@@ -3,33 +3,33 @@ import Section from "@/components/common/Section";
 
 export default function FounderStory() {
   return (
-    <Section className="py-16 sm:py-24 bg-surface">
-      <div className="container max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+    <Section className="bg-white">
+      <div className="container max-w-6xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-split items-center">
           
           {/* IMAGE COLUMN */}
-          <div className="order-2 lg:order-1 relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none rounded-[2rem] overflow-hidden shadow-2xl">
+          <div className="order-2 lg:order-1 relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none rounded-4xl overflow-hidden shadow-2xl">
             <Image
               src="/images/collections/couple-collection.jpg"
               alt="The Luxe Jewels Founders"
               fill
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-wine/10 mix-blend-overlay" />
+            <div className="absolute inset-0 bg-brown/10 mix-blend-overlay" />
           </div>
 
           {/* CONTENT COLUMN */}
           <div className="order-1 lg:order-2 space-y-6">
             <div className="space-y-2">
-              <span className="text-caption font-bold uppercase tracking-[0.25em] text-gold">
+              <span className="text-caption font-bold tracking-widest text-gold-dark">
                 Our Genesis
               </span>
-              <h2 className="font-display text-h3 sm:text-h2 font-semibold text-wine leading-tight">
+              <h2 className="font-display text-h3 sm:text-h2 font-semibold text-brown leading-tight">
                 A Legacy Born from Passion and Precision
               </h2>
             </div>
             
-            <div className="w-12 h-[2px] bg-gold" />
+            <div className="w-12 h-0.5 bg-gold" />
             
             <div className="space-y-4 text-body text-muted leading-relaxed font-light">
               <p>
@@ -47,7 +47,7 @@ export default function FounderStory() {
               <p className="font-display text-h5 text-ink italic opacity-80">
                 "True luxury is not loud. It is the quiet confidence of exceptional craftsmanship."
               </p>
-              <span className="block mt-2 text-caption font-semibold uppercase tracking-widest text-wine">
+              <span className="block mt-2 text-caption font-semibold tracking-widest text-brown">
                 — The Founders
               </span>
             </div>

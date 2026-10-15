@@ -12,7 +12,7 @@ export const JewelryIcon: FC<JewelryIconProps> = ({ name, className = "w-7 h-7",
   switch (true) {
     case iconKey.includes("allgold") || iconKey.includes("all"):
       return (
-        <svg viewBox="0 0 36 36" fill="none" className={className} {...props}>
+        <svg aria-hidden="true" viewBox="0 0 36 36" fill="none" className={className} {...props}>
           <circle cx="18" cy="18" r="16.5" fill="#FAF6EE" stroke="#EFE4D2" strokeWidth="1" />
           <circle cx="13" cy="12" r="1.8" fill="#C9A961" />
           <circle cx="23" cy="12" r="1.8" fill="#C9A961" />
@@ -24,7 +24,7 @@ export const JewelryIcon: FC<JewelryIconProps> = ({ name, className = "w-7 h-7",
 
     case iconKey.includes("bangle"):
       return (
-        <svg viewBox="0 0 36 36" fill="none" className={className} {...props}>
+        <svg aria-hidden="true" viewBox="0 0 36 36" fill="none" className={className} {...props}>
           <circle cx="18" cy="18" r="16.5" fill="#FAF6EE" stroke="#EFE4D2" strokeWidth="1" />
           <ellipse cx="18" cy="18" rx="10.5" ry="6.5" stroke="#C9A961" strokeWidth="2" />
           <ellipse cx="18" cy="18" rx="7.5" ry="4" stroke="#A9873F" strokeWidth="1" strokeDasharray="2 1.5" />
@@ -33,7 +33,7 @@ export const JewelryIcon: FC<JewelryIconProps> = ({ name, className = "w-7 h-7",
 
     case iconKey.includes("bracelet"):
       return (
-        <svg viewBox="0 0 36 36" fill="none" className={className} {...props}>
+        <svg aria-hidden="true" viewBox="0 0 36 36" fill="none" className={className} {...props}>
           <circle cx="18" cy="18" r="16.5" fill="#FAF6EE" stroke="#EFE4D2" strokeWidth="1" />
           <circle cx="18" cy="18" r="9.5" stroke="#C9A961" strokeWidth="1.6" strokeDasharray="3.5 2" />
           <circle cx="18" cy="8.5" r="2.2" fill="#A9873F" />
@@ -43,7 +43,7 @@ export const JewelryIcon: FC<JewelryIconProps> = ({ name, className = "w-7 h-7",
 
     case iconKey.includes("earring") || iconKey.includes("stud"):
       return (
-        <svg viewBox="0 0 36 36" fill="none" className={className} {...props}>
+        <svg aria-hidden="true" viewBox="0 0 36 36" fill="none" className={className} {...props}>
           <circle cx="18" cy="18" r="16.5" fill="#FAF6EE" stroke="#EFE4D2" strokeWidth="1" />
           {/* Left earring */}
           <circle cx="13" cy="12" r="1.6" fill="#A9873F" />
@@ -58,7 +58,7 @@ export const JewelryIcon: FC<JewelryIconProps> = ({ name, className = "w-7 h-7",
 
     case iconKey.includes("chain"):
       return (
-        <svg viewBox="0 0 36 36" fill="none" className={className} {...props}>
+        <svg aria-hidden="true" viewBox="0 0 36 36" fill="none" className={className} {...props}>
           <circle cx="18" cy="18" r="16.5" fill="#FAF6EE" stroke="#EFE4D2" strokeWidth="1" />
           <path d="M10 12c2.5 6 5.5 13 8 13s5.5-7 8-13" stroke="#C9A961" strokeWidth="2" strokeLinecap="round" strokeDasharray="3.5 2" />
           <path d="M12.5 12c2 4.5 4 10 5.5 10s3.5-5.5 5.5-10" stroke="#A9873F" strokeWidth="1" strokeLinecap="round" />
@@ -67,7 +67,7 @@ export const JewelryIcon: FC<JewelryIconProps> = ({ name, className = "w-7 h-7",
 
     case iconKey.includes("pendant"):
       return (
-        <svg viewBox="0 0 36 36" fill="none" className={className} {...props}>
+        <svg aria-hidden="true" viewBox="0 0 36 36" fill="none" className={className} {...props}>
           <circle cx="18" cy="18" r="16.5" fill="#FAF6EE" stroke="#EFE4D2" strokeWidth="1" />
           <path d="M12 10c2 3.5 4 7 6 7s4-3.5 6-7" stroke="#D3C5AE" strokeWidth="1.2" />
           <circle cx="18" cy="17" r="1.8" fill="#A9873F" />
@@ -78,7 +78,7 @@ export const JewelryIcon: FC<JewelryIconProps> = ({ name, className = "w-7 h-7",
 
     case iconKey.includes("engagement") || iconKey.includes("solitaire"):
       return (
-        <svg viewBox="0 0 36 36" fill="none" className={className} {...props}>
+        <svg aria-hidden="true" viewBox="0 0 36 36" fill="none" className={className} {...props}>
           <circle cx="18" cy="18" r="16.5" fill="#FAF6EE" stroke="#EFE4D2" strokeWidth="1" />
           <ellipse cx="18" cy="20" rx="9" ry="6.5" stroke="#C9A961" strokeWidth="2" />
           {/* Diamond solitaire */}
@@ -89,7 +89,7 @@ export const JewelryIcon: FC<JewelryIconProps> = ({ name, className = "w-7 h-7",
 
     case iconKey.includes("ring"):
       return (
-        <svg viewBox="0 0 36 36" fill="none" className={className} {...props}>
+        <svg aria-hidden="true" viewBox="0 0 36 36" fill="none" className={className} {...props}>
           <circle cx="18" cy="18" r="16.5" fill="#FAF6EE" stroke="#EFE4D2" strokeWidth="1" />
           <ellipse cx="18" cy="18" rx="9.5" ry="7" stroke="#C9A961" strokeWidth="2.2" />
           <ellipse cx="18" cy="18" rx="6.5" ry="4.5" stroke="#FAF6EE" strokeWidth="1.2" />
@@ -99,7 +99,7 @@ export const JewelryIcon: FC<JewelryIconProps> = ({ name, className = "w-7 h-7",
 
     case iconKey.includes("necklace") || iconKey.includes("choker"):
       return (
-        <svg viewBox="0 0 36 36" fill="none" className={className} {...props}>
+        <svg aria-hidden="true" viewBox="0 0 36 36" fill="none" className={className} {...props}>
           <circle cx="18" cy="18" r="16.5" fill="#FAF6EE" stroke="#EFE4D2" strokeWidth="1" />
           <path d="M10 12c1.8 8 5.8 15 8 15s6.2-7 8-15" stroke="#C9A961" strokeWidth="2" strokeLinecap="round" />
           <circle cx="18" cy="24" r="1.8" fill="#A9873F" />
@@ -110,7 +110,7 @@ export const JewelryIcon: FC<JewelryIconProps> = ({ name, className = "w-7 h-7",
 
     case iconKey.includes("nose") || iconKey.includes("pin"):
       return (
-        <svg viewBox="0 0 36 36" fill="none" className={className} {...props}>
+        <svg aria-hidden="true" viewBox="0 0 36 36" fill="none" className={className} {...props}>
           <circle cx="18" cy="18" r="16.5" fill="#FAF6EE" stroke="#EFE4D2" strokeWidth="1" />
           <circle cx="15" cy="15" r="3" fill="#C9A961" stroke="#A9873F" strokeWidth="1.2" />
           <circle cx="15" cy="15" r="1" fill="#FFF" />
@@ -120,7 +120,7 @@ export const JewelryIcon: FC<JewelryIconProps> = ({ name, className = "w-7 h-7",
 
     case iconKey.includes("kada"):
       return (
-        <svg viewBox="0 0 36 36" fill="none" className={className} {...props}>
+        <svg aria-hidden="true" viewBox="0 0 36 36" fill="none" className={className} {...props}>
           <circle cx="18" cy="18" r="16.5" fill="#FAF6EE" stroke="#EFE4D2" strokeWidth="1" />
           <ellipse cx="18" cy="18" rx="10" ry="7.5" stroke="#C9A961" strokeWidth="3" />
           <circle cx="11" cy="18" r="2.2" fill="#A9873F" />
@@ -130,7 +130,7 @@ export const JewelryIcon: FC<JewelryIconProps> = ({ name, className = "w-7 h-7",
 
     case iconKey.includes("mangalsutra"):
       return (
-        <svg viewBox="0 0 36 36" fill="none" className={className} {...props}>
+        <svg aria-hidden="true" viewBox="0 0 36 36" fill="none" className={className} {...props}>
           <circle cx="18" cy="18" r="16.5" fill="#FAF6EE" stroke="#EFE4D2" strokeWidth="1" />
           <path d="M10 12c2.5 6 5.5 13 8 13s5.5-7 8-13" stroke="#222" strokeWidth="1.8" strokeDasharray="2 2" />
           <circle cx="18" cy="25" r="2.8" fill="#C9A961" stroke="#A9873F" strokeWidth="1" />
@@ -141,7 +141,7 @@ export const JewelryIcon: FC<JewelryIconProps> = ({ name, className = "w-7 h-7",
 
     case iconKey.includes("coin"):
       return (
-        <svg viewBox="0 0 36 36" fill="none" className={className} {...props}>
+        <svg aria-hidden="true" viewBox="0 0 36 36" fill="none" className={className} {...props}>
           <circle cx="18" cy="18" r="16.5" fill="#FAF6EE" stroke="#EFE4D2" strokeWidth="1" />
           <circle cx="18" cy="18" r="9.5" fill="#C9A961" stroke="#A9873F" strokeWidth="1.4" />
           <circle cx="18" cy="18" r="7.5" stroke="#FFF" strokeWidth="0.7" strokeDasharray="1.2 1.2" />
@@ -151,7 +151,7 @@ export const JewelryIcon: FC<JewelryIconProps> = ({ name, className = "w-7 h-7",
 
     default:
       return (
-        <svg viewBox="0 0 36 36" fill="none" className={className} {...props}>
+        <svg aria-hidden="true" viewBox="0 0 36 36" fill="none" className={className} {...props}>
           <circle cx="18" cy="18" r="16.5" fill="#FAF6EE" stroke="#EFE4D2" strokeWidth="1" />
           <circle cx="18" cy="18" r="7.5" stroke="#C9A961" strokeWidth="1.8" />
           <circle cx="18" cy="18" r="2.5" fill="#A9873F" />

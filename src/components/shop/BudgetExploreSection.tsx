@@ -80,7 +80,7 @@ export default function BudgetExploreSection({
         description={
           <>
             Current item is valued at{" "}
-            <strong className="text-wine">{formatPrice(currentProduct.price)}</strong>. Compare
+            <strong className="text-brown">{formatPrice(currentProduct.price)}</strong>. Compare
             alternative jewellery designs across your preferred price ranges.
           </>
         }
@@ -98,7 +98,7 @@ export default function BudgetExploreSection({
       />
 
       {/* Product Cards Grid */}
-      <div className="grid grid-cols-2 gap-3.5 sm:gap-6 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-grid lg:grid-cols-4">
         {filteredProducts.map((prod) => (
           <ProductCard key={prod.id} product={prod} />
         ))}

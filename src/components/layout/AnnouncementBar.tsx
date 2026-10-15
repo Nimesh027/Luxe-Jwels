@@ -34,7 +34,7 @@ export default function AnnouncementBar() {
 
   return (
     <div
-      className={`relative w-full overflow-hidden bg-ink text-cream border-b border-ink-soft select-none transition-all duration-300 ease-in-out z-40 ${isVisible
+      className={`relative w-full overflow-hidden bg-ink text-offwhite border-b border-ink-soft select-none transition-all duration-300 ease-in-out z-40 ${isVisible
         ? "max-h-12 py-2.5 opacity-100 translate-y-0"
         : "max-h-0 py-0 opacity-0 -translate-y-full border-transparent pointer-events-none"
         }`}
@@ -42,11 +42,11 @@ export default function AnnouncementBar() {
       <div className="flex w-max animate-marquee hover:[animation-play-state:paused] items-center">
         {repeatedItems.map((item, index) => (
           <div key={index} className="flex items-center shrink-0">
-            <span className="text-caption uppercase tracking-[0.2em] font-medium px-8 text-cream/90">
+            <span className="text-caption tracking-widest font-medium px-8 text-offwhite/90">
               {item}
             </span>
-            <span className="text-gold/70 text-[9px] select-none">
-              <svg
+            <span className="text-gold/70 text-micro select-none">
+              <svg aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 version="1.1"
                 xmlnsXlink="http://www.w3.org/1999/xlink"

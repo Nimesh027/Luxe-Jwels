@@ -22,8 +22,8 @@ export default function CustomerPromise() {
   ];
 
   return (
-    <Section className="py-16 sm:py-20 bg-wine-dark text-white">
-      <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+    <Section className="bg-brown-dark text-white">
+      <div className="container max-w-6xl">
 
         <SectionTitle
           title="The Luxe Jewels Promise"
@@ -31,7 +31,7 @@ export default function CustomerPromise() {
           description="When you invest in our heritage, we invest in you. Our promises are the bedrock of the trust we have built over decades."
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-grid divide-y sm:divide-y-0 sm:divide-x divide-white/10">
           {promises.map((promise, idx) => (
             <div key={idx} className="pt-6 sm:pt-0 sm:px-6 first:pt-0 first:px-0 text-center space-y-3">
               <h3 className="font-display font-semibold !text-h5 text-gold">

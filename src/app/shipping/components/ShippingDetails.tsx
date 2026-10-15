@@ -10,28 +10,28 @@ export default function ShippingDetails() {
       >
         <div className="overflow-x-auto pt-4">
           <table className="w-full text-left text-small border border-border/60 rounded-xl overflow-hidden shadow-xs">
-            <thead className="bg-[#fbf8f2] text-ink font-semibold uppercase tracking-[0.08em] border-b border-gold/20">
+            <thead className="bg-offwhite text-ink font-semibold tracking-wide border-b border-gold/20">
               <tr>
                 <th className="p-4 border-r border-border/40 font-medium">Shipping Type</th>
                 <th className="p-4 border-r border-border/40 font-medium">Estimated Delivery</th>
-                <th className="p-4 font-medium text-wine">Shipping Fee</th>
+                <th className="p-4 font-medium text-brown">Shipping Fee</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/40 text-ink/80 bg-white">
               <tr className="hover:bg-gold/[0.02] transition-colors">
                 <td className="p-4 font-medium border-r border-border/40">Standard Insured Delivery</td>
                 <td className="p-4 font-light border-r border-border/40">3 to 5 Business Days</td>
-                <td className="p-4 font-semibold text-wine">FREE</td>
+                <td className="p-4 font-semibold text-brown">FREE</td>
               </tr>
               <tr className="hover:bg-gold/[0.02] transition-colors">
                 <td className="p-4 font-medium border-r border-border/40">Metro Priority Air Express</td>
                 <td className="p-4 font-light border-r border-border/40">1 to 2 Business Days</td>
-                <td className="p-4 font-semibold text-wine">FREE on orders &gt; ₹25,000</td>
+                <td className="p-4 font-semibold text-brown">FREE on orders &gt; ₹25,000</td>
               </tr>
               <tr className="hover:bg-gold/[0.02] transition-colors">
                 <td className="p-4 font-medium border-r border-border/40">Bespoke / Custom Creations</td>
                 <td className="p-4 font-light border-r border-border/40">7 to 10 Business Days</td>
-                <td className="p-4 font-semibold text-wine">FREE</td>
+                <td className="p-4 font-semibold text-brown">FREE</td>
               </tr>
             </tbody>
           </table>

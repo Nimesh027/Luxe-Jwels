@@ -40,7 +40,7 @@ export default function ProductHeroSection({
 
   const [quantity, setQuantity] = useState(1);
   const [selectedMetal, setSelectedMetal] = useState<"yellow" | "white" | "rose">("yellow");
-  const [selectedSize, setSelectedSize] = useState<string>("18 INCHES");
+  const [selectedSize, setSelectedSize] = useState<string>("18 inches");
   const [addEngraving, setAddEngraving] = useState(false);
   const [engravingText, setEngravingText] = useState("");
 
@@ -55,7 +55,7 @@ export default function ProductHeroSection({
       />
 
       {/* Hero Section Grid */}
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
+      <div className="grid grid-cols-1 gap-split lg:grid-cols-12 lg:items-start">
         {/* Left Column: Image Gallery (7 cols on lg) */}
         <div className="lg:col-span-7 space-y-4">
           <div className="flex flex-col-reverse gap-4 md:flex-row md:items-start w-full">
@@ -74,7 +74,7 @@ export default function ProductHeroSection({
                     });
                   }}
                   className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border-2 transition-all duration-200 cursor-pointer ${activeImageIndex === idx
-                    ? "border-wine shadow-md ring-2 ring-wine/20 scale-95"
+                    ? "border-brown shadow-md ring-2 ring-brown/20 scale-95"
                     : "border-border/80 hover:border-gold opacity-75 hover:opacity-100 bg-white"
                     }`}
                 >
@@ -91,7 +91,7 @@ export default function ProductHeroSection({
             {/* Main Showcase Frame */}
             <div
               onClick={onOpenLightbox}
-              className="group relative aspect-[4/3] w-full min-h-[300px] sm:min-h-[380px] md:min-h-[440px] max-h-[460px] flex-1 min-w-0 cursor-zoom-in overflow-hidden rounded-3xl border border-border/80 bg-cream-dark shadow-sm transition-all hover:shadow-md"
+              className="group relative aspect-[4/3] w-full min-h-[clamp(280px,calc(220px+20vw),440px)] max-h-[clamp(460px,32vw,620px)] flex-1 min-w-0 cursor-zoom-in overflow-hidden rounded-3xl border border-border/80 bg-offwhite-dark shadow-sm transition-all hover:shadow-md"
             >
               <Image
                 src={images[activeImageIndex] || product.image || "/images/product/diamond-ring.jpg"}
@@ -103,12 +103,12 @@ export default function ProductHeroSection({
               />
 
               {/* Floating Badges */}
-              <div className="absolute top-4 left-4 flex flex-col gap-2 z-10">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-wine/90 px-3.5 py-1 text-[11px] font-medium tracking-wide text-white backdrop-blur-md shadow-xs">
-                  <SafetyCertificateIcon size={14} /> 18K Hallmarked Gold
+              <div className="absolute top-4 left-4 flex flex-col items-start gap-2 z-10">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-ink/90 px-3.5 py-1.5 text-micro font-medium tracking-wide text-offwhite ring-1 ring-white/15 backdrop-blur-md shadow-md">
+                  <SafetyCertificateIcon size={14} className="text-gold-light" /> 18K Hallmarked Gold
                 </span>
                 {product.compareAtPrice && (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-gold px-3.5 py-1 text-[11px] font-semibold tracking-wide text-ink shadow-xs">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white px-3.5 py-1.5 text-micro font-bold tracking-wide text-brown-dark ring-1 ring-brown/20 shadow-md">
                     SAVE{" "}
                     {Math.round(
                       ((product.compareAtPrice - product.price) / product.compareAtPrice) * 100
@@ -126,7 +126,7 @@ export default function ProductHeroSection({
           <div>
             {/* Category Pill & Rating */}
             <div className="mb-2 flex items-center justify-between">
-              <span className="text-caption font-semibold uppercase tracking-widest text-gold-dark">
+              <span className="text-caption font-semibold tracking-widest text-gold-dark">
                 {category?.name || "Luxe Jewellery"}
               </span>
               <div className="flex items-center gap-1.5 text-caption text-muted">
@@ -143,9 +143,9 @@ export default function ProductHeroSection({
           </div>
 
           {/* Price Breakdown */}
-          <div className="rounded-2xl border border-border/80 bg-surface p-4 shadow-2xs">
+          <div className="rounded-2xl border border-border/80 bg-white p-4 shadow-2xs">
             <div className="flex items-baseline gap-3">
-              <span className="font-display text-h2 font-semibold text-wine">
+              <span className="font-display text-h2 font-semibold text-brown">
                 {formatPrice(product.price)}
               </span>
               {product.compareAtPrice && (
@@ -164,7 +164,7 @@ export default function ProductHeroSection({
             </p>
 
             {/* No-cost EMI Banner */}
-            <div className="mt-3 flex items-center gap-2 rounded-xl bg-wine-soft/60 px-3 py-2 text-caption text-wine font-medium">
+            <div className="mt-3 flex items-center gap-2 rounded-xl bg-brown-soft/60 px-3 py-2 text-caption text-brown font-medium">
               <ThunderboltIcon size={16} />
               <span>
                 Or 3 interest-free payments of{" "}
@@ -175,42 +175,48 @@ export default function ProductHeroSection({
 
           {/* Metal Swatch Selection */}
           <div>
-            <label className="mb-2 block text-caption font-semibold uppercase tracking-wider text-ink">
+            <span id="metal-color-label" className="mb-2 block text-caption font-semibold tracking-wider text-ink">
               Select Metal Color:{" "}
               <span className="font-normal text-muted capitalize">{selectedMetal} Gold</span>
-            </label>
-            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+            </span>
+            <div role="radiogroup" aria-labelledby="metal-color-label" className="flex flex-wrap items-center gap-2.5 sm:gap-3">
               <button
                 type="button"
+                role="radio"
+                aria-checked={selectedMetal === "yellow"}
                 onClick={() => setSelectedMetal("yellow")}
                 className={`flex items-center gap-2 rounded-full border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${selectedMetal === "yellow"
-                  ? "border-wine bg-wine/5 font-semibold text-wine shadow-xs"
+                  ? "border-brown bg-brown/5 font-semibold text-brown shadow-xs"
                   : "border-border text-ink hover:border-gold"
                   }`}
               >
-                <span className="h-4 w-4 rounded-full bg-amber-400 border border-amber-600/30"></span>
+                <span className="h-4 w-4 rounded-full bg-amber-400 border border-amber-600/30" aria-hidden="true"></span>
                 Yellow Gold
               </button>
               <button
                 type="button"
+                role="radio"
+                aria-checked={selectedMetal === "white"}
                 onClick={() => setSelectedMetal("white")}
                 className={`flex items-center gap-2 rounded-full border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${selectedMetal === "white"
-                  ? "border-wine bg-wine/5 font-semibold text-wine shadow-xs"
+                  ? "border-brown bg-brown/5 font-semibold text-brown shadow-xs"
                   : "border-border text-ink hover:border-gold"
                   }`}
               >
-                <span className="h-4 w-4 rounded-full bg-slate-200 border border-slate-400/40"></span>
+                <span className="h-4 w-4 rounded-full bg-slate-200 border border-slate-400/40" aria-hidden="true"></span>
                 White Gold
               </button>
               <button
                 type="button"
+                role="radio"
+                aria-checked={selectedMetal === "rose"}
                 onClick={() => setSelectedMetal("rose")}
                 className={`flex items-center gap-2 rounded-full border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${selectedMetal === "rose"
-                  ? "border-wine bg-wine/5 font-semibold text-wine shadow-xs"
+                  ? "border-brown bg-brown/5 font-semibold text-brown shadow-xs"
                   : "border-border text-ink hover:border-gold"
                   }`}
               >
-                <span className="h-4 w-4 rounded-full bg-rose-300 border border-rose-500/40"></span>
+                <span className="h-4 w-4 rounded-full bg-rose-300 border border-rose-500/40" aria-hidden="true"></span>
                 Rose Gold
               </button>
             </div>
@@ -219,25 +225,27 @@ export default function ProductHeroSection({
           {/* Size Selector */}
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <label className="text-caption font-semibold uppercase tracking-wider text-ink">
+              <span id="size-label" className="text-caption font-semibold tracking-wider text-ink">
                 Select Size / Length
-              </label>
+              </span>
               <button
                 type="button"
                 onClick={onOpenSizeGuide}
-                className="text-caption text-wine underline hover:text-wine-dark cursor-pointer"
+                className="text-caption text-brown underline hover:text-brown-dark cursor-pointer"
               >
                 Size Guide
               </button>
             </div>
-            <div className="flex flex-wrap gap-2">
-              {["14 INCHES", "16 INCHES", "18 INCHES", "20 INCHES"].map((sz) => (
+            <div role="radiogroup" aria-labelledby="size-label" className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+              {["14 inches", "16 inches", "18 inches", "20 inches"].map((sz) => (
                 <button
                   key={sz}
                   type="button"
+                  role="radio"
+                  aria-checked={selectedSize === sz}
                   onClick={() => setSelectedSize(sz)}
-                  className={`rounded-xl border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${selectedSize === sz
-                    ? "border-wine bg-wine text-white shadow-xs"
+                  className={`rounded-xl border px-4 py-2 text-small font-medium transition-all cursor-pointer ${selectedSize === sz
+                    ? "border-brown bg-brown text-white shadow-xs"
                     : "border-border bg-white text-ink hover:border-gold"
                     }`}
                 >
@@ -248,27 +256,34 @@ export default function ProductHeroSection({
           </div>
 
           {/* Custom Engraving Option */}
-          <div className="rounded-2xl border border-border/80 bg-surface p-4 shadow-2xs">
+          <div className="rounded-2xl border border-border/80 bg-white p-4 shadow-2xs">
             <label className="flex items-center gap-2 text-caption font-medium text-ink cursor-pointer">
               <input
                 type="checkbox"
+                name="addEngraving"
+                aria-controls="engraving-text"
                 checked={addEngraving}
                 onChange={(e) => setAddEngraving(e.target.checked)}
-                className="accent-wine rounded cursor-pointer"
+                className="accent-brown rounded cursor-pointer"
               />
               Add Free Custom Laser Engraving (Initial / Date)
             </label>
             {addEngraving && (
               <div className="mt-3">
                 <input
+                  id="engraving-text"
+                  name="engravingText"
+                  aria-label="Engraving text"
+                  aria-describedby="engraving-text-count"
+                  autoComplete="off"
                   type="text"
                   maxLength={12}
                   placeholder="Enter up to 12 characters (e.g. A & K ❤️)"
                   value={engravingText}
                   onChange={(e) => setEngravingText(e.target.value)}
-                  className="w-full rounded-xl border border-border bg-cream/30 px-3.5 py-2 text-caption text-ink placeholder:text-muted/60 focus:border-wine focus:outline-none"
+                  className="w-full rounded-xl border border-border bg-offwhite/30 px-3.5 py-2 text-caption text-ink placeholder:text-muted/60 focus:border-brown focus:outline-none"
                 />
-                <span className="mt-1 block text-[10px] text-muted">
+                <span id="engraving-text-count" aria-live="polite" className="mt-1 block text-micro text-muted">
                   {12 - engravingText.length} characters remaining
                 </span>
               </div>
@@ -284,7 +299,8 @@ export default function ProductHeroSection({
             <Button
               variant="dark"
               leftIcon={<ShoppingBagIcon size={18} />}
-              className="flex-1 h-12 rounded-xl text-small font-medium shadow-sm hover:shadow-md cursor-pointer"
+              rounded="lg"
+          className="flex-1 shadow-sm hover:shadow-md"
               onClick={() => add(product, quantity)}
             >
               Add To Cart

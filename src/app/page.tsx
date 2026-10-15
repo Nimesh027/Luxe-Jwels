@@ -3,6 +3,7 @@ import FeatureStrip from "@/components/sections/FeatureStrip";
 import CategoryGrid from "@/components/sections/CategoryGrid";
 import Bestsellers from "@/components/sections/Bestsellers";
 import ForHimForHer from "@/components/sections/ForHimForHer";
+import FeaturedCollections from "@/components/sections/FeaturedCollections";
 import NewCollection from "@/components/sections/NewCollection";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import Collections from "@/components/sections/Collections";
@@ -19,6 +20,7 @@ export default function Home() {
       <CategoryGrid />
       <Bestsellers />
       <ForHimForHer />
+      <FeaturedCollections />
       <NewCollection />
       <WhyChooseUs />
       <Collections />

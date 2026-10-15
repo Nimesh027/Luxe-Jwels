@@ -15,14 +15,14 @@ interface BreadcrumbsProps {
 
 export default function Breadcrumbs({ items, className = "mb-8", isDarkBackground = false }: BreadcrumbsProps) {
   const baseTextColor = isDarkBackground ? "text-white/60" : "text-muted";
-  const hoverColor = isDarkBackground ? "hover:text-white" : "hover:text-wine";
-  const activeColor = isDarkBackground ? "text-white/90" : "text-wine";
+  const hoverColor = isDarkBackground ? "hover:text-white" : "hover:text-brown";
+  const activeColor = isDarkBackground ? "text-white/90" : "text-brown";
   const separatorColor = isDarkBackground ? "text-white/40" : "text-muted/60";
 
   return (
     <nav
       aria-label="Breadcrumb"
-      className={`flex flex-wrap items-center gap-2 !text-body uppercase tracking-wider ${baseTextColor} ${className}`}
+      className={`flex flex-wrap items-center gap-2 !text-body tracking-wider ${baseTextColor} ${className}`}
     >
       <Link href="/" className={`${hoverColor} transition-colors`}>
         Home

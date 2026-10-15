@@ -26,9 +26,9 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
     <div
       role="region"
       aria-label="Navigation Mega Menu"
-      className="w-full bg-surface border-t border-border/70 py-6 sm:py-7 transition-all duration-200"
+      className="w-full bg-white border-t border-border/70 py-6 sm:py-7 transition-all duration-200"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-10">
         {/* LEFT COLUMN: Filter / Navigation Tabs */}
         <div className="w-full lg:w-48 xl:w-52 shrink-0 flex lg:flex-col gap-1 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 border-b lg:border-b-0 lg:border-r border-border/60 pr-0 lg:pr-4">
@@ -43,8 +43,8 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                 className={cn(
                   "text-left px-4 py-2.5 rounded-full text-small font-medium transition-all duration-150 whitespace-nowrap cursor-pointer",
                   isActive
-                    ? "bg-wine-soft text-wine border border-wine/20 shadow-xs font-semibold"
-                    : "text-muted hover:text-wine hover:bg-cream"
+                    ? "bg-brown-soft text-brown border border-brown/20 shadow-xs font-semibold"
+                    : "text-muted hover:text-brown hover:bg-offwhite"
                 )}
               >
                 {tab.label}
@@ -62,17 +62,17 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                 key={item.id}
                 href={item.href}
                 onClick={onClose}
-                className="group flex items-center gap-3 p-1.5 rounded-xl hover:bg-cream transition-all duration-150"
+                className="group flex min-h-12 items-center gap-3 p-1.5 rounded-xl hover:bg-offwhite transition-all duration-150"
               >
                 <div className="shrink-0 transition-transform duration-200 group-hover:scale-110">
                   <JewelryIcon name={item.name} className="w-8 h-8" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <span className="text-small font-normal text-ink group-hover:text-wine transition-colors duration-150 block truncate">
+                  <span className="text-small font-normal text-ink group-hover:text-brown transition-colors duration-150 block truncate">
                     {item.name}
                   </span>
                   {item.badge && (
-                    <span className="text-[10px] text-gold font-semibold uppercase tracking-wider">
+                    <span className="text-micro text-gold-dark font-semibold tracking-wider">
                       {item.badge}
                     </span>
                   )}
@@ -83,7 +83,7 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
 
           {/* Bottom Promotional Bar */}
           {activeTab.bottomBanner && (
-            <div className="mt-6 p-3 sm:p-4 rounded-xl bg-cream/70 border border-border/70 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+            <div className="mt-6 p-3 sm:p-4 rounded-xl bg-offwhite/70 border border-border/70 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
               <div className="flex items-center gap-3.5">
                 {/* Thumbnails preview stack */}
                 {activeTab.bottomBanner.thumbnails && activeTab.bottomBanner.thumbnails.length > 0 && (
@@ -91,7 +91,7 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                     {activeTab.bottomBanner.thumbnails.slice(0, 3).map((thumb, idx) => (
                       <div
                         key={idx}
-                        className="relative w-10 h-10 rounded-lg overflow-hidden border-2 border-surface shadow-xs"
+                        className="relative w-10 h-10 rounded-lg overflow-hidden border-2 border-white shadow-xs"
                       >
                         <Image
                           src={thumb}
@@ -117,10 +117,10 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
               <Button
                 href={activeTab.bottomBanner.buttonHref}
                 onClick={onClose}
-                colorTheme="wine"
+                colorTheme="brown"
                 size="xs"
                 rounded="full"
-                className="shrink-0 px-5 text-caption font-semibold tracking-wide shadow-xs hover:shadow"
+                className="shrink-0 tracking-wide shadow-xs hover:shadow"
               >
                 {activeTab.bottomBanner.buttonText}
               </Button>
@@ -136,7 +136,7 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
               onClick={onClose}
               className="group block"
             >
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-cream-dark shadow-sm">
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-offwhite-dark shadow-sm">
                 <Image
                   src={activeTab.featuredCard.image}
                   alt={activeTab.featuredCard.title}
@@ -144,14 +144,14 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                   sizes="(max-width: 1024px) 100vw, 300px"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-linear-to-t from-ink/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <p className="font-display text-small font-medium text-ink mt-3 leading-snug line-clamp-2 group-hover:text-wine transition-colors duration-150">
+              <p className="font-display text-small font-medium text-ink mt-3 leading-snug line-clamp-2 group-hover:text-brown transition-colors duration-150">
                 {activeTab.featuredCard.title}
               </p>
-              <div className="inline-flex items-center gap-1.5 text-caption font-semibold text-wine hover:text-gold mt-2 transition-colors duration-150">
+              <div className="inline-flex items-center gap-1.5 text-caption font-semibold text-brown hover:text-gold mt-2 transition-colors duration-150">
                 <span>{activeTab.featuredCard.ctaLabel}</span>
-                <span className="text-[10px] transform group-hover:translate-x-1 transition-transform">
+                <span className="text-micro transform group-hover:translate-x-1 transition-transform">
                   ↗
                 </span>
               </div>

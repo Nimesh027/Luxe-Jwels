@@ -8,7 +8,7 @@ import { useAppSelector } from "@/store/hooks";
 
 function InstagramIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
-    <svg
+    <svg aria-hidden="true"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -35,7 +35,7 @@ export default function Instagram() {
     <Section className="bg-white overflow-hidden" containerClassName="!max-w-full !px-0">
       {/* Centered Editorial Section Header */}
       <div className="text-center mb-8 sm:mb-12">
-        <h2 className="font-display text-h2 md:text-h2 font-normal text-ink tracking-tight">
+        <h2 className="font-display text-h2 font-normal text-ink tracking-tight">
           Follow the Luxe Jewels Story
         </h2>
         <a
@@ -55,7 +55,7 @@ export default function Instagram() {
           {loopImages.map((image, index) => (
             <div
               key={index}
-              className="w-[180px] xs:w-[210px] sm:w-[240px] md:w-[270px] lg:w-[290px] shrink-0 px-2 sm:px-2.5"
+              className="w-[clamp(180px,calc(150px+10vw),340px)] shrink-0 px-2 sm:px-2.5"
             >
               <a
                 href="https://instagram.com"
@@ -88,10 +88,10 @@ export default function Instagram() {
         <Button
           href="https://instagram.com"
           variant="border"
-          colorTheme="wine"
+          colorTheme="brown"
           size="lg"
           rightIcon={<ArrowRightIcon className="h-4 w-4" />}
-          className="hover:shadow-md font-medium"
+          className="hover:shadow-md"
         >
           View More On Instagram
         </Button>

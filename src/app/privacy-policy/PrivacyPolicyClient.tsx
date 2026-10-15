@@ -174,7 +174,7 @@ const privacyPolicyData = [
           If you have questions or concerns regarding this Privacy Notice or our data handling practices, please write to us at:
         </p>
         <div className="p-4 bg-white/50 border border-border rounded-lg text-caption space-y-1">
-          <p className="font-semibold text-wine">Luxe Jewels Privacy Office</p>
+          <p className="font-semibold text-brown">Luxe Jewels Privacy Office</p>
           <p>Luxe Tower, MG Road, Bengaluru, Karnataka 560001, India</p>
           <p>Email: privacy@luxe-jewels.com | Phone: +91 (80) 4000-8888</p>
         </div>
@@ -211,14 +211,14 @@ export default function PrivacyPolicyClient() {
       breadcrumbLabel="Privacy Policy"
       description="Luxe Jewels is committed to protecting your personal data and respecting your privacy."
     >
-      <Section className="bg-surface/50 relative overflow-hidden">
+      <Section className="bg-white/50 relative overflow-hidden">
         {/* Subtle decorative background elements */}
-        <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-wine/5 to-transparent pointer-events-none" />
+        <div className="absolute top-0 left-0 w-full h-64 bg-linear-to-b from-brown/5 to-transparent pointer-events-none" />
 
         {/* Header Note */}
         <SectionTitle
           title="Privacy Policy"
-          titleClassName="!text-h3 text-wine font-semibold"
+          titleClassName="!text-h3 text-brown font-semibold"
           description="We are committed to safeguarding your privacy. Read our detailed policies below to understand how we protect your information."
           descriptionClassName="text-ink/70 font-light"
           align="center"
@@ -234,8 +234,8 @@ export default function PrivacyPolicyClient() {
                 id={section.id}
                 className="scroll-mt-32 group bg-white p-8 sm:p-10 rounded-3xl shadow-xs border border-border/40 hover:shadow-md hover:border-gold/30 transition-all duration-500"
               >
-                <h2 className="font-display text-xl sm:text-2xl text-wine font-semibold mb-6 flex items-center gap-4">
-                  <span className="w-10 h-[1px] bg-gold/60 group-hover:bg-gold group-hover:w-14 transition-all duration-500"></span>
+                <h2 className="font-display text-xl sm:text-2xl text-brown font-semibold mb-6 flex items-center gap-4">
+                  <span className="w-10 h-px bg-gold/60 group-hover:bg-gold group-hover:w-14 transition-all duration-500"></span>
                   {section.title}
                 </h2>
                 <div className="text-body text-ink/80 leading-relaxed font-light space-y-4">

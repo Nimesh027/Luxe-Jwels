@@ -10,6 +10,8 @@ import { setCartDrawerOpen } from "@/store/slices/uiSlice";
 import { formatPrice } from "@/lib/utils";
 import QuantitySelector from "@/components/ui/QuantitySelector";
 import Button from "@/components/ui/Button";
+import Collapse from "@/components/ui/Collapse";
+import { usePresence } from "@/hooks/usePresence";
 import {
   CloseIcon,
   ShoppingBagIcon,
@@ -37,29 +39,31 @@ export default function CartDrawer() {
     router.push("/checkout");
   };
 
-  if (!isOpen) return null;
+  const { mounted, open } = usePresence(isOpen, 300);
+
+  if (!mounted) return null;
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
       {/* Dimmed Backdrop Overlay */}
       <div
-        className="fixed inset-0 bg-ink/60 backdrop-blur-xs transition-opacity duration-300"
+        className={`fixed inset-0 bg-ink/60 backdrop-blur-xs ${open ? "animate-in fade-in" : "animate-out fade-out duration-300"}`}
         onClick={closeDrawer}
         aria-hidden="true"
       />
 
       <div className="fixed inset-y-0 right-0 flex max-w-full pl-10">
         <aside
-          className="relative flex w-screen max-w-md flex-col bg-white shadow-2xl transition-transform duration-300 ease-out"
+          className={`relative flex w-screen max-w-md flex-col bg-white shadow-2xl ${open ? "animate-in slide-in-from-right duration-500" : "animate-out slide-out-to-right duration-300"}`}
           aria-label="Shopping Cart Drawer"
         >
           {/* Drawer Header */}
-          <div className="flex items-center justify-between border-b border-neutral-200/80 px-6 py-4.5 bg-[#fbf9f6]">
+          <div className="flex items-center justify-between border-b border-neutral-200/80 px-6 py-4.5 bg-offwhite">
             <div className="flex items-center gap-2">
               <p className="font-display text-body font-semibold text-ink">
                 Your Cart
               </p>
-              <span className="flex h-5.5 min-w-5.5 items-center justify-center rounded-full bg-wine text-white text-caption font-semibold px-1.5">
+              <span className="flex h-5.5 min-w-5.5 items-center justify-center rounded-full bg-brown text-white text-caption font-semibold px-1.5">
                 {count}
               </span>
             </div>
@@ -68,7 +72,7 @@ export default function CartDrawer() {
               type="button"
               onClick={closeDrawer}
               aria-label="Close cart drawer"
-              className="flex h-8 w-8 items-center justify-center rounded-full text-neutral-500 hover:bg-neutral-200/60 hover:text-ink transition-colors cursor-pointer"
+              className="-mr-2 flex size-12 items-center justify-center rounded-full text-neutral-500 hover:bg-neutral-200/60 hover:text-ink transition-colors cursor-pointer"
             >
               <CloseIcon size={18} />
             </button>
@@ -78,8 +82,8 @@ export default function CartDrawer() {
           {items.length === 0 ? (
             /* Empty Cart View */
             <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
-              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#f6efe9] text-wine mb-5 shadow-xs">
-                <ShoppingBagIcon size={36} className="text-wine" />
+              <div className="flex h-20 w-20 items-center justify-center rounded-full bg-offwhite-dark text-brown mb-5 shadow-xs">
+                <ShoppingBagIcon size={36} className="text-brown" />
               </div>
 
               <h3 className="font-display text-h4 font-medium text-ink mb-2">
@@ -97,7 +101,7 @@ export default function CartDrawer() {
                   closeDrawer();
                   router.push("/collections");
                 }}
-                className="text-caption font-semibold uppercase tracking-wider !text-cream hover:!bg-wine shadow-md hover:shadow-lg"
+                className="tracking-wider !text-offwhite hover:!bg-brown shadow-md hover:shadow-lg"
               >
                 Start Shopping
               </Button>
@@ -129,13 +133,13 @@ export default function CartDrawer() {
                         <Link
                           href={`/products/${product.slug}`}
                           onClick={closeDrawer}
-                          className="font-display text-small font-normal text-ink hover:text-wine transition-colors line-clamp-1 block"
+                          className="font-display text-small font-normal text-ink hover:text-brown transition-colors line-clamp-1 block"
                         >
                           {product.name}
                         </Link>
 
                         {/* Specs: Weight / Purity / Category */}
-                        <div className="mt-1 flex items-center gap-2 text-[11px] text-muted font-light">
+                        <div className="mt-1 flex items-center gap-2 text-micro text-muted font-light">
                           <span>18K Solid Gold</span>
                           <span>•</span>
                           <span className="capitalize">{product.category.replace(/-/g, " ")}</span>
@@ -147,7 +151,7 @@ export default function CartDrawer() {
                             {formatPrice(product.price * quantity)}
                           </span>
                           {quantity > 1 && (
-                            <span className="text-[11px] text-muted">
+                            <span className="text-micro text-muted">
                               ({formatPrice(product.price)} each)
                             </span>
                           )}
@@ -164,10 +168,10 @@ export default function CartDrawer() {
 
                         <Button
                           variant="border"
+                          colorTheme="danger"
                           size="xs"
                           rounded="full"
                           onClick={() => remove(product.id)}
-                          className="!px-2.5 !py-1 text-[10px] font-medium !text-neutral-500 hover:!text-red-700 hover:!bg-red-50/80 !border-neutral-200/80"
                           leftIcon={<TrashIcon size={14} />}
                         >
                           Remove
@@ -182,58 +186,61 @@ export default function CartDrawer() {
 
           {/* Drawer Footer with Actions & Checkout */}
           {items.length > 0 && (
-            <div className="border-t border-neutral-200 bg-[#fbf9f6] p-6">
+            <div className="border-t border-neutral-200 bg-offwhite p-6">
               {/* Order Special Instructions Accordion */}
               <div className="mb-4 border-b border-neutral-200/70 pb-3">
                 <button
                   type="button"
                   onClick={() => setInstructionsOpen(!instructionsOpen)}
+                  aria-expanded={instructionsOpen}
+                  aria-controls="drawer-order-note"
                   className="flex w-full items-center justify-between text-left text-caption font-medium text-neutral-700 hover:text-ink cursor-pointer"
                 >
                   <span className="inline-flex items-center gap-1.5">
                     <span className="text-gold text-caption">✍</span>
                     <span>Order Special Instructions / Gift Note</span>
                   </span>
-                  <span className="text-small font-semibold">{instructionsOpen ? "−" : "+"}</span>
+                  <span className="text-small font-semibold" aria-hidden="true">{instructionsOpen ? "−" : "+"}</span>
                 </button>
 
-                {instructionsOpen && (
-                  <div className="mt-2.5">
-                    <textarea
-                      rows={2}
-                      value={orderNote}
-                      onChange={(e) => setOrderNote(e.target.value)}
-                      placeholder="Add custom engraving note or special delivery instructions..."
-                      className="w-full rounded-lg border border-neutral-300 bg-white p-2.5 text-caption text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
-                    />
-                  </div>
-                )}
+                <Collapse open={instructionsOpen} className="pt-2.5">
+                  <textarea
+                    id="drawer-order-note"
+                    name="orderNote"
+                    aria-label="Order special instructions or gift note"
+                    rows={2}
+                    value={orderNote}
+                    onChange={(e) => setOrderNote(e.target.value)}
+                    placeholder="Add custom engraving note or special delivery instructions..."
+                    className="w-full rounded-lg border border-neutral-300 bg-white p-2.5 text-caption text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+                  />
+                </Collapse>
               </div>
 
               {/* Subtotal & Estimated Total */}
               <div className="flex items-baseline justify-between mb-1.5">
-                <span className="text-[11px] uppercase tracking-wider font-semibold text-neutral-600">
+                <span className="text-micro tracking-wider font-semibold text-neutral-600">
                   Estimated Total
                 </span>
-                <span className="font-display text-[16px] sm:text-[17px] font-bold text-ink">
+                <span className="font-display text-body sm:text-h6 font-bold text-ink">
                   {formatPrice(subtotal)}
                 </span>
               </div>
 
               {/* Tax & Shipping Note */}
-              <p className="text-[10.5px] text-muted font-light leading-relaxed mb-4">
+              <p className="text-micro text-muted font-light leading-relaxed mb-4">
                 Taxes, discounts, and insured shipping calculated at checkout.
               </p>
 
               {/* Action Buttons: View Cart & Check Out */}
               <div className="flex flex-col gap-2">
                 <Button
-                  colorTheme="wine"
+                  colorTheme="brown"
                   rounded="full"
                   size="sm"
                   fullWidth
                   onClick={handleCheckout}
-                  className="text-caption font-semibold uppercase tracking-wider shadow-md hover:shadow-lg"
+                  className="tracking-wider shadow-md hover:shadow-lg"
                   rightIcon={<ChevronRightIcon size={14} strokeWidth={2.5} />}
                 >
                   Check Out
@@ -246,7 +253,7 @@ export default function CartDrawer() {
                   size="sm"
                   fullWidth
                   onClick={handleViewCart}
-                  className="text-caption font-medium uppercase tracking-wider hover:!bg-neutral-100/80 !border-neutral-300"
+                  className="tracking-wider hover:!bg-neutral-100/80 !border-neutral-300"
                 >
                   View Cart
                 </Button>

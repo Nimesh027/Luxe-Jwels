@@ -44,7 +44,7 @@ export default function TrackOrderClient() {
 
       {/* TRACKING RESULTS DISPLAY */}
       {isSearched && (
-        <Section className="bg-surface/50 pb-16 sm:pb-24">
+        <Section className="bg-white/50">
           <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-300">
             <TrackingHeader orderId={orderIdInput} />
             <TrackingItemPreview />

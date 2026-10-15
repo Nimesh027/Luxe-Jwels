@@ -46,7 +46,7 @@ export default function Tabs<T extends string = string>({
   if (variant === "pill") {
     return (
       <div className={cn("flex justify-center", className)}>
-        <div className="inline-flex items-center rounded-full border border-border bg-cream/50 p-1.5 shadow-inner">
+        <div className="inline-flex max-w-full items-center rounded-full border border-border bg-offwhite/50 p-1 sm:p-1.5 shadow-inner">
           {options.map((opt) => {
             const isActive = activeId === opt.id;
             return (
@@ -55,10 +55,10 @@ export default function Tabs<T extends string = string>({
                 type="button"
                 onClick={(e) => handleTabClick(opt.id, e)}
                 className={cn(
-                  "rounded-full px-6 py-2.5 text-body font-medium transition-all duration-300 cursor-pointer select-none",
+                  "min-h-11 rounded-full px-4 py-2 text-small sm:px-6 sm:text-body font-medium transition-all duration-300 cursor-pointer select-none",
                   isActive
-                    ? "bg-wine text-white shadow-md scale-102"
-                    : "text-ink hover:text-wine hover:bg-cream/40"
+                    ? "bg-brown text-white shadow-md scale-102"
+                    : "text-ink hover:text-brown hover:bg-offwhite/40"
                 )}
               >
                 {opt.label}
@@ -76,7 +76,7 @@ export default function Tabs<T extends string = string>({
       <div
         ref={containerRef}
         className={cn(
-          "flex flex-nowrap items-center sm:justify-center gap-2.5 overflow-x-auto py-2 px-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
+          "scrollbar-none flex flex-nowrap items-center sm:justify-center gap-2.5 overflow-x-auto py-2 px-gutter",
           className
         )}
       >
@@ -88,17 +88,17 @@ export default function Tabs<T extends string = string>({
               type="button"
               onClick={(e) => handleTabClick(opt.id, e)}
               className={cn(
-                "flex flex-col items-center shrink-0 rounded-2xl px-5 py-2.5 text-caption transition-all duration-300 ease-out active:scale-95 cursor-pointer select-none",
+                "flex min-h-12 flex-col items-center justify-center shrink-0 rounded-2xl px-5 py-2 text-small transition-all duration-300 ease-out active:scale-95 cursor-pointer select-none",
                 isActive
-                  ? "bg-wine text-white shadow-md font-semibold border border-wine"
-                  : "border border-border bg-cream/40 text-ink hover:border-gold hover:bg-cream"
+                  ? "bg-brown text-white shadow-md font-semibold border border-brown"
+                  : "border border-border bg-offwhite/40 text-ink hover:border-gold hover:bg-offwhite"
               )}
             >
               <span className="font-semibold whitespace-nowrap">{opt.label}</span>
               {opt.subtitle && (
                 <span
                   className={cn(
-                    "text-[10px] whitespace-nowrap",
+                    "text-micro whitespace-nowrap",
                     isActive ? "text-white/80" : "text-muted"
                   )}
                 >
@@ -116,7 +116,7 @@ export default function Tabs<T extends string = string>({
   return (
     <div
       className={cn(
-        "flex border-b border-border gap-8 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
+        "scrollbar-none flex border-b border-border gap-6 sm:gap-8 overflow-x-auto",
         className
       )}
     >
@@ -128,9 +128,9 @@ export default function Tabs<T extends string = string>({
             type="button"
             onClick={(e) => handleTabClick(opt.id, e)}
             className={cn(
-              "pb-3 text-small font-medium transition-all duration-200 cursor-pointer border-b-2 whitespace-nowrap",
+              "flex min-h-12 items-end pb-3 text-small font-medium transition-all duration-200 cursor-pointer border-b-2 whitespace-nowrap",
               isActive
-                ? "border-wine text-wine font-semibold"
+                ? "border-brown text-brown font-semibold"
                 : "border-transparent text-muted hover:text-ink hover:border-border"
             )}
           >

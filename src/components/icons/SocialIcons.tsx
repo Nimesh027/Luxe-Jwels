@@ -1,6 +1,6 @@
 export function InstagramIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
-    <svg
+    <svg aria-hidden="true"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -18,7 +18,7 @@ export function InstagramIcon({ className = "w-4 h-4" }: { className?: string })
 
 export function PinterestIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
-    <svg
+    <svg aria-hidden="true"
       viewBox="0 0 24 24"
       fill="currentColor"
       className={className}
@@ -30,7 +30,7 @@ export function PinterestIcon({ className = "w-4 h-4" }: { className?: string })
 
 export function FacebookIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
-    <svg
+    <svg aria-hidden="true"
       viewBox="0 0 24 24"
       fill="currentColor"
       className={className}
@@ -42,7 +42,7 @@ export function FacebookIcon({ className = "w-4 h-4" }: { className?: string }) 
 
 export function YoutubeIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
-    <svg
+    <svg aria-hidden="true"
       viewBox="0 0 24 24"
       fill="currentColor"
       className={className}

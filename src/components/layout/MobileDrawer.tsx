@@ -18,6 +18,7 @@ import {
 import JewelryIcon from "./JewelryIcon";
 import { cn } from "@/lib/utils";
 import Button from "@/components/ui/Button";
+import Collapse from "@/components/ui/Collapse";
 
 export default function MobileDrawer() {
   const dispatch = useAppDispatch();
@@ -28,21 +29,37 @@ export default function MobileDrawer() {
 
   const close = () => dispatch(setMobileDrawerOpen(false));
 
-  if (!open) return null;
-
   return (
-    <div className="fixed inset-0 z-50 lg:hidden">
-      <div className="absolute inset-0 bg-ink/60 transition-opacity" onClick={close} />
-      <div className="relative flex h-full w-84 max-w-[88vw] flex-col bg-surface shadow-2xl">
-        <div className="flex items-center justify-between border-b border-border px-5 py-4 bg-surface">
-          <span className="font-display text-h5 tracking-[0.2em] text-ink font-semibold">
-            LUXE JEWELS
+    <div
+      aria-hidden={!open}
+      inert={!open}
+      className={cn(
+        "fixed inset-0 z-50 lg:hidden transition-[visibility] duration-300",
+        open ? "visible" : "invisible"
+      )}
+    >
+      <div
+        className={cn(
+          "absolute inset-0 bg-ink/60 transition-opacity duration-300 ease-out",
+          open ? "opacity-100" : "opacity-0"
+        )}
+        onClick={close}
+      />
+      <div
+        className={cn(
+          "relative flex h-full w-84 max-w-[88vw] flex-col bg-white shadow-2xl transition-transform duration-300 ease-out will-change-transform",
+          open ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
+        <div className="flex items-center justify-between border-b border-border px-5 py-4 bg-white">
+          <span className="font-display text-h5 tracking-widest text-ink font-semibold">
+            Luxe Jewels
           </span>
           <button
             type="button"
             aria-label="Close menu"
             onClick={close}
-            className="text-ink hover:text-wine cursor-pointer p-1"
+            className="-mr-3 flex size-12 items-center justify-center rounded-full text-ink hover:bg-brown-soft hover:text-brown cursor-pointer"
           >
             <CloseIcon size={20} />
           </button>
@@ -70,7 +87,7 @@ export default function MobileDrawer() {
                   <Link
                     href={link.href}
                     onClick={close}
-                    className="flex-1 px-3 py-2.5 text-caption font-medium uppercase tracking-wider text-ink hover:text-wine"
+                    className="flex-1 px-3 py-2.5 text-caption font-medium tracking-wider text-ink hover:text-brown"
                   >
                     {link.label}
                   </Link>
@@ -80,13 +97,13 @@ export default function MobileDrawer() {
                       type="button"
                       aria-label={`Toggle ${link.label}`}
                       onClick={() => setExpandedId(isExpanded ? null : link.id)}
-                      className="px-3 py-2.5 text-ink hover:text-wine cursor-pointer"
+                      className="px-3 py-2.5 text-ink hover:text-brown cursor-pointer"
                     >
                       <ChevronDownIcon
                         size={14}
                         className={cn(
                           "transition-transform duration-200",
-                          isExpanded && "rotate-180 text-wine"
+                          isExpanded && "rotate-180 text-brown"
                         )}
                       />
                     </button>
@@ -94,8 +111,8 @@ export default function MobileDrawer() {
                 </div>
 
                 {/* Mega Menu Expandable Mobile View */}
-                {hasMega && link.megaMenu && isExpanded && (
-                  <div className="pb-3 pt-1 px-2">
+                {hasMega && link.megaMenu && (
+                <Collapse open={isExpanded} className="pb-3 pt-1 px-2">
                     {/* Tabs list */}
                     <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none">
                       {link.megaMenu.tabs.map((tab) => {
@@ -110,8 +127,8 @@ export default function MobileDrawer() {
                             className={cn(
                               "px-3 py-1.5 rounded-full text-caption font-medium whitespace-nowrap transition-colors",
                               isTabActive
-                                ? "bg-wine-soft text-wine border border-wine/30 font-semibold"
-                                : "text-muted hover:text-ink bg-cream/70"
+                                ? "bg-brown-soft text-brown border border-brown/30 font-semibold"
+                                : "text-muted hover:text-ink bg-offwhite/70"
                             )}
                           >
                             {tab.label}
@@ -122,16 +139,16 @@ export default function MobileDrawer() {
 
                     {/* Tab Items Grid */}
                     {currentTab && (
-                      <div className="grid grid-cols-2 gap-2 mt-2 bg-cream/30 p-2.5 rounded-xl border border-border/60">
+                      <div className="grid grid-cols-2 gap-2 mt-2 bg-offwhite/30 p-2.5 rounded-xl border border-border/60">
                         {currentTab.items.map((item) => (
                           <Link
                             key={item.id}
                             href={item.href}
                             onClick={close}
-                            className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-surface transition-colors"
+                            className="flex min-h-12 items-center gap-2 p-1.5 rounded-lg hover:bg-white transition-colors"
                           >
                             <JewelryIcon name={item.name} className="w-5 h-5 shrink-0" />
-                            <span className="text-caption text-ink truncate hover:text-wine">
+                            <span className="text-caption text-ink truncate hover:text-brown">
                               {item.name}
                             </span>
                           </Link>
@@ -145,42 +162,42 @@ export default function MobileDrawer() {
                         <Button
                           href={currentTab.bottomBanner.buttonHref}
                           onClick={close}
-                          colorTheme="wine"
+                          colorTheme="brown"
                           size="xs"
                           rounded="md"
                           fullWidth
-                          className="text-caption font-medium tracking-wide"
+                          className="tracking-wide"
                         >
                           {currentTab.bottomBanner.buttonText} - {currentTab.bottomBanner.heading}
                         </Button>
                       </div>
                     )}
-                  </div>
-                )}
+                  </Collapse>
+                  )}
 
                 {/* Simple Children Fallback */}
-                {hasChildren && !hasMega && isExpanded && (
-                  <div className="pb-2 pl-4 pr-2 space-y-1">
+                {hasChildren && !hasMega && (
+                <Collapse open={isExpanded} className="pb-2 pl-4 pr-2 space-y-1">
                     {link.children?.map((child) => (
                       <Link
                         key={child.id}
                         href={child.href}
                         onClick={close}
-                        className="block py-1.5 px-2 text-caption text-muted hover:text-wine hover:bg-cream rounded"
+                        className="block py-1.5 px-2 text-caption text-muted hover:text-brown hover:bg-offwhite rounded"
                       >
                         {child.label}
                       </Link>
                     ))}
-                  </div>
-                )}
+                  </Collapse>
+                  )}
               </div>
             );
           })}
         </nav>
 
         {/* Bottom User Actions */}
-        <div className="flex items-center justify-around border-t border-border px-5 py-4 bg-surface text-ink">
-          <Link href="/login" onClick={close} className="flex flex-col items-center gap-1 text-caption hover:text-wine">
+        <div className="flex items-center justify-around border-t border-border px-5 py-4 bg-white text-ink">
+          <Link href="/login" onClick={close} className="flex flex-col items-center gap-1 text-caption hover:text-brown">
             <UserIcon size={20} />
             <span>Account</span>
           </Link>
@@ -190,7 +207,7 @@ export default function MobileDrawer() {
               close();
               dispatch(setWishlistDrawerOpen(true));
             }}
-            className="flex flex-col items-center gap-1 text-caption hover:text-wine cursor-pointer"
+            className="flex flex-col items-center gap-1 text-caption hover:text-brown cursor-pointer"
           >
             <HeartIcon size={20} />
             <span>Wishlist</span>
@@ -201,7 +218,7 @@ export default function MobileDrawer() {
               close();
               dispatch(setCartDrawerOpen(true));
             }}
-            className="flex flex-col items-center gap-1 text-caption hover:text-wine cursor-pointer"
+            className="flex flex-col items-center gap-1 text-caption hover:text-brown cursor-pointer"
           >
             <ShoppingBagIcon size={20} />
             <span>Cart</span>

@@ -12,10 +12,10 @@ interface CardProps {
 }
 
 const variantClasses: Record<CardVariant, string> = {
-  product: "bg-surface border border-border rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-200",
+  product: "bg-white border border-border rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-200",
   collection: "relative overflow-hidden rounded-2xl group",
-  promo: "relative overflow-hidden rounded-2xl bg-ink text-cream",
-  plain: "bg-surface rounded-2xl",
+  promo: "relative overflow-hidden rounded-2xl bg-ink text-offwhite",
+  plain: "bg-white rounded-2xl",
 };
 
 export default function Card({ variant = "plain", href, children, className }: CardProps) {

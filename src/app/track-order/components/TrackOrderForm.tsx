@@ -2,7 +2,7 @@ import React from "react";
 import Input from "@/components/ui/Input";
 import Section from "@/components/common/Section";
 import Button from "@/components/ui/Button";
-import { TagIcon, SmartphoneIcon } from "@/components/icons";
+import { TagIcon, SmartphoneIcon, ArrowRightIcon } from "@/components/icons";
 
 interface TrackOrderFormProps {
   trackType: "order" | "awb";
@@ -26,18 +26,18 @@ export default function TrackOrderForm({
   onSubmit,
 }: TrackOrderFormProps) {
   return (
-    <Section className="bg-gradient-to-b from-[#FAF0F2]/60 via-surface to-background">
-      <div className="bg-white/90 backdrop-blur-md rounded-3xl border border-wine/20 p-6 sm:p-10 shadow-[0_15px_40px_rgba(128,34,47,0.08)] max-w-2xl mx-auto mb-12 relative overflow-hidden">
+    <Section className="bg-linear-to-b from-brown-soft/60 via-white to-offwhite">
+      <div className="bg-white/90 backdrop-blur-md rounded-3xl border border-brown/20 p-6 sm:p-10 shadow-[0_15px_40px_rgba(139,94,52,0.08)] max-w-2xl mx-auto mb-12 relative overflow-hidden">
         {/* Subtle Corner Glow Accent */}
-        <div className="absolute -top-16 -right-16 w-32 h-32 bg-wine/10 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute -top-16 -right-16 w-32 h-32 bg-brown/10 rounded-full blur-2xl pointer-events-none" />
 
         {/* Toggle Mode Tabs */}
-        <div className="grid grid-cols-2 gap-2 p-1.5 bg-[#F8EFEF]/80 rounded-2xl mb-6 border border-wine/10">
+        <div className="grid grid-cols-2 gap-2 p-1.5 bg-brown-soft/80 rounded-2xl mb-6 border border-brown/10">
           <button
             type="button"
             onClick={() => setTrackType("order")}
             className={`py-2.5 px-4 text-body font-semibold rounded-xl transition-all cursor-pointer ${trackType === "order"
-              ? "bg-white text-wine shadow-sm"
+              ? "bg-white text-brown shadow-sm"
               : "text-muted hover:text-ink"
               }`}
           >
@@ -47,7 +47,7 @@ export default function TrackOrderForm({
             type="button"
             onClick={() => setTrackType("awb")}
             className={`py-2.5 px-4 text-body font-semibold rounded-xl transition-all cursor-pointer ${trackType === "awb"
-              ? "bg-white text-wine shadow-sm"
+              ? "bg-white text-brown shadow-sm"
               : "text-muted hover:text-ink"
               }`}
           >
@@ -61,7 +61,7 @@ export default function TrackOrderForm({
             id="track-order-id-input"
             label={trackType === "order" ? "Order ID" : "AWB / Waybill Number"}
             labelAction={
-              <span className="text-[11px] text-muted font-normal uppercase">
+              <span className="text-micro text-muted font-normal">
                 e.g. {trackType === "order" ? "LX-89210" : "SQL-98234109"}
               </span>
             }
@@ -70,7 +70,7 @@ export default function TrackOrderForm({
             value={orderIdInput}
             onChange={(e) => setOrderIdInput(e.target.value)}
             placeholder={trackType === "order" ? "LX-89210" : "SQL-98234109"}
-            inputClassName="font-mono uppercase tracking-wider"
+            inputClassName="font-mono tracking-wider"
             trailingIcon={<TagIcon size={16} className="text-muted" />}
             required
           />
@@ -89,18 +89,18 @@ export default function TrackOrderForm({
 
           <Button
             type="submit"
-            colorTheme="wine"
+            colorTheme="brown"
             size="md"
             rounded="lg"
             fullWidth
             disabled={isLoading}
-            className="font-bold uppercase tracking-widest shadow-md hover:shadow-lg mt-2"
-            rightIcon={!isLoading && <span className="text-body">→</span>}
+            className="tracking-widest shadow-md hover:shadow-lg mt-2"
+            rightIcon={!isLoading && <ArrowRightIcon className="h-4 w-4" />}
           >
             {isLoading ? (
               <span className="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
             ) : (
-              "TRACK SHIPMENT"
+              "Track Shipment"
             )}
           </Button>
         </form>

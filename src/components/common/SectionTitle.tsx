@@ -34,7 +34,7 @@ export default function SectionTitle({
   return (
     <div
       className={cn(
-        "mb-8 sm:mb-12",
+        "mb-8 sm:mb-10 lg:mb-12",
         isCentered && "text-center mx-auto",
         isRight && "text-right ml-auto",
         !isCentered && !isRight && "text-left",
@@ -52,7 +52,7 @@ export default function SectionTitle({
           {tagline && (
             <span
               className={cn(
-                "inline-block text-[11px] sm:text-caption font-semibold tracking-[0.2em] uppercase text-wine mb-2",
+                "inline-block text-caption font-semibold tracking-widest text-brown mb-2",
                 taglineClassName
               )}
             >
@@ -63,7 +63,7 @@ export default function SectionTitle({
           {/* Main Title */}
           <h2
             className={cn(
-              "font-display text-h2 text-ink font-normal tracking-wide leading-tight",
+              "font-display text-h2 text-ink font-normal tracking-tight",
               titleClassName
             )}
           >
@@ -74,7 +74,7 @@ export default function SectionTitle({
           {description && (
             <div
               className={cn(
-                "mt-2 sm:mt-2.5 text-body text-muted leading-relaxed",
+                "mt-2 sm:mt-3 text-body text-muted leading-relaxed",
                 isCentered && "max-w-xl mx-auto",
                 descriptionClassName
               )}
@@ -89,7 +89,7 @@ export default function SectionTitle({
           <div className={cn("mt-4", isCentered ? "text-center" : "sm:mt-0")}>
             <Link
               href={viewAllHref}
-              className="inline-flex items-center gap-1.5 text-caption uppercase tracking-wider font-medium text-wine hover:text-wine-dark hover:underline underline-offset-4 transition-colors"
+              className="group -my-3 inline-flex min-h-12 items-center gap-1.5 py-3 text-small font-medium text-brown hover:text-brown-dark hover:underline underline-offset-4 transition-colors"
             >
               <span>{viewAllLabel}</span>
               <ArrowRightIcon className="w-3.5 h-3.5 shrink-0 transition-transform group-hover:translate-x-0.5" />

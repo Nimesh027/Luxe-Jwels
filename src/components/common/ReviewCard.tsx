@@ -45,14 +45,14 @@ export default function ReviewCard({
           </div>
 
           {date && (
-            <span className="text-[11px] font-medium uppercase tracking-wider text-muted shrink-0">
+            <span className="text-micro font-medium tracking-wider text-muted shrink-0">
               {date}
             </span>
           )}
         </div>
 
         {/* Review Quote Body */}
-        <p className="mt-3.5 text-caption sm:text-[13px] text-muted leading-relaxed font-light">
+        <p className="mt-3.5 text-caption sm:text-label text-muted leading-relaxed font-light">
           &quot;{quote}&quot;
         </p>
       </div>
@@ -61,7 +61,7 @@ export default function ReviewCard({
       <div className="mt-5 pt-4 border-t border-neutral-100 flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           {/* Avatar Initial Circle */}
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f4ebe1] text-body font-semibold text-ink shadow-2xs">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-offwhite-dark text-body font-semibold text-ink shadow-2xs">
             {initial}
           </div>
 
@@ -70,7 +70,7 @@ export default function ReviewCard({
               {name}
             </h4>
             {location && (
-              <p className="text-[11px] text-muted font-light truncate mt-0.5">
+              <p className="text-micro text-muted font-light truncate mt-0.5">
                 {location}
               </p>
             )}
@@ -78,7 +78,7 @@ export default function ReviewCard({
         </div>
 
         {verified && (
-          <span className="shrink-0 text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+          <span className="shrink-0 text-micro font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
             ✓ Verified Buyer
           </span>
         )}

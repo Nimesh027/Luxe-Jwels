@@ -26,20 +26,20 @@ export default function Sustainability() {
   ];
 
   return (
-    <Section className="py-16 sm:py-24 bg-white border-y border-border/40">
-      <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+    <Section className="bg-white border-y border-border/40">
+      <div className="container max-w-6xl">
 
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
 
           {/* Text Content */}
           <div className="w-full lg:w-1/3 space-y-6 text-center lg:text-left">
-            <span className="text-caption font-bold uppercase tracking-[0.25em] text-emerald-700/80">
+            <span className="text-caption font-bold tracking-widest text-emerald-700/80">
               Conscious Luxury
             </span>
-            <h2 className="font-display text-h3 sm:text-h2 font-semibold text-wine leading-tight">
+            <h2 className="font-display text-h3 sm:text-h2 font-semibold text-brown leading-tight">
               A Commitment to the Earth
             </h2>
-            <div className="w-12 h-[2px] bg-emerald-700/30 mx-auto lg:mx-0" />
+            <div className="w-12 h-0.5 bg-emerald-700/30 mx-auto lg:mx-0" />
             <p className="text-body text-muted leading-relaxed font-light">
               True luxury should not come at the cost of our planet or its people. We are dedicated to pioneering sustainable and ethical practices within the high jewellery industry.
             </p>
@@ -47,9 +47,9 @@ export default function Sustainability() {
 
           {/* Grid */}
           <div className="w-full lg:w-2/3">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-grid">
               {initiatives.map((item, idx) => (
-                <div key={idx} className="bg-surface/50 rounded-[2rem] p-8 border border-emerald-900/10 hover:border-emerald-900/30 transition-colors shadow-2xs">
+                <div key={idx} className="bg-white/50 rounded-4xl p-8 border border-emerald-900/10 hover:border-emerald-900/30 transition-colors shadow-2xs">
                   <div className="w-12 h-12 rounded-2xl bg-emerald-50/80 border border-emerald-200/60 flex items-center justify-center mb-5 shadow-2xs">
                     {item.icon}
                   </div>

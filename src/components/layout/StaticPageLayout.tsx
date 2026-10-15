@@ -21,7 +21,7 @@ export default function StaticPageLayout({
   return (
     <>
       {/* HERO BANNER SECTION */}
-      <section className="w-full bg-wine-dark py-16 sm:py-24 relative overflow-hidden">
+      <section className="w-full bg-brown-dark py-section relative overflow-hidden">
         <div className="absolute inset-0 bg-black/20 mix-blend-overlay pointer-events-none" />
         <div className="relative z-10 container mx-auto px-4 text-center space-y-3">
           <div className="mb-10">

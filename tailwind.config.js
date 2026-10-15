@@ -8,6 +8,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        offwhite: {
+          DEFAULT: "var(--color-offwhite)",
+          dark: "var(--color-offwhite-dark)",
+        },
+        white: "var(--color-white)",
+        brown: {
+          DEFAULT: "var(--color-brown)",
+          dark: "var(--color-brown-dark)",
+          light: "var(--color-brown-light)",
+          soft: "var(--color-brown-soft)",
+        },
         ink: {
           DEFAULT: "var(--color-ink)",
           soft: "var(--color-ink-soft)",
@@ -15,19 +26,10 @@ module.exports = {
         gold: {
           DEFAULT: "var(--color-gold)",
           dark: "var(--color-gold-dark)",
+          light: "var(--color-gold-light)",
         },
-        cream: {
-          DEFAULT: "var(--color-cream)",
-          dark: "var(--color-cream-dark)",
-        },
-        surface: "var(--color-surface)",
         muted: "var(--color-muted)",
         border: "var(--color-border)",
-        wine: {
-          DEFAULT: "var(--color-wine)",
-          dark: "var(--color-wine-dark)",
-          soft: "var(--color-wine-soft)",
-        },
       },
       fontFamily: {
         display: ["var(--font-display)", "serif"],

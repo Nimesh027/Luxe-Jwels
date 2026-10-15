@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import Input from "@/components/ui/Input";
+import Button from "@/components/ui/Button";
 
 export default function ForgotPasswordClient() {
   const [email, setEmail] = useState("");
@@ -26,19 +27,19 @@ export default function ForgotPasswordClient() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-0px)] bg-[#0f0e0d] text-cream flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-svh bg-ink text-offwhite flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Ambient Radial Background Glow */}
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-wine/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-brown/15 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="w-full max-w-lg bg-[#161412] border border-gold/25 rounded-2xl shadow-2xl overflow-hidden relative z-10 p-6 sm:p-10 lg:p-12">
+      <div className="w-full max-w-lg bg-ink-soft border border-gold/25 rounded-2xl shadow-2xl overflow-hidden relative z-10 p-6 sm:p-10 lg:p-12">
         {/* Top Brand Header */}
         <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-8">
           <div>
-            <span className="font-display text-h5 tracking-[0.25em] text-cream uppercase font-semibold">
-              LUXE JEWELS
+            <span className="font-display text-h5 tracking-widest text-offwhite font-semibold">
+              Luxe Jewels
             </span>
-            <p className="text-[11px] text-cream/50 tracking-wider uppercase mt-0.5 font-light">
+            <p className="text-micro text-offwhite/50 tracking-wider mt-0.5 font-light">
               Password Recovery
             </p>
           </div>
@@ -47,7 +48,7 @@ export default function ForgotPasswordClient() {
             href="/login"
             className="flex items-center gap-1.5 text-caption text-gold/90 hover:text-gold transition-colors font-medium"
           >
-            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <svg aria-hidden="true" className="w-4 h-4 fill-current" viewBox="0 0 24 24">
               <path d="M22 11H4.414l5.293-5.293a1 1 0 1 0-1.414-1.414l-7 7a1 1 0 0 0 0 1.414l7 7a1 1 0 0 0 1.414-1.414L4.414 13H22a1 1 0 0 0 0-2" />
             </svg>
             <span>Back to Login</span>
@@ -58,10 +59,10 @@ export default function ForgotPasswordClient() {
           <>
             {/* Heading */}
             <div className="mb-8">
-              <h1 className="font-display text-h2 text-cream font-normal tracking-wide">
+              <h1 className="font-display text-h2 text-offwhite font-normal tracking-wide">
                 Forgot Your Password?
               </h1>
-              <p className="text-body text-cream/60 mt-1 font-light leading-relaxed">
+              <p className="text-body text-offwhite/60 mt-1 font-light leading-relaxed">
                 Enter your registered email address below. We&apos;ll send a secure password reset link to your inbox.
               </p>
             </div>
@@ -77,7 +78,7 @@ export default function ForgotPasswordClient() {
                 required
                 error={error}
                 leadingIcon={
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -89,14 +90,19 @@ export default function ForgotPasswordClient() {
               />
 
               {/* Submit Button */}
-              <button
+              <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold to-[#b59247] hover:from-[#dcb96b] hover:to-gold text-ink font-semibold text-caption uppercase tracking-[0.15em] transition-all duration-300 transform active:scale-[0.99] shadow-lg shadow-gold/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+                variant="fill"
+                colorTheme="gold"
+                size="lg"
+                rounded="lg"
+                fullWidth
+                className="tracking-widest shadow-lg shadow-gold/20"
               >
                 {isLoading ? (
                   <>
-                    <svg className="animate-spin h-4 w-4 text-ink" fill="none" viewBox="0 0 24 24">
+                    <svg aria-hidden="true" className="animate-spin h-4 w-4 text-ink" fill="none" viewBox="0 0 24 24">
                       <circle
                         className="opacity-25"
                         cx="12"
@@ -116,7 +122,7 @@ export default function ForgotPasswordClient() {
                 ) : (
                   <span>Send Recovery Link</span>
                 )}
-              </button>
+              </Button>
             </form>
           </>
         ) : (
@@ -127,41 +133,45 @@ export default function ForgotPasswordClient() {
             </div>
 
             <div>
-              <h2 className="font-display text-h3 text-cream font-normal">
+              <h2 className="font-display text-h3 text-offwhite font-normal">
                 Check Your Inbox
               </h2>
-              <p className="text-body text-cream/70 mt-2 leading-relaxed max-w-sm mx-auto font-light">
+              <p className="text-body text-offwhite/70 mt-2 leading-relaxed max-w-sm mx-auto font-light">
                 We have sent password recovery instructions to{" "}
                 <span className="text-gold font-medium">{email}</span>. Please check your email inbox and follow the link provided.
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-caption text-cream/60 font-light">
+            <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-caption text-offwhite/60 font-light">
               Didn&apos;t receive the email? Check your spam folder or{" "}
               <button
                 type="button"
                 onClick={() => setIsSubmitted(false)}
-                className="text-gold underline underline-offset-2 hover:text-cream font-medium cursor-pointer"
+                className="text-gold underline underline-offset-2 hover:text-offwhite font-medium cursor-pointer"
               >
                 try another email address
               </button>.
             </div>
 
             <div className="pt-2">
-              <Link
+              <Button
                 href="/login"
-                className="inline-flex items-center justify-center w-full py-3 px-6 rounded-xl bg-white/10 hover:bg-white/20 text-cream font-medium text-caption uppercase tracking-wider transition-colors"
+                variant="border"
+                colorTheme="light"
+                size="md"
+                rounded="lg"
+                fullWidth
               >
                 Return To Sign In
-              </Link>
+              </Button>
             </div>
           </div>
         )}
 
         {/* Bottom Security Footer */}
-        <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-cream/40">
+        <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-micro text-offwhite/40">
           <span className="flex items-center gap-1.5">
-            <svg className="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg aria-hidden="true" className="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

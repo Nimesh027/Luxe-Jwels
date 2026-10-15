@@ -57,7 +57,7 @@ function CategoryContent({
       {products.length === 0 ? (
         <p className="text-small text-muted">No products found in this category yet.</p>
       ) : (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="grid-products gap-grid">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

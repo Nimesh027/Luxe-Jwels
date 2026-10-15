@@ -48,8 +48,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               <label
                 htmlFor={inputId}
                 className={cn(
-                  "block text-caption uppercase tracking-wider font-medium cursor-pointer",
-                  isDark ? "text-cream/80" : "text-ink/80"
+                  "block text-label font-medium cursor-pointer",
+                  isDark ? "text-offwhite/80" : "text-ink/80"
                 )}
               >
                 {label}
@@ -66,7 +66,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             <div
               className={cn(
                 "absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none",
-                isDark ? "text-cream/40" : "text-muted"
+                isDark ? "text-offwhite/40" : "text-muted"
               )}
             >
               {leadingIcon}
@@ -79,12 +79,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             id={inputId}
             disabled={disabled}
             className={cn(
-              "w-full rounded-xl py-2.5 sm:py-3 text-body transition-all duration-200 outline-hidden border",
+              "w-full min-h-12 rounded-xl py-3 text-body transition-[border-color,box-shadow,background-color] duration-200 outline-hidden border",
               leadingIcon ? "pl-10" : "pl-3.5",
               trailingIcon ? "pr-10" : "pr-3.5",
               isDark
-                ? "bg-white/5 text-cream placeholder-cream/30 border-white/15 focus:border-gold focus:ring-1 focus:ring-gold"
-                : "bg-surface text-ink placeholder-muted border-border focus:border-wine focus:ring-1 focus:ring-wine",
+                ? "bg-white/5 text-offwhite placeholder-offwhite/30 border-white/15 focus:border-gold focus:ring-1 focus:ring-gold"
+                : "bg-white text-ink placeholder-muted border-border focus:border-brown focus:ring-1 focus:ring-brown",
               error && (isDark ? "border-red-500/80 ring-1 ring-red-500/50" : "border-red-500 ring-1 ring-red-500/50"),
               disabled && "opacity-50 cursor-not-allowed",
               inputClassName,
@@ -98,7 +98,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             <div
               className={cn(
                 "absolute inset-y-0 right-0 pr-3.5 flex items-center",
-                isDark ? "text-cream/40" : "text-muted"
+                isDark ? "text-offwhite/40" : "text-muted"
               )}
             >
               {trailingIcon}
@@ -108,11 +108,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
         {/* Error or Helper Message */}
         {error ? (
-          <p className={cn("text-[11px] sm:text-caption mt-1.5 font-medium", isDark ? "text-red-400" : "text-red-500")}>
+          <p className={cn("text-caption mt-1.5 font-medium", isDark ? "text-red-400" : "text-red-500")}>
             {error}
           </p>
         ) : helperText ? (
-          <p className={cn("text-[11px] sm:text-caption mt-1.5 font-light", isDark ? "text-cream/50" : "text-muted")}>
+          <p className={cn("text-caption mt-1.5 font-light", isDark ? "text-offwhite/50" : "text-muted")}>
             {helperText}
           </p>
         ) : null}

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { FilterIcon, CheckIcon } from "@/components/icons";
+import Button from "@/components/ui/Button";
 
 export const CATEGORIES = [
   { label: "Rings", value: "rings" },
@@ -40,15 +41,15 @@ function FilterCheckbox({ label, checked, onChange }: FilterCheckboxProps) {
       className="w-full flex items-center gap-3 px-2 py-1.5 rounded-lg text-left transition-all duration-200 cursor-pointer group hover:bg-ink/5"
     >
       <span
-        className={`w-[15px] h-[15px] shrink-0 rounded-[4px] border-[1.5px] flex items-center justify-center transition-all duration-200 ${checked
-            ? "bg-wine border-wine shadow-sm shadow-wine/30"
-            : "border-border/70 bg-surface group-hover:border-wine/50"
+        className={`w-4 h-4 shrink-0 rounded-[4px] border-[1.5px] flex items-center justify-center transition-all duration-200 ${checked
+            ? "bg-brown border-brown shadow-sm shadow-brown/30"
+            : "border-border/70 bg-white group-hover:border-brown/50"
           }`}
       >
         {checked && <CheckIcon size={10} className="text-white stroke-[2.5]" />}
       </span>
       <span
-        className={`text-[13px] leading-none transition-colors duration-150 ${checked ? "text-wine font-semibold" : "text-ink/80 group-hover:text-ink"
+        className={`text-label leading-none transition-colors duration-150 ${checked ? "text-brown font-semibold" : "text-ink/80 group-hover:text-ink"
           }`}
       >
         {label}
@@ -71,17 +72,17 @@ function FilterRadio({ label, checked, onChange }: FilterRadioProps) {
       className="w-full flex items-center gap-3 px-2 py-1.5 rounded-lg text-left transition-all duration-200 cursor-pointer group hover:bg-ink/5"
     >
       <span
-        className={`w-[15px] h-[15px] shrink-0 rounded-full border-[1.5px] flex items-center justify-center transition-all duration-200 ${checked
-            ? "border-wine"
-            : "border-border/70 bg-surface group-hover:border-wine/50"
+        className={`w-4 h-4 shrink-0 rounded-full border-[1.5px] flex items-center justify-center transition-all duration-200 ${checked
+            ? "border-brown"
+            : "border-border/70 bg-white group-hover:border-brown/50"
           }`}
       >
         {checked && (
-          <span className="w-[7px] h-[7px] rounded-full bg-wine block shadow-sm shadow-wine/40" />
+          <span className="w-2 h-2 rounded-full bg-brown block shadow-sm shadow-brown/40" />
         )}
       </span>
       <span
-        className={`text-[13px] leading-none transition-colors duration-150 ${checked ? "text-wine font-semibold" : "text-ink/80 group-hover:text-ink"
+        className={`text-label leading-none transition-colors duration-150 ${checked ? "text-brown font-semibold" : "text-ink/80 group-hover:text-ink"
           }`}
       >
         {label}
@@ -100,7 +101,7 @@ function FilterSection({
   return (
     <div>
       <div className="flex items-center gap-2 mb-2.5">
-        <p className="text-[9px] font-extrabold uppercase tracking-[0.28em] text-muted/70">
+        <p className="text-micro font-extrabold tracking-widest text-muted/70">
           {title}
         </p>
         <span className="flex-1 h-px bg-border/50" />
@@ -136,18 +137,21 @@ export default function ShopFilter({
       {/* Header */}
       <div className="flex items-center justify-between mb-5 pb-3 border-b border-border/60">
         <div className="flex items-center gap-2">
-          <FilterIcon size={16} className="text-wine" />
-          <h2 className="!text-small font-extrabold uppercase tracking-[0.2em] text-ink">
+          <FilterIcon size={16} className="text-brown" />
+          <h2 className="!text-small font-extrabold tracking-widest text-ink">
             Filter By
           </h2>
         </div>
         {activeFilterCount > 0 && (
-          <button
+          <Button
             onClick={onClearAll}
-            className="text-[10px] text-wine/80 hover:text-wine border border-wine/20 hover:border-wine/40 rounded-full px-2.5 py-0.5 transition-all duration-150 cursor-pointer font-semibold tracking-wide"
+            variant="border"
+            colorTheme="brown"
+            size="xs"
+            rounded="full"
           >
             Clear {activeFilterCount}
-          </button>
+          </Button>
         )}
       </div>
 

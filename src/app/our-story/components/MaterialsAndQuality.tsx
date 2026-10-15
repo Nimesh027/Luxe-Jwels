@@ -27,18 +27,18 @@ export default function MaterialsAndQuality() {
       {/* Header */}
       <SectionTitle
         tagline="Pure Elements"
-        taglineClassName="text-gold tracking-[0.25em]"
+        taglineClassName="text-gold-dark tracking-widest"
         title="Materials & Unyielding Quality"
-        titleClassName="text-wine"
+        titleClassName="text-brown"
         description="A masterpiece is only as enduring as the elements from which it is forged. We travel the world to ethically source the finest materials nature has to offer."
       />
 
       {/* Materials Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-grid">
         {materials.map((item, idx) => (
           <div
             key={idx}
-            className="bg-white rounded-[2rem] overflow-hidden border border-border/80 shadow-sm group hover:shadow-lg hover:border-gold/30 transition-all duration-300"
+            className="bg-white rounded-4xl overflow-hidden border border-border/80 shadow-sm group hover:shadow-lg hover:border-gold/30 transition-all duration-300"
           >
             <div className="relative h-64 w-full overflow-hidden">
               <Image
@@ -47,7 +47,7 @@ export default function MaterialsAndQuality() {
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
               <h3 className="absolute bottom-6 left-6 font-display font-semibold !text-h5 text-white">
                 {item.title}
               </h3>

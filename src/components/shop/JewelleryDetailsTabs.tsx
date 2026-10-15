@@ -74,7 +74,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
         className="mb-10"
       />
 
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
+      <div className="grid grid-cols-1 gap-stack lg:grid-cols-12 lg:items-start">
         {/* Left Column: Tab Content */}
         <div className="lg:col-span-7">
           {activeTab === "details" ? (
@@ -84,13 +84,13 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 <button
                   type="button"
                   onClick={() => toggleAccordion("metal")}
-                  className="flex w-full items-center justify-between px-6 py-4 text-left font-medium text-ink hover:bg-cream/40 cursor-pointer"
+                  className="flex w-full items-center justify-between px-4 py-3.5 sm:px-6 sm:py-4 text-left font-medium text-ink hover:bg-offwhite/40 cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-cream text-gold-dark">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-offwhite text-gold-dark">
                       <GoldBarIcon size={18} />
                     </span>
-                    <span className="text-caption font-semibold tracking-wider uppercase text-ink">
+                    <span className="text-small font-semibold text-ink">
                       Metal Details
                     </span>
                   </div>
@@ -106,28 +106,28 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                     }`}
                 >
                   <div className="overflow-hidden">
-                    <div className="bg-cream/20 px-6 py-5">
-                      <div className="grid grid-cols-2 gap-y-5 gap-x-6 sm:grid-cols-3">
+                    <div className="bg-offwhite/20 px-4 py-4 sm:px-6 sm:py-5">
+                      <div className="grid grid-cols-2 gap-y-4 gap-x-4 sm:grid-cols-3 sm:gap-x-6">
                         <div>
-                          <div className="font-display text-h4 font-medium text-ink">18K</div>
+                          <div className="font-display text-body sm:text-h6 font-medium text-ink leading-snug">18K</div>
                           <div className="mt-0.5 text-caption text-muted">Karatage</div>
                         </div>
                         <div>
-                          <div className="font-display text-h4 font-medium text-ink">Yellow</div>
+                          <div className="font-display text-body sm:text-h6 font-medium text-ink leading-snug">Yellow</div>
                           <div className="mt-0.5 text-caption text-muted">Material Colour</div>
                         </div>
                         <div>
-                          <div className="font-display text-h4 font-medium text-ink">
+                          <div className="font-display text-body sm:text-h6 font-medium text-ink leading-snug">
                             {goldWeightGrams}g
                           </div>
                           <div className="mt-0.5 text-caption text-muted">Gross Weight</div>
                         </div>
                         <div>
-                          <div className="font-display text-h4 font-medium text-ink">Gold</div>
+                          <div className="font-display text-body sm:text-h6 font-medium text-ink leading-snug">Gold</div>
                           <div className="mt-0.5 text-caption text-muted">Metal</div>
                         </div>
                         <div>
-                          <div className="font-display text-h4 font-medium text-ink">Standard</div>
+                          <div className="font-display text-body sm:text-h6 font-medium text-ink leading-snug">Standard</div>
                           <div className="mt-0.5 text-caption text-muted">Size</div>
                         </div>
                       </div>
@@ -141,13 +141,13 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 <button
                   type="button"
                   onClick={() => toggleAccordion("diamond")}
-                  className="flex w-full items-center justify-between px-6 py-4 text-left font-medium text-ink hover:bg-cream/40 cursor-pointer"
+                  className="flex w-full items-center justify-between px-4 py-3.5 sm:px-6 sm:py-4 text-left font-medium text-ink hover:bg-offwhite/40 cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-cream text-gold-dark">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-offwhite text-gold-dark">
                       <DiamondIcon size={18} />
                     </span>
-                    <span className="text-caption font-semibold tracking-wider uppercase text-ink">
+                    <span className="text-small font-semibold text-ink">
                       Diamond Details
                     </span>
                   </div>
@@ -163,26 +163,26 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                     }`}
                 >
                   <div className="overflow-hidden">
-                    <div className="bg-cream/20 px-6 py-5">
-                      <div className="grid grid-cols-2 gap-y-5 gap-x-6 sm:grid-cols-3">
+                    <div className="bg-offwhite/20 px-4 py-4 sm:px-6 sm:py-5">
+                      <div className="grid grid-cols-2 gap-y-4 gap-x-4 sm:grid-cols-3 sm:gap-x-6">
                         <div>
-                          <div className="font-display text-h4 font-medium text-ink">SI2 / VS1</div>
+                          <div className="font-display text-body sm:text-h6 font-medium text-ink leading-snug">SI2 / VS1</div>
                           <div className="mt-0.5 text-caption text-muted">Diamond Clarity</div>
                         </div>
                         <div>
-                          <div className="font-display text-h4 font-medium text-ink">G-H</div>
+                          <div className="font-display text-body sm:text-h6 font-medium text-ink leading-snug">G-H</div>
                           <div className="mt-0.5 text-caption text-muted">Diamond Color</div>
                         </div>
                         <div>
-                          <div className="font-display text-h4 font-medium text-ink">09</div>
+                          <div className="font-display text-body sm:text-h6 font-medium text-ink leading-snug">09</div>
                           <div className="mt-0.5 text-caption text-muted">No Of Diamonds</div>
                         </div>
                         <div>
-                          <div className="font-display text-h4 font-medium text-ink">Prong</div>
+                          <div className="font-display text-body sm:text-h6 font-medium text-ink leading-snug">Prong</div>
                           <div className="mt-0.5 text-caption text-muted">Diamond Setting</div>
                         </div>
                         <div>
-                          <div className="font-display text-h4 font-medium text-ink">Round</div>
+                          <div className="font-display text-body sm:text-h6 font-medium text-ink leading-snug">Round</div>
                           <div className="mt-0.5 text-caption text-muted">Diamond Shape</div>
                         </div>
                       </div>
@@ -196,13 +196,13 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 <button
                   type="button"
                   onClick={() => toggleAccordion("general")}
-                  className="flex w-full items-center justify-between px-6 py-4 text-left font-medium text-ink hover:bg-cream/40 cursor-pointer"
+                  className="flex w-full items-center justify-between px-4 py-3.5 sm:px-6 sm:py-4 text-left font-medium text-ink hover:bg-offwhite/40 cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-cream text-gold-dark">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-offwhite text-gold-dark">
                       <CrownIcon size={18} />
                     </span>
-                    <span className="text-caption font-semibold tracking-wider uppercase text-ink">
+                    <span className="text-small font-semibold text-ink">
                       General Details
                     </span>
                   </div>
@@ -218,32 +218,32 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                     }`}
                 >
                   <div className="overflow-hidden">
-                    <div className="bg-cream/20 px-6 py-5">
-                      <div className="grid grid-cols-2 gap-y-5 gap-x-6 sm:grid-cols-3">
+                    <div className="bg-offwhite/20 px-4 py-4 sm:px-6 sm:py-5">
+                      <div className="grid grid-cols-2 gap-y-4 gap-x-4 sm:grid-cols-3 sm:gap-x-6">
                         <div>
-                          <div className="font-display text-h4 font-medium text-ink capitalize">
+                          <div className="font-display text-body sm:text-h6 font-medium text-ink leading-snug capitalize">
                             {product.category}
                           </div>
                           <div className="mt-0.5 text-caption text-muted">Jewellery Type</div>
                         </div>
                         <div>
-                          <div className="font-display text-h4 font-medium text-ink">Luxe Jewels</div>
+                          <div className="font-display text-body sm:text-h6 font-medium text-ink leading-snug">Luxe Jewels</div>
                           <div className="mt-0.5 text-caption text-muted">Brand</div>
                         </div>
                         <div>
-                          <div className="font-display text-h4 font-medium text-ink">
+                          <div className="font-display text-body sm:text-h6 font-medium text-ink leading-snug">
                             {product.isBestseller ? "Bestsellers" : "Signature"}
                           </div>
                           <div className="mt-0.5 text-caption text-muted">Collection</div>
                         </div>
                         <div>
-                          <div className="font-display text-h4 font-medium text-ink capitalize">
+                          <div className="font-display text-body sm:text-h6 font-medium text-ink leading-snug capitalize">
                             {product.gender || "Women"}
                           </div>
                           <div className="mt-0.5 text-caption text-muted">Gender</div>
                         </div>
                         <div>
-                          <div className="font-display text-h4 font-medium text-ink">Bridal Wear</div>
+                          <div className="font-display text-body sm:text-h6 font-medium text-ink leading-snug">Bridal Wear</div>
                           <div className="mt-0.5 text-caption text-muted">Occasion</div>
                         </div>
                       </div>
@@ -257,13 +257,13 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 <button
                   type="button"
                   onClick={() => toggleAccordion("description")}
-                  className="flex w-full items-center justify-between px-6 py-4 text-left font-medium text-ink hover:bg-cream/40 cursor-pointer"
+                  className="flex w-full items-center justify-between px-4 py-3.5 sm:px-6 sm:py-4 text-left font-medium text-ink hover:bg-offwhite/40 cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-cream text-gold-dark">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-offwhite text-gold-dark">
                       <BookOpenIcon size={18} />
                     </span>
-                    <span className="text-caption font-semibold tracking-wider uppercase text-ink">
+                    <span className="text-small font-semibold text-ink">
                       Description
                     </span>
                   </div>
@@ -279,7 +279,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                     }`}
                 >
                   <div className="overflow-hidden">
-                    <div className="bg-cream/20 px-6 py-5">
+                    <div className="bg-offwhite/20 px-4 py-4 sm:px-6 sm:py-5">
                       <p className="text-small leading-relaxed text-muted">
                         {product.description ||
                           "Crafted in 18 Karat yellow gold, this diamond piece celebrates luxury and beauty with a touch of modern elegance. Stone Clarity: SI2. Embracing a minimalist design, this jewellery piece holds the power to captivate hearts with its unmatched brilliance."}
@@ -290,7 +290,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                             <button
                               type="button"
                               onClick={() => setShowFullDesc(true)}
-                              className="font-medium text-wine hover:underline cursor-pointer"
+                              className="font-medium text-brown hover:underline cursor-pointer"
                             >
                               See more
                             </button>
@@ -325,7 +325,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                       {formatPrice(goldValue)}
                     </span>
                   </div>
-                  <div className="mt-2.5 grid grid-cols-2 text-[11px] text-muted">
+                  <div className="mt-2.5 grid grid-cols-2 text-micro text-muted">
                     <div>Rate: <span className="text-ink font-medium">₹12,317.73/g</span></div>
                     <div className="text-right">Weight: <span className="text-ink font-medium">{goldWeightGrams}g</span></div>
                   </div>
@@ -342,7 +342,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                       {formatPrice(stoneValue)}
                     </span>
                   </div>
-                  <div className="mt-2.5 text-[11px] text-muted">
+                  <div className="mt-2.5 text-micro text-muted">
                     Weight / Count: <span className="text-ink font-medium">{isDiamondCategory ? "0.302 ct / 0.060 g" : "0.150 ct"}</span>
                   </div>
                 </div>
@@ -354,7 +354,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 </div>
 
                 {/* Sub Total */}
-                <div className="rounded-2xl border border-border/80 bg-cream/40 p-4 flex items-center justify-between text-caption">
+                <div className="rounded-2xl border border-border/80 bg-offwhite/40 p-4 flex items-center justify-between text-caption">
                   <span className="font-medium text-ink">Sub Total ({goldWeightGrams}g Gross Wt.)</span>
                   <span className="font-display text-small font-semibold text-ink">{formatPrice(subtotalBeforeDiscount)}</span>
                 </div>
@@ -372,7 +372,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                 </div>
 
                 {/* Grand Total */}
-                <div className="rounded-2xl border-2 border-wine bg-wine/5 p-4 flex items-center justify-between text-wine">
+                <div className="rounded-2xl border-2 border-brown bg-brown/5 p-4 flex items-center justify-between text-brown">
                   <span className="font-display text-small font-semibold">Grand Total</span>
                   <span className="font-display text-h5 font-bold">{formatPrice(grandTotal)}</span>
                 </div>
@@ -382,7 +382,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
               <div className="hidden sm:block overflow-hidden rounded-2xl border border-border bg-white shadow-xs">
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-caption">
-                    <thead className="border-b border-border bg-cream/40 font-semibold tracking-wider text-muted uppercase">
+                    <thead className="border-b border-border bg-offwhite/40 font-semibold tracking-wider text-muted">
                       <tr>
                         <th className="py-3.5 px-4">Product Details</th>
                         <th className="py-3.5 px-4">Rate</th>
@@ -396,7 +396,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                         <td className="py-3.5 px-4 font-medium">
                           <div className="flex items-center gap-2">
                             <span className="inline-block h-3 w-3 rounded-full bg-gold"></span>
-                            Yellow Gold <span className="text-muted text-[11px]">18KT</span>
+                            Yellow Gold <span className="text-muted text-micro">18KT</span>
                           </div>
                         </td>
                         <td className="py-3.5 px-4 text-muted">₹ 12,317.73/g</td>
@@ -429,7 +429,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                           {formatPrice(makingCharges)}
                         </td>
                       </tr>
-                      <tr className="bg-cream/20 font-medium">
+                      <tr className="bg-offwhite/20 font-medium">
                         <td className="py-3.5 px-4">Sub Total</td>
                         <td className="py-3.5 px-4 text-muted">-</td>
                         <td className="py-3.5 px-4 text-muted">{goldWeightGrams}g Gross Wt.</td>
@@ -447,7 +447,7 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                         </td>
                         <td className="py-3.5 px-4 text-right">-</td>
                       </tr>
-                      <tr className="bg-cream/20">
+                      <tr className="bg-offwhite/20">
                         <td className="py-3.5 px-4 font-medium">Subtotal after Discount</td>
                         <td className="py-3.5 px-4 text-muted">-</td>
                         <td className="py-3.5 px-4 text-muted">-</td>
@@ -465,10 +465,10 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
                           {formatPrice(gst)}
                         </td>
                       </tr>
-                      <tr className="bg-wine/5 font-semibold text-ink">
+                      <tr className="bg-brown/5 font-semibold text-ink">
                         <td className="py-4 px-4 font-display text-small">Grand Total</td>
                         <td className="py-4 px-4" colSpan={3}></td>
-                        <td className="py-4 px-4 text-right font-display text-body text-wine">
+                        <td className="py-4 px-4 text-right font-display text-body text-brown">
                           {formatPrice(grandTotal)}
                         </td>
                       </tr>
@@ -483,11 +483,11 @@ export default function JewelleryDetailsTabs({ product }: JewelleryDetailsTabsPr
         {/* Right Column: SKU & Product Showcase Card */}
         <div className="lg:col-span-5">
           <div className="space-y-3">
-            <div className="text-right text-[11px] font-mono tracking-wider text-muted">
+            <div className="text-right text-micro font-mono tracking-wider text-muted">
               {skuId}
             </div>
 
-            <div className="relative aspect-square w-full min-h-[260px] sm:min-h-[320px] overflow-hidden rounded-2xl border border-border bg-cream-dark shadow-xs">
+            <div className="relative aspect-square w-full min-h-[260px] sm:min-h-[320px] overflow-hidden rounded-2xl border border-border bg-offwhite-dark shadow-xs">
               <Image
                 src={product.image || "/images/product/diamond-ring.jpg"}
                 alt={product.name}

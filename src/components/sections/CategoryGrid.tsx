@@ -43,8 +43,8 @@ export default function CategoryGrid() {
         className={cn(
           "group relative block w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-ink/20 shadow-sm hover:shadow-xl transition-all duration-500",
           isHero
-            ? "h-[280px] sm:h-[340px] md:h-[500px] lg:h-[520px]"
-            : "h-[220px] sm:h-[240px] md:h-[238px] lg:h-[248px]"
+            ? "h-[clamp(280px,calc(200px+25vw),420px)] md:h-full"
+            : "h-[clamp(200px,calc(170px+5vw),300px)]"
         )}
       >
         <Image
@@ -59,7 +59,7 @@ export default function CategoryGrid() {
         {/* Multi-stage gradient scrim */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-500 group-hover:opacity-90"
+          className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-500 group-hover:opacity-90"
         />
 
         {/* Subtle border glow on hover */}
@@ -67,20 +67,20 @@ export default function CategoryGrid() {
 
         {/* Content Typography */}
         <div className="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col justify-end items-start text-left transition-all duration-300 z-10">
-          <span className="text-[10px] sm:text-caption font-semibold tracking-[0.2em] uppercase text-gold mb-1 drop-shadow-xs">
+          <span className="text-micro sm:text-caption font-semibold tracking-widest text-gold mb-1 drop-shadow-xs">
             {tagline}
           </span>
 
           <h3
             className={cn(
-              "font-display text-cream font-normal tracking-wide leading-tight drop-shadow-md group-hover:text-gold transition-colors duration-300",
-              isHero ? "text-h2 lg:text-h2" : "text-h3"
+              "font-display text-offwhite font-normal tracking-wide leading-tight drop-shadow-md group-hover:text-gold transition-colors duration-300",
+              isHero ? "text-h2" : "text-h3"
             )}
           >
             {item.name}
           </h3>
 
-          <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] sm:text-caption tracking-wider uppercase text-gold font-medium drop-shadow-xs group-hover:text-cream transition-colors">
+          <div className="mt-2 inline-flex items-center gap-1.5 text-micro sm:text-caption tracking-wider text-gold font-medium drop-shadow-xs group-hover:text-offwhite transition-colors">
             <span>Explore {item.name}</span>
             <ArrowRightIcon className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
           </div>
@@ -98,14 +98,14 @@ export default function CategoryGrid() {
         align="center"
       />
 
-      <div className="max-w-7xl mx-auto">
+      <div>
         {/* Asymmetric Bento Layout: 1 Hero Category on left, 4 Grid Categories on right */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-grid">
           {/* Main Hero Category Card */}
           {heroCategory && renderCategoryCard(heroCategory, true)}
 
           {/* 4 Secondary Category Cards in 2x2 grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-grid">
             {subCategories.map((item) => renderCategoryCard(item, false))}
           </div>
         </div>
@@ -115,9 +115,9 @@ export default function CategoryGrid() {
           <Button
             href="/collections"
             variant="border"
-            colorTheme="wine"
+            colorTheme="brown"
             size="lg"
-            rightIcon={<ArrowRightIcon className="w-4 h-4" />}
+            rightIcon={<ArrowRightIcon className="h-4 w-4" />}
             className="hover:shadow-md"
           >
             View All Categories

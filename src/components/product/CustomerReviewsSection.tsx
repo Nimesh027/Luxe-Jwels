@@ -7,9 +7,11 @@ import Rating from "@/components/ui/Rating";
 import SectionTitle from "@/components/common/SectionTitle";
 import ReviewCard from "@/components/common/ReviewCard";
 import Section from "../common/Section";
+import { usePresence } from "@/hooks/usePresence";
 
 export default function CustomerReviewsSection() {
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const reviewModal = usePresence(isReviewModalOpen);
   const [newRating, setNewRating] = useState(5);
   const [newReviewText, setNewReviewText] = useState("");
   const [reviewSubmitted, setReviewSubmitted] = useState(false);
@@ -46,7 +48,7 @@ export default function CustomerReviewsSection() {
       </div>
 
       {/* Review Cards Grid */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-grid md:grid-cols-2">
         <ReviewCard
           name="Ananya R."
           location="Mumbai"
@@ -68,15 +70,15 @@ export default function CustomerReviewsSection() {
       </div>
 
       {/* Write a Review Modal */}
-      {isReviewModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
-          <div className="w-full max-w-md rounded-3xl bg-surface p-6 shadow-xl border border-border">
+      {reviewModal.mounted && (
+        <div className={`fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs ${reviewModal.open ? "animate-in fade-in" : "animate-out fade-out"}`}>
+          <div className={`w-full max-w-md rounded-3xl bg-white p-6 shadow-xl border border-border ${reviewModal.open ? "animate-in fade-in zoom-in-95 slide-in-from-bottom-4" : "animate-out fade-out zoom-out-95"}`}>
             <div className="flex items-center justify-between border-b border-border pb-4">
               <h3 className="font-display text-h4 font-medium text-ink">Write a Product Review</h3>
               <button
                 type="button"
                 onClick={() => setIsReviewModalOpen(false)}
-                className="text-muted hover:text-ink p-1 cursor-pointer"
+                className="-mr-3 flex size-12 items-center justify-center rounded-full text-muted hover:bg-offwhite hover:text-ink cursor-pointer"
                 aria-label="Close review modal"
               >
                 <CloseIcon size={18} />
@@ -92,14 +94,17 @@ export default function CustomerReviewsSection() {
             ) : (
               <form onSubmit={handleReviewSubmit} className="mt-4 space-y-4">
                 <div>
-                  <label className="block text-caption font-semibold uppercase tracking-wider text-ink mb-1.5">
+                  <span id="review-rating-label" className="block text-caption font-semibold tracking-wider text-ink mb-1.5">
                     Your Rating
-                  </label>
-                  <div className="flex gap-2 text-gold cursor-pointer">
+                  </span>
+                  <div role="radiogroup" aria-labelledby="review-rating-label" className="flex gap-2 text-gold cursor-pointer">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <button
                         key={star}
                         type="button"
+                        role="radio"
+                        aria-checked={star === newRating}
+                        aria-label={`${star} star${star > 1 ? "s" : ""}`}
                         onClick={() => setNewRating(star)}
                         className="hover:scale-110 transition-transform cursor-pointer p-0.5"
                       >
@@ -114,16 +119,18 @@ export default function CustomerReviewsSection() {
                 </div>
 
                 <div>
-                  <label className="block text-caption font-semibold uppercase tracking-wider text-ink mb-1.5">
+                  <label htmlFor="review-text" className="block text-caption font-semibold tracking-wider text-ink mb-1.5">
                     Your Review
                   </label>
                   <textarea
+                    id="review-text"
+                    name="review"
                     required
                     rows={4}
                     placeholder="Share your thoughts about quality, craftsmanship, and fit..."
                     value={newReviewText}
                     onChange={(e) => setNewReviewText(e.target.value)}
-                    className="w-full rounded-xl border border-border p-3 text-caption text-ink focus:border-wine focus:outline-none"
+                    className="w-full rounded-xl border border-border p-3 text-caption text-ink focus:border-brown focus:outline-none"
                   ></textarea>
                 </div>
 

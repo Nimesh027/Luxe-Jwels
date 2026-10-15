@@ -49,7 +49,7 @@ export default function RootLayout({
       className={`${fraunces.variable} ${ibmPlexSans.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-cream text-ink" suppressHydrationWarning>
+      <body className="min-h-full flex flex-col bg-offwhite text-ink" suppressHydrationWarning>
         <ReduxProvider>
           <AnnouncementBar />
           <Header />

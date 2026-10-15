@@ -4,6 +4,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
 import type { ReactNode } from "react";
 import { useCarousel } from "@/hooks/useCarousel";
 import { cn } from "@/lib/utils";
+import Button from "@/components/ui/Button";
 
 interface CarouselProps {
   items: ReactNode[];
@@ -13,6 +14,8 @@ interface CarouselProps {
   showDots?: boolean;
   className?: string;
   itemClassName?: string;
+  /** Vertical position of the arrows (defaults to the vertical centre) */
+  arrowTopClassName?: string;
 }
 
 export default function Carousel({
@@ -23,6 +26,7 @@ export default function Carousel({
   showDots = false,
   className,
   itemClassName,
+  arrowTopClassName = "top-1/2",
 }: CarouselProps) {
   const maxIndex = Math.max(items.length - itemsPerView, 0);
   const { index, next, prev, goTo } = useCarousel({
@@ -38,7 +42,7 @@ export default function Carousel({
     <div className={cn("relative", className)}>
       <div className="overflow-hidden">
         <div
-          className="flex transition-transform duration-300 ease-out"
+          className="flex items-stretch transition-transform duration-300 ease-out"
           style={{ transform: `translateX(-${translate}%)` }}
         >
           {items.map((item, itemIndex) => (
@@ -55,22 +59,28 @@ export default function Carousel({
 
       {showArrows && maxIndex > 0 && (
         <>
-          <button
+          <Button
             type="button"
             aria-label="Previous"
             onClick={prev}
-            className="absolute left-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-ink shadow-md backdrop-blur-xs hover:bg-white hover:scale-105 transition-all cursor-pointer"
+            variant="icon"
+            colorTheme="light"
+            size="icon"
+            className={cn("absolute left-2 z-10 -translate-y-1/2", arrowTopClassName)}
           >
             <ChevronLeftIcon size={20} />
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
             aria-label="Next"
             onClick={next}
-            className="absolute right-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-ink shadow-md backdrop-blur-xs hover:bg-white hover:scale-105 transition-all cursor-pointer"
+            variant="icon"
+            colorTheme="light"
+            size="icon"
+            className={cn("absolute right-2 z-10 -translate-y-1/2", arrowTopClassName)}
           >
             <ChevronRightIcon size={20} />
-          </button>
+          </Button>
         </>
       )}
 

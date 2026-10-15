@@ -37,15 +37,15 @@ export default function CraftsmanshipProcess() {
   ];
 
   return (
-    <Section className="py-16 sm:py-24 bg-white">
-      <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+    <Section className="bg-white">
+      <div className="container max-w-6xl">
 
         {/* Header */}
         <SectionTitle
           tagline="The Making of a Masterpiece"
-          taglineClassName="text-gold tracking-[0.25em]"
+          taglineClassName="text-gold-dark tracking-widest"
           title="Our Craftsmanship Process"
-          titleClassName="text-wine"
+          titleClassName="text-brown"
           description="Witness the journey from a simple sketch to a timeless heirloom, shaped by hands that have perfected their art over decades."
         />
 
@@ -60,25 +60,25 @@ export default function CraftsmanshipProcess() {
                 className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16"
               >
                 {/* Image Column */}
-                <div className={`w-full lg:w-1/2 relative aspect-square sm:aspect-[4/3] rounded-[2rem] overflow-hidden shadow-lg border border-wine/10 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
+                <div className={`w-full lg:w-1/2 relative aspect-square sm:aspect-[4/3] rounded-4xl overflow-hidden shadow-lg border border-brown/10 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
                   <Image
                     src={process.image}
                     alt={process.title}
                     fill
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-wine/5 mix-blend-overlay" />
+                  <div className="absolute inset-0 bg-brown/5 mix-blend-overlay" />
                 </div>
 
                 {/* Text Column */}
                 <div className={`w-full lg:w-1/2 space-y-6 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
-                  <span className="font-display text-h2 text-gold/30 font-bold block mb-2">
+                  <span className="font-display text-h2 text-gold-dark font-bold block mb-2">
                     {process.id}
                   </span>
                   <h3 className="font-display text-h4 sm:text-h3 font-semibold text-ink">
                     {process.title}
                   </h3>
-                  <div className="w-10 h-[2px] bg-wine/30" />
+                  <div className="w-10 h-0.5 bg-brown/30" />
                   <p className="text-body text-muted leading-relaxed font-light">
                     {process.description}
                   </p>

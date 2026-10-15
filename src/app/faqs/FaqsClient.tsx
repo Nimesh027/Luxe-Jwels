@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Section from "@/components/common/Section";
+import Collapse from "@/components/ui/Collapse";
 import StaticPageLayout from "@/components/layout/StaticPageLayout";
 import HelpBoxSection from "@/components/common/HelpBoxSection";
 
@@ -176,7 +177,7 @@ export default function FaqsClient() {
       breadcrumbLabel="FAQs"
       description="Find instant answers to common questions about order delivery, gold purity, payments, and lifetime exchange."
     >
-      <Section className="pb-16 sm:pb-24">
+      <Section>
         {/* MOBILE SCROLLABLE TAB PILLS (Visible on Mobile/Tablet) */}
         <div className="lg:hidden flex items-center gap-2 overflow-x-auto pb-3 mb-6 scrollbar-none">
           {categories.map((cat) => (
@@ -188,8 +189,8 @@ export default function FaqsClient() {
                 setSearchQuery("");
               }}
               className={`px-4 py-2.5 rounded-full text-caption font-semibold whitespace-nowrap transition-all cursor-pointer ${selectedCategory === cat.id && !searchQuery
-                ? "bg-[#80222F] text-white shadow-xs"
-                : "bg-surface border border-border/80 text-ink/80 hover:border-wine/40"
+                ? "bg-brown text-white shadow-xs"
+                : "bg-white border border-border/80 text-ink/80 hover:border-brown/40"
                 }`}
             >
               {cat.label}
@@ -198,10 +199,10 @@ export default function FaqsClient() {
         </div>
 
         {/* MAIN RESPONSIVE SIDEBAR TAB LAYOUT (MATCHING USER SCREENSHOT) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-stack items-start mb-14">
 
           {/* LEFT COLUMN: VERTICAL SIDEBAR TABS (Matching Screenshot) */}
-          <div className="hidden lg:block lg:col-span-4 bg-surface rounded-2xl border border-border/80 overflow-hidden divide-y divide-border/60 shadow-xs sticky top-24">
+          <div className="hidden lg:block lg:col-span-4 bg-white rounded-2xl border border-border/80 overflow-hidden divide-y divide-border/60 shadow-xs sticky top-24">
             {categories.map((cat) => {
               const isActive = selectedCategory === cat.id && !searchQuery;
               return (
@@ -213,14 +214,14 @@ export default function FaqsClient() {
                     setSearchQuery("");
                   }}
                   className={`w-full p-4.5 text-left font-display text-small font-semibold flex items-center justify-between transition-all cursor-pointer ${isActive
-                    ? "bg-[#FAF0F2] text-[#80222F] border-l-4 border-[#80222F]"
-                    : "bg-surface text-ink/80 hover:bg-wine/5 hover:text-wine"
+                    ? "bg-brown-soft text-brown border-l-4 border-brown"
+                    : "bg-white text-ink/80 hover:bg-brown/5 hover:text-brown"
                     }`}
                 >
                   <span>{cat.label}</span>
                   <span
                     className={`text-caption font-semibold px-2 py-0.5 rounded-full ${isActive
-                      ? "bg-wine/15 text-wine"
+                      ? "bg-brown/15 text-brown"
                       : "bg-neutral-100 text-muted"
                       }`}
                   >
@@ -235,7 +236,7 @@ export default function FaqsClient() {
           <div className="lg:col-span-8 space-y-4">
             {/* Category Header */}
             <div className="flex items-center justify-between pb-3 border-b border-border/80">
-              <h2 className="font-display !text-h4 font-semibold text-wine">
+              <h2 className="font-display !text-h4 font-semibold text-brown">
                 {searchQuery ? `Search Results for "${searchQuery}"` : activeCategoryObj?.label}
               </h2>
               <span className="text-caption flex-none text-muted font-medium">
@@ -251,31 +252,29 @@ export default function FaqsClient() {
                   return (
                     <div
                       key={faq.id}
-                      className="bg-surface rounded-2xl border border-border/80 overflow-hidden shadow-2xs transition-all hover:border-wine/30"
+                      className="bg-white rounded-2xl border border-border/80 overflow-hidden shadow-2xs transition-all hover:border-brown/30"
                     >
                       <button
                         type="button"
                         onClick={() => toggleFaq(faq.id)}
-                        className="w-full flex items-center justify-between p-5 text-left text-body font-semibold text-ink hover:text-wine cursor-pointer transition-colors"
+                        className="w-full flex items-center justify-between p-5 text-left text-body font-semibold text-ink hover:text-brown cursor-pointer transition-colors"
                       >
                         <span className="pr-4">{faq.question}</span>
                         <span
-                          className={`w-6 h-6 rounded-full bg-wine/5 text-wine flex items-center justify-center font-bold text-small shrink-0 transition-transform ${isOpen ? "rotate-45" : ""
+                          className={`w-6 h-6 rounded-full bg-brown/5 text-brown flex items-center justify-center font-bold text-small shrink-0 transition-transform duration-300 ease-luxe ${isOpen ? "rotate-45" : ""
                             }`}
                         >
                           +
                         </span>
                       </button>
-                      {isOpen && (
-                        <div className="px-5 pb-5 pt-0 text-body text-muted leading-relaxed border-t border-border/40 animate-in fade-in duration-200">
+                      <Collapse open={isOpen} className="px-5 pb-5 pt-0 text-body text-muted leading-relaxed border-t border-border/40">
                           <p className="pt-3">{faq.answer}</p>
-                        </div>
-                      )}
+                        </Collapse>
                     </div>
                   );
                 })
               ) : (
-                <div className="text-center py-12 bg-surface rounded-2xl border border-border/80 p-8 space-y-2">
+                <div className="text-center py-12 bg-white rounded-2xl border border-border/80 p-8 space-y-2">
                   <p className="font-display font-semibold text-body text-ink">No FAQs found</p>
                   <p className="text-caption text-muted">Try searching with a different keyword or select another category from the tabs.</p>
                 </div>

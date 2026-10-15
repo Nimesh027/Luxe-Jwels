@@ -6,6 +6,7 @@ import SectionTitle from "@/components/common/SectionTitle";
 import ReviewCard from "@/components/common/ReviewCard";
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 import { useAppSelector } from "@/store/hooks";
+import Button from "@/components/ui/Button";
 
 export default function Testimonials() {
   const testimonials = useAppSelector((state) => state.testimonials.items);
@@ -57,7 +58,7 @@ export default function Testimonials() {
   };
 
   return (
-    <Section className="bg-[#fdfaf7] border-y border-[#f2eae1] py-14 sm:py-18 md:py-20">
+    <Section className="bg-offwhite border-y border-border">
       {/* Section Header matching Reference */}
       <SectionTitle
         title="Hear From Our Customers"
@@ -72,24 +73,30 @@ export default function Testimonials() {
         onMouseLeave={() => setIsPaused(false)}
       >
         {/* Floating Left Carousel Navigation Arrow */}
-        <button
+        <Button
           type="button"
           onClick={handlePrev}
           aria-label="Previous customer reviews"
-          className="absolute -left-1 sm:-left-3 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-700 shadow-md hover:bg-neutral-50 hover:text-black transition-all cursor-pointer"
+          variant="icon"
+          colorTheme="light"
+          size="icon"
+          className="absolute -left-1 sm:-left-3 top-1/2 -translate-y-1/2 z-20"
         >
           <ArrowRightIcon className="h-4 w-4 rotate-180" />
-        </button>
+        </Button>
 
         {/* Floating Right Carousel Navigation Arrow */}
-        <button
+        <Button
           type="button"
           onClick={handleNext}
           aria-label="Next customer reviews"
-          className="absolute -right-1 sm:-right-3 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-700 shadow-md hover:bg-neutral-50 hover:text-black transition-all cursor-pointer"
+          variant="icon"
+          colorTheme="light"
+          size="icon"
+          className="absolute -right-1 sm:-right-3 top-1/2 -translate-y-1/2 z-20"
         >
           <ArrowRightIcon className="h-4 w-4" />
-        </button>
+        </Button>
 
         {/* Smooth Sliding Carousel Window */}
         <div className="overflow-hidden py-2 -mx-2.5">
@@ -119,28 +126,32 @@ export default function Testimonials() {
         </div>
 
         {/* Dynamic Scaling Carousel Pagination Dots matching Reference */}
-        <div className="mt-8 sm:mt-10 flex items-center justify-center gap-2 sm:gap-2.5 h-6">
+        <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center">
           {Array.from({ length: total }).map((_, idx) => {
             const distance = Math.abs(idx - currentIndex);
             const isActive = idx === currentIndex;
 
-            let sizeClasses = "w-[6px] h-[6px] bg-[#cbb281]/45 hover:bg-[#cbb281]/70";
+            let sizeClasses = "w-1.5 h-1.5 bg-gold/45 group-hover:bg-gold/70";
             if (isActive) {
-              sizeClasses = "w-[8px] h-[8px] bg-[#cbb281] shadow-xs scale-105";
+              sizeClasses = "w-2 h-2 bg-gold shadow-xs scale-105";
             } else if (distance === 1) {
-              sizeClasses = "w-[6px] h-[6px] bg-[#cbb281]/80 hover:bg-[#cbb281]";
+              sizeClasses = "w-1.5 h-1.5 bg-gold/80 group-hover:bg-gold";
             } else if (distance === 2) {
-              sizeClasses = "w-[4px] h-[4px] bg-[#cbb281]/65 hover:bg-[#cbb281]/90";
+              sizeClasses = "w-1 h-1 bg-gold/65 group-hover:bg-gold/90";
             }
 
+            // The visible dot stays tiny; the button around it is a comfortable touch target
             return (
               <button
                 key={idx}
                 type="button"
                 onClick={() => setCurrentIndex(Math.min(idx, maxIndex))}
                 aria-label={`Go to review ${idx + 1}`}
-                className={`rounded-full transition-all duration-300 cursor-pointer ${sizeClasses}`}
-              />
+                aria-current={isActive ? "true" : undefined}
+                className="group grid size-8 pointer-coarse:size-10 place-items-center cursor-pointer"
+              >
+                <span className={`rounded-full transition-all duration-300 ${sizeClasses}`} />
+              </button>
             );
           })}
         </div>

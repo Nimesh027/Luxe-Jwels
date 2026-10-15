@@ -3,8 +3,10 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRightIcon } from "@/components/icons";
 import { useRouter } from "next/navigation";
 import Section from "@/components/common/Section";
+import Collapse from "@/components/ui/Collapse";
 import SectionTitle from "@/components/common/SectionTitle";
 import Button from "@/components/ui/Button";
 import QuantitySelector from "@/components/ui/QuantitySelector";
@@ -63,10 +65,10 @@ export default function CartClient() {
   // Empty Cart View
   if (items.length === 0) {
     return (
-      <Section className="py-16 sm:py-24 bg-white">
+      <Section className="bg-white">
         <div className="mx-auto flex max-w-lg flex-col items-center justify-center text-center px-4">
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#f6efe9] text-wine mb-6 shadow-xs border border-wine/10">
-            <svg className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-offwhite-dark text-brown mb-6 shadow-xs border border-brown/10">
+            <svg aria-hidden="true" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
               <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
               <line x1="3" y1="6" x2="21" y2="6" />
               <path d="M16 10a4 4 0 0 1-8 0" />
@@ -83,9 +85,9 @@ export default function CartClient() {
           <Button
             href="/collections"
             variant="fill"
-            colorTheme="wine"
+            colorTheme="brown"
             size="lg"
-            className="rounded-full px-8 uppercase tracking-wider text-body font-semibold shadow-md hover:shadow-lg"
+            className="tracking-wider shadow-md hover:shadow-lg"
           >
             Explore Collections
           </Button>
@@ -95,8 +97,8 @@ export default function CartClient() {
   }
 
   return (
-    <div className="bg-[#fcfaf7] min-h-screen py-10 sm:py-14">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="bg-offwhite min-h-screen py-section-sm">
+      <div className="container max-w-7xl">
         {/* Page Header */}
         <SectionTitle
           title="Shopping Bag"
@@ -106,7 +108,7 @@ export default function CartClient() {
         />
 
         {/* Complimentary Insured Shipping Progress Banner */}
-        <div className="mb-8 rounded-2xl border border-gold/30 bg-gradient-to-r from-[#fffcf7] via-[#faf5ec] to-[#fffcf7] p-4 sm:p-5 shadow-2xs">
+        <div className="mb-8 rounded-2xl border border-gold/30 bg-linear-to-r from-offwhite via-offwhite to-offwhite p-4 sm:p-5 shadow-2xs">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold-dark font-semibold text-small">
@@ -116,24 +118,24 @@ export default function CartClient() {
                 <p className="text-body font-semibold text-ink">
                   You Have Unlocked Complimentary Insured Delivery!
                 </p>
-                <p className="text-[11px] sm:text-caption text-muted font-light">
+                <p className="text-micro sm:text-caption text-muted font-light">
                   Includes certified hallmarking certificate & signature velvet presentation box.
                 </p>
               </div>
             </div>
-            <span className="shrink-0 rounded-full bg-gold/20 px-3 py-1 text-[11px] font-semibold text-gold-dark uppercase tracking-wider">
+            <span className="shrink-0 rounded-full bg-gold/20 px-3 py-1 text-micro font-semibold text-gold-dark tracking-wider">
               Free Shipping Applied
             </span>
           </div>
         </div>
 
         {/* Main 2-Column Cart Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-stack">
           {/* Left Column: Cart Items List (8 cols) */}
           <div className="lg:col-span-8 space-y-6">
             <div className="rounded-2xl border border-neutral-200/80 bg-white p-5 sm:p-7 shadow-xs">
               {/* Header Bar */}
-              <div className="hidden sm:grid grid-cols-12 border-b border-neutral-100 pb-3 text-caption uppercase tracking-wider font-semibold text-neutral-500">
+              <div className="hidden sm:grid grid-cols-12 border-b border-neutral-100 pb-3 text-caption tracking-wider font-semibold text-neutral-500">
                 <span className="col-span-6">Product</span>
                 <span className="col-span-2 text-center">Price</span>
                 <span className="col-span-2 text-center">Quantity</span>
@@ -165,15 +167,15 @@ export default function CartClient() {
                         </div>
 
                         <div className="flex-1 min-w-0">
-                          <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-gold">
+                          <span className="text-micro font-semibold tracking-wider text-gold-dark">
                             {product.category?.replace(/-/g, " ") || "Fine Jewellery"}
                           </span>
                           <Link href={`/products/${product.slug}`}>
-                            <h3 className="font-display text-body font-normal text-ink hover:text-wine transition-colors line-clamp-1 mt-0.5">
+                            <h3 className="font-display text-body font-normal text-ink hover:text-brown transition-colors line-clamp-1 mt-0.5">
                               {product.name}
                             </h3>
                           </Link>
-                          <p className="text-[11px] text-muted font-light mt-0.5">
+                          <p className="text-micro text-muted font-light mt-0.5">
                             18K Solid Gold • Certified Hallmarked
                           </p>
 
@@ -192,18 +194,17 @@ export default function CartClient() {
                           {/* Item Action Buttons with Theme Styling */}
                           <div className="mt-3 flex items-center gap-2 pt-0.5">
                             {/* Save to Wishlist Button */}
-                            <button
+                            <Button
                               type="button"
                               onClick={() => toggleWishlist(product)}
-                              className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium transition-all duration-200 cursor-pointer ${
-                                saved
-                                  ? "bg-wine/10 text-wine border border-wine/30 shadow-2xs"
-                                  : "bg-[#fbf7f2] text-neutral-600 hover:text-wine hover:bg-wine/5 border border-neutral-200/80"
-                              }`}
+                              variant="border"
+                              colorTheme={saved ? "brown" : "dark"}
+                              size="xs"
+                              rounded="full"
                             >
-                              <svg
+                              <svg aria-hidden="true"
                                 className={`h-3.5 w-3.5 ${
-                                  saved ? "fill-wine text-wine" : "fill-none stroke-current"
+                                  saved ? "fill-brown text-brown" : "fill-none stroke-current"
                                 }`}
                                 viewBox="0 0 24 24"
                                 strokeWidth="1.8"
@@ -215,17 +216,17 @@ export default function CartClient() {
                                 />
                               </svg>
                               <span>{saved ? "Saved in Wishlist" : "Save for later"}</span>
-                            </button>
+                            </Button>
 
                             {/* Remove Item Button */}
                             <Button
                               variant="border"
+                              colorTheme="danger"
                               size="xs"
                               rounded="full"
                               onClick={() => remove(product.id)}
-                              className="!px-2.5 !py-1 text-[11px] font-medium !text-neutral-500 hover:!text-red-700 hover:!bg-red-50/80 !border-neutral-200/80"
                               leftIcon={
-                                <svg
+                                <svg aria-hidden="true"
                                   className="h-3.5 w-3.5"
                                   fill="none"
                                   viewBox="0 0 24 24"
@@ -273,9 +274,10 @@ export default function CartClient() {
               <div className="mt-4 pt-4 border-t border-neutral-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-caption">
                 <Link
                   href="/collections"
-                  className="text-wine hover:text-wine-dark font-medium underline underline-offset-4 transition-colors"
+                  className="inline-flex items-center gap-2 text-small text-brown hover:text-brown-dark font-medium underline underline-offset-4 transition-colors"
                 >
-                  ← Continue Shopping
+                  <ArrowRightIcon className="h-4 w-4 rotate-180" />
+                  Continue Shopping
                 </Link>
 
                 <button
@@ -293,52 +295,55 @@ export default function CartClient() {
               <button
                 type="button"
                 onClick={() => setNoteOpen(!noteOpen)}
+                aria-expanded={noteOpen}
+                aria-controls="cart-order-note"
                 className="flex w-full items-center justify-between text-left text-body font-semibold text-ink cursor-pointer"
               >
                 <span className="inline-flex items-center gap-2">
-                  <span className="text-gold text-body">✍</span>
+                  <span className="text-gold-dark text-body">✍</span>
                   <span>Add Gift Message or Custom Ring Sizing Note</span>
                 </span>
-                <span className="text-small">{noteOpen ? "−" : "+"}</span>
+                <span className="text-small" aria-hidden="true">{noteOpen ? "−" : "+"}</span>
               </button>
 
-              {noteOpen && (
-                <div className="mt-3">
+              <Collapse open={noteOpen} className="mt-3">
                   <textarea
+                    id="cart-order-note"
+                    name="orderNote"
+                    aria-label="Gift message or custom ring sizing note"
                     rows={3}
                     value={orderNote}
                     onChange={(e) => setOrderNote(e.target.value)}
                     placeholder="Provide special delivery instructions, custom engraving message, or gift card greetings..."
                     className="w-full rounded-xl border border-neutral-300 bg-neutral-50 p-3 text-body text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
                   />
-                  <p className="text-[11px] text-muted font-light mt-1.5">
+                  <p className="text-micro text-muted font-light mt-1.5">
                     We will handwrite your note on our embossed gold foil stationery at no extra cost.
                   </p>
-                </div>
-              )}
+                </Collapse>
             </div>
 
             {/* Assurance Badges Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               <div className="rounded-xl border border-neutral-200/60 bg-white p-3.5 text-center shadow-2xs">
                 <span className="text-h5 block mb-1">🛡️</span>
-                <p className="text-[11px] font-semibold text-ink">BIS Hallmarked</p>
-                <p className="text-[10px] text-muted">100% Certified Gold</p>
+                <p className="text-micro font-semibold text-ink">BIS Hallmarked</p>
+                <p className="text-micro text-muted">100% Certified Gold</p>
               </div>
               <div className="rounded-xl border border-neutral-200/60 bg-white p-3.5 text-center shadow-2xs">
                 <span className="text-h5 block mb-1">✈️</span>
-                <p className="text-[11px] font-semibold text-ink">Insured Shipping</p>
-                <p className="text-[10px] text-muted">Doorstep Delivery</p>
+                <p className="text-micro font-semibold text-ink">Insured Shipping</p>
+                <p className="text-micro text-muted">Doorstep Delivery</p>
               </div>
               <div className="rounded-xl border border-neutral-200/60 bg-white p-3.5 text-center shadow-2xs">
                 <span className="text-h5 block mb-1">🔄</span>
-                <p className="text-[11px] font-semibold text-ink">30-Day Returns</p>
-                <p className="text-[10px] text-muted">Hassle-Free Exchange</p>
+                <p className="text-micro font-semibold text-ink">30-Day Returns</p>
+                <p className="text-micro text-muted">Hassle-Free Exchange</p>
               </div>
               <div className="rounded-xl border border-neutral-200/60 bg-white p-3.5 text-center shadow-2xs">
                 <span className="text-h5 block mb-1">🎁</span>
-                <p className="text-[11px] font-semibold text-ink">Luxury Box</p>
-                <p className="text-[10px] text-muted">Signature Packaging</p>
+                <p className="text-micro font-semibold text-ink">Luxury Box</p>
+                <p className="text-micro text-muted">Signature Packaging</p>
               </div>
             </div>
           </div>
@@ -347,7 +352,7 @@ export default function CartClient() {
           <div className="lg:col-span-4">
             <div className="sticky top-28 space-y-6">
               <div className="rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-xs">
-                <h2 className="font-display text-body font-semibold text-ink uppercase tracking-wider border-b border-neutral-100 pb-3 mb-4">
+                <h2 className="font-display text-body font-semibold text-ink tracking-wider border-b border-neutral-100 pb-3 mb-4">
                   Order Summary
                 </h2>
 
@@ -360,14 +365,14 @@ export default function CartClient() {
 
                   <div className="flex justify-between items-center">
                     <span>Insured Delivery</span>
-                    <span className="font-semibold text-emerald-600 text-caption uppercase bg-emerald-50 px-2 py-0.5 rounded">
+                    <span className="font-semibold text-emerald-600 text-caption bg-emerald-50 px-2 py-0.5 rounded">
                       FREE
                     </span>
                   </div>
 
                   <div className="flex justify-between items-center">
                     <span>Luxury Velvet Presentation Box</span>
-                    <span className="font-semibold text-emerald-600 text-caption uppercase bg-emerald-50 px-2 py-0.5 rounded">
+                    <span className="font-semibold text-emerald-600 text-caption bg-emerald-50 px-2 py-0.5 rounded">
                       FREE
                     </span>
                   </div>
@@ -381,7 +386,7 @@ export default function CartClient() {
 
                   <div className="border-t border-neutral-100 pt-3 flex items-baseline justify-between text-body font-bold text-ink">
                     <span>Estimated Total</span>
-                    <span className="font-display text-h4 text-wine font-bold">
+                    <span className="font-display text-h4 text-brown font-bold">
                       {formatPrice(finalTotal)}
                     </span>
                   </div>
@@ -389,7 +394,7 @@ export default function CartClient() {
 
                 {/* Promo Code Input */}
                 <div className="mt-5 border-t border-neutral-100 pt-4">
-                  <label className="block text-[11px] font-semibold uppercase tracking-wider text-neutral-600 mb-1.5">
+                  <label htmlFor="cart-promo-code" className="block text-micro font-semibold tracking-wider text-neutral-600 mb-1.5">
                     Promotional Code
                   </label>
 
@@ -407,18 +412,21 @@ export default function CartClient() {
                   ) : (
                     <form onSubmit={handleApplyPromo} className="flex gap-2">
                       <input
+                        id="cart-promo-code"
+                        name="promoCode"
+                        autoComplete="off"
                         type="text"
                         value={promoCode}
                         onChange={(e) => setPromoCode(e.target.value)}
                         placeholder="e.g. LUXE10"
-                        className="flex-1 rounded-xl border border-neutral-300 bg-neutral-50 px-3 py-2 text-caption text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none uppercase"
+                        className="flex-1 rounded-xl border border-neutral-300 bg-neutral-50 px-3 py-2 text-caption text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none"
                       />
                       <Button
                         type="submit"
                         colorTheme="dark"
                         size="xs"
                         rounded="lg"
-                        className="font-semibold text-caption px-4"
+                       
                       >
                         Apply
                       </Button>
@@ -426,20 +434,20 @@ export default function CartClient() {
                   )}
 
                   {promoError && (
-                    <p className="mt-1 text-[11px] text-red-600 font-medium">{promoError}</p>
+                    <p className="mt-1 text-micro text-red-600 font-medium">{promoError}</p>
                   )}
                 </div>
 
                 {/* Checkout CTA Button */}
                 <Button
-                  colorTheme="wine"
+                  colorTheme="brown"
                   size="md"
                   rounded="full"
                   fullWidth
                   onClick={() => router.push("/checkout")}
-                  className="mt-6 uppercase font-semibold text-body tracking-wider shadow-md hover:shadow-lg"
+                  className="mt-6 tracking-wider shadow-md hover:shadow-lg"
                   rightIcon={
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <svg aria-hidden="true" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                   }
@@ -449,7 +457,7 @@ export default function CartClient() {
 
                 {/* Trust & Payment Badges */}
                 <div className="mt-5 border-t border-neutral-100 pt-4 text-center">
-                  <p className="text-[10px] uppercase tracking-wider font-semibold text-neutral-400 mb-2.5">
+                  <p className="text-micro tracking-wider font-semibold text-neutral-400 mb-2.5">
                     Guaranteed Safe & Secure Checkout
                   </p>
                   <div className="flex items-center justify-center gap-2 flex-wrap">

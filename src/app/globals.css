@@ -1,39 +1,454 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   Luxe Jewels design tokens
+   Single source of truth for colour, type, spacing, radius and elevation.
+   Fluid values scale linearly between 320px and 1280px viewports.
+   ========================================================================== */
+
 :root {
-  --color-ink: #0d0d0d;
-  --color-ink-soft: #1a1a1a;
-  --color-gold: #c9a961;
-  --color-gold-dark: #a9873f;
-  --color-cream: #f8f5f0;
-  --color-cream-dark: #efe9e0;
-  --color-surface: #ffffff;
-  --color-muted: #6b6660;
-  --color-border: #e5ded2;
-  --color-wine: #741727;
-  --color-wine-dark: #5c111e;
-  --color-wine-soft: #fbf2ee;
+  /* Core palette: offwhite / brown / white */
+  --color-offwhite: #f8f4ee;
+  --color-offwhite-dark: #efe7dc;
+  --color-white: #ffffff;
+  --color-brown: #8b5e34;
+  --color-brown-dark: #6f4a27;
+  --color-brown-light: #a87b4f;
+  --color-brown-soft: #f4ece2;
+
+  /* Supporting tones (same warm brown family) */
+  --color-ink: #2a1f17;
+  --color-ink-soft: #3b2c21;
+  --color-ink-deep: #100f0e; /* footer / darkest surface */
+  --color-gold: #b8895a; /* decorative: icons, stars, fills, text on dark surfaces only */
+  --color-gold-dark: #86602f; /* AA (>= 4.5:1) on every light surface */
+  --color-gold-light: #cfa77a;
+  --color-muted: #6e5f52; /* AA (>= 5:1) on every light surface */
+  --color-border: #e6dccf;
 
   --font-display: var(--font-fraunces);
   --font-body: var(--font-ibm-plex-sans);
+
+  /* Spacing rhythm (4px base). Fluid section + gutter values. */
+  --space-gutter: clamp(16px, calc(10.67px + 1.667vw), 32px);
+  --space-section: clamp(48px, calc(37.33px + 3.333vw), 80px);
+  --space-section-sm: clamp(32px, calc(26.67px + 1.667vw), 48px);
+  --space-grid: clamp(16px, calc(13.33px + 0.833vw), 24px);
+  --space-stack: clamp(24px, calc(18.67px + 1.667vw), 40px);
+  --space-split: clamp(32px, calc(21.33px + 3.333vw), 64px); /* two-column editorial splits */
+
+  /* 1440px up to 1920px, then grows with the viewport to 1760px (~2350px+) */
+  --container-max: clamp(1440px, 75vw, 1760px);
+  --tap-target: 48px;
+}
+
+/* Large desktop → ultra-wide (1440px – 2400px): keep rhythm growing instead of freezing at 1280px */
+@media (min-width: 1440px) {
+  :root {
+    --space-gutter: clamp(32px, calc(8px + 1.667vw), 48px);
+    --space-section: clamp(80px, calc(40px + 2.778vw), 112px);
+    --space-section-sm: clamp(48px, calc(33px + 1.042vw), 64px);
+    --space-grid: clamp(24px, calc(12px + 0.833vw), 32px);
+    --space-stack: clamp(40px, calc(25px + 1.042vw), 56px);
+    --space-split: clamp(64px, calc(16px + 3.333vw), 96px);
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --text-display: clamp(64px, calc(16px + 2.5vw), 76px);
+    --text-h1: clamp(48px, calc(20px + 1.458vw), 55px);
+    --text-h2: clamp(40px, calc(20px + 1.042vw), 45px);
+    --text-h3: clamp(30px, calc(18px + 0.625vw), 33px);
+  }
 }
 
 @theme inline {
+  /* Palette */
+  --color-offwhite: var(--color-offwhite);
+  --color-offwhite-dark: var(--color-offwhite-dark);
+  --color-white: var(--color-white);
+  --color-brown: var(--color-brown);
+  --color-brown-dark: var(--color-brown-dark);
+  --color-brown-light: var(--color-brown-light);
+  --color-brown-soft: var(--color-brown-soft);
   --color-ink: var(--color-ink);
   --color-ink-soft: var(--color-ink-soft);
+  --color-ink-deep: var(--color-ink-deep);
   --color-gold: var(--color-gold);
   --color-gold-dark: var(--color-gold-dark);
-  --color-cream: var(--color-cream);
-  --color-cream-dark: var(--color-cream-dark);
-  --color-surface: var(--color-surface);
+  --color-gold-light: var(--color-gold-light);
   --color-muted: var(--color-muted);
   --color-border: var(--color-border);
-  --color-wine: var(--color-wine);
-  --color-wine-dark: var(--color-wine-dark);
-  --color-wine-soft: var(--color-wine-soft);
+
+  /* Semantic aliases: surfaces, text, accent */
+  --color-surface: var(--color-white);
+  --color-surface-muted: var(--color-offwhite);
+  --color-surface-sunken: var(--color-offwhite-dark);
+  --color-surface-inverse: var(--color-ink);
+  --color-content: var(--color-ink);
+  --color-content-secondary: var(--color-muted);
+  --color-content-inverse: var(--color-offwhite);
+  --color-accent: var(--color-gold-dark);
+  --color-accent-strong: var(--color-brown);
 
   --font-display: var(--font-display);
   --font-body: var(--font-body);
+}
+
+@theme {
+  /* Breakpoints — Tailwind defaults (sm 640, md 768, lg 1024, xl 1280, 2xl 1536) plus:
+     xs 480 (large phones), tablet 860, laptop 992 (iPad landscape / small laptop),
+     3xl 1920 (full HD+). "≤767px" is max-md:. */
+  --breakpoint-xs: 30rem;
+  --breakpoint-tablet: 53.75rem;
+  --breakpoint-laptop: 62rem;
+  --breakpoint-3xl: 120rem;
+
+  /* Fluid type scale — text-display … text-micro (each carries its line height) */
+  --text-display: clamp(44px, calc(37.33px + 2.083vw), 64px);
+  --text-display--line-height: 1.05;
+  --text-h1: clamp(36px, calc(32px + 1.25vw), 48px);
+  --text-h1--line-height: 1.1;
+  --text-h2: clamp(30px, calc(26.67px + 1.042vw), 40px);
+  --text-h2--line-height: 1.15;
+  --text-h3: clamp(24px, calc(22px + 0.625vw), 30px);
+  --text-h3--line-height: 1.2;
+  --text-h4: clamp(20px, calc(18.67px + 0.417vw), 24px);
+  --text-h4--line-height: 1.25;
+  --text-h5: clamp(18px, calc(17.33px + 0.208vw), 20px);
+  --text-h5--line-height: 1.3;
+  --text-h6: clamp(16px, calc(15.33px + 0.208vw), 18px);
+  --text-h6--line-height: 1.35;
+  --text-body: clamp(15px, calc(14.67px + 0.104vw), 16px);
+  --text-body--line-height: 1.6;
+  --text-btn: clamp(15px, calc(14.67px + 0.104vw), 16px);
+  --text-btn--line-height: 1;
+  --text-label: clamp(13px, calc(12.67px + 0.104vw), 14px);
+  --text-label--line-height: 1.4;
+  --text-small: 14px;
+  --text-small--line-height: 1.5;
+  --text-caption: 12px;
+  --text-caption--line-height: 1.45;
+  --text-micro: 11px;
+  --text-micro--line-height: 1.4;
+
+  /* Warm-tinted elevation scale */
+  --shadow-2xs: 0 1px 1px rgb(42 31 23 / 0.04);
+  --shadow-xs: 0 1px 2px rgb(42 31 23 / 0.06);
+  --shadow-sm: 0 1px 3px rgb(42 31 23 / 0.08), 0 1px 2px rgb(42 31 23 / 0.04);
+  --shadow-md: 0 4px 12px -2px rgb(42 31 23 / 0.1), 0 2px 4px -2px rgb(42 31 23 / 0.06);
+  --shadow-lg: 0 12px 24px -6px rgb(42 31 23 / 0.12), 0 4px 8px -4px rgb(42 31 23 / 0.06);
+  --shadow-xl: 0 20px 40px -10px rgb(42 31 23 / 0.16), 0 8px 16px -8px rgb(42 31 23 / 0.08);
+  --shadow-2xl: 0 32px 64px -16px rgb(42 31 23 / 0.22);
+
+  /* Motion */
+  --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ==========================================================================
+   Base element defaults (base layer so utilities always win)
+   ========================================================================== */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    min-width: 320px;
+    background: var(--color-offwhite);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :where(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-display);
+    font-weight: 500;
+    text-wrap: balance;
+    overflow-wrap: break-word;
+  }
+
+  :where(h1) {
+    font-size: var(--text-h1);
+    line-height: var(--text-h1--line-height);
+  }
+
+  :where(h2) {
+    font-size: var(--text-h2);
+    line-height: var(--text-h2--line-height);
+  }
+
+  :where(h3) {
+    font-size: var(--text-h3);
+    line-height: var(--text-h3--line-height);
+  }
+
+  :where(h4) {
+    font-size: var(--text-h4);
+    line-height: var(--text-h4--line-height);
+  }
+
+  :where(h5) {
+    font-size: var(--text-h5);
+    line-height: var(--text-h5--line-height);
+  }
+
+  :where(h6) {
+    font-size: var(--text-h6);
+    line-height: var(--text-h6--line-height);
+  }
+
+  :where(p) {
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+  }
+
+  :where(img, svg, video) {
+    max-width: 100%;
+  }
+
+  .small {
+    font-size: var(--text-small);
+  }
+
+  .caption {
+    font-size: var(--text-caption);
+  }
+
+  .button,
+  button {
+    font-size: var(--text-btn);
+  }
+
+  .label,
+  label {
+    font-size: var(--text-label);
+  }
+
+  /* Accessible focus: visible ring for keyboard users, none for pointer clicks */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brown);
+    outline-offset: 2px;
+  }
+
+  :where(input, select, textarea):focus-visible {
+    outline-offset: 0;
+  }
+
+  /* Every interactive element eases between states; a transition-* utility still overrides this */
+  :where(a, button, [role="button"], [role="tab"], [role="menuitem"], [role="option"], summary, label, input, select, textarea) {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, translate, scale, rotate;
+    transition-duration: 200ms;
+    transition-timing-function: var(--ease-luxe);
+  }
+
+  /* Tactile press feedback */
+  :where(button, [role="button"]):not(:disabled):active {
+    translate: 0 1px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   Layout utilities
+   ========================================================================== */
+
+/* Fluid, max-width bounded wrapper with responsive gutters */
+@utility container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-gutter);
+}
+
+@utility px-gutter {
+  padding-inline: var(--space-gutter);
+}
+
+@utility py-section {
+  padding-block: var(--space-section);
+}
+
+@utility py-section-sm {
+  padding-block: var(--space-section-sm);
+}
+
+@utility pt-section {
+  padding-top: var(--space-section);
+}
+
+@utility pb-section {
+  padding-bottom: var(--space-section);
+}
+
+@utility gap-grid {
+  gap: var(--space-grid);
+}
+
+@utility gap-x-grid {
+  column-gap: var(--space-grid);
+}
+
+@utility gap-y-grid {
+  row-gap: var(--space-grid);
+}
+
+@utility gap-stack {
+  gap: var(--space-stack);
+}
+
+@utility gap-split {
+  gap: var(--space-split);
+}
+
+@utility space-y-stack {
+  & > :not(:last-child) {
+    margin-block-end: var(--space-stack);
+  }
+}
+
+/* Intrinsic responsive grids: columns appear as space allows, no breakpoints needed */
+@utility grid-auto-fit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min, 260px)), 1fr));
+}
+
+@utility grid-auto-fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--grid-min, 260px)), 1fr));
+}
+
+/* Product grid: 2-up on phones, grows to 3–5 columns with available width */
+@utility grid-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(calc(50% - 12px), clamp(150px, 22vw, 260px)), 1fr));
+}
+
+/* Minimum touch target (48×48) — apply to small interactive elements */
+@utility tap-target {
+  min-height: var(--tap-target);
+  min-width: var(--tap-target);
+}
+
+/* ==========================================================================
+   Motion: composable enter / exit animations (tailwindcss-animate class API)
+   Enter: animate-in + fade-in, zoom-in-95, slide-in-from-right, slide-in-from-top-2 …
+   Exit:  animate-out + fade-out, zoom-out-95, slide-out-to-right, slide-out-to-top-2 …
+   Pair exits with usePresence() so the element stays mounted until it has animated away.
+   ========================================================================== */
+@property --tw-enter-opacity { syntax: "*"; inherits: false; }
+@property --tw-enter-scale { syntax: "*"; inherits: false; }
+@property --tw-enter-translate-x { syntax: "*"; inherits: false; }
+@property --tw-enter-translate-y { syntax: "*"; inherits: false; }
+@property --tw-exit-opacity { syntax: "*"; inherits: false; }
+@property --tw-exit-scale { syntax: "*"; inherits: false; }
+@property --tw-exit-translate-x { syntax: "*"; inherits: false; }
+@property --tw-exit-translate-y { syntax: "*"; inherits: false; }
+
+@keyframes enter {
+  from {
+    opacity: var(--tw-enter-opacity, 1);
+    transform: translate3d(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0), 0)
+      scale3d(var(--tw-enter-scale, 1), var(--tw-enter-scale, 1), 1);
+  }
+}
+
+@keyframes exit {
+  to {
+    opacity: var(--tw-exit-opacity, 1);
+    transform: translate3d(var(--tw-exit-translate-x, 0), var(--tw-exit-translate-y, 0), 0)
+      scale3d(var(--tw-exit-scale, 1), var(--tw-exit-scale, 1), 1);
+  }
+}
+
+@utility animate-in {
+  animation: enter var(--tw-duration, 300ms) var(--tw-ease, var(--ease-luxe)) both;
+}
+
+@utility animate-out {
+  animation: exit var(--tw-duration, 200ms) var(--tw-ease, cubic-bezier(0.4, 0, 1, 1)) both;
+}
+
+@utility fade-in {
+  --tw-enter-opacity: 0;
+}
+@utility fade-out {
+  --tw-exit-opacity: 0;
+}
+@utility zoom-in-* {
+  --tw-enter-scale: calc(--value(integer) / 100);
+}
+@utility zoom-out-* {
+  --tw-exit-scale: calc(--value(integer) / 100);
+}
+
+@utility slide-in-from-top {
+  --tw-enter-translate-y: -100%;
+}
+@utility slide-in-from-top-* {
+  --tw-enter-translate-y: calc(var(--spacing) * --value(integer) * -1);
+}
+@utility slide-in-from-bottom {
+  --tw-enter-translate-y: 100%;
+}
+@utility slide-in-from-bottom-* {
+  --tw-enter-translate-y: calc(var(--spacing) * --value(integer));
+}
+@utility slide-in-from-left {
+  --tw-enter-translate-x: -100%;
+}
+@utility slide-in-from-left-* {
+  --tw-enter-translate-x: calc(var(--spacing) * --value(integer) * -1);
+}
+@utility slide-in-from-right {
+  --tw-enter-translate-x: 100%;
+}
+@utility slide-in-from-right-* {
+  --tw-enter-translate-x: calc(var(--spacing) * --value(integer));
+}
+
+@utility slide-out-to-top {
+  --tw-exit-translate-y: -100%;
+}
+@utility slide-out-to-top-* {
+  --tw-exit-translate-y: calc(var(--spacing) * --value(integer) * -1);
+}
+@utility slide-out-to-bottom {
+  --tw-exit-translate-y: 100%;
+}
+@utility slide-out-to-bottom-* {
+  --tw-exit-translate-y: calc(var(--spacing) * --value(integer));
+}
+@utility slide-out-to-left {
+  --tw-exit-translate-x: -100%;
+}
+@utility slide-out-to-right {
+  --tw-exit-translate-x: 100%;
 }
 
 /* Hide scrollbar for Chrome, Safari, Opera, Edge, Firefox while keeping page scrollable */
@@ -50,126 +465,6 @@ body::-webkit-scrollbar,
   scrollbar-width: none !important;
 }
 
-:where(h1, h2, h3, h4, h5, h6) {
-  font-family: var(--font-display);
-}
-
-:where(h1) {
-  font-size: clamp(30px, calc(26px + 0.8vw), 38px);
-}
-
-:where(h2) {
-  font-size: clamp(24px, calc(21px + 0.6vw), 30px);
-}
-
-:where(h3) {
-  font-size: clamp(19px, calc(17px + 0.4vw), 23px);
-}
-
-:where(h4) {
-  font-size: clamp(16px, calc(15px + 0.25vw), 18px);
-}
-
-:where(h5) {
-  font-size: clamp(14px, calc(13.5px + 0.15vw), 16px);
-}
-
-:where(h6) {
-  font-size: 14px;
-}
-
-body {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  background: var(--color-cream);
-  color: var(--color-ink);
-  font-family: var(--font-body);
-  font-size: clamp(15px, calc(14.62px + 0.096vw), 16px);
-}
-
-.small {
-  font-size: 14px;
-}
-
-.caption {
-  font-size: 12px;
-}
-
-.button,
-button {
-  font-size: clamp(15px, calc(14.62px + 0.096vw), 16px);
-}
-
-.label,
-label {
-  font-size: clamp(13px, calc(12.62px + 0.096vw), 14px);
-}
-
-@utility text-h1 {
-  font-size: clamp(36px, calc(31.38px + 1.154vw), 48px);
-}
-
-@utility text-h2 {
-  font-size: clamp(32px, calc(28.92px + 0.769vw), 40px);
-}
-
-@utility text-h3 {
-  font-size: clamp(26px, calc(23.69px + 0.577vw), 32px);
-}
-
-@utility text-h4 {
-  font-size: clamp(22px, calc(20.46px + 0.385vw), 26px);
-}
-
-@utility text-h5 {
-  font-size: clamp(20px, calc(19.23px + 0.192vw), 22px);
-}
-
-@utility text-h6 {
-  font-size: 18px;
-}
-
-@utility text-body {
-  font-size: clamp(15px, calc(14.62px + 0.096vw), 16px);
-}
-
-@utility text-small {
-  font-size: 14px;
-}
-
-@utility text-caption {
-  font-size: 12px;
-}
-
-@utility text-btn {
-  font-size: clamp(15px, calc(14.62px + 0.096vw), 16px);
-}
-
-@utility text-label {
-  font-size: clamp(13px, calc(12.62px + 0.096vw), 14px);
-}
-
-.container {
-  max-width: 1440px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
-/* p {
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  letter-spacing: normal;
-}
-
-span {
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 400;
-  letter-spacing: normal;
-} */
-
 @keyframes marquee {
   0% {
     transform: translateX(0%);
@@ -182,15 +477,4 @@ span {
 
 .animate-marquee {
   animation: marquee 22s linear infinite;
-}
-
-:focus,
-:focus-visible {
-  outline: none;
-  border: none;
-}
-
-select:focus {
-  border: none !important;
-  outline: none !important;
 }

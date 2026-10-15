@@ -25,11 +25,12 @@ export default function Bestsellers() {
       />
       <Carousel
         items={products.map((product) => (
-          <div key={product.id} className="px-2">
+          <div key={product.id} className="h-full px-1.5 sm:px-2">
             <ProductCard product={product} />
           </div>
         ))}
         itemsPerView={itemsPerView}
+        arrowTopClassName="top-[calc((min(100vw,var(--container-max))-2*var(--space-gutter))/4)] sm:top-[calc((min(100vw,var(--container-max))-2*var(--space-gutter))/6)] lg:top-[calc((min(100vw,var(--container-max))-2*var(--space-gutter))/10)]"
       />
 
       {/* View All Button at the bottom */}
@@ -37,9 +38,9 @@ export default function Bestsellers() {
         <Button
           href="/collections"
           variant="border"
-          colorTheme="wine"
+          colorTheme="brown"
           size="lg"
-          rightIcon={<ArrowRightIcon className="w-4 h-4" />}
+          rightIcon={<ArrowRightIcon className="h-4 w-4" />}
           className="hover:shadow-md"
         >
           View All Bestsellers

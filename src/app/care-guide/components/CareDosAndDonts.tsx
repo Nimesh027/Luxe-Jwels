@@ -39,7 +39,7 @@ export default function CareDosAndDonts() {
   return (
     <Section className="!py-4 mb-8 sm:mb-12" containerClassName="max-w-5xl">
       <div className="text-center space-y-2 mb-10">
-        <h2 className="font-display text-h2 font-semibold text-wine">
+        <h2 className="font-display text-h2 font-semibold text-brown">
           Essential Do’s & Don’ts
         </h2>
         <p className="text-body text-muted">
@@ -47,7 +47,7 @@ export default function CareDosAndDonts() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-grid">
         {dosAndDonts.map((item, idx) => {
           const isDo = item.type === "do";
           return (
@@ -75,7 +75,7 @@ export default function CareDosAndDonts() {
                   }`}
                 >
                   {isDo ? (
-                    <svg
+                    <svg aria-hidden="true"
                       className="w-6 h-6"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -89,7 +89,7 @@ export default function CareDosAndDonts() {
                       />
                     </svg>
                   ) : (
-                    <svg
+                    <svg aria-hidden="true"
                       className="w-6 h-6"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -104,7 +104,7 @@ export default function CareDosAndDonts() {
                     </svg>
                   )}
                 </span>
-                <h3 className="font-display text-lg font-semibold text-wine">
+                <h3 className="font-display text-lg font-semibold text-brown">
                   {item.title}
                 </h3>
                 <p className="text-body text-ink/75 leading-relaxed mt-2 font-light">

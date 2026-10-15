@@ -28,25 +28,25 @@ export default function OurArtisans() {
   ];
 
   return (
-    <Section className="py-16 sm:py-24 bg-[#F9F7F5]">
-      <div className="container max-w-6xl mx-auto px-4 sm:px-6">
+    <Section className="bg-offwhite">
+      <div className="container max-w-6xl">
 
         {/* Header */}
         <SectionTitle
           tagline="The Hands Behind the Magic"
-          taglineClassName="text-gold tracking-[0.25em]"
+          taglineClassName="text-gold-dark tracking-widest"
           title="Meet Our Master Artisans"
-          titleClassName="text-wine"
+          titleClassName="text-brown"
           description="Our workshop is home to over 300 legacy karigars (craftsmen) hailing from families that have served Indian royalty for centuries. We are proud to share their stories."
         />
 
         {/* Artisans Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-grid">
           {artisans.map((artisan, idx) => (
-            <div key={idx} className="group relative overflow-hidden rounded-[2rem] bg-white shadow-sm hover:shadow-xl transition-all duration-500 border border-border/80 hover:border-gold/30">
+            <div key={idx} className="group relative overflow-hidden rounded-4xl bg-white shadow-sm hover:shadow-xl transition-all duration-500 border border-border/80 hover:border-gold/30">
 
               {/* Image Container */}
-              <div className="relative h-72 w-full overflow-hidden bg-surface">
+              <div className="relative h-72 w-full overflow-hidden bg-white">
                 <Image
                   src={artisan.image}
                   alt={artisan.name}
@@ -63,16 +63,16 @@ export default function OurArtisans() {
                     {artisan.name}
                   </h3>
                   <div className="flex flex-col gap-1">
-                    <span className="text-caption font-bold uppercase tracking-wider text-wine/80">
+                    <span className="text-caption font-bold tracking-wider text-brown/80">
                       {artisan.role}
                     </span>
-                    <span className="text-[11px] text-muted font-medium">
+                    <span className="text-micro text-muted font-medium">
                       {artisan.experience}
                     </span>
                   </div>
                 </div>
 
-                <div className="w-8 h-[1px] bg-gold/50" />
+                <div className="w-8 h-px bg-gold/50" />
 
                 <p className="text-body text-muted leading-relaxed font-light italic">
                   "{artisan.quote}"

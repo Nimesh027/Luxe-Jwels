@@ -10,6 +10,7 @@ import Select from "@/components/ui/Select";
 import { useAppSelector } from "@/store/hooks";
 import { filterProducts } from "@/lib/productFilter";
 import type { Product } from "@/types";
+import { usePresence } from "@/hooks/usePresence";
 
 const SORT_OPTIONS = [
   { label: "Featured", value: "featured" },
@@ -61,18 +62,18 @@ function Pagination({
   const pages = getPages();
 
   return (
-    <div className="flex items-center justify-center gap-1.5 mt-10 pt-8 border-t border-border/60">
+    <nav aria-label="Pagination" className="flex items-center justify-center gap-1.5 mt-10 pt-8 border-t border-border/60">
       {/* Prev */}
       <Button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
         variant="border"
-        colorTheme="wine"
+        colorTheme="brown"
         size="sm"
         rounded="md"
         aria-label="Previous page"
         leftIcon={
-          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <svg aria-hidden="true" className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M15 18l-6-6 6-6" />
           </svg>
         }
@@ -84,16 +85,19 @@ function Pagination({
       <div className="flex items-center gap-1">
         {pages.map((page, i) =>
           page === "..." ? (
-            <span key={`ellipsis-${i}`} className="w-9 h-9 flex items-center justify-center text-[12px] text-muted select-none">
+            <span key={`ellipsis-${i}`} aria-hidden="true" className="w-9 h-9 flex items-center justify-center text-caption text-muted select-none">
               &hellip;
             </span>
           ) : (
             <button
               key={page}
+              type="button"
+              aria-label={`Page ${page}`}
+              aria-current={currentPage === page ? "page" : undefined}
               onClick={() => onPageChange(page as number)}
-              className={`w-9 h-9 flex items-center justify-center text-[12px] font-medium rounded-lg border transition-all duration-150 cursor-pointer ${currentPage === page
-                ? "bg-wine border-wine text-white shadow-sm shadow-wine/20"
-                : "border-border text-ink hover:border-wine/50 hover:text-wine hover:bg-wine/5"
+              className={`size-11 pointer-coarse:size-12 flex items-center justify-center text-caption font-medium rounded-lg border transition-all duration-150 cursor-pointer ${currentPage === page
+                ? "bg-brown border-brown text-white shadow-sm shadow-brown/20"
+                : "border-border text-ink hover:border-brown/50 hover:text-brown hover:bg-brown/5"
                 }`}
             >
               {page}
@@ -107,19 +111,19 @@ function Pagination({
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         variant="border"
-        colorTheme="wine"
+        colorTheme="brown"
         size="sm"
         rounded="md"
         aria-label="Next page"
         rightIcon={
-          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <svg aria-hidden="true" className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M9 18l6-6-6-6" />
           </svg>
         }
       >
         Next
       </Button>
-    </div>
+    </nav>
   );
 }
 
@@ -130,6 +134,7 @@ function ShopContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const sidebar = usePresence(sidebarOpen, 300);
 
   const rawCategories = searchParams.get("category") ?? "";
   const rawCollections = searchParams.get("collection") ?? "";
@@ -228,11 +233,11 @@ function ShopContent() {
   };
 
   return (
-    <div className="bg-cream">
+    <div className="bg-offwhite">
       {/* ── Page Hero ────────────────────────────────────────────── */}
       <ShopHero />
 
-      <div className="py-12 md:py-16">
+      <div className="py-section">
         <div className="container">
           {/* ── Toolbar ───────────────────────────────────────────── */}
           <div className="flex items-center justify-between gap-4 mb-7 pb-5 border-b border-border/70">
@@ -241,18 +246,18 @@ function ShopContent() {
               id="shop-filter-toggle"
               onClick={() => setSidebarOpen(true)}
               variant="border"
-              colorTheme="wine"
+              colorTheme="brown"
               size="sm"
               rounded="md"
               className="lg:hidden"
               leftIcon={
-                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <svg aria-hidden="true" className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="4" y1="6" x2="20" y2="6" /><line x1="7" y1="12" x2="17" y2="12" /><line x1="10" y1="18" x2="14" y2="18" />
                 </svg>
               }
               rightIcon={
                 activeFilterCount > 0 ? (
-                  <span className="bg-wine text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">
+                  <span className="bg-brown text-white text-micro font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">
                     {activeFilterCount}
                   </span>
                 ) : undefined
@@ -262,7 +267,7 @@ function ShopContent() {
             </Button>
 
             {/* Product count — desktop */}
-            <p className="hidden lg:block text-[12px] text-muted">
+            <p className="hidden lg:block text-caption text-muted">
               Showing{" "}
               <span className="font-semibold text-ink">{products.length}</span>{" "}
               {products.length === 1 ? "product" : "products"}
@@ -272,13 +277,13 @@ function ShopContent() {
             </p>
 
             {/* Product count — mobile */}
-            <p className="lg:hidden text-[12px] text-muted">
+            <p className="lg:hidden text-caption text-muted">
               <span className="font-semibold text-ink">{products.length}</span> results
             </p>
 
             {/* Sort dropdown — fully custom */}
             <div className="flex items-center gap-2.5">
-              <span className="text-[11px] text-muted hidden sm:block uppercase tracking-wider font-medium whitespace-nowrap">
+              <span className="text-micro text-muted hidden sm:block tracking-wider font-medium whitespace-nowrap">
                 Sort
               </span>
               <Select
@@ -289,28 +294,28 @@ function ShopContent() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-stack">
             {/* ── Desktop Sidebar — col-span-3 ─────────────────── */}
             <div className="hidden lg:block lg:col-span-3">
-              <div className="bg-surface border border-border/60 rounded-2xl p-5 shadow-sm">
+              <div className="bg-white border border-border/60 rounded-2xl p-5 shadow-sm">
                 <ShopFilter {...sidebarProps} />
               </div>
             </div>
 
             {/* ── Mobile Sidebar Overlay ─────────────────────────── */}
-            {sidebarOpen && (
+            {sidebar.mounted && (
               <div className="fixed inset-0 z-50 lg:hidden">
                 <div
-                  className="absolute inset-0 bg-ink/40 backdrop-blur-sm"
+                  className={`absolute inset-0 bg-ink/40 backdrop-blur-sm ${sidebar.open ? "animate-in fade-in" : "animate-out fade-out duration-300"}`}
                   onClick={() => setSidebarOpen(false)}
                 />
-                <div className="absolute left-0 top-0 bottom-0 w-[300px] bg-surface shadow-2xl animate-in slide-in-from-left duration-300 flex flex-col">
+                <div className={`absolute left-0 top-0 bottom-0 w-[min(300px,85vw)] bg-white shadow-2xl flex flex-col ${sidebar.open ? "animate-in slide-in-from-left duration-500" : "animate-out slide-out-to-left duration-300"}`}>
                   <div className="flex items-center justify-between px-5 py-4 border-b border-border">
                     <div className="flex items-center gap-2">
-                      <svg className="w-3.5 h-3.5 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <svg aria-hidden="true" className="w-3.5 h-3.5 text-brown" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="4" y1="6" x2="20" y2="6" /><line x1="7" y1="12" x2="17" y2="12" /><line x1="10" y1="18" x2="14" y2="18" />
                       </svg>
-                      <span className="!text-small font-extrabold uppercase tracking-[0.2em] text-ink">
+                      <span className="!text-small font-extrabold tracking-widest text-ink">
                         Filter By
                       </span>
                     </div>
@@ -322,7 +327,7 @@ function ShopContent() {
                       rounded="md"
                       aria-label="Close filters"
                       leftIcon={
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                        <svg aria-hidden="true" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                           <path d="M18 6L6 18M6 6l12 12" />
                         </svg>
                       }
@@ -335,7 +340,7 @@ function ShopContent() {
                     <Button
                       onClick={() => setSidebarOpen(false)}
                       variant="fill"
-                      colorTheme="wine"
+                      colorTheme="brown"
                       size="md"
                       rounded="lg"
                       fullWidth
@@ -356,12 +361,13 @@ function ShopContent() {
                     <Button
                       key={val}
                       onClick={() => toggleMultiParam("category", activeCategories, val)}
+                      aria-label={`Remove ${CATEGORIES.find((c) => c.value === val)?.label} filter`}
                       variant="border"
-                      colorTheme="wine"
+                      colorTheme="brown"
                       size="xs"
                       rounded="full"
                       rightIcon={
-                        <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
                           <path d="M18 6L6 18M6 6l12 12" />
                         </svg>
                       }
@@ -373,12 +379,13 @@ function ShopContent() {
                     <Button
                       key={val}
                       onClick={() => toggleMultiParam("collection", activeCollections, val)}
+                      aria-label={`Remove ${COLLECTIONS.find((c) => c.value === val)?.label} filter`}
                       variant="border"
-                      colorTheme="wine"
+                      colorTheme="brown"
                       size="xs"
                       rounded="full"
                       rightIcon={
-                        <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
                           <path d="M18 6L6 18M6 6l12 12" />
                         </svg>
                       }
@@ -389,12 +396,13 @@ function ShopContent() {
                   {activePrice && (
                     <Button
                       onClick={() => setParam("price", "")}
+                      aria-label={`Remove ${PRICE_RANGES.find((r) => r.value === activePrice)?.label} filter`}
                       variant="border"
-                      colorTheme="wine"
+                      colorTheme="brown"
                       size="xs"
                       rounded="full"
                       rightIcon={
-                        <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
                           <path d="M18 6L6 18M6 6l12 12" />
                         </svg>
                       }
@@ -405,7 +413,7 @@ function ShopContent() {
                   <Button
                     onClick={clearAll}
                     variant="text"
-                    colorTheme="wine"
+                    colorTheme="brown"
                     size="xs"
                     rounded="md"
                   >
@@ -417,8 +425,8 @@ function ShopContent() {
               {/* Empty state */}
               {products.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-28 text-center gap-5">
-                  <div className="w-20 h-20 rounded-full bg-wine/8 border border-wine/15 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-wine/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
+                  <div className="w-20 h-20 rounded-full bg-brown/8 border border-brown/15 flex items-center justify-center">
+                    <svg aria-hidden="true" className="w-8 h-8 text-brown/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
                       <circle cx="11" cy="11" r="8" />
                       <path d="M21 21l-4.35-4.35" />
                     </svg>
@@ -434,7 +442,7 @@ function ShopContent() {
                   <Button
                     onClick={clearAll}
                     variant="border"
-                    colorTheme="wine"
+                    colorTheme="brown"
                     size="sm"
                     rounded="md"
                   >
@@ -442,7 +450,7 @@ function ShopContent() {
                   </Button>
                 </div>
               ) : (
-                <div className="grid grid-cols-2 gap-4 sm:gap-5 sm:grid-cols-3">
+                <div className="grid-products gap-grid">
                   {paginatedProducts.map((product) => (
                     <ProductCard key={product.id} product={product} />
                   ))}
@@ -472,7 +480,7 @@ function ShopWrapper() {
 
 export default function ShopClient() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-cream" />}>
+    <Suspense fallback={<div className="min-h-screen bg-offwhite" />}>
       <ShopWrapper />
     </Suspense>
   );

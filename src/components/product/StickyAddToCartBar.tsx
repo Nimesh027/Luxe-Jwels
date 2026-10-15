@@ -32,15 +32,15 @@ export default function StickyAddToCartBar({
       {/* 1. PRICE & DISCOUNT BADGE */}
       <div className="flex items-center gap-2 shrink-0">
         <div>
-          <span className="text-[9px] sm:text-caption text-neutral-400 line-through font-normal block -mb-0.5">
+          <span className="text-micro sm:text-caption text-neutral-400 line-through font-normal block -mb-0.5">
             {comparePriceFormatted}
           </span>
           <div className="flex items-center gap-1.5">
             <span className="font-display font-bold text-small sm:text-h5 text-slate-900 tracking-tight">
               {priceFormatted}
             </span>
-            <span className="px-1.5 sm:px-2 py-0.5 bg-red-50 text-red-500 rounded-full text-[9px] sm:text-caption font-semibold flex items-center gap-0.5 border border-red-100/80">
-              <span className="text-[8px] sm:text-[9px]">▾</span>
+            <span className="px-1.5 sm:px-2 py-0.5 bg-red-50 text-red-500 rounded-full text-micro sm:text-caption font-semibold flex items-center gap-0.5 border border-red-100/80">
+              <span className="text-micro">▾</span>
               {discountPercent}%
             </span>
           </div>
@@ -50,11 +50,11 @@ export default function StickyAddToCartBar({
       {/* 2. ADD TO CART BUTTON */}
       <Button
         type="button"
-        colorTheme="wine"
+        colorTheme="brown"
         rounded="full"
         size="sm"
         onClick={onAddToCart}
-        className="px-4 sm:px-7 font-semibold text-caption sm:text-body uppercase tracking-wider shadow-md hover:shadow-lg shrink-0"
+        className="tracking-wider shadow-md hover:shadow-lg shrink-0"
         leftIcon={<ShoppingBagIcon size={16} />}
       >
         Add to Cart

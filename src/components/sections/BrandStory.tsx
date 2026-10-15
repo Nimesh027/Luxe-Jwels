@@ -12,7 +12,7 @@ export default function BrandStory() {
   return (
     <Section className="bg-white">
         {/* 50/50 Balanced Grid: 45% Image, 55% Content with 60-80px Spacing */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-10 sm:gap-12 lg:gap-16 xl:gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-split">
           {/* Image Column: 45% width on desktop, first on mobile */}
           <div className="order-1 lg:order-1 lg:col-span-5">
             <div className="group relative aspect-[4/3] w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-gold/25 shadow-lg">
@@ -24,24 +24,24 @@ export default function BrandStory() {
                 className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
               />
               {/* Subtle Warm Amber / Gold Tint Vignette */}
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-linear-to-t from-ink/30 via-transparent to-transparent opacity-60" />
             </div>
           </div>
 
           {/* Content Column: 55% width on desktop, second on mobile */}
           <div className="order-2 lg:order-2 lg:col-span-7 flex flex-col items-start gap-4 sm:gap-5">
             {/* Overline Eyebrow */}
-            <span className="text-[10px] sm:text-caption font-semibold uppercase tracking-[0.25em] text-gold">
+            <span className="text-micro sm:text-caption font-semibold tracking-widest text-gold">
               Artisan Heritage
             </span>
 
             {/* Main Headline */}
-            <h2 className="font-display text-h2 lg:text-h2 xl:text-[42px] font-normal leading-[1.18] text-ink tracking-tight">
+            <h2 className="font-display text-h2 xl:text-h1 font-normal leading-tight text-ink tracking-tight">
               {brandStory.title}
             </h2>
 
             {/* Subtle Gold Divider */}
-            <div className="h-[2px] w-12 bg-gold/80" />
+            <div className="h-0.5 w-12 bg-gold/80" />
 
             {/* Story Description with 540px Max-Width & Generous Line-Height */}
             <p className="max-w-[540px] text-body font-light leading-[1.8] text-muted">
@@ -52,7 +52,7 @@ export default function BrandStory() {
             <div className="pt-2">
               <Link
                 href={brandStory.cta.href}
-                className="inline-flex h-11 items-center gap-2.5 rounded-full bg-ink px-7 text-body font-semibold uppercase tracking-wider text-cream shadow-md transition-all duration-300 hover:bg-gold hover:text-ink hover:shadow-lg hover:shadow-gold/20"
+                className="inline-flex h-11 pointer-coarse:h-12 items-center gap-2.5 rounded-full bg-ink px-7 text-body font-semibold tracking-wider text-offwhite shadow-md transition-all duration-300 hover:bg-gold hover:text-ink hover:shadow-lg hover:shadow-gold/20"
               >
                 <span>{brandStory.cta.label}</span>
                 <ArrowRightIcon className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />

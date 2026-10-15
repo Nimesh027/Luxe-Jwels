@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { SearchIcon, CloseIcon, ArrowRightIcon } from "@/components/icons";
 import { useAppSelector } from "@/store/hooks";
 import { cn } from "@/lib/utils";
+import Button from "@/components/ui/Button";
+import { usePresence } from "@/hooks/usePresence";
 
 const ROTATING_PLACEHOLDERS = [
   "gold necklace",
@@ -22,6 +24,8 @@ const ROTATING_PLACEHOLDERS = [
 interface SearchBarProps {
   className?: string;
   autoFocus?: boolean;
+  /** "dropdown" floats suggestions under the field; "panel" is the full-screen mobile search */
+  variant?: "dropdown" | "panel";
   onCloseMobile?: () => void;
   onOpenChange?: (open: boolean) => void;
 }
@@ -29,9 +33,11 @@ interface SearchBarProps {
 export default function SearchBar({
   className,
   autoFocus = false,
+  variant = "dropdown",
   onCloseMobile,
   onOpenChange,
 }: SearchBarProps) {
+  const isPanel = variant === "panel";
   const router = useRouter();
   const products = useAppSelector((state) => state.products.items);
   const categories = useAppSelector((state) => state.categories.items);
@@ -40,6 +46,7 @@ export default function SearchBar({
   const [isOpen, setIsOpen] = useState(false);
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
   const [isFading, setIsFading] = useState(false);
+  const suggestions = usePresence(isOpen, 150);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -97,23 +104,41 @@ export default function SearchBar({
     : [];
 
   return (
-    <div ref={containerRef} className={cn("relative", className)}>
+    <div ref={containerRef} className={cn("relative", isPanel && "flex h-full flex-col", className)}>
+      {/* Search field row (panel adds a back button and its own top bar) */}
+      <div
+        className={cn(
+          isPanel &&
+            "flex shrink-0 items-center gap-1 border-b border-border bg-white px-gutter py-2.5 shadow-xs"
+        )}
+      >
+      {isPanel && (
+        <button
+          type="button"
+          onClick={onCloseMobile}
+          aria-label="Close search"
+          className="-ml-3 flex size-12 shrink-0 items-center justify-center rounded-full text-ink hover:bg-brown-soft hover:text-brown transition-colors cursor-pointer"
+        >
+          <ArrowRightIcon className="w-5 h-5 rotate-180" />
+        </button>
+      )}
       {/* Pill Search Input Form */}
       <form
         onSubmit={handleSearchSubmit}
         className={cn(
-          "relative flex items-center w-full h-10 sm:h-11 px-4 sm:px-5 rounded-full border border-border bg-surface transition-all duration-200 shadow-xs",
-          "focus-within:border-wine/50 focus-within:ring-2 focus-within:ring-wine/10"
+          "relative flex items-center w-full h-11 px-4 sm:px-5 rounded-full border border-border bg-white transition-all duration-200 shadow-xs",
+          isPanel && "flex-1 min-w-0 bg-offwhite",
+          "focus-within:border-brown/50 focus-within:bg-white focus-within:ring-2 focus-within:ring-brown/10"
         )}
       >
         {/* Maroon Search Magnifying Glass Icon */}
-        <span className="text-wine mr-3 shrink-0 flex items-center select-none">
+        <span className="text-brown mr-3 shrink-0 flex items-center select-none">
           <SearchIcon size={16} />
         </span>
 
         {/* Dynamic Placeholder overlay if query is empty */}
         {!query && (
-          <div className="absolute left-12 pointer-events-none flex items-center text-body select-none">
+          <div className="absolute left-12 right-4 pointer-events-none flex items-center overflow-hidden whitespace-nowrap text-body select-none">
             <span className="text-muted/60 font-normal">Search for&nbsp;</span>
             <span
               className={cn(
@@ -129,6 +154,7 @@ export default function SearchBar({
         {/* Actual Input */}
         <input
           ref={inputRef}
+          name="q"
           type="text"
           value={query}
           autoFocus={autoFocus}
@@ -137,6 +163,14 @@ export default function SearchBar({
             updateIsOpen(true);
           }}
           onFocus={() => updateIsOpen(true)}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") {
+              if (isPanel) return onCloseMobile?.();
+              updateIsOpen(false);
+              inputRef.current?.blur();
+            }
+          }}
+          aria-label="Search jewellery"
           className="w-full h-full bg-transparent text-body text-ink placeholder-transparent focus:outline-none z-10 pr-2"
         />
 
@@ -155,17 +189,28 @@ export default function SearchBar({
           </button>
         )}
       </form>
+      </div>
 
-      {/* Live Search Popup Dropdown - Centered beneath search bar */}
-      {isOpen && (
-        <div className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-full min-w-[300px] sm:min-w-[480px] md:min-w-[540px] lg:min-w-[580px] max-w-xl bg-surface border border-border/80 shadow-2xl rounded-2xl lg:rounded-3xl p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-150 max-h-[80vh] overflow-y-auto">
+      {/* Suggestions: floating card under the field, or the scrolling body of the mobile panel */}
+      {(suggestions.mounted || isPanel) && (
+        <div
+          className={cn(
+            isPanel
+              ? "flex-1 overflow-y-auto overscroll-contain scrollbar-none px-gutter pt-5 pb-10"
+              : "absolute inset-x-0 top-full mt-2 md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:w-[min(36rem,calc(100vw-2*var(--space-gutter)))] bg-white ring-1 ring-border shadow-2xl rounded-2xl lg:rounded-3xl p-4 sm:p-5 z-50 origin-top max-h-[min(75svh,640px)] overflow-y-auto overscroll-contain scrollbar-none",
+            !isPanel &&
+              (isOpen
+                ? "animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-200"
+                : "animate-out fade-out zoom-out-95 duration-150")
+          )}
+        >
           {query.trim() ? (
             /* Filtered Search Results View when user types */
             <div>
               {/* Filtered Categories */}
               {filteredCategories.length > 0 && (
                 <div className="mb-4 pb-3 border-b border-border/60">
-                  <span className="text-caption font-semibold text-muted tracking-wide block mb-2">
+                  <span className="block mb-3 text-micro font-semibold tracking-widest uppercase text-gold-dark">
                     Categories
                   </span>
                   <div className="flex flex-wrap gap-2">
@@ -177,7 +222,7 @@ export default function SearchBar({
                           updateIsOpen(false);
                           onCloseMobile?.();
                         }}
-                        className="text-caption px-3.5 py-1.5 bg-cream hover:bg-wine-soft hover:text-wine rounded-full transition-colors font-medium text-ink flex items-center gap-1.5"
+                        className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-border bg-offwhite px-4 text-caption font-medium text-ink transition-colors hover:border-brown/50 hover:bg-brown-soft hover:text-brown"
                       >
                         <span className="text-gold">✦</span>
                         {cat.name}
@@ -189,7 +234,7 @@ export default function SearchBar({
 
               {/* Filtered Products List */}
               <div>
-                <span className="text-caption font-semibold text-muted tracking-wide block mb-3">
+                <span className="block mb-3 text-micro font-semibold tracking-widest uppercase text-gold-dark">
                   Matching Products ({filteredProducts.length})
                 </span>
 
@@ -203,9 +248,9 @@ export default function SearchBar({
                           updateIsOpen(false);
                           onCloseMobile?.();
                         }}
-                        className="flex items-center gap-3.5 p-2 rounded-xl hover:bg-cream transition-colors group"
+                        className="flex items-center gap-3.5 p-2 rounded-xl hover:bg-offwhite transition-colors group"
                       >
-                        <div className="w-12 h-12 rounded-xl overflow-hidden bg-cream shrink-0 border border-border/60">
+                        <div className="w-12 h-12 rounded-xl overflow-hidden bg-offwhite shrink-0 border border-border/60">
                           <img
                             src={product.image}
                             alt={product.name}
@@ -213,26 +258,29 @@ export default function SearchBar({
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h5 className="text-caption font-medium text-ink group-hover:text-wine truncate transition-colors">
+                          <h5 className="text-caption font-medium text-ink group-hover:text-brown truncate transition-colors">
                             {product.name}
                           </h5>
-                          <span className="text-caption font-semibold text-wine mt-0.5 block">
+                          <span className="text-caption font-semibold text-brown mt-0.5 block">
                             ₹{product.price.toLocaleString("en-IN")}
                           </span>
                         </div>
-                        <ArrowRightIcon className="w-4 h-4 text-muted/50 group-hover:text-wine group-hover:translate-x-1 transition-all shrink-0" />
+                        <ArrowRightIcon className="w-4 h-4 text-muted/50 group-hover:text-brown group-hover:translate-x-1 transition-all shrink-0" />
                       </Link>
                     ))}
 
                     <div className="pt-3 text-center border-t border-border/60">
-                      <button
+                      <Button
                         type="button"
                         onClick={handleSearchSubmit}
-                        className="inline-flex items-center gap-1.5 text-caption font-semibold text-wine hover:text-wine-dark cursor-pointer mx-auto"
+                        variant="text"
+                        colorTheme="brown"
+                        size="xs"
+                        className="mx-auto"
                       >
                         <span>View all results for &quot;{query}&quot;</span>
                         <ArrowRightIcon className="w-3.5 h-3.5" />
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 ) : (
@@ -244,10 +292,11 @@ export default function SearchBar({
             </div>
           ) : (
             /* DEFAULT SEARCH VIEW (MATCHING REFERENCE IMAGE) */
-            <div className="space-y-5">
+            <div className="space-y-5 sm:space-y-6">
               {/* SECTION 1: Popular Searches with Trending Arrow Chips */}
               <div>
-                <span className="text-caption text-muted/80 font-normal block mb-2.5">
+                <span className="flex items-center gap-2 mb-3 text-micro font-semibold tracking-widest uppercase text-gold-dark">
+                  <span className="h-px w-4 bg-gold" />
                   Popular Searches
                 </span>
                 <div className="flex flex-wrap gap-2">
@@ -264,11 +313,12 @@ export default function SearchBar({
                         setQuery(chip.label);
                         inputRef.current?.focus();
                       }}
-                      className="px-3.5 py-1.5 rounded-xl border border-border/80 bg-surface hover:border-wine/60 hover:text-wine text-ink text-caption font-normal transition-all duration-150 inline-flex items-center gap-1.5 cursor-pointer shadow-2xs hover:bg-wine-soft/30"
+                      className="group inline-flex min-h-10 pointer-coarse:min-h-11 items-center gap-2 rounded-full border border-border bg-offwhite px-4 text-caption font-medium text-ink transition-colors duration-150 cursor-pointer hover:border-brown/50 hover:bg-brown-soft hover:text-brown"
                     >
                       {/* Upward trending arrow icon */}
                       <svg
-                        className="w-3.5 h-3.5 text-muted/70 group-hover:text-wine"
+                        aria-hidden="true"
+                        className="w-3.5 h-3.5 shrink-0 text-gold-dark group-hover:text-brown transition-colors"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -287,10 +337,24 @@ export default function SearchBar({
 
               {/* SECTION 2: Trending Products (3-Column Image Cards) */}
               <div>
-                <span className="text-caption text-muted/80 font-normal block mb-2.5">
-                  Trending Products
-                </span>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="flex items-center gap-2 text-micro font-semibold tracking-widest uppercase text-gold-dark">
+                    <span className="h-px w-4 bg-gold" />
+                    Trending Now
+                  </span>
+                  <Link
+                    href="/shop"
+                    onClick={() => {
+                      updateIsOpen(false);
+                      onCloseMobile?.();
+                    }}
+                    className="inline-flex min-h-10 items-center gap-1 -my-2 text-caption font-medium text-brown hover:text-brown-dark hover:underline underline-offset-4"
+                  >
+                    View all
+                    <ArrowRightIcon className="w-3 h-3" />
+                  </Link>
+                </div>
+                <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
                   {[
                     {
                       title: "Regal Diamond Encrusted Square..",
@@ -315,9 +379,9 @@ export default function SearchBar({
                         updateIsOpen(false);
                         onCloseMobile?.();
                       }}
-                      className="group block"
+                      className="group block rounded-xl"
                     >
-                      <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-cream border border-border/70 shadow-xs">
+                      <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-offwhite ring-1 ring-border transition-shadow duration-300 group-hover:shadow-md group-hover:ring-gold/60">
                         <Image
                           src={item.image}
                           alt={item.title}
@@ -326,7 +390,7 @@ export default function SearchBar({
                           className="object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
-                      <p className="font-body text-[11px] sm:text-caption text-ink/90 group-hover:text-wine mt-1.5 line-clamp-2 leading-tight transition-colors">
+                      <p className="font-body text-micro sm:text-caption font-medium text-ink group-hover:text-brown mt-2 line-clamp-2 leading-snug transition-colors">
                         {item.title}
                       </p>
                     </Link>
@@ -335,14 +399,30 @@ export default function SearchBar({
               </div>
 
               {/* SECTION 3: Bottom Pink/Blush Store Banner */}
-              <div className="p-3.5 sm:p-4 rounded-2xl bg-[#faedf0] border border-[#f5dede] text-center shadow-xs">
-                <p className="font-display text-body text-ink leading-snug">
-                  <span className="text-ink/80 font-normal">Loved It Online? </span>
-                  <span className="text-wine font-semibold">Find It At A Luxe Store Near You!</span>
-                </p>
-                <p className="text-[10px] sm:text-[11px] text-muted/90 mt-0.5">
-                  Click &quot;Request Store Availability&quot; on your favourite product.
-                </p>
+              <div className="flex items-center gap-3 sm:gap-4 rounded-2xl bg-brown-soft border border-brown/15 p-3.5 sm:p-4">
+                <span className="flex size-10 sm:size-11 shrink-0 items-center justify-center rounded-full bg-white text-brown ring-1 ring-gold/40 shadow-xs">
+                  <svg
+                    aria-hidden="true"
+                    className="w-5 h-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z" />
+                    <circle cx="12" cy="9.5" r="2.5" />
+                  </svg>
+                </span>
+                <div className="min-w-0">
+                  <p className="font-display text-small sm:text-body font-medium text-ink leading-snug">
+                    Loved it online? <span className="text-brown">Find it at a store near you.</span>
+                  </p>
+                  <p className="text-micro text-muted mt-0.5">
+                    Tap &quot;Request Store Availability&quot; on any product.
+                  </p>
+                </div>
               </div>
             </div>
           )}

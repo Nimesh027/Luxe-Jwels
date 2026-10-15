@@ -21,7 +21,7 @@ export default function Hero() {
 
   return (
     <Section className="!p-0" containerClassName="!p-0 !max-w-full">
-      <div className="relative p-0 h-[480px] sm:h-[540px] md:h-[580px] lg:h-[640px] xl:h-[680px] w-full overflow-hidden select-none">
+      <div className="relative p-0 h-[clamp(480px,calc(380px+20vw),760px)] w-full overflow-hidden select-none">
         <Image
           src={slide.image}
           alt={slide.heading}
@@ -38,28 +38,27 @@ export default function Hero() {
             "pointer-events-none absolute inset-0 transition-opacity duration-700",
             /* Mobile: bottom-to-top soft gradient; Tablet/Desktop: right-to-left soft gradient starting from center-right */
             isDark
-              ? "bg-gradient-to-t from-ink/80 via-ink/40 to-transparent sm:bg-gradient-to-l sm:from-ink/75 sm:via-ink/30 sm:to-transparent sm:left-[30%]"
-              : "bg-gradient-to-t from-black/60 via-black/25 to-transparent sm:bg-gradient-to-l sm:from-black/55 sm:via-black/20 sm:to-transparent sm:left-[30%]"
+              ? "bg-linear-to-t from-ink/80 via-ink/40 to-transparent sm:bg-linear-to-l sm:from-ink/75 sm:via-ink/30 sm:to-transparent sm:left-[30%]"
+              : "bg-linear-to-t from-black/60 via-black/25 to-transparent sm:bg-linear-to-l sm:from-black/55 sm:via-black/20 sm:to-transparent sm:left-[30%]"
           )}
         />
 
-        <div className="relative h-full container mx-auto px-4 sm:px-8 lg:px-16 flex items-center justify-center sm:justify-end z-10">
+        <div className="relative h-full container flex items-center justify-center sm:justify-end z-10">
           <div
             className={cn(
               "w-full max-w-lg lg:max-w-xl transition-all duration-500 ease-out",
-              "p-4 sm:p-0",
-              isDark ? "text-cream" : "text-cream"
+              isDark ? "text-offwhite" : "text-offwhite"
             )}
           >
             {/* Tagline */}
             {slide.tagline && (
-              <span className="inline-block text-[11px] sm:text-caption font-semibold tracking-[0.25em] uppercase mb-2.5 text-gold">
+              <span className="inline-block text-micro sm:text-caption font-semibold tracking-widest mb-2.5 text-gold">
                 {slide.tagline}
               </span>
             )}
 
             {/* Title & Accent */}
-            <h1 className="font-display text-h3 sm:text-h2 lg:text-h1 font-normal leading-[1.15] tracking-tight mb-3 sm:mb-4 text-cream">
+            <h1 className="font-display text-h3 sm:text-h2 lg:text-h1 font-normal leading-[1.15] tracking-tight mb-3 sm:mb-4 text-offwhite">
               {slide.heading}
               <br />
               <span className="font-medium italic text-gold">
@@ -68,7 +67,7 @@ export default function Hero() {
             </h1>
 
             {/* Description */}
-            <p className="text-body lg:text-body leading-relaxed max-w-md mb-6 text-cream/90">
+            <p className="text-body leading-relaxed max-w-md mb-6 text-offwhite/90">
               {slide.subtext}
             </p>
 
@@ -81,7 +80,7 @@ export default function Hero() {
                     key={cta.label}
                     href={cta.href}
                     variant={isPrimary ? "fill" : "border"}
-                    colorTheme={isPrimary ? "gold" : "cream"}
+                    colorTheme={isPrimary ? "gold" : "offwhite"}
                     size="md"
                   >
                     {cta.label}
@@ -102,7 +101,7 @@ export default function Hero() {
               onClick={prev}
               className="hidden sm:inline-flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20"
               leftIcon={
-                <svg
+                <svg aria-hidden="true"
                   className="w-5 h-5"
                   viewBox="0 0 24 24"
                   fill="none"
@@ -124,7 +123,7 @@ export default function Hero() {
               onClick={next}
               className="hidden sm:inline-flex absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20"
               leftIcon={
-                <svg
+                <svg aria-hidden="true"
                   className="w-5 h-5"
                   viewBox="0 0 24 24"
                   fill="none"
@@ -153,7 +152,7 @@ export default function Hero() {
                   dotIndex === index
                     ? "w-6 sm:w-8 bg-gold shadow-sm"
                     : isDark
-                    ? "w-2 bg-cream/40 hover:bg-cream/70"
+                    ? "w-2 bg-offwhite/40 hover:bg-offwhite/70"
                     : "w-2 bg-ink/30 hover:bg-ink/60"
                 )}
               />

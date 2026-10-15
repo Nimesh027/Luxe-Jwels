@@ -30,11 +30,11 @@ export default function SidebarNavigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="w-full lg:w-64 shrink-0 bg-surface border border-border/80 rounded-2xl p-6 shadow-xs sticky top-28 h-fit">
+    <nav aria-label="Section navigation" className="w-full lg:w-64 shrink-0 bg-white border border-border/80 rounded-2xl p-6 shadow-xs sticky top-28 h-fit">
       <div className="space-y-8">
         {SECTIONS.map((section) => (
           <div key={section.title}>
-            <h3 className="font-display font-semibold text-wine text-h5 mb-4 tracking-wide">
+            <h3 className="font-display font-semibold text-brown text-h5 mb-4 tracking-wide">
               {section.title}
             </h3>
             <ul className="space-y-1">
@@ -48,7 +48,7 @@ export default function SidebarNavigation() {
                       className={cn(
                         "block px-3 py-2 text-small font-medium rounded-lg transition-colors",
                         isActive
-                          ? "bg-wine/5 text-wine"
+                          ? "bg-brown/5 text-brown"
                           : "text-muted hover:bg-black/5 hover:text-ink"
                       )}
                     >

@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 
 export function VisaBadge({ className = "h-6 w-auto" }: { className?: string }) {
   return (
-    <div className="flex h-7 px-2.5 items-center justify-center rounded-md bg-white border border-neutral-200 shadow-2xs">
-      <svg
+    <div role="img" aria-label="Visa" className="flex h-7 px-2.5 items-center justify-center rounded-md bg-white border border-neutral-200 shadow-2xs">
+      <svg aria-hidden="true"
         viewBox="0 0 48 16"
         className={className}
         fill="none"
@@ -24,8 +24,8 @@ export function VisaBadge({ className = "h-6 w-auto" }: { className?: string }) 
 
 export function MastercardBadge({ className = "h-5 w-auto" }: { className?: string }) {
   return (
-    <div className="flex h-7 px-2.5 items-center justify-center rounded-md bg-white border border-neutral-200 shadow-2xs">
-      <svg
+    <div role="img" aria-label="Mastercard" className="flex h-7 px-2.5 items-center justify-center rounded-md bg-white border border-neutral-200 shadow-2xs">
+      <svg aria-hidden="true"
         viewBox="0 0 32 20"
         className={className}
         fill="none"
@@ -44,8 +44,8 @@ export function MastercardBadge({ className = "h-5 w-auto" }: { className?: stri
 
 export function AmexBadge({ className = "h-5 w-auto" }: { className?: string }) {
   return (
-    <div className="flex h-7 px-2.5 items-center justify-center rounded-md bg-[#0070d1] border border-blue-400 shadow-2xs">
-      <span className="font-sans text-[11px] font-black tracking-tighter text-white">
+    <div role="img" aria-label="American Express" className="flex h-7 px-2.5 items-center justify-center rounded-md bg-[#0070d1] border border-blue-400 shadow-2xs">
+      <span className="font-sans text-micro font-black tracking-tighter text-white">
         AMEX
       </span>
     </div>
@@ -54,8 +54,8 @@ export function AmexBadge({ className = "h-5 w-auto" }: { className?: string }) 
 
 export function PaypalBadge({ className = "h-5 w-auto" }: { className?: string }) {
   return (
-    <div className="flex h-7 px-2.5 items-center justify-center rounded-md bg-white border border-neutral-200 shadow-2xs">
-      <svg
+    <div role="img" aria-label="PayPal" className="flex h-7 px-2.5 items-center justify-center rounded-md bg-white border border-neutral-200 shadow-2xs">
+      <svg aria-hidden="true"
         viewBox="0 0 469.351 469.351"
         className={className}
         fill="none"
@@ -106,8 +106,8 @@ export function PaypalBadge({ className = "h-5 w-auto" }: { className?: string }
 
 export function UpiBadge({ className = "h-4 w-auto" }: { className?: string }) {
   return (
-    <div className="flex h-7 px-2.5 items-center justify-center rounded-md bg-white border border-neutral-200 shadow-2xs gap-1">
-      <svg
+    <div role="img" aria-label="UPI" className="flex h-7 px-2.5 items-center justify-center rounded-md bg-white border border-neutral-200 shadow-2xs gap-1">
+      <svg aria-hidden="true"
         viewBox="0 0 24 24"
         className={className}
         fill="none"
@@ -116,7 +116,7 @@ export function UpiBadge({ className = "h-4 w-auto" }: { className?: string }) {
         <path d="M12 2L4 7V17L12 22L20 17V7L12 2Z" fill="#78be20" />
         <path d="M12 6L7 9V15L12 18L17 15V9L12 6Z" fill="#ff7900" />
       </svg>
-      <span className="font-sans text-[11px] font-black tracking-wider text-neutral-800">
+      <span className="font-sans text-micro font-black tracking-wider text-neutral-800">
         UPI
       </span>
     </div>
@@ -125,15 +125,15 @@ export function UpiBadge({ className = "h-4 w-auto" }: { className?: string }) {
 
 export function ApplePayBadge({ className = "h-4 w-auto" }: { className?: string }) {
   return (
-    <div className="flex h-7 px-2.5 items-center justify-center rounded-md bg-black text-white border border-neutral-700 shadow-2xs gap-1">
-      <svg
+    <div role="img" aria-label="Apple Pay" className="flex h-7 px-2.5 items-center justify-center rounded-md bg-black text-white border border-neutral-700 shadow-2xs gap-1">
+      <svg aria-hidden="true"
         viewBox="0 0 170 170"
         className={className}
         fill="currentColor"
       >
         <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.6-7.79-11.72-14.24-6.3-9.84-11.22-20.91-14.75-33.22-3.53-12.31-5.3-24.08-5.3-35.3 0-14.34 3.7-26.36 11.09-36.08 7.39-9.72 16.74-14.67 28.05-14.86 5.43 0 11.29 1.41 17.58 4.23 6.29 2.83 10.22 4.29 11.79 4.39 1.19-.1 5.34-1.61 12.44-4.54 7.1-2.93 13.1-4.14 17.98-3.64 13.48 1.09 23.97 6.42 31.47 16-11.74 7.07-17.49 16.85-17.25 29.35.22 9.78 4.02 18.04 11.4 24.78 4.13 3.8 8.91 6.63 14.34 8.48-2.6 7.6-5.75 15.1-9.45 22.52zM119.22 33.24c0-7.72 2.77-14.99 8.31-21.82 5.54-6.84 12.38-10.99 20.52-12.45.65 1.52.98 3.15.98 4.89 0 7.82-2.93 15.32-8.8 22.5-5.87 7.17-12.87 11.29-21.01 12.35v-5.47z" />
       </svg>
-      <span className="font-sans text-[11px] font-semibold text-white">
+      <span className="font-sans text-micro font-semibold text-white">
         Pay
       </span>
     </div>
