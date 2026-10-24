@@ -26,13 +26,13 @@ export default function TrackOrderForm({
   onSubmit,
 }: TrackOrderFormProps) {
   return (
-    <Section className="bg-gradient-to-b from-[#FAF0F2]/60 via-surface to-background">
+    <Section className="bg-gradient-to-b from-gold-soft/60 via-surface to-background">
       <div className="bg-white/90 backdrop-blur-md rounded-3xl border border-wine/20 p-6 sm:p-10 shadow-[0_15px_40px_rgba(128,34,47,0.08)] max-w-2xl mx-auto mb-12 relative overflow-hidden">
         {/* Subtle Corner Glow Accent */}
         <div className="absolute -top-16 -right-16 w-32 h-32 bg-wine/10 rounded-full blur-2xl pointer-events-none" />
 
         {/* Toggle Mode Tabs */}
-        <div className="grid grid-cols-2 gap-2 p-1.5 bg-[#F8EFEF]/80 rounded-2xl mb-6 border border-wine/10">
+        <div className="grid grid-cols-2 gap-2 p-1.5 bg-gold-soft/80 rounded-2xl mb-6 border border-wine/10">
           <Button
             type="button"
             variant="unstyled"

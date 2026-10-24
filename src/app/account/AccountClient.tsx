@@ -389,7 +389,7 @@ export default function AccountClient() {
               type="button"
               variant="unstyled"
               onClick={() => setIsMobileMenuOpen(true)}
-              className="px-3.5 py-2 bg-[#80222F] text-white rounded-xl text-caption font-semibold hover:bg-wine-dark transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs active:scale-95"
+              className="px-3.5 py-2 bg-brand text-white rounded-xl text-caption font-semibold hover:bg-wine-dark transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs active:scale-95"
             >
               <MenuIcon size={16} />
               <span>Menu</span>
@@ -440,7 +440,7 @@ export default function AccountClient() {
                             setActiveTab(item.id);
                             setIsMobileMenuOpen(false);
                           }}
-                          className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-left text-caption font-semibold transition-all duration-150 cursor-pointer ${ isActive ? "bg-[#80222F] text-white shadow-xs" : "text-ink/80 hover:bg-wine/5 hover:text-wine bg-neutral-50/50" }`}
+                          className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-left text-caption font-semibold transition-all duration-150 cursor-pointer ${ isActive ? "bg-brand text-white shadow-xs" : "text-ink/80 hover:bg-wine/5 hover:text-wine bg-cream/50" }`}
                         >
                           <div className="flex items-center gap-3">
                             <span className={`shrink-0 ${isActive ? "text-white" : "text-wine"}`}>
@@ -503,7 +503,7 @@ export default function AccountClient() {
                       type="button"
                       variant="unstyled"
                       onClick={() => setActiveTab(item.id)}
-                      className={`w-full flex items-center justify-between px-5 py-3.5 text-left text-body font-medium transition-all duration-150 cursor-pointer ${ isActive ? "bg-[#80222F] text-white font-semibold shadow-xs" : "text-ink/80 hover:bg-wine/5 hover:text-wine" }`}
+                      className={`w-full flex items-center justify-between px-5 py-3.5 text-left text-body font-medium transition-all duration-150 cursor-pointer ${ isActive ? "bg-brand text-white font-semibold shadow-xs" : "text-ink/80 hover:bg-wine/5 hover:text-wine" }`}
                     >
                       <div className="flex items-center gap-3">
                         <span className={`shrink-0 ${isActive ? "text-white" : "text-wine"}`}>
@@ -640,7 +640,7 @@ export default function AccountClient() {
                   /* DISPLAY CARD (MATCHING SCREENSHOT 2) */
                   <div className="bg-surface rounded-2xl border border-wine/30 shadow-xs overflow-hidden">
                     {/* Pink/Wine Tint Header */}
-                    <div className="bg-[#FAF0F2] px-6 py-3.5 border-b border-wine/20 flex items-center justify-between">
+                    <div className="bg-gold-soft px-6 py-3.5 border-b border-wine/20 flex items-center justify-between">
                       <span className="font-display font-semibold text-wine text-small">
                         Personal Information
                       </span>
@@ -960,7 +960,7 @@ export default function AccountClient() {
                               type="button"
                               variant="unstyled"
                               onClick={() => handleRemovePayment(pm.id)}
-                              className={`px-3 py-1.5 rounded-full text-caption font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5 ${ pm.type === "card" ? "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 hover:border-slate-500" : "bg-white border border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-900" }`}
+                              className={`px-3 py-1.5 rounded-full text-caption font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5 ${ pm.type === "card" ? "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 hover:border-slate-500" : "bg-white border border-border-strong hover:border-border-strong text-muted hover:text-ink" }`}
                               title="Remove Payment Method"
                             >
                               <svg className="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1203,10 +1203,10 @@ export default function AccountClient() {
                             type="button"
                             variant="unstyled"
                             onClick={() => handleRemoveAddress(addr.id)}
-                            className="px-3.5 py-1.5 bg-white border border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-900 rounded-full text-caption font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5"
+                            className="px-3.5 py-1.5 bg-white border border-border-strong hover:border-border-strong text-muted hover:text-ink rounded-full text-caption font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5"
                             title="Remove Address"
                           >
-                            <svg className="w-3.5 h-3.5 text-gray-500 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <svg className="w-3.5 h-3.5 text-muted fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                               <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6" />
                             </svg>
                             <span>Remove</span>
@@ -1228,8 +1228,8 @@ export default function AccountClient() {
                 {wishlistItems.length === 0 ? (
                   <div className="bg-surface rounded-2xl border border-border/80 p-10 sm:p-14 shadow-xs text-center flex flex-col items-center justify-center animate-in fade-in duration-200">
                     {/* Heart Halo Icon Circle */}
-                    <div className="flex h-24 w-24 items-center justify-center rounded-full bg-[#FAF0F2] text-[#80222F] mb-6 shadow-2xs">
-                      <svg className="h-10 w-10 fill-[#80222F]" viewBox="0 0 24 24">
+                    <div className="flex h-24 w-24 items-center justify-center rounded-full bg-gold-soft text-gold mb-6 shadow-2xs">
+                      <svg className="h-10 w-10 fill-gold" viewBox="0 0 24 24">
                         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                       </svg>
                     </div>
@@ -1258,7 +1258,7 @@ export default function AccountClient() {
                       >
                         {/* Left: Product Thumbnail & Details */}
                         <div className="flex items-center gap-4 sm:gap-6">
-                          <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden bg-neutral-100 flex-shrink-0 border border-border/40 shadow-2xs">
+                          <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden bg-cream-dark flex-shrink-0 border border-border/40 shadow-2xs">
                             <Image
                               src={product.image}
                               alt={product.name}
@@ -1304,9 +1304,9 @@ export default function AccountClient() {
                           size="xs"
                           rounded="full"
                           onClick={() => handleRemoveFromWishlist(product.id)}
-                          className="text-gray-600 hover:!text-red-700 hover:!bg-red-50/80 !border-gray-300 self-start sm:self-center"
+                          className="text-muted hover:!text-red-700 hover:!bg-red-50/80 !border-border-strong self-start sm:self-center"
                           title="Remove from Wishlist"
-                          leftIcon={<TrashIcon size={14} className="text-gray-500" />}
+                          leftIcon={<TrashIcon size={14} className="text-muted" />}
                         >
                           Remove
                         </Button>
@@ -1370,8 +1370,8 @@ export default function AccountClient() {
               <div className="space-y-6">
                 <div className="bg-surface rounded-2xl border border-wine/25 shadow-xs overflow-hidden">
                   {/* Pink Header Banner matching screenshot */}
-                  <div className="bg-[#FAF0F2] px-6 py-4 border-b border-wine/20">
-                    <h3 className="font-display font-semibold text-[#80222F] text-h5">
+                  <div className="bg-gold-soft px-6 py-4 border-b border-wine/20">
+                    <h3 className="font-display font-semibold text-gold text-h5">
                       Gift Card Balance
                     </h3>
                   </div>
@@ -1423,7 +1423,7 @@ export default function AccountClient() {
                         <Button
                           type="submit"
                           variant="unstyled"
-                          className="w-full py-3 px-6 bg-[#80222F] hover:bg-[#681B26] text-white text-body font-semibold rounded-lg shadow-sm transition-all duration-150 cursor-pointer whitespace-nowrap active:scale-98"
+                          className="w-full py-3 px-6 bg-brand hover:bg-brand-dark text-white text-body font-semibold rounded-lg shadow-sm transition-all duration-150 cursor-pointer whitespace-nowrap active:scale-98"
                         >
                           Check Balance
                         </Button>

@@ -30,7 +30,7 @@ export default function ReviewCard({
   return (
     <div
       className={cn(
-        "flex h-full flex-col justify-between rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-2xs hover:shadow-md transition-all duration-300",
+        "flex h-full flex-col justify-between rounded-2xl border border-border/80 bg-white p-6 shadow-2xs hover:shadow-md transition-all duration-300",
         className
       )}
     >
@@ -58,10 +58,10 @@ export default function ReviewCard({
       </div>
 
       {/* Footer: Avatar Circle + Name + Location / Verified badge */}
-      <div className="mt-5 pt-4 border-t border-neutral-100 flex items-center justify-between gap-3">
+      <div className="mt-5 pt-4 border-t border-border flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           {/* Avatar Initial Circle */}
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f4ebe1] text-body font-semibold text-ink shadow-2xs">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-soft text-body font-semibold text-ink shadow-2xs">
             {initial}
           </div>
 

@@ -25,7 +25,7 @@ export default function CustomerReviewsSection() {
   };
 
   return (
-    <Section className="py-12 border-t border-border">
+    <Section id="reviews" className="py-12 border-t border-border">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
           <h3 className="font-display text-h3 text-ink">Verified Customer Reviews</h3>

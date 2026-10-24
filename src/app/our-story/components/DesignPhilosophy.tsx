@@ -16,7 +16,7 @@ export default function DesignPhilosophy() {
             <h2 className="font-display text-h3 sm:text-h2 font-semibold text-wine leading-tight">
               Rooted in Tradition, Designed for Today
             </h2>
-            <div className="w-12 h-[2px] bg-gold" />
+            <div className="w-12 h-[2px] bg-brand" />
             <p className="text-body text-muted leading-relaxed font-light">
               Luxe Jewels exists at the intersection of heritage and modernity. We do not believe in mass production. Our design ethos revolves around creating distinct, recognizable silhouettes that feel deeply rooted in Indian royal aesthetics, yet possess a sleek, contemporary minimalism that resonates globally.
             </p>

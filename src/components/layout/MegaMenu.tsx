@@ -26,12 +26,12 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
     <div
       role="region"
       aria-label="Navigation Mega Menu"
-      className="w-full bg-white border-t border-[#EAE4DC] py-6 sm:py-7 transition-all duration-200 shadow-xl"
+      className="w-full bg-white border-t border-border py-6 sm:py-7 transition-all duration-200 shadow-xl"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-10">
           {/* LEFT COLUMN: Filter / Navigation Tabs */}
-          <div className="w-full lg:w-48 xl:w-52 shrink-0 flex lg:flex-col gap-1.5 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 border-b lg:border-b-0 lg:border-r border-[#EAE4DC] pr-0 lg:pr-4">
+          <div className="w-full lg:w-48 xl:w-52 shrink-0 flex lg:flex-col gap-1.5 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 border-b lg:border-b-0 lg:border-r border-border pr-0 lg:pr-4">
             {data.tabs.map((tab) => {
               const isActive = tab.id === activeTabId;
               return (
@@ -43,8 +43,8 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                   className={cn(
                     "text-left px-4 py-2.5 rounded-xl text-[13.5px] font-medium transition-all duration-150 whitespace-nowrap cursor-pointer",
                     isActive
-                      ? "bg-[#FAF7F2] text-[#141414] border border-[#B38E5D]/40 font-semibold shadow-2xs"
-                      : "text-[#554E46] hover:text-[#141414] hover:bg-[#FAF7F2]"
+                      ? "bg-cream text-ink border border-gold/40 font-semibold shadow-2xs"
+                      : "text-muted hover:text-ink hover:bg-cream"
                   )}
                 >
                   {tab.label}
@@ -62,17 +62,17 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                   key={item.id}
                   href={item.href}
                   onClick={onClose}
-                  className="group flex items-center gap-3 p-2 rounded-xl hover:bg-[#FAF7F2] transition-all duration-150"
+                  className="group flex items-center gap-3 p-2 rounded-xl hover:bg-cream transition-all duration-150"
                 >
-                  <div className="shrink-0 transition-transform duration-200 group-hover:scale-105 text-[#B38E5D]">
-                    <JewelryIcon name={item.name} className="w-7 h-7 text-[#B38E5D]" />
+                  <div className="shrink-0 transition-transform duration-200 group-hover:scale-105 text-gold">
+                    <JewelryIcon name={item.name} className="w-7 h-7 text-gold" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <span className="text-[13.5px] font-medium text-[#141414] group-hover:text-[#B38E5D] transition-colors duration-150 block truncate">
+                    <span className="text-[13.5px] font-medium text-ink group-hover:text-gold transition-colors duration-150 block truncate">
                       {item.name}
                     </span>
                     {item.badge && (
-                      <span className="text-[10px] text-[#B38E5D] font-semibold tracking-wider block mt-0.5">
+                      <span className="text-[10px] text-gold font-semibold tracking-wider block mt-0.5">
                         {item.badge}
                       </span>
                     )}
@@ -83,7 +83,7 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
 
             {/* Bottom Promotional Bar */}
             {activeTab.bottomBanner && (
-              <div className="mt-6 p-3.5 sm:p-4 rounded-xl bg-[#FAF7F2] border border-[#EAE4DC] flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
+              <div className="mt-6 p-3.5 sm:p-4 rounded-xl bg-cream border border-border flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
                 <div className="flex items-center gap-3.5">
                   {/* Thumbnails preview stack */}
                   {activeTab.bottomBanner.thumbnails && activeTab.bottomBanner.thumbnails.length > 0 && (
@@ -105,10 +105,10 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                     </div>
                   )}
                   <div>
-                    <p className="text-[13.5px] font-semibold text-[#141414] leading-tight">
+                    <p className="text-[13.5px] font-semibold text-ink leading-tight">
                       {activeTab.bottomBanner.heading}
                     </p>
-                    <p className="text-[12px] text-[#554E46] mt-0.5">
+                    <p className="text-[12px] text-muted mt-0.5">
                       {activeTab.bottomBanner.subheading}
                     </p>
                   </div>
@@ -117,7 +117,7 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                 <Link
                   href={activeTab.bottomBanner.buttonHref}
                   onClick={onClose}
-                  className="shrink-0 px-5 py-2 rounded-full bg-[#B38E5D] hover:bg-[#9C7748] text-white text-[12.5px] font-medium tracking-wide shadow-2xs transition-colors cursor-pointer"
+                  className="shrink-0 px-5 py-2 rounded-full bg-brand hover:bg-brand-dark text-white text-[12.5px] font-medium tracking-wide shadow-2xs transition-colors cursor-pointer"
                 >
                   {activeTab.bottomBanner.buttonText}
                 </Link>
@@ -127,13 +127,13 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
 
           {/* RIGHT COLUMN: Featured Showcase Card */}
           {activeTab.featuredCard && (
-            <div className="w-full lg:w-64 xl:w-72 shrink-0 border-t lg:border-t-0 lg:border-l border-[#EAE4DC] pt-4 lg:pt-0 lg:pl-6 flex flex-col justify-between">
+            <div className="w-full lg:w-64 xl:w-72 shrink-0 border-t lg:border-t-0 lg:border-l border-border pt-4 lg:pt-0 lg:pl-6 flex flex-col justify-between">
               <Link
                 href={activeTab.featuredCard.href}
                 onClick={onClose}
                 className="group block"
               >
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#FAF7F2] border border-[#EAE4DC] shadow-sm">
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-cream border border-border shadow-sm">
                   <Image
                     src={activeTab.featuredCard.image}
                     alt={activeTab.featuredCard.title}
@@ -143,10 +143,10 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                <p className="font-display text-[14.5px] font-medium text-[#141414] mt-3 leading-snug line-clamp-2 group-hover:text-[#B38E5D] transition-colors duration-150">
+                <p className="font-display text-[14.5px] font-medium text-ink mt-3 leading-snug line-clamp-2 group-hover:text-gold transition-colors duration-150">
                   {activeTab.featuredCard.title}
                 </p>
-                <div className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-[#B38E5D] mt-2 transition-colors duration-150">
+                <div className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-gold mt-2 transition-colors duration-150">
                   <span>{activeTab.featuredCard.ctaLabel}</span>
                   <span className="text-[11px] transform group-hover:translate-x-1 transition-transform">
                     &rarr;

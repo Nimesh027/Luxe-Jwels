@@ -60,12 +60,12 @@ export default function LoginClient() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-0px)] bg-[#0f0e0d] text-cream flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="theme-dark min-h-screen bg-ink text-cream flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Ambient Radial Background Glow */}
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-wine/15 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="w-full max-w-lg bg-[#161412] border border-gold/25 rounded-2xl shadow-2xl overflow-hidden relative z-10 p-6 sm:p-10 lg:p-12">
+      <div className="w-full max-w-lg bg-ink border border-gold/25 rounded-2xl shadow-2xl overflow-hidden relative z-10 p-6 sm:p-10 lg:p-12">
         {/* Top Brand & Mode Switcher */}
         <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-8">
           <div>
@@ -79,7 +79,7 @@ export default function LoginClient() {
 
           {/* Navigation Switcher Pills */}
           <div className="flex items-center bg-white/5 border border-white/10 rounded-full p-1 text-caption">
-            <span className="px-4 py-1.5 rounded-full bg-gold text-ink font-medium shadow-xs">
+            <span className="px-4 py-1.5 rounded-full bg-gold text-ink font-semibold shadow-xs">
               Login
             </span>
             <Link
@@ -227,7 +227,7 @@ export default function LoginClient() {
             type="submit"
             variant="unstyled"
             disabled={isLoading}
-            className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold to-[#b59247] hover:from-[#dcb96b] hover:to-gold text-ink font-semibold text-caption tracking-[0.15em] transition-all duration-300 transform active:scale-[0.99] shadow-lg shadow-gold/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+            className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold to-gold hover:from-gold hover:to-gold text-ink font-semibold text-[14.5px] tracking-wide transition-all duration-300 transform active:scale-[0.99] shadow-lg shadow-gold/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
           >
             {isLoading ? (
               <>
@@ -259,7 +259,7 @@ export default function LoginClient() {
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-white/10" />
           </div>
-          <span className="relative bg-[#161412] px-3 text-[11px] tracking-widest text-cream/40 font-light">
+          <span className="relative bg-ink px-3 text-[11px] tracking-widest text-cream/40 font-light">
             Or Continue With
           </span>
         </div>

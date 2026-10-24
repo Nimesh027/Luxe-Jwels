@@ -31,7 +31,7 @@ export default function NewCollection() {
           <div className="flex max-w-lg sm:max-w-xl md:max-w-2xl flex-col items-start gap-2.5 sm:gap-3.5">
             {/* Refined Gold Overline Badge */}
             <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-ink/60 px-3 py-0.5 sm:px-3.5 sm:py-1 backdrop-blur-md">
-              <span className="h-1.5 w-1.5 rounded-full bg-gold shrink-0 animate-pulse" />
+              <span className="h-1.5 w-1.5 rounded-full bg-brand shrink-0 animate-pulse" />
               <span className="text-[10px] sm:text-[11px] font-medium tracking-[0.25em] text-gold">
                 {newCollection.subtitle || "NEW COLLECTION"}
               </span>
@@ -46,7 +46,7 @@ export default function NewCollection() {
 
             {/* Thin Gold Divider */}
             <div className="flex items-center gap-2">
-              <span className="h-[1.5px] w-10 sm:w-12 bg-gold transition-all duration-500 group-hover:w-16 sm:group-hover:w-20" />
+              <span className="h-[1.5px] w-10 sm:w-12 bg-brand transition-all duration-500 group-hover:w-16 sm:group-hover:w-20" />
             </div>
 
             {/* Shortened Supporting Copy */}

@@ -29,7 +29,7 @@ export default function FounderStory() {
               </h2>
             </div>
             
-            <div className="w-12 h-[2px] bg-gold" />
+            <div className="w-12 h-[2px] bg-brand" />
             
             <div className="space-y-4 text-body text-muted leading-relaxed font-light">
               <p>

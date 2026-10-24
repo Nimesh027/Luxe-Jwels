@@ -30,8 +30,8 @@ export default function WishlistClient() {
       <Section className="py-16 sm:py-24">
         <div className="mx-auto flex max-w-md flex-col items-center justify-center text-center px-4">
           {/* Heart Halo Icon Circle */}
-          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-[#FAF0F2] text-[#80222F] mb-6 shadow-2xs">
-            <svg className="h-10 w-10 fill-[#80222F]" viewBox="0 0 24 24">
+          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-gold-soft text-gold mb-6 shadow-2xs">
+            <svg className="h-10 w-10 fill-gold" viewBox="0 0 24 24">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
             </svg>
           </div>
@@ -75,7 +75,7 @@ export default function WishlistClient() {
           >
             {/* Left: Product Thumbnail & Details */}
             <div className="flex items-center gap-4 sm:gap-6">
-              <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden bg-neutral-100 flex-shrink-0 border border-border/40 shadow-2xs">
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden bg-cream-dark flex-shrink-0 border border-border/40 shadow-2xs">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -121,10 +121,10 @@ export default function WishlistClient() {
               size="xs"
               rounded="full"
               onClick={() => handleRemove(product.id)}
-              className="text-gray-600 hover:!text-red-700 hover:!bg-red-50/80 !border-gray-300 self-start sm:self-center"
+              className="text-muted hover:!text-red-700 hover:!bg-red-50/80 !border-border-strong self-start sm:self-center"
               title="Remove from Wishlist"
               leftIcon={
-                <svg className="w-3.5 h-3.5 text-gray-500 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg className="w-3.5 h-3.5 text-muted fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6" />
                 </svg>
               }

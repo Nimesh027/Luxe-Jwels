@@ -78,7 +78,7 @@ export default function CareCategoryTabs() {
             key={cat.id}
             variant="unstyled"
             onClick={() => setActiveCategory(cat.id)}
-            className={`px-5 py-3 rounded-full text-caption font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${ activeCategory === cat.id ? "bg-[#80222F] text-white shadow-md" : "bg-surface border border-border/80 text-ink/80 hover:border-wine/40 hover:text-wine" }`}
+            className={`px-5 py-3 rounded-full text-caption font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${ activeCategory === cat.id ? "bg-brand text-white shadow-md" : "bg-surface border border-border/80 text-ink/80 hover:border-wine/40 hover:text-wine" }`}
           >
             <span>{cat.icon}</span>
             <span>{cat.title}</span>

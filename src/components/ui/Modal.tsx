@@ -83,7 +83,7 @@ function ModalComponent({
         <Button
           variant="unstyled"
           aria-label="Close modal"
-          className="absolute right-4 top-4 text-muted hover:text-ink cursor-pointer p-1.5 rounded-full hover:bg-neutral-100 transition-colors"
+          className="absolute right-4 top-4 text-muted hover:text-ink cursor-pointer p-1.5 rounded-full hover:bg-cream-dark transition-colors"
           onClick={handleClose}
         >
           <CloseIcon size={18} />

@@ -1,273 +1,293 @@
 @import "tailwindcss";
 
-:root {
-  --color-ink: #141414;
-  --color-ink-soft: #22201e;
-  --color-gold: #c5a059;
-  --color-gold-dark: #9e783e;
-  --color-gold-warm: #b38e5d;
-  --color-gold-hover: #9c7748;
-  --color-gold-light: #f7f2ea;
-  --color-cream: #faf7f2;
-  --color-cream-dark: #f0ebe2;
+/* ==========================================================================
+   Luxe Jewels design tokens
+   Every colour, font and radius used by the site lives here. Utilities such
+   as `bg-gold`, `text-muted` or `border-border` resolve to these variables,
+   so changing a value below re-themes the whole storefront.
+   ========================================================================== */
+@theme {
+  /* Ink — primary text, dark buttons and dark surfaces */
+  --color-ink: #1e1a16;
+  --color-ink-soft: #2d2620;
+  --color-espresso: #2b1e14;
+  --color-espresso-deep: #17110c;
+
+  /* Gold — brand accent.
+     `gold` passes WCAG AA for white text on it and for gold text on cream. */
+  --color-gold: #966529;
+  --color-gold-dark: #7e5421;
+  --color-gold-hover: #7e5421;
+  --color-gold-warm: #b8864a; /* decorative: icons, rules, stars */
+  --color-gold-bright: #d9b47a; /* gold text on dark surfaces */
+  --color-gold-light: #f5ede2; /* tinted background */
+  --color-gold-soft: #f5ede2;
+  --color-star: #c9973f;
+  /* Filled buttons — fixed, never re-mapped inside .theme-dark */
+  --color-brand: #966529;
+  --color-brand-dark: #7e5421;
+
+  /* Neutrals */
+  --color-cream: #fbf8f4;
+  --color-cream-dark: #f3ece2;
   --color-surface: #ffffff;
-  --color-muted: #78716a;
-  --color-muted-foreground: #78716a;
-  --color-muted-bg: #f6f3ed;
-  --color-foreground: #141414;
-  --color-background: #faf7f2;
-  --color-border: #eae4dc;
-  --color-border-subtle: #f0ebe2;
-  --color-wine: #b38e5d;
-  --color-wine-dark: #9c7748;
-  --color-wine-soft: #f7f2ea;
+  --color-background: #fbf8f4;
+  --color-foreground: #1e1a16;
+  --color-muted: #6b6158;
+  --color-muted-foreground: #6b6158;
+  --color-muted-bg: #f6f1ea;
+  --color-subtle: #8e847a;
+  --color-border: #e8e0d5;
+  --color-border-strong: #d6cab9;
+  --color-border-subtle: #f0e9df;
 
-  --font-display: var(--font-cormorant);
-  --font-heading: var(--font-cormorant);
-  --font-body: var(--font-plus-jakarta-sans);
+  /* Legacy aliases kept for older components */
+  --color-wine: #966529;
+  --color-wine-dark: #7e5421;
+  --color-wine-soft: #f5ede2;
+
+  /* Status */
+  --color-success: #2f7a4f;
+  --color-danger: #b3261e;
+
+  /* Typography */
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-heading: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-body: var(--font-jakarta), "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), "Plus Jakarta Sans", system-ui, sans-serif;
+
+  /* Shape — the reference uses restrained corners; large radii are capped */
+  --radius-xl: 10px;
+  --radius-2xl: 12px;
+  --radius-3xl: 14px;
+  --radius-card: 10px;
+  --radius-btn: 4px;
+
+  --shadow-card: 0 1px 2px rgb(30 26 22 / 0.04), 0 8px 24px -12px rgb(30 26 22 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(30 26 22 / 0.05), 0 18px 40px -16px rgb(30 26 22 / 0.22);
 }
 
-@theme inline {
-  --color-ink: var(--color-ink);
-  --color-ink-soft: var(--color-ink-soft);
-  --color-gold: var(--color-gold);
-  --color-gold-dark: var(--color-gold-dark);
-  --color-gold-warm: var(--color-gold-warm);
-  --color-gold-hover: var(--color-gold-hover);
-  --color-gold-light: var(--color-gold-light);
-  --color-cream: var(--color-cream);
-  --color-cream-dark: var(--color-cream-dark);
-  --color-surface: var(--color-surface);
-  --color-muted: var(--color-muted);
-  --color-muted-foreground: var(--color-muted-foreground);
-  --color-foreground: var(--color-foreground);
-  --color-background: var(--color-background);
-  --color-border: var(--color-border);
-  --color-border-subtle: var(--color-border-subtle);
-  --color-wine: var(--color-wine);
-  --color-wine-dark: var(--color-wine-dark);
-  --color-wine-soft: var(--color-wine-soft);
-
-  --font-display: var(--font-display);
-  --font-heading: var(--font-heading);
-  --font-body: var(--font-body);
+/* Dark surfaces (footer, banners, announcement bar). Inside them the accent
+   and secondary text switch to variants that stay legible on dark brown. */
+.theme-dark {
+  --color-gold: #d9b47a;
+  --color-gold-warm: #d9b47a;
+  --color-muted: #c4b8aa;
+  --color-subtle: #a89c8f;
+  --color-border: rgb(255 255 255 / 0.14);
+  color: #ffffff;
 }
 
-.section-spacing {
-  padding-top: clamp(48px, 6vw, 84px);
-  padding-bottom: clamp(48px, 6vw, 84px);
+/* ---------- Base (layered so utilities always win) ---------- */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: clip;
+    width: 100%;
+  }
+
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (min-width: 1024px) {
+    body {
+      font-size: 16px;
+    }
+  }
+
+  :where(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    color: inherit;
+  }
+
+  :where(h1) { font-size: clamp(32px, calc(24px + 2vw), 52px); }
+  :where(h2) { font-size: clamp(26px, calc(21px + 1.1vw), 36px); }
+  :where(h3) { font-size: clamp(20px, calc(18px + 0.5vw), 24px); }
+  :where(h4) { font-size: clamp(17px, calc(16px + 0.3vw), 20px); }
+  :where(h5) { font-size: 16px; }
+  :where(h6) { font-size: 15px; }
+
+  ::selection {
+    background: var(--color-gold-soft);
+    color: var(--color-ink);
+  }
+
+  /* Visible, consistent keyboard focus everywhere */
+  :focus {
+    outline: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  img {
+    max-width: 100%;
+  }
 }
 
-.sub-label {
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  font-weight: 600;
+/* ---------- Type scale utilities ---------- */
+@utility text-display {
+  font-size: clamp(36px, calc(24px + 3vw), 64px);
+  line-height: 1.05;
 }
-
-/* Hide scrollbar for Chrome, Safari, Opera, Edge, Firefox while keeping page scrollable */
-html::-webkit-scrollbar,
-body::-webkit-scrollbar,
-.scrollbar-none::-webkit-scrollbar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-}
-
-.scrollbar-none {
-  -ms-overflow-style: none !important;
-  scrollbar-width: none !important;
-}
-
-:where(h1, h2, h3, h4, h5, h6) {
-  font-family: var(--font-display);
-}
-
-:where(h1) {
-  font-size: clamp(30px, calc(26px + 0.8vw), 38px);
-}
-
-:where(h2) {
-  font-size: clamp(24px, calc(21px + 0.6vw), 30px);
-}
-
-:where(h3) {
-  font-size: clamp(19px, calc(17px + 0.4vw), 23px);
-}
-
-:where(h4) {
-  font-size: clamp(16px, calc(15px + 0.25vw), 18px);
-}
-
-:where(h5) {
-  font-size: clamp(14px, calc(13.5px + 0.15vw), 16px);
-}
-
-:where(h6) {
-  font-size: 14px;
-}
-
-html,
-body {
-  max-width: 100%;
-  overflow-x: hidden;
-  position: relative;
-  width: 100%;
-}
-
-body {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  background: var(--color-cream);
-  color: var(--color-ink);
-  font-family: var(--font-body);
-  font-size: clamp(15px, calc(14.62px + 0.096vw), 16px);
-}
-
-.small {
-  font-size: 14px;
-}
-
-.caption {
-  font-size: 12px;
-}
-
-.button,
-button {
-  font-size: clamp(15px, calc(14.62px + 0.096vw), 16px);
-}
-
-.label,
-label {
-  font-size: clamp(13px, calc(12.62px + 0.096vw), 14px);
-}
-
 @utility text-h1 {
-  font-size: clamp(36px, calc(31.38px + 1.154vw), 48px);
+  font-size: clamp(32px, calc(24px + 2vw), 52px);
 }
-
 @utility text-h2 {
-  font-size: clamp(32px, calc(28.92px + 0.769vw), 40px);
+  font-size: clamp(26px, calc(21px + 1.1vw), 36px);
 }
-
 @utility text-h3 {
-  font-size: clamp(26px, calc(23.69px + 0.577vw), 32px);
+  font-size: clamp(22px, calc(19px + 0.7vw), 28px);
 }
-
 @utility text-h4 {
-  font-size: clamp(22px, calc(20.46px + 0.385vw), 26px);
+  font-size: clamp(19px, calc(17px + 0.4vw), 22px);
 }
-
 @utility text-h5 {
-  font-size: clamp(20px, calc(19.23px + 0.192vw), 22px);
+  font-size: clamp(17px, calc(16px + 0.25vw), 19px);
 }
-
 @utility text-h6 {
-  font-size: 18px;
+  font-size: 16px;
 }
-
 @utility text-body {
-  font-size: clamp(15px, calc(14.62px + 0.096vw), 16px);
+  font-size: 15px;
+  @media (min-width: 1024px) {
+    font-size: 16px;
+  }
 }
-
 @utility text-small {
   font-size: 14px;
 }
-
 @utility text-caption {
-  font-size: 12px;
+  font-size: 12.5px;
 }
-
 @utility text-btn {
-  font-size: clamp(15px, calc(14.62px + 0.096vw), 16px);
-}
-
-@utility text-label {
-  font-size: clamp(13px, calc(12.62px + 0.096vw), 14px);
-}
-
-.container {
-  max-width: 1440px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
-@media (min-width: 640px) {
-  .container {
-    padding: 0 24px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    padding: 0 32px;
-  }
-}
-
-/* p {
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  letter-spacing: normal;
-}
-
-span {
   font-size: 14px;
-  line-height: 20px;
-  font-weight: 400;
-  letter-spacing: normal;
-} */
+}
+@utility text-label {
+  font-size: 13.5px;
+}
+@utility text-eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
 
+/* ---------- Layout ---------- */
+/* One container for the whole site: 1320px content width, 16/24/32px gutters */
+@utility container {
+  width: 100%;
+  max-width: 1384px;
+  margin-inline: auto;
+  padding-inline: 16px;
+  @media (min-width: 640px) {
+    padding-inline: 24px;
+  }
+  @media (min-width: 1024px) {
+    padding-inline: 32px;
+  }
+}
+
+@layer components {
+  .section-spacing {
+    padding-block: clamp(48px, 6vw, 88px);
+  }
+
+  .section-spacing-sm {
+    padding-block: clamp(36px, 4.5vw, 64px);
+  }
+
+  .sub-label {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .small {
+    font-size: 14px;
+  }
+
+  .caption {
+    font-size: 12.5px;
+  }
+
+  /* ---------- Form controls ---------- */
+  .field {
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 14px;
+    font-size: 15px;
+    color: var(--color-ink);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-btn);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .field::placeholder {
+    color: var(--color-subtle);
+  }
+
+  .field:focus,
+  .field:focus-visible {
+    outline: none;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 3px rgb(150 101 41 / 0.15);
+  }
+}
+
+/* ---------- Scrollbars ---------- */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ---------- Motion ---------- */
 @keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
 
-  100% {
-    transform: translateX(-50%);
-  }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
 }
 
 .animate-marquee {
   animation: marquee 22s linear infinite;
-}
-
-:focus,
-:focus-visible {
-  outline: none;
-  border: none;
-}
-
-select:focus {
-  border: none !important;
-  outline: none !important;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
 }
 
 .animate-fadeIn {
@@ -280,4 +300,14 @@ select:focus {
 
 .animate-slideInLeft {
   animation: slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

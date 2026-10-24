@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import PageHero from "@/components/common/PageHero";
 
 const termsSections = [
   {
@@ -123,48 +124,44 @@ export default function TermsClient() {
   };
 
   return (
-    <div className="w-full bg-[#FAF7F2] min-h-screen">
+    <div className="w-full bg-cream min-h-screen">
       {/* 1. Header Banner */}
-      <div className="relative overflow-hidden bg-[#181512] py-14 sm:py-20 border-b border-[#332E27]">
-        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-2xl">
-          <h1 className="font-display text-[32px] sm:text-[44px] md:text-[50px] text-white font-normal leading-tight mb-2">
-            Terms & Conditions
-          </h1>
-          <p className="font-body text-[14px] sm:text-[16px] text-[#DDD6CD] font-light">
-            Please read carefully
-          </p>
-        </div>
-      </div>
+      <PageHero
+        title="Terms & Conditions"
+        subtitle="Please read carefully"
+        image="/images/revamp/ring-macro.jpg"
+        breadcrumbs={[{ label: "Terms & Conditions" }]}
+      />
 
       {/* 2. Numbered Core Summary Card */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 max-w-4xl">
-        <div className="bg-white p-6 sm:p-10 rounded-2xl border border-[#EAE4DC] shadow-xs space-y-8">
+        <div className="bg-white p-6 sm:p-10 rounded-2xl border border-border shadow-xs space-y-8">
           {termsSections.map((sec, idx) => (
-            <div key={idx} className="pb-6 border-b border-[#F0EBE2] last:border-b-0 last:pb-0">
-              <h3 className="font-display text-[17px] sm:text-[18px] font-semibold text-[#141414] mb-2">
+            <div key={idx} className="pb-6 border-b border-border last:border-b-0 last:pb-0">
+              <h3 className="font-display text-[17px] sm:text-[18px] font-semibold text-ink mb-2">
                 {sec.number}
               </h3>
-              <p className="font-body text-[13.5px] sm:text-[14.5px] text-[#554E46] leading-relaxed font-light">
+              <p className="font-body text-[13.5px] sm:text-[14.5px] text-muted leading-relaxed font-light">
                 {sec.content}
               </p>
             </div>
           ))}
 
           {/* Agreement Checkbox & Action */}
-          <div className="pt-6 border-t border-[#EAE4DC] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <label className="flex items-center gap-3 cursor-pointer text-[13.5px] text-[#141414]">
+          <div className="pt-6 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <label className="flex items-center gap-3 cursor-pointer text-[13.5px] text-ink">
               <input
                 type="checkbox"
                 checked={agreed}
                 onChange={(e) => setAgreed(e.target.checked)}
-                className="w-4 h-4 rounded accent-[#B38E5D] cursor-pointer"
+                className="w-4 h-4 rounded accent-gold cursor-pointer"
               />
               <span>I agree to the terms & conditions</span>
             </label>
 
             <Link
               href="/shop"
-              className={`px-8 py-3 rounded-xl text-[14px] font-medium tracking-wide shadow-md transition-all ${ agreed ? "bg-[#B38E5D] hover:bg-[#9C7748] text-white cursor-pointer" : "bg-[#EAE4DC] text-[#8C827A] cursor-not-allowed pointer-events-none" }`}
+              className={`px-8 py-3 rounded-xl text-[14px] font-medium tracking-wide shadow-md transition-all ${ agreed ? "bg-brand hover:bg-brand-dark text-white cursor-pointer" : "bg-border text-muted cursor-not-allowed pointer-events-none" }`}
             >
               Continue
             </Link>
@@ -173,7 +170,7 @@ export default function TermsClient() {
 
         {/* 3. Detailed Regulatory & Policy Accordions */}
         <div className="mt-12 space-y-4">
-          <h2 className="font-display text-[22px] sm:text-[26px] font-medium text-[#141414] mb-6 text-center">
+          <h2 className="font-display text-[22px] sm:text-[26px] font-medium text-ink mb-6 text-center">
             Detailed Statutory & Operational Provisions
           </h2>
 
@@ -183,23 +180,23 @@ export default function TermsClient() {
               return (
                 <div
                   key={section.id}
-                  className="bg-white rounded-2xl border border-[#EAE4DC] overflow-hidden shadow-2xs transition-all hover:border-[#B38E5D]/40"
+                  className="bg-white rounded-2xl border border-border overflow-hidden shadow-2xs transition-all hover:border-gold/40"
                 >
                   <button
                     type="button"
                     onClick={() => toggleAccordion(section.id)}
-                    className="w-full flex items-center justify-between p-5 text-left font-display text-[16px] sm:text-[17px] font-semibold text-[#141414] hover:text-[#B38E5D] cursor-pointer transition-colors"
+                    className="w-full flex items-center justify-between p-5 text-left font-display text-[16px] sm:text-[17px] font-semibold text-ink hover:text-gold cursor-pointer transition-colors"
                   >
                     <span className="pr-4">{section.title}</span>
                     <span
-                      className={`w-7 h-7 rounded-full bg-[#FAF7F2] text-[#B38E5D] flex items-center justify-center font-bold text-sm shrink-0 transition-transform duration-300 ${ isOpen ? "rotate-45 bg-[#B38E5D] text-white" : "" }`}
+                      className={`w-7 h-7 rounded-full bg-cream text-gold flex items-center justify-center font-bold text-sm shrink-0 transition-transform duration-300 ${ isOpen ? "rotate-45 bg-brand text-white" : "" }`}
                     >
                       +
                     </span>
                   </button>
 
                   {isOpen && (
-                    <div className="px-5 pb-5 pt-0 text-[13.5px] sm:text-[14px] text-[#554E46] leading-relaxed font-light border-t border-[#F0EBE2] animate-in fade-in duration-200">
+                    <div className="px-5 pb-5 pt-0 text-[13.5px] sm:text-[14px] text-muted leading-relaxed font-light border-t border-border animate-in fade-in duration-200">
                       <p className="pt-3">{section.content}</p>
                     </div>
                   )}

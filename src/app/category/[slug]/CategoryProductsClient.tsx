@@ -2,10 +2,20 @@
 
 import { useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import Section from "@/components/common/Section";
-import ProductCard from "@/components/common/ProductCard";
+import PageHero from "@/components/common/PageHero";
+import ProductGrid from "@/components/common/ProductGrid";
 import { useAppSelector } from "@/store/hooks";
 import { filterProducts } from "@/lib/productFilter";
+
+const HERO_IMAGES: Record<string, string> = {
+  rings: "/images/revamp/ring-macro.jpg",
+  necklaces: "/images/product/grand-floral-heritage-necklace.jpg",
+  earrings: "/images/products/teardrop-chandelier-earrings.jpg",
+  bracelets: "/images/products/royal-tennis-bracelet.jpg",
+  pendants: "/images/product/cross-pendant.jpg",
+  "mens-collection": "/images/for-him-for-her/for-him-1.jpg",
+  "womens-collection": "/images/revamp/designer-model.jpg",
+};
 
 function CategoryContent({
   slug,
@@ -53,17 +63,15 @@ function CategoryContent({
   }
 
   return (
-    <Section title={displayTitle} subtitle={`${products.length} products`}>
-      {products.length === 0 ? (
-        <p className="text-small text-muted">No products found in this category yet.</p>
-      ) : (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      )}
-    </Section>
+    <>
+      <PageHero
+        title={displayTitle}
+        subtitle="Timeless designs for every occasion"
+        image={HERO_IMAGES[slug] ?? "/images/revamp/ring-macro.jpg"}
+        breadcrumbs={[{ label: "Shop", href: "/shop" }, { label: displayTitle }]}
+      />
+      <ProductGrid title={displayTitle} products={products} />
+    </>
   );
 }
 

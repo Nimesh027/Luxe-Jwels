@@ -1,10 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import Section from "@/components/common/Section";
-import ProductCard from "@/components/common/ProductCard";
+import PageHero from "@/components/common/PageHero";
+import ProductGrid from "@/components/common/ProductGrid";
 import { useAppSelector } from "@/store/hooks";
 import { filterProducts } from "@/lib/productFilter";
 
@@ -44,35 +43,13 @@ function CollectionDetailContent({
 
   return (
     <>
-      <Section className="!p-0" containerClassName="!p-0 !max-w-full">
-        <div className="relative h-64 w-full overflow-hidden sm:h-80">
-          <Image
-            src={collection.image}
-            alt={collection.name}
-            fill
-            sizes="100vw"
-            priority
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-ink/45" />
-          <div className="relative flex h-full flex-col items-center justify-center gap-2 text-center">
-            <h1 className="font-display text-h2 text-cream sm:text-h2">{collection.name}</h1>
-            <p className="text-small text-cream/85">{collection.tagline}</p>
-          </div>
-        </div>
-      </Section>
-
-      <Section title="Shop The Collection" subtitle={`${products.length} products`}>
-        {products.length === 0 ? (
-          <p className="text-small text-muted">No products found in this collection.</p>
-        ) : (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        )}
-      </Section>
+      <PageHero
+        title={collection.name}
+        subtitle={collection.tagline}
+        image={collection.image}
+        breadcrumbs={[{ label: "Collections", href: "/collections" }, { label: collection.name }]}
+      />
+      <ProductGrid title="Shop the Collection" products={products} />
     </>
   );
 }

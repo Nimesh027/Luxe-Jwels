@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import TrackOrderClient from "./TrackOrderClient";
 
 export const metadata: Metadata = {
-  title: "Track Your Order | Luxe Jewels",
+  title: "Track Your Order",
   description: "Track your fine jewellery shipment in real time using your Order ID or AWB waybill number. View live courier status and estimated delivery time.",
 };
 

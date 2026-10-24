@@ -21,7 +21,7 @@ export default function OurPhilosophy() {
   ];
 
   return (
-    <Section className="py-16 sm:py-24 bg-gradient-to-b from-background to-[#FAF0F2]/40">
+    <Section className="py-16 sm:py-24 bg-gradient-to-b from-background to-gold-soft/40">
       <div className="container max-w-6xl mx-auto px-4 sm:px-6">
 
         {/* Header */}

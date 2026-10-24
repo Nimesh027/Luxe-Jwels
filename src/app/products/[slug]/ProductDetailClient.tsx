@@ -38,15 +38,13 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
     .filter((item) => item.id !== product.id && item.category === product.category)
     .slice(0, 4);
 
-  const images = [
-    product.image,
-    "/images/collections/couple-collection.jpg",
-    "/images/collections/diamond-collection.jpg",
-    "/images/category/rings.jpg",
-  ];
+  // Main shot first, then the category lifestyle image for context
+  const images = [product.image, category?.image].filter(
+    (img, i, arr): img is string => Boolean(img) && arr.indexOf(img) === i
+  );
 
   return (
-    <>
+    <div className="pb-20 lg:pb-0">
       {/* Section 1: Hero Section (Breadcrumbs, Gallery, Swatches, Buy Box) */}
       <ProductHeroSection
         product={product}
@@ -94,6 +92,6 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
         isOpen={isSizeGuideOpen}
         onClose={() => setIsSizeGuideOpen(false)}
       />
-    </>
+    </div>
   );
 }

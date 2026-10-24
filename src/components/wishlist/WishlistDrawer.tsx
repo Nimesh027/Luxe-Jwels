@@ -63,7 +63,7 @@ export default function WishlistDrawer() {
     items.length > 0 ? (
       <div className="w-full space-y-3">
         {/* Wishlist summary count */}
-        <div className="flex items-baseline justify-between text-neutral-600">
+        <div className="flex items-baseline justify-between text-muted">
           <span className="text-[11px] tracking-wider font-semibold">
             Saved Items
           </span>
@@ -93,7 +93,7 @@ export default function WishlistDrawer() {
             size="sm"
             fullWidth
             onClick={handleViewWishlist}
-            className="h-9 text-caption font-medium tracking-wider hover:!bg-neutral-100/80 !border-neutral-300 cursor-pointer"
+            className="h-9 text-caption font-medium tracking-wider hover:!bg-cream-dark/80 !border-border-strong cursor-pointer"
             rightIcon={<ChevronRightIcon size={14} strokeWidth={2.5} />}
           >
             View Full Wishlist
@@ -108,14 +108,14 @@ export default function WishlistDrawer() {
       onClose={closeDrawer}
       title={titleNode}
       ariaLabel="Wishlist Drawer"
-      headerClassName="bg-[#fbf9f6]"
+      headerClassName="bg-cream"
       footer={footerNode}
-      footerClassName="bg-[#fbf9f6] border-t border-neutral-200/80 p-4 sm:p-5"
+      footerClassName="bg-cream border-t border-border/80 p-4 sm:p-5"
     >
       {items.length === 0 ? (
         /* Empty Wishlist State */
         <div className="flex flex-1 min-h-[350px] flex-col items-center justify-center p-6 text-center">
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#f6efe9] text-wine mb-5 shadow-xs">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gold-soft text-wine mb-5 shadow-xs">
             <HeartIcon size={36} filled className="text-wine" />
           </div>
 
@@ -141,7 +141,7 @@ export default function WishlistDrawer() {
         </div>
       ) : (
         /* Populated Wishlist Items List */
-        <div className="p-4 sm:p-6 divide-y divide-neutral-100">
+        <div className="p-4 sm:p-6 divide-y divide-border">
           {items.map((product) => {
             const isAdded = addedIds[product.id];
 
@@ -151,7 +151,7 @@ export default function WishlistDrawer() {
                 className="py-4 first:pt-0 last:pb-0 flex gap-3.5 sm:gap-4 items-start"
               >
                 {/* Product Thumbnail */}
-                <div className="relative h-20 w-20 sm:h-22 sm:w-22 shrink-0 overflow-hidden rounded-xl border border-neutral-200/80 bg-neutral-50">
+                <div className="relative h-20 w-20 sm:h-22 sm:w-22 shrink-0 overflow-hidden rounded-xl border border-border/80 bg-cream">
                   <Link href={`/products/${product.slug}`} onClick={closeDrawer}>
                     <Image
                       src={product.image}
@@ -220,7 +220,7 @@ export default function WishlistDrawer() {
                       size="xs"
                       rounded="full"
                       onClick={() => toggle(product)}
-                      className="!px-2.5 !py-1 text-[10px] font-medium !text-neutral-500 hover:!text-red-700 hover:!bg-red-50/80 !border-neutral-200/80 cursor-pointer"
+                      className="!px-2.5 !py-1 text-[10px] font-medium !text-muted hover:!text-red-700 hover:!bg-red-50/80 !border-border/80 cursor-pointer"
                       leftIcon={<TrashIcon size={13} />}
                     >
                       Remove

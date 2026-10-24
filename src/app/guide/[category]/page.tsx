@@ -30,7 +30,7 @@ export async function generateMetadata({
 
   if (!overview) {
     return {
-      title: "Guide Category Not Found - Luxe Jewels",
+      title: "Guide Category Not Found",
     };
   }
 

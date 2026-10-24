@@ -3,132 +3,119 @@
 import { memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { HeartIcon, StarIcon } from "@/components/icons";
-import Button from "@/components/ui/Button";
+import { HeartIcon, ShoppingBagIcon } from "@/components/icons";
+import Rating from "@/components/ui/Rating";
 import { useCart } from "@/hooks/useCart";
 import { useWishlist } from "@/hooks/useWishlist";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice, cn } from "@/lib/utils";
 import type { Product } from "@/types";
 
 interface ProductCardProps {
   product: Product;
   showRating?: boolean;
+  /** Pass true for cards visible above the fold */
+  priority?: boolean;
+  sizes?: string;
 }
 
-function ProductCardComponent({ product, showRating = true }: ProductCardProps) {
+function ProductCardComponent({
+  product,
+  showRating = true,
+  priority = false,
+  sizes = "(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 220px",
+}: ProductCardProps) {
   const { add } = useCart();
   const { toggle, isWishlisted } = useWishlist();
   const wishlisted = isWishlisted(product.id);
+  const href = `/products/${product.slug}`;
+
+  const discount =
+    product.compareAtPrice && product.compareAtPrice > product.price
+      ? Math.round((1 - product.price / product.compareAtPrice) * 100)
+      : 0;
+  const badge = product.isBestseller ? "Bestseller" : product.isMostSold ? "New" : null;
 
   return (
-    <div className="group relative flex flex-col h-full bg-white rounded-xl sm:rounded-2xl border border-[#EAE4DC] hover:border-[#D0C3B2] p-3 sm:p-4 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-      {/* Product Image Area */}
-      <div className="relative aspect-square w-full rounded-lg sm:rounded-xl overflow-hidden bg-[#FAF7F2] mb-3">
-        <Link href={`/products/${product.slug}`} className="block w-full h-full">
+    <article className="group relative flex h-full flex-col">
+      <div className="relative aspect-square overflow-hidden rounded-[var(--radius-card)] border border-border bg-cream-dark">
+        <Link href={href} tabIndex={-1} aria-hidden="true" className="block h-full w-full">
           <Image
             src={product.image}
             alt={product.name}
             fill
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-            className="object-cover object-center group-hover:scale-108 transition-transform duration-500"
+            priority={priority}
+            sizes={sizes}
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
           />
         </Link>
 
-        {/* Top Badges: Bestseller / New */}
-        <div className="absolute top-2.5 left-2.5 z-10 flex flex-col gap-1 pointer-events-none">
-          {product.isBestseller && (
-            <span className="px-2 py-0.5 rounded text-[10px] font-semibold tracking-wide bg-[#B38E5D] text-white shadow-xs">
-              Bestseller
-            </span>
-          )}
-          {product.isMostSold && !product.isBestseller && (
-            <span className="px-2 py-0.5 rounded text-[10px] font-semibold tracking-wide bg-[#2C2C2C] text-white shadow-xs">
-              New
-            </span>
-          )}
+        {badge && (
+          <span
+            className={cn(
+              "pointer-events-none absolute left-2.5 top-2.5 rounded-[3px] px-2 py-1 text-[11px] font-semibold leading-none tracking-wide",
+              badge === "New" ? "bg-ink text-white" : "bg-white text-ink shadow-xs"
+            )}
+          >
+            {badge}
+          </span>
+        )}
+
+        <div className="absolute right-2.5 top-2.5 flex flex-col gap-2">
+          <button
+            type="button"
+            aria-label={wishlisted ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
+            aria-pressed={wishlisted}
+            onClick={() => toggle(product)}
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-white/95 text-ink shadow-xs hover:text-gold transition-colors cursor-pointer"
+          >
+            <HeartIcon size={17} filled={wishlisted} className={wishlisted ? "text-gold" : undefined} />
+          </button>
+          <button
+            type="button"
+            aria-label={`Add ${product.name} to cart`}
+            onClick={() => add(product)}
+            className="flex lg:hidden h-9 w-9 items-center justify-center rounded-full bg-white/95 text-ink shadow-xs hover:text-gold transition-colors cursor-pointer"
+          >
+            <ShoppingBagIcon size={17} />
+          </button>
         </div>
 
-        {/* Wishlist Button (Top-Right) */}
-        <button
-          type="button"
-          aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
-          onClick={(e) => {
-            e.preventDefault();
-            toggle(product);
-          }}
-          className="absolute top-2.5 right-2.5 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-[#141414] hover:text-[#B38E5D] hover:bg-white shadow-xs transition-transform active:scale-95 cursor-pointer"
-        >
-          <HeartIcon
-            size={16}
-            filled={wishlisted}
-            className={wishlisted ? "text-[#B38E5D]" : "currentColor"}
-          />
-        </button>
-
-        {/* Quick Add to Cart Button (Slide up on hover) */}
-        <div className="absolute inset-x-2.5 bottom-2.5 z-10 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 pointer-events-none group-hover:pointer-events-auto">
-          <Button
-            variant="fill"
-            colorTheme="gold"
-            size="sm"
-            rounded="md"
-            fullWidth
-            onClick={(e) => {
-              e.preventDefault();
-              add(product);
-            }}
-            className="text-[12px] font-semibold tracking-wider py-2 bg-[#B38E5D] hover:bg-[#9C7748] text-white shadow-md"
+        <div className="absolute inset-x-2.5 bottom-2.5 hidden lg:block translate-y-2 opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
+          <button
+            type="button"
+            onClick={() => add(product)}
+            className="h-10 w-full rounded-[var(--radius-btn)] bg-brand text-[13.5px] font-semibold tracking-wide text-white hover:bg-brand-dark transition-colors cursor-pointer"
           >
             Add to Cart
-          </Button>
+          </button>
         </div>
       </div>
 
-      {/* Product Information */}
-      <div className="flex flex-col flex-1 justify-between text-left">
-        <div>
-          {/* Product Title */}
-          <Link
-            href={`/products/${product.slug}`}
-            title={product.name}
-            className="font-display text-[16px] sm:text-[17px] text-[#141414] font-medium leading-snug hover:text-[#B38E5D] transition-colors line-clamp-1 mb-1.5 block"
-          >
+      <div className="flex flex-1 flex-col pt-3">
+        <h3 className="font-body text-[14.5px] sm:text-[15px] font-medium leading-snug text-ink line-clamp-2 min-h-[2.6em]">
+          <Link href={href} className="hover:text-gold transition-colors">
             {product.name}
           </Link>
+        </h3>
 
-          {/* Star Rating with crisp SVG icons */}
-          {showRating && (
-            <div className="flex items-center gap-1.5 mb-2.5">
-              <div className="flex items-center gap-0.5 text-[#C5A059]">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <StarIcon
-                    key={i}
-                    size={13}
-                    filled
-                    className="text-[#C5A059] fill-[#C5A059]"
-                  />
-                ))}
-              </div>
-              <span className="text-[12px] text-[#6B655F] font-semibold tracking-tight">
-                4.8 <span className="text-[#9C948B] font-normal">(124)</span>
-              </span>
-            </div>
+        <div className="mt-1.5 flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+          <span className="text-[16px] sm:text-[17px] font-semibold text-ink">{formatPrice(product.price)}</span>
+          {discount > 0 && (
+            <>
+              <span className="text-[13px] text-subtle line-through">{formatPrice(product.compareAtPrice!)}</span>
+              <span className="text-[12.5px] font-semibold text-success">{discount}% off</span>
+            </>
           )}
         </div>
 
-        {/* Price Row with comfortable bottom spacing */}
-        <div className="flex items-baseline gap-2 mt-auto pt-1 pb-0.5">
-          <span className="font-display text-[17px] sm:text-[18.5px] font-semibold text-[#141414] tracking-tight">
-            {formatPrice(product.price)}
-          </span>
-          {product.compareAtPrice && (
-            <span className="text-[12.5px] sm:text-[13px] text-[#9A9187] line-through font-light">
-              {formatPrice(product.compareAtPrice)}
-            </span>
-          )}
-        </div>
+        {showRating && (
+          <div className="mt-1.5 flex items-center gap-1.5">
+            <Rating value={4.8} size={13} />
+            <span className="text-[12.5px] text-muted">(124)</span>
+          </div>
+        )}
       </div>
-    </div>
+    </article>
   );
 }
 

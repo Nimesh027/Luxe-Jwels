@@ -34,28 +34,28 @@ export default function WhyChooseUs() {
           return (
             <div
               key={item.id}
-              className="group relative flex flex-col items-center text-center p-7 sm:p-8 rounded-2xl bg-white border border-[#E8E1D5] hover:border-[#B38E5D]/60 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+              className="group relative flex flex-col items-center text-center p-7 sm:p-8 rounded-2xl bg-white border border-border hover:border-gold/60 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
             >
               {/* Dark Cream Icon Halo Container */}
-              <div className="w-16 h-16 rounded-full bg-[#F5ECE0] border border-[#DFCBB4] flex items-center justify-center p-3.5 shadow-xs group-hover:scale-110 group-hover:border-[#785627] group-hover:bg-[#EFE2D0] transition-all duration-300 mb-4">
-                <IconComponent className="w-8 h-8 text-[#785627] group-hover:text-[#5E3F18] transition-colors duration-300" />
+              <div className="w-16 h-16 rounded-full bg-[#F5ECE0] border border-gold-soft flex items-center justify-center p-3.5 shadow-xs group-hover:scale-110 group-hover:border-gold-dark group-hover:bg-[#EFE2D0] transition-all duration-300 mb-4">
+                <IconComponent className="w-8 h-8 text-gold-dark group-hover:text-gold-dark transition-colors duration-300" />
               </div>
 
               {/* Title */}
-              <h3 className="font-display text-[17px] sm:text-[18px] font-semibold text-[#141414] tracking-tight group-hover:text-[#B38E5D] transition-colors duration-300">
+              <h3 className="font-display text-[17px] sm:text-[18px] font-semibold text-ink tracking-tight group-hover:text-gold transition-colors duration-300">
                 {item.title}
               </h3>
 
               {/* Shortened Description */}
-              <p className="mt-2 text-[13px] sm:text-[13.5px] text-[#78716A] leading-relaxed font-light">
+              <p className="mt-2 text-[13px] sm:text-[13.5px] text-muted leading-relaxed font-light">
                 {item.subtitle}
               </p>
 
               {/* Micro Trust Tag */}
               {item.trustBadge && (
-                <div className="mt-5 pt-3 border-t border-[#EDE4D6] w-full flex items-center justify-center">
-                  <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-[11.5px] font-medium tracking-wide text-[#785627]">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#785627] shrink-0" />
+                <div className="mt-5 pt-3 border-t border-border w-full flex items-center justify-center">
+                  <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-[11.5px] font-medium tracking-wide text-gold-dark">
+                    <span className="h-1.5 w-1.5 rounded-full bg-brand-dark shrink-0" />
                     {item.trustBadge}
                   </span>
                 </div>

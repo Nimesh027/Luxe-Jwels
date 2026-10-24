@@ -46,7 +46,7 @@ export default function FaqsClient() {
                 setSelectedCategory(cat.id);
                 setSearchQuery("");
               }}
-              className={`px-4 py-2.5 rounded-full text-caption font-semibold whitespace-nowrap transition-all cursor-pointer ${ selectedCategory === cat.id && !searchQuery ? "bg-[#80222F] text-white shadow-xs" : "bg-surface border border-border/80 text-ink/80 hover:border-wine/40" }`}
+              className={`px-4 py-2.5 rounded-full text-caption font-semibold whitespace-nowrap transition-all cursor-pointer ${ selectedCategory === cat.id && !searchQuery ? "bg-brand text-white shadow-xs" : "bg-surface border border-border/80 text-ink/80 hover:border-wine/40" }`}
             >
               {cat.label}
             </Button>
@@ -67,11 +67,11 @@ export default function FaqsClient() {
                     setSelectedCategory(cat.id);
                     setSearchQuery("");
                   }}
-                  className={`w-full p-4.5 text-left font-display text-small font-semibold flex items-center justify-between transition-all cursor-pointer ${ isActive ? "bg-[#FAF0F2] text-[#80222F] border-l-4 border-[#80222F]" : "bg-surface text-ink/80 hover:bg-wine/5 hover:text-wine" }`}
+                  className={`w-full p-4.5 text-left font-display text-small font-semibold flex items-center justify-between transition-all cursor-pointer ${ isActive ? "bg-gold-soft text-gold border-l-4 border-gold" : "bg-surface text-ink/80 hover:bg-wine/5 hover:text-wine" }`}
                 >
                   <span>{cat.label}</span>
                   <span
-                    className={`text-caption font-semibold px-2 py-0.5 rounded-full ${ isActive ? "bg-wine/15 text-wine" : "bg-neutral-100 text-muted" }`}
+                    className={`text-caption font-semibold px-2 py-0.5 rounded-full ${ isActive ? "bg-wine/15 text-wine" : "bg-cream-dark text-muted" }`}
                   >
                     {cat.count}
                   </span>

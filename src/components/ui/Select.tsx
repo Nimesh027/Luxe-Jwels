@@ -92,8 +92,8 @@ function SelectComponent({
             "w-full inline-flex items-center justify-between gap-2.5 font-medium border transition-all duration-200 cursor-pointer select-none",
             "disabled:opacity-50 disabled:cursor-not-allowed",
             open
-              ? "border-[#B38E5D] bg-[#F7F2EA] text-[#8F6C39] shadow-xs ring-2 ring-[#B38E5D]/20"
-              : "border-[#E5DDD0] bg-[#FAF7F2] hover:bg-[#F4EFE6] text-[#8F6C39] hover:border-[#C5A059]",
+              ? "border-gold bg-gold-soft text-gold-dark shadow-xs ring-2 ring-gold/20"
+              : "border-border bg-cream hover:bg-[#F4EFE6] text-gold-dark hover:border-gold",
             sizeClasses[size],
             className
           )}
@@ -105,7 +105,7 @@ function SelectComponent({
             size={14}
             className={cn(
               "shrink-0 transition-transform duration-250 ease-out",
-              open ? "rotate-180 text-[#8F6C39]" : "text-[#8F6C39]/80"
+              open ? "rotate-180 text-gold-dark" : "text-gold-dark/80"
             )}
           />
         </Button>
@@ -114,7 +114,7 @@ function SelectComponent({
         <div
           role="listbox"
           className={cn(
-            "absolute top-[calc(100%+6px)] z-50 min-w-[210px] w-full sm:w-max max-w-[290px] bg-white border border-[#EAE4DC] rounded-2xl shadow-xl overflow-hidden transition-all duration-200 ease-out",
+            "absolute top-[calc(100%+6px)] z-50 min-w-[210px] w-full sm:w-max max-w-[290px] bg-white border border-border rounded-2xl shadow-xl overflow-hidden transition-all duration-200 ease-out",
             align === "right" ? "right-0 origin-top-right" : "left-0 origin-top-left",
             open
               ? "opacity-100 scale-100 translate-y-0 pointer-events-auto visible"
@@ -122,7 +122,7 @@ function SelectComponent({
           )}
         >
           {/* Subtle gold accent top hairline */}
-          <div className="h-[2px] bg-gradient-to-r from-[#B38E5D]/60 via-[#B38E5D]/30 to-transparent" />
+          <div className="h-[2px] bg-gradient-to-r from-gold/60 via-gold/30 to-transparent" />
 
           <div className="py-1.5 max-h-64 overflow-y-auto scrollbar-thin">
             {options.map((opt) => {
@@ -140,13 +140,13 @@ function SelectComponent({
                   className={cn(
                     "w-full flex items-center justify-between px-4 py-2.5 text-[13.5px] sm:text-[14px] text-left transition-colors duration-150 cursor-pointer select-none",
                     isActive
-                      ? "bg-[#FAF5ED] text-[#8F6C39] font-semibold"
-                      : "text-[#221F1C] hover:bg-[#FAF5ED] hover:text-[#8F6C39]"
+                      ? "bg-cream text-gold-dark font-semibold"
+                      : "text-ink hover:bg-cream hover:text-gold-dark"
                   )}
                 >
                   <span className="truncate pr-2">{opt.label}</span>
                   {isActive && (
-                    <CheckIcon size={14} className="text-[#8F6C39] shrink-0 stroke-[2.5]" />
+                    <CheckIcon size={14} className="text-gold-dark shrink-0 stroke-[2.5]" />
                   )}
                 </button>
               );

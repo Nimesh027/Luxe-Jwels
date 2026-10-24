@@ -28,27 +28,11 @@ function applyPriceFilter(products: Product[], priceRange: string): Product[] {
 
 function ProductCardSkeleton() {
   return (
-    <div className="flex flex-col h-full bg-white rounded-xl sm:rounded-2xl border border-[#EAE4DC] p-3 sm:p-4 shadow-xs animate-pulse">
-      {/* Product Image Skeleton */}
-      <div className="relative aspect-square w-full rounded-lg sm:rounded-xl bg-[#F2EDE5] mb-3 overflow-hidden flex items-center justify-center">
-        <div className="w-9 h-9 rounded-full bg-[#E5DEC7]/30" />
-      </div>
-
-      {/* Title Skeletons */}
-      <div className="h-4 bg-[#EDE8DF] rounded-md w-4/5 mb-2" />
-      <div className="h-3.5 bg-[#F4EFE7] rounded-md w-3/5 mb-3" />
-
-      {/* Star Rating Skeleton */}
-      <div className="flex items-center gap-1.5 mb-4">
-        <div className="h-3 w-16 bg-[#EDE8DF] rounded" />
-        <div className="h-3 w-8 bg-[#F4EFE7] rounded" />
-      </div>
-
-      {/* Price & Action Skeleton */}
-      <div className="mt-auto pt-2 flex items-center justify-between border-t border-[#F5F1EA]">
-        <div className="h-5 bg-[#EDE8DF] rounded w-24" />
-        <div className="h-8 w-8 rounded-full bg-[#EDE8DF]" />
-      </div>
+    <div aria-hidden="true" className="flex flex-col animate-pulse">
+      <div className="aspect-square w-full rounded-[var(--radius-card)] bg-cream-dark" />
+      <div className="mt-3 h-4 w-4/5 rounded bg-cream-dark" />
+      <div className="mt-2 h-4 w-2/5 rounded bg-cream-dark" />
+      <div className="mt-2 h-3 w-1/3 rounded bg-cream-dark" />
     </div>
   );
 }
@@ -160,17 +144,28 @@ function ShopContent() {
 
   function setParam(key: string, value: string) {
     const params = new URLSearchParams(searchParams.toString());
-    if (value) params.set(key, value);
-    else params.delete(key);
-    params.delete("page");
+    if (value) {
+      params.set(key, value);
+    } else {
+      params.delete(key);
+    }
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
   function toggleMultiParam(key: string, current: string[], value: string) {
-    const next = current.includes(value)
-      ? current.filter((v) => v !== value)
-      : [...current, value];
-    setParam(key, next.join(","));
+    const params = new URLSearchParams(searchParams.toString());
+    let next: string[];
+    if (current.includes(value)) {
+      next = current.filter((v) => v !== value);
+    } else {
+      next = [...current, value];
+    }
+    if (next.length > 0) {
+      params.set(key, next.join(","));
+    } else {
+      params.delete(key);
+    }
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
   function clearAll() {
@@ -198,7 +193,7 @@ function ShopContent() {
       {/* ── Page Hero ────────────────────────────────────────────── */}
       <ShopHero />
 
-      <div className="py-10 sm:py-12 lg:py-14">
+      <div className="py-8 sm:py-10 lg:py-12">
         <div className="container">
           {/* ── Toolbar ───────────────────────────────────────────── */}
           <div className="flex items-center justify-between gap-4 mb-7 pb-5 border-b border-border/70">
@@ -218,7 +213,7 @@ function ShopContent() {
               }
               rightIcon={
                 activeFilterCount > 0 ? (
-                  <span className="bg-wine text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">
+                  <span className="bg-brand text-white text-[10.5px] font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">
                     {activeFilterCount}
                   </span>
                 ) : undefined
@@ -228,7 +223,7 @@ function ShopContent() {
             </Button>
 
             {/* Product count — desktop */}
-            <p className="hidden lg:block text-[12px] text-muted">
+            <p className="hidden lg:block text-[14px] text-muted">
               Showing{" "}
               <span className="font-semibold text-ink">{visibleProducts.length}</span>{" "}
               of <span className="font-semibold text-ink">{products.length}</span>{" "}
@@ -236,14 +231,14 @@ function ShopContent() {
             </p>
 
             {/* Product count — mobile */}
-            <p className="lg:hidden text-[12px] text-muted">
+            <p className="lg:hidden text-[13.5px] text-muted">
               Showing <span className="font-semibold text-ink">{visibleProducts.length}</span> of{" "}
               <span className="font-semibold text-ink">{products.length}</span>
             </p>
 
             {/* Sort dropdown */}
             <div className="flex items-center gap-2.5">
-              <span className="text-[11px] text-muted hidden sm:block tracking-wider font-medium whitespace-nowrap">
+              <span className="text-[14px] text-muted hidden sm:block whitespace-nowrap">
                 Sort
               </span>
               <Select
@@ -258,7 +253,7 @@ function ShopContent() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* ── Desktop Sidebar — col-span-3 ─────────────────── */}
             <div className="hidden lg:block lg:col-span-3">
-              <div className="bg-surface border border-border/60 rounded-2xl p-5 shadow-sm">
+              <div className="lg:sticky lg:top-24">
                 <ShopFilter {...sidebarProps} />
               </div>
             </div>
@@ -300,12 +295,12 @@ function ShopContent() {
             <div className="lg:col-span-9">
               {/* Active Filter Chips */}
               {activeFilterCount > 0 && (
-                <div className="flex flex-wrap items-center gap-2 mb-6 p-3 bg-surface border border-border/60 rounded-xl">
+                <div className="flex flex-wrap items-center gap-2 mb-6 p-3 bg-surface border border-border rounded-[var(--radius-card)]">
                   <span className="text-caption text-muted font-medium">
                     Active filters:
                   </span>
                   {activeCategories.map((slug) => {
-                    const cat = CATEGORIES.find((c) => c.slug === slug);
+                    const cat = CATEGORIES.find((c) => c.value === slug);
                     return (
                       <Button
                         key={slug}
@@ -316,12 +311,12 @@ function ShopContent() {
                         rounded="full"
                         rightIcon={<span>&times;</span>}
                       >
-                        {cat?.name ?? slug}
+                        {cat?.label ?? slug}
                       </Button>
                     );
                   })}
                   {activeCollections.map((slug) => {
-                    const col = COLLECTIONS.find((c) => c.slug === slug);
+                    const col = COLLECTIONS.find((c) => c.value === slug);
                     return (
                       <Button
                         key={slug}
@@ -332,7 +327,7 @@ function ShopContent() {
                         rounded="full"
                         rightIcon={<span>&times;</span>}
                       >
-                        {col?.name ?? slug}
+                        {col?.label ?? slug}
                       </Button>
                     );
                   })}
@@ -390,7 +385,7 @@ function ShopContent() {
               ) : (
                 <>
                   {/* Products Grid */}
-                  <div className="grid grid-cols-2 gap-4 sm:gap-5 sm:grid-cols-3">
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-5 sm:grid-cols-3 xl:grid-cols-4">
                     {visibleProducts.map((product) => (
                       <ProductCard key={product.id} product={product} />
                     ))}
@@ -411,8 +406,8 @@ function ShopContent() {
                     className={hasMore ? "w-full py-4 flex items-center justify-center" : "h-0 w-full overflow-hidden"}
                   >
                     {isLoadingMore && (
-                      <div className="flex items-center gap-2.5 py-2 text-[12.5px] font-medium text-[#B38E5D] tracking-wider uppercase">
-                        <span className="w-4 h-4 border-2 border-[#B38E5D]/30 border-t-[#B38E5D] rounded-full animate-spin" />
+                      <div className="flex items-center gap-2.5 py-2 text-[14px] font-medium text-gold">
+                        <span className="w-4 h-4 border-2 border-gold/30 border-t-gold rounded-full animate-spin" />
                         <span>Curating more handcrafted designs...</span>
                       </div>
                     )}

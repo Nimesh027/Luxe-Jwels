@@ -5,67 +5,48 @@ import CategoryGrid from "@/components/sections/CategoryGrid";
 import ManufacturingBanner from "@/components/sections/ManufacturingBanner";
 import FeaturedCollections from "@/components/sections/Bestsellers";
 import ForHimForHer from "@/components/sections/ForHimForHer";
-import NewCollection from "@/components/sections/NewCollection";
-import Collections from "@/components/sections/Collections";
-import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import Testimonials from "@/components/sections/Testimonials";
 import BrandStory from "@/components/sections/BrandStory";
 import ServiceStrip from "@/components/sections/ServiceStrip";
-import Instagram from "@/components/sections/Instagram";
+import { SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Luxe Jewels | Timeless Elegance, Crafted for You",
+  title: { absolute: "Luxe Jewels | Timeless Elegance, Crafted for You" },
   description:
-    "Explore luxury handcrafted jewellery at Luxe Jewels. Certified diamonds, hallmarked gold rings, necklaces, bracelets, and bridal collections.",
-  openGraph: {
-    title: "Luxe Jewels | Timeless Elegance, Crafted for You",
-    description:
-      "Handcrafted fine jewellery for life's most precious moments. Hallmarked gold & certified diamonds.",
-    type: "website",
+    "Explore luxury handcrafted jewellery at Luxe Jewels. Certified diamonds, hallmarked gold rings, necklaces, earrings, bracelets and bridal collections.",
+  alternates: { canonical: "/" },
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Luxe Jewels",
+  url: SITE_URL,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${SITE_URL}/collections?search={search_term_string}`,
+    "query-input": "required name=search_term_string",
   },
 };
 
 export default function Home() {
   return (
     <>
-      {/* 1. Hero Showcase */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
       <Hero />
-
-      {/* 2. Top Trust Pillars Strip */}
       <FeatureStrip />
-
-      {/* 3. Shop by Category (Circular 8-item grid) */}
       <CategoryGrid />
-
-      {/* 4. Explore Our Manufacturing Banner */}
       <ManufacturingBanner />
-
-      {/* 5. Featured Collections Tabbed Product Grid */}
       <FeaturedCollections />
-
-      {/* 6. Dual Promotional Banners (Designer & Custom Jewellery) */}
-      <ForHimForHer />
-
-      {/* 7. New Collection Spotlight Banner */}
-      <NewCollection />
-
-      {/* 8. Signature Curated Collections */}
-      <Collections />
-
-      {/* 9. The Luxe Jewels Difference */}
-      <WhyChooseUs />
-
-      {/* 10. Loved by Thousands Customer Reviews */}
+      <div className="pt-[clamp(36px,4.5vw,64px)] bg-cream">
+        <ForHimForHer />
+      </div>
       <Testimonials />
-
-      {/* 11. Luxury. Trust. Forever. Brand Showcase */}
       <BrandStory />
-
-      {/* 12. Authentic Assurance Pillars */}
       <ServiceStrip />
-
-      {/* 13. Social Community Gallery */}
-      <Instagram />
     </>
   );
 }

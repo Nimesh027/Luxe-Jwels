@@ -27,7 +27,7 @@ export async function generateMetadata({
   if (isShapeCategory || (shape && normalizedCategory === "diamond")) {
     if (!shape) {
       return {
-        title: "Diamond Shape Guide Not Found - Luxe Jewels",
+        title: "Diamond Shape Guide Not Found",
       };
     }
 
@@ -53,7 +53,7 @@ export async function generateMetadata({
 
   if (!item) {
     return {
-      title: "Jewellery Guide Not Found - Luxe Jewels",
+      title: "Jewellery Guide Not Found",
     };
   }
 

@@ -85,7 +85,7 @@ function CarouselComponent({
               onClick={() => goTo(dotIndex)}
               className={cn(
                 "h-2 w-2 rounded-full transition-colors cursor-pointer",
-                dotIndex === index ? "bg-gold" : "bg-border"
+                dotIndex === index ? "bg-brand" : "bg-border"
               )}
             />
           ))}

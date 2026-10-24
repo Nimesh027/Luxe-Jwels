@@ -2,11 +2,8 @@
 
 import { useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
-import Section from "@/components/common/Section";
-import Card from "@/components/ui/Card";
-import ProductCard from "@/components/common/ProductCard";
+import PageHero from "@/components/common/PageHero";
+import ProductGrid from "@/components/common/ProductGrid";
 import { useAppSelector } from "@/store/hooks";
 import { filterProducts } from "@/lib/productFilter";
 import Collections from "@/components/sections/Collections";
@@ -16,6 +13,7 @@ function CollectionsContent() {
   const gender = searchParams.get("gender");
   const collectionParam = searchParams.get("collection");
   const categoryParam = searchParams.get("category");
+  const searchQuery = searchParams.get("search")?.trim() || "";
 
   const collections = useAppSelector((state) => state.collections.items);
   const allProducts = useAppSelector((state) => state.products.items);
@@ -30,10 +28,12 @@ function CollectionsContent() {
       collection: collectionParam || undefined,
       category: categoryParam || undefined,
       gender: gender || undefined,
+      search: searchQuery || undefined,
     });
-  }, [allProducts, collectionParam, categoryParam, gender]);
+  }, [allProducts, collectionParam, categoryParam, gender, searchQuery]);
 
   const pageTitle = useMemo(() => {
+    if (searchQuery) return `Results for “${searchQuery}”`;
     if (matchedCollection) {
       if (gender === "women") return `Women's ${matchedCollection.name}`;
       if (gender === "men") return `Men's ${matchedCollection.name}`;
@@ -42,7 +42,7 @@ function CollectionsContent() {
     if (gender === "women") return "All Women's Jewellery";
     if (gender === "men") return "All Men's Jewellery";
     return "All Jewellery & Collections";
-  }, [matchedCollection, gender]);
+  }, [matchedCollection, gender, searchQuery]);
 
   const pageSubtitle = useMemo(() => {
     if (matchedCollection) return matchedCollection.tagline;
@@ -53,14 +53,13 @@ function CollectionsContent() {
 
   return (
     <>
-      <Section title={pageTitle} subtitle={pageSubtitle}>
-        {/* Products Grid */}
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 mb-16">
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </Section>
+      <PageHero
+        title={pageTitle}
+        subtitle={searchQuery ? `${filteredProducts.length} matching designs` : pageSubtitle}
+        image="/images/revamp/luxury-trust-banner.jpg"
+        breadcrumbs={[{ label: searchQuery ? "Search" : "Collections" }]}
+      />
+      <ProductGrid title={searchQuery ? "Search results" : "All designs"} products={filteredProducts} />
       <Collections />
     </>
   );

@@ -16,7 +16,8 @@ export async function generateMetadata({
 
   return {
     title: category.name,
-    description: `Shop the ${category.name} collection at Luxe Jewels.`,
+    description: `Shop certified, hallmarked ${category.name.toLowerCase()} at Luxe Jewels — handcrafted fine jewellery with free shipping and 30-day returns.`,
+    alternates: { canonical: `/category/${category.slug}` },
     openGraph: {
       title: category.name,
       images: [{ url: category.image }],

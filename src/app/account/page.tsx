@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import AccountClient from "@/app/account/AccountClient";
 
 export const metadata: Metadata = {
-  title: "My Account | Luxe Jewels",
+  title: "My Account",
   description: "View and manage your personal account overview, orders, addresses, and luxury membership details.",
 };
 

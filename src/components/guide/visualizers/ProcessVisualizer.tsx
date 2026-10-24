@@ -13,7 +13,7 @@ interface ProcessVisualizerProps {
 export default function ProcessVisualizer({
   step,
   category,
-  accentColor = "#C5A059",
+  accentColor = "var(--color-gold)",
 }: ProcessVisualizerProps) {
   const { visualType, visualData } = step;
 
@@ -57,7 +57,7 @@ export default function ProcessVisualizer({
             <span className="text-2xl font-bold font-display text-foreground tracking-tight">
               {pure}%
             </span>
-            <span className="text-[10px] font-bold tracking-[0.2em] text-[#C5A059]">
+            <span className="text-[10px] font-bold tracking-[0.2em] text-gold">
               Pure Metal
             </span>
           </div>
@@ -92,7 +92,7 @@ export default function ProcessVisualizer({
           </div>
         </div>
 
-        <div className="mt-4 px-3 py-1.5 rounded-full bg-[#C5A059]/10 text-[#C5A059] text-[11px] font-bold tracking-wider flex items-center gap-1.5">
+        <div className="mt-4 px-3 py-1.5 rounded-full bg-gold/10 text-gold text-[11px] font-bold tracking-wider flex items-center gap-1.5">
           <Award className="w-3.5 h-3.5" />
           Assay Stamp: {hallmark}
         </div>
@@ -103,21 +103,21 @@ export default function ProcessVisualizer({
   // 2. COLOR VARIANTS (Yellow Gold, White Gold, Rose Gold)
   if (visualType === "color_variants") {
     const variants = visualData?.variants || [
-      { name: "Yellow Tone", color: "#E5C158", composition: "Classic Ratio" },
-      { name: "White Tone", color: "#EFEFE8", composition: "Palladium Alloy" },
+      { name: "Yellow Tone", color: "var(--color-gold)", composition: "Classic Ratio" },
+      { name: "White Tone", color: "var(--color-cream)", composition: "Palladium Alloy" },
       { name: "Rose Tone", color: "#E8A38B", composition: "Copper Rich" },
     ];
 
     return (
       <div className="flex flex-col gap-3.5 p-6 bg-white border border-black/5 shadow-xs rounded-2xl w-full max-w-[440px] mx-auto">
-        <div className="text-xs font-bold tracking-[0.2em] text-[#C5A059] text-center mb-1">
+        <div className="text-xs font-bold tracking-[0.2em] text-gold text-center mb-1">
           Metallurgical Color Spectrum
         </div>
         <div className="space-y-3">
           {variants.map((v: any, idx: number) => (
             <div
               key={idx}
-              className="flex items-center gap-4 p-3 rounded-xl border border-black/5 hover:border-[#C5A059]/40 bg-stone-50/50 transition-all"
+              className="flex items-center gap-4 p-3 rounded-xl border border-black/5 hover:border-gold/40 bg-stone-50/50 transition-all"
             >
               <div
                 className="w-12 h-12 rounded-xl shadow-inner border border-black/10 shrink-0 flex items-center justify-center"
@@ -135,7 +135,7 @@ export default function ProcessVisualizer({
                   {v.composition}
                 </div>
               </div>
-              <CheckCircle2 className="w-4 h-4 text-[#C5A059] shrink-0" />
+              <CheckCircle2 className="w-4 h-4 text-gold shrink-0" />
             </div>
           ))}
         </div>
@@ -151,7 +151,7 @@ export default function ProcessVisualizer({
 
     return (
       <div className="flex flex-col items-center justify-center p-6 bg-white border border-black/5 shadow-xs rounded-2xl w-full max-w-[440px] mx-auto">
-        <div className="text-xs font-bold tracking-[0.2em] text-[#C5A059] mb-4">
+        <div className="text-xs font-bold tracking-[0.2em] text-gold mb-4">
           Vickers & Mohs Hardness Rating
         </div>
 
@@ -161,7 +161,7 @@ export default function ProcessVisualizer({
               className="h-full rounded-full transition-all duration-1000 ease-out"
               style={{
                 width: `${rating}%`,
-                background: `linear-gradient(90deg, #C5A059 0%, #D4AF37 50%, #10B981 100%)`,
+                background: `linear-gradient(90deg, var(--color-gold) 0%, var(--color-gold) 50%, #10B981 100%)`,
               }}
             />
           </div>
@@ -176,7 +176,7 @@ export default function ProcessVisualizer({
           <div className="text-3xl font-bold font-display text-foreground tracking-tight">
             {score}
           </div>
-          <div className="text-xs font-medium text-[#C5A059] mt-0.5">
+          <div className="text-xs font-medium text-gold mt-0.5">
             {label}
           </div>
         </div>
@@ -207,19 +207,19 @@ export default function ProcessVisualizer({
 
     return (
       <div className="flex flex-col items-center justify-center p-6 bg-white border border-black/5 shadow-xs rounded-2xl w-full max-w-[440px] mx-auto text-center">
-        <div className="text-xs font-bold tracking-[0.2em] text-[#C5A059] mb-4">
+        <div className="text-xs font-bold tracking-[0.2em] text-gold mb-4">
           Government Assay Hallmark Stamp
         </div>
 
         {/* Laser Inscription Badge */}
-        <div className="relative px-8 py-5 rounded-2xl bg-gradient-to-b from-stone-900 to-stone-950 text-white shadow-lg border border-gold/30 flex items-center justify-center gap-4">
+        <div className="theme-dark relative px-8 py-5 rounded-2xl bg-gradient-to-b from-ink to-espresso-deep text-white shadow-lg border border-gold/30 flex items-center justify-center gap-4">
           {/* Assay Logo Silhouette */}
           <div className="w-10 h-10 rounded-lg border border-gold/40 flex items-center justify-center text-gold font-bold text-sm font-mono">
             ✦
           </div>
 
           <div className="flex flex-col text-left">
-            <div className="text-2xl font-bold font-mono tracking-widest text-[#E5C158]">
+            <div className="text-2xl font-bold font-mono tracking-widest text-gold">
               {stampText}
             </div>
             <div className="text-[10px] tracking-wider text-stone-400 font-mono">
@@ -249,7 +249,7 @@ export default function ProcessVisualizer({
 
     return (
       <div className="flex flex-col items-center justify-center p-6 bg-white border border-black/5 shadow-xs rounded-2xl w-full max-w-[440px] mx-auto">
-        <div className="text-xs font-bold tracking-[0.2em] text-[#C5A059] mb-4">
+        <div className="text-xs font-bold tracking-[0.2em] text-gold mb-4">
           Atomic Crystal Lattice
         </div>
 
@@ -259,19 +259,19 @@ export default function ProcessVisualizer({
             <polygon
               points="50,10 85,30 85,70 50,90 15,70 15,30"
               fill="rgba(197, 160, 89, 0.08)"
-              stroke="#C5A059"
+              stroke="var(--color-gold)"
               strokeWidth="1.5"
             />
-            <line x1="50" y1="10" x2="50" y2="90" stroke="#C5A059" strokeWidth="1" strokeDasharray="2 2" />
-            <line x1="15" y1="30" x2="85" y2="70" stroke="#C5A059" strokeWidth="1" strokeDasharray="2 2" />
-            <line x1="15" y1="70" x2="85" y2="30" stroke="#C5A059" strokeWidth="1" strokeDasharray="2 2" />
-            <circle cx="50" cy="50" r="8" fill="#C5A059" />
-            <circle cx="50" cy="10" r="4" fill="#0D0D0D" />
-            <circle cx="85" cy="30" r="4" fill="#0D0D0D" />
-            <circle cx="85" cy="70" r="4" fill="#0D0D0D" />
-            <circle cx="50" cy="90" r="4" fill="#0D0D0D" />
-            <circle cx="15" cy="70" r="4" fill="#0D0D0D" />
-            <circle cx="15" cy="30" r="4" fill="#0D0D0D" />
+            <line x1="50" y1="10" x2="50" y2="90" stroke="var(--color-gold)" strokeWidth="1" strokeDasharray="2 2" />
+            <line x1="15" y1="30" x2="85" y2="70" stroke="var(--color-gold)" strokeWidth="1" strokeDasharray="2 2" />
+            <line x1="15" y1="70" x2="85" y2="30" stroke="var(--color-gold)" strokeWidth="1" strokeDasharray="2 2" />
+            <circle cx="50" cy="50" r="8" fill="var(--color-gold)" />
+            <circle cx="50" cy="10" r="4" fill="var(--color-ink)" />
+            <circle cx="85" cy="30" r="4" fill="var(--color-ink)" />
+            <circle cx="85" cy="70" r="4" fill="var(--color-ink)" />
+            <circle cx="50" cy="90" r="4" fill="var(--color-ink)" />
+            <circle cx="15" cy="70" r="4" fill="var(--color-ink)" />
+            <circle cx="15" cy="30" r="4" fill="var(--color-ink)" />
           </svg>
         </div>
 
@@ -294,7 +294,7 @@ export default function ProcessVisualizer({
 
     return (
       <div className="flex flex-col items-center justify-center p-6 bg-white border border-black/5 shadow-xs rounded-2xl w-full max-w-[440px] mx-auto">
-        <div className="text-xs font-bold tracking-[0.2em] text-[#C5A059] mb-4">
+        <div className="text-xs font-bold tracking-[0.2em] text-gold mb-4">
           Light Physics & Spectral Dispersion
         </div>
 
@@ -302,9 +302,9 @@ export default function ProcessVisualizer({
         <div className="relative w-44 h-28 flex items-center justify-center">
           <svg viewBox="0 0 160 100" className="w-full h-full">
             {/* White light entry ray */}
-            <line x1="10" y1="20" x2="60" y2="50" stroke="#0D0D0D" strokeWidth="2" />
+            <line x1="10" y1="20" x2="60" y2="50" stroke="var(--color-ink)" strokeWidth="2" />
             {/* Gem facet boundary */}
-            <polygon points="60,20 110,20 135,50 85,90 35,50" fill="rgba(197, 160, 89, 0.1)" stroke="#C5A059" strokeWidth="1.5" />
+            <polygon points="60,20 110,20 135,50 85,90 35,50" fill="rgba(197, 160, 89, 0.1)" stroke="var(--color-gold)" strokeWidth="1.5" />
             {/* Spectral rainbow exit rays */}
             <line x1="85" y1="50" x2="150" y2="25" stroke="#EF4444" strokeWidth="1.5" />
             <line x1="85" y1="50" x2="150" y2="35" stroke="#F59E0B" strokeWidth="1.5" />
@@ -316,11 +316,11 @@ export default function ProcessVisualizer({
 
         <div className="mt-4 text-center">
           <div className="text-lg font-bold font-display text-foreground">{index}</div>
-          <div className="text-xs text-[#C5A059] font-medium mt-0.5">{label}</div>
+          <div className="text-xs text-gold font-medium mt-0.5">{label}</div>
         </div>
 
         <div className="mt-3 flex items-center gap-1.5 text-[11px] text-muted-foreground">
-          <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
+          <Sparkles className="w-3.5 h-3.5 text-gold" />
           Maximum Fire, Brilliance & Scintillation
         </div>
       </div>
@@ -334,7 +334,7 @@ export default function ProcessVisualizer({
 
     return (
       <div className="flex flex-col items-center justify-center p-6 bg-white border border-black/5 shadow-xs rounded-2xl w-full max-w-[440px] mx-auto text-center">
-        <div className="text-xs font-bold tracking-[0.2em] text-[#C5A059] mb-4">
+        <div className="text-xs font-bold tracking-[0.2em] text-gold mb-4">
           Gemological Testing Response
         </div>
 
@@ -377,7 +377,7 @@ export default function ProcessVisualizer({
 
     return (
       <div className="flex flex-col items-center justify-center p-6 bg-white border border-black/5 shadow-xs rounded-2xl w-full max-w-[440px] mx-auto text-center">
-        <div className="text-xs font-bold tracking-[0.2em] text-[#C5A059] mb-4">
+        <div className="text-xs font-bold tracking-[0.2em] text-gold mb-4">
           Chemical Surface Protection
         </div>
 
@@ -404,9 +404,9 @@ export default function ProcessVisualizer({
 
   // Default Fallback Note
   return (
-    <div className="flex flex-col items-center justify-center p-6 bg-[#F7F4EF] text-center w-full max-w-[320px] mx-auto rounded-2xl">
+    <div className="flex flex-col items-center justify-center p-6 bg-cream text-center w-full max-w-[320px] mx-auto rounded-2xl">
       <div className="text-xl font-bold text-foreground">{step.title}</div>
-      <div className="my-3 h-px w-12 bg-[#C5A059]" />
+      <div className="my-3 h-px w-12 bg-brand" />
       <p className="text-xs text-muted-foreground leading-relaxed">{step.copy}</p>
     </div>
   );

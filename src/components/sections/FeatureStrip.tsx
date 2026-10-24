@@ -1,67 +1,39 @@
-"use client";
-
 import {
   ShippingIcon,
   ReturnsIcon,
   CertifiedIcon,
   SecureIcon,
 } from "@/components/icons/FeatureIcons";
+import { cn } from "@/lib/utils";
 
 const features = [
-  {
-    id: "f-shipping",
-    icon: ShippingIcon,
-    title: "Free Shipping",
-    subtitle: "On orders above ₹2,999",
-  },
-  {
-    id: "f-returns",
-    icon: ReturnsIcon,
-    title: "30 Days Easy Return",
-    subtitle: "Hassle Free",
-  },
-  {
-    id: "f-certified",
-    icon: CertifiedIcon,
-    title: "Certified Jewellery",
-    subtitle: "100% Authentic",
-  },
-  {
-    id: "f-secure",
-    icon: SecureIcon,
-    title: "Secure Payments",
-    subtitle: "Multiple Options",
-  },
+  { icon: ShippingIcon, title: "Free Shipping", subtitle: "On orders above ₹2,999" },
+  { icon: ReturnsIcon, title: "30 Days Easy Return", subtitle: "Hassle free" },
+  { icon: CertifiedIcon, title: "Certified Jewellery", subtitle: "100% authentic" },
+  { icon: SecureIcon, title: "Secure Payments", subtitle: "Multiple options" },
 ];
 
-export default function FeatureStrip() {
+export default function FeatureStrip({ className }: { className?: string }) {
   return (
-    <section className="w-full bg-[#FAF7F2] py-7 sm:py-9">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 items-center justify-between">
-          {features.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={item.id}
-                className={`flex items-center gap-3.5 sm:gap-4 justify-start sm:justify-center ${ idx < features.length - 1 ? "md:border-r md:border-[#E8E2D8]/80 pr-4" : "" }`}
-              >
-                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#F2EBE0] border border-[#DDD1BF] flex items-center justify-center text-[#1A1815] shrink-0 shadow-xs group-hover:border-[#1A1815] transition-colors">
-                  <Icon className="w-5 h-5 sm:w-5.5 sm:h-5.5 text-[#1A1815]" />
-                </div>
-                <div className="flex flex-col">
-                  <h3 className="font-display text-[15px] sm:text-[16px] font-semibold text-[#141414] leading-snug">
-                    {item.title}
-                  </h3>
-                  <span className="font-body text-[12px] sm:text-[12.5px] text-[#78716A] font-normal leading-tight">
-                    {item.subtitle}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+    <section aria-label="Why shop with us" className={cn("bg-white border-b border-border", className)}>
+      <ul className="container grid grid-cols-2 lg:grid-cols-4 gap-y-6 py-6 sm:py-8">
+        {features.map(({ icon: Icon, title, subtitle }, idx) => (
+          <li
+            key={title}
+            className={cn(
+              "flex items-center gap-3 sm:gap-4 px-2 sm:px-4 lg:justify-center",
+              idx % 2 === 1 && "border-l border-border",
+              idx === 2 && "lg:border-l"
+            )}
+          >
+            <Icon className="w-8 h-8 sm:w-9 sm:h-9 shrink-0 text-gold-warm" />
+            <div className="min-w-0">
+              <p className="font-display text-[16px] sm:text-[18px] font-semibold leading-tight text-ink">{title}</p>
+              <p className="text-[12.5px] sm:text-[13.5px] text-muted">{subtitle}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

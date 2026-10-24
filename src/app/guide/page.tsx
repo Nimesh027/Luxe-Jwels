@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import GuideHubClient from "@/components/guide/GuideHubClient";
 
 export const metadata: Metadata = {
-  title: "Guide & Learn | Gold Karats, Silver Standards, Diamond Types & Shapes | Luxe Jewels",
+  title: "Guide & Learn | Gold Karats, Silver Standards, Diamond Types & Shapes",
   description:
     "Explore the complete fine jewellery education guide. Master 18k, 22k, 24k, 14k, 9k gold purity, 925 sterling & fine silver standards, natural mined vs CVD & HPHT lab-grown diamonds, and moissanite.",
   openGraph: {

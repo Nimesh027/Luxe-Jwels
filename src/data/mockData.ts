@@ -14,13 +14,13 @@ import type {
 // 1. CATEGORIES DATA
 // ============================================================================
 export const categoriesData: Category[] = [
-  { id: "cat-necklaces", name: "Necklaces", slug: "necklaces", image: "/images/category/necklaces.jpg" },
-  { id: "cat-earrings", name: "Earrings", slug: "earrings", image: "/images/category/earrings.jpg" },
-  { id: "cat-rings", name: "Rings", slug: "rings", image: "/images/category/rings.jpg" },
-  { id: "cat-bracelets", name: "Bracelets", slug: "bracelets", image: "/images/category/bracelets.jpg" },
-  { id: "cat-pendants", name: "Pendants", slug: "pendants", image: "/images/category/pendants.jpg" },
-  { id: "cat-mens", name: "Men's Collection", slug: "mens-collection", image: "/images/category/mens-collection.jpg" },
-  { id: "cat-womens", name: "Women's Collection", slug: "womens-collection", image: "/images/product/women-necklace-showcase.png" },
+  { id: "cat-necklaces", name: "Necklaces", slug: "necklaces", image: "/images/categories/necklaces.jpg" },
+  { id: "cat-earrings", name: "Earrings", slug: "earrings", image: "/images/categories/earrings.jpg" },
+  { id: "cat-rings", name: "Rings", slug: "rings", image: "/images/categories/rings.jpg" },
+  { id: "cat-bracelets", name: "Bracelets", slug: "bracelets", image: "/images/categories/bracelets.jpg" },
+  { id: "cat-pendants", name: "Pendants", slug: "pendants", image: "/images/categories/pendants.png" },
+  { id: "cat-mens", name: "Men's Collection", slug: "mens-collection", image: "/images/categories/mens-collection.jpg" },
+  { id: "cat-womens", name: "Women's Collection", slug: "womens-collection", image: "/images/categories/womens-collection.jpg" },
 ];
 
 // ============================================================================
@@ -104,7 +104,7 @@ export const productsData: Product[] = [
     slug: "eternal-halo-diamond-ring",
     price: 58999,
     compareAtPrice: 64999,
-    image: "/images/product/women-rings-showcase.png",
+    image: "/images/revamp/halo-ring.jpg",
     category: "rings",
     gender: "women",
     collections: ["diamond-collection", "couple-collection", "gift-collection"],
@@ -119,7 +119,7 @@ export const productsData: Product[] = [
     slug: "emerald-cut-solitaire-band",
     price: 38999,
     compareAtPrice: 43999,
-    image: "/images/category/rings.jpg",
+    image: "/images/products/emerald-cut-solitaire-band.jpg",
     category: "rings",
     gender: "women",
     collections: ["gold-collection", "couple-collection"],
@@ -196,7 +196,7 @@ export const productsData: Product[] = [
     slug: "imperial-solitaire-pendant",
     price: 27999,
     compareAtPrice: 31999,
-    image: "/images/category/pendants.jpg",
+    image: "/images/products/imperial-solitaire-pendant.jpg",
     category: "pendants",
     gender: "women",
     collections: ["diamond-collection", "gift-collection"],
@@ -212,7 +212,7 @@ export const productsData: Product[] = [
     slug: "royal-diamond-tennis-bracelet",
     price: 79999,
     compareAtPrice: 89999,
-    image: "/images/category/bracelets.jpg",
+    image: "/images/products/royal-tennis-bracelet.jpg",
     category: "bracelets",
     gender: "women",
     collections: ["diamond-collection", "couple-collection", "gift-collection"],
@@ -226,7 +226,7 @@ export const productsData: Product[] = [
     slug: "pave-diamond-cuff-bangle",
     price: 48999,
     compareAtPrice: 54999,
-    image: "/images/collections/couple-collection.jpg",
+    image: "/images/products/pave-cuff-bangle.jpg",
     category: "bracelets",
     gender: "women",
     collections: ["diamond-collection", "gold-collection", "couple-collection"],
@@ -305,7 +305,7 @@ export const productsData: Product[] = [
     slug: "teardrop-chandelier-drop-earrings",
     price: 44999,
     compareAtPrice: 51999,
-    image: "/images/category/earrings.jpg",
+    image: "/images/products/teardrop-chandelier-earrings.jpg",
     category: "earrings",
     gender: "women",
     collections: ["diamond-collection", "gold-collection", "gift-collection"],
@@ -336,7 +336,7 @@ export const productsData: Product[] = [
     slug: "celebration-diamond-choker",
     price: 95999,
     compareAtPrice: 108999,
-    image: "/images/category/necklaces.jpg",
+    image: "/images/products/celebration-diamond-choker.jpg",
     category: "necklaces",
     gender: "women",
     collections: ["diamond-collection"],
@@ -381,7 +381,7 @@ export const productsData: Product[] = [
     slug: "mens-gold-bar-pendant-chain",
     price: 45999,
     compareAtPrice: 51999,
-    image: "/images/collections/gold-collection.jpg",
+    image: "/images/products/gold-bar-pendant-chain.jpg",
     category: "necklaces",
     gender: "men",
     collections: ["mens-collection", "gold-collection", "gift-collection"],
@@ -497,92 +497,9 @@ export const navigationData: NavLink[] = [
             ctaLabel: "Shop by Metal",
           },
         },
-      ],
-    },
-  },
-  {
-    id: "nav-men",
-    label: "Men",
-    href: "/category/mens-collection",
-    children: [
-      { id: "nav-men-rings", label: "Rings", href: "/category/rings?gender=men" },
-      { id: "nav-men-bracelets", label: "Bracelets", href: "/category/bracelets?gender=men" },
-      { id: "nav-men-chains", label: "Chains", href: "/category/necklaces?gender=men" },
-      { id: "nav-men-all", label: "All Men's Collection", href: "/category/mens-collection" },
-    ],
-    megaMenu: {
-      defaultTabId: "men-category",
-      tabs: [
-        {
-          id: "men-category",
-          label: "Category",
-          items: [
-            { id: "men-rings", name: "Rings", href: "/category/rings?gender=men" },
-            { id: "men-bracelets", name: "Bracelets", href: "/category/bracelets?gender=men" },
-            { id: "men-chains", name: "Chains", href: "/category/necklaces?gender=men" },
-            { id: "men-all", name: "All Men's Jewellery", href: "/category/mens-collection" },
-          ],
-          bottomBanner: {
-            heading: "Bold & Masculine Statements.",
-            subheading: "Contemporary fine jewellery crafted for the modern gentleman.",
-            thumbnails: [
-              "/images/product/mens-black-onyx-signet-ring.jpg",
-              "/images/product/mens-gold-link-bracelet.jpg",
-            ],
-            buttonText: "View All Men",
-            buttonHref: "/category/mens-collection",
-          },
-          featuredCard: {
-            image: "/images/product/mens-black-onyx-signet-ring.jpg",
-            title: "Bold & Masculine — Handcrafted designs for every gentleman",
-            href: "/category/mens-collection",
-            ctaLabel: "Explore Men's",
-          },
-        },
-        {
-          id: "men-collections",
-          label: "Collections",
-          items: [
-            { id: "men-col-main", name: "Men's Collection", href: "/category/mens-collection" },
-            { id: "men-col-couple", name: "Couple Collection", href: "/collections/couple-collection" },
-            { id: "men-col-gift", name: "Gift Collection", href: "/collections/gift-collection" },
-          ],
-          bottomBanner: {
-            heading: "Curated for Him.",
-            subheading: "Unique solid gold and diamond accents with rugged sophistication.",
-            thumbnails: [
-              "/images/product/mens-black-onyx-signet-ring.jpg",
-              "/images/product/mens-gold-link-bracelet.jpg",
-            ],
-            buttonText: "Discover Men's Suites",
-            buttonHref: "/category/mens-collection",
-          },
-          featuredCard: {
-            image: "/images/product/mens-gold-link-bracelet.jpg",
-            title: "Solid Gold Link Bracelets — Master crafted in 18K & 22K gold",
-            href: "/category/mens-collection",
-            ctaLabel: "Shop Bracelets",
-          },
-        },
-      ],
-    },
-  },
-  {
-    id: "nav-women",
-    label: "Women",
-    href: "/shop?gender=women",
-    children: [
-      { id: "nav-women-rings", label: "Rings", href: "/category/rings?gender=women" },
-      { id: "nav-women-necklaces", label: "Necklaces", href: "/category/necklaces?gender=women" },
-      { id: "nav-women-earrings", label: "Earrings", href: "/category/earrings?gender=women" },
-      { id: "nav-women-bracelets", label: "Bracelets", href: "/category/bracelets?gender=women" },
-    ],
-    megaMenu: {
-      defaultTabId: "women-category",
-      tabs: [
         {
           id: "women-category",
-          label: "Category",
+          label: "For Her",
           items: [
             { id: "women-rings", name: "Rings", href: "/category/rings?gender=women" },
             { id: "women-necklaces", name: "Necklaces", href: "/category/necklaces?gender=women" },
@@ -609,29 +526,29 @@ export const navigationData: NavLink[] = [
           },
         },
         {
-          id: "women-collections",
-          label: "Collections",
+          id: "men-category",
+          label: "For Him",
           items: [
-            { id: "women-col-diamond", name: "Diamond Collection", href: "/collections/diamond-collection" },
-            { id: "women-col-gold", name: "Gold Collection", href: "/collections/gold-collection" },
-            { id: "women-col-couple", name: "Couple Collection", href: "/collections/couple-collection" },
-            { id: "women-col-gift", name: "Gift Collection", href: "/collections/gift-collection" },
+            { id: "men-rings", name: "Rings", href: "/category/rings?gender=men" },
+            { id: "men-bracelets", name: "Bracelets", href: "/category/bracelets?gender=men" },
+            { id: "men-chains", name: "Chains", href: "/category/necklaces?gender=men" },
+            { id: "men-all", name: "All Men's Jewellery", href: "/category/mens-collection" },
           ],
           bottomBanner: {
-            heading: "Exclusive Collections.",
-            subheading: "Timeless beauty crafted with supreme precision.",
+            heading: "Bold & Masculine Statements.",
+            subheading: "Contemporary fine jewellery crafted for the modern gentleman.",
             thumbnails: [
-              "/images/product/women-rings-showcase.png",
-              "/images/product/women-festive-showcase.png",
+              "/images/product/mens-black-onyx-signet-ring.jpg",
+              "/images/product/mens-gold-link-bracelet.jpg",
             ],
-            buttonText: "View Collections",
-            buttonHref: "/collections",
+            buttonText: "View All Men",
+            buttonHref: "/category/mens-collection",
           },
           featuredCard: {
-            image: "/images/product/women-rings-showcase.png",
-            title: "Radiate Brilliance — Certified hallmarked diamonds and fine gold",
-            href: "/collections/diamond-collection",
-            ctaLabel: "Discover Diamond",
+            image: "/images/product/mens-black-onyx-signet-ring.jpg",
+            title: "Bold & Masculine — Handcrafted designs for every gentleman",
+            href: "/category/mens-collection",
+            ctaLabel: "Explore Men's",
           },
         },
       ],
@@ -710,6 +627,10 @@ export const navigationData: NavLink[] = [
       ],
     },
   },
+  { id: "nav-about", label: "About", href: "/our-story" },
+  { id: "nav-manufacturing", label: "Manufacturing", href: "/manufacturing" },
+  { id: "nav-blog", label: "Blog", href: "/blog" },
+  { id: "nav-contact", label: "Contact", href: "/contact" },
 ];
 
 // ============================================================================
@@ -750,14 +671,27 @@ export interface SiteContentData {
     subtitle: string;
     placeholder: string;
     cta: string;
+    badgeTitle: string;
+    badgeSubtitle: string;
+    successMessage: string;
+    privacyNote: string;
   };
   footer: {
     brandBlurb: string;
     columns: FooterColumn[];
+    contact: FooterContactItem[];
     socials: SocialLink[];
     paymentBadges: string[];
     copyright: string;
   };
+}
+
+export interface FooterContactItem {
+  id: string;
+  icon: "location" | "phone" | "email";
+  title: string;
+  detail: string;
+  href?: string;
 }
 
 export const siteContentData: SiteContentData = {
@@ -948,58 +882,96 @@ export const siteContentData: SiteContentData = {
     subtitle: "Subscribe to get special offers, new arrivals and more.",
     placeholder: "Enter your email address",
     cta: "Subscribe",
+    badgeTitle: "100% Authentic",
+    badgeSubtitle: "Gold, silver, and bridal gems handcrafted for you",
+    successMessage: "Thank you for subscribing to Luxe Jewels updates!",
+    privacyNote: "By subscribing, you agree to our Privacy Policy. Unsubscribe anytime.",
   },
+  // Merged from every previous footer version so no link or detail is lost.
   footer: {
     brandBlurb:
-      "Timeless jewellery for every moment that matters. Crafted with love, delivered with trust.",
+      "Timeless jewellery for every moment that matters. Crafted with love, delivered with trust. Fine handcrafted jewellery for every milestone. Hallmarked gold, certified diamonds, and master artisan atelier.",
     columns: [
       {
         id: "footer-shop",
-        title: "Shop",
+        title: "Shop Jewellery",
         links: [
-          { label: "Men", href: "/category/mens-collection" },
-          { label: "Women", href: "/collections" },
-          { label: "Shop All", href: "/shop" },
-          { label: "Bestsellers", href: "/collections" },
-          { label: "Gift Cards", href: "/collections/gift-collection" },
+          { label: "All Jewellery", href: "/shop" },
+          { label: "Rings", href: "/category/rings" },
+          { label: "Necklaces", href: "/category/necklaces" },
+          { label: "Earrings", href: "/category/earrings" },
+          { label: "Bracelets", href: "/category/bracelets" },
+          { label: "Pendants", href: "/category/pendants" },
+          { label: "Men's Collection", href: "/category/mens-collection" },
         ],
       },
       {
         id: "footer-collections",
         title: "Collections",
         links: [
-          { label: "Rings", href: "/category/rings" },
-          { label: "Necklaces", href: "/category/necklaces" },
-          { label: "Earrings", href: "/category/earrings" },
-          { label: "Bracelets", href: "/category/bracelets" },
-          { label: "Pendants", href: "/category/pendants" },
+          { label: "Signature Collections", href: "/collections" },
+          { label: "Women", href: "/collections" },
+          { label: "Bestsellers", href: "/collections" },
+          { label: "Gift Cards", href: "/collections/gift-collection" },
         ],
       },
       {
-        id: "footer-customer-service",
-        title: "Customer Service",
+        id: "footer-guide",
+        title: "Guide & Learn",
         links: [
-          { label: "Contact Us", href: "/contact" },
-          { label: "Shipping & Delivery", href: "/shipping" },
-          { label: "Returns & Exchanges", href: "/returns" },
-          { label: "Track Your Order", href: "/track-order" },
-          { label: "FAQs", href: "/faqs" },
+          { label: "Guide & Learn Hub", href: "/guide" },
+          { label: "Gold Karats (18K/22K/24K)", href: "/guide/gold" },
+          { label: "Diamond Types (Natural/CVD)", href: "/guide/diamond" },
+          { label: "12 Diamond Shapes Cut", href: "/guide/shape" },
+          { label: "Silver Standards (925/999)", href: "/guide/silver" },
+          { label: "Jewellery Care Guide", href: "/care-guide" },
         ],
       },
       {
-        id: "footer-information",
-        title: "Information",
+        id: "footer-about",
+        title: "About & Studio",
         links: [
           { label: "About Us", href: "/about" },
-          { label: "Guide & Learn Hub", href: "/guide" },
-          { label: "Gold Karats Guide", href: "/guide/gold" },
-          { label: "Silver Standards Guide", href: "/guide/silver" },
-          { label: "Diamond Types Guide", href: "/guide/diamond" },
-          { label: "Diamond Shapes Guide", href: "/guide/shape" },
-          { label: "Care Guide", href: "/care-guide" },
-          { label: "Privacy Notice", href: "/privacy-policy" },
-          { label: "Terms & Conditions", href: "/terms" },
+          { label: "Our Story & Heritage", href: "/our-story" },
+          { label: "Explore Manufacturing", href: "/manufacturing" },
+          { label: "Blog & Insights", href: "/blog" },
+          { label: "Contact & Showroom", href: "/contact" },
         ],
+      },
+      {
+        id: "footer-customer-care",
+        title: "Customer Care",
+        links: [
+          { label: "Track Your Order", href: "/track-order" },
+          { label: "Shipping Policy", href: "/shipping" },
+          { label: "Return & Refund", href: "/returns" },
+          { label: "FAQs & Help Center", href: "/faqs" },
+          { label: "Customer Reviews", href: "/reviews" },
+          { label: "Terms & Conditions", href: "/terms" },
+          { label: "Privacy Policy", href: "/privacy-policy" },
+        ],
+      },
+    ],
+    contact: [
+      {
+        id: "contact-studio",
+        icon: "location",
+        title: "Flagship Studio & Atelier",
+        detail: "Ahmedabad, Gujarat, India",
+      },
+      {
+        id: "contact-phone",
+        icon: "phone",
+        title: "+91 98765 43210",
+        detail: "Mon - Sat: 10:00 AM - 7:00 PM",
+        href: "tel:+919876543210",
+      },
+      {
+        id: "contact-email",
+        icon: "email",
+        title: "support@luxejewels.com",
+        detail: "We reply within 24 hours",
+        href: "mailto:support@luxejewels.com",
       },
     ],
     socials: [
@@ -1008,8 +980,8 @@ export const siteContentData: SiteContentData = {
       { id: "social-facebook", label: "Facebook", href: "https://facebook.com", icon: "facebook" },
       { id: "social-youtube", label: "YouTube", href: "https://youtube.com", icon: "youtube" },
     ],
-    paymentBadges: ["Visa", "Mastercard", "Amex", "PayPal", "UPI"],
-    copyright: "© 2025 Luxe Jewels. All Rights Reserved.",
+    paymentBadges: ["Visa", "Mastercard", "Amex", "UPI", "PayPal"],
+    copyright: "Luxe Jewels. All Rights Reserved.",
   },
 };
 

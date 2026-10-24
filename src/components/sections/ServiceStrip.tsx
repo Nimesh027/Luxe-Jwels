@@ -1,5 +1,3 @@
-"use client";
-
 function AuthenticIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -72,32 +70,23 @@ const assuranceItems = [
 
 export default function ServiceStrip() {
   return (
-    <section className="w-full bg-[#FAF7F2] py-8 sm:py-10">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-          {assuranceItems.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={idx}
-                className="flex items-center gap-3.5 sm:gap-4 justify-start sm:justify-center"
-              >
-                <div className="w-11 h-11 rounded-full bg-[#F2EBE0] border border-[#DDD1BF] flex items-center justify-center text-[#1A1815] shrink-0 shadow-xs">
-                  <Icon className="w-5 h-5 text-[#1A1815]" />
-                </div>
-                <div className="flex flex-col">
-                  <h4 className="font-display text-[15px] sm:text-[16px] font-semibold text-[#141414] leading-snug">
-                    {item.title}
-                  </h4>
-                  <span className="font-body text-[12px] sm:text-[12.5px] text-[#78716A]">
-                    {item.subtitle}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+    <section className="bg-cream pb-[clamp(36px,4.5vw,64px)]" aria-label="Our promise">
+      <ul className="container grid grid-cols-2 lg:grid-cols-4 gap-y-6">
+        {assuranceItems.map(({ icon: Icon, title, subtitle }, idx) => (
+          <li
+            key={title}
+            className={`flex items-center gap-3 sm:gap-4 px-2 sm:px-4 lg:justify-center ${idx % 2 === 1 ? "border-l border-border" : ""} ${idx === 2 ? "lg:border-l" : ""}`}
+          >
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border bg-white text-gold-warm">
+              <Icon className="w-6 h-6" />
+            </span>
+            <div className="min-w-0">
+              <p className="font-display text-[16px] sm:text-[18px] font-semibold leading-tight text-ink">{title}</p>
+              <p className="text-[12.5px] sm:text-[13.5px] text-muted">{subtitle}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

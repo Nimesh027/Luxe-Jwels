@@ -4,6 +4,7 @@ import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 import { cn } from "@/lib/utils";
 
 interface SectionProps {
+  id?: string;
   title?: string;
   subtitle?: string;
   viewAllHref?: string;
@@ -13,6 +14,7 @@ interface SectionProps {
 }
 
 export default function Section({
+  id,
   title,
   subtitle,
   viewAllHref,
@@ -21,8 +23,8 @@ export default function Section({
   children,
 }: SectionProps) {
   return (
-    <section className={cn("py-12 md:py-16 w-full overflow-hidden", className)}>
-      <div className={cn("container mx-auto px-4 sm:px-6 lg:px-8", containerClassName)}>
+    <section id={id} className={cn("py-12 md:py-16 w-full overflow-hidden scroll-mt-24", className)}>
+      <div className={cn("container", containerClassName)}>
         {(title || viewAllHref) && (
           <div className="mb-8 flex items-end justify-between gap-4">
             <div>

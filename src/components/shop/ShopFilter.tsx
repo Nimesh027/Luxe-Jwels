@@ -1,8 +1,9 @@
 "use client";
 
-import React, { memo } from "react";
-import { FilterIcon, CheckIcon } from "@/components/icons";
-import Button from "@/components/ui/Button";
+import React, { memo, useId, useMemo } from "react";
+import { CheckIcon } from "@/components/icons";
+import { useAppSelector } from "@/store/hooks";
+import { cn } from "@/lib/utils";
 
 export const CATEGORIES = [
   { value: "rings", label: "Rings", count: 132 },
@@ -22,8 +23,8 @@ export const PRICE_RANGES = [
 ];
 
 export const METALS = [
-  { value: "gold", label: "Yellow Gold", color: "#E5C158" },
-  { value: "white-gold", label: "White Gold", color: "#E0E0E0" },
+  { value: "gold", label: "Yellow Gold", color: "var(--color-gold)" },
+  { value: "white-gold", label: "White Gold", color: "var(--color-border)" },
   { value: "rose-gold", label: "Rose Gold", color: "#E8B298" },
   { value: "platinum", label: "Platinum", color: "#C0C0C0" },
   { value: "silver", label: "Silver", color: "#D3D3D3" },
@@ -49,6 +50,7 @@ interface FilterCheckboxProps {
   count?: number;
   checked: boolean;
   onChange: () => void;
+  type?: "checkbox" | "radio";
 }
 
 const FilterCheckbox = memo(function FilterCheckbox({
@@ -56,46 +58,36 @@ const FilterCheckbox = memo(function FilterCheckbox({
   count,
   checked,
   onChange,
+  type = "checkbox",
 }: FilterCheckboxProps) {
+  const id = useId();
   return (
-    <Button
-      variant="unstyled"
-      onClick={onChange}
-      className="w-full flex items-center justify-between py-1.5 rounded text-left transition-colors cursor-pointer group hover:text-[#B38E5D]"
-    >
-      <div className="flex items-center gap-2.5">
+    <label htmlFor={id} className="group flex min-h-9 cursor-pointer items-center justify-between gap-3 text-[14.5px]">
+      <span className="flex items-center gap-3">
+        <input id={id} type="checkbox" checked={checked} onChange={onChange} className="peer sr-only" />
         <span
-          className={`w-4 h-4 shrink-0 rounded border flex items-center justify-center transition-all ${ checked ? "bg-[#B38E5D] border-[#B38E5D] text-white" : "border-[#D6CEC5] bg-white group-hover:border-[#B38E5D]" }`}
+          aria-hidden="true"
+          className={cn(
+            "flex h-[18px] w-[18px] shrink-0 items-center justify-center border transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-gold/40",
+            type === "radio" ? "rounded-full" : "rounded-[3px]",
+            checked ? "border-brand bg-brand text-white" : "border-border-strong bg-white group-hover:border-gold"
+          )}
         >
-          {checked && <CheckIcon size={11} className="text-white stroke-[2.5]" />}
+          {checked && <CheckIcon size={12} className="stroke-[2.5]" />}
         </span>
-        <span
-          className={`text-[13px] ${ checked ? "text-[#B38E5D] font-semibold" : "text-[#332E29]" }`}
-        >
-          {label}
-        </span>
-      </div>
-      {typeof count === "number" && (
-        <span className="text-[11.5px] text-[#8C827A] font-light">({count})</span>
-      )}
-    </Button>
+        <span className={checked ? "font-medium text-ink" : "text-ink-soft group-hover:text-ink"}>{label}</span>
+      </span>
+      {typeof count === "number" && <span className="text-[13px] text-subtle">({count})</span>}
+    </label>
   );
 });
 
-function FilterSection({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
+function FilterSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="border-b border-[#EAE4DC] pb-5 mb-5 last:border-b-0 last:pb-0 last:mb-0">
-      <h3 className="font-display text-[15px] font-semibold text-[#141414] mb-3">
-        {title}
-      </h3>
-      <div className="flex flex-col gap-1">{children}</div>
-    </div>
+    <fieldset className="border-t border-border py-5 last:pb-0">
+      <legend className="float-left w-full mb-2 font-display text-[19px] font-semibold text-ink">{title}</legend>
+      <div className="clear-both flex flex-col">{children}</div>
+    </fieldset>
   );
 }
 
@@ -112,89 +104,80 @@ export interface ShopFilterProps {
 
 function ShopFilterComponent({
   activeCategories,
+  activeCollections,
   activePrice,
   onToggleCategory,
+  onToggleCollection,
   onSetPrice,
   onClearAll,
   activeFilterCount,
 }: ShopFilterProps) {
+  const products = useAppSelector((state) => state.products.items);
+
+  // Real counts from the catalogue rather than placeholder numbers
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const c of CATEGORIES) {
+      counts[c.value] = products.filter((p) =>
+        c.value === "mens-collection"
+          ? p.gender === "men" || p.category === "mens-collection"
+          : p.category === c.value
+      ).length;
+    }
+    return counts;
+  }, [products]);
+
   return (
-    <aside className="bg-white p-5 rounded-2xl border border-[#EAE4DC] shadow-xs">
-      {/* Header */}
-      <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#EAE4DC]">
-        <div className="flex items-center gap-2">
-          <FilterIcon size={16} className="text-[#B38E5D]" />
-          <h2 className="font-display text-[17px] font-semibold text-[#141414]">
-            Shop By
-          </h2>
-        </div>
+    <aside aria-labelledby="shop-filter-heading" className="rounded-[var(--radius-card)] border border-border bg-white p-5 sm:p-6">
+      <div className="mb-1 flex items-center justify-between pb-4">
+        <h2 id="shop-filter-heading" className="font-display text-[22px] font-semibold text-ink">
+          Shop By
+        </h2>
         {activeFilterCount > 0 && (
           <button
             type="button"
             onClick={onClearAll}
-            className="text-[11.5px] text-[#B38E5D] hover:underline font-medium cursor-pointer"
+            className="text-[13.5px] font-semibold text-gold underline-offset-4 hover:underline cursor-pointer"
           >
-            Clear ({activeFilterCount})
+            Clear all ({activeFilterCount})
           </button>
         )}
       </div>
 
-      <div className="space-y-1">
-        {/* Category */}
-        <FilterSection title="Category">
-          {CATEGORIES.map((cat) => (
-            <FilterCheckbox
-              key={cat.value}
-              label={cat.label}
-              count={cat.count}
-              checked={activeCategories.includes(cat.value)}
-              onChange={() => onToggleCategory(cat.value)}
-            />
-          ))}
-        </FilterSection>
+      <FilterSection title="Category">
+        {CATEGORIES.map((cat) => (
+          <FilterCheckbox
+            key={cat.value}
+            label={cat.label}
+            count={categoryCounts[cat.value]}
+            checked={activeCategories.includes(cat.value)}
+            onChange={() => onToggleCategory(cat.value)}
+          />
+        ))}
+      </FilterSection>
 
-        {/* Price Range */}
-        <FilterSection title="Price Range">
-          {PRICE_RANGES.map((range) => (
-            <FilterCheckbox
-              key={range.value}
-              label={range.label}
-              checked={activePrice === range.value}
-              onChange={() =>
-                onSetPrice(activePrice === range.value ? "" : range.value)
-              }
-            />
-          ))}
-        </FilterSection>
+      <FilterSection title="Price Range">
+        {PRICE_RANGES.map((range) => (
+          <FilterCheckbox
+            key={range.value}
+            type="radio"
+            label={range.label}
+            checked={activePrice === range.value}
+            onChange={() => onSetPrice(activePrice === range.value ? "" : range.value)}
+          />
+        ))}
+      </FilterSection>
 
-        {/* Metal */}
-        <FilterSection title="Metal">
-          {METALS.map((metal) => (
-            <div
-              key={metal.value}
-              className="flex items-center gap-2.5 py-1 text-[13px] text-[#332E29] hover:text-[#B38E5D] cursor-pointer"
-            >
-              <span
-                className="w-3.5 h-3.5 rounded-full border border-black/20"
-                style={{ backgroundColor: metal.color }}
-              />
-              <span>{metal.label}</span>
-            </div>
-          ))}
-        </FilterSection>
-
-        {/* Stone */}
-        <FilterSection title="Stone">
-          {STONES.map((stone) => (
-            <div
-              key={stone.value}
-              className="flex items-center gap-2.5 py-1 text-[13px] text-[#332E29] hover:text-[#B38E5D] cursor-pointer"
-            >
-              <span>{stone.label}</span>
-            </div>
-          ))}
-        </FilterSection>
-      </div>
+      <FilterSection title="Collection">
+        {COLLECTIONS.map((col) => (
+          <FilterCheckbox
+            key={col.value}
+            label={col.label}
+            checked={activeCollections.includes(col.value)}
+            onChange={() => onToggleCollection(col.value)}
+          />
+        ))}
+      </FilterSection>
     </aside>
   );
 }

@@ -57,13 +57,13 @@ export default function ShapesCatalogClient() {
   }, [activeFilter]);
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] text-foreground">
+    <div className="min-h-screen bg-cream text-foreground">
       {/* 1. HERO SECTION */}
       <section className="relative overflow-hidden border-b border-black/5 bg-white py-16 md:py-20 px-6">
-        <div className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-[#C5A059]/10 blur-[130px] pointer-events-none" />
+        <div className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-gold/10 blur-[130px] pointer-events-none" />
 
         <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <div className="mb-4 inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.35em] text-[#C5A059]">
+          <div className="mb-4 inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.35em] text-gold">
             <Gem className="h-3.5 w-3.5" />
             Diamond Shapes Collection
           </div>
@@ -85,7 +85,7 @@ export default function ShapesCatalogClient() {
                   key={tab.id}
                   variant="unstyled"
                   onClick={() => setActiveFilter(tab.id)}
-                  className={`cursor-pointer px-5 py-2.5 text-xs font-bold tracking-[0.2em] transition-all duration-200 border ${ isActive ? "bg-[#0D0D0D] text-white border-[#0D0D0D] shadow-sm" : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent" }`}
+                  className={`cursor-pointer px-5 py-2.5 text-xs font-bold tracking-[0.2em] transition-all duration-200 border ${ isActive ? "bg-ink text-white border-ink shadow-sm" : "bg-cream text-foreground/70 hover:text-foreground hover:bg-white border-transparent" }`}
                 >
                   {tab.label}
                   {tab.id === "all" && ` (${diamondShapesData.length})`}
@@ -103,11 +103,11 @@ export default function ShapesCatalogClient() {
             <Link
               key={shape.id || shape.slug}
               href={`/shapes/${shape.slug || shape.id}`}
-              className="group relative flex flex-col justify-between border border-black/6 bg-white p-6 transition-all duration-300 hover:border-[#C5A059]/50 hover:shadow-[0_15px_35px_-15px_rgba(0,0,0,0.1)]"
+              className="group relative flex flex-col justify-between border border-black/6 bg-white p-6 transition-all duration-300 hover:border-gold/50 hover:shadow-[0_15px_35px_-15px_rgba(0,0,0,0.1)]"
             >
               <div>
                 {/* Image Card Container */}
-                <div className="relative mb-5 aspect-square w-full overflow-hidden bg-[#FAF7F2] p-8 transition-colors group-hover:bg-[#F5F1E8]">
+                <div className="relative mb-5 aspect-square w-full overflow-hidden bg-cream p-8 transition-colors group-hover:bg-cream">
                   <Image
                     src={shape.image}
                     alt={`${shape.name} cut diamond`}
@@ -118,11 +118,11 @@ export default function ShapesCatalogClient() {
                 </div>
 
                 {/* Header & Meta */}
-                <div className="text-[10px] font-bold tracking-[0.25em] text-[#C5A059]">
+                <div className="text-[10px] font-bold tracking-[0.25em] text-gold">
                   {shape.specs?.shapeFamily || "Diamond Cut"}
                 </div>
 
-                <h2 className="mt-1 text-lg font-bold tracking-tight text-foreground transition-colors group-hover:text-[#C5A059] md:text-xl">
+                <h2 className="mt-1 text-lg font-bold tracking-tight text-foreground transition-colors group-hover:text-gold md:text-xl">
                   {shape.name} Cut
                 </h2>
 
@@ -139,7 +139,7 @@ export default function ShapesCatalogClient() {
               </div>
 
               {/* Clean Footer Link */}
-              <div className="mt-5 pt-3 border-t border-black/5 flex items-center justify-between text-[11px] font-bold tracking-[0.2em] text-[#C5A059] group-hover:text-foreground transition-colors">
+              <div className="mt-5 pt-3 border-t border-black/5 flex items-center justify-between text-[11px] font-bold tracking-[0.2em] text-gold group-hover:text-foreground transition-colors">
                 <span>Explore Guide</span>
                 <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
               </div>
@@ -151,7 +151,7 @@ export default function ShapesCatalogClient() {
       {/* 3. CONCIERGE BANNER */}
       <section className="border-t border-black/5 bg-white py-16 px-6">
         <div className="mx-auto max-w-4xl text-center">
-          <span className="mb-3 block text-[10px] font-bold tracking-[0.35em] text-[#C5A059]">
+          <span className="mb-3 block text-[10px] font-bold tracking-[0.35em] text-gold">
             Concierge Consultation
           </span>
           <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl text-foreground">
@@ -163,7 +163,7 @@ export default function ShapesCatalogClient() {
           <div className="mt-8">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 bg-[#0D0D0D] px-8 py-3.5 text-xs font-bold tracking-[0.22em] text-white transition-all hover:bg-[#C5A059] shadow-sm"
+              className="inline-flex items-center gap-2 bg-ink px-8 py-3.5 text-xs font-bold tracking-[0.22em] text-white transition-all hover:bg-brand shadow-sm"
             >
               Book Complimentary Consultation
               <ArrowRight className="h-4 w-4" />

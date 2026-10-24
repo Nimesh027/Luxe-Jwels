@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
+import { MailIcon } from "@/components/icons";
 
 export default function ForgotPasswordClient() {
   const [email, setEmail] = useState("");
@@ -27,12 +28,12 @@ export default function ForgotPasswordClient() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-0px)] bg-[#0f0e0d] text-cream flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="theme-dark min-h-screen bg-ink text-cream flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Ambient Radial Background Glow */}
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-wine/15 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="w-full max-w-lg bg-[#161412] border border-gold/25 rounded-2xl shadow-2xl overflow-hidden relative z-10 p-6 sm:p-10 lg:p-12">
+      <div className="w-full max-w-lg bg-ink border border-gold/25 rounded-2xl shadow-2xl overflow-hidden relative z-10 p-6 sm:p-10 lg:p-12">
         {/* Top Brand Header */}
         <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-8">
           <div>
@@ -94,7 +95,7 @@ export default function ForgotPasswordClient() {
                 type="submit"
                 variant="unstyled"
                 disabled={isLoading}
-                className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold to-[#b59247] hover:from-[#dcb96b] hover:to-gold text-ink font-semibold text-caption tracking-[0.15em] transition-all duration-300 transform active:scale-[0.99] shadow-lg shadow-gold/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+                className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold to-gold hover:from-gold hover:to-gold text-ink font-semibold text-[14.5px] tracking-wide transition-all duration-300 transform active:scale-[0.99] shadow-lg shadow-gold/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
               >
                 {isLoading ? (
                   <>
@@ -125,7 +126,7 @@ export default function ForgotPasswordClient() {
           /* SUCCESS CONFIRMATION SCREEN */
           <div className="text-center py-4 space-y-6 animate-in fade-in zoom-in-95 duration-200">
             <div className="w-16 h-16 rounded-full bg-gold/15 border border-gold/40 text-gold flex items-center justify-center mx-auto text-h3">
-              📩
+              <MailIcon size={28} />
             </div>
 
             <div>

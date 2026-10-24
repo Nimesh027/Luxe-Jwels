@@ -1,77 +1,68 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import Link from "next/link";
 import ProductCard from "@/components/common/ProductCard";
-import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
+import SectionTitle from "@/components/common/SectionTitle";
 import { useAppSelector } from "@/store/hooks";
+import { cn } from "@/lib/utils";
 
 const TABS = [
-  { id: "rings", label: "Rings", category: "rings" },
-  { id: "necklaces", label: "Necklaces", category: "necklaces" },
-  { id: "earrings", label: "Earrings", category: "earrings" },
-  { id: "bracelets", label: "Bracelets", category: "bracelets" },
-  { id: "pendants", label: "Pendants", category: "pendants" },
-  { id: "mens", label: "Men's Collection", category: "mens-collection" },
+  { id: "rings", label: "Rings" },
+  { id: "necklaces", label: "Necklaces" },
+  { id: "earrings", label: "Earrings" },
+  { id: "bracelets", label: "Bracelets" },
+  { id: "pendants", label: "Pendants" },
+  { id: "mens-collection", label: "Men's Collection" },
 ];
 
+const ITEMS = 6;
+
 export default function FeaturedCollections() {
-  const [activeTab, setActiveTab] = useState("rings");
+  const [activeTab, setActiveTab] = useState(TABS[0].id);
   const allProducts = useAppSelector((state) => state.products.items);
 
-  const filteredProducts = useMemo(() => {
-    const currentTabObj = TABS.find((t) => t.id === activeTab);
-    const categoryKey = currentTabObj?.category || "rings";
-
-    let prods = allProducts.filter((p) => {
-      if (categoryKey === "mens-collection") {
-        return p.gender === "men" || p.category === "mens-collection";
-      }
-      return p.category === categoryKey;
-    });
-
-    if (prods.length < 5) {
-      // Fallback to top products if category has few
-      const additional = allProducts.filter((p) => !prods.includes(p));
-      prods = [...prods, ...additional];
-    }
-
-    return prods.slice(0, 5);
+  const products = useMemo(() => {
+    const matches = allProducts.filter((p) =>
+      activeTab === "mens-collection"
+        ? p.gender === "men" || p.category === "mens-collection"
+        : p.category === activeTab
+    );
+    // Top up thin categories so the row always reads as a full grid
+    const fill = allProducts.filter((p) => !matches.includes(p));
+    return [...matches, ...fill].slice(0, ITEMS);
   }, [allProducts, activeTab]);
 
   return (
-    <section className="w-full bg-[#FAF7F2] py-14 sm:py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
-          <div>
-            <h2 className="font-display text-[26px] sm:text-[34px] md:text-[38px] text-[#141414] font-medium tracking-tight">
-              Featured Collections
-            </h2>
-            <p className="font-body text-[13.5px] sm:text-[15px] text-[#78716A] mt-1 font-normal">
-              Handpicked iconic designs created for life’s most cherished celebrations
-            </p>
-          </div>
+    <section className="section-spacing-sm bg-white border-y border-border" aria-labelledby="featured-heading">
+      <div className="container">
+        <SectionTitle
+          id="featured-heading"
+          align="left"
+          title="Featured Collections"
+          description="Handpicked designs for life's most cherished celebrations"
+          viewAllHref="/shop"
+          className="mb-5 sm:mb-6"
+        />
 
-          <Link
-            href="/shop"
-            className="group inline-flex items-center gap-1.5 text-[12.5px] sm:text-[13.5px] tracking-wider text-[#B38E5D] hover:text-[#9C7748] font-semibold transition-colors shrink-0"
-          >
-            <span>View All Products</span>
-            <ArrowRightIcon className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </div>
-
-        {/* Filter Tabs */}
-        <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-4 mb-8 scrollbar-none">
+        <div
+          role="tablist"
+          aria-label="Featured categories"
+          className="-mx-4 px-4 sm:mx-0 sm:px-0 mb-6 sm:mb-8 flex gap-6 sm:gap-8 overflow-x-auto border-b border-border scrollbar-none"
+        >
           {TABS.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
               <button
                 key={tab.id}
                 type="button"
+                role="tab"
+                aria-selected={isActive}
+                aria-controls="featured-panel"
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 sm:px-5 py-2 rounded-full text-[12.5px] sm:text-[13px] font-medium tracking-wide transition-all duration-200 cursor-pointer whitespace-nowrap ${ isActive ? "bg-[#B38E5D] text-white shadow-xs" : "bg-white text-[#5C554E] hover:text-[#141414] border border-[#E5DFD5] hover:border-[#B38E5D]" }`}
+                className={cn(
+                  "relative -mb-px shrink-0 whitespace-nowrap border-b-2 pb-3 text-[14.5px] font-medium transition-colors cursor-pointer",
+                  isActive ? "border-gold text-ink" : "border-transparent text-muted hover:text-ink"
+                )}
               >
                 {tab.label}
               </button>
@@ -79,14 +70,13 @@ export default function FeaturedCollections() {
           })}
         </div>
 
-        {/* 5-Item Product Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5 lg:gap-6">
-          {filteredProducts.map((product) => (
-            <div key={product.id} className="h-full">
+        <ul id="featured-panel" role="tabpanel" className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-4 gap-y-8 sm:gap-x-5">
+          {products.map((product) => (
+            <li key={product.id}>
               <ProductCard product={product} />
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

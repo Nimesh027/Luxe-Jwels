@@ -3,18 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import {
-  HeartIcon,
-  SafetyCertificateIcon,
-  ShoppingBagIcon,
-  ThunderboltIcon,
-} from "@/components/icons";
+import { useRouter } from "next/navigation";
+import { HeartIcon, ShareIcon, CheckIcon } from "@/components/icons";
+import { CertifiedIcon, CareIcon, ShippingIcon, ReturnsIcon } from "@/components/icons/FeatureIcons";
 import type { Product, Category } from "@/types";
 import Button from "@/components/ui/Button";
+import Rating from "@/components/ui/Rating";
 import { useCart } from "@/hooks/useCart";
 import { useWishlist } from "@/hooks/useWishlist";
-import { formatPrice } from "@/lib/utils";
-import Breadcrumbs from "@/components/common/Breadcrumbs";
+import { formatPrice, cn } from "@/lib/utils";
 
 interface ProductHeroSectionProps {
   product: Product;
@@ -26,6 +23,21 @@ interface ProductHeroSectionProps {
   onOpenSizeGuide: () => void;
 }
 
+const METALS = [
+  { id: "yellow", label: "Yellow Gold", swatch: "#d4ad62" },
+  { id: "white", label: "White Gold", swatch: "#e5e4e2" },
+  { id: "rose", label: "Rose Gold", swatch: "#e8b298" },
+] as const;
+
+const SIZES = [6, 7, 8, 9, 10, 11, 12];
+
+const ASSURANCES = [
+  { icon: CertifiedIcon, label: "Certified Diamond" },
+  { icon: CareIcon, label: "Lifetime Polish" },
+  { icon: ShippingIcon, label: "Free Shipping" },
+  { icon: ReturnsIcon, label: "Easy 30 Day Return" },
+];
+
 export default function ProductHeroSection({
   product,
   category,
@@ -35,242 +47,231 @@ export default function ProductHeroSection({
   onOpenLightbox,
   onOpenSizeGuide,
 }: ProductHeroSectionProps) {
+  const router = useRouter();
   const { add } = useCart();
   const { toggle, isWishlisted } = useWishlist();
   const wishlisted = isWishlisted(product.id);
 
-  const [quantity, setQuantity] = useState(1);
-  const [selectedMetal, setSelectedMetal] = useState<"yellow" | "white" | "rose">("yellow");
-  const [selectedSize, setSelectedSize] = useState<number>(7);
-
+  const [metal, setMetal] = useState<(typeof METALS)[number]["id"]>("yellow");
+  const [size, setSize] = useState(7);
   const [isAdded, setIsAdded] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  const sizes = [6, 7, 8, 9, 10, 11, 12];
+  const isRing = product.category === "rings";
+  const discount =
+    product.compareAtPrice && product.compareAtPrice > product.price
+      ? Math.round((1 - product.price / product.compareAtPrice) * 100)
+      : 0;
+  const activeMetal = METALS.find((m) => m.id === metal)!;
 
   const handleAddToCart = () => {
-    add(product, quantity);
+    add(product, 1);
     setIsAdded(true);
     setTimeout(() => setIsAdded(false), 2000);
   };
 
-  const handleBuyNow = () => {
-    add(product, quantity);
-    window.location.href = "/cart";
+  const handleShare = async () => {
+    const url = window.location.href;
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: product.name, url });
+      } catch {
+        /* user dismissed the share sheet */
+      }
+      return;
+    }
+    await navigator.clipboard.writeText(url);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
-  return (
-    <section className="w-full bg-[#FAF7F2] py-6 sm:py-10 border-b border-[#EAE4DC]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumbs */}
-        <div className="mb-6">
-          <Breadcrumbs
-            items={[
-              { label: "Home", href: "/" },
-              { label: category?.name || "Rings", href: `/category/${category?.slug || "rings"}` },
-              { label: product.name },
-            ]}
-          />
-        </div>
+  const categoryCrumb = category ?? { name: "Shop", slug: "" };
 
-        {/* 2-Column Product Detail Layout */}
+  return (
+    <section className="bg-cream pt-5 pb-10 sm:pb-14">
+      <div className="container">
+        <nav aria-label="Breadcrumb" className="mb-5 sm:mb-6">
+          <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[13.5px] text-muted">
+            <li><Link href="/" className="hover:text-gold transition-colors">Home</Link></li>
+            <li aria-hidden="true">/</li>
+            <li>
+              <Link
+                href={categoryCrumb.slug ? `/category/${categoryCrumb.slug}` : "/shop"}
+                className="hover:text-gold transition-colors"
+              >
+                {categoryCrumb.name}
+              </Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li aria-current="page" className="text-ink font-medium truncate max-w-[60vw]">{product.name}</li>
+          </ol>
+        </nav>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* LEFT: Image Gallery with Main View & Thumbnail Strip */}
-          <div className="lg:col-span-6 flex flex-col gap-4">
-            {/* Main Image Frame */}
-            <div
+          {/* Gallery */}
+          <div className="lg:col-span-7 flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 lg:sticky lg:top-24">
+            {images.length > 1 && (
+              <ul className="flex sm:flex-col gap-3 overflow-x-auto sm:overflow-visible scrollbar-none" aria-label="Product images">
+                {images.map((img, idx) => (
+                  <li key={img + idx}>
+                    <button
+                      type="button"
+                      onClick={() => onSelectImage(idx)}
+                      aria-label={`Show image ${idx + 1}`}
+                      aria-current={activeImageIndex === idx}
+                      className={cn(
+                        "relative block h-16 w-16 sm:h-20 sm:w-20 shrink-0 overflow-hidden rounded-md border bg-white transition-colors cursor-pointer",
+                        activeImageIndex === idx ? "border-gold ring-1 ring-gold" : "border-border hover:border-border-strong"
+                      )}
+                    >
+                      <Image src={img} alt="" fill sizes="80px" className="object-cover" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <button
+              type="button"
               onClick={onOpenLightbox}
-              className="relative aspect-square w-full rounded-2xl overflow-hidden bg-white border border-[#EAE4DC] shadow-sm cursor-zoom-in"
+              aria-label="Enlarge image"
+              className="relative block aspect-square w-full flex-1 overflow-hidden rounded-[var(--radius-card)] border border-border bg-white cursor-zoom-in"
             >
               <Image
-                src={images[activeImageIndex] || product.image || "/images/revamp/halo-ring.jpg"}
-                alt={product.name}
+                src={images[activeImageIndex] || product.image}
+                alt={`${product.name} in ${activeMetal.label.toLowerCase()}`}
                 fill
                 priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-center"
+                sizes="(max-width: 1024px) 100vw, 640px"
+                className="object-cover"
               />
-            </div>
-
-            {/* Thumbnail Gallery Strip */}
-            <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-none">
-              {images.map((img, idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  onClick={() => onSelectImage(idx)}
-                  className={`relative w-20 h-20 rounded-xl overflow-hidden border-2 bg-white transition-all cursor-pointer shrink-0 ${ activeImageIndex === idx ? "border-[#B38E5D] ring-2 ring-[#B38E5D]/30" : "border-[#EAE4DC] opacity-75 hover:opacity-100" }`}
-                >
-                  <Image
-                    src={img || product.image}
-                    alt={`${product.name} angle ${idx + 1}`}
-                    fill
-                    className="object-cover object-center"
-                  />
-                </button>
-              ))}
-            </div>
+            </button>
           </div>
 
-          {/* RIGHT: Buy Box Information & Selectors */}
-          <div className="lg:col-span-6 flex flex-col gap-5">
-            {/* Title & Star Rating */}
-            <div>
-              <h1 className="font-display text-[28px] sm:text-[34px] md:text-[38px] font-medium text-[#141414] leading-tight mb-2">
-                {product.name}
-              </h1>
+          {/* Buy box */}
+          <div className="lg:col-span-5">
+            <h1 className="font-display text-h2 font-semibold text-ink leading-tight">{product.name}</h1>
 
-              <div className="flex items-center gap-2">
-                <div className="flex text-[#B38E5D] text-[14px]">
-                  {"★".repeat(5)}
-                </div>
-                <span className="font-display text-[15px] font-semibold text-[#141414]">
-                  4.8
-                </span>
-                <span className="text-[13px] text-[#8C827A]">
-                  (124 reviews)
-                </span>
-              </div>
-            </div>
+            <a href="#reviews" className="mt-2 inline-flex items-center gap-2 text-[14px] text-muted hover:text-gold transition-colors">
+              <Rating value={4.8} size={15} />
+              <span className="font-semibold text-ink">4.8</span>
+              <span>(124 reviews)</span>
+            </a>
 
-            {/* Price Row */}
-            <div className="flex items-baseline gap-3 py-2 border-y border-[#EAE4DC]">
-              <span className="font-display text-[26px] sm:text-[30px] font-semibold text-[#141414]">
+            <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <span className="text-[28px] sm:text-[32px] font-semibold text-ink leading-none">
                 {formatPrice(product.price)}
               </span>
-              {product.compareAtPrice && (
-                <span className="font-body text-[16px] text-[#8C827A] line-through">
-                  {formatPrice(product.compareAtPrice)}
-                </span>
-              )}
-              {product.compareAtPrice && (
-                <span className="px-2 py-0.5 rounded text-[12px] font-semibold bg-[#227248]/10 text-[#227248]">
-                  28% OFF
-                </span>
+              {discount > 0 && (
+                <>
+                  <span className="text-[17px] text-subtle line-through">{formatPrice(product.compareAtPrice!)}</span>
+                  <span className="rounded-[3px] bg-success/10 px-2 py-0.5 text-[13px] font-semibold text-success">
+                    {discount}% OFF
+                  </span>
+                </>
               )}
             </div>
+            <p className="mt-1.5 text-[13px] text-muted">Inclusive of all taxes</p>
 
-            {/* 4 Feature Badges */}
-            <div className="grid grid-cols-2 gap-2 text-[12.5px] text-[#3A3530]">
-              <div className="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border border-[#EAE4DC]">
-                <span className="text-[#B38E5D]">💎</span>
-                <span>Certified Diamond</span>
-              </div>
-              <div className="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border border-[#EAE4DC]">
-                <span className="text-[#B38E5D]">✨</span>
-                <span>Lifetime Polish</span>
-              </div>
-              <div className="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border border-[#EAE4DC]">
-                <span className="text-[#B38E5D]">🚚</span>
-                <span>Free Shipping</span>
-              </div>
-              <div className="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border border-[#EAE4DC]">
-                <span className="text-[#B38E5D]">🔄</span>
-                <span>Easy 30-Day Return</span>
-              </div>
-            </div>
+            <ul className="mt-5 space-y-2.5 border-y border-border py-5">
+              {ASSURANCES.map(({ icon: Icon, label }) => (
+                <li key={label} className="flex items-center gap-3 text-[14.5px] text-ink-soft">
+                  <Icon className="h-5 w-5 text-gold-warm shrink-0" />
+                  {label}
+                </li>
+              ))}
+            </ul>
 
-            {/* Metal Selector */}
-            <div>
-              <label className="block text-[12.5px] font-semibold tracking-wider text-[#141414] mb-2">
-                Metal:{" "}
-                <span className="font-normal capitalize text-[#78716A]">
-                  {selectedMetal} Gold
-                </span>
-              </label>
-              <div className="flex items-center gap-2.5">
-                {[
-                  { id: "yellow", label: "Yellow Gold", color: "#E5C158" },
-                  { id: "white", label: "White Gold", color: "#E0E0E0" },
-                  { id: "rose", label: "Rose Gold", color: "#E8B298" },
-                ].map((metal) => (
+            <fieldset className="mt-5">
+              <legend className="mb-2.5 text-[14px] font-semibold text-ink">
+                Metal: <span className="font-normal text-muted">{activeMetal.label}</span>
+              </legend>
+              <div className="grid grid-cols-3 gap-2.5">
+                {METALS.map((m) => (
                   <button
-                    key={metal.id}
+                    key={m.id}
                     type="button"
-                    onClick={() => setSelectedMetal(metal.id as any)}
-                    className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-[12.5px] font-medium transition-all cursor-pointer ${ selectedMetal === metal.id ? "border-[#B38E5D] bg-[#B38E5D]/10 text-[#B38E5D] font-semibold shadow-xs" : "border-[#EAE4DC] bg-white text-[#141414] hover:border-[#B38E5D]" }`}
+                    aria-pressed={metal === m.id}
+                    onClick={() => setMetal(m.id)}
+                    className={cn(
+                      "flex h-11 items-center justify-center gap-2 rounded-[var(--radius-btn)] border px-2 text-[13.5px] font-medium transition-colors cursor-pointer",
+                      metal === m.id ? "border-gold bg-gold-soft text-ink" : "border-border bg-white text-ink hover:border-border-strong"
+                    )}
                   >
-                    <span
-                      className="w-3.5 h-3.5 rounded-full border border-black/20"
-                      style={{ backgroundColor: metal.color }}
-                    />
-                    <span>{metal.label}</span>
+                    <span className="h-3.5 w-3.5 shrink-0 rounded-full border border-black/15" style={{ backgroundColor: m.swatch }} />
+                    <span className="truncate">{m.label}</span>
                   </button>
                 ))}
               </div>
-            </div>
+            </fieldset>
 
-            {/* Size Selector */}
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <label className="text-[12.5px] font-semibold tracking-wider text-[#141414]">
-                  Size
-                </label>
-                <button
-                  type="button"
-                  onClick={onOpenSizeGuide}
-                  className="text-[12px] text-[#B38E5D] hover:underline font-medium cursor-pointer"
-                >
-                  Size Guide
-                </button>
-              </div>
-              <div className="flex items-center gap-2 flex-wrap">
-                {sizes.map((sz) => (
+            {isRing && (
+              <fieldset className="mt-5">
+                <div className="mb-2.5 flex items-center justify-between">
+                  <legend className="text-[14px] font-semibold text-ink">
+                    Size: <span className="font-normal text-muted">{size}</span>
+                  </legend>
                   <button
-                    key={sz}
                     type="button"
-                    onClick={() => setSelectedSize(sz)}
-                    className={`w-9 h-9 rounded-lg border text-[13px] font-medium transition-all cursor-pointer flex items-center justify-center ${ selectedSize === sz ? "border-[#B38E5D] bg-[#B38E5D] text-white shadow-xs" : "border-[#EAE4DC] bg-white text-[#141414] hover:border-[#B38E5D]" }`}
+                    onClick={onOpenSizeGuide}
+                    className="text-[13.5px] font-semibold text-gold underline-offset-4 hover:underline cursor-pointer"
                   >
-                    {sz}
+                    Size Guide
                   </button>
-                ))}
-              </div>
-            </div>
+                </div>
+                <div className="grid grid-cols-7 gap-2">
+                  {SIZES.map((sz) => (
+                    <button
+                      key={sz}
+                      type="button"
+                      aria-pressed={size === sz}
+                      onClick={() => setSize(sz)}
+                      className={cn(
+                        "flex h-11 items-center justify-center rounded-[var(--radius-btn)] border text-[14px] font-medium transition-colors cursor-pointer",
+                        size === sz ? "border-ink bg-ink text-white" : "border-border bg-white text-ink hover:border-border-strong"
+                      )}
+                    >
+                      {sz}
+                    </button>
+                  ))}
+                </div>
+              </fieldset>
+            )}
 
-            {/* Dual CTA Buttons: Add to Cart & Buy Now */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
-              <button
-                type="button"
-                onClick={handleAddToCart}
-                className="w-full sm:flex-1 py-3.5 px-6 rounded-xl bg-[#B38E5D] hover:bg-[#9C7748] text-white text-[14px] font-medium tracking-wide shadow-md transition-colors cursor-pointer text-center active:scale-[0.98]"
-              >
-                {isAdded ? "Added to Cart ✓" : "Add to Cart"}
-              </button>
-
-              <button
-                type="button"
-                onClick={handleBuyNow}
-                className="w-full sm:flex-1 py-3.5 px-6 rounded-xl bg-[#141414] hover:bg-[#252525] text-white text-[14px] font-medium tracking-wide shadow-md transition-colors cursor-pointer text-center"
+            <div className="mt-6 space-y-3">
+              <Button size="lg" fullWidth onClick={handleAddToCart} leftIcon={isAdded ? <CheckIcon size={18} /> : undefined}>
+                {isAdded ? "Added to Cart" : "Add to Cart"}
+              </Button>
+              <Button
+                size="lg"
+                colorTheme="dark"
+                fullWidth
+                onClick={() => {
+                  add(product, 1);
+                  router.push("/cart");
+                }}
               >
                 Buy Now
-              </button>
+              </Button>
             </div>
 
-            {/* Secondary Actions: Wishlist & Share */}
-            <div className="flex items-center gap-6 pt-1 text-[13px] text-[#78716A]">
+            <div className="mt-4 flex items-center gap-6 text-[14px] text-ink-soft">
               <button
                 type="button"
                 onClick={() => toggle(product)}
-                className="flex items-center gap-2 hover:text-[#B38E5D] cursor-pointer"
+                aria-pressed={wishlisted}
+                className="inline-flex items-center gap-2 hover:text-gold transition-colors cursor-pointer"
               >
-                <HeartIcon size={16} filled={wishlisted} className={wishlisted ? "text-[#B38E5D]" : ""} />
-                <span>{wishlisted ? "In Wishlist" : "Add to Wishlist"}</span>
+                <HeartIcon size={17} filled={wishlisted} className={wishlisted ? "text-gold" : undefined} />
+                {wishlisted ? "In Wishlist" : "Add to Wishlist"}
               </button>
-
               <button
                 type="button"
-                onClick={() => {
-                  if (navigator.share) {
-                    navigator.share({ title: product.name, url: window.location.href });
-                  } else {
-                    navigator.clipboard.writeText(window.location.href);
-                    alert("Link copied to clipboard!");
-                  }
-                }}
-                className="flex items-center gap-2 hover:text-[#B38E5D] cursor-pointer"
+                onClick={handleShare}
+                className="inline-flex items-center gap-2 hover:text-gold transition-colors cursor-pointer"
               >
-                <span>🔗</span>
-                <span>Share</span>
+                <ShareIcon size={17} />
+                <span aria-live="polite">{copied ? "Link copied" : "Share"}</span>
               </button>
             </div>
           </div>

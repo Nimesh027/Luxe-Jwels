@@ -37,7 +37,7 @@ export default function MobileDrawer() {
 
   const titleNode = (
     <div className="flex items-center gap-2">
-      <svg className="w-5 h-5 text-[#B38E5D]" viewBox="0 0 32 32" fill="none">
+      <svg className="w-5 h-5 text-gold" viewBox="0 0 32 32" fill="none">
         <path d="M16 2L2 12L16 30L30 12L16 2Z" stroke="currentColor" strokeWidth="1.8" />
         <path d="M2 12H30M16 2L10 12L16 30L22 12L16 2Z" stroke="currentColor" strokeWidth="1.5" />
       </svg>
@@ -45,7 +45,7 @@ export default function MobileDrawer() {
         <span className="font-display text-[16px] tracking-[0.16em] text-ink font-semibold uppercase leading-none">
           LUXE JEWELS
         </span>
-        <span className="text-[8.5px] uppercase tracking-[0.2em] text-[#B38E5D] font-medium mt-0.5">
+        <span className="text-[8.5px] uppercase tracking-[0.2em] text-gold font-medium mt-0.5">
           Timeless Elegance
         </span>
       </div>
@@ -185,8 +185,8 @@ export default function MobileDrawer() {
                           className={cn(
                             "px-3.5 py-1.5 rounded-full text-[12px] font-medium whitespace-nowrap transition-colors",
                             isTabActive
-                              ? "bg-[#FAF7F2] text-[#B38E5D] border border-[#B38E5D]/40 font-semibold shadow-2xs"
-                              : "text-[#554E46] hover:text-[#141414] bg-[#FAF7F2]/70"
+                              ? "bg-cream text-gold border border-gold/40 font-semibold shadow-2xs"
+                              : "text-muted hover:text-ink bg-cream/70"
                           )}
                         >
                           {tab.label}
@@ -197,7 +197,7 @@ export default function MobileDrawer() {
 
                   {/* Tab Items Grid */}
                   {currentTab && (
-                    <div className="grid grid-cols-2 gap-2 mt-2 bg-[#FAF7F2]/50 p-2.5 rounded-xl border border-[#EAE4DC]">
+                    <div className="grid grid-cols-2 gap-2 mt-2 bg-cream/50 p-2.5 rounded-xl border border-border">
                       {currentTab.items.map((item) => (
                         <Link
                           key={item.id}
@@ -205,8 +205,8 @@ export default function MobileDrawer() {
                           onClick={close}
                           className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-white transition-colors"
                         >
-                          <JewelryIcon name={item.name} className="w-5 h-5 shrink-0 text-[#B38E5D]" />
-                          <span className="text-[12.5px] text-[#141414] truncate hover:text-[#B38E5D]">
+                          <JewelryIcon name={item.name} className="w-5 h-5 shrink-0 text-gold" />
+                          <span className="text-[12.5px] text-ink truncate hover:text-gold">
                             {item.name}
                           </span>
                         </Link>

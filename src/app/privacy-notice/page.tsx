@@ -3,6 +3,7 @@ import PrivacyPolicyClient from "@/app/privacy-policy/PrivacyPolicyClient";
 
 export const metadata: Metadata = {
   title: "Privacy Notice",
+  alternates: { canonical: "/privacy-policy" },
   description: "Read the official Privacy Notice and Data Protection Policy for Luxe Jewels.",
 };
 

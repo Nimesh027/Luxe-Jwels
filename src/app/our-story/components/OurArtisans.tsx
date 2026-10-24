@@ -28,7 +28,7 @@ export default function OurArtisans() {
   ];
 
   return (
-    <Section className="py-16 sm:py-24 bg-[#F9F7F5]">
+    <Section className="py-16 sm:py-24 bg-cream">
       <div className="container max-w-6xl mx-auto px-4 sm:px-6">
 
         {/* Header */}

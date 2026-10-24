@@ -159,7 +159,7 @@ function DrawerComponent({
                     variant="unstyled"
                     onClick={onClose}
                     aria-label={`Close ${ariaLabel}`}
-                    className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground hover:bg-neutral-200/60 hover:text-ink transition-colors cursor-pointer shrink-0"
+                    className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground hover:bg-border/60 hover:text-ink transition-colors cursor-pointer shrink-0"
                   >
                     <CloseIcon size={18} />
                   </Button>

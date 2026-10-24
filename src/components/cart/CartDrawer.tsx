@@ -11,6 +11,7 @@ import { formatPrice } from "@/lib/utils";
 import QuantitySelector from "@/components/ui/QuantitySelector";
 import Button from "@/components/ui/Button";
 import Drawer from "@/components/ui/Drawer";
+import { GiftIcon } from "@/components/icons";
 import {
   ShoppingBagIcon,
   TrashIcon,
@@ -53,14 +54,14 @@ export default function CartDrawer() {
   const footerNode = items.length > 0 ? (
     <div className="w-full space-y-3.5">
       {/* Order Special Instructions Accordion */}
-      <div className="border-b border-neutral-200/70 pb-3">
+      <div className="border-b border-border/70 pb-3">
         <Button
           variant="unstyled"
           onClick={() => setInstructionsOpen(!instructionsOpen)}
-          className="flex w-full items-center justify-between text-left text-caption font-medium text-neutral-700 hover:text-ink cursor-pointer"
+          className="flex w-full items-center justify-between text-left text-caption font-medium text-ink-soft hover:text-ink cursor-pointer"
         >
           <span className="inline-flex items-center gap-1.5">
-            <span className="text-gold text-caption">✍</span>
+            <GiftIcon size={16} className="text-gold" />
             <span>Order Special Instructions / Gift Note</span>
           </span>
           <span className="text-small font-semibold">{instructionsOpen ? "−" : "+"}</span>
@@ -73,7 +74,7 @@ export default function CartDrawer() {
               value={orderNote}
               onChange={(e) => setOrderNote(e.target.value)}
               placeholder="Add custom engraving note or special delivery instructions..."
-              className="w-full rounded-lg border border-neutral-300 bg-white p-2.5 text-caption text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+              className="w-full rounded-lg border border-border-strong bg-white p-2.5 text-caption text-ink placeholder:text-muted focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
             />
           </div>
         )}
@@ -81,7 +82,7 @@ export default function CartDrawer() {
 
       {/* Subtotal & Estimated Total */}
       <div className="flex items-baseline justify-between">
-        <span className="text-[11px] tracking-wider font-semibold text-neutral-600">
+        <span className="text-[11px] tracking-wider font-semibold text-muted">
           Estimated Total
         </span>
         <span className="font-display text-[16px] sm:text-[18px] font-bold text-ink">
@@ -115,7 +116,7 @@ export default function CartDrawer() {
           size="sm"
           fullWidth
           onClick={handleViewCart}
-          className="h-9 text-caption font-medium tracking-wider hover:!bg-neutral-100/80 !border-neutral-300 cursor-pointer"
+          className="h-9 text-caption font-medium tracking-wider hover:!bg-cream-dark/80 !border-border-strong cursor-pointer"
         >
           View Cart
         </Button>
@@ -129,14 +130,14 @@ export default function CartDrawer() {
       onClose={closeDrawer}
       title={titleNode}
       ariaLabel="Shopping Cart Drawer"
-      headerClassName="bg-[#fbf9f6]"
+      headerClassName="bg-cream"
       footer={footerNode}
-      footerClassName="bg-[#fbf9f6] border-t border-neutral-200/80 p-4 sm:p-5"
+      footerClassName="bg-cream border-t border-border/80 p-4 sm:p-5"
     >
       {items.length === 0 ? (
         /* Empty Cart View */
         <div className="flex flex-1 min-h-[350px] flex-col items-center justify-center p-6 text-center">
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#f6efe9] text-wine mb-5 shadow-xs">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gold-soft text-wine mb-5 shadow-xs">
             <ShoppingBagIcon size={36} className="text-wine" />
           </div>
 
@@ -164,7 +165,7 @@ export default function CartDrawer() {
         /* Populated Cart Content */
         <div>
           {/* Free Shipping Progress Ribbon */}
-          <div className="bg-[#FAF7F2] border-b border-neutral-200/60 px-4 py-2.5 sm:px-6">
+          <div className="bg-cream border-b border-border/60 px-4 py-2.5 sm:px-6">
             <div className="flex items-center justify-between text-[11px] mb-1.5 font-medium">
               <span className="text-ink">
                 {isFreeShipping ? (
@@ -181,16 +182,16 @@ export default function CartDrawer() {
                 {progressPercent}%
               </span>
             </div>
-            <div className="w-full bg-neutral-200/80 h-1.5 rounded-full overflow-hidden">
+            <div className="w-full bg-border/80 h-1.5 rounded-full overflow-hidden">
               <div
-                className="h-full rounded-full transition-all duration-500 bg-gold"
+                className="h-full rounded-full transition-all duration-500 bg-brand"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
           </div>
 
           {/* Cart Items List */}
-          <div className="p-4 sm:p-6 divide-y divide-neutral-100">
+          <div className="p-4 sm:p-6 divide-y divide-border">
             {items.map((item) => {
               const { product, quantity } = item;
 
@@ -200,7 +201,7 @@ export default function CartDrawer() {
                   className="py-4 first:pt-0 last:pb-0 flex gap-3.5 sm:gap-4 items-start"
                 >
                   {/* Product Image */}
-                  <div className="relative h-20 w-20 sm:h-22 sm:w-22 shrink-0 overflow-hidden rounded-xl border border-neutral-200/80 bg-neutral-50">
+                  <div className="relative h-20 w-20 sm:h-22 sm:w-22 shrink-0 overflow-hidden rounded-xl border border-border/80 bg-cream">
                     <Link href={`/products/${product.slug}`} onClick={closeDrawer}>
                       <Image
                         src={product.image}
@@ -258,7 +259,7 @@ export default function CartDrawer() {
                         size="xs"
                         rounded="full"
                         onClick={() => remove(product.id)}
-                        className="!px-2.5 !py-1 text-[10px] font-medium !text-neutral-500 hover:!text-red-700 hover:!bg-red-50/80 !border-neutral-200/80 cursor-pointer"
+                        className="!px-2.5 !py-1 text-[10px] font-medium !text-muted hover:!text-red-700 hover:!bg-red-50/80 !border-border/80 cursor-pointer"
                         leftIcon={<TrashIcon size={13} />}
                       >
                         Remove

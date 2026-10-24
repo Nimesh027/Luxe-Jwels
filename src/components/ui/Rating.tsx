@@ -9,14 +9,19 @@ interface RatingProps {
 }
 
 export default function Rating({ value, max = 5, className, size = 15 }: RatingProps) {
+  const rounded = Math.round(value);
   return (
-    <span className={cn("inline-flex items-center gap-0.5 text-gold", className)} aria-label={`${value} out of ${max} stars`}>
+    <span
+      role="img"
+      className={cn("inline-flex items-center gap-0.5", className)}
+      aria-label={`Rated ${value} out of ${max}`}
+    >
       {Array.from({ length: max }, (_, index) => (
         <StarIcon
           key={index}
           size={size}
-          filled={index < value}
-          className={index < value ? "text-gold" : "text-border"}
+          filled={index < rounded}
+          className={index < rounded ? "text-star" : "text-border-strong"}
         />
       ))}
     </span>

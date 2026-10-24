@@ -6,6 +6,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/hooks/useCart";
 import { formatPrice } from "@/lib/utils";
+import Button from "@/components/ui/Button";
+import { ShoppingBagIcon, TrashIcon } from "@/components/icons";
+import { ShippingIcon, SecureIcon } from "@/components/icons/FeatureIcons";
 
 export default function CartClient() {
   const router = useRouter();
@@ -43,264 +46,215 @@ export default function CartClient() {
 
   const finalTotal = Math.max(0, subtotal - promoDiscount);
 
-  // If cart is completely empty
   if (items.length === 0) {
     return (
-      <div className="w-full bg-[#FAF7F2] min-h-[60vh] flex items-center justify-center py-16 px-4">
-        <div className="text-center max-w-md">
-          <div className="w-16 h-16 rounded-full bg-white border border-[#EAE4DC] flex items-center justify-center mx-auto mb-4 text-[24px]">
-            🛍️
-          </div>
-          <h1 className="font-display text-[28px] font-medium text-[#141414] mb-2">
-            Your Cart is Empty
-          </h1>
-          <p className="font-body text-[14px] text-[#78716A] mb-6">
+      <section className="section-spacing">
+        <div className="container max-w-md text-center">
+          <span className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-border bg-white text-gold-warm">
+            <ShoppingBagIcon size={30} />
+          </span>
+          <h1 className="mt-5 font-display text-h2 font-semibold text-ink">Your cart is empty</h1>
+          <p className="mt-2 text-[15px] text-muted">
             Looks like you haven&apos;t added any jewellery yet. Explore our handcrafted collections.
           </p>
-          <Link
-            href="/shop"
-            className="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-[#B38E5D] hover:bg-[#9C7748] text-white text-[14px] font-medium tracking-wide shadow-md transition-colors"
-          >
+          <Button href="/shop" size="lg" className="mt-7">
             Start Shopping
-          </Link>
+          </Button>
         </div>
-      </div>
+      </section>
     );
   }
 
   return (
-    <div className="w-full bg-[#FAF7F2] py-10 sm:py-14 min-h-screen">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-        {/* Title */}
-        <h1 className="font-display text-[26px] sm:text-[32px] text-[#141414] font-medium mb-8">
-          Your Cart ({count} {count === 1 ? "item" : "items"})
+    <section className="py-8 sm:py-12">
+      <div className="container">
+        <h1 className="font-display text-h2 font-semibold text-ink">
+          Your Cart{" "}
+          <span className="font-body text-[16px] font-normal text-muted">
+            ({count} {count === 1 ? "item" : "items"})
+          </span>
         </h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* LEFT: Item List (7 cols) */}
-          <div className="lg:col-span-7 space-y-4">
-            {items.map(({ product, quantity }) => (
-              <div
-                key={product.id}
-                className="flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-2xl bg-white border border-[#EAE4DC] shadow-xs"
-              >
-                {/* Thumbnail */}
-                <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-[#FAF7F2] border border-[#EAE4DC] shrink-0">
-                  <Image
-                    src={product.image || "/images/revamp/halo-ring.jpg"}
-                    alt={product.name}
-                    fill
-                    className="object-cover object-center"
-                  />
-                </div>
-
-                {/* Details */}
-                <div className="flex-1 min-w-0">
+        <div className="mt-6 sm:mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+          {/* Items */}
+          <div className="lg:col-span-8 space-y-6">
+            <ul className="divide-y divide-border rounded-[var(--radius-card)] border border-border bg-white">
+              {items.map(({ product, quantity }) => (
+                <li key={product.id} className="flex gap-4 p-4 sm:p-5">
                   <Link
                     href={`/products/${product.slug}`}
-                    className="font-display text-[15px] sm:text-[17px] font-medium text-[#141414] hover:text-[#B38E5D] transition-colors line-clamp-1"
+                    className="relative h-24 w-24 sm:h-28 sm:w-28 shrink-0 overflow-hidden rounded-md border border-border bg-cream-dark"
                   >
-                    {product.name}
+                    <Image src={product.image} alt={product.name} fill sizes="112px" className="object-cover" />
                   </Link>
-                  <p className="font-body text-[12px] text-[#78716A] mt-0.5">
-                    Yellow Gold | Size 7
-                  </p>
-                  <p className="font-display text-[15px] sm:text-[16px] font-semibold text-[#141414] mt-1.5">
-                    {formatPrice(product.price)}
-                  </p>
-                </div>
 
-                {/* Quantity Stepper & Delete Button */}
-                <div className="flex flex-col sm:flex-row items-end sm:items-center gap-3">
-                  <div className="flex items-center border border-[#EAE4DC] rounded-lg bg-white overflow-hidden">
-                    <button
-                      type="button"
-                      onClick={() => setQuantity(product.id, Math.max(1, quantity - 1))}
-                      className="w-7 h-7 flex items-center justify-center text-[#78716A] hover:text-[#141414] hover:bg-[#FAF7F2] cursor-pointer"
-                    >
-                      −
-                    </button>
-                    <span className="w-8 text-center text-[13px] font-semibold text-[#141414]">
-                      {quantity}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => setQuantity(product.id, quantity + 1)}
-                      className="w-7 h-7 flex items-center justify-center text-[#78716A] hover:text-[#141414] hover:bg-[#FAF7F2] cursor-pointer"
-                    >
-                      +
-                    </button>
+                  <div className="flex min-w-0 flex-1 flex-col">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <Link
+                          href={`/products/${product.slug}`}
+                          className="text-[15.5px] font-medium text-ink hover:text-gold transition-colors line-clamp-2"
+                        >
+                          {product.name}
+                        </Link>
+                        <p className="mt-0.5 text-[13.5px] text-muted">Yellow Gold · Size 7</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => remove(product.id)}
+                        aria-label={`Remove ${product.name} from cart`}
+                        className="-mr-1.5 -mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-muted hover:bg-cream hover:text-danger transition-colors cursor-pointer"
+                      >
+                        <TrashIcon size={17} />
+                      </button>
+                    </div>
+
+                    <div className="mt-auto flex flex-wrap items-end justify-between gap-3 pt-3">
+                      <div className="flex h-10 items-center overflow-hidden rounded-[var(--radius-btn)] border border-border">
+                        <button
+                          type="button"
+                          aria-label="Decrease quantity"
+                          disabled={quantity <= 1}
+                          onClick={() => setQuantity(product.id, Math.max(1, quantity - 1))}
+                          className="flex h-full w-10 items-center justify-center text-[18px] text-ink hover:bg-cream disabled:text-border-strong cursor-pointer"
+                        >
+                          −
+                        </button>
+                        <span aria-live="polite" className="w-9 text-center text-[15px] font-semibold text-ink">
+                          {quantity}
+                        </span>
+                        <button
+                          type="button"
+                          aria-label="Increase quantity"
+                          onClick={() => setQuantity(product.id, quantity + 1)}
+                          className="flex h-full w-10 items-center justify-center text-[18px] text-ink hover:bg-cream cursor-pointer"
+                        >
+                          +
+                        </button>
+                      </div>
+                      <p className="text-[17px] font-semibold text-ink">{formatPrice(product.price * quantity)}</p>
+                    </div>
                   </div>
+                </li>
+              ))}
+            </ul>
 
-                  <button
-                    type="button"
-                    onClick={() => remove(product.id)}
-                    className="p-1.5 text-[#A69F96] hover:text-red-600 transition-colors cursor-pointer"
-                    aria-label="Remove item"
-                  >
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                    </svg>
-                  </button>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                { icon: ShippingIcon, title: "Free Shipping", text: "On orders above ₹2,999" },
+                { icon: SecureIcon, title: "Secure Payments", text: "100% safe & secure" },
+              ].map(({ icon: Icon, title, text }) => (
+                <div key={title} className="flex items-center gap-3.5 rounded-[var(--radius-card)] border border-border bg-white p-4">
+                  <Icon className="h-8 w-8 shrink-0 text-gold-warm" />
+                  <div>
+                    <p className="font-display text-[17px] font-semibold text-ink leading-tight">{title}</p>
+                    <p className="text-[13.5px] text-muted">{text}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
-
-            {/* Free Shipping & Secure Badges */}
-            <div className="grid grid-cols-2 gap-4 pt-4">
-              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-[#EAE4DC]">
-                <span className="text-[#B38E5D] text-lg">🚚</span>
-                <div>
-                  <p className="font-display text-[13.5px] font-semibold text-[#141414]">Free Shipping</p>
-                  <p className="text-[11.5px] text-[#78716A]">Orders above ₹2,999</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-[#EAE4DC]">
-                <span className="text-[#B38E5D] text-lg">🔒</span>
-                <div>
-                  <p className="font-display text-[13.5px] font-semibold text-[#141414]">Secure Payments</p>
-                  <p className="text-[11.5px] text-[#78716A]">100% Safe & Secure</p>
-                </div>
-              </div>
+              ))}
             </div>
 
-            {/* "Still Deciding? Save your cart for later" Banner */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-[#FAF0E4] via-[#FDF7EF] to-[#FAF0E4] border border-[#E8D8C3] flex items-center justify-between gap-4 mt-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-[var(--radius-card)] border border-border bg-gold-soft p-5 sm:p-6">
               <div>
-                <h3 className="font-display text-[16px] sm:text-[18px] font-semibold text-[#141414]">
-                  Still Deciding?
-                </h3>
-                <p className="font-body text-[12.5px] sm:text-[13px] text-[#78716A]">
-                  Save your cart for later and get notified on price updates.
-                </p>
+                <h2 className="font-display text-h4 font-semibold text-ink">Still deciding?</h2>
+                <p className="text-[14.5px] text-muted">Save your cart for later and get notified on price updates.</p>
               </div>
-
-              <button
-                type="button"
-                onClick={() => setSavedForLater(true)}
-                className="px-5 py-2.5 rounded-xl bg-white border border-[#B38E5D] text-[#B38E5D] hover:bg-[#B38E5D] hover:text-white text-[13px] font-medium tracking-wide transition-colors cursor-pointer shrink-0"
-              >
+              <Button variant="outline" onClick={() => setSavedForLater(true)} className="shrink-0">
                 {savedForLater ? "Cart Saved ✓" : "Save Cart"}
-              </button>
+              </Button>
             </div>
           </div>
 
-          {/* RIGHT: Order Summary Card (5 cols) */}
-          <div className="lg:col-span-5">
-            <div className="bg-white rounded-2xl border border-[#EAE4DC] p-6 shadow-sm sticky top-28 space-y-5">
-              <h2 className="font-display text-[18px] font-semibold text-[#141414] pb-4 border-b border-[#EAE4DC]">
+          {/* Summary */}
+          <aside className="lg:col-span-4 lg:sticky lg:top-24" aria-labelledby="order-summary-heading">
+            <div className="rounded-[var(--radius-card)] border border-border bg-white p-5 sm:p-6">
+              <h2
+                id="order-summary-heading"
+                className="border-b border-border pb-4 font-display text-h4 font-semibold text-ink"
+              >
                 Order Summary
               </h2>
 
-              <div className="space-y-3 text-[14px]">
-                <div className="flex justify-between text-[#5C554E]">
-                  <span>Subtotal ({count} {count === 1 ? "item" : "items"})</span>
-                  <span className="font-semibold text-[#141414]">{formatPrice(subtotal)}</span>
+              <dl className="space-y-3 py-4 text-[15px]">
+                <div className="flex justify-between">
+                  <dt className="text-muted">Subtotal</dt>
+                  <dd className="font-medium text-ink">{formatPrice(subtotal)}</dd>
                 </div>
-
-                <div className="flex justify-between items-center text-[#5C554E]">
-                  <span>Insured Delivery</span>
-                  <span className="font-semibold text-[#227248] text-[12px] bg-emerald-50 px-2 py-0.5 rounded">
-                    FREE
-                  </span>
+                <div className="flex justify-between">
+                  <dt className="text-muted">Shipping</dt>
+                  <dd className="font-semibold text-success">FREE</dd>
                 </div>
-
-                <div className="flex justify-between items-center text-[#5C554E]">
-                  <span>Luxury Velvet Box</span>
-                  <span className="font-semibold text-[#227248] text-[12px] bg-emerald-50 px-2 py-0.5 rounded">
-                    FREE
-                  </span>
+                <div className="flex justify-between">
+                  <dt className="text-muted">Luxury gift box</dt>
+                  <dd className="font-semibold text-success">FREE</dd>
                 </div>
-
                 {promoApplied && (
-                  <div className="flex justify-between text-[#227248] font-medium">
-                    <span>Discount ({promoCode.toUpperCase()})</span>
-                    <span>&minus; {formatPrice(promoDiscount)}</span>
+                  <div className="flex justify-between text-success">
+                    <dt>Discount ({promoCode.toUpperCase()})</dt>
+                    <dd className="font-medium">− {formatPrice(promoDiscount)}</dd>
                   </div>
                 )}
+              </dl>
 
-                <div className="pt-3 border-t border-[#EAE4DC] flex items-baseline justify-between text-[16px]">
-                  <span className="font-semibold text-[#141414]">Total</span>
-                  <span className="font-display text-[22px] font-semibold text-[#B38E5D]">
-                    {formatPrice(finalTotal)}
-                  </span>
-                </div>
+              <div className="flex items-baseline justify-between border-t border-border pt-4">
+                <span className="text-[16px] font-semibold text-ink">Total</span>
+                <span className="text-[26px] font-semibold text-ink">{formatPrice(finalTotal)}</span>
               </div>
 
-              {/* Promo Code Input Form */}
-              <div className="pt-3 border-t border-[#EAE4DC]">
-                <label className="block text-[11px] font-semibold tracking-wider text-[#78716A] mb-2">
-                  Promotional Coupon
-                </label>
-
+              <div className="mt-5">
                 {promoApplied ? (
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-[12.5px] text-emerald-800">
-                    <span>Coupon &quot;{promoCode.toUpperCase()}&quot; Applied!</span>
-                    <button
-                      type="button"
-                      onClick={handleRemovePromo}
-                      className="font-semibold text-emerald-900 underline cursor-pointer"
-                    >
+                  <div
+                    role="status"
+                    className="flex items-center justify-between rounded-[var(--radius-btn)] border border-success/30 bg-success/5 px-3 py-2.5 text-[14px] text-success"
+                  >
+                    <span>Coupon “{promoCode.toUpperCase()}” applied</span>
+                    <button type="button" onClick={handleRemovePromo} className="font-semibold underline cursor-pointer">
                       Remove
                     </button>
                   </div>
                 ) : (
-                  <form onSubmit={handleApplyPromo} className="flex gap-2">
-                    <input
-                      type="text"
-                      value={promoCode}
-                      onChange={(e) => setPromoCode(e.target.value)}
-                      placeholder="e.g. LUXE10 or WELCOME"
-                      className="flex-1 px-3 py-2 text-[13px] rounded-xl border border-[#EAE4DC] focus:border-[#B38E5D] focus:outline-none bg-[#FAF7F2]"
-                    />
-                    <button
-                      type="submit"
-                      className="px-4 py-2 rounded-xl bg-[#141414] hover:bg-[#2C2723] text-white text-[12.5px] font-medium tracking-wide transition-colors cursor-pointer"
-                    >
-                      Apply Code
-                    </button>
+                  <form onSubmit={handleApplyPromo}>
+                    <label htmlFor="promo-code" className="mb-1.5 block text-[14px] font-medium text-ink">
+                      Promo code
+                    </label>
+                    <div className="flex gap-2">
+                      <input
+                        id="promo-code"
+                        type="text"
+                        value={promoCode}
+                        onChange={(e) => setPromoCode(e.target.value)}
+                        placeholder="e.g. LUXE10"
+                        aria-describedby={promoError ? "promo-error" : undefined}
+                        className="field min-w-0 flex-1"
+                      />
+                      <Button type="submit" colorTheme="dark" className="shrink-0 h-[46px]">
+                        Apply
+                      </Button>
+                    </div>
+                    {promoError && (
+                      <p id="promo-error" className="mt-1.5 text-[13px] text-danger">
+                        {promoError}
+                      </p>
+                    )}
                   </form>
                 )}
-
-                {promoError && (
-                  <p className="mt-1.5 text-[11px] text-red-600 font-medium">{promoError}</p>
-                )}
               </div>
 
-              {/* Checkout CTA */}
-              <button
-                type="button"
-                onClick={() => router.push("/checkout")}
-                className="w-full py-3.5 rounded-xl bg-[#B38E5D] hover:bg-[#9C7748] text-white text-[14.5px] font-medium tracking-wide shadow-md transition-colors cursor-pointer text-center"
-              >
+              <Button size="lg" fullWidth className="mt-5" onClick={() => router.push("/checkout")}>
                 Proceed to Checkout
-              </button>
-
-              {/* Payment Security */}
-              <div className="pt-4 border-t border-[#EAE4DC] text-center">
-                <p className="text-[10px] tracking-wider font-semibold text-[#8C827A] mb-2">
-                  Guaranteed 100% Safe & Insured Checkout
-                </p>
-                <div className="flex items-center justify-center gap-2 text-[11px] text-[#78716A] flex-wrap">
-                  <span className="px-2 py-1 rounded bg-[#FAF7F2] border border-[#EAE4DC]">UPI</span>
-                  <span className="px-2 py-1 rounded bg-[#FAF7F2] border border-[#EAE4DC]">Cards</span>
-                  <span className="px-2 py-1 rounded bg-[#FAF7F2] border border-[#EAE4DC]">Net Banking</span>
-                  <span className="px-2 py-1 rounded bg-[#FAF7F2] border border-[#EAE4DC]">EMI</span>
-                </div>
-              </div>
-
-              <div className="text-center pt-2">
+              </Button>
+              <div className="mt-3 text-center">
                 <Link
                   href="/shop"
-                  className="text-[13px] text-[#78716A] hover:text-[#B38E5D] underline transition-colors"
+                  className="text-[14px] font-medium text-ink-soft underline-offset-4 hover:text-gold hover:underline"
                 >
                   Continue Shopping
                 </Link>
               </div>
             </div>
-          </div>
+          </aside>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

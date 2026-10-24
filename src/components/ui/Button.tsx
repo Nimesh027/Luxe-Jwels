@@ -35,21 +35,23 @@ export interface ButtonProps
   type?: "button" | "submit" | "reset";
 }
 
+// The reference design uses crisp, slightly rounded rectangles for every
+// button, so "md"/"lg" no longer produce pill shapes.
 const roundedClasses: Record<ButtonRounded, string> = {
   none: "rounded-none",
-  sm: "rounded-sm",
-  md: "rounded-lg",
-  lg: "rounded-xl",
-  full: "rounded-full",
+  sm: "rounded-[var(--radius-btn)]",
+  md: "rounded-[var(--radius-btn)]",
+  lg: "rounded-md",
+  full: "rounded-[var(--radius-btn)]",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
   none: "",
-  xs: "px-3 py-1.5 text-caption gap-1.5",
-  sm: "px-4 py-2 text-caption gap-2",
-  md: "px-6 py-2.5 sm:py-3 text-body gap-2.5",
-  lg: "px-8 py-3.5 sm:py-4 text-body gap-3",
-  icon: "p-2.5 sm:p-3 aspect-square items-center justify-center",
+  xs: "h-8 px-3 text-[12.5px] gap-1.5",
+  sm: "h-10 px-4 text-[13.5px] gap-2",
+  md: "h-11 px-6 text-[14.5px] gap-2.5",
+  lg: "h-12 sm:h-[52px] px-8 text-[15px] gap-3",
+  icon: "h-10 w-10 sm:h-11 sm:w-11 items-center justify-center",
 };
 
 const ButtonComponent = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
@@ -57,7 +59,7 @@ const ButtonComponent = forwardRef<HTMLButtonElement, ButtonProps>(function Butt
     variant = "fill",
     colorTheme = "wine",
     size = "md",
-    rounded = "full",
+    rounded = "md",
     fullWidth = false,
     href,
     leftIcon,
@@ -70,7 +72,6 @@ const ButtonComponent = forwardRef<HTMLButtonElement, ButtonProps>(function Butt
   },
   ref
 ) {
-  // If variant is 'unstyled', allow custom styling without intrusive defaults
   if (variant === "unstyled") {
     const unstyledClasses = cn(
       "cursor-pointer select-none transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none",
@@ -95,83 +96,65 @@ const ButtonComponent = forwardRef<HTMLButtonElement, ButtonProps>(function Butt
     }
 
     return (
-      <button
-        ref={ref}
-        type={type}
-        disabled={disabled}
-        className={unstyledClasses}
-        {...rest}
-      >
+      <button ref={ref} type={type} disabled={disabled} className={unstyledClasses} {...rest}>
         {content}
       </button>
     );
   }
 
-  // Resolve computed variant style
   const getVariantStyles = (): string => {
-    // 1. Icon Only Button Variant
     if (variant === "icon") {
       switch (colorTheme) {
         case "light":
-          return "bg-surface/80 text-ink hover:bg-surface border border-border/80 shadow-xs hover:shadow-md backdrop-blur-xs";
+          return "bg-white text-ink hover:text-gold border border-border shadow-xs";
         case "gold":
-          return "bg-gold hover:bg-gold-light text-ink shadow-gold/20 hover:shadow-md";
+          return "bg-brand hover:bg-brand-dark text-white";
         case "dark":
-          return "bg-ink/50 text-cream hover:bg-ink/80 border border-cream/20 shadow-md backdrop-blur-xs";
+          return "bg-ink/60 text-white hover:bg-ink border border-white/20 backdrop-blur-xs";
         case "cream":
-          return "bg-cream text-ink hover:bg-cream-dark border border-border/60 shadow-xs";
+          return "bg-cream text-ink hover:bg-cream-dark border border-border";
         case "wine":
         default:
-          return "bg-wine-soft/80 text-wine hover:bg-wine hover:text-white border border-wine/20 transition-all";
+          return "bg-gold-soft text-gold hover:bg-brand hover:text-white border border-gold/20";
       }
     }
 
-    // 2. Text / Ghost Variant (No Border, No Fill)
     if (variant === "text" || variant === "ghost") {
       switch (colorTheme) {
-        case "gold":
-          return "bg-transparent text-gold hover:text-gold-light hover:underline underline-offset-4";
         case "light":
         case "cream":
-          return "bg-transparent text-cream/90 hover:text-cream hover:underline underline-offset-4";
+          return "bg-transparent text-white/90 hover:text-white underline-offset-4 hover:underline";
         case "dark":
         case "ink":
-          return "bg-transparent text-ink hover:text-wine";
-        case "wine":
+          return "bg-transparent text-ink hover:text-gold";
         default:
-          return "bg-transparent text-wine hover:text-wine-dark hover:underline underline-offset-4";
+          return "bg-transparent text-gold hover:text-gold-dark underline-offset-4 hover:underline";
       }
     }
 
-    // 3. Border / Outline Variant
     if (variant === "border" || variant === "outline" || variant === "secondary") {
       switch (colorTheme) {
-        case "gold":
-          return "bg-transparent text-gold border border-gold/60 hover:bg-gold hover:text-ink shadow-2xs";
         case "light":
         case "cream":
-          return "bg-transparent text-cream border border-cream/50 hover:bg-cream/20 backdrop-blur-xs shadow-2xs";
+          return "bg-transparent text-white border border-white/70 hover:bg-white hover:text-ink";
         case "dark":
         case "ink":
-          return "bg-transparent text-ink border border-ink/40 hover:bg-ink/10 shadow-2xs";
-        case "wine":
+          return "bg-transparent text-ink border border-ink hover:bg-ink hover:text-white";
         default:
-          return "bg-transparent text-wine border border-wine/50 hover:bg-wine-soft shadow-2xs";
+          return "bg-transparent text-gold border border-gold hover:bg-brand hover:border-brand hover:text-white";
       }
     }
 
-    // 4. Fill / Primary Variant (Default)
+    // Fill (default)
     switch (colorTheme) {
-      case "gold":
-        return "bg-[#B38E5D] hover:bg-[#9C7748] text-white font-medium shadow-xs hover:shadow-md active:scale-[0.99]";
       case "dark":
-        return "bg-ink hover:bg-ink-soft text-white font-medium shadow-xs hover:shadow-md active:scale-[0.99]";
+      case "ink":
+        return "bg-ink hover:bg-ink-soft text-white font-semibold";
       case "light":
       case "cream":
-        return "bg-white hover:bg-[#FAF7F2] text-ink border border-border font-medium shadow-xs hover:shadow-md";
-      case "wine":
+        return "bg-white hover:bg-cream text-ink border border-border font-semibold";
       default:
-        return "bg-[#B38E5D] hover:bg-[#9C7748] text-white font-medium shadow-xs hover:shadow-md active:scale-[0.99]";
+        return "bg-brand hover:bg-brand-dark text-white font-semibold";
     }
   };
 
@@ -179,7 +162,7 @@ const ButtonComponent = forwardRef<HTMLButtonElement, ButtonProps>(function Butt
   const effectiveSize = isIconSize ? "icon" : size;
 
   const combinedClasses = cn(
-    "inline-flex items-center justify-center font-body transition-all duration-200 cursor-pointer select-none tracking-wide",
+    "inline-flex items-center justify-center font-body font-medium tracking-wide whitespace-nowrap transition-colors duration-200 cursor-pointer select-none",
     "disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none",
     roundedClasses[rounded],
     sizeClasses[effectiveSize],
@@ -205,13 +188,7 @@ const ButtonComponent = forwardRef<HTMLButtonElement, ButtonProps>(function Butt
   }
 
   return (
-    <button
-      ref={ref}
-      type={type}
-      disabled={disabled}
-      className={combinedClasses}
-      {...rest}
-    >
+    <button ref={ref} type={type} disabled={disabled} className={combinedClasses} {...rest}>
       {content}
     </button>
   );

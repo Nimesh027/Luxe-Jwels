@@ -4,62 +4,33 @@ import { memo } from "react";
 import type { Product } from "@/types";
 import Button from "@/components/ui/Button";
 import { ShoppingBagIcon } from "@/components/icons";
+import { formatPrice } from "@/lib/utils";
 
 interface StickyAddToCartBarProps {
   product: Product;
   onAddToCart: () => void;
 }
 
-function StickyAddToCartBarComponent({
-  product,
-  onAddToCart,
-}: StickyAddToCartBarProps) {
-  // Calculate discount percentage
-  const discountPercent = product.compareAtPrice
-    ? Math.round(
-        ((product.compareAtPrice - product.price) / product.compareAtPrice) * 100
-      )
-    : 12;
-
-  const comparePriceFormatted = product.compareAtPrice
-    ? `₹${product.compareAtPrice.toLocaleString("en-IN")}`
-    : "₹48,999";
-
-  const priceFormatted = `₹${product.price.toLocaleString("en-IN")}`;
+/** Mobile/tablet only: keeps price and the primary action within thumb reach. */
+function StickyAddToCartBarComponent({ product, onAddToCart }: StickyAddToCartBarProps) {
+  const hasDiscount = Boolean(product.compareAtPrice && product.compareAtPrice > product.price);
 
   return (
-    <div className="fixed bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 w-[calc(100%-1.5rem)] sm:w-auto max-w-md sm:max-w-fit bg-white shadow-[0_12px_40px_rgba(0,0,0,0.16)] rounded-full border border-neutral-100 p-2 px-3.5 sm:px-7 flex items-center justify-between gap-2.5 sm:gap-8 animate-in slide-in-from-bottom-5 duration-300">
-      
-      {/* 1. PRICE & DISCOUNT BADGE */}
-      <div className="flex items-center gap-2 shrink-0">
-        <div>
-          <span className="text-[9px] sm:text-caption text-neutral-400 line-through font-normal block -mb-0.5">
-            {comparePriceFormatted}
-          </span>
-          <div className="flex items-center gap-1.5">
-            <span className="font-display font-bold text-small sm:text-h5 text-slate-900 tracking-tight">
-              {priceFormatted}
-            </span>
-            <span className="px-1.5 sm:px-2 py-0.5 bg-red-50 text-red-500 rounded-full text-[9px] sm:text-caption font-semibold flex items-center gap-0.5 border border-red-100/80">
-              <span className="text-[8px] sm:text-[9px]">▾</span>
-              {discountPercent}%
-            </span>
-          </div>
+    <div className="lg:hidden fixed inset-x-0 bottom-0 z-40 border-t border-border bg-white/95 backdrop-blur-sm pb-[env(safe-area-inset-bottom)]">
+      <div className="container flex items-center justify-between gap-4 py-3">
+        <div className="min-w-0">
+          <p className="truncate text-[13px] text-muted">{product.name}</p>
+          <p className="flex items-baseline gap-2">
+            <span className="text-[18px] font-semibold text-ink">{formatPrice(product.price)}</span>
+            {hasDiscount && (
+              <span className="text-[13px] text-subtle line-through">{formatPrice(product.compareAtPrice!)}</span>
+            )}
+          </p>
         </div>
+        <Button onClick={onAddToCart} leftIcon={<ShoppingBagIcon size={17} />} className="shrink-0">
+          Add to Cart
+        </Button>
       </div>
-
-      {/* 2. ADD TO CART BUTTON */}
-      <Button
-        type="button"
-        colorTheme="wine"
-        rounded="full"
-        size="sm"
-        onClick={onAddToCart}
-        className="px-4 sm:px-7 font-semibold text-caption sm:text-body tracking-wider shadow-md hover:shadow-lg shrink-0"
-        leftIcon={<ShoppingBagIcon size={16} />}
-      >
-        Add to Cart
-      </Button>
     </div>
   );
 }
