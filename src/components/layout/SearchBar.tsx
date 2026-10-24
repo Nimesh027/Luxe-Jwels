@@ -9,6 +9,7 @@ import { useAppSelector } from "@/store/hooks";
 import { cn } from "@/lib/utils";
 import Button from "@/components/ui/Button";
 import { JewelryIcon } from "./JewelryIcon";
+import { useOverlayBehaviour } from "@/hooks/useOverlay";
 import {
   searchPlaceholdersData as ROTATING_PLACEHOLDERS,
   popularSearchesData,
@@ -21,6 +22,8 @@ interface SearchBarProps {
   onClose?: () => void;
   onCloseMobile?: () => void;
   onOpenChange?: (open: boolean) => void;
+  /** Drives the enter/exit transition when mounted through usePresence */
+  state?: "open" | "closed";
 }
 
 const QUICK_CATEGORIES = [
@@ -39,6 +42,7 @@ function SearchBarComponent({
   onClose,
   onCloseMobile,
   onOpenChange,
+  state = "open",
 }: SearchBarProps) {
   const router = useRouter();
   const products = useAppSelector((state) => state.products.items);
@@ -59,22 +63,9 @@ function SearchBarComponent({
     onOpenChange?.(false);
   };
 
-  // Keyboard shortcut (ESC) & Body Scroll Lock
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        handleClose();
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = originalOverflow;
-    };
-  }, []);
+  // Escape, scroll lock and focus handling shared with every other overlay
+  const panelRef = useRef<HTMLDivElement>(null);
+  useOverlayBehaviour({ open: state === "open", onClose: handleClose, panelRef });
 
   // Real Typewriter Effect (letter-by-letter typing, pause, backspacing, rotating)
   useEffect(() => {
@@ -102,9 +93,11 @@ function SearchBarComponent({
           setTypedText(currentPhrase.slice(0, typedText.length - 1));
         }, 25); // quick smooth backspace
       } else {
-        // Switch to next suggestion phrase
-        setIsDeleting(false);
-        setPhraseIndex((prev) => (prev + 1) % ROTATING_PLACEHOLDERS.length);
+        // Brief pause on the empty field, then start the next suggestion
+        timeout = setTimeout(() => {
+          setIsDeleting(false);
+          setPhraseIndex((prev) => (prev + 1) % ROTATING_PLACEHOLDERS.length);
+        }, 350);
       }
     }
 
@@ -135,11 +128,14 @@ function SearchBarComponent({
 
   return (
     <div
+      ref={panelRef}
+      tabIndex={-1}
+      data-state={state}
       role="dialog"
       aria-modal="true"
       aria-label="Search Luxe Jewels Catalog"
       className={cn(
-        "fixed inset-0 z-[100] flex flex-col items-center justify-start p-3 sm:p-6 md:p-10 overflow-y-auto scrollbar-none bg-black/60 backdrop-blur-md animate-in fade-in duration-200",
+        "fixed inset-0 z-[100] flex flex-col items-center justify-start p-3 sm:p-6 md:p-10 overflow-y-auto scrollbar-none bg-black/60 backdrop-blur-md outline-none motion-fade",
         className
       )}
       onClick={(e) => {
@@ -150,7 +146,8 @@ function SearchBarComponent({
     >
       <div
         ref={containerRef}
-        className="relative w-full max-w-4xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-border overflow-hidden my-auto sm:my-6 animate-in zoom-in-95 slide-in-from-top-4 duration-200"
+        data-state={state}
+        className="motion-drop relative w-full max-w-4xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-border overflow-hidden my-auto sm:my-6"
       >
         {/* 1. TOP UTILITY HEADER: Atelier Brand + ESC badge + Close Button */}
         <div className="flex items-center justify-between px-5 sm:px-7 py-3.5 bg-cream border-b border-border">
@@ -180,7 +177,7 @@ function SearchBarComponent({
         <div className="p-4 sm:p-7 border-b border-border bg-gradient-to-b from-cream to-white">
           <form
             onSubmit={handleSearchSubmit}
-            className="group relative flex items-center w-full h-14 sm:h-16 px-3.5 sm:px-5 rounded-2xl bg-white border-2 border-border hover:border-border focus-within:!border-gold focus-within:ring-4 focus-within:ring-gold/15 focus-within:shadow-[0_10px_35px_-8px_rgba(179,142,93,0.22)] transition-all duration-300 shadow-xs"
+            className="group relative flex items-center w-full h-14 sm:h-16 px-3.5 sm:px-5 rounded-2xl bg-white border-2 border-border hover:border-border focus-within:!border-gold focus-within:ring-4 focus-within:ring-gold/15 focus-within:shadow-[0_10px_35px_-8px_rgba(179,142,93,0.22)] transition duration-300 shadow-xs"
           >
             {/* Luxury Gold Search Icon Badge */}
             <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-cream border border-border group-focus-within:border-gold/50 group-focus-within:bg-gold-soft flex items-center justify-center text-gold mr-3 sm:mr-3.5 shrink-0 shadow-2xs transition-colors duration-200">
@@ -228,7 +225,7 @@ function SearchBarComponent({
             {/* Action Submit Button */}
             <button
               type="submit"
-              className="shrink-0 z-10 inline-flex items-center gap-1.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-gold to-gold-dark hover:from-gold hover:to-gold-dark text-white text-[12.5px] sm:text-[13.5px] font-semibold tracking-wider transition-all duration-200 shadow-sm hover:shadow-md active:scale-[0.97] cursor-pointer"
+              className="shrink-0 z-10 inline-flex items-center gap-1.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-gold to-gold-dark hover:from-gold hover:to-gold-dark text-white text-[12.5px] sm:text-[13.5px] font-semibold tracking-wider transition duration-200 shadow-sm hover:shadow-md active:scale-[0.97] cursor-pointer"
             >
               <span>Search</span>
               {query && (
@@ -292,7 +289,7 @@ function SearchBarComponent({
                         key={product.id}
                         href={`/products/${product.slug}`}
                         onClick={handleClose}
-                        className="group flex items-center gap-3.5 p-2.5 rounded-xl border border-border hover:border-gold/50 hover:bg-cream transition-all duration-150"
+                        className="group flex items-center gap-3.5 p-2.5 rounded-xl border border-border hover:border-gold/50 hover:bg-cream transition duration-150"
                       >
                         <div className="relative w-14 h-14 rounded-lg overflow-hidden bg-cream shrink-0 border border-border">
                           <Image
@@ -314,7 +311,7 @@ function SearchBarComponent({
                             ₹{product.price.toLocaleString("en-IN")}
                           </span>
                         </div>
-                        <ArrowRightIcon className="w-4 h-4 text-muted/60 group-hover:text-gold group-hover:translate-x-1 transition-all shrink-0" />
+                        <ArrowRightIcon className="w-4 h-4 text-muted/60 group-hover:text-gold group-hover:translate-x-1 transition shrink-0" />
                       </Link>
                     ))}
                   </div>
@@ -362,7 +359,7 @@ function SearchBarComponent({
                       key={cat.name}
                       href={cat.href}
                       onClick={handleClose}
-                      className="group flex flex-col items-center justify-center p-3 rounded-xl border border-border bg-cream hover:bg-white hover:border-gold/60 hover:shadow-sm transition-all duration-150 text-center"
+                      className="group flex flex-col items-center justify-center p-3 rounded-xl border border-border bg-cream hover:bg-white hover:border-gold/60 hover:shadow-sm transition duration-150 text-center"
                     >
                       <div className="transition-transform duration-200 group-hover:scale-110 mb-1.5 text-gold">
                         <JewelryIcon name={cat.name} className="w-6 h-6 text-gold" />
@@ -389,7 +386,7 @@ function SearchBarComponent({
                         setQuery(chip.label);
                         inputRef.current?.focus();
                       }}
-                      className="px-3.5 py-1.5 rounded-full border border-border bg-cream hover:border-gold hover:text-gold hover:bg-white text-ink text-[12.5px] font-normal transition-all duration-150 inline-flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                      className="px-3.5 py-1.5 rounded-full border border-border bg-cream hover:border-gold hover:text-gold hover:bg-white text-ink text-[12.5px] font-normal transition duration-150 inline-flex items-center gap-1.5 cursor-pointer shadow-2xs"
                     >
                       <svg
                         className="w-3.5 h-3.5 text-gold"
@@ -431,7 +428,7 @@ function SearchBarComponent({
                       key={idx}
                       href={item.href}
                       onClick={handleClose}
-                      className="group block p-2.5 rounded-xl border border-border hover:border-gold/60 hover:shadow-md transition-all duration-200 bg-white"
+                      className="group block p-2.5 rounded-xl border border-border hover:border-gold/60 hover:shadow-md transition duration-200 bg-white"
                     >
                       <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-cream border border-border mb-2">
                         <Image

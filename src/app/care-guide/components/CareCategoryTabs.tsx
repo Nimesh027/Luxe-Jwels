@@ -78,7 +78,7 @@ export default function CareCategoryTabs() {
             key={cat.id}
             variant="unstyled"
             onClick={() => setActiveCategory(cat.id)}
-            className={`px-5 py-3 rounded-full text-caption font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${ activeCategory === cat.id ? "bg-brand text-white shadow-md" : "bg-surface border border-border/80 text-ink/80 hover:border-wine/40 hover:text-wine" }`}
+            className={`px-5 py-3 rounded-full text-caption font-semibold whitespace-nowrap transition cursor-pointer flex items-center gap-2 ${ activeCategory === cat.id ? "bg-brand text-white shadow-md" : "bg-surface border border-border/80 text-ink/80 hover:border-wine/40 hover:text-wine" }`}
           >
             <span>{cat.icon}</span>
             <span>{cat.title}</span>
@@ -92,7 +92,7 @@ export default function CareCategoryTabs() {
         .map((cat) => (
           <div
             key={cat.id}
-            className="bg-surface rounded-[2rem] border border-border/80 p-6 sm:p-10 shadow-sm animate-in fade-in zoom-in-95 duration-500"
+            className="bg-surface rounded-[2rem] border border-border/80 p-6 sm:p-10 shadow-sm animate-in fade-in zoom-in-95 duration-300"
           >
             <div className="flex flex-col md:flex-row gap-8 items-start">
               {/* Left: Title & Icon */}
@@ -115,7 +115,7 @@ export default function CareCategoryTabs() {
                 {cat.tips.map((tip, idx) => (
                   <li
                     key={idx}
-                    className="group flex items-start gap-4 p-5 rounded-2xl bg-white border border-border/40 hover:border-gold/40 hover:shadow-md transition-all duration-300"
+                    className="group flex items-start gap-4 p-5 rounded-2xl bg-white border border-border/40 hover:border-gold/40 hover:shadow-md transition duration-300"
                   >
                     <span className="w-8 h-8 rounded-full bg-wine/5 group-hover:bg-wine text-wine group-hover:text-white flex items-center justify-center shrink-0 font-bold text-caption transition-colors duration-300">
                       {idx + 1}

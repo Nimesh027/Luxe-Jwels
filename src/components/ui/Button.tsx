@@ -74,7 +74,7 @@ const ButtonComponent = forwardRef<HTMLButtonElement, ButtonProps>(function Butt
 ) {
   if (variant === "unstyled") {
     const unstyledClasses = cn(
-      "cursor-pointer select-none transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none",
+      "cursor-pointer select-none transition duration-200 disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none",
       fullWidth && "w-full",
       className
     );
@@ -162,7 +162,7 @@ const ButtonComponent = forwardRef<HTMLButtonElement, ButtonProps>(function Butt
   const effectiveSize = isIconSize ? "icon" : size;
 
   const combinedClasses = cn(
-    "inline-flex items-center justify-center font-body font-medium tracking-wide whitespace-nowrap transition-colors duration-200 cursor-pointer select-none",
+    "inline-flex items-center justify-center font-body font-medium tracking-wide whitespace-nowrap press cursor-pointer select-none",
     "disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none",
     roundedClasses[rounded],
     sizeClasses[effectiveSize],

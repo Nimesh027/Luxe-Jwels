@@ -65,9 +65,9 @@ export default function ContactSupportOptions() {
             <a
               key={option.id}
               href={option.href}
-              className="group flex flex-col items-center justify-center text-center p-8 rounded-xl border border-transparent hover:border-gold/30 hover:bg-gold/[0.02] hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              className="group flex flex-col items-center justify-center text-center p-8 rounded-xl border border-transparent hover:border-gold/30 hover:bg-gold/[0.02] hover:shadow-lg transition duration-300"
             >
-              <div className="w-16 h-16 rounded-full bg-cream border border-gold/40 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:border-gold group-hover:shadow-md transition-all duration-300">
+              <div className="w-16 h-16 rounded-full bg-cream border border-gold/40 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:border-gold group-hover:shadow-md transition duration-300">
                 {option.icon}
               </div>
               <h3 className="font-display font-medium !text-h6 mb-2 group-hover:text-wine transition-colors duration-300">

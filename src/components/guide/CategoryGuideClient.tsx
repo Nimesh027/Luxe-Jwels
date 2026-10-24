@@ -69,11 +69,11 @@ export default function CategoryGuideClient({ overview }: CategoryGuideClientPro
             <Link
               key={item.slug}
               href={`/guide/${isShapeCategory ? "shape" : category}/${item.slug}`}
-              className="group rounded-[var(--radius-card)] bg-white border border-border shadow-xs hover:shadow-xl hover:border-gold/40 transition-all flex flex-col overflow-hidden"
+              className="group rounded-[var(--radius-card)] bg-white border border-border shadow-xs hover:shadow-xl hover:border-gold/40 transition flex flex-col overflow-hidden"
             >
               {/* Image Frame */}
               <div className="relative aspect-square w-full bg-cream overflow-hidden p-6">
-                <div className="absolute inset-4 border border-gold/15 pointer-events-none transition-all group-hover:inset-3" />
+                <div className="absolute inset-4 border border-gold/15 pointer-events-none transition-transform duration-300 ease-out group-hover:scale-[1.02]" />
                 <Image
                   src={item.image}
                   alt={item.name}

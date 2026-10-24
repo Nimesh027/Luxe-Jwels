@@ -161,7 +161,7 @@ export default function TermsClient() {
 
             <Link
               href="/shop"
-              className={`px-8 py-3 rounded-xl text-[14px] font-medium tracking-wide shadow-md transition-all ${ agreed ? "bg-brand hover:bg-brand-dark text-white cursor-pointer" : "bg-border text-muted cursor-not-allowed pointer-events-none" }`}
+              className={`px-8 py-3 rounded-xl text-[14px] font-medium tracking-wide shadow-md transition ${ agreed ? "bg-brand hover:bg-brand-dark text-white cursor-pointer" : "bg-border text-muted cursor-not-allowed pointer-events-none" }`}
             >
               Continue
             </Link>
@@ -180,7 +180,7 @@ export default function TermsClient() {
               return (
                 <div
                   key={section.id}
-                  className="bg-white rounded-2xl border border-border overflow-hidden shadow-2xs transition-all hover:border-gold/40"
+                  className="bg-white rounded-2xl border border-border overflow-hidden shadow-2xs transition hover:border-gold/40"
                 >
                   <button
                     type="button"

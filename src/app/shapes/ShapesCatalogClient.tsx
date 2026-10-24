@@ -85,7 +85,7 @@ export default function ShapesCatalogClient() {
                   key={tab.id}
                   variant="unstyled"
                   onClick={() => setActiveFilter(tab.id)}
-                  className={`cursor-pointer px-5 py-2.5 text-xs font-bold tracking-[0.2em] transition-all duration-200 border ${ isActive ? "bg-ink text-white border-ink shadow-sm" : "bg-cream text-foreground/70 hover:text-foreground hover:bg-white border-transparent" }`}
+                  className={`cursor-pointer px-5 py-2.5 text-xs font-bold tracking-[0.2em] transition duration-200 border ${ isActive ? "bg-ink text-white border-ink shadow-sm" : "bg-cream text-foreground/70 hover:text-foreground hover:bg-white border-transparent" }`}
                 >
                   {tab.label}
                   {tab.id === "all" && ` (${diamondShapesData.length})`}
@@ -103,7 +103,7 @@ export default function ShapesCatalogClient() {
             <Link
               key={shape.id || shape.slug}
               href={`/shapes/${shape.slug || shape.id}`}
-              className="group relative flex flex-col justify-between border border-black/6 bg-white p-6 transition-all duration-300 hover:border-gold/50 hover:shadow-[0_15px_35px_-15px_rgba(0,0,0,0.1)]"
+              className="group relative flex flex-col justify-between border border-black/6 bg-white p-6 transition duration-300 hover:border-gold/50 hover:shadow-[0_15px_35px_-15px_rgba(0,0,0,0.1)]"
             >
               <div>
                 {/* Image Card Container */}
@@ -113,7 +113,7 @@ export default function ShapesCatalogClient() {
                     alt={`${shape.name} cut diamond`}
                     fill
                     sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
-                    className="object-contain p-4 drop-shadow-[0_10px_18px_rgba(0,0,0,0.12)] transition-transform duration-500 group-hover:scale-108"
+                    className="object-contain p-4 drop-shadow-[0_10px_18px_rgba(0,0,0,0.12)] transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
 
@@ -163,7 +163,7 @@ export default function ShapesCatalogClient() {
           <div className="mt-8">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 bg-ink px-8 py-3.5 text-xs font-bold tracking-[0.22em] text-white transition-all hover:bg-brand shadow-sm"
+              className="inline-flex items-center gap-2 bg-ink px-8 py-3.5 text-xs font-bold tracking-[0.22em] text-white transition hover:bg-brand shadow-sm"
             >
               Book Complimentary Consultation
               <ArrowRight className="h-4 w-4" />

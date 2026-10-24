@@ -137,14 +137,14 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-ink text-white px-7 py-3.5 text-[14px] font-semibold tracking-wide transition-all hover:bg-brand"
+                className="inline-flex items-center gap-2 bg-ink text-white px-7 py-3.5 text-[14px] font-semibold tracking-wide transition hover:bg-brand"
               >
                 <Calendar className="w-4 h-4" />
                 Book Consultation
               </Link>
               <a
                 href="#matching-jewellery"
-                className="inline-flex items-center gap-2 border border-border-strong bg-white text-foreground px-7 py-3.5 text-[14px] font-semibold tracking-wide transition-all hover:border-gold hover:text-gold"
+                className="inline-flex items-center gap-2 border border-border-strong bg-white text-foreground px-7 py-3.5 text-[14px] font-semibold tracking-wide transition hover:border-gold hover:text-gold"
               >
                 View Jewellery
                 <ArrowRight className="w-4 h-4" />
@@ -154,7 +154,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
 
           {/* Right Luxury Framed Image */}
           <div className="relative mx-auto aspect-square w-full max-w-[520px] border border-border bg-white shadow-[0_35px_90px_-45px_rgba(0,0,0,0.35)] flex items-center justify-center p-6 group">
-            <div className="absolute inset-6 border border-gold/20 pointer-events-none transition-all group-hover:inset-4" />
+            <div className="absolute inset-6 border border-gold/20 pointer-events-none transition-transform duration-300 ease-out group-hover:scale-[1.02]" />
             
             <div className="relative w-full h-full">
               <Image
@@ -420,7 +420,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
               return (
                 <div
                   key={product.id}
-                  className="group rounded-[var(--radius-card)] bg-white border border-border shadow-xs hover:shadow-md transition-all flex flex-col"
+                  className="group rounded-[var(--radius-card)] bg-white border border-border shadow-xs hover:shadow-md transition flex flex-col"
                 >
                   <div className="relative aspect-square w-full overflow-hidden bg-cream p-6">
                     <Image

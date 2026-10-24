@@ -232,10 +232,10 @@ export default function PrivacyPolicyClient() {
               <div
                 key={`content-${section.id}`}
                 id={section.id}
-                className="scroll-mt-32 group bg-white p-8 sm:p-10 rounded-3xl shadow-xs border border-border/40 hover:shadow-md hover:border-gold/30 transition-all duration-500"
+                className="scroll-mt-32 group bg-white p-8 sm:p-10 rounded-3xl shadow-xs border border-border/40 hover:shadow-md hover:border-gold/30 transition duration-300"
               >
                 <h2 className="font-display text-xl sm:text-2xl text-wine font-semibold mb-6 flex items-center gap-4">
-                  <span className="w-10 h-[1px] bg-gold/60 group-hover:bg-brand group-hover:w-14 transition-all duration-500"></span>
+                  <span className="w-14 h-[1px] origin-left scale-x-[0.72] bg-gold/60 group-hover:bg-brand group-hover:scale-x-100 transition duration-300"></span>
                   {section.title}
                 </h2>
                 <div className="text-body text-ink/80 leading-relaxed font-light space-y-4">

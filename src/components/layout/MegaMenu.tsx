@@ -6,7 +6,6 @@ import Image from "next/image";
 import type { MegaMenuData } from "@/types";
 import JewelryIcon from "./JewelryIcon";
 import { cn } from "@/lib/utils";
-import Button from "@/components/ui/Button";
 
 interface MegaMenuProps {
   data: MegaMenuData;
@@ -26,7 +25,7 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
     <div
       role="region"
       aria-label="Navigation Mega Menu"
-      className="w-full bg-white border-t border-border py-6 sm:py-7 transition-all duration-200 shadow-xl"
+      className="w-full bg-white border-t border-border py-6 sm:py-7 shadow-xl"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-10">
@@ -40,11 +39,12 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                   type="button"
                   onMouseEnter={() => setActiveTabId(tab.id)}
                   onClick={() => setActiveTabId(tab.id)}
+                  aria-pressed={isActive}
                   className={cn(
-                    "text-left px-4 py-2.5 rounded-xl text-[13.5px] font-medium transition-all duration-150 whitespace-nowrap cursor-pointer",
+                    "text-left px-4 py-2.5 rounded-xl border text-[13.5px] font-medium whitespace-nowrap cursor-pointer",
                     isActive
-                      ? "bg-cream text-ink border border-gold/40 font-semibold shadow-2xs"
-                      : "text-muted hover:text-ink hover:bg-cream"
+                      ? "bg-cream text-ink border-gold/40 shadow-2xs"
+                      : "border-transparent text-muted hover:text-ink hover:bg-cream"
                   )}
                 >
                   {tab.label}
@@ -54,7 +54,7 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
           </div>
 
           {/* MIDDLE SECTION: 3-Column Items Grid + Bottom Promo Banner */}
-          <div className="flex-1 flex flex-col justify-between min-w-0">
+          <div key={activeTab.id} className="flex-1 flex flex-col justify-between min-w-0 animate-in fade-in">
             {/* 3-Column Categories Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3.5 py-1">
               {activeTab.items.map((item) => (
@@ -62,7 +62,7 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                   key={item.id}
                   href={item.href}
                   onClick={onClose}
-                  className="group flex items-center gap-3 p-2 rounded-xl hover:bg-cream transition-all duration-150"
+                  className="group flex items-center gap-3 p-2 rounded-xl hover:bg-cream"
                 >
                   <div className="shrink-0 transition-transform duration-200 group-hover:scale-105 text-gold">
                     <JewelryIcon name={item.name} className="w-7 h-7 text-gold" />
@@ -127,7 +127,7 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
 
           {/* RIGHT COLUMN: Featured Showcase Card */}
           {activeTab.featuredCard && (
-            <div className="w-full lg:w-64 xl:w-72 shrink-0 border-t lg:border-t-0 lg:border-l border-border pt-4 lg:pt-0 lg:pl-6 flex flex-col justify-between">
+            <div key={`${activeTab.id}-card`} className="animate-in fade-in w-full lg:w-64 xl:w-72 shrink-0 border-t lg:border-t-0 lg:border-l border-border pt-4 lg:pt-0 lg:pl-6 flex flex-col justify-between">
               <Link
                 href={activeTab.featuredCard.href}
                 onClick={onClose}

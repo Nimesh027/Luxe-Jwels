@@ -389,7 +389,7 @@ export default function AccountClient() {
               type="button"
               variant="unstyled"
               onClick={() => setIsMobileMenuOpen(true)}
-              className="px-3.5 py-2 bg-brand text-white rounded-xl text-caption font-semibold hover:bg-wine-dark transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs active:scale-95"
+              className="px-3.5 py-2 bg-brand text-white rounded-xl text-caption font-semibold hover:bg-wine-dark transition cursor-pointer flex items-center gap-1.5 shadow-2xs active:scale-95"
             >
               <MenuIcon size={16} />
               <span>Menu</span>
@@ -440,7 +440,7 @@ export default function AccountClient() {
                             setActiveTab(item.id);
                             setIsMobileMenuOpen(false);
                           }}
-                          className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-left text-caption font-semibold transition-all duration-150 cursor-pointer ${ isActive ? "bg-brand text-white shadow-xs" : "text-ink/80 hover:bg-wine/5 hover:text-wine bg-cream/50" }`}
+                          className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-left text-caption font-semibold transition duration-150 cursor-pointer ${ isActive ? "bg-brand text-white shadow-xs" : "text-ink/80 hover:bg-wine/5 hover:text-wine bg-cream/50" }`}
                         >
                           <div className="flex items-center gap-3">
                             <span className={`shrink-0 ${isActive ? "text-white" : "text-wine"}`}>
@@ -503,7 +503,7 @@ export default function AccountClient() {
                       type="button"
                       variant="unstyled"
                       onClick={() => setActiveTab(item.id)}
-                      className={`w-full flex items-center justify-between px-5 py-3.5 text-left text-body font-medium transition-all duration-150 cursor-pointer ${ isActive ? "bg-brand text-white font-semibold shadow-xs" : "text-ink/80 hover:bg-wine/5 hover:text-wine" }`}
+                      className={`w-full flex items-center justify-between px-5 py-3.5 text-left text-body font-medium transition duration-150 cursor-pointer ${ isActive ? "bg-brand text-white font-semibold shadow-xs" : "text-ink/80 hover:bg-wine/5 hover:text-wine" }`}
                     >
                       <div className="flex items-center gap-3">
                         <span className={`shrink-0 ${isActive ? "text-white" : "text-wine"}`}>
@@ -648,7 +648,7 @@ export default function AccountClient() {
                         type="button"
                         variant="unstyled"
                         onClick={() => setIsEditing(true)}
-                        className="px-3 py-1 border border-wine text-wine bg-white hover:bg-wine hover:text-white rounded-lg text-caption font-semibold transition-all cursor-pointer shadow-2xs"
+                        className="px-3 py-1 border border-wine text-wine bg-white hover:bg-wine hover:text-white rounded-lg text-caption font-semibold transition cursor-pointer shadow-2xs"
                       >
                         Edit Details
                       </Button>
@@ -707,7 +707,7 @@ export default function AccountClient() {
                       type="button"
                       variant="unstyled"
                       onClick={() => setShowAddPaymentForm(true)}
-                      className="px-4 py-2 bg-wine text-white rounded-xl text-caption font-semibold hover:bg-wine-dark transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
+                      className="px-4 py-2 bg-wine text-white rounded-xl text-caption font-semibold hover:bg-wine-dark transition cursor-pointer shadow-xs flex items-center gap-1.5"
                     >
                       <span>+</span> Add New Payment Method
                     </Button>
@@ -727,7 +727,7 @@ export default function AccountClient() {
                         type="button"
                         variant="unstyled"
                         onClick={() => setNewPaymentType("card")}
-                        className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition-all cursor-pointer flex items-center justify-center gap-2 ${ newPaymentType === "card" ? "bg-wine text-white border-wine shadow-xs" : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5" }`}
+                        className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition cursor-pointer flex items-center justify-center gap-2 ${ newPaymentType === "card" ? "bg-wine text-white border-wine shadow-xs" : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5" }`}
                       >
                         <CreditCardIcon size={16} className={newPaymentType === "card" ? "text-white" : "text-wine"} />
                         <span>Card</span>
@@ -736,7 +736,7 @@ export default function AccountClient() {
                         type="button"
                         variant="unstyled"
                         onClick={() => setNewPaymentType("upi")}
-                        className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition-all cursor-pointer flex items-center justify-center gap-2 ${ newPaymentType === "upi" ? "bg-wine text-white border-wine shadow-xs" : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5" }`}
+                        className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition cursor-pointer flex items-center justify-center gap-2 ${ newPaymentType === "upi" ? "bg-wine text-white border-wine shadow-xs" : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5" }`}
                       >
                         <SmartphoneIcon size={16} className={newPaymentType === "upi" ? "text-white" : "text-wine"} />
                         <span>UPI ID</span>
@@ -745,7 +745,7 @@ export default function AccountClient() {
                         type="button"
                         variant="unstyled"
                         onClick={() => setNewPaymentType("netbanking")}
-                        className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition-all cursor-pointer flex items-center justify-center gap-2 ${ newPaymentType === "netbanking" ? "bg-wine text-white border-wine shadow-xs" : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5" }`}
+                        className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition cursor-pointer flex items-center justify-center gap-2 ${ newPaymentType === "netbanking" ? "bg-wine text-white border-wine shadow-xs" : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5" }`}
                       >
                         <BankIcon size={16} className={newPaymentType === "netbanking" ? "text-white" : "text-wine"} />
                         <span>NetBanking</span>
@@ -764,7 +764,7 @@ export default function AccountClient() {
                             onChange={(e) => setNewPaymentForm({ ...newPaymentForm, cardNumber: e.target.value })}
                             placeholder="4532 •••• •••• 8821"
                             maxLength={19}
-                            className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150 font-mono"
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition duration-150 font-mono"
                             required
                           />
                         </div>
@@ -777,7 +777,7 @@ export default function AccountClient() {
                               value={newPaymentForm.cardHolder}
                               onChange={(e) => setNewPaymentForm({ ...newPaymentForm, cardHolder: e.target.value })}
                               placeholder="Name on card"
-                              className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                              className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition duration-150"
                               required
                             />
                           </div>
@@ -789,7 +789,7 @@ export default function AccountClient() {
                               value={newPaymentForm.bankName}
                               onChange={(e) => setNewPaymentForm({ ...newPaymentForm, bankName: e.target.value })}
                               placeholder="e.g. HDFC Bank, ICICI Bank"
-                              className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                              className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition duration-150"
                               required
                             />
                           </div>
@@ -830,7 +830,7 @@ export default function AccountClient() {
                             value={newPaymentForm.upiId}
                             onChange={(e) => setNewPaymentForm({ ...newPaymentForm, upiId: e.target.value })}
                             placeholder="e.g. user@okaxis / mobile@paytm"
-                            className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition duration-150"
                             required
                           />
                         </div>
@@ -841,7 +841,7 @@ export default function AccountClient() {
                             type="text"
                             value={newPaymentForm.cardHolder}
                             onChange={(e) => setNewPaymentForm({ ...newPaymentForm, cardHolder: e.target.value })}
-                            className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition duration-150"
                             required
                           />
                         </div>
@@ -894,7 +894,7 @@ export default function AccountClient() {
                       <Button
                         type="submit"
                         variant="unstyled"
-                        className="px-5 py-2.5 bg-wine text-white text-body font-semibold rounded-xl hover:bg-wine-dark transition-all cursor-pointer shadow-xs"
+                        className="px-5 py-2.5 bg-wine text-white text-body font-semibold rounded-xl hover:bg-wine-dark transition cursor-pointer shadow-xs"
                       >
                         Save Payment Method
                       </Button>
@@ -906,7 +906,7 @@ export default function AccountClient() {
                     {paymentMethods.map((pm) => (
                       <div
                         key={pm.id}
-                        className={`rounded-2xl p-5 shadow-sm relative overflow-hidden flex flex-col justify-between space-y-4 border transition-all ${ pm.type === "card" ? "bg-gradient-to-r from-slate-900 via-slate-800 to-zinc-900 text-white border-slate-700" : "bg-surface border-wine/25 text-ink hover:border-wine/40" }`}
+                        className={`rounded-2xl p-5 shadow-sm relative overflow-hidden flex flex-col justify-between space-y-4 border transition ${ pm.type === "card" ? "bg-gradient-to-r from-slate-900 via-slate-800 to-zinc-900 text-white border-slate-700" : "bg-surface border-wine/25 text-ink hover:border-wine/40" }`}
                       >
                         {/* Top Row: Bank Label & Default Badge */}
                         <div className="flex items-center justify-between">
@@ -951,7 +951,7 @@ export default function AccountClient() {
                                 type="button"
                                 variant="unstyled"
                                 onClick={() => handleSetDefaultPayment(pm.id)}
-                                className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all cursor-pointer ${ pm.type === "card" ? "bg-slate-800 text-slate-200 hover:bg-slate-700 border border-slate-600" : "bg-white border border-wine/30 text-wine hover:bg-wine hover:text-white" }`}
+                                className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition cursor-pointer ${ pm.type === "card" ? "bg-slate-800 text-slate-200 hover:bg-slate-700 border border-slate-600" : "bg-white border border-wine/30 text-wine hover:bg-wine hover:text-white" }`}
                               >
                                 Set Default
                               </Button>
@@ -960,7 +960,7 @@ export default function AccountClient() {
                               type="button"
                               variant="unstyled"
                               onClick={() => handleRemovePayment(pm.id)}
-                              className={`px-3 py-1.5 rounded-full text-caption font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5 ${ pm.type === "card" ? "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 hover:border-slate-500" : "bg-white border border-border-strong hover:border-border-strong text-muted hover:text-ink" }`}
+                              className={`px-3 py-1.5 rounded-full text-caption font-medium transition duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5 ${ pm.type === "card" ? "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 hover:border-slate-500" : "bg-white border border-border-strong hover:border-border-strong text-muted hover:text-ink" }`}
                               title="Remove Payment Method"
                             >
                               <svg className="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -992,7 +992,7 @@ export default function AccountClient() {
                       type="button"
                       variant="unstyled"
                       onClick={handleOpenAddAddress}
-                      className="px-4 py-2 bg-wine text-white rounded-xl text-caption font-semibold hover:bg-wine-dark transition-all cursor-pointer shadow-xs flex items-center gap-1.5"
+                      className="px-4 py-2 bg-wine text-white rounded-xl text-caption font-semibold hover:bg-wine-dark transition cursor-pointer shadow-xs flex items-center gap-1.5"
                     >
                       <span>+</span> Add New Address
                     </Button>
@@ -1017,7 +1017,7 @@ export default function AccountClient() {
                           value={addressForm.name}
                           onChange={(e) => setAddressForm({ ...addressForm, name: e.target.value })}
                           placeholder="Recipient Full Name"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition duration-150"
                           required
                         />
                       </div>
@@ -1029,7 +1029,7 @@ export default function AccountClient() {
                           value={addressForm.phone}
                           onChange={(e) => setAddressForm({ ...addressForm, phone: e.target.value })}
                           placeholder="+91 9876543210"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition duration-150"
                           required
                         />
                       </div>
@@ -1041,7 +1041,7 @@ export default function AccountClient() {
                           value={addressForm.street}
                           onChange={(e) => setAddressForm({ ...addressForm, street: e.target.value })}
                           placeholder="e.g. Flat 302, Luxe Residency, MG Road"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition duration-150"
                           required
                         />
                       </div>
@@ -1053,7 +1053,7 @@ export default function AccountClient() {
                           value={addressForm.locality}
                           onChange={(e) => setAddressForm({ ...addressForm, locality: e.target.value })}
                           placeholder="e.g. Near Trinity Metro Station"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition duration-150"
                         />
                       </div>
                       <div>
@@ -1064,7 +1064,7 @@ export default function AccountClient() {
                           value={addressForm.city}
                           onChange={(e) => setAddressForm({ ...addressForm, city: e.target.value })}
                           placeholder="Bengaluru"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition duration-150"
                           required
                         />
                       </div>
@@ -1076,7 +1076,7 @@ export default function AccountClient() {
                           value={addressForm.state}
                           onChange={(e) => setAddressForm({ ...addressForm, state: e.target.value })}
                           placeholder="Karnataka"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition duration-150"
                           required
                         />
                       </div>
@@ -1089,7 +1089,7 @@ export default function AccountClient() {
                           onChange={(e) => setAddressForm({ ...addressForm, pincode: e.target.value })}
                           placeholder="560001"
                           maxLength={6}
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition duration-150"
                           required
                         />
                       </div>
@@ -1139,7 +1139,7 @@ export default function AccountClient() {
                       <Button
                         type="submit"
                         variant="unstyled"
-                        className="px-5 py-2.5 bg-wine text-white text-body font-semibold rounded-xl hover:bg-wine-dark transition-all cursor-pointer shadow-xs"
+                        className="px-5 py-2.5 bg-wine text-white text-body font-semibold rounded-xl hover:bg-wine-dark transition cursor-pointer shadow-xs"
                       >
                         Save Address
                       </Button>
@@ -1151,7 +1151,7 @@ export default function AccountClient() {
                     {addresses.map((addr) => (
                       <div
                         key={addr.id}
-                        className={`rounded-2xl p-5 bg-surface shadow-xs space-y-3 relative border transition-all ${ addr.isDefault ? "border-wine/50 bg-wine/5" : "border-border hover:border-wine/30" }`}
+                        className={`rounded-2xl p-5 bg-surface shadow-xs space-y-3 relative border transition ${ addr.isDefault ? "border-wine/50 bg-wine/5" : "border-border hover:border-wine/30" }`}
                       >
                         {/* Header Badges */}
                         <div className="flex items-center justify-between">
@@ -1181,7 +1181,7 @@ export default function AccountClient() {
                               type="button"
                               variant="unstyled"
                               onClick={() => handleOpenEditAddress(addr)}
-                              className="px-3.5 py-1.5 bg-white border border-wine/30 text-wine hover:bg-wine hover:text-white rounded-full text-caption font-semibold shadow-2xs transition-all duration-150 cursor-pointer flex items-center gap-1.5"
+                              className="px-3.5 py-1.5 bg-white border border-wine/30 text-wine hover:bg-wine hover:text-white rounded-full text-caption font-semibold shadow-2xs transition duration-150 cursor-pointer flex items-center gap-1.5"
                             >
                               <svg className="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
@@ -1203,7 +1203,7 @@ export default function AccountClient() {
                             type="button"
                             variant="unstyled"
                             onClick={() => handleRemoveAddress(addr.id)}
-                            className="px-3.5 py-1.5 bg-white border border-border-strong hover:border-border-strong text-muted hover:text-ink rounded-full text-caption font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5"
+                            className="px-3.5 py-1.5 bg-white border border-border-strong hover:border-border-strong text-muted hover:text-ink rounded-full text-caption font-medium transition duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5"
                             title="Remove Address"
                           >
                             <svg className="w-3.5 h-3.5 text-muted fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1245,7 +1245,7 @@ export default function AccountClient() {
                     {/* Continue Shopping Black Pill CTA Button */}
                     <Link
                       href="/collections"
-                      className="inline-flex items-center justify-center rounded-full bg-slate-950 text-white px-8 py-3.5 text-caption font-bold tracking-widest hover:bg-slate-800 transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer active:scale-95"
+                      className="inline-flex items-center justify-center rounded-full bg-slate-950 text-white px-8 py-3.5 text-caption font-bold tracking-widest hover:bg-slate-800 transition duration-200 shadow-md hover:shadow-lg cursor-pointer active:scale-95"
                     >Continue Shopping</Link>
                   </div>
                 ) : (
@@ -1254,7 +1254,7 @@ export default function AccountClient() {
                     {wishlistItems.map((product) => (
                       <div
                         key={product.id}
-                        className="py-6 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 transition-all"
+                        className="py-6 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 transition"
                       >
                         {/* Left: Product Thumbnail & Details */}
                         <div className="flex items-center gap-4 sm:gap-6">
@@ -1391,7 +1391,7 @@ export default function AccountClient() {
                           onChange={(e) => setGiftCardForm({ ...giftCardForm, cardNumber: e.target.value })}
                           placeholder="Gift card Number"
                           maxLength={19}
-                          className="w-full px-4 py-3 rounded-lg border border-border bg-white text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all font-mono"
+                          className="w-full px-4 py-3 rounded-lg border border-border bg-white text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition font-mono"
                           required
                         />
                       </div>
@@ -1404,7 +1404,7 @@ export default function AccountClient() {
                           onChange={(e) => setGiftCardForm({ ...giftCardForm, pin: e.target.value })}
                           placeholder="6- Digit PIN"
                           maxLength={6}
-                          className="w-full px-4 py-3 pr-10 rounded-lg border border-border bg-white text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all font-mono"
+                          className="w-full px-4 py-3 pr-10 rounded-lg border border-border bg-white text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition font-mono"
                           required
                         />
                         <Button
@@ -1423,7 +1423,7 @@ export default function AccountClient() {
                         <Button
                           type="submit"
                           variant="unstyled"
-                          className="w-full py-3 px-6 bg-brand hover:bg-brand-dark text-white text-body font-semibold rounded-lg shadow-sm transition-all duration-150 cursor-pointer whitespace-nowrap active:scale-98"
+                          className="w-full py-3 px-6 bg-brand hover:bg-brand-dark text-white text-body font-semibold rounded-lg shadow-sm transition duration-150 cursor-pointer whitespace-nowrap active:scale-98"
                         >
                           Check Balance
                         </Button>

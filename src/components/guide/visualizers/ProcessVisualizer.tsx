@@ -50,7 +50,7 @@ export default function ProcessVisualizer({
               strokeDashoffset={pureOffset}
               strokeLinecap="round"
               fill="transparent"
-              className="transition-all duration-1000 ease-out"
+              className="transition duration-1000 ease-out"
             />
           </svg>
           <div className="absolute flex flex-col items-center text-center">
@@ -117,7 +117,7 @@ export default function ProcessVisualizer({
           {variants.map((v: any, idx: number) => (
             <div
               key={idx}
-              className="flex items-center gap-4 p-3 rounded-xl border border-black/5 hover:border-gold/40 bg-stone-50/50 transition-all"
+              className="flex items-center gap-4 p-3 rounded-xl border border-black/5 hover:border-gold/40 bg-stone-50/50 transition"
             >
               <div
                 className="w-12 h-12 rounded-xl shadow-inner border border-black/10 shrink-0 flex items-center justify-center"
@@ -158,9 +158,9 @@ export default function ProcessVisualizer({
         <div className="relative w-full max-w-[280px] my-2">
           <div className="h-4 w-full bg-stone-100 rounded-full overflow-hidden p-0.5 border border-black/5">
             <div
-              className="h-full rounded-full transition-all duration-1000 ease-out"
+              className="h-full w-full origin-left rounded-full transition-transform duration-700 ease-out"
               style={{
-                width: `${rating}%`,
+                transform: `scaleX(${rating / 100})`,
                 background: `linear-gradient(90deg, var(--color-gold) 0%, var(--color-gold) 50%, #10B981 100%)`,
               }}
             />

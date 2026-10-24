@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useCallback, memo, type ReactNode } from "react";
+import React, { useCallback, useRef, memo, type ReactNode } from "react";
+import { usePresence, useOverlayBehaviour } from "@/hooks/useOverlay";
 import { CloseIcon } from "@/components/icons";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { closeModal } from "@/store/slices/uiSlice";
@@ -40,41 +41,27 @@ function ModalComponent({
     }
   }, [controlledOnClose, isReduxMode, dispatch]);
 
-  // Handle ESC key
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        handleClose();
-      }
-    },
-    [handleClose]
-  );
+  const panelRef = useRef<HTMLDivElement>(null);
+  const { mounted, state } = usePresence(isOpen);
+  useOverlayBehaviour({ open: isOpen, onClose: handleClose, panelRef });
 
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = originalOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen, handleKeyDown]);
-
-  if (!isOpen) return null;
+  if (!mounted) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/60 p-4 backdrop-blur-xs transition-opacity duration-300"
+      data-state={state}
+      className="motion-fade fixed inset-0 z-50 flex items-center justify-center bg-ink/60 p-4 backdrop-blur-xs"
       onClick={handleClose}
       role="dialog"
       aria-modal="true"
+      aria-label={typeof title === "string" ? title : undefined}
     >
       <div
+        ref={panelRef}
+        tabIndex={-1}
+        data-state={state}
         className={cn(
-          "relative w-full rounded-2xl border border-border bg-surface p-6 shadow-2xl transition-transform duration-300",
+          "motion-pop relative w-full rounded-2xl border border-border bg-surface p-6 shadow-2xl outline-none",
           maxWidth,
           className
         )}

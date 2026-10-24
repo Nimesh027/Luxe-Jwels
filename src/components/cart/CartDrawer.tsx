@@ -184,8 +184,8 @@ export default function CartDrawer() {
             </div>
             <div className="w-full bg-border/80 h-1.5 rounded-full overflow-hidden">
               <div
-                className="h-full rounded-full transition-all duration-500 bg-brand"
-                style={{ width: `${progressPercent}%` }}
+                className="h-full w-full origin-left rounded-full bg-brand transition-transform duration-500 ease-out"
+                style={{ transform: `scaleX(${progressPercent / 100})` }}
               />
             </div>
           </div>

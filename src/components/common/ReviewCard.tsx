@@ -30,7 +30,7 @@ export default function ReviewCard({
   return (
     <div
       className={cn(
-        "flex h-full flex-col justify-between rounded-2xl border border-border/80 bg-white p-6 shadow-2xs hover:shadow-md transition-all duration-300",
+        "flex h-full flex-col justify-between rounded-2xl border border-border/80 bg-white p-6 shadow-2xs hover:shadow-md transition duration-300",
         className
       )}
     >

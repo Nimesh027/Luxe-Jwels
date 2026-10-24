@@ -38,7 +38,7 @@ export default function MaterialsAndQuality() {
         {materials.map((item, idx) => (
           <div
             key={idx}
-            className="bg-white rounded-[2rem] overflow-hidden border border-border/80 shadow-sm group hover:shadow-lg hover:border-gold/30 transition-all duration-300"
+            className="bg-white rounded-[2rem] overflow-hidden border border-border/80 shadow-sm group hover:shadow-lg hover:border-gold/30 transition duration-300"
           >
             <div className="relative h-64 w-full overflow-hidden">
               <Image

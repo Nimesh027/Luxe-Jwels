@@ -122,7 +122,7 @@ export default function TrackingTimeline() {
 
               {/* Step Circle Indicator */}
               <div
-                className={`absolute -left-6 sm:-left-10 top-0.5 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-caption font-bold transition-all shadow-2xs z-10 ${ isCompleted ? "bg-wine text-white" : isActive ? "bg-amber-500 text-white ring-4 ring-amber-100 animate-pulse" : "bg-border text-muted" }`}
+                className={`absolute -left-6 sm:-left-10 top-0.5 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-caption font-bold transition shadow-2xs z-10 ${ isCompleted ? "bg-wine text-white" : isActive ? "bg-amber-500 text-white ring-4 ring-amber-100 animate-pulse" : "bg-border text-muted" }`}
               >
                 {isCompleted ? <CheckIcon /> : step.icon}
               </div>

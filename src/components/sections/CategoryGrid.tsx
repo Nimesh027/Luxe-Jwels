@@ -36,7 +36,7 @@ export default function CategoryGrid() {
                       alt=""
                       fill
                       sizes="(max-width: 1024px) 22vw, 132px"
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </span>
                 </span>

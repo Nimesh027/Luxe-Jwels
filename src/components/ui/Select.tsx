@@ -89,7 +89,7 @@ function SelectComponent({
           disabled={disabled}
           onClick={() => setOpen((prev) => !prev)}
           className={cn(
-            "w-full inline-flex items-center justify-between gap-2.5 font-medium border transition-all duration-200 cursor-pointer select-none",
+            "w-full inline-flex items-center justify-between gap-2.5 font-medium border transition duration-200 cursor-pointer select-none",
             "disabled:opacity-50 disabled:cursor-not-allowed",
             open
               ? "border-gold bg-gold-soft text-gold-dark shadow-xs ring-2 ring-gold/20"
@@ -114,7 +114,7 @@ function SelectComponent({
         <div
           role="listbox"
           className={cn(
-            "absolute top-[calc(100%+6px)] z-50 min-w-[210px] w-full sm:w-max max-w-[290px] bg-white border border-border rounded-2xl shadow-xl overflow-hidden transition-all duration-200 ease-out",
+            "absolute top-[calc(100%+6px)] z-50 min-w-[210px] w-full sm:w-max max-w-[290px] bg-white border border-border rounded-2xl shadow-xl overflow-hidden transition-[opacity,scale,translate,visibility] duration-200 ease-out",
             align === "right" ? "right-0 origin-top-right" : "left-0 origin-top-left",
             open
               ? "opacity-100 scale-100 translate-y-0 pointer-events-auto visible"

@@ -44,7 +44,7 @@ export default function UserDrawer() {
         <Link
           href="/account"
           onClick={handleClose}
-          className="block bg-gradient-to-r from-gold via-gold to-gold-dark hover:from-gold-dark hover:to-gold-dark rounded-2xl p-4 sm:p-5 text-white shadow-md relative overflow-hidden transition-all duration-200 group cursor-pointer"
+          className="block bg-gradient-to-r from-gold via-gold to-gold-dark hover:from-gold-dark hover:to-gold-dark rounded-2xl p-4 sm:p-5 text-white shadow-md relative overflow-hidden transition duration-200 group cursor-pointer"
         >
           <div className="absolute right-0 top-0 translate-x-4 -translate-y-4 w-28 h-28 bg-white/10 rounded-full blur-xl pointer-events-none" />
 
@@ -75,7 +75,7 @@ export default function UserDrawer() {
               setActiveTab("order-history");
               handleClose();
             }}
-            className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left transition-all duration-200 cursor-pointer ${ activeTab === "order-history" ? "bg-wine-soft/50 text-wine font-medium border border-wine/20 shadow-xs" : "text-ink/80 hover:bg-cream-dark hover:text-ink" }`}
+            className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left transition duration-200 cursor-pointer ${ activeTab === "order-history" ? "bg-wine-soft/50 text-wine font-medium border border-wine/20 shadow-xs" : "text-ink/80 hover:bg-cream-dark hover:text-ink" }`}
           >
             <div className="w-8 h-8 rounded-full bg-wine/10 flex items-center justify-center text-wine shrink-0">
               <PackageIcon size={16} className="text-wine" />
@@ -90,7 +90,7 @@ export default function UserDrawer() {
               setActiveTab("track-order");
               handleClose();
             }}
-            className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left transition-all duration-200 cursor-pointer ${ activeTab === "track-order" ? "bg-wine-soft/50 text-wine font-medium border border-wine/20 shadow-xs" : "text-ink/80 hover:bg-cream-dark hover:text-ink" }`}
+            className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left transition duration-200 cursor-pointer ${ activeTab === "track-order" ? "bg-wine-soft/50 text-wine font-medium border border-wine/20 shadow-xs" : "text-ink/80 hover:bg-cream-dark hover:text-ink" }`}
           >
             <div className="w-8 h-8 rounded-full bg-wine/10 flex items-center justify-center text-wine shrink-0">
               <TruckIcon size={16} className="text-wine" />
@@ -105,7 +105,7 @@ export default function UserDrawer() {
               setActiveTab("care-guide");
               handleClose();
             }}
-            className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left transition-all duration-200 cursor-pointer ${ activeTab === "care-guide" ? "bg-wine-soft/50 text-wine font-medium border border-wine/20 shadow-xs" : "text-ink/80 hover:bg-cream-dark hover:text-ink" }`}
+            className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left transition duration-200 cursor-pointer ${ activeTab === "care-guide" ? "bg-wine-soft/50 text-wine font-medium border border-wine/20 shadow-xs" : "text-ink/80 hover:bg-cream-dark hover:text-ink" }`}
           >
             <div className="w-8 h-8 rounded-full bg-wine/10 flex items-center justify-center text-wine shrink-0">
               <DiamondIcon size={16} className="text-wine" />
@@ -120,7 +120,7 @@ export default function UserDrawer() {
               setActiveTab("faqs");
               handleClose();
             }}
-            className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left transition-all duration-200 cursor-pointer ${ activeTab === "faqs" ? "bg-wine-soft/50 text-wine font-medium border border-wine/20 shadow-xs" : "text-ink/80 hover:bg-cream-dark hover:text-ink" }`}
+            className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left transition duration-200 cursor-pointer ${ activeTab === "faqs" ? "bg-wine-soft/50 text-wine font-medium border border-wine/20 shadow-xs" : "text-ink/80 hover:bg-cream-dark hover:text-ink" }`}
           >
             <div className="w-8 h-8 rounded-full bg-wine/10 flex items-center justify-center text-wine shrink-0">
               <HelpCircleIcon size={16} className="text-wine" />
@@ -136,7 +136,7 @@ export default function UserDrawer() {
                 dispatch(logout());
                 handleClose();
               }}
-              className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left text-wine hover:bg-red-50/80 transition-all duration-200 cursor-pointer"
+              className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left text-wine hover:bg-red-50/80 transition duration-200 cursor-pointer"
             >
               <div className="w-8 h-8 rounded-full bg-wine/10 flex items-center justify-center text-wine shrink-0">
                 <LogOutIcon size={16} className="text-wine" />
@@ -147,7 +147,7 @@ export default function UserDrawer() {
             <Link
               href="/login"
               onClick={handleClose}
-              className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left text-wine hover:bg-wine/5 transition-all duration-200 cursor-pointer"
+              className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-left text-wine hover:bg-wine/5 transition duration-200 cursor-pointer"
             >
               <div className="w-8 h-8 rounded-full bg-wine/10 flex items-center justify-center text-wine shrink-0">
                 <LogInIcon size={16} className="text-wine" />

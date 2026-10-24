@@ -17,9 +17,9 @@ export interface HelpBoxSectionProps {
 export default function HelpBoxSection({ title, description, primaryAction, secondaryAction }: HelpBoxSectionProps) {
   const renderAction = (action: HelpBoxAction, isPrimary: boolean) => {
     const primaryStyles =
-      "w-full sm:w-auto px-8 py-3 bg-wine text-white rounded-full text-small font-semibold hover:bg-wine-dark transition-all cursor-pointer shadow-md";
+      "w-full sm:w-auto px-8 py-3 bg-wine text-white rounded-full text-small font-semibold hover:bg-wine-dark transition cursor-pointer shadow-md";
     const secondaryStyles =
-      "w-full sm:w-auto px-8 py-3 bg-white border border-wine/30 text-wine rounded-full text-small font-semibold hover:bg-wine hover:text-white transition-all cursor-pointer shadow-sm";
+      "w-full sm:w-auto px-8 py-3 bg-white border border-wine/30 text-wine rounded-full text-small font-semibold hover:bg-wine hover:text-white transition cursor-pointer shadow-sm";
     const styles = isPrimary ? primaryStyles : secondaryStyles;
 
     if (

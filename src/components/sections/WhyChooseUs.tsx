@@ -34,10 +34,10 @@ export default function WhyChooseUs() {
           return (
             <div
               key={item.id}
-              className="group relative flex flex-col items-center text-center p-7 sm:p-8 rounded-2xl bg-white border border-border hover:border-gold/60 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+              className="group relative flex flex-col items-center text-center p-7 sm:p-8 rounded-2xl bg-white border border-border hover:border-gold/60 shadow-xs hover:shadow-xl.5 transition duration-300"
             >
               {/* Dark Cream Icon Halo Container */}
-              <div className="w-16 h-16 rounded-full bg-[#F5ECE0] border border-gold-soft flex items-center justify-center p-3.5 shadow-xs group-hover:scale-110 group-hover:border-gold-dark group-hover:bg-[#EFE2D0] transition-all duration-300 mb-4">
+              <div className="w-16 h-16 rounded-full bg-[#F5ECE0] border border-gold-soft flex items-center justify-center p-3.5 shadow-xs group-hover:scale-110 group-hover:border-gold-dark group-hover:bg-[#EFE2D0] transition duration-300 mb-4">
                 <IconComponent className="w-8 h-8 text-gold-dark group-hover:text-gold-dark transition-colors duration-300" />
               </div>
 

@@ -80,7 +80,7 @@ function ProductCardComponent({
           </button>
         </div>
 
-        <div className="absolute inset-x-2.5 bottom-2.5 hidden lg:block translate-y-2 opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
+        <div className="absolute inset-x-2.5 bottom-2.5 hidden lg:block translate-y-2 opacity-0 transition duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
           <button
             type="button"
             onClick={() => add(product)}

@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useCallback, memo, type ReactNode } from "react";
+import React, { useRef, memo, type ReactNode } from "react";
+import { usePresence, useOverlayBehaviour } from "@/hooks/useOverlay";
 import { cn } from "@/lib/utils";
 import Button from "@/components/ui/Button";
 import { CloseIcon } from "@/components/icons";
@@ -56,53 +57,27 @@ function DrawerComponent({
   closeOnBackdropClick = true,
   closeOnEsc = true,
 }: DrawerProps) {
-  // Handle ESC key to close drawer
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (closeOnEsc && e.key === "Escape") {
-        onClose();
-      }
-    },
-    [closeOnEsc, onClose]
-  );
+  const panelRef = useRef<HTMLElement>(null);
+  const { mounted, state } = usePresence(isOpen, 300);
+  useOverlayBehaviour({ open: isOpen, onClose, panelRef, closeOnEsc });
 
-  useEffect(() => {
-    if (!isOpen) return;
-
-    // Prevent body scrolling while keeping current scroll position
-    const originalOverflow = document.body.style.overflow;
-    const originalPaddingRight = document.body.style.paddingRight;
-    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-
-    document.body.style.overflow = "hidden";
-    if (scrollbarWidth > 0) {
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-    }
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = originalOverflow;
-      document.body.style.paddingRight = originalPaddingRight;
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen, handleKeyDown]);
-
-  if (!isOpen) return null;
+  if (!mounted) return null;
 
   const isLeft = position === "left";
   const resolvedMaxWidth = maxWidth || SIZE_MAP[size] || SIZE_MAP.md;
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-hidden"
+      className={cn("fixed inset-0 z-50 overflow-hidden", state === "closed" && "pointer-events-none")}
+      data-state={state}
       role="dialog"
       aria-modal="true"
       aria-label={ariaLabel}
     >
       {/* Dimmed backdrop with smooth fade-in */}
       <div
-        className="fixed inset-0 bg-ink/60 backdrop-blur-xs transition-opacity duration-300 animate-fadeIn cursor-pointer"
+        data-state={state}
+        className="motion-fade fixed inset-0 bg-ink/60 backdrop-blur-xs cursor-pointer"
         onClick={closeOnBackdropClick ? onClose : undefined}
         aria-hidden="true"
       />
@@ -117,9 +92,13 @@ function DrawerComponent({
         )}
       >
         <aside
+          ref={panelRef}
+          tabIndex={-1}
+          data-state={state}
           className={cn(
-            "pointer-events-auto relative flex h-full w-full flex-col bg-surface shadow-2xl transition-transform duration-300 ease-out",
-            isLeft ? "animate-slideInLeft" : "animate-slideInRight",
+            "relative flex h-full w-full flex-col bg-surface shadow-2xl outline-none will-change-transform",
+            state === "open" ? "pointer-events-auto" : "pointer-events-none",
+            isLeft ? "motion-slide-left" : "motion-slide-right",
             "max-w-full",
             resolvedMaxWidth,
             className

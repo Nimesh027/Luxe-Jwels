@@ -185,7 +185,7 @@ export default function CheckoutClient() {
               </h2>
               <div className="space-y-3">
                 <label
-                  className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all ${ paymentMethod === "upi" ? "border-wine bg-wine/5" : "border-border bg-cream/50 hover:bg-cream" }`}
+                  className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition ${ paymentMethod === "upi" ? "border-wine bg-wine/5" : "border-border bg-cream/50 hover:bg-cream" }`}
                 >
                   <div className="flex items-center gap-3">
                     <input
@@ -205,7 +205,7 @@ export default function CheckoutClient() {
                 </label>
 
                 <label
-                  className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all ${ paymentMethod === "card" ? "border-wine bg-wine/5" : "border-border bg-cream/50 hover:bg-cream" }`}
+                  className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition ${ paymentMethod === "card" ? "border-wine bg-wine/5" : "border-border bg-cream/50 hover:bg-cream" }`}
                 >
                   <div className="flex items-center gap-3">
                     <input
@@ -229,7 +229,7 @@ export default function CheckoutClient() {
                 </label>
 
                 <label
-                  className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all ${ paymentMethod === "paypal" ? "border-wine bg-wine/5" : "border-border bg-cream/50 hover:bg-cream" }`}
+                  className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition ${ paymentMethod === "paypal" ? "border-wine bg-wine/5" : "border-border bg-cream/50 hover:bg-cream" }`}
                 >
                   <div className="flex items-center gap-3">
                     <input

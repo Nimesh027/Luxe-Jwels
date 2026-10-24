@@ -43,7 +43,7 @@ export default function OurArtisans() {
         {/* Artisans Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {artisans.map((artisan, idx) => (
-            <div key={idx} className="group relative overflow-hidden rounded-[2rem] bg-white shadow-sm hover:shadow-xl transition-all duration-500 border border-border/80 hover:border-gold/30">
+            <div key={idx} className="group relative overflow-hidden rounded-[2rem] bg-white shadow-sm hover:shadow-xl transition duration-300 border border-border/80 hover:border-gold/30">
 
               {/* Image Container */}
               <div className="relative h-72 w-full overflow-hidden bg-surface">

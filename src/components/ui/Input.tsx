@@ -79,7 +79,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             id={inputId}
             disabled={disabled}
             className={cn(
-              "w-full rounded-xl py-2.5 sm:py-3 text-body transition-all duration-200 outline-hidden border",
+              "w-full rounded-xl py-2.5 sm:py-3 text-body transition duration-200 outline-hidden border",
               leadingIcon ? "pl-10" : "pl-3.5",
               trailingIcon ? "pr-10" : "pr-3.5",
               isDark

@@ -37,7 +37,7 @@ export default function ContactFAQ() {
           return (
             <div
               key={faq.id}
-              className="bg-surface rounded-2xl border border-border/70 overflow-hidden shadow-2xs transition-all"
+              className="bg-surface rounded-2xl border border-border/70 overflow-hidden shadow-2xs transition"
             >
               <Button
                 type="button"

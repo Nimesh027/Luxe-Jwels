@@ -170,7 +170,7 @@ export default function MobileDrawer() {
 
               {/* Mega Menu Expandable Mobile View */}
               {hasMega && link.megaMenu && isExpanded && (
-                <div className="pb-3 pt-1 px-2">
+                <div className="pb-3 pt-1 px-2 animate-in fade-in slide-in-from-top-2">
                   {/* Tabs list */}
                   <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none">
                     {link.megaMenu.tabs.map((tab) => {
@@ -235,7 +235,7 @@ export default function MobileDrawer() {
 
               {/* Simple Children Fallback */}
               {hasChildren && !hasMega && isExpanded && (
-                <div className="pb-2 pl-4 pr-2 space-y-1">
+                <div className="pb-2 pl-4 pr-2 space-y-1 animate-in fade-in slide-in-from-top-2">
                   {link.children?.map((child) => (
                     <Link
                       key={child.id}

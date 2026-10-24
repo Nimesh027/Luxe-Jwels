@@ -46,7 +46,7 @@ export default function AwardsRecognition() {
         {/* Awards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {awards.map((award, idx) => (
-            <div key={idx} className="group bg-white rounded-3xl p-8 border border-border/60 shadow-sm text-center flex flex-col items-center justify-between space-y-4 hover:shadow-xl hover:border-gold/40 transition-all duration-300">
+            <div key={idx} className="group bg-white rounded-3xl p-8 border border-border/60 shadow-sm text-center flex flex-col items-center justify-between space-y-4 hover:shadow-xl hover:border-gold/40 transition duration-300">
               <div className="w-16 h-16 rounded-2xl bg-gold-soft group-hover:bg-wine/10 border border-wine/15 group-hover:border-wine/30 flex items-center justify-center mb-2 shadow-2xs transition-colors duration-300">
                 {award.icon}
               </div>

@@ -71,7 +71,7 @@ export default function WishlistClient() {
         {items.map((product) => (
           <div
             key={product.id}
-            className="py-6 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 transition-all"
+            className="py-6 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 transition"
           >
             {/* Left: Product Thumbnail & Details */}
             <div className="flex items-center gap-4 sm:gap-6">

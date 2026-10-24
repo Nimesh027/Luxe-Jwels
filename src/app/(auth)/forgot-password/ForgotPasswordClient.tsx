@@ -95,7 +95,7 @@ export default function ForgotPasswordClient() {
                 type="submit"
                 variant="unstyled"
                 disabled={isLoading}
-                className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold to-gold hover:from-gold hover:to-gold text-ink font-semibold text-[14.5px] tracking-wide transition-all duration-300 transform active:scale-[0.99] shadow-lg shadow-gold/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+                className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold to-gold hover:from-gold hover:to-gold text-ink font-semibold text-[14.5px] tracking-wide transition duration-300 transform active:scale-[0.99] shadow-lg shadow-gold/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
               >
                 {isLoading ? (
                   <>

@@ -65,6 +65,16 @@
 
   --shadow-card: 0 1px 2px rgb(30 26 22 / 0.04), 0 8px 24px -12px rgb(30 26 22 / 0.12);
   --shadow-lift: 0 2px 4px rgb(30 26 22 / 0.05), 0 18px 40px -16px rgb(30 26 22 / 0.22);
+
+  /* Motion — one easing family and three speeds used everywhere */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-soft: cubic-bezier(0.55, 0, 0.75, 0.2);
+  --default-transition-duration: 200ms;
+  --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-fast: 150ms;
+  --motion-base: 220ms;
+  --motion-slow: 320ms;
 }
 
 /* Dark surfaces (footer, banners, announcement bar). Inside them the accent
@@ -140,6 +150,19 @@
 
   img {
     max-width: 100%;
+  }
+
+  /* Default colour feedback for every interactive element. Utilities such as
+     transition-transform still override this where a component needs it. */
+  :where(a, button, summary, [role="button"], [role="tab"], input, select, textarea) {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow;
+    transition-duration: var(--motion-base);
+    transition-timing-function: var(--ease-standard);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :where(button, summary, [role="button"], [role="tab"]) {
+    touch-action: manipulation;
   }
 }
 
@@ -302,12 +325,98 @@
   animation: slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Entrance utilities (animate-in + fade-in / zoom-in-95 / slide-in-from-*).
+   They compose through custom properties, so any combination works. */
+@keyframes enter {
+  from {
+    opacity: var(--tw-enter-opacity, 1);
+    transform: translate3d(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0), 0)
+      scale(var(--tw-enter-scale, 1));
+  }
+}
+
+@utility animate-in {
+  animation: enter var(--tw-duration, var(--motion-base)) var(--ease-out-soft) both;
+}
+@utility fade-in {
+  --tw-enter-opacity: 0;
+}
+@utility zoom-in-95 {
+  --tw-enter-scale: 0.95;
+}
+@utility slide-in-from-top-2 {
+  --tw-enter-translate-y: -0.5rem;
+}
+@utility slide-in-from-top-4 {
+  --tw-enter-translate-y: -1rem;
+}
+@utility slide-in-from-left {
+  --tw-enter-translate-x: -0.75rem;
+}
+
+/* ---------- Overlay presence ----------
+   Panels render with data-state="open" | "closed". @starting-style gives the
+   entrance, [data-state=closed] the exit, and because both are transitions an
+   interrupted open/close reverses smoothly instead of restarting. */
+@layer components {
+  .motion-fade,
+  .motion-pop,
+  .motion-drop,
+  .motion-slide-left,
+  .motion-slide-right {
+    transition-property: opacity, transform;
+    transition-timing-function: var(--ease-out-soft);
+    transition-duration: var(--motion-slow);
+  }
+
+  .motion-fade { opacity: 1; }
+  .motion-pop { opacity: 1; transform: none; transition-duration: var(--motion-base); }
+  .motion-drop { opacity: 1; transform: none; transition-duration: var(--motion-base); }
+  .motion-slide-left,
+  .motion-slide-right { transform: none; }
+
+  @starting-style {
+    .motion-fade { opacity: 0; }
+    .motion-pop { opacity: 0; transform: translateY(8px) scale(0.97); }
+    .motion-drop { opacity: 0; transform: translateY(-6px); }
+    .motion-slide-left { transform: translateX(-100%); }
+    .motion-slide-right { transform: translateX(100%); }
+  }
+
+  :is(.motion-fade, .motion-pop, .motion-drop, .motion-slide-left, .motion-slide-right)[data-state="closed"] {
+    pointer-events: none;
+    transition-timing-function: var(--ease-in-soft);
+    transition-duration: var(--motion-base);
+  }
+  .motion-fade[data-state="closed"] { opacity: 0; }
+  .motion-pop[data-state="closed"] { opacity: 0; transform: translateY(8px) scale(0.97); }
+  .motion-drop[data-state="closed"] { opacity: 0; transform: translateY(-6px); }
+  .motion-slide-left[data-state="closed"] { transform: translateX(-100%); }
+  .motion-slide-right[data-state="closed"] { transform: translateX(100%); }
+
+  /* Shared pressed feedback: a transform, so neighbours never move */
+  .press {
+    transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+    transition-duration: var(--motion-fast);
+    transition-timing-function: var(--ease-standard);
+  }
+  .press:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Nonessential decorative movement is dropped entirely */
+  .animate-marquee {
+    animation: none !important;
   }
 }

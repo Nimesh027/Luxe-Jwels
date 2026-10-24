@@ -37,7 +37,7 @@ export default function Collections() {
           <Link
             key={collection.id}
             href={`/collections/${collection.slug}`}
-            className="group relative block h-[400px] sm:h-[440px] lg:h-[480px] w-full overflow-hidden rounded-2xl sm:rounded-3xl bg-ink shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl border border-border hover:border-gold/50"
+            className="group relative block h-[400px] sm:h-[440px] lg:h-[480px] w-full overflow-hidden rounded-2xl sm:rounded-3xl bg-ink shadow-sm transition duration-300 hover:shadow-2xl border border-border hover:border-gold/50"
           >
             {/* Hero Card Image with Smooth Scale */}
             <Image
@@ -46,7 +46,7 @@ export default function Collections() {
               fill
               priority={index === 0}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-108 brightness-[0.96] contrast-[1.04]"
+              className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105 brightness-[0.96] contrast-[1.04]"
             />
 
             {/* Ambient Base Scrim */}
@@ -71,7 +71,7 @@ export default function Collections() {
               {/* Interactive Explore Link */}
               <div className="mt-4 flex items-center gap-2 text-[12.5px] sm:text-[13px] font-medium tracking-widest text-gold-bright group-hover:text-white transition-colors">
                 <span>Explore Collection</span>
-                <span className="w-6 h-6 rounded-full bg-white/15 group-hover:bg-brand group-hover:text-white flex items-center justify-center transition-all duration-300">
+                <span className="w-6 h-6 rounded-full bg-white/15 group-hover:bg-brand group-hover:text-white flex items-center justify-center transition duration-300">
                   <ArrowRightIcon className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </span>
               </div>

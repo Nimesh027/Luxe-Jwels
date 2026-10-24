@@ -54,7 +54,7 @@ function QuantitySelectorComponent({
   return (
     <div
       className={cn(
-        "inline-flex items-center justify-between rounded-full border border-border/80 bg-surface shadow-2xs transition-all",
+        "inline-flex items-center justify-between rounded-full border border-border/80 bg-surface shadow-2xs transition",
         sizeClasses[size],
         className
       )}

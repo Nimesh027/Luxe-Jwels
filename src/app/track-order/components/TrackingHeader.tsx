@@ -41,7 +41,7 @@ export default function TrackingHeader({ orderId }: TrackingHeaderProps) {
             type="button"
             variant="unstyled"
             onClick={handleCopyLink}
-            className="px-3.5 py-2 bg-white border border-border hover:border-wine/40 text-ink rounded-xl text-caption font-medium transition-all shadow-2xs flex items-center gap-2 cursor-pointer"
+            className="px-3.5 py-2 bg-white border border-border hover:border-wine/40 text-ink rounded-xl text-caption font-medium transition shadow-2xs flex items-center gap-2 cursor-pointer"
           >
             {copiedLink ? (
               <>
@@ -57,7 +57,7 @@ export default function TrackingHeader({ orderId }: TrackingHeaderProps) {
           </Button>
           <Link
             href="/contact"
-            className="px-3.5 py-2 bg-wine/10 hover:bg-wine/20 text-wine rounded-xl text-caption font-semibold transition-all flex items-center gap-2"
+            className="px-3.5 py-2 bg-wine/10 hover:bg-wine/20 text-wine rounded-xl text-caption font-semibold transition flex items-center gap-2"
           >
             <PhoneIcon size={14} className="shrink-0" />
             <span>Contact Agent</span>

@@ -135,7 +135,7 @@ export default function DiamondShapeDetailClient({
               >
                 {/* Slide 1: Real Render (Clean, No background) */}
                 <div
-                  className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ${ heroView === "photo" ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none" }`}
+                  className={`absolute inset-0 flex items-center justify-center transition duration-700 ${ heroView === "photo" ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none" }`}
                 >
                   <div className="relative w-full h-full p-4 flex items-center justify-center">
                     <Image
@@ -151,7 +151,7 @@ export default function DiamondShapeDetailClient({
 
                 {/* Slide 2: Facet Blueprint (Clean vector lines, transparent fill) */}
                 <div
-                  className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ${ heroView === "facets" ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none" }`}
+                  className={`absolute inset-0 flex items-center justify-center transition duration-700 ${ heroView === "facets" ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none" }`}
                 >
                   <div className="w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center p-4">
                     <DiamondFacetSvg
@@ -172,14 +172,14 @@ export default function DiamondShapeDetailClient({
                   onClick={() => setHeroView("photo")}
                   aria-label="Real Render View"
                   title="Photorealistic Gem Render"
-                  className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer ${ heroView === "photo" ? "bg-brand ring-4 ring-gold/25 scale-110" : "bg-stone-300 hover:bg-gold/50" }`}
+                  className={`w-3 h-3 rounded-full transition duration-300 cursor-pointer ${ heroView === "photo" ? "bg-brand ring-4 ring-gold/25 scale-110" : "bg-stone-300 hover:bg-gold/50" }`}
                 />
                 <button
                   type="button"
                   onClick={() => setHeroView("facets")}
                   aria-label="Facet Blueprint View"
                   title="Architectural Facet Blueprint"
-                  className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer ${ heroView === "facets" ? "bg-brand ring-4 ring-gold/25 scale-110" : "bg-stone-300 hover:bg-gold/50" }`}
+                  className={`w-3 h-3 rounded-full transition duration-300 cursor-pointer ${ heroView === "facets" ? "bg-brand ring-4 ring-gold/25 scale-110" : "bg-stone-300 hover:bg-gold/50" }`}
                 />
               </div>
             </div>
@@ -324,7 +324,7 @@ export default function DiamondShapeDetailClient({
               </div>
               <Link
                 href="/guide"
-                className="self-start sm:self-auto flex items-center gap-2 px-5 py-2.5 text-xs font-semibold tracking-widest border transition-all hover:opacity-90"
+                className="self-start sm:self-auto flex items-center gap-2 px-5 py-2.5 text-xs font-semibold tracking-widest border transition hover:opacity-90"
                 style={{
                   background: "var(--color-gold)",
                   color: "#fff",
@@ -388,7 +388,7 @@ export default function DiamondShapeDetailClient({
                   <button
                     type="button"
                     onClick={() => setCutSimulation("ideal")}
-                    className={`flex-1 max-w-[160px] flex flex-col items-center gap-3 p-4 sm:p-5 transition-all rounded-2xl cursor-pointer ${ cutSimulation === "ideal" ? "shadow-sm scale-102" : "opacity-60 hover:opacity-85" }`}
+                    className={`flex-1 max-w-[160px] flex flex-col items-center gap-3 p-4 sm:p-5 transition rounded-2xl cursor-pointer ${ cutSimulation === "ideal" ? "shadow-sm scale-102" : "opacity-60 hover:opacity-85" }`}
                     style={{
                       background: cutSimulation === "ideal" ? "var(--color-gold-soft)" : "transparent",
                       border:
@@ -416,7 +416,7 @@ export default function DiamondShapeDetailClient({
                   <button
                     type="button"
                     onClick={() => setCutSimulation("shallow")}
-                    className={`flex-1 max-w-[160px] flex flex-col items-center gap-3 p-4 sm:p-5 transition-all rounded-2xl cursor-pointer ${ cutSimulation === "shallow" ? "shadow-sm scale-102" : "opacity-60 hover:opacity-85" }`}
+                    className={`flex-1 max-w-[160px] flex flex-col items-center gap-3 p-4 sm:p-5 transition rounded-2xl cursor-pointer ${ cutSimulation === "shallow" ? "shadow-sm scale-102" : "opacity-60 hover:opacity-85" }`}
                     style={{
                       background: cutSimulation === "shallow" ? "var(--color-gold-soft)" : "transparent",
                       border:
@@ -444,7 +444,7 @@ export default function DiamondShapeDetailClient({
                   <button
                     type="button"
                     onClick={() => setCutSimulation("deep")}
-                    className={`flex-1 max-w-[160px] flex flex-col items-center gap-3 p-4 sm:p-5 transition-all rounded-2xl cursor-pointer ${ cutSimulation === "deep" ? "shadow-sm scale-102" : "opacity-60 hover:opacity-85" }`}
+                    className={`flex-1 max-w-[160px] flex flex-col items-center gap-3 p-4 sm:p-5 transition rounded-2xl cursor-pointer ${ cutSimulation === "deep" ? "shadow-sm scale-102" : "opacity-60 hover:opacity-85" }`}
                     style={{
                       background: cutSimulation === "deep" ? "var(--color-gold-soft)" : "transparent",
                       border:
@@ -490,7 +490,7 @@ export default function DiamondShapeDetailClient({
                           key={grade.label}
                           type="button"
                           onClick={() => setSelectedColorIdx(idx)}
-                          className={`flex flex-col items-center gap-3 p-3.5 sm:p-4 rounded-2xl transition-all cursor-pointer ${ isSel ? "shadow-sm scale-102" : "opacity-60 hover:opacity-85" }`}
+                          className={`flex flex-col items-center gap-3 p-3.5 sm:p-4 rounded-2xl transition cursor-pointer ${ isSel ? "shadow-sm scale-102" : "opacity-60 hover:opacity-85" }`}
                           style={{
                             background: isSel ? "var(--color-gold-soft)" : "transparent",
                             border: isSel
@@ -623,7 +623,7 @@ export default function DiamondShapeDetailClient({
                             key={grade.label}
                             type="button"
                             onClick={() => setSelectedClarityIdx(idx)}
-                            className={`flex flex-col items-center gap-1.5 p-2 sm:p-3 rounded-xl transition-all cursor-pointer ${ isSel ? "shadow-2xs scale-102" : "opacity-60 hover:opacity-85" }`}
+                            className={`flex flex-col items-center gap-1.5 p-2 sm:p-3 rounded-xl transition cursor-pointer ${ isSel ? "shadow-2xs scale-102" : "opacity-60 hover:opacity-85" }`}
                             style={{
                               background: isSel ? "var(--color-gold-soft)" : "transparent",
                               border: isSel
@@ -705,7 +705,7 @@ export default function DiamondShapeDetailClient({
                             key={size.carat}
                             type="button"
                             onClick={() => setSelectedCaratIdx(idx)}
-                            className={`flex flex-col items-center gap-2 transition-all cursor-pointer ${ isSel ? "scale-105 opacity-100" : "opacity-45 hover:opacity-80" }`}
+                            className={`flex flex-col items-center gap-2 transition cursor-pointer ${ isSel ? "scale-105 opacity-100" : "opacity-45 hover:opacity-80" }`}
                           >
                             <div
                               style={{
@@ -745,7 +745,7 @@ export default function DiamondShapeDetailClient({
                             key={size.carat}
                             type="button"
                             onClick={() => setSelectedCaratIdx(idx)}
-                            className={`flex flex-col items-center gap-1 p-2.5 rounded-xl border transition-all cursor-pointer ${ isSel ? "shadow-2xs scale-102" : "opacity-65" }`}
+                            className={`flex flex-col items-center gap-1 p-2.5 rounded-xl border transition cursor-pointer ${ isSel ? "shadow-2xs scale-102" : "opacity-65" }`}
                             style={{
                               background: isSel ? "var(--color-gold-soft)" : "transparent",
                               borderColor: isSel ? "var(--color-gold)" : "var(--color-border)",
@@ -949,7 +949,7 @@ export default function DiamondShapeDetailClient({
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {/* Setting 1: Solitaire */}
             <div
-              className="rounded-2xl border transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:shadow-lg"
+              className="rounded-2xl border transition duration-300 flex flex-col justify-between overflow-hidden group hover:shadow-lg"
               style={{ background: "var(--color-gold-soft)", borderColor: "var(--color-border)" }}
             >
               <div className="p-4 sm:p-5 flex flex-col items-center">
@@ -1002,7 +1002,7 @@ export default function DiamondShapeDetailClient({
 
             {/* Setting 2: Halo & Hidden Halo */}
             <div
-              className="rounded-2xl border transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:shadow-lg"
+              className="rounded-2xl border transition duration-300 flex flex-col justify-between overflow-hidden group hover:shadow-lg"
               style={{ background: "var(--color-gold-soft)", borderColor: "var(--color-border)" }}
             >
               <div className="p-4 sm:p-5 flex flex-col items-center">
@@ -1055,7 +1055,7 @@ export default function DiamondShapeDetailClient({
 
             {/* Setting 3: Three-Stone Architecture */}
             <div
-              className="rounded-2xl border transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:shadow-lg"
+              className="rounded-2xl border transition duration-300 flex flex-col justify-between overflow-hidden group hover:shadow-lg"
               style={{ background: "var(--color-gold-soft)", borderColor: "var(--color-border)" }}
             >
               <div className="p-4 sm:p-5 flex flex-col items-center">
@@ -1108,7 +1108,7 @@ export default function DiamondShapeDetailClient({
 
             {/* Setting 4: Modern Bezel Mount */}
             <div
-              className="rounded-2xl border transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:shadow-lg"
+              className="rounded-2xl border transition duration-300 flex flex-col justify-between overflow-hidden group hover:shadow-lg"
               style={{ background: "var(--color-gold-soft)", borderColor: "var(--color-border)" }}
             >
               <div className="p-4 sm:p-5 flex flex-col items-center">
@@ -1184,7 +1184,7 @@ export default function DiamondShapeDetailClient({
                 <Link
                   key={item.slug}
                   href={`/guide/shape/${item.slug}`}
-                  className={`group p-3.5 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center ${ isCurrent ? "bg-wine/5 border-wine shadow-md ring-1 ring-wine" : "bg-surface border-border/80 hover:border-gold/60 hover:shadow-md" }`}
+                  className={`group p-3.5 rounded-2xl border transition duration-300 flex flex-col items-center text-center ${ isCurrent ? "bg-wine/5 border-wine shadow-md ring-1 ring-wine" : "bg-surface border-border/80 hover:border-gold/60 hover:shadow-md" }`}
                 >
                   <div className="relative w-14 h-14 sm:w-16 sm:h-16 mb-2.5 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center p-1.5 rounded-xl bg-surface-alt/40 border border-border/40">
                     <DiamondFacetSvg
@@ -1247,7 +1247,7 @@ export default function DiamondShapeDetailClient({
               {relatedProducts.map((product) => (
                 <div
                   key={product.id}
-                  className="group bg-surface rounded-2xl border border-border/80 overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+                  className="group bg-surface rounded-2xl border border-border/80 overflow-hidden hover:shadow-lg transition duration-300 flex flex-col justify-between"
                 >
                   <div>
                     <div className="relative aspect-square overflow-hidden bg-surface-alt">

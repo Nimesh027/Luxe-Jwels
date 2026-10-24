@@ -53,7 +53,7 @@ export default function CareDosAndDonts() {
           return (
             <div
               key={idx}
-              className={`group relative rounded-2xl border p-8 space-y-4 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden ${ isDo ? "bg-emerald-50/40 border-emerald-200/60 hover:border-emerald-300" : "bg-rose-50/40 border-rose-200/60 hover:border-rose-300" }`}
+              className={`group relative rounded-2xl border p-8 space-y-4 shadow-sm hover:shadow-xl transition duration-300 overflow-hidden ${ isDo ? "bg-emerald-50/40 border-emerald-200/60 hover:border-emerald-300" : "bg-rose-50/40 border-rose-200/60 hover:border-rose-300" }`}
             >
               {/* Subtle Background Accent */}
               <div

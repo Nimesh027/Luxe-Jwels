@@ -25,7 +25,7 @@ export default function TrackingItemPreview() {
 
       <Link
         href="/products/solitaire-ring"
-        className="hidden sm:inline-flex px-4 py-2 border border-border hover:border-wine text-caption font-semibold rounded-full text-ink hover:text-wine transition-all"
+        className="hidden sm:inline-flex px-4 py-2 border border-border hover:border-wine text-caption font-semibold rounded-full text-ink hover:text-wine transition"
       >
         View Item
       </Link>

@@ -59,7 +59,7 @@ export default function Instagram() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group/card relative block aspect-[1/1.12] w-full overflow-hidden rounded-xl bg-ink/10 shadow-2xs transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
+                className="group/card relative block aspect-[1/1.12] w-full overflow-hidden rounded-xl bg-ink/10 shadow-2xs transition duration-300 hover:shadow-xl"
               >
                 <Image
                   src={image}

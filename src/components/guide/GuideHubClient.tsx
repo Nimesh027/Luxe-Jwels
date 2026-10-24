@@ -65,7 +65,7 @@ export default function GuideHubClient() {
               <Link
                 key={item.slug}
                 href={`/guide/gold/${item.slug}`}
-                className="group rounded-[var(--radius-card)] bg-white border border-border shadow-xs hover:shadow-lg hover:border-gold/40 transition-all flex flex-col overflow-hidden text-center"
+                className="group rounded-[var(--radius-card)] bg-white border border-border shadow-xs hover:shadow-lg hover:border-gold/40 transition flex flex-col overflow-hidden text-center"
               >
                 <div className="relative aspect-square w-full bg-cream overflow-hidden p-4">
                   <Image
@@ -132,7 +132,7 @@ export default function GuideHubClient() {
               <Link
                 key={item.slug}
                 href={`/guide/silver/${item.slug}`}
-                className="group rounded-[var(--radius-card)] bg-white border border-border shadow-xs hover:shadow-lg hover:border-gold/40 transition-all flex flex-col overflow-hidden text-center"
+                className="group rounded-[var(--radius-card)] bg-white border border-border shadow-xs hover:shadow-lg hover:border-gold/40 transition flex flex-col overflow-hidden text-center"
               >
                 <div className="relative aspect-square w-full bg-cream overflow-hidden p-4">
                   <Image
@@ -199,7 +199,7 @@ export default function GuideHubClient() {
               <Link
                 key={item.slug}
                 href={`/guide/diamond/${item.slug}`}
-                className="group rounded-[var(--radius-card)] bg-white border border-border shadow-xs hover:shadow-lg hover:border-gold/40 transition-all flex flex-col overflow-hidden text-center"
+                className="group rounded-[var(--radius-card)] bg-white border border-border shadow-xs hover:shadow-lg hover:border-gold/40 transition flex flex-col overflow-hidden text-center"
               >
                 <div className="relative aspect-square w-full bg-cream overflow-hidden p-6">
                   <Image

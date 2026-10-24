@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useRef } from "react";
 import { createPortal } from "react-dom";
 import { CloseIcon } from "@/components/icons";
+import { usePresence, useOverlayBehaviour } from "@/hooks/useOverlay";
 
 interface VideoModalProps {
   open: boolean;
@@ -17,30 +18,26 @@ export default function VideoModal({
   title,
   src = "/videos/diamond-ring.mp4",
 }: VideoModalProps) {
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = prev;
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [open, onClose]);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const { mounted, state } = usePresence(open);
+  useOverlayBehaviour({ open, onClose, panelRef });
 
-  if (!open || typeof document === "undefined") return null;
+  if (!mounted || typeof document === "undefined") return null;
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[90] flex items-center justify-center bg-black/85 p-4 animate-fadeIn"
+      data-state={state}
+      className="motion-fade fixed inset-0 z-[90] flex items-center justify-center bg-black/85 p-4"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label={title}
     >
       <div
-        className="theme-dark relative w-full max-w-4xl overflow-hidden rounded-[var(--radius-card)] bg-ink shadow-2xl"
+        ref={panelRef}
+        tabIndex={-1}
+        data-state={state}
+        className="motion-pop outline-none theme-dark relative w-full max-w-4xl overflow-hidden rounded-[var(--radius-card)] bg-ink shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between gap-4 px-4 sm:px-5 py-3 border-b border-white/10">
@@ -49,8 +46,8 @@ export default function VideoModal({
             type="button"
             onClick={onClose}
             aria-label="Close video"
-            autoFocus
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+            data-autofocus
+            className="press flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white/80 hover:text-white hover:bg-white/10 cursor-pointer"
           >
             <CloseIcon size={18} />
           </button>

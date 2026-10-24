@@ -46,7 +46,7 @@ export default function NewCollection() {
 
             {/* Thin Gold Divider */}
             <div className="flex items-center gap-2">
-              <span className="h-[1.5px] w-10 sm:w-12 bg-brand transition-all duration-500 group-hover:w-16 sm:group-hover:w-20" />
+              <span className="h-[1.5px] w-16 sm:w-20 origin-left scale-x-[0.62] bg-brand transition-transform duration-300 ease-out group-hover:scale-x-100" />
             </div>
 
             {/* Shortened Supporting Copy */}

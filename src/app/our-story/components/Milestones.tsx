@@ -55,8 +55,8 @@ export default function Milestones() {
                 )}
 
                 {/* Content Box */}
-                <div className={`ml-20 md:ml-0 md:w-1/2 ${isEven ? 'md:pl-16' : 'md:pr-16 md:text-right'} transition-transform duration-500 group-hover:-translate-y-2`}>
-                  <div className="bg-white p-8 md:p-10 rounded-[2rem] border border-border/80 shadow-sm group-hover:shadow-xl group-hover:border-gold/30 transition-all duration-300 relative z-10">
+                <div className={`ml-20 md:ml-0 md:w-1/2 ${isEven ? 'md:pl-16' : 'md:pr-16 md:text-right'} transition-transform duration-300 ease-out group-hover:-translate-y-1`}>
+                  <div className="bg-white p-8 md:p-10 rounded-[2rem] border border-border/80 shadow-sm group-hover:shadow-xl group-hover:border-gold/30 transition duration-300 relative z-10">
                     <div className="text-gold text-small font-bold mb-3 tracking-widest">{item.year}</div>
                     <h3 className="font-display font-semibold text-h4 text-ink mb-4">
                       {item.title}
@@ -69,7 +69,7 @@ export default function Milestones() {
 
                 {/* Year Marker / Dot */}
                 <div className="absolute left-8 md:left-1/2 top-8 md:top-14 -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
-                  <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-surface border-[4px] border-white shadow-md flex items-center justify-center ring-1 ring-border group-hover:ring-gold group-hover:scale-110 transition-all duration-500 overflow-hidden relative">
+                  <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-surface border-[4px] border-white shadow-md flex items-center justify-center ring-1 ring-border group-hover:ring-gold group-hover:scale-110 transition duration-300 overflow-hidden relative">
                     <div className="absolute inset-0 bg-gradient-to-br from-wine/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <span className="font-display font-semibold text-h5 md:text-h4 text-wine relative z-10">
                       {item.year}

@@ -81,7 +81,7 @@ export default function UserModals() {
       {/* 2. ORDER HISTORY MODAL */}
       <Modal id="orderHistory" title="Order History">
         <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-1">
-          <div className="p-3.5 border border-border rounded-xl bg-surface hover:border-wine/30 transition-all space-y-2">
+          <div className="p-3.5 border border-border rounded-xl bg-surface hover:border-wine/30 transition space-y-2">
             <div className="flex items-center justify-between text-caption">
               <span className="font-semibold text-wine">Order #LX-89241</span>
               <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-semibold">Delivered</span>
@@ -93,7 +93,7 @@ export default function UserModals() {
             </div>
           </div>
 
-          <div className="p-3.5 border border-border rounded-xl bg-surface hover:border-wine/30 transition-all space-y-2">
+          <div className="p-3.5 border border-border rounded-xl bg-surface hover:border-wine/30 transition space-y-2">
             <div className="flex items-center justify-between text-caption">
               <span className="font-semibold text-wine">Order #LX-77319</span>
               <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-semibold">Delivered</span>

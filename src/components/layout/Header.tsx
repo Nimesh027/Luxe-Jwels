@@ -17,6 +17,7 @@ import UserDrawer from "@/components/layout/UserDrawer";
 import UserModals from "@/components/layout/UserModals";
 import SearchBar from "@/components/layout/SearchBar";
 import MegaMenu from "@/components/layout/MegaMenu";
+import { usePresence } from "@/hooks/useOverlay";
 import BrandLogo from "@/components/layout/BrandLogo";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
@@ -55,6 +56,17 @@ function HeaderComponent() {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const activeLink = links.find((l) => l.id === activeLinkId);
+  const activeMegaMenu = !isSearchOpen ? activeLink?.megaMenu : undefined;
+
+  // Keep the last mega menu rendered while it fades out
+  const [megaMenuData, setMegaMenuData] = useState(activeMegaMenu);
+  if (activeMegaMenu && activeMegaMenu !== megaMenuData) setMegaMenuData(activeMegaMenu);
+  const megaMenu = usePresence(Boolean(activeMegaMenu), 220);
+  const search = usePresence(isSearchOpen, 260);
+
+  useEffect(() => () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY >= 40);
@@ -67,13 +79,31 @@ function HeaderComponent() {
     pathname === "/login" || pathname === "/register" || pathname === "/forgot-password";
   if (isAuthPage) return null;
 
-  const handleMouseEnter = (id: string) => {
+  const clearMenuTimer = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    setActiveLinkId(id);
+    timeoutRef.current = null;
   };
 
+  // Hover intent: a short delay before opening stops the menu flashing while
+  // the pointer sweeps across the nav; once open, switching is immediate.
+  const handleMouseEnter = (id: string) => {
+    clearMenuTimer();
+    if (activeLinkId) {
+      setActiveLinkId(id);
+      return;
+    }
+    timeoutRef.current = setTimeout(() => setActiveLinkId(id), 90);
+  };
+
+  // Closing is delayed so a diagonal path into the menu does not dismiss it
   const handleMouseLeave = () => {
-    timeoutRef.current = setTimeout(() => setActiveLinkId(null), 150);
+    clearMenuTimer();
+    timeoutRef.current = setTimeout(() => setActiveLinkId(null), 180);
+  };
+
+  const closeMenu = () => {
+    clearMenuTimer();
+    setActiveLinkId(null);
   };
 
   return (
@@ -83,6 +113,7 @@ function HeaderComponent() {
         isScrolled && "shadow-[0_6px_24px_-12px_rgb(30_26_22/0.18)]"
       )}
       onMouseLeave={handleMouseLeave}
+      onKeyDown={(e) => e.key === "Escape" && activeLinkId && closeMenu()}
     >
       <div className="container">
         <div className="flex items-center justify-between h-16 sm:h-[76px] gap-3 lg:gap-6">
@@ -116,7 +147,7 @@ function HeaderComponent() {
                   <li
                     key={link.id}
                     className="relative"
-                    onMouseEnter={() => (hasDropdown ? handleMouseEnter(link.id) : setActiveLinkId(null))}
+                    onMouseEnter={() => (hasDropdown ? handleMouseEnter(link.id) : handleMouseLeave())}
                   >
                     <Link
                       href={link.href}
@@ -140,13 +171,13 @@ function HeaderComponent() {
                     </Link>
 
                     {hasChildren && !hasMegaMenu && isOpen && (
-                      <div className="absolute left-0 top-full z-50 min-w-[220px] animate-fadeIn">
+                      <div className="absolute left-0 top-full z-50 min-w-[220px] animate-in fade-in slide-in-from-top-2">
                         <ul className="bg-white border border-border rounded-[var(--radius-card)] shadow-[var(--shadow-lift)] py-2">
                           {link.children?.map((child) => (
                             <li key={child.id}>
                               <Link
                                 href={child.href}
-                                onClick={() => setActiveLinkId(null)}
+                                onClick={closeMenu}
                                 className="block px-4 py-2 text-[14px] text-ink hover:bg-cream hover:text-gold transition-colors"
                               >
                                 {child.label}
@@ -214,17 +245,18 @@ function HeaderComponent() {
         </div>
       </div>
 
-      {isSearchOpen && <SearchBar autoFocus onClose={() => setIsSearchOpen(false)} />}
+      {search.mounted && (
+        <SearchBar autoFocus state={search.state} onClose={() => setIsSearchOpen(false)} />
+      )}
 
-      {activeLink?.megaMenu && !isSearchOpen && (
+      {megaMenu.mounted && megaMenuData && (
         <div
-          className="absolute left-0 right-0 top-full z-50 w-full animate-fadeIn"
-          onMouseEnter={() => {
-            if (timeoutRef.current) clearTimeout(timeoutRef.current);
-          }}
+          data-state={megaMenu.state}
+          className="motion-drop absolute left-0 right-0 top-full z-50 w-full"
+          onMouseEnter={clearMenuTimer}
           onMouseLeave={handleMouseLeave}
         >
-          <MegaMenu data={activeLink.megaMenu} onClose={() => setActiveLinkId(null)} />
+          <MegaMenu data={megaMenuData} onClose={closeMenu} />
         </div>
       )}
 

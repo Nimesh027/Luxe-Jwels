@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import PageHero from "@/components/common/PageHero";
 import Rating from "@/components/ui/Rating";
+import Modal from "@/components/ui/Modal";
 import { CheckCircleIcon } from "@/components/icons";
 
 const reviewStats = {
@@ -184,7 +185,7 @@ export default function ReviewsClient() {
                   src={post}
                   alt="Customer showcase"
                   fill
-                  className="object-cover object-center group-hover:scale-108 transition-transform duration-500"
+                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
             ))}
@@ -193,28 +194,13 @@ export default function ReviewsClient() {
       </div>
 
       {/* Write a Review Modal */}
-      {modalOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-xs p-4"
-          onClick={() => setModalOpen(false)}
-        >
-          <div
-            className="w-full max-w-lg bg-white rounded-2xl p-6 sm:p-8 shadow-2xl border border-border"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between pb-4 mb-4 border-b border-border">
-              <h3 className="font-display text-[20px] font-semibold text-ink">
-                Write a Review
-              </h3>
-              <button
-                type="button"
-                onClick={() => setModalOpen(false)}
-                className="text-muted hover:text-ink text-lg cursor-pointer"
-              >
-                ✕
-              </button>
-            </div>
-
+      <Modal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title="Write a Review"
+        maxWidth="max-w-lg"
+        className="sm:p-8"
+      >
             {submitted ? (
               <div className="text-center py-8">
                 <CheckCircleIcon size={40} className="mx-auto mb-2 text-success" />
@@ -270,15 +256,13 @@ export default function ReviewsClient() {
                 </div>
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-xl bg-brand hover:bg-brand-dark text-white font-medium shadow-md transition-colors cursor-pointer"
+                  className="press w-full py-3 rounded-xl bg-brand hover:bg-brand-dark text-white font-medium shadow-md cursor-pointer"
                 >
                   Submit Review
                 </button>
               </form>
             )}
-          </div>
-        </div>
-      )}
+      </Modal>
     </div>
   );
 }
