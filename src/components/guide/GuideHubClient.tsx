@@ -30,7 +30,7 @@ export default function GuideHubClient() {
         <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-[#C5A059]/10 blur-[140px] pointer-events-none" />
 
         <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <div className="mb-4 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.35em] text-[#C5A059]">
+          <div className="mb-4 inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.35em] text-[#C5A059]">
             <Gem className="h-3.5 w-3.5" />
             Luxe Jewels Academy & Gemology Center
           </div>
@@ -48,55 +48,35 @@ export default function GuideHubClient() {
             <Button
               variant="unstyled"
               onClick={() => setActiveTab("all")}
-              className={`cursor-pointer px-5 py-2.5 text-xs font-bold uppercase tracking-[0.2em] transition-all border ${
-                activeTab === "all"
-                  ? "bg-[#0D0D0D] text-white border-[#0D0D0D] shadow-xs"
-                  : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent"
-              }`}
+              className={`cursor-pointer px-5 py-2.5 text-xs font-bold tracking-[0.2em] transition-all border ${ activeTab === "all" ? "bg-[#0D0D0D] text-white border-[#0D0D0D] shadow-xs" : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent" }`}
             >
               All Guides ({totalCount})
             </Button>
             <Button
               variant="unstyled"
               onClick={() => setActiveTab("gold")}
-              className={`cursor-pointer px-5 py-2.5 text-xs font-bold uppercase tracking-[0.2em] transition-all border ${
-                activeTab === "gold"
-                  ? "bg-[#0D0D0D] text-white border-[#0D0D0D] shadow-xs"
-                  : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent"
-              }`}
+              className={`cursor-pointer px-5 py-2.5 text-xs font-bold tracking-[0.2em] transition-all border ${ activeTab === "gold" ? "bg-[#0D0D0D] text-white border-[#0D0D0D] shadow-xs" : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent" }`}
             >
               Gold Karats ({goldGuidesData.length})
             </Button>
             <Button
               variant="unstyled"
               onClick={() => setActiveTab("silver")}
-              className={`cursor-pointer px-5 py-2.5 text-xs font-bold uppercase tracking-[0.2em] transition-all border ${
-                activeTab === "silver"
-                  ? "bg-[#0D0D0D] text-white border-[#0D0D0D] shadow-xs"
-                  : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent"
-              }`}
+              className={`cursor-pointer px-5 py-2.5 text-xs font-bold tracking-[0.2em] transition-all border ${ activeTab === "silver" ? "bg-[#0D0D0D] text-white border-[#0D0D0D] shadow-xs" : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent" }`}
             >
               Silver Standards ({silverGuidesData.length})
             </Button>
             <Button
               variant="unstyled"
               onClick={() => setActiveTab("diamond")}
-              className={`cursor-pointer px-5 py-2.5 text-xs font-bold uppercase tracking-[0.2em] transition-all border ${
-                activeTab === "diamond"
-                  ? "bg-[#0D0D0D] text-white border-[#0D0D0D] shadow-xs"
-                  : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent"
-              }`}
+              className={`cursor-pointer px-5 py-2.5 text-xs font-bold tracking-[0.2em] transition-all border ${ activeTab === "diamond" ? "bg-[#0D0D0D] text-white border-[#0D0D0D] shadow-xs" : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent" }`}
             >
               Diamond Types ({diamondTypesGuidesData.length})
             </Button>
             <Button
               variant="unstyled"
               onClick={() => setActiveTab("shapes")}
-              className={`cursor-pointer px-5 py-2.5 text-xs font-bold uppercase tracking-[0.2em] transition-all border ${
-                activeTab === "shapes"
-                  ? "bg-[#0D0D0D] text-white border-[#0D0D0D] shadow-xs"
-                  : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent"
-              }`}
+              className={`cursor-pointer px-5 py-2.5 text-xs font-bold tracking-[0.2em] transition-all border ${ activeTab === "shapes" ? "bg-[#0D0D0D] text-white border-[#0D0D0D] shadow-xs" : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent" }`}
             >
               Diamond Shapes ({diamondShapesData.length})
             </Button>
@@ -109,7 +89,7 @@ export default function GuideHubClient() {
         <section className="mx-auto max-w-7xl px-6 py-16 border-b border-black/5">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
-              <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.35em] text-[#C5A059] mb-2">
+              <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.35em] text-[#C5A059] mb-2">
                 <Award className="w-3.5 h-3.5" />
                 Metallurgy & Purity
               </div>
@@ -120,7 +100,7 @@ export default function GuideHubClient() {
             </div>
             <Link
               href="/guide/gold"
-              className="text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059] hover:text-foreground inline-flex items-center gap-1.5"
+              className="text-xs font-bold tracking-[0.2em] text-[#C5A059] hover:text-foreground inline-flex items-center gap-1.5"
             >
               View Gold Hub
               <ArrowRight className="w-4 h-4" />
@@ -142,7 +122,7 @@ export default function GuideHubClient() {
                     sizes="(min-width: 1024px) 20vw, 50vw"
                     className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-2 left-2 text-[9px] font-mono uppercase bg-white/90 px-2 py-0.5 border border-black/5">
+                  <div className="absolute top-2 left-2 text-[9px] font-mono bg-white/90 px-2 py-0.5 border border-black/5">
                     {item.hallmarkOrStamp}
                   </div>
                 </div>
@@ -160,7 +140,7 @@ export default function GuideHubClient() {
                     </p>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-black/5 flex items-center justify-center gap-1 text-[11px] font-bold uppercase tracking-wider text-[#C5A059]">
+                  <div className="mt-4 pt-3 border-t border-black/5 flex items-center justify-center gap-1 text-[11px] font-bold tracking-wider text-[#C5A059]">
                     <span>Learn More</span>
                     <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -176,7 +156,7 @@ export default function GuideHubClient() {
         <section className="mx-auto max-w-7xl px-6 py-16 border-b border-black/5">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
-              <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.35em] text-[#C5A059] mb-2">
+              <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.35em] text-[#C5A059] mb-2">
                 <Shield className="w-3.5 h-3.5" />
                 Hallmarks & Resistance
               </div>
@@ -187,7 +167,7 @@ export default function GuideHubClient() {
             </div>
             <Link
               href="/guide/silver"
-              className="text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059] hover:text-foreground inline-flex items-center gap-1.5"
+              className="text-xs font-bold tracking-[0.2em] text-[#C5A059] hover:text-foreground inline-flex items-center gap-1.5"
             >
               View Silver Hub
               <ArrowRight className="w-4 h-4" />
@@ -209,7 +189,7 @@ export default function GuideHubClient() {
                     sizes="(min-width: 1024px) 20vw, 50vw"
                     className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-2 left-2 text-[9px] font-mono uppercase bg-white/90 px-2 py-0.5 border border-black/5">
+                  <div className="absolute top-2 left-2 text-[9px] font-mono bg-white/90 px-2 py-0.5 border border-black/5">
                     {item.hallmarkOrStamp}
                   </div>
                 </div>
@@ -227,7 +207,7 @@ export default function GuideHubClient() {
                     </p>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-black/5 flex items-center justify-center gap-1 text-[11px] font-bold uppercase tracking-wider text-[#C5A059]">
+                  <div className="mt-4 pt-3 border-t border-black/5 flex items-center justify-center gap-1 text-[11px] font-bold tracking-wider text-[#C5A059]">
                     <span>Learn More</span>
                     <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -243,7 +223,7 @@ export default function GuideHubClient() {
         <section className="mx-auto max-w-7xl px-6 py-16 border-b border-black/5">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
-              <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.35em] text-[#C5A059] mb-2">
+              <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.35em] text-[#C5A059] mb-2">
                 <Sparkles className="w-3.5 h-3.5" />
                 Gemological Science
               </div>
@@ -254,7 +234,7 @@ export default function GuideHubClient() {
             </div>
             <Link
               href="/guide/diamond"
-              className="text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059] hover:text-foreground inline-flex items-center gap-1.5"
+              className="text-xs font-bold tracking-[0.2em] text-[#C5A059] hover:text-foreground inline-flex items-center gap-1.5"
             >
               View Diamond Types Hub
               <ArrowRight className="w-4 h-4" />
@@ -276,7 +256,7 @@ export default function GuideHubClient() {
                     sizes="(min-width: 1024px) 25vw, 50vw"
                     className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-2 left-2 text-[9px] font-mono uppercase bg-white/90 px-2 py-0.5 border border-black/5">
+                  <div className="absolute top-2 left-2 text-[9px] font-mono bg-white/90 px-2 py-0.5 border border-black/5">
                     {item.hallmarkOrStamp}
                   </div>
                 </div>
@@ -294,7 +274,7 @@ export default function GuideHubClient() {
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-black/5 flex items-center justify-center gap-1 text-xs font-bold uppercase tracking-wider text-[#C5A059]">
+                  <div className="mt-6 pt-4 border-t border-black/5 flex items-center justify-center gap-1 text-xs font-bold tracking-wider text-[#C5A059]">
                     <span>View Science & Specs</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -310,7 +290,7 @@ export default function GuideHubClient() {
         <section className="mx-auto max-w-7xl px-6 py-16">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
-              <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.35em] text-[#C5A059] mb-2">
+              <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.35em] text-[#C5A059] mb-2">
                 <Gem className="w-3.5 h-3.5" />
                 Cut Proportions & 4Cs
               </div>
@@ -321,7 +301,7 @@ export default function GuideHubClient() {
             </div>
             <Link
               href="/guide/shape"
-              className="text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059] hover:text-foreground inline-flex items-center gap-1.5"
+              className="text-xs font-bold tracking-[0.2em] text-[#C5A059] hover:text-foreground inline-flex items-center gap-1.5"
             >
               All 12 Diamond Shapes
               <ArrowRight className="w-4 h-4" />
@@ -344,7 +324,7 @@ export default function GuideHubClient() {
                     className="object-contain p-6 transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
-                <div className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C5A059]">
+                <div className="text-[10px] font-bold tracking-[0.25em] text-[#C5A059]">
                   {shape.name}
                 </div>
                 <div className="text-[11px] text-muted-foreground mt-1">
@@ -359,7 +339,7 @@ export default function GuideHubClient() {
       {/* 6. CONCIERGE BANNER */}
       <section className="bg-stone-950 text-white py-16 px-6 text-center">
         <div className="mx-auto max-w-3xl">
-          <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#C5A059] block mb-2">
+          <span className="text-[10px] font-bold tracking-[0.35em] text-[#C5A059] block mb-2">
             Complimentary Service
           </span>
           <h2 className="text-3xl font-bold mb-4">
@@ -370,7 +350,7 @@ export default function GuideHubClient() {
           </p>
           <Link
             href="/contact"
-            className="inline-block bg-[#C5A059] text-white px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-colors"
+            className="inline-block bg-[#C5A059] text-white px-8 py-3.5 text-xs font-bold tracking-[0.2em] hover:bg-white hover:text-black transition-colors"
           >
             Connect With Concierge
           </Link>

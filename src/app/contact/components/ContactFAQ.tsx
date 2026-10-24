@@ -47,8 +47,7 @@ export default function ContactFAQ() {
               >
                 <span>{faq.question}</span>
                 <span
-                  className={`w-6 h-6 rounded-full bg-wine/5 text-wine flex items-center justify-center font-bold text-small shrink-0 transition-transform ${isOpen ? "rotate-45" : ""
-                    }`}
+                  className={`w-6 h-6 rounded-full bg-wine/5 text-wine flex items-center justify-center font-bold text-small shrink-0 transition-transform ${isOpen ? "rotate-45" : "" }`}
                 >
                   +
                 </span>

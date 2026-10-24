@@ -33,7 +33,7 @@ export default function Sustainability() {
 
           {/* Text Content */}
           <div className="w-full lg:w-1/3 space-y-6 text-center lg:text-left">
-            <span className="text-caption font-bold uppercase tracking-[0.25em] text-emerald-700/80">
+            <span className="text-caption font-bold tracking-[0.25em] text-emerald-700/80">
               Conscious Luxury
             </span>
             <h2 className="font-display text-h3 sm:text-h2 font-semibold text-wine leading-tight">

@@ -105,7 +105,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
               <span className="text-black/20">/</span>
               <span className="text-[#C5A059] font-medium">{item.shortName}</span>
             </nav>
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#C5A059] hidden sm:inline-block">
+            <span className="text-[11px] font-bold tracking-[0.2em] text-[#C5A059] hidden sm:inline-block">
               {item.hallmarkOrStamp} • Certified Guide
             </span>
           </div>
@@ -119,16 +119,10 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
                 <Link
                   key={sib.slug}
                   href={`/guide/${sibCategory}/${sib.slug}`}
-                  className={`shrink-0 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] transition-all duration-200 border flex items-center gap-2 ${
-                    isActive
-                      ? "bg-[#0D0D0D] text-white border-[#0D0D0D] shadow-xs"
-                      : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent"
-                  }`}
+                  className={`shrink-0 px-4 py-1.5 text-xs font-bold tracking-[0.18em] transition-all duration-200 border flex items-center gap-2 ${ isActive ? "bg-[#0D0D0D] text-white border-[#0D0D0D] shadow-xs" : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent" }`}
                 >
                   <span
-                    className={`w-1.5 h-1.5 rounded-full ${
-                      isActive ? "bg-[#C5A059]" : "bg-black/20"
-                    }`}
+                    className={`w-1.5 h-1.5 rounded-full ${ isActive ? "bg-[#C5A059]" : "bg-black/20" }`}
                   />
                   {sib.shortName}
                 </Link>
@@ -147,13 +141,13 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
           <div>
             <Link
               href={categoryUrl}
-              className="mb-8 inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.3em] text-[#C5A059] transition-colors hover:text-foreground"
+              className="mb-8 inline-flex items-center gap-2 text-[12px] font-bold tracking-[0.3em] text-[#C5A059] transition-colors hover:text-foreground"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to {isShapeCategory ? "Diamond Shapes" : item.category.toUpperCase()} Guide
             </Link>
 
-            <div className="mb-5 flex items-center gap-3 text-[12px] font-bold uppercase tracking-[0.35em] text-[#C5A059]">
+            <div className="mb-5 flex items-center gap-3 text-[12px] font-bold tracking-[0.35em] text-[#C5A059]">
               <Gem className="h-4 w-4" />
               {categoryLabel}
             </div>
@@ -172,7 +166,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
 
             {item.historyAndCraft && (
               <div className="mt-8 p-6 bg-[#F7F4EF] border-l-2 border-[#C5A059] max-w-2xl">
-                <div className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#C5A059] mb-2">
+                <div className="text-[11px] font-bold tracking-[0.25em] text-[#C5A059] mb-2">
                   {isShapeCategory ? "Heritage & Facet Geometry" : "Heritage & Metallurgical Craft"}
                 </div>
                 <p className="text-sm leading-relaxed text-foreground/80">
@@ -184,14 +178,14 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-[#0D0D0D] text-white px-7 py-3.5 text-xs font-bold uppercase tracking-[0.2em] transition-all hover:bg-[#C5A059]"
+                className="inline-flex items-center gap-2 bg-[#0D0D0D] text-white px-7 py-3.5 text-xs font-bold tracking-[0.2em] transition-all hover:bg-[#C5A059]"
               >
                 <Calendar className="w-4 h-4" />
                 Book Consultation
               </Link>
               <a
                 href="#matching-jewellery"
-                className="inline-flex items-center gap-2 border border-black/15 bg-white text-foreground px-7 py-3.5 text-xs font-bold uppercase tracking-[0.2em] transition-all hover:border-[#C5A059] hover:text-[#C5A059]"
+                className="inline-flex items-center gap-2 border border-black/15 bg-white text-foreground px-7 py-3.5 text-xs font-bold tracking-[0.2em] transition-all hover:border-[#C5A059] hover:text-[#C5A059]"
               >
                 View Jewellery
                 <ArrowRight className="w-4 h-4" />
@@ -214,11 +208,11 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
               />
             </div>
 
-            <div className="absolute top-4 left-4 text-[10px] uppercase font-mono tracking-widest text-muted-foreground bg-white/90 backdrop-blur-xs px-3 py-1 border border-black/5">
+            <div className="absolute top-4 left-4 text-[10px] font-mono tracking-widest text-muted-foreground bg-white/90 backdrop-blur-xs px-3 py-1 border border-black/5">
               {item.hallmarkOrStamp}
             </div>
 
-            <div className="absolute bottom-4 right-4 text-[10px] uppercase font-mono tracking-widest text-[#C5A059] bg-white/90 backdrop-blur-xs px-3 py-1 border border-[#C5A059]/30 font-bold">
+            <div className="absolute bottom-4 right-4 text-[10px] font-mono tracking-widest text-[#C5A059] bg-white/90 backdrop-blur-xs px-3 py-1 border border-[#C5A059]/30 font-bold">
               {item.purityOrOrigin}
             </div>
           </div>
@@ -230,7 +224,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
         <div className="mx-auto grid max-w-7xl gap-px overflow-hidden border border-black/5 bg-black/5 grid-cols-2 md:grid-cols-4">
           {item.metrics.map((metric) => (
             <div key={metric.label} className="bg-white p-6 sm:p-8">
-              <div className="mb-2 text-[10px] font-bold uppercase tracking-[0.3em] text-[#C5A059]">
+              <div className="mb-2 text-[10px] font-bold tracking-[0.3em] text-[#C5A059]">
                 {metric.label}
               </div>
               <div className="text-xl sm:text-2xl font-bold text-foreground">
@@ -253,7 +247,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
         <div className="mx-auto max-w-7xl">
           <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
-              <span className="mb-3 block sub-label font-bold uppercase tracking-[0.35em] text-[#C5A059]">
+              <span className="mb-3 block sub-label font-bold tracking-[0.35em] text-[#C5A059]">
                 Our Process
               </span>
               <h2 className="text-3xl font-bold leading-tight md:text-5xl">
@@ -262,7 +256,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
             </div>
             <Link
               href={categoryUrl}
-              className="inline-flex w-fit items-center whitespace-nowrap gap-2 bg-[#C5A059] px-6 py-3 text-[10px] font-bold uppercase tracking-[0.22em] text-white transition-colors hover:bg-foreground"
+              className="inline-flex w-fit items-center whitespace-nowrap gap-2 bg-[#C5A059] px-6 py-3 text-[10px] font-bold tracking-[0.22em] text-white transition-colors hover:bg-foreground"
             >
               {isShapeCategory ? "All 12 Diamond Shapes" : `All ${item.category.toUpperCase()} Standards`}
               <ArrowRight className="h-4 w-4" />
@@ -276,24 +270,20 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
               return (
                 <div
                   key={step.number}
-                  className={`grid gap-8 lg:grid-cols-[0.9fr_1.4fr] lg:items-center ${
-                    !isEven ? "lg:grid-cols-[1.4fr_0.9fr]" : ""
-                  }`}
+                  className={`grid gap-8 lg:grid-cols-[0.9fr_1.4fr] lg:items-center ${ !isEven ? "lg:grid-cols-[1.4fr_0.9fr]" : "" }`}
                 >
                   {/* Process Note Box */}
                   <div
-                    className={`flex min-h-[190px] flex-col justify-center bg-[#F7F4EF] p-8 text-center shadow-xs border border-black/5 ${
-                      !isEven ? "lg:order-2" : "lg:order-1"
-                    }`}
+                    className={`flex min-h-[190px] flex-col justify-center bg-[#F7F4EF] p-8 text-center shadow-xs border border-black/5 ${ !isEven ? "lg:order-2" : "lg:order-1" }`}
                   >
-                    <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#C5A059] mb-1">
+                    <span className="text-[11px] font-bold tracking-[0.25em] text-[#C5A059] mb-1">
                       Step {step.number}
                     </span>
                     <h3 className="mb-3 text-2xl font-bold text-foreground">
                       {step.number}. {step.title}
                     </h3>
                     {step.subtitle && (
-                      <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                      <div className="text-xs font-semibold text-muted-foreground tracking-wider mb-2">
                         {step.subtitle}
                       </div>
                     )}
@@ -321,7 +311,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
       {/* 5. BEST FOR SECTION (Exact styling as shapes/[shape]) */}
       <section className="mx-auto grid max-w-7xl gap-12 px-6 section-spacing lg:grid-cols-[0.8fr_1fr]">
         <div>
-          <span className="mb-4 block text-[10px] font-bold uppercase tracking-[0.35em] text-[#C5A059]">
+          <span className="mb-4 block text-[10px] font-bold tracking-[0.35em] text-[#C5A059]">
             Best For
           </span>
           <h2 className="mb-5 text-3xl font-bold leading-tight md:text-5xl">
@@ -333,7 +323,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
 
           {item.bestFor.recommendedJewellery && (
             <div className="mt-8 p-6 bg-[#F7F4EF] rounded-xl border border-black/5">
-              <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059] mb-3">
+              <div className="text-xs font-bold tracking-[0.2em] text-[#C5A059] mb-3">
                 Recommended Fine Mountings
               </div>
               <ul className="space-y-2 text-sm text-foreground/80">
@@ -370,7 +360,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
         <section className="bg-muted/40 py-16 px-6 border-y border-black/5">
           <div className="mx-auto max-w-5xl">
             <div className="text-center mb-10">
-              <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#C5A059] block mb-2">
+              <span className="text-[10px] font-bold tracking-[0.35em] text-[#C5A059] block mb-2">
                 Certified Assay Data
               </span>
               <h2 className="text-3xl font-bold text-foreground">
@@ -385,7 +375,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
                     key={index}
                     className="grid grid-cols-1 sm:grid-cols-3 p-4 sm:p-5 hover:bg-[#F7F4EF]/50 transition-colors"
                   >
-                    <div className="text-xs font-bold uppercase tracking-wider text-[#C5A059] mb-1 sm:mb-0">
+                    <div className="text-xs font-bold tracking-wider text-[#C5A059] mb-1 sm:mb-0">
                       {spec.label}
                     </div>
                     <div className="sm:col-span-2 text-sm font-medium text-foreground">
@@ -406,7 +396,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
           <div className="p-8 bg-white border border-black/5 shadow-xs">
             <div className="flex items-center gap-2.5 text-emerald-600 mb-6">
               <ShieldCheck className="w-5 h-5" />
-              <h3 className="text-xl font-bold uppercase tracking-wider text-foreground">
+              <h3 className="text-xl font-bold tracking-wider text-foreground">
                 Key Advantages
               </h3>
             </div>
@@ -426,7 +416,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
           <div className="p-8 bg-white border border-black/5 shadow-xs">
             <div className="flex items-center gap-2.5 text-[#C5A059] mb-6">
               <Info className="w-5 h-5" />
-              <h3 className="text-xl font-bold uppercase tracking-wider text-foreground">
+              <h3 className="text-xl font-bold tracking-wider text-foreground">
                 Considerations & Care
               </h3>
             </div>
@@ -449,7 +439,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#C5A059] block mb-2">
+              <span className="text-[10px] font-bold tracking-[0.35em] text-[#C5A059] block mb-2">
                 Curated Collection
               </span>
               <h2 className="text-3xl font-bold">
@@ -458,7 +448,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
             </div>
             <Link
               href="/shop"
-              className="text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059] hover:text-foreground inline-flex items-center gap-2"
+              className="text-xs font-bold tracking-[0.2em] text-[#C5A059] hover:text-foreground inline-flex items-center gap-2"
             >
               Shop All Catalogue
               <ArrowRight className="w-4 h-4" />
@@ -484,9 +474,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
                     <button
                       onClick={() => handleToggleWishlist(product)}
                       aria-label="Wishlist"
-                      className={`absolute top-3 right-3 p-2 rounded-full bg-white/90 shadow-xs transition-colors ${
-                        isWishlisted ? "text-rose-500" : "text-stone-400 hover:text-rose-500"
-                      }`}
+                      className={`absolute top-3 right-3 p-2 rounded-full bg-white/90 shadow-xs transition-colors ${ isWishlisted ? "text-rose-500" : "text-stone-400 hover:text-rose-500" }`}
                     >
                       <Heart className={`w-4 h-4 ${isWishlisted ? "fill-current" : ""}`} />
                     </button>
@@ -494,7 +482,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
 
                   <div className="p-5 flex-1 flex flex-col justify-between">
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#C5A059]">
+                      <span className="text-[10px] font-bold tracking-wider text-[#C5A059]">
                         {item.shortName}
                       </span>
                       <h4 className="font-semibold text-sm text-foreground mt-1 line-clamp-1">
@@ -510,7 +498,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
                         variant="fill"
                         size="sm"
                         onClick={() => handleAddToCart(product)}
-                        className="w-full text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5"
+                        className="w-full text-xs font-bold tracking-wider flex items-center justify-center gap-1.5"
                       >
                         <ShoppingBag className="w-3.5 h-3.5" />
                         Add to Cart
@@ -528,7 +516,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
       {item.faqs && item.faqs.length > 0 && (
         <section className="mx-auto max-w-4xl px-6 section-spacing">
           <div className="text-center mb-10">
-            <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#C5A059] block mb-2">
+            <span className="text-[10px] font-bold tracking-[0.35em] text-[#C5A059] block mb-2">
               Buyer Questions
             </span>
             <h2 className="text-3xl font-bold">Frequently Asked Questions</h2>
@@ -547,9 +535,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
                       {faq.question}
                     </span>
                     <ChevronDown
-                      className={`w-5 h-5 text-muted-foreground transition-transform duration-200 shrink-0 ${
-                        isOpen ? "rotate-180 text-[#C5A059]" : ""
-                      }`}
+                      className={`w-5 h-5 text-muted-foreground transition-transform duration-200 shrink-0 ${ isOpen ? "rotate-180 text-[#C5A059]" : "" }`}
                     />
                   </button>
                   {isOpen && (
@@ -568,7 +554,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
       <section className="mx-auto max-w-7xl px-6 section-spacing">
         <div className="mb-8 flex items-end justify-between gap-6">
           <div>
-            <span className="mb-3 block sub-label font-bold uppercase tracking-[0.35em] text-[#C5A059]">
+            <span className="mb-3 block sub-label font-bold tracking-[0.35em] text-[#C5A059]">
               Explore More
             </span>
             <h2 className="text-3xl font-bold">
@@ -577,7 +563,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
           </div>
           <Link
             href={categoryUrl}
-            className="hidden items-center gap-2 text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/60 hover:text-[#C5A059] md:flex"
+            className="hidden items-center gap-2 text-[10px] font-bold tracking-[0.25em] text-foreground/60 hover:text-[#C5A059] md:flex"
           >
             {isShapeCategory ? "All 12 Diamond Shapes" : `All ${siblings.length} Standards`}
             <ArrowRight className="h-4 w-4" />
@@ -604,7 +590,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
                       className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
-                  <div className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C5A059]">
+                  <div className="text-[10px] font-bold tracking-[0.25em] text-[#C5A059]">
                     {sib.shortName}
                   </div>
                   <div className="text-[11px] text-muted-foreground mt-1">
@@ -620,7 +606,7 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
       <section className="bg-stone-950 text-white py-16 px-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#C5A059]/15 via-transparent to-transparent pointer-events-none" />
         <div className="mx-auto max-w-4xl text-center relative z-10">
-          <span className="text-[11px] font-bold uppercase tracking-[0.35em] text-[#C5A059] block mb-3">
+          <span className="text-[11px] font-bold tracking-[0.35em] text-[#C5A059] block mb-3">
             Bespoke Concierge
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
@@ -632,13 +618,13 @@ export default function GuideDetailClient({ item }: GuideDetailClientProps) {
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/contact"
-              className="bg-[#C5A059] text-white px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-colors"
+              className="bg-[#C5A059] text-white px-8 py-3.5 text-xs font-bold tracking-[0.2em] hover:bg-white hover:text-black transition-colors"
             >
               Schedule Consultation
             </Link>
             <Link
               href="/guide"
-              className="border border-white/20 text-white px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] hover:border-[#C5A059] hover:text-[#C5A059] transition-colors"
+              className="border border-white/20 text-white px-8 py-3.5 text-xs font-bold tracking-[0.2em] hover:border-[#C5A059] hover:text-[#C5A059] transition-colors"
             >
               Explore All Guides
             </Link>

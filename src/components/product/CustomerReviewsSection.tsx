@@ -74,7 +74,7 @@ export default function CustomerReviewsSection() {
         ) : (
           <form onSubmit={handleReviewSubmit} className="mt-4 space-y-4">
             <div>
-              <label className="block text-caption font-semibold uppercase tracking-wider text-ink mb-1.5">
+              <label className="block text-caption font-semibold tracking-wider text-ink mb-1.5">
                 Your Rating
               </label>
               <div className="flex gap-2 text-gold cursor-pointer">
@@ -96,7 +96,7 @@ export default function CustomerReviewsSection() {
             </div>
 
             <div>
-              <label className="block text-caption font-semibold uppercase tracking-wider text-ink mb-1.5">
+              <label className="block text-caption font-semibold tracking-wider text-ink mb-1.5">
                 Your Review
               </label>
               <textarea

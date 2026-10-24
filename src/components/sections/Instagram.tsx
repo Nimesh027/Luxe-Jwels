@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import Section from "@/components/common/Section";
-import Button from "@/components/ui/Button";
-import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 import { useAppSelector } from "@/store/hooks";
 
 function InstagramIcon({ className = "w-4 h-4" }: { className?: string }) {
@@ -83,19 +81,6 @@ export default function Instagram() {
         </div>
       </div>
 
-      {/* View More On Instagram CTA Button */}
-      <div className="mt-8 sm:mt-10 lg:mt-12 text-center px-4">
-        <Button
-          href="https://instagram.com"
-          variant="border"
-          colorTheme="wine"
-          size="lg"
-          rightIcon={<ArrowRightIcon className="h-4 w-4" />}
-          className="hover:shadow-md font-medium"
-        >
-          View More On Instagram
-        </Button>
-      </div>
     </Section>
   );
 }

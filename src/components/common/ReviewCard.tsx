@@ -45,7 +45,7 @@ export default function ReviewCard({
           </div>
 
           {date && (
-            <span className="text-[11px] font-medium uppercase tracking-wider text-muted shrink-0">
+            <span className="text-[11px] font-medium tracking-wider text-muted shrink-0">
               {date}
             </span>
           )}

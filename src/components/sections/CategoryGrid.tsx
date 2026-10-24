@@ -2,128 +2,112 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import Section from "@/components/common/Section";
-import SectionTitle from "@/components/common/SectionTitle";
-import Button from "@/components/ui/Button";
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
-import { useAppSelector } from "@/store/hooks";
-import { cn } from "@/lib/utils";
-import type { Category } from "@/types";
+
+const categories = [
+  {
+    name: "Rings",
+    slug: "rings",
+    href: "/category/rings",
+    image: "/images/revamp/halo-ring.jpg",
+  },
+  {
+    name: "Necklaces",
+    slug: "necklaces",
+    href: "/category/necklaces",
+    image: "/images/category/necklaces.jpg",
+  },
+  {
+    name: "Earrings",
+    slug: "earrings",
+    href: "/category/earrings",
+    image: "/images/category/earrings.jpg",
+  },
+  {
+    name: "Bracelets",
+    slug: "bracelets",
+    href: "/category/bracelets",
+    image: "/images/category/bracelets.jpg",
+  },
+  {
+    name: "Pendants",
+    slug: "pendants",
+    href: "/category/pendants",
+    image: "/images/category/pendants.jpg",
+  },
+  {
+    name: "Men's Collection",
+    slug: "mens-collection",
+    href: "/category/mens-collection",
+    image: "/images/category/mens-collection.jpg",
+  },
+  {
+    name: "Bangles",
+    slug: "bangles",
+    href: "/category/bracelets",
+    image: "/images/product/black-onyx-bracelet.jpg",
+  },
+  {
+    name: "Wedding Collection",
+    slug: "wedding-collection",
+    href: "/collections/couple-collection",
+    image: "/images/collections/couple-collection.jpg",
+  },
+];
 
 export default function CategoryGrid() {
-  const categories = useAppSelector((state) => state.categories.items);
-
-  if (!categories || categories.length === 0) return null;
-
-  // Select the 5 primary jewelry product categories
-  const mainCategories = categories.filter(
-    (c) => c.slug !== "mens-collection" && c.slug !== "womens-collection"
-  );
-  const displayCategories =
-    mainCategories.length >= 5 ? mainCategories.slice(0, 5) : categories.slice(0, 5);
-
-  const heroCategory = displayCategories[0]; // Hero category (Necklaces)
-  const subCategories = displayCategories.slice(1); // 4 other categories (Earrings, Rings, Bracelets, Pendants)
-
-  const categoryTaglines: Record<string, string> = {
-    necklaces: "Chokers & Heritage Chains",
-    earrings: "Studs & Drops",
-    rings: "Solitaires & Bands",
-    bracelets: "Cuffs & Tennis Bangles",
-    pendants: "Diamond Charms",
-  };
-
-  const renderCategoryCard = (item: Category, isHero: boolean) => {
-    const tagline = categoryTaglines[item.slug] || "Handcrafted Fine Jewellery";
-
-    return (
-      <Link
-        key={item.id}
-        href={`/category/${item.slug}`}
-        className={cn(
-          "group relative block w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-ink/20 shadow-sm hover:shadow-xl transition-all duration-500",
-          isHero
-            ? "h-[280px] sm:h-[340px] md:h-[500px] lg:h-[520px]"
-            : "h-[220px] sm:h-[240px] md:h-[238px] lg:h-[248px]"
-        )}
-      >
-        <Image
-          src={item.image}
-          alt={item.name}
-          fill
-          priority={isHero}
-          sizes={isHero ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
-          className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-        />
-
-        {/* Multi-stage gradient scrim */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-500 group-hover:opacity-90"
-        />
-
-        {/* Subtle border glow on hover */}
-        <div className="absolute inset-0 rounded-2xl sm:rounded-3xl border border-white/10 transition-colors duration-500 group-hover:border-gold/50" />
-
-        {/* Content Typography */}
-        <div className="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col justify-end items-start text-left transition-all duration-300 z-10">
-          <span className="text-[10px] sm:text-caption font-semibold tracking-[0.2em] uppercase text-gold mb-1 drop-shadow-xs">
-            {tagline}
-          </span>
-
-          <h3
-            className={cn(
-              "font-display text-cream font-normal tracking-wide leading-tight drop-shadow-md group-hover:text-gold transition-colors duration-300",
-              isHero ? "text-h2 lg:text-h2" : "text-h3"
-            )}
-          >
-            {item.name}
-          </h3>
-
-          <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] sm:text-caption tracking-wider uppercase text-gold font-medium drop-shadow-xs group-hover:text-cream transition-colors">
-            <span>Explore {item.name}</span>
-            <ArrowRightIcon className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-          </div>
-        </div>
-      </Link>
-    );
-  };
-
   return (
-    <Section className="bg-white">
-      {/* Category Section Header */}
-      <SectionTitle
-        title="Shop By Category"
-        description="Discover masterfully crafted jewellery across our signature categories."
-        align="center"
-      />
-
-      <div className="max-w-7xl mx-auto">
-        {/* Asymmetric Bento Layout: 1 Hero Category on left, 4 Grid Categories on right */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-          {/* Main Hero Category Card */}
-          {heroCategory && renderCategoryCard(heroCategory, true)}
-
-          {/* 4 Secondary Category Cards in 2x2 grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-            {subCategories.map((item) => renderCategoryCard(item, false))}
+    <section className="w-full bg-[#FCFAF8] py-10 sm:py-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header with Left Title and Right 'View All' */}
+        <div className="flex items-end justify-between mb-8 sm:mb-10">
+          <div>
+            <h2 className="font-display text-[26px] sm:text-[32px] md:text-[36px] text-[#141414] font-medium tracking-tight">
+              Shop By Category
+            </h2>
+            <p className="font-body text-[13px] sm:text-[14.5px] text-[#78716A] mt-1 font-normal">
+              Discover our exquisite collections
+            </p>
           </div>
+
+          <Link
+            href="/shop"
+            className="group inline-flex items-center gap-1.5 text-[12.5px] sm:text-[13.5px] tracking-wider text-[#B38E5D] hover:text-[#9C7748] font-semibold transition-colors pb-1"
+          >
+            <span>View All Categories</span>
+            <ArrowRightIcon className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+          </Link>
         </div>
 
-        {/* View All Categories Button */}
-        <div className="mt-8 sm:mt-12 text-center">
-          <Button
-            href="/collections"
-            variant="border"
-            colorTheme="wine"
-            size="lg"
-            rightIcon={<ArrowRightIcon className="w-4 h-4" />}
-            className="hover:shadow-md"
-          >
-            View All Categories
-          </Button>
+        {/* 8 Circular Category Items Grid / Scroll on mobile */}
+        <div className="grid grid-cols-4 md:grid-cols-8 gap-4 sm:gap-6 justify-items-center">
+          {categories.map((cat) => (
+            <Link
+              key={cat.name}
+              href={cat.href}
+              className="group flex flex-col items-center text-center cursor-pointer w-full max-w-[120px]"
+            >
+              {/* Circular Thumbnail with Golden Ring */}
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-24 md:h-24 lg:w-26 lg:h-26 rounded-full p-1 bg-white border border-[#E5DFD5] group-hover:border-[#B38E5D] group-hover:shadow-md transition-all duration-300">
+                <div className="relative w-full h-full rounded-full overflow-hidden bg-[#FAF7F2]">
+                  <Image
+                    src={cat.image}
+                    alt={cat.name}
+                    fill
+                    sizes="120px"
+                    className="object-cover object-center group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+              </div>
+
+              {/* Category Label */}
+              <span className="font-body text-[12px] sm:text-[13px] font-medium text-[#141414] group-hover:text-[#B38E5D] transition-colors mt-3 line-clamp-1">
+                {cat.name}
+              </span>
+            </Link>
+          ))}
         </div>
       </div>
-    </Section>
+    </section>
   );
 }

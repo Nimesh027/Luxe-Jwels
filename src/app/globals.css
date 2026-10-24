@@ -1,25 +1,30 @@
 @import "tailwindcss";
 
 :root {
-  --color-ink: #0d0d0d;
-  --color-ink-soft: #1a1a1a;
-  --color-gold: #c9a961;
-  --color-gold-dark: #a9873f;
-  --color-cream: #f8f5f0;
-  --color-cream-dark: #efe9e0;
+  --color-ink: #141414;
+  --color-ink-soft: #22201e;
+  --color-gold: #c5a059;
+  --color-gold-dark: #9e783e;
+  --color-gold-warm: #b38e5d;
+  --color-gold-hover: #9c7748;
+  --color-gold-light: #f7f2ea;
+  --color-cream: #faf7f2;
+  --color-cream-dark: #f0ebe2;
   --color-surface: #ffffff;
-  --color-muted: #f7f4ef;
-  --color-muted-foreground: #6b6660;
-  --color-foreground: #0d0d0d;
-  --color-background: #ffffff;
-  --color-border: #e5ded2;
-  --color-wine: #741727;
-  --color-wine-dark: #5c111e;
-  --color-wine-soft: #fbf2ee;
+  --color-muted: #78716a;
+  --color-muted-foreground: #78716a;
+  --color-muted-bg: #f6f3ed;
+  --color-foreground: #141414;
+  --color-background: #faf7f2;
+  --color-border: #eae4dc;
+  --color-border-subtle: #f0ebe2;
+  --color-wine: #b38e5d;
+  --color-wine-dark: #9c7748;
+  --color-wine-soft: #f7f2ea;
 
-  --font-display: var(--font-fraunces);
-  --font-heading: var(--font-fraunces);
-  --font-body: var(--font-ibm-plex-sans);
+  --font-display: var(--font-cormorant);
+  --font-heading: var(--font-cormorant);
+  --font-body: var(--font-plus-jakarta-sans);
 }
 
 @theme inline {
@@ -27,6 +32,9 @@
   --color-ink-soft: var(--color-ink-soft);
   --color-gold: var(--color-gold);
   --color-gold-dark: var(--color-gold-dark);
+  --color-gold-warm: var(--color-gold-warm);
+  --color-gold-hover: var(--color-gold-hover);
+  --color-gold-light: var(--color-gold-light);
   --color-cream: var(--color-cream);
   --color-cream-dark: var(--color-cream-dark);
   --color-surface: var(--color-surface);
@@ -35,6 +43,7 @@
   --color-foreground: var(--color-foreground);
   --color-background: var(--color-background);
   --color-border: var(--color-border);
+  --color-border-subtle: var(--color-border-subtle);
   --color-wine: var(--color-wine);
   --color-wine-dark: var(--color-wine-dark);
   --color-wine-soft: var(--color-wine-soft);
@@ -51,9 +60,8 @@
 
 .sub-label {
   font-size: 11px;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  font-weight: 700;
+  letter-spacing: 0.15em;
+  font-weight: 600;
 }
 
 /* Hide scrollbar for Chrome, Safari, Opera, Edge, Firefox while keeping page scrollable */

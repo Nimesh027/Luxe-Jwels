@@ -36,10 +36,10 @@ export default function ForgotPasswordClient() {
         {/* Top Brand Header */}
         <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-8">
           <div>
-            <span className="font-display text-h5 tracking-[0.25em] text-cream uppercase font-semibold">
+            <span className="font-display text-h5 tracking-[0.25em] text-cream font-semibold">
               LUXE JEWELS
             </span>
-            <p className="text-[11px] text-cream/50 tracking-wider uppercase mt-0.5 font-light">
+            <p className="text-[11px] text-cream/50 tracking-wider mt-0.5 font-light">
               Password Recovery
             </p>
           </div>
@@ -94,7 +94,7 @@ export default function ForgotPasswordClient() {
                 type="submit"
                 variant="unstyled"
                 disabled={isLoading}
-                className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold to-[#b59247] hover:from-[#dcb96b] hover:to-gold text-ink font-semibold text-caption uppercase tracking-[0.15em] transition-all duration-300 transform active:scale-[0.99] shadow-lg shadow-gold/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+                className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold to-[#b59247] hover:from-[#dcb96b] hover:to-gold text-ink font-semibold text-caption tracking-[0.15em] transition-all duration-300 transform active:scale-[0.99] shadow-lg shadow-gold/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
               >
                 {isLoading ? (
                   <>
@@ -153,7 +153,7 @@ export default function ForgotPasswordClient() {
             <div className="pt-2">
               <Link
                 href="/login"
-                className="inline-flex items-center justify-center w-full py-3 px-6 rounded-xl bg-white/10 hover:bg-white/20 text-cream font-medium text-caption uppercase tracking-wider transition-colors"
+                className="inline-flex items-center justify-center w-full py-3 px-6 rounded-xl bg-white/10 hover:bg-white/20 text-cream font-medium text-caption tracking-wider transition-colors"
               >
                 Return To Sign In
               </Link>

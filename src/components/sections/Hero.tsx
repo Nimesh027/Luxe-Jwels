@@ -1,166 +1,114 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import Button from "@/components/ui/Button";
-import Section from "@/components/common/Section";
-import { useCarousel } from "@/hooks/useCarousel";
-import { useAppSelector } from "@/store/hooks";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { PlayIcon } from "@/components/icons";
 
 export default function Hero() {
-  const slides = useAppSelector((state) => state.siteContent.heroSlides);
-  const { index, goTo, next, prev } = useCarousel({
-    itemCount: slides.length,
-    autoplayMs: 6000,
-  });
-  const slide = slides[index];
-
-  if (!slide) return null;
-
-  const isDark = slide.theme === "dark";
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   return (
-    <Section className="!p-0" containerClassName="!p-0 !max-w-full">
-      <div className="relative p-0 h-[480px] sm:h-[540px] md:h-[580px] lg:h-[640px] xl:h-[680px] w-full overflow-hidden select-none">
-        <Image
-          src={slide.image}
-          alt={slide.heading}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center transition-all duration-700 ease-in-out"
-        />
+    <>
+      <section className="relative w-full bg-[#121110] overflow-hidden select-none">
+        {/* Main Hero Container - Sleeker, compact luxury banner height */}
+        <div className="relative min-h-[380px] sm:min-h-[440px] md:min-h-[480px] lg:min-h-[520px] xl:min-h-[560px] w-full flex items-center">
+          {/* Background Image of Luxury Model / Jewellery */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/images/revamp/hero-bride.jpg"
+              alt="Luxe Jewels - Timeless Elegance, Crafted for You"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-right lg:object-[80%_center] brightness-[0.95] contrast-[1.04]"
+            />
 
-        {/* Subtle Right-Side Gradient Overlay for high text legibility without obscuring banner artwork */}
-        <div
-          aria-hidden="true"
-          className={cn(
-            "pointer-events-none absolute inset-0 transition-opacity duration-700",
-            /* Mobile: bottom-to-top soft gradient; Tablet/Desktop: right-to-left soft gradient starting from center-right */
-            isDark
-              ? "bg-gradient-to-t from-ink/80 via-ink/40 to-transparent sm:bg-gradient-to-l sm:from-ink/75 sm:via-ink/30 sm:to-transparent sm:left-[30%]"
-              : "bg-gradient-to-t from-black/60 via-black/25 to-transparent sm:bg-gradient-to-l sm:from-black/55 sm:via-black/20 sm:to-transparent sm:left-[30%]"
-          )}
-        />
+            {/* Gradient Overlays for Guaranteed Text Legibility */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0e0c0a] via-[#0e0c0a]/85 via-45% to-transparent sm:w-[72%] lg:w-[62%] pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0e0c0a]/90 via-transparent to-transparent sm:hidden pointer-events-none" />
+          </div>
 
-        <div className="relative h-full container mx-auto px-4 sm:px-8 lg:px-16 flex items-center justify-center sm:justify-end z-10">
-          <div
-            className={cn(
-              "w-full max-w-lg lg:max-w-xl transition-all duration-500 ease-out",
-              "p-4 sm:p-0",
-              isDark ? "text-cream" : "text-cream"
-            )}
-          >
-            {/* Tagline */}
-            {slide.tagline && (
-              <span className="inline-block text-[11px] sm:text-caption font-semibold tracking-[0.25em] uppercase mb-2.5 text-gold">
-                {slide.tagline}
-              </span>
-            )}
+          {/* Hero Content Overlay */}
+          <div className="container mx-auto px-5 sm:px-8 lg:px-14 xl:px-20 relative z-10 py-8 sm:py-12 lg:py-14">
+            <div className="max-w-xl lg:max-w-2xl xl:max-w-3xl text-left">
+              {/* Main Headline */}
+              <h1 className="font-display text-[36px] sm:text-[48px] md:text-[58px] lg:text-[68px] xl:text-[76px] text-white font-normal leading-[1.08] sm:leading-[1.05] tracking-tight mb-3.5 sm:mb-4 drop-shadow-sm">
+                Timeless Elegance, <br />
+                Crafted for You
+              </h1>
 
-            {/* Title & Accent */}
-            <h1 className="font-display text-h3 sm:text-h2 lg:text-h1 font-normal leading-[1.15] tracking-tight mb-3 sm:mb-4 text-cream">
-              {slide.heading}
-              <br />
-              <span className="font-medium italic text-gold">
-                {slide.headingAccent}
-              </span>
-            </h1>
+              {/* Subheading */}
+              <p className="font-body text-[14.5px] sm:text-[16px] md:text-[17.5px] lg:text-[19px] text-[#EDE7DE]/90 font-light leading-relaxed max-w-lg lg:max-w-xl mb-5 sm:mb-7 drop-shadow-xs">
+                Premium jewellery for every moment. <br className="hidden sm:inline" />
+                Tradition. Craftsmanship. Forever.
+              </p>
 
-            {/* Description */}
-            <p className="text-body lg:text-body leading-relaxed max-w-md mb-6 text-cream/90">
-              {slide.subtext}
-            </p>
+              {/* Action Buttons with Divider */}
+              <div className="flex items-center gap-4 sm:gap-6">
+                {/* Shop Now Button: Clean Crisp White Rectangle */}
+                <Link
+                  href="/shop"
+                  className="inline-flex items-center justify-center px-7 sm:px-8 py-3 sm:py-3.5 rounded-[3px] bg-white hover:bg-[#F4EFEA] text-[#141414] text-[14px] sm:text-[15.5px] font-semibold tracking-wide shadow-sm transition-all duration-200 active:scale-[0.98]"
+                >
+                  Shop Now
+                </Link>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-              {slide.ctas.map((cta) => {
-                const isPrimary = cta.variant === "primary";
-                return (
-                  <Button
-                    key={cta.label}
-                    href={cta.href}
-                    variant={isPrimary ? "fill" : "border"}
-                    colorTheme={isPrimary ? "gold" : "cream"}
-                    size="md"
-                  >
-                    {cta.label}
-                  </Button>
-                );
-              })}
+                {/* Vertical Divider */}
+                <div className="h-6 sm:h-7 w-[1px] bg-white/30" />
+
+                {/* Watch Video: Outlined Circular Play Icon + Text */}
+                <button
+                  type="button"
+                  onClick={() => setIsVideoModalOpen(true)}
+                  className="inline-flex items-center gap-3 text-white hover:text-[#E8D8C3] transition-colors duration-200 cursor-pointer group"
+                >
+                  <span className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/60 group-hover:border-white bg-white/10 group-hover:bg-white/20 transition-all duration-200">
+                    <PlayIcon size={13} className="ml-0.5 fill-white" />
+                  </span>
+                  <span className="text-[14px] sm:text-[15.5px] font-normal tracking-wide">
+                    Watch Video
+                  </span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* {slides.length > 1 && (
-          <>
-            <Button
-              variant="icon"
-              colorTheme={isDark ? "dark" : "light"}
-              size="icon"
-              aria-label="Previous slide"
-              onClick={prev}
-              className="hidden sm:inline-flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20"
-              leftIcon={
-                <svg
-                  className="w-5 h-5"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="15 18 9 12 15 6" />
-                </svg>
-              }
-            />
-
-            <Button
-              variant="icon"
-              colorTheme={isDark ? "dark" : "light"}
-              size="icon"
-              aria-label="Next slide"
-              onClick={next}
-              className="hidden sm:inline-flex absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20"
-              leftIcon={
-                <svg
-                  className="w-5 h-5"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="9 18 15 12 9 6" />
-                </svg>
-              }
-            />
-          </>
-        )} */}
-
-        {slides.length > 1 && (
-          <div className="absolute bottom-5 sm:bottom-7 left-1/2 -translate-x-1/2 flex items-center gap-2 sm:gap-2.5 z-20">
-            {slides.map((item, dotIndex) => (
-              <Button
-                key={item.id}
-                variant="unstyled"
-                aria-label={`Go to slide ${dotIndex + 1}`}
-                onClick={() => goTo(dotIndex)}
-                className={cn(
-                  "h-1.5 sm:h-2 rounded-full transition-all duration-300 cursor-pointer",
-                  dotIndex === index
-                    ? "w-6 sm:w-8 bg-gold shadow-sm"
-                    : isDark
-                    ? "w-2 bg-cream/40 hover:bg-cream/70"
-                    : "w-2 bg-ink/30 hover:bg-ink/60"
-                )}
+      {/* Video Modal Preview */}
+      {isVideoModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+          onClick={() => setIsVideoModalOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-4xl bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/20"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between p-4 bg-[#1A1A1A] text-white border-b border-white/10">
+              <span className="font-display text-lg tracking-wider text-[#B38E5D]">
+                The Craft of Luxe Jewels
+              </span>
+              <button
+                type="button"
+                onClick={() => setIsVideoModalOpen(false)}
+                className="text-neutral-400 hover:text-white text-sm font-semibold tracking-wider px-2 py-1 rounded"
+              >
+                Close ✕
+              </button>
+            </div>
+            <div className="relative aspect-video w-full bg-black flex items-center justify-center">
+              <video
+                src="/videos/diamond-ring.mp4"
+                controls
+                autoPlay
+                className="w-full h-full object-cover"
               />
-            ))}
+            </div>
           </div>
-        )}
-      </div>
-    </Section>
+        </div>
+      )}
+    </>
   );
 }

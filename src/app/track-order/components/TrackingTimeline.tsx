@@ -122,13 +122,7 @@ export default function TrackingTimeline() {
 
               {/* Step Circle Indicator */}
               <div
-                className={`absolute -left-6 sm:-left-10 top-0.5 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-caption font-bold transition-all shadow-2xs z-10 ${
-                  isCompleted
-                    ? "bg-wine text-white"
-                    : isActive
-                    ? "bg-amber-500 text-white ring-4 ring-amber-100 animate-pulse"
-                    : "bg-neutral-200 text-neutral-400"
-                }`}
+                className={`absolute -left-6 sm:-left-10 top-0.5 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-caption font-bold transition-all shadow-2xs z-10 ${ isCompleted ? "bg-wine text-white" : isActive ? "bg-amber-500 text-white ring-4 ring-amber-100 animate-pulse" : "bg-neutral-200 text-neutral-400" }`}
               >
                 {isCompleted ? <CheckIcon /> : step.icon}
               </div>
@@ -137,18 +131,12 @@ export default function TrackingTimeline() {
               <div className="space-y-1 flex-1">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <h4
-                    className={`font-display font-semibold text-body ${
-                      isCompleted || isActive ? "text-wine" : "text-neutral-400"
-                    }`}
+                    className={`font-display font-semibold text-body ${ isCompleted || isActive ? "text-wine" : "text-neutral-400" }`}
                   >
                     {step.title}
                   </h4>
                   <span
-                    className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full ${
-                      isActive
-                        ? "bg-amber-50 text-amber-700 border border-amber-200"
-                        : "bg-neutral-100 text-muted"
-                    }`}
+                    className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full ${ isActive ? "bg-amber-50 text-amber-700 border border-amber-200" : "bg-neutral-100 text-muted" }`}
                   >
                     {step.date}
                   </span>

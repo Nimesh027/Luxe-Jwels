@@ -68,7 +68,7 @@ export default function TrackingHeader({ orderId }: TrackingHeaderProps) {
       {/* Delivery ETA & Address Banner */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="bg-[#FAF0F2] rounded-2xl p-4 border border-wine/15 space-y-1">
-          <span className="text-[10px] text-muted uppercase tracking-wider font-semibold block">
+          <span className="text-[10px] text-muted tracking-wider font-semibold block">
             Estimated Delivery
           </span>
           <span className="font-display font-bold text-h5 text-wine block">
@@ -81,7 +81,7 @@ export default function TrackingHeader({ orderId }: TrackingHeaderProps) {
         </div>
 
         <div className="bg-neutral-50 rounded-2xl p-4 border border-neutral-200/80 space-y-1">
-          <span className="text-[10px] text-muted uppercase tracking-wider font-semibold block">
+          <span className="text-[10px] text-muted tracking-wider font-semibold block">
             Delivery Address
           </span>
           <span className="text-caption font-semibold text-ink block truncate">
@@ -93,7 +93,7 @@ export default function TrackingHeader({ orderId }: TrackingHeaderProps) {
         </div>
 
         <div className="bg-neutral-50 rounded-2xl p-4 border border-neutral-200/80 space-y-1">
-          <span className="text-[10px] text-muted uppercase tracking-wider font-semibold block">
+          <span className="text-[10px] text-muted tracking-wider font-semibold block">
             Package Contents
           </span>
           <span className="text-caption font-semibold text-ink block truncate">

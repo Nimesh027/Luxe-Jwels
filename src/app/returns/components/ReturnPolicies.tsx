@@ -24,7 +24,7 @@ export default function ReturnPolicies() {
       >
         <div className="overflow-x-auto pt-4">
           <table className="w-full text-left text-small border border-border/60 rounded-xl overflow-hidden shadow-xs">
-            <thead className="bg-[#fbf8f2] text-ink font-semibold uppercase tracking-[0.08em] border-b border-gold/20">
+            <thead className="bg-[#fbf8f2] text-ink font-semibold tracking-[0.08em] border-b border-gold/20">
               <tr>
                 <th className="p-4 border-r border-border/40 font-medium">Jewellery Category</th>
                 <th className="p-4 border-r border-border/40 font-medium">Lifetime Exchange Value</th>

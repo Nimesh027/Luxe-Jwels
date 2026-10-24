@@ -52,7 +52,7 @@ export default function SectionTitle({
           {tagline && (
             <span
               className={cn(
-                "inline-block text-[11px] sm:text-caption font-semibold tracking-[0.2em] uppercase text-wine mb-2",
+                "inline-block text-[11px] sm:text-caption font-semibold tracking-[0.2em] text-wine mb-2",
                 taglineClassName
               )}
             >
@@ -89,7 +89,7 @@ export default function SectionTitle({
           <div className={cn("mt-4", isCentered ? "text-center" : "sm:mt-0")}>
             <Link
               href={viewAllHref}
-              className="inline-flex items-center gap-1.5 text-caption uppercase tracking-wider font-medium text-wine hover:text-wine-dark hover:underline underline-offset-4 transition-colors"
+              className="inline-flex items-center gap-1.5 text-caption tracking-wider font-medium text-wine hover:text-wine-dark hover:underline underline-offset-4 transition-colors"
             >
               <span>{viewAllLabel}</span>
               <ArrowRightIcon className="w-3.5 h-3.5 shrink-0 transition-transform group-hover:translate-x-0.5" />

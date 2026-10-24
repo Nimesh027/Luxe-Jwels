@@ -81,7 +81,7 @@ export default function CartDrawer() {
 
       {/* Subtotal & Estimated Total */}
       <div className="flex items-baseline justify-between">
-        <span className="text-[11px] uppercase tracking-wider font-semibold text-neutral-600">
+        <span className="text-[11px] tracking-wider font-semibold text-neutral-600">
           Estimated Total
         </span>
         <span className="font-display text-[16px] sm:text-[18px] font-bold text-ink">
@@ -102,10 +102,10 @@ export default function CartDrawer() {
           size="sm"
           fullWidth
           onClick={handleCheckout}
-          className="h-10 text-caption font-semibold uppercase tracking-wider shadow-md hover:shadow-lg cursor-pointer"
+          className="h-10 text-caption font-semibold tracking-wider shadow-md hover:shadow-lg cursor-pointer"
           rightIcon={<ChevronRightIcon size={14} strokeWidth={2.5} />}
         >
-          Check Out
+          Proceed to Checkout
         </Button>
 
         <Button
@@ -115,7 +115,7 @@ export default function CartDrawer() {
           size="sm"
           fullWidth
           onClick={handleViewCart}
-          className="h-9 text-caption font-medium uppercase tracking-wider hover:!bg-neutral-100/80 !border-neutral-300 cursor-pointer"
+          className="h-9 text-caption font-medium tracking-wider hover:!bg-neutral-100/80 !border-neutral-300 cursor-pointer"
         >
           View Cart
         </Button>
@@ -155,7 +155,7 @@ export default function CartDrawer() {
               closeDrawer();
               router.push("/collections");
             }}
-            className="text-caption font-semibold uppercase tracking-wider !text-cream hover:!bg-wine shadow-md hover:shadow-lg cursor-pointer"
+            className="text-caption font-semibold tracking-wider !text-cream hover:!bg-wine shadow-md hover:shadow-lg cursor-pointer"
           >
             Start Shopping
           </Button>

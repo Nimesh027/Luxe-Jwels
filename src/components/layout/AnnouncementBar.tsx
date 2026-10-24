@@ -3,6 +3,12 @@
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useAppSelector } from "@/store/hooks";
+import {
+  ShippingIcon,
+  ReturnsIcon,
+  CertifiedIcon,
+  SecureIcon,
+} from "@/components/icons/FeatureIcons";
 
 export default function AnnouncementBar() {
   const pathname = usePathname();
@@ -27,47 +33,61 @@ export default function AnnouncementBar() {
     pathname === "/login" || pathname === "/register" || pathname === "/forgot-password";
   if (isAuthPage) return null;
 
-  if (!items || items.length === 0) return null;
-
-  // Quadruple the items to ensure wide screens are completely covered and loop seamlessly
-  const repeatedItems = [...items, ...items, ...items, ...items];
+  const trustPillars = [
+    {
+      icon: <ShippingIcon className="w-3.5 h-3.5 text-[#B38E5D]" />,
+      label: "Free Shipping",
+    },
+    {
+      icon: <ReturnsIcon className="w-3.5 h-3.5 text-[#B38E5D]" />,
+      label: "30 Days Easy Return",
+    },
+    {
+      icon: <CertifiedIcon className="w-3.5 h-3.5 text-[#B38E5D]" />,
+      label: "Certified Jewellery",
+    },
+    {
+      icon: <SecureIcon className="w-3.5 h-3.5 text-[#B38E5D]" />,
+      label: "Secure Payments",
+    },
+  ];
 
   return (
     <div
-      className={`relative w-full overflow-hidden bg-ink text-cream border-b border-ink-soft select-none transition-all duration-300 ease-in-out z-40 ${isVisible
-        ? "max-h-12 py-2.5 opacity-100 translate-y-0"
-        : "max-h-0 py-0 opacity-0 -translate-y-full border-transparent pointer-events-none"
-        }`}
+      className={`relative w-full overflow-hidden bg-[#121212] text-white border-b border-[#222220] select-none transition-all duration-300 ease-in-out z-40 ${ isVisible ? "max-h-12 py-2 opacity-100 translate-y-0" : "max-h-0 py-0 opacity-0 -translate-y-full border-transparent pointer-events-none" }`}
     >
-      <div className="flex w-max animate-marquee hover:[animation-play-state:paused] items-center">
-        {repeatedItems.map((item, index) => (
-          <div key={index} className="flex items-center shrink-0">
-            <span className="text-caption uppercase tracking-[0.2em] font-medium px-8 text-cream/90">
-              {item}
-            </span>
-            <span className="text-gold/70 text-[9px] select-none">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                version="1.1"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                width="24"
-                height="24"
-                x="0"
-                y="0"
-                viewBox="0 0 512 512"
-                xmlSpace="preserve"
-              >
-                <path
-                  d="M256 16c-10.7 220.5-19.5 229.3-240 240 220.5 10.7 229.3 19.5 240 240 10.7-220.5 19.5-229.3 240-240-220.5-10.7-229.3-19.5-240-240"
-                  fill="currentColor"
-                  opacity="1"
-                />
-              </svg>
-            </span>
+      <div className="container mx-auto px-4 flex items-center justify-center">
+        {/* Desktop & Tablet: Balanced 4-pillar row */}
+        <div className="hidden sm:flex items-center justify-center gap-6 md:gap-10 text-[11.5px] tracking-wide text-neutral-300">
+          {trustPillars.map((item, idx) => (
+            <div key={idx} className="flex items-center gap-2">
+              {item.icon}
+              <span className="font-medium text-white/90">{item.label}</span>
+              {idx < trustPillars.length - 1 && (
+                <span className="text-white/20 ml-6 md:ml-10">|</span>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile: Smooth marquee or compact row */}
+        <div className="sm:hidden flex items-center justify-between w-full text-[11px] text-neutral-300">
+          <div className="flex items-center gap-1.5">
+            {trustPillars[0].icon}
+            <span className="font-medium">{trustPillars[0].label}</span>
           </div>
-        ))}
+          <span className="text-white/20">•</span>
+          <div className="flex items-center gap-1.5">
+            {trustPillars[2].icon}
+            <span className="font-medium">{trustPillars[2].label}</span>
+          </div>
+          <span className="text-white/20">•</span>
+          <div className="flex items-center gap-1.5">
+            {trustPillars[3].icon}
+            <span className="font-medium">100% Secure</span>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
-

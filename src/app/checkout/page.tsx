@@ -38,9 +38,7 @@ export default function CheckoutPage() {
             </svg>
           </div>
 
-          <span className="text-caption uppercase tracking-[0.25em] font-semibold text-gold mb-2 block">
-            ORDER CONFIRMED
-          </span>
+          <span className="text-caption tracking-[0.25em] font-semibold text-gold mb-2 block">Order Confirmed</span>
           <h1 className="font-display text-h2 font-medium text-ink mb-3">
             Thank you for your order!
           </h1>
@@ -53,7 +51,7 @@ export default function CheckoutPage() {
             variant="fill"
             colorTheme="wine"
             size="lg"
-            className="rounded-full px-8 uppercase tracking-wider text-body font-semibold shadow-md"
+            className="rounded-full px-8 tracking-wider text-body font-semibold shadow-md"
           >
             Return to Home
           </Button>
@@ -85,7 +83,7 @@ export default function CheckoutPage() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Checkout Header */}
         <div className="mb-8">
-          <Link href="/cart" className="inline-flex items-center gap-1.5 text-caption uppercase tracking-wider font-semibold text-wine hover:underline mb-2">
+          <Link href="/cart" className="inline-flex items-center gap-1.5 text-caption tracking-wider font-semibold text-wine hover:underline mb-2">
             <span>← Return to Cart</span>
           </Link>
           <h1 className="font-display text-h2 lg:text-h2 font-medium text-ink tracking-tight">
@@ -101,7 +99,7 @@ export default function CheckoutPage() {
           <div className="lg:col-span-7 space-y-6">
             {/* Contact Information */}
             <div className="rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-xs">
-              <h2 className="font-display text-body font-semibold text-ink uppercase tracking-wider mb-4">
+              <h2 className="font-display text-body font-semibold text-ink tracking-wider mb-4">
                 1. Contact Information
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -128,7 +126,7 @@ export default function CheckoutPage() {
 
             {/* Shipping Address */}
             <div className="rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-xs">
-              <h2 className="font-display text-body font-semibold text-ink uppercase tracking-wider mb-4">
+              <h2 className="font-display text-body font-semibold text-ink tracking-wider mb-4">
                 2. Shipping Address
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -182,16 +180,12 @@ export default function CheckoutPage() {
 
             {/* Payment Method */}
             <div className="rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-xs">
-              <h2 className="font-display text-body font-semibold text-ink uppercase tracking-wider mb-4">
+              <h2 className="font-display text-body font-semibold text-ink tracking-wider mb-4">
                 3. Payment Method
               </h2>
               <div className="space-y-3">
                 <label
-                  className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all ${
-                    paymentMethod === "upi"
-                      ? "border-wine bg-wine/5"
-                      : "border-neutral-200 bg-neutral-50/50 hover:bg-neutral-50"
-                  }`}
+                  className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all ${ paymentMethod === "upi" ? "border-wine bg-wine/5" : "border-neutral-200 bg-neutral-50/50 hover:bg-neutral-50" }`}
                 >
                   <div className="flex items-center gap-3">
                     <input
@@ -211,11 +205,7 @@ export default function CheckoutPage() {
                 </label>
 
                 <label
-                  className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all ${
-                    paymentMethod === "card"
-                      ? "border-wine bg-wine/5"
-                      : "border-neutral-200 bg-neutral-50/50 hover:bg-neutral-50"
-                  }`}
+                  className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all ${ paymentMethod === "card" ? "border-wine bg-wine/5" : "border-neutral-200 bg-neutral-50/50 hover:bg-neutral-50" }`}
                 >
                   <div className="flex items-center gap-3">
                     <input
@@ -239,11 +229,7 @@ export default function CheckoutPage() {
                 </label>
 
                 <label
-                  className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all ${
-                    paymentMethod === "paypal"
-                      ? "border-wine bg-wine/5"
-                      : "border-neutral-200 bg-neutral-50/50 hover:bg-neutral-50"
-                  }`}
+                  className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all ${ paymentMethod === "paypal" ? "border-wine bg-wine/5" : "border-neutral-200 bg-neutral-50/50 hover:bg-neutral-50" }`}
                 >
                   <div className="flex items-center gap-3">
                     <input
@@ -269,7 +255,7 @@ export default function CheckoutPage() {
           <div className="lg:col-span-5">
             <div className="sticky top-28 rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-xs">
               <div className="flex items-center justify-between border-b border-neutral-100 pb-4 mb-4">
-                <h2 className="font-display text-body font-semibold text-ink uppercase tracking-wider">
+                <h2 className="font-display text-body font-semibold text-ink tracking-wider">
                   Order Summary
                 </h2>
                 <span className="text-caption font-semibold text-gold">
@@ -324,7 +310,7 @@ export default function CheckoutPage() {
                 size="md"
                 rounded="full"
                 fullWidth
-                className="mt-6 uppercase font-semibold text-body tracking-wider shadow-md hover:shadow-lg"
+                className="mt-6 font-semibold text-body tracking-wider shadow-md hover:shadow-lg"
                 rightIcon={
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />

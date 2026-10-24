@@ -78,11 +78,7 @@ export default function CareCategoryTabs() {
             key={cat.id}
             variant="unstyled"
             onClick={() => setActiveCategory(cat.id)}
-            className={`px-5 py-3 rounded-full text-caption font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${
-              activeCategory === cat.id
-                ? "bg-[#80222F] text-white shadow-md"
-                : "bg-surface border border-border/80 text-ink/80 hover:border-wine/40 hover:text-wine"
-            }`}
+            className={`px-5 py-3 rounded-full text-caption font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${ activeCategory === cat.id ? "bg-[#80222F] text-white shadow-md" : "bg-surface border border-border/80 text-ink/80 hover:border-wine/40 hover:text-wine" }`}
           >
             <span>{cat.icon}</span>
             <span>{cat.title}</span>
@@ -108,7 +104,7 @@ export default function CareCategoryTabs() {
                   <h2 className="font-display text-2xl font-semibold text-wine mb-2">
                     {cat.title}
                   </h2>
-                  <p className="text-caption text-muted uppercase tracking-widest font-medium">
+                  <p className="text-caption text-muted tracking-widest font-medium">
                     Care Instructions
                   </p>
                 </div>

@@ -50,10 +50,8 @@ export default function WishlistClient() {
             colorTheme="dark"
             rounded="full"
             size="md"
-            className="px-8 font-bold uppercase tracking-widest shadow-md hover:shadow-lg"
-          >
-            CONTINUE SHOPPING
-          </Button>
+            className="px-8 font-bold tracking-widest shadow-md hover:shadow-lg"
+          >Continue Shopping</Button>
         </div>
       </Section>
     );
@@ -111,10 +109,8 @@ export default function WishlistClient() {
                     colorTheme="dark"
                     rounded="full"
                     onClick={() => handleAddToCart(product)}
-                    className="px-5 font-bold uppercase tracking-wider shadow-xs hover:shadow-md"
-                  >
-                    ADD TO CART
-                  </Button>
+                    className="px-5 font-bold tracking-wider shadow-xs hover:shadow-md"
+                  >Add to Cart</Button>
                 </div>
               </div>
             </div>

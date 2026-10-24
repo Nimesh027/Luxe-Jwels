@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useAppSelector } from "@/store/hooks";
 import {
   InstagramIcon,
   PinterestIcon,
@@ -12,51 +11,14 @@ import {
 import {
   VisaBadge,
   MastercardBadge,
-  AmexBadge,
   PaypalBadge,
   UpiBadge,
-  ApplePayBadge,
 } from "@/components/icons/PaymentIcons";
+import { MapPinIcon, PhoneIcon, MailIcon } from "@/components/icons";
 import Newsletter from "../sections/Newsletter";
-
-const socialSvgMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  instagram: InstagramIcon,
-  pinterest: PinterestIcon,
-  facebook: FacebookIcon,
-  youtube: YoutubeIcon,
-};
-
-function renderPaymentBadge(badge: string) {
-  const normalized = badge.toLowerCase().trim();
-  switch (normalized) {
-    case "visa":
-      return <VisaBadge key={badge} />;
-    case "mastercard":
-      return <MastercardBadge key={badge} />;
-    case "amex":
-      return <AmexBadge key={badge} />;
-    case "paypal":
-      return <PaypalBadge key={badge} />;
-    case "upi":
-      return <UpiBadge key={badge} />;
-    case "apple pay":
-    case "applepay":
-      return <ApplePayBadge key={badge} />;
-    default:
-      return (
-        <span
-          key={badge}
-          className="flex h-7 items-center justify-center rounded-md border border-neutral-700 bg-white/10 px-2.5 text-[11px] font-medium tracking-wider uppercase text-cream/80"
-        >
-          {badge}
-        </span>
-      );
-  }
-}
 
 export default function Footer() {
   const pathname = usePathname();
-  const footer = useAppSelector((state) => state.siteContent.footer);
 
   const isAuthPage =
     pathname === "/login" || pathname === "/register" || pathname === "/forgot-password";
@@ -66,80 +28,201 @@ export default function Footer() {
     <>
       <Newsletter />
 
-      <footer className="relative w-full bg-[#100f0e] border-t border-gold/30 text-cream pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10 overflow-hidden">
-        {/* Top Gold Hairline Glow Accent */}
-        <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Main Footer Grid: 4-cols for Brand, 8-cols for Navigation */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12">
-            {/* Brand Intro Column */}
-            <div className="lg:col-span-4 flex flex-col items-start">
-              <Link href="/" className="inline-block">
-                <span className="font-display text-h4 sm:text-h3 font-normal tracking-[0.2em] sm:tracking-[0.25em] text-cream">
-                  LUXE JEWELS
-                </span>
+      <footer className="w-full bg-[#111110] text-[#E0DCD6] py-12 sm:py-14 border-t border-[#222220]">
+        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Main Footer 5-Column Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-10 pb-12 border-b border-[#242422]">
+            {/* Column 1: Brand Identity */}
+            <div className="flex flex-col items-start lg:col-span-1">
+              <Link href="/" className="flex items-center gap-2.5 mb-2 group">
+                <svg className="w-6 h-6 text-[#B38E5D]" viewBox="0 0 32 32" fill="none">
+                  <path d="M16 2L2 12L16 30L30 12L16 2Z" stroke="currentColor" strokeWidth="1.8" />
+                  <path d="M2 12H30M16 2L10 12L16 30L22 12L16 2Z" stroke="currentColor" strokeWidth="1.5" />
+                </svg>
+                <div className="flex flex-col">
+                  <span className="font-display text-[20px] tracking-[0.16em] text-white font-semibold leading-none">
+                    LUXE JEWELS
+                  </span>
+                  <span className="font-body text-[9px] tracking-[0.24em] text-[#B38E5D] font-medium mt-1">
+                    Timeless Elegance
+                  </span>
+                </div>
               </Link>
-              <div className="h-[1.5px] w-10 bg-gold/70 mt-2 mb-3" />
-              <p className="max-w-sm text-caption sm:text-[13px] font-light leading-relaxed text-cream/70">
-                {footer.brandBlurb}
+
+              <p className="font-body text-[13px] text-[#A69F96] font-light leading-relaxed mt-3 max-w-xs">
+                Fine handcrafted jewellery for every milestone. Hallmarked gold, certified diamonds, and master artisan atelier.
               </p>
 
-              {/* Proper Social Icons (Crisp SVGs with gold halo on hover) */}
-              <div className="mt-5 sm:mt-6 flex items-center gap-2.5 sm:gap-3 flex-wrap">
-                {footer.socials.map((social) => {
-                  const Icon = socialSvgMap[social.icon] || InstagramIcon;
+              {/* Social Icons */}
+              <div className="flex items-center gap-2.5 mt-5">
+                {[
+                  { icon: InstagramIcon, href: "https://instagram.com", label: "Instagram" },
+                  { icon: FacebookIcon, href: "https://facebook.com", label: "Facebook" },
+                  { icon: PinterestIcon, href: "https://pinterest.com", label: "Pinterest" },
+                  { icon: YoutubeIcon, href: "https://youtube.com", label: "YouTube" },
+                ].map((social, idx) => {
+                  const Icon = social.icon;
                   return (
                     <a
-                      key={social.id}
+                      key={idx}
                       href={social.href}
-                      aria-label={social.label}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-cream/80 transition-all duration-300 hover:border-gold hover:bg-gold/15 hover:text-gold hover:scale-105 shadow-xs"
+                      aria-label={social.label}
+                      className="w-8 h-8 rounded-full border border-white/15 bg-white/5 flex items-center justify-center text-white/80 hover:text-[#B38E5D] hover:border-[#B38E5D] transition-colors"
                     >
-                      <Icon className="h-4 w-4" />
+                      <Icon className="w-3.5 h-3.5" />
                     </a>
                   );
                 })}
               </div>
             </div>
 
-            {/* Navigation Links Grid (2 columns on mobile, 4 columns on desktop) */}
-            <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-              {footer.columns.map((column) => (
-                <div key={column.id} className="min-w-0">
-                  <h3 className="text-xs sm:text-small font-semibold uppercase tracking-[0.12em] sm:tracking-[0.2em] text-cream/90 mb-3 sm:mb-4">
-                    {column.title}
-                  </h3>
-                  <ul className="space-y-1.5 sm:space-y-2">
-                    {column.links.map((link) => (
-                      <li key={link.label}>
-                        <Link
-                          href={link.href}
-                          className="text-caption sm:text-[13px] font-light text-cream/70 hover:text-gold transition-colors duration-200 block py-0.5"
-                        >
-                          {link.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+            {/* Column 2: Shop & Categories */}
+            <div>
+              <h4 className="font-display text-[15px] font-semibold text-white tracking-wider mb-4">
+                Shop Jewellery
+              </h4>
+              <ul className="space-y-2.5 text-[13px]">
+                {[
+                  { label: "All Jewellery", href: "/shop" },
+                  { label: "Rings", href: "/category/rings" },
+                  { label: "Necklaces", href: "/category/necklaces" },
+                  { label: "Earrings", href: "/category/earrings" },
+                  { label: "Bracelets", href: "/category/bracelets" },
+                  { label: "Men's Collection", href: "/category/mens-collection" },
+                  { label: "Signature Collections", href: "/collections" },
+                ].map((item) => (
+                  <li key={item.label}>
+                    <Link
+                      href={item.href}
+                      className="text-[#A69F96] hover:text-[#B38E5D] transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 3: Guide & Education */}
+            <div>
+              <h4 className="font-display text-[15px] font-semibold text-white tracking-wider mb-4">
+                Guide & Learn
+              </h4>
+              <ul className="space-y-2.5 text-[13px]">
+                {[
+                  { label: "Guide & Learn Hub", href: "/guide" },
+                  { label: "Gold Karats (18K/22K/24K)", href: "/guide/gold" },
+                  { label: "Diamond Types (Natural/CVD)", href: "/guide/diamond" },
+                  { label: "12 Diamond Shapes Cut", href: "/guide/shape" },
+                  { label: "Silver Standards (925/999)", href: "/guide/silver" },
+                  { label: "Jewellery Care Guide", href: "/care-guide" },
+                ].map((item) => (
+                  <li key={item.label}>
+                    <Link
+                      href={item.href}
+                      className="text-[#A69F96] hover:text-[#B38E5D] transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 4: About, Manufacturing, Blog & Contact */}
+            <div>
+              <h4 className="font-display text-[15px] font-semibold text-white tracking-wider mb-4">
+                About & Studio
+              </h4>
+              <ul className="space-y-2.5 text-[13px]">
+                {[
+                  { label: "About Us", href: "/about" },
+                  { label: "Our Story & Heritage", href: "/our-story" },
+                  { label: "Explore Manufacturing", href: "/manufacturing" },
+                  { label: "Blog & Insights", href: "/blog" },
+                  { label: "Contact & Showroom", href: "/contact" },
+                ].map((item) => (
+                  <li key={item.label}>
+                    <Link
+                      href={item.href}
+                      className="text-[#A69F96] hover:text-[#B38E5D] transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 5: Customer Care & Policies */}
+            <div>
+              <h4 className="font-display text-[15px] font-semibold text-white tracking-wider mb-4">
+                Customer Care
+              </h4>
+              <ul className="space-y-2.5 text-[13px]">
+                {[
+                  { label: "Track Your Order", href: "/track-order" },
+                  { label: "Shipping Policy", href: "/shipping" },
+                  { label: "Return & Refund", href: "/returns" },
+                  { label: "FAQs & Help Center", href: "/faqs" },
+                  { label: "Customer Reviews", href: "/reviews" },
+                  { label: "Terms & Conditions", href: "/terms" },
+                  { label: "Privacy Policy", href: "/privacy-policy" },
+                ].map((item) => (
+                  <li key={item.label}>
+                    <Link
+                      href={item.href}
+                      className="text-[#A69F96] hover:text-[#B38E5D] transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
-          {/* Divider & Bottom Row */}
-          <div className="mt-10 sm:mt-14 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-5">
-            {/* Authentic Payment Logos */}
-            <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap justify-center sm:justify-start">
-              {footer.paymentBadges.map((badge) => renderPaymentBadge(badge))}
+          {/* Atelier Contact & Operating Hours Strip */}
+          <div className="py-8 border-b border-[#242422] grid grid-cols-1 sm:grid-cols-3 gap-6 text-[13px] text-[#A69F96]">
+            <div className="flex items-start gap-3">
+              <MapPinIcon size={18} className="text-[#B38E5D] mt-0.5 shrink-0" />
+              <div>
+                <p className="text-white font-medium">Flagship Studio & Atelier</p>
+                <p className="text-[12px] text-[#8C827A] mt-0.5">Ahmedabad, Gujarat, India</p>
+              </div>
             </div>
 
-            {/* Copyright Text */}
-            <p className="text-center sm:text-right text-caption text-cream/50 tracking-wide font-light">
-              {footer.copyright}
+            <div className="flex items-start gap-3">
+              <PhoneIcon size={18} className="text-[#B38E5D] mt-0.5 shrink-0" />
+              <div>
+                <p className="text-white font-medium">+91 98765 43210</p>
+                <p className="text-[12px] text-[#8C827A] mt-0.5">Mon - Sat: 10:00 AM - 7:00 PM</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <MailIcon size={18} className="text-[#B38E5D] mt-0.5 shrink-0" />
+              <div>
+                <p className="text-white font-medium">support@luxejewels.com</p>
+                <p className="text-[12px] text-[#8C827A] mt-0.5">We reply within 24 hours</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Row: Copyright & Payment Badges */}
+          <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-[12px] text-[#78716A]">
+              &copy; 2026 Luxe Jewels. All Rights Reserved.
             </p>
+
+            <div className="flex items-center gap-2">
+              <VisaBadge />
+              <MastercardBadge />
+              <UpiBadge />
+              <PaypalBadge />
+            </div>
           </div>
         </div>
       </footer>

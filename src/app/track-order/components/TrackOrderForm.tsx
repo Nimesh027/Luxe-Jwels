@@ -2,7 +2,7 @@ import React from "react";
 import Input from "@/components/ui/Input";
 import Section from "@/components/common/Section";
 import Button from "@/components/ui/Button";
-import { TagIcon, SmartphoneIcon } from "@/components/icons";
+import { TagIcon, SmartphoneIcon, ArrowRightIcon } from "@/components/icons";
 
 interface TrackOrderFormProps {
   trackType: "order" | "awb";
@@ -37,10 +37,7 @@ export default function TrackOrderForm({
             type="button"
             variant="unstyled"
             onClick={() => setTrackType("order")}
-            className={`py-2.5 px-4 text-body font-semibold rounded-xl transition-all cursor-pointer ${trackType === "order"
-              ? "bg-white text-wine shadow-sm"
-              : "text-muted hover:text-ink"
-              }`}
+            className={`py-2.5 px-4 text-body font-semibold rounded-xl transition-all cursor-pointer ${trackType === "order" ? "bg-white text-wine shadow-sm" : "text-muted hover:text-ink" }`}
           >
             Order ID & Mobile
           </Button>
@@ -48,10 +45,7 @@ export default function TrackOrderForm({
             type="button"
             variant="unstyled"
             onClick={() => setTrackType("awb")}
-            className={`py-2.5 px-4 text-body font-semibold rounded-xl transition-all cursor-pointer ${trackType === "awb"
-              ? "bg-white text-wine shadow-sm"
-              : "text-muted hover:text-ink"
-              }`}
+            className={`py-2.5 px-4 text-body font-semibold rounded-xl transition-all cursor-pointer ${trackType === "awb" ? "bg-white text-wine shadow-sm" : "text-muted hover:text-ink" }`}
           >
             AWB Tracking Number
           </Button>
@@ -63,7 +57,7 @@ export default function TrackOrderForm({
             id="track-order-id-input"
             label={trackType === "order" ? "Order ID" : "AWB / Waybill Number"}
             labelAction={
-              <span className="text-[11px] text-muted font-normal uppercase">
+              <span className="text-[11px] text-muted font-normal">
                 e.g. {trackType === "order" ? "LX-89210" : "SQL-98234109"}
               </span>
             }
@@ -72,7 +66,7 @@ export default function TrackOrderForm({
             value={orderIdInput}
             onChange={(e) => setOrderIdInput(e.target.value)}
             placeholder={trackType === "order" ? "LX-89210" : "SQL-98234109"}
-            inputClassName="font-mono uppercase tracking-wider"
+            inputClassName="font-mono tracking-wider"
             trailingIcon={<TagIcon size={16} className="text-muted" />}
             required
           />
@@ -96,8 +90,8 @@ export default function TrackOrderForm({
             rounded="lg"
             fullWidth
             disabled={isLoading}
-            className="font-bold uppercase tracking-widest shadow-md hover:shadow-lg mt-2"
-            rightIcon={!isLoading && <span className="text-body">→</span>}
+            className="font-bold tracking-widest shadow-md hover:shadow-lg mt-2"
+            rightIcon={!isLoading && <ArrowRightIcon className="w-4 h-4" />}
           >
             {isLoading ? (
               <span className="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />

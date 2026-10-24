@@ -10,11 +10,11 @@ import Select from "@/components/ui/Select";
 import { useAppSelector } from "@/store/hooks";
 import { filterProducts } from "@/lib/productFilter";
 import type { Product } from "@/types";
-
 import { sortOptionsData as SORT_OPTIONS } from "@/data";
 import Drawer from "@/components/ui/Drawer";
 
-const PRODUCTS_PER_PAGE = 18;
+const INITIAL_DISPLAY_COUNT = 15;
+const LOAD_MORE_BATCH_COUNT = 15;
 
 // ─── Price Filter Helper ──────────────────────────────────────────────────────
 
@@ -24,99 +24,31 @@ function applyPriceFilter(products: Product[], priceRange: string): Product[] {
   return products.filter((p) => p.price >= range.min && p.price < range.max);
 }
 
-// ─── Pagination Component ────────────────────────────────────────────────────
+// ─── Product Card Skeleton Loader ─────────────────────────────────────────────
 
-function Pagination({
-  currentPage,
-  totalPages,
-  onPageChange,
-}: {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-}) {
-  if (totalPages <= 1) return null;
-
-  // Build page number list with ellipsis
-  function getPages(): (number | "...")[] {
-    if (totalPages <= 7) return Array.from({ length: totalPages }, (_, i) => i + 1);
-    const pages: (number | "...")[] = [1];
-    if (currentPage > 3) pages.push("...");
-    for (
-      let i = Math.max(2, currentPage - 1);
-      i <= Math.min(totalPages - 1, currentPage + 1);
-      i++
-    ) {
-      pages.push(i);
-    }
-    if (currentPage < totalPages - 2) pages.push("...");
-    pages.push(totalPages);
-    return pages;
-  }
-
-  const pages = getPages();
-
+function ProductCardSkeleton() {
   return (
-    <div className="flex items-center justify-center gap-1.5 mt-10 pt-8 border-t border-border/60">
-      {/* Prev */}
-      <Button
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-        variant="border"
-        colorTheme="wine"
-        size="sm"
-        rounded="md"
-        aria-label="Previous page"
-        leftIcon={
-          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        }
-      >
-        Prev
-      </Button>
-
-      {/* Page numbers */}
-      <div className="flex items-center gap-1">
-        {pages.map((page, i) =>
-          page === "..." ? (
-            <span key={`ellipsis-${i}`} className="w-9 h-9 flex items-center justify-center text-[12px] text-muted select-none">
-              &hellip;
-            </span>
-          ) : (
-            <Button
-              key={page}
-              variant="unstyled"
-              onClick={() => onPageChange(page as number)}
-              className={`w-9 h-9 flex items-center justify-center text-[12px] font-medium rounded-lg border transition-all duration-150 cursor-pointer ${
-                currentPage === page
-                  ? "bg-wine border-wine text-white shadow-sm shadow-wine/20"
-                  : "border-border text-ink hover:border-wine/50 hover:text-wine hover:bg-wine/5"
-              }`}
-            >
-              {page}
-            </Button>
-          )
-        )}
+    <div className="flex flex-col h-full bg-white rounded-xl sm:rounded-2xl border border-[#EAE4DC] p-3 sm:p-4 shadow-xs animate-pulse">
+      {/* Product Image Skeleton */}
+      <div className="relative aspect-square w-full rounded-lg sm:rounded-xl bg-[#F2EDE5] mb-3 overflow-hidden flex items-center justify-center">
+        <div className="w-9 h-9 rounded-full bg-[#E5DEC7]/30" />
       </div>
 
-      {/* Next */}
-      <Button
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-        variant="border"
-        colorTheme="wine"
-        size="sm"
-        rounded="md"
-        aria-label="Next page"
-        rightIcon={
-          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-        }
-      >
-        Next
-      </Button>
+      {/* Title Skeletons */}
+      <div className="h-4 bg-[#EDE8DF] rounded-md w-4/5 mb-2" />
+      <div className="h-3.5 bg-[#F4EFE7] rounded-md w-3/5 mb-3" />
+
+      {/* Star Rating Skeleton */}
+      <div className="flex items-center gap-1.5 mb-4">
+        <div className="h-3 w-16 bg-[#EDE8DF] rounded" />
+        <div className="h-3 w-8 bg-[#F4EFE7] rounded" />
+      </div>
+
+      {/* Price & Action Skeleton */}
+      <div className="mt-auto pt-2 flex items-center justify-between border-t border-[#F5F1EA]">
+        <div className="h-5 bg-[#EDE8DF] rounded w-24" />
+        <div className="h-8 w-8 rounded-full bg-[#EDE8DF]" />
+      </div>
     </div>
   );
 }
@@ -135,10 +67,10 @@ function ShopContent() {
   const activeCollections = rawCollections ? rawCollections.split(",").filter(Boolean) : [];
   const activePrice = searchParams.get("price") ?? "";
   const activeSort = searchParams.get("sort") ?? "featured";
-  const currentPage = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10));
 
   const allProducts = useAppSelector((state) => state.products.items);
 
+  // Filtered & Sorted products
   const products = useMemo(() => {
     let filtered: Product[];
 
@@ -174,28 +106,64 @@ function ShopContent() {
     return filtered;
   }, [allProducts, rawCategories, rawCollections, activePrice, activeSort]);
 
-  // Pagination derived values
-  const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
-  const paginatedProducts = products.slice(
-    (currentPage - 1) * PRODUCTS_PER_PAGE,
-    currentPage * PRODUCTS_PER_PAGE
-  );
+  // Infinite Scroll State (Default 15 products)
+  const [visibleCount, setVisibleCount] = useState(INITIAL_DISPLAY_COUNT);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
-  // When a filter changes, reset to page 1
+  // Reset to 15 items whenever filter or sort changes
+  useEffect(() => {
+    setVisibleCount(INITIAL_DISPLAY_COUNT);
+    setIsLoadingMore(false);
+  }, [rawCategories, rawCollections, activePrice, activeSort]);
+
+  const visibleProducts = useMemo(() => {
+    return products.slice(0, visibleCount);
+  }, [products, visibleCount]);
+
+  const hasMore = visibleCount < products.length;
+
+  // Infinite scroll intersection observer
+  useEffect(() => {
+    if (!hasMore || isLoadingMore) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const first = entries[0];
+        if (first.isIntersecting && hasMore && !isLoadingMore) {
+          setIsLoadingMore(true);
+          // Smooth simulated loading delay for luxury feel and skeleton rendering
+          setTimeout(() => {
+            setVisibleCount((prev) => Math.min(prev + LOAD_MORE_BATCH_COUNT, products.length));
+            setIsLoadingMore(false);
+          }, 600);
+        }
+      },
+      {
+        rootMargin: "250px", // Pre-fetch before user reaches the very bottom
+        threshold: 0.1,
+      }
+    );
+
+    const currentRef = loadMoreRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+      observer.disconnect();
+    };
+  }, [hasMore, isLoadingMore, products.length]);
+
   function setParam(key: string, value: string) {
     const params = new URLSearchParams(searchParams.toString());
     if (value) params.set(key, value);
     else params.delete(key);
-    // Reset page whenever a filter/sort changes (but not when page itself changes)
-    if (key !== "page") params.delete("page");
+    params.delete("page");
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
-  }
-
-  function goToPage(page: number) {
-    const params = new URLSearchParams(searchParams.toString());
-    if (page <= 1) params.delete("page");
-    else params.set("page", String(page));
-    router.push(`${pathname}?${params.toString()}`, { scroll: true });
   }
 
   function toggleMultiParam(key: string, current: string[], value: string) {
@@ -230,7 +198,7 @@ function ShopContent() {
       {/* ── Page Hero ────────────────────────────────────────────── */}
       <ShopHero />
 
-      <div className="py-12 md:py-16">
+      <div className="py-10 sm:py-12 lg:py-14">
         <div className="container">
           {/* ── Toolbar ───────────────────────────────────────────── */}
           <div className="flex items-center justify-between gap-4 mb-7 pb-5 border-b border-border/70">
@@ -262,27 +230,27 @@ function ShopContent() {
             {/* Product count — desktop */}
             <p className="hidden lg:block text-[12px] text-muted">
               Showing{" "}
-              <span className="font-semibold text-ink">{products.length}</span>{" "}
-              {products.length === 1 ? "product" : "products"}
-              {totalPages > 1 && (
-                <span className="text-muted/70"> &mdash; page {currentPage} of {totalPages}</span>
-              )}
+              <span className="font-semibold text-ink">{visibleProducts.length}</span>{" "}
+              of <span className="font-semibold text-ink">{products.length}</span>{" "}
+              {products.length === 1 ? "design" : "designs"}
             </p>
 
             {/* Product count — mobile */}
             <p className="lg:hidden text-[12px] text-muted">
-              <span className="font-semibold text-ink">{products.length}</span> results
+              Showing <span className="font-semibold text-ink">{visibleProducts.length}</span> of{" "}
+              <span className="font-semibold text-ink">{products.length}</span>
             </p>
 
-            {/* Sort dropdown — fully custom */}
+            {/* Sort dropdown */}
             <div className="flex items-center gap-2.5">
-              <span className="text-[11px] text-muted hidden sm:block uppercase tracking-wider font-medium whitespace-nowrap">
+              <span className="text-[11px] text-muted hidden sm:block tracking-wider font-medium whitespace-nowrap">
                 Sort
               </span>
               <Select
                 options={SORT_OPTIONS}
                 value={activeSort}
                 onChange={(val) => setParam("sort", val)}
+                align="right"
               />
             </div>
           </div>
@@ -295,80 +263,79 @@ function ShopContent() {
               </div>
             </div>
 
-            {/* ── Mobile Sidebar Drawer ─────────────────────────── */}
+            {/* ── Mobile Filter Drawer ─────────────────────────── */}
             <Drawer
               isOpen={sidebarOpen}
               onClose={() => setSidebarOpen(false)}
+              title="Filter Products"
               position="left"
-              maxWidth="max-w-[320px]"
-              ariaLabel="Filters"
-              title={
-                <div className="flex items-center gap-2">
-                  <svg className="w-3.5 h-3.5 text-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="4" y1="6" x2="20" y2="6" /><line x1="7" y1="12" x2="17" y2="12" /><line x1="10" y1="18" x2="14" y2="18" />
-                  </svg>
-                  <span className="!text-small font-extrabold uppercase tracking-[0.2em] text-ink">
-                    Filter By
-                  </span>
-                </div>
-              }
-              footer={
-                <Button
-                  onClick={() => setSidebarOpen(false)}
-                  variant="fill"
-                  colorTheme="wine"
-                  size="md"
-                  rounded="lg"
-                  fullWidth
-                >
-                  View {products.length} {products.length === 1 ? "product" : "products"}
-                </Button>
-              }
+              className="lg:hidden"
             >
-              <div className="p-5">
+              <div className="p-4">
                 <ShopFilter {...sidebarProps} />
+                <div className="mt-6 pt-4 border-t border-border flex gap-3">
+                  <Button
+                    onClick={clearAll}
+                    variant="border"
+                    colorTheme="wine"
+                    size="sm"
+                    className="flex-1"
+                  >
+                    Clear All
+                  </Button>
+                  <Button
+                    onClick={() => setSidebarOpen(false)}
+                    variant="fill"
+                    colorTheme="wine"
+                    size="sm"
+                    className="flex-1"
+                  >
+                    View {products.length} Results
+                  </Button>
+                </div>
               </div>
             </Drawer>
 
-            {/* ── Product Grid — col-span-9 ──────────────────────── */}
+            {/* ── Product Grid — col-span-9 ────────────────────── */}
             <div className="lg:col-span-9">
-              {/* Active filter pills */}
+              {/* Active Filter Chips */}
               {activeFilterCount > 0 && (
-                <div className="flex flex-wrap items-center gap-2 mb-5">
-                  {activeCategories.map((val) => (
-                    <Button
-                      key={val}
-                      onClick={() => toggleMultiParam("category", activeCategories, val)}
-                      variant="border"
-                      colorTheme="wine"
-                      size="xs"
-                      rounded="full"
-                      rightIcon={
-                        <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <path d="M18 6L6 18M6 6l12 12" />
-                        </svg>
-                      }
-                    >
-                      {CATEGORIES.find((c) => c.value === val)?.label}
-                    </Button>
-                  ))}
-                  {activeCollections.map((val) => (
-                    <Button
-                      key={val}
-                      onClick={() => toggleMultiParam("collection", activeCollections, val)}
-                      variant="border"
-                      colorTheme="wine"
-                      size="xs"
-                      rounded="full"
-                      rightIcon={
-                        <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <path d="M18 6L6 18M6 6l12 12" />
-                        </svg>
-                      }
-                    >
-                      {COLLECTIONS.find((c) => c.value === val)?.label}
-                    </Button>
-                  ))}
+                <div className="flex flex-wrap items-center gap-2 mb-6 p-3 bg-surface border border-border/60 rounded-xl">
+                  <span className="text-caption text-muted font-medium">
+                    Active filters:
+                  </span>
+                  {activeCategories.map((slug) => {
+                    const cat = CATEGORIES.find((c) => c.slug === slug);
+                    return (
+                      <Button
+                        key={slug}
+                        onClick={() => toggleMultiParam("category", activeCategories, slug)}
+                        variant="border"
+                        colorTheme="wine"
+                        size="xs"
+                        rounded="full"
+                        rightIcon={<span>&times;</span>}
+                      >
+                        {cat?.name ?? slug}
+                      </Button>
+                    );
+                  })}
+                  {activeCollections.map((slug) => {
+                    const col = COLLECTIONS.find((c) => c.slug === slug);
+                    return (
+                      <Button
+                        key={slug}
+                        onClick={() => toggleMultiParam("collection", activeCollections, slug)}
+                        variant="border"
+                        colorTheme="wine"
+                        size="xs"
+                        rounded="full"
+                        rightIcon={<span>&times;</span>}
+                      >
+                        {col?.name ?? slug}
+                      </Button>
+                    );
+                  })}
                   {activePrice && (
                     <Button
                       onClick={() => setParam("price", "")}
@@ -376,11 +343,7 @@ function ShopContent() {
                       colorTheme="wine"
                       size="xs"
                       rounded="full"
-                      rightIcon={
-                        <svg className="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <path d="M18 6L6 18M6 6l12 12" />
-                        </svg>
-                      }
+                      rightIcon={<span>&times;</span>}
                     >
                       {PRICE_RANGES.find((r) => r.value === activePrice)?.label}
                     </Button>
@@ -392,7 +355,7 @@ function ShopContent() {
                     size="xs"
                     rounded="md"
                   >
-                    Clear all
+                    Clear All
                   </Button>
                 </div>
               )}
@@ -421,23 +384,41 @@ function ShopContent() {
                     size="sm"
                     rounded="md"
                   >
-                    Clear all filters
+                    Clear All Filters
                   </Button>
                 </div>
               ) : (
-                <div className="grid grid-cols-2 gap-4 sm:gap-5 sm:grid-cols-3">
-                  {paginatedProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                  ))}
-                </div>
-              )}
+                <>
+                  {/* Products Grid */}
+                  <div className="grid grid-cols-2 gap-4 sm:gap-5 sm:grid-cols-3">
+                    {visibleProducts.map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))}
 
-              {/* Pagination */}
-              <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={goToPage}
-              />
+                    {/* Skeleton loaders while loading more on scroll */}
+                    {isLoadingMore && (
+                      <>
+                        <ProductCardSkeleton />
+                        <ProductCardSkeleton />
+                        <ProductCardSkeleton />
+                      </>
+                    )}
+                  </div>
+
+                  {/* Infinite Scroll Sentinel */}
+                  <div
+                    ref={loadMoreRef}
+                    className={hasMore ? "w-full py-4 flex items-center justify-center" : "h-0 w-full overflow-hidden"}
+                  >
+                    {isLoadingMore && (
+                      <div className="flex items-center gap-2.5 py-2 text-[12.5px] font-medium text-[#B38E5D] tracking-wider uppercase">
+                        <span className="w-4 h-4 border-2 border-[#B38E5D]/30 border-t-[#B38E5D] rounded-full animate-spin" />
+                        <span>Curating more handcrafted designs...</span>
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

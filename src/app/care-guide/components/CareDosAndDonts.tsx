@@ -53,26 +53,16 @@ export default function CareDosAndDonts() {
           return (
             <div
               key={idx}
-              className={`group relative rounded-2xl border p-8 space-y-4 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden ${
-                isDo
-                  ? "bg-emerald-50/40 border-emerald-200/60 hover:border-emerald-300"
-                  : "bg-rose-50/40 border-rose-200/60 hover:border-rose-300"
-              }`}
+              className={`group relative rounded-2xl border p-8 space-y-4 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden ${ isDo ? "bg-emerald-50/40 border-emerald-200/60 hover:border-emerald-300" : "bg-rose-50/40 border-rose-200/60 hover:border-rose-300" }`}
             >
               {/* Subtle Background Accent */}
               <div
-                className={`absolute -top-4 -right-4 w-32 h-32 rounded-full opacity-10 transition-transform duration-700 group-hover:scale-150 ${
-                  isDo ? "bg-emerald-400" : "bg-rose-400"
-                }`}
+                className={`absolute -top-4 -right-4 w-32 h-32 rounded-full opacity-10 transition-transform duration-700 group-hover:scale-150 ${ isDo ? "bg-emerald-400" : "bg-rose-400" }`}
               />
 
               <div className="relative z-10">
                 <span
-                  className={`inline-flex items-center justify-center w-12 h-12 rounded-full mb-6 shadow-sm ${
-                    isDo
-                      ? "bg-emerald-100 text-emerald-700"
-                      : "bg-rose-100 text-rose-700"
-                  }`}
+                  className={`inline-flex items-center justify-center w-12 h-12 rounded-full mb-6 shadow-sm ${ isDo ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700" }`}
                 >
                   {isDo ? (
                     <svg

@@ -55,7 +55,7 @@ function StickyAddToCartBarComponent({
         rounded="full"
         size="sm"
         onClick={onAddToCart}
-        className="px-4 sm:px-7 font-semibold text-caption sm:text-body uppercase tracking-wider shadow-md hover:shadow-lg shrink-0"
+        className="px-4 sm:px-7 font-semibold text-caption sm:text-body tracking-wider shadow-md hover:shadow-lg shrink-0"
         leftIcon={<ShoppingBagIcon size={16} />}
       >
         Add to Cart

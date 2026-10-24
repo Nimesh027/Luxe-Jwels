@@ -63,7 +63,7 @@ export default function OurArtisans() {
                     {artisan.name}
                   </h3>
                   <div className="flex flex-col gap-1">
-                    <span className="text-caption font-bold uppercase tracking-wider text-wine/80">
+                    <span className="text-caption font-bold tracking-wider text-wine/80">
                       {artisan.role}
                     </span>
                     <span className="text-[11px] text-muted font-medium">

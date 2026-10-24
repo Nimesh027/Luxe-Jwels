@@ -1,50 +1,93 @@
 "use client";
 
-import Carousel from "@/components/common/Carousel";
-import Section from "@/components/common/Section";
-import SectionTitle from "@/components/common/SectionTitle";
+import { useState, useMemo } from "react";
+import Link from "next/link";
 import ProductCard from "@/components/common/ProductCard";
-import Button from "@/components/ui/Button";
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useAppSelector } from "@/store/hooks";
-import { selectBestsellers } from "@/store/slices/productsSlice";
 
-export default function Bestsellers() {
-  const products = useAppSelector(selectBestsellers);
-  const isLg = useMediaQuery("(min-width: 1024px)");
-  const isSm = useMediaQuery("(min-width: 640px)");
-  const itemsPerView = isLg ? 5 : isSm ? 3 : 2;
+const TABS = [
+  { id: "rings", label: "Rings", category: "rings" },
+  { id: "necklaces", label: "Necklaces", category: "necklaces" },
+  { id: "earrings", label: "Earrings", category: "earrings" },
+  { id: "bracelets", label: "Bracelets", category: "bracelets" },
+  { id: "pendants", label: "Pendants", category: "pendants" },
+  { id: "mens", label: "Men's Collection", category: "mens-collection" },
+];
+
+export default function FeaturedCollections() {
+  const [activeTab, setActiveTab] = useState("rings");
+  const allProducts = useAppSelector((state) => state.products.items);
+
+  const filteredProducts = useMemo(() => {
+    const currentTabObj = TABS.find((t) => t.id === activeTab);
+    const categoryKey = currentTabObj?.category || "rings";
+
+    let prods = allProducts.filter((p) => {
+      if (categoryKey === "mens-collection") {
+        return p.gender === "men" || p.category === "mens-collection";
+      }
+      return p.category === categoryKey;
+    });
+
+    if (prods.length < 5) {
+      // Fallback to top products if category has few
+      const additional = allProducts.filter((p) => !prods.includes(p));
+      prods = [...prods, ...additional];
+    }
+
+    return prods.slice(0, 5);
+  }, [allProducts, activeTab]);
 
   return (
-    <Section>
-      <SectionTitle
-        title="Most Loved Bestsellers"
-        description="Explore our most coveted and iconic designs, handcrafted with timeless brilliance."
-        align="center"
-      />
-      <Carousel
-        items={products.map((product) => (
-          <div key={product.id} className="px-2">
-            <ProductCard product={product} />
+    <section className="w-full bg-[#FAF7F2] py-14 sm:py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+          <div>
+            <h2 className="font-display text-[26px] sm:text-[34px] md:text-[38px] text-[#141414] font-medium tracking-tight">
+              Featured Collections
+            </h2>
+            <p className="font-body text-[13.5px] sm:text-[15px] text-[#78716A] mt-1 font-normal">
+              Handpicked iconic designs created for life’s most cherished celebrations
+            </p>
           </div>
-        ))}
-        itemsPerView={itemsPerView}
-      />
 
-      {/* View All Button at the bottom */}
-      <div className="mt-8 sm:mt-12 text-center">
-        <Button
-          href="/collections"
-          variant="border"
-          colorTheme="wine"
-          size="lg"
-          rightIcon={<ArrowRightIcon className="w-4 h-4" />}
-          className="hover:shadow-md"
-        >
-          View All Bestsellers
-        </Button>
+          <Link
+            href="/shop"
+            className="group inline-flex items-center gap-1.5 text-[12.5px] sm:text-[13.5px] tracking-wider text-[#B38E5D] hover:text-[#9C7748] font-semibold transition-colors shrink-0"
+          >
+            <span>View All Products</span>
+            <ArrowRightIcon className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
+
+        {/* Filter Tabs */}
+        <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-4 mb-8 scrollbar-none">
+          {TABS.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-4 sm:px-5 py-2 rounded-full text-[12.5px] sm:text-[13px] font-medium tracking-wide transition-all duration-200 cursor-pointer whitespace-nowrap ${ isActive ? "bg-[#B38E5D] text-white shadow-xs" : "bg-white text-[#5C554E] hover:text-[#141414] border border-[#E5DFD5] hover:border-[#B38E5D]" }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* 5-Item Product Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5 lg:gap-6">
+          {filteredProducts.map((product) => (
+            <div key={product.id} className="h-full">
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }

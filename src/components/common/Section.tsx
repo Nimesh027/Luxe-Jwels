@@ -36,7 +36,7 @@ export default function Section({
             {viewAllHref && (
               <Link
                 href={viewAllHref}
-                className="group shrink-0 inline-flex items-center gap-1.5 text-caption uppercase tracking-wider text-wine hover:text-wine-dark font-medium underline-offset-4 hover:underline transition-colors"
+                className="group shrink-0 inline-flex items-center gap-1.5 text-caption tracking-wider text-wine hover:text-wine-dark font-medium underline-offset-4 hover:underline transition-colors"
               >
                 <span>View All</span>
                 <ArrowRightIcon className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />

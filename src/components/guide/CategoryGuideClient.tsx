@@ -23,13 +23,13 @@ export default function CategoryGuideClient({ overview }: CategoryGuideClientPro
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <Link
             href="/guide"
-            className="mb-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#C5A059] hover:text-foreground transition-colors"
+            className="mb-6 inline-flex items-center gap-2 text-xs font-bold tracking-[0.25em] text-[#C5A059] hover:text-foreground transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Guide & Learn Hub
           </Link>
 
-          <div className="mb-4 flex items-center justify-center gap-2 text-[11px] font-bold uppercase tracking-[0.35em] text-[#C5A059]">
+          <div className="mb-4 flex items-center justify-center gap-2 text-[11px] font-bold tracking-[0.35em] text-[#C5A059]">
             <Gem className="h-3.5 w-3.5" />
             {badge}
           </div>
@@ -50,41 +50,25 @@ export default function CategoryGuideClient({ overview }: CategoryGuideClientPro
           <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
             <Link
               href="/guide/gold"
-              className={`px-5 py-2.5 text-xs font-bold uppercase tracking-[0.2em] transition-all border ${
-                category === "gold"
-                  ? "bg-[#0D0D0D] text-white border-[#0D0D0D]"
-                  : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent"
-              }`}
+              className={`px-5 py-2.5 text-xs font-bold tracking-[0.2em] transition-all border ${ category === "gold" ? "bg-[#0D0D0D] text-white border-[#0D0D0D]" : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent" }`}
             >
               Gold Karats (5)
             </Link>
             <Link
               href="/guide/silver"
-              className={`px-5 py-2.5 text-xs font-bold uppercase tracking-[0.2em] transition-all border ${
-                category === "silver"
-                  ? "bg-[#0D0D0D] text-white border-[#0D0D0D]"
-                  : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent"
-              }`}
+              className={`px-5 py-2.5 text-xs font-bold tracking-[0.2em] transition-all border ${ category === "silver" ? "bg-[#0D0D0D] text-white border-[#0D0D0D]" : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent" }`}
             >
               Silver Standards (5)
             </Link>
             <Link
               href="/guide/diamond"
-              className={`px-5 py-2.5 text-xs font-bold uppercase tracking-[0.2em] transition-all border ${
-                category === "diamond"
-                  ? "bg-[#0D0D0D] text-white border-[#0D0D0D]"
-                  : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent"
-              }`}
+              className={`px-5 py-2.5 text-xs font-bold tracking-[0.2em] transition-all border ${ category === "diamond" ? "bg-[#0D0D0D] text-white border-[#0D0D0D]" : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent" }`}
             >
               Diamond Types (4)
             </Link>
             <Link
               href="/guide/shape"
-              className={`px-5 py-2.5 text-xs font-bold uppercase tracking-[0.2em] transition-all border ${
-                isShapeCategory
-                  ? "bg-[#0D0D0D] text-white border-[#0D0D0D]"
-                  : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent"
-              }`}
+              className={`px-5 py-2.5 text-xs font-bold tracking-[0.2em] transition-all border ${ isShapeCategory ? "bg-[#0D0D0D] text-white border-[#0D0D0D]" : "bg-[#F7F5EF] text-foreground/70 hover:text-foreground hover:bg-white border-transparent" }`}
             >
               Diamond Shapes (12)
             </Link>
@@ -96,7 +80,7 @@ export default function CategoryGuideClient({ overview }: CategoryGuideClientPro
       <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#C5A059] block mb-2">
+            <span className="text-[10px] font-bold tracking-[0.35em] text-[#C5A059] block mb-2">
               Collection Overview
             </span>
             <h2 className="text-3xl font-bold">
@@ -129,10 +113,10 @@ export default function CategoryGuideClient({ overview }: CategoryGuideClientPro
                   sizes="(min-width: 1024px) 33vw, 50vw"
                   className="object-contain p-6 transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute top-4 left-4 text-[10px] font-mono uppercase tracking-widest bg-white/90 px-2.5 py-1 border border-black/5">
+                <div className="absolute top-4 left-4 text-[10px] font-mono tracking-widest bg-white/90 px-2.5 py-1 border border-black/5">
                   {item.hallmarkOrStamp}
                 </div>
-                <div className="absolute bottom-4 right-4 text-[10px] font-bold uppercase tracking-wider text-[#C5A059] bg-white/90 px-2.5 py-1 border border-[#C5A059]/30">
+                <div className="absolute bottom-4 right-4 text-[10px] font-bold tracking-wider text-[#C5A059] bg-white/90 px-2.5 py-1 border border-[#C5A059]/30">
                   {item.purityOrOrigin}
                 </div>
               </div>
@@ -156,13 +140,13 @@ export default function CategoryGuideClient({ overview }: CategoryGuideClientPro
                   <div className="grid grid-cols-2 gap-2 mb-4 text-[11px]">
                     {item.metrics.slice(0, 2).map((m, i) => (
                       <div key={i} className="p-2 bg-stone-50 rounded-xs">
-                        <span className="text-[10px] uppercase text-muted-foreground block">{m.label}</span>
+                        <span className="text-[10px] text-muted-foreground block">{m.label}</span>
                         <span className="font-bold text-foreground">{m.value}</span>
                       </div>
                     ))}
                   </div>
 
-                  <div className="flex items-center justify-between text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059] group-hover:translate-x-1 transition-transform">
+                  <div className="flex items-center justify-between text-xs font-bold tracking-[0.2em] text-[#C5A059] group-hover:translate-x-1 transition-transform">
                     <span>View Masterclass</span>
                     <ArrowRight className="w-4 h-4" />
                   </div>
@@ -177,7 +161,7 @@ export default function CategoryGuideClient({ overview }: CategoryGuideClientPro
       <section className="bg-white border-t border-black/5 py-16 px-6">
         <div className="mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#C5A059] block mb-2">
+            <span className="text-[10px] font-bold tracking-[0.35em] text-[#C5A059] block mb-2">
               At a Glance
             </span>
             <h2 className="text-3xl font-bold">
@@ -195,7 +179,7 @@ export default function CategoryGuideClient({ overview }: CategoryGuideClientPro
           <div className="overflow-x-auto">
             <table className="w-full text-left border border-black/5 bg-white shadow-xs">
               <thead>
-                <tr className="bg-stone-50 border-b border-black/5 text-[11px] uppercase tracking-wider text-muted-foreground font-bold">
+                <tr className="bg-stone-50 border-b border-black/5 text-[11px] tracking-wider text-muted-foreground font-bold">
                   <th className="p-4">{isShapeCategory ? "Silhouette & Shape" : "Standard"}</th>
                   <th className="p-4">{isShapeCategory ? "Shape Family" : "Purity / Origin"}</th>
                   <th className="p-4">{isShapeCategory ? "Facet Count" : "Hallmark"}</th>
@@ -227,7 +211,7 @@ export default function CategoryGuideClient({ overview }: CategoryGuideClientPro
                     <td className="p-4 text-right">
                       <Link
                         href={`/guide/${isShapeCategory ? "shape" : category}/${item.slug}`}
-                        className="inline-flex items-center gap-1 font-bold text-[#C5A059] hover:text-foreground uppercase tracking-wider text-[11px]"
+                        className="inline-flex items-center gap-1 font-bold text-[#C5A059] hover:text-foreground tracking-wider text-[11px]"
                       >
                         Details
                         <ArrowRight className="w-3 h-3" />
@@ -245,7 +229,7 @@ export default function CategoryGuideClient({ overview }: CategoryGuideClientPro
       <section className="bg-stone-950 text-white py-16 px-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#C5A059]/15 via-transparent to-transparent pointer-events-none" />
         <div className="mx-auto max-w-4xl text-center relative z-10">
-          <span className="text-[11px] font-bold uppercase tracking-[0.35em] text-[#C5A059] block mb-3">
+          <span className="text-[11px] font-bold tracking-[0.35em] text-[#C5A059] block mb-3">
             Bespoke Consultation
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
@@ -261,13 +245,13 @@ export default function CategoryGuideClient({ overview }: CategoryGuideClientPro
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/contact"
-              className="bg-[#C5A059] text-white px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-colors"
+              className="bg-[#C5A059] text-white px-8 py-3.5 text-xs font-bold tracking-[0.2em] hover:bg-white hover:text-black transition-colors"
             >
               Book Complimentary Consultation
             </Link>
             <Link
               href="/guide"
-              className="border border-white/20 text-white px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] hover:border-[#C5A059] hover:text-[#C5A059] transition-colors"
+              className="border border-white/20 text-white px-8 py-3.5 text-xs font-bold tracking-[0.2em] hover:border-[#C5A059] hover:text-[#C5A059] transition-colors"
             >
               Explore All Guides
             </Link>

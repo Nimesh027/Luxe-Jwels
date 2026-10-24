@@ -5,48 +5,37 @@ import Image from "next/image";
 interface ShopHeroProps {
   title?: string;
   subtitle?: string;
-  badge?: string;
   imageSrc?: string;
 }
 
 export default function ShopHero({
-  title = "Shop Fine Jewellery",
-  subtitle = "Explore our complete range of certified luxury jewellery — meticulously handcrafted in hallmarked 18K gold & ethically sourced diamonds.",
-  badge = "Luxe Jewels Collection",
-  imageSrc = "/images/banners/gold-star-jewellery-model.png",
+  title = "Rings",
+  subtitle = "Timeless designs for every occasion",
+  imageSrc = "/images/revamp/ring-macro.jpg",
 }: ShopHeroProps) {
   return (
-    <div className="relative overflow-hidden bg-ink py-16 md:py-20 lg:py-24 border-b border-border/40">
-      {/* Background Image */}
-      <Image
-        src={imageSrc}
-        alt={title}
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-[75%_center] opacity-40 mix-blend-luminosity"
-      />
-
-      {/* Rich Radial & Linear Gradients for depth and readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/90 via-55% to-ink/40" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(212,175,55,0.15),transparent_50%)]" />
-
-      {/* Gold Border Accent */}
-      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+    <div className="relative overflow-hidden bg-[#181512] py-12 sm:py-16 border-b border-[#332E27]">
+      {/* Background Image of Rings */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={imageSrc}
+          alt={title}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-right sm:object-center brightness-[0.65] contrast-[1.1]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#181512]/95 via-[#181512]/80 to-transparent w-full sm:w-[65%]" />
+      </div>
 
       {/* Content Container */}
-      <div className="container relative z-10 mx-auto px-4 sm:px-6">
-        <div className="max-w-2xl">
-
-
-          {/* Main Title */}
-          <h1 className="font-display text-h1 lg:text-[56px] text-cream font-light leading-[1.1] tracking-tight drop-shadow-sm">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-xl text-left">
+          <h1 className="font-display text-[32px] sm:text-[42px] md:text-[48px] text-white font-normal leading-tight tracking-tight mb-2 drop-shadow-sm">
             {title}
           </h1>
-
-          {/* Subtitle */}
           {subtitle && (
-            <p className="mt-4 text-body text-cream/80 max-w-lg leading-relaxed font-light">
+            <p className="font-body text-[14px] sm:text-[15.5px] text-[#DDD6CD] font-light leading-relaxed drop-shadow-xs">
               {subtitle}
             </p>
           )}

@@ -21,7 +21,7 @@ import { useAppDispatch } from "@/store/hooks";
 import { addItem } from "@/store/slices/cartSlice";
 import { toggleItem } from "@/store/slices/wishlistSlice";
 import { setCartDrawerOpen } from "@/store/slices/uiSlice";
-import { Sparkles, Shield, Compass, Layers, Check } from "lucide-react";
+import { Sparkles, Shield, Compass, Layers, Check, ArrowRight } from "lucide-react";
 
 interface DiamondShapeDetailClientProps {
   shape: DiamondShapeDetail;
@@ -112,11 +112,7 @@ export default function DiamondShapeDetailClient({
               >
                 {/* Slide 1: Real Render (Clean, No background) */}
                 <div
-                  className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ${
-                    heroView === "photo"
-                      ? "opacity-100 scale-100 pointer-events-auto"
-                      : "opacity-0 scale-95 pointer-events-none"
-                  }`}
+                  className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ${ heroView === "photo" ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none" }`}
                 >
                   <div className="relative w-full h-full p-4 flex items-center justify-center">
                     <Image
@@ -132,11 +128,7 @@ export default function DiamondShapeDetailClient({
 
                 {/* Slide 2: Facet Blueprint (Clean vector lines, transparent fill) */}
                 <div
-                  className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ${
-                    heroView === "facets"
-                      ? "opacity-100 scale-100 pointer-events-auto"
-                      : "opacity-0 scale-95 pointer-events-none"
-                  }`}
+                  className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ${ heroView === "facets" ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none" }`}
                 >
                   <div className="w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center p-4">
                     <DiamondFacetSvg
@@ -157,22 +149,14 @@ export default function DiamondShapeDetailClient({
                   onClick={() => setHeroView("photo")}
                   aria-label="Real Render View"
                   title="Photorealistic Gem Render"
-                  className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer ${
-                    heroView === "photo"
-                      ? "bg-[#B8965A] ring-4 ring-[#B8965A]/25 scale-110"
-                      : "bg-stone-300 hover:bg-[#B8965A]/50"
-                  }`}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer ${ heroView === "photo" ? "bg-[#B8965A] ring-4 ring-[#B8965A]/25 scale-110" : "bg-stone-300 hover:bg-[#B8965A]/50" }`}
                 />
                 <button
                   type="button"
                   onClick={() => setHeroView("facets")}
                   aria-label="Facet Blueprint View"
                   title="Architectural Facet Blueprint"
-                  className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer ${
-                    heroView === "facets"
-                      ? "bg-[#B8965A] ring-4 ring-[#B8965A]/25 scale-110"
-                      : "bg-stone-300 hover:bg-[#B8965A]/50"
-                  }`}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer ${ heroView === "facets" ? "bg-[#B8965A] ring-4 ring-[#B8965A]/25 scale-110" : "bg-stone-300 hover:bg-[#B8965A]/50" }`}
                 />
               </div>
             </div>
@@ -180,7 +164,7 @@ export default function DiamondShapeDetailClient({
           {/* Right: Shape Header & Graphical Vitals Matrix */}
           <div className="lg:col-span-7 space-y-5">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-wine/10 text-wine border border-wine/20 text-xs font-medium uppercase tracking-wider mb-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-wine/10 text-wine border border-wine/20 text-xs font-medium tracking-wider mb-2">
                 <span className="text-gold">✦</span> Diamond Silhouette Guide
               </div>
               <h1 className="font-display text-3xl sm:text-4xl md:text-5xl text-ink font-bold tracking-tight">
@@ -206,7 +190,7 @@ export default function DiamondShapeDetailClient({
                 style={{ background: "#F2EDE4", borderColor: "#E2D9CC" }}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] uppercase font-mono tracking-wider text-ink-muted">
+                  <span className="text-[10px] font-mono tracking-wider text-ink-muted">
                     Fire / Light
                   </span>
                   <div className="w-7 h-7 rounded-lg bg-surface flex items-center justify-center border border-gold/30">
@@ -237,7 +221,7 @@ export default function DiamondShapeDetailClient({
                 style={{ background: "#F2EDE4", borderColor: "#E2D9CC" }}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] uppercase font-mono tracking-wider text-ink-muted">
+                  <span className="text-[10px] font-mono tracking-wider text-ink-muted">
                     Ideal Ratio
                   </span>
                   <div className="w-7 h-7 rounded-lg bg-surface flex items-center justify-center border border-gold/30">
@@ -258,7 +242,7 @@ export default function DiamondShapeDetailClient({
                 style={{ background: "#F2EDE4", borderColor: "#E2D9CC" }}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] uppercase font-mono tracking-wider text-ink-muted">
+                  <span className="text-[10px] font-mono tracking-wider text-ink-muted">
                     Facet Count
                   </span>
                   <div className="w-7 h-7 rounded-lg bg-surface flex items-center justify-center border border-gold/30">
@@ -279,7 +263,7 @@ export default function DiamondShapeDetailClient({
                 style={{ background: "#F2EDE4", borderColor: "#E2D9CC" }}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] uppercase font-mono tracking-wider text-ink-muted">
+                  <span className="text-[10px] font-mono tracking-wider text-ink-muted">
                     Style Family
                   </span>
                   <div className="w-7 h-7 rounded-lg bg-surface flex items-center justify-center border border-gold/30">
@@ -310,7 +294,7 @@ export default function DiamondShapeDetailClient({
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 sm:mb-16">
               <div>
                 <p
-                  className="text-xs uppercase tracking-[0.25em] font-semibold mb-2"
+                  className="text-xs tracking-[0.25em] font-semibold mb-2"
                   style={{ color: "#B8965A" }}
                 >
                   Our Process
@@ -324,7 +308,7 @@ export default function DiamondShapeDetailClient({
               </div>
               <Link
                 href="/guide"
-                className="self-start sm:self-auto flex items-center gap-2 px-5 py-2.5 text-xs font-semibold uppercase tracking-widest border transition-all hover:opacity-90"
+                className="self-start sm:self-auto flex items-center gap-2 px-5 py-2.5 text-xs font-semibold tracking-widest border transition-all hover:opacity-90"
                 style={{
                   background: "#B8965A",
                   color: "#fff",
@@ -332,7 +316,7 @@ export default function DiamondShapeDetailClient({
                   letterSpacing: "0.15em",
                 }}
               >
-                Learn More <span>→</span>
+                Learn More <ArrowRight className="w-3.5 h-3.5 inline ml-1 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>
 
@@ -388,11 +372,7 @@ export default function DiamondShapeDetailClient({
                   <button
                     type="button"
                     onClick={() => setCutSimulation("ideal")}
-                    className={`flex-1 max-w-[160px] flex flex-col items-center gap-3 p-4 sm:p-5 transition-all rounded-2xl cursor-pointer ${
-                      cutSimulation === "ideal"
-                        ? "shadow-sm scale-102"
-                        : "opacity-60 hover:opacity-85"
-                    }`}
+                    className={`flex-1 max-w-[160px] flex flex-col items-center gap-3 p-4 sm:p-5 transition-all rounded-2xl cursor-pointer ${ cutSimulation === "ideal" ? "shadow-sm scale-102" : "opacity-60 hover:opacity-85" }`}
                     style={{
                       background: cutSimulation === "ideal" ? "#F2EDE4" : "transparent",
                       border:
@@ -407,7 +387,7 @@ export default function DiamondShapeDetailClient({
                       isSelected={cutSimulation === "ideal"}
                     />
                     <span
-                      className="text-[11px] uppercase tracking-[0.15em] font-bold text-center"
+                      className="text-[11px] tracking-[0.15em] font-bold text-center"
                       style={{
                         color: cutSimulation === "ideal" ? "#B8965A" : "#1A1009",
                       }}
@@ -420,11 +400,7 @@ export default function DiamondShapeDetailClient({
                   <button
                     type="button"
                     onClick={() => setCutSimulation("shallow")}
-                    className={`flex-1 max-w-[160px] flex flex-col items-center gap-3 p-4 sm:p-5 transition-all rounded-2xl cursor-pointer ${
-                      cutSimulation === "shallow"
-                        ? "shadow-sm scale-102"
-                        : "opacity-60 hover:opacity-85"
-                    }`}
+                    className={`flex-1 max-w-[160px] flex flex-col items-center gap-3 p-4 sm:p-5 transition-all rounded-2xl cursor-pointer ${ cutSimulation === "shallow" ? "shadow-sm scale-102" : "opacity-60 hover:opacity-85" }`}
                     style={{
                       background: cutSimulation === "shallow" ? "#F2EDE4" : "transparent",
                       border:
@@ -439,7 +415,7 @@ export default function DiamondShapeDetailClient({
                       isSelected={cutSimulation === "shallow"}
                     />
                     <span
-                      className="text-[11px] uppercase tracking-[0.15em] font-bold text-center"
+                      className="text-[11px] tracking-[0.15em] font-bold text-center"
                       style={{
                         color: cutSimulation === "shallow" ? "#B8965A" : "#1A1009",
                       }}
@@ -452,11 +428,7 @@ export default function DiamondShapeDetailClient({
                   <button
                     type="button"
                     onClick={() => setCutSimulation("deep")}
-                    className={`flex-1 max-w-[160px] flex flex-col items-center gap-3 p-4 sm:p-5 transition-all rounded-2xl cursor-pointer ${
-                      cutSimulation === "deep"
-                        ? "shadow-sm scale-102"
-                        : "opacity-60 hover:opacity-85"
-                    }`}
+                    className={`flex-1 max-w-[160px] flex flex-col items-center gap-3 p-4 sm:p-5 transition-all rounded-2xl cursor-pointer ${ cutSimulation === "deep" ? "shadow-sm scale-102" : "opacity-60 hover:opacity-85" }`}
                     style={{
                       background: cutSimulation === "deep" ? "#F2EDE4" : "transparent",
                       border:
@@ -471,7 +443,7 @@ export default function DiamondShapeDetailClient({
                       isSelected={cutSimulation === "deep"}
                     />
                     <span
-                      className="text-[11px] uppercase tracking-[0.15em] font-bold text-center"
+                      className="text-[11px] tracking-[0.15em] font-bold text-center"
                       style={{
                         color: cutSimulation === "deep" ? "#B8965A" : "#1A1009",
                       }}
@@ -502,11 +474,7 @@ export default function DiamondShapeDetailClient({
                           key={grade.label}
                           type="button"
                           onClick={() => setSelectedColorIdx(idx)}
-                          className={`flex flex-col items-center gap-3 p-3.5 sm:p-4 rounded-2xl transition-all cursor-pointer ${
-                            isSel
-                              ? "shadow-sm scale-102"
-                              : "opacity-60 hover:opacity-85"
-                          }`}
+                          className={`flex flex-col items-center gap-3 p-3.5 sm:p-4 rounded-2xl transition-all cursor-pointer ${ isSel ? "shadow-sm scale-102" : "opacity-60 hover:opacity-85" }`}
                           style={{
                             background: isSel ? "#F2EDE4" : "transparent",
                             border: isSel
@@ -531,7 +499,7 @@ export default function DiamondShapeDetailClient({
                               {grade.label}
                             </span>
                             <span
-                              className="text-[10px] uppercase tracking-wider font-medium block mt-0.5"
+                              className="text-[10px] tracking-wider font-medium block mt-0.5"
                               style={{ color: isSel ? "#9E7A3E" : "#8A7B6B" }}
                             >
                               {grade.name}
@@ -616,7 +584,7 @@ export default function DiamondShapeDetailClient({
                       </div>
                       <div className="flex-1 text-left">
                         <span
-                          className="text-xs uppercase tracking-widest font-bold block"
+                          className="text-xs tracking-widest font-bold block"
                           style={{ color: "#B8965A" }}
                         >
                           {clarityGrades[selectedClarityIdx]?.label || "VS1 / VS2"}
@@ -639,9 +607,7 @@ export default function DiamondShapeDetailClient({
                             key={grade.label}
                             type="button"
                             onClick={() => setSelectedClarityIdx(idx)}
-                            className={`flex flex-col items-center gap-1.5 p-2 sm:p-3 rounded-xl transition-all cursor-pointer ${
-                              isSel ? "shadow-2xs scale-102" : "opacity-60 hover:opacity-85"
-                            }`}
+                            className={`flex flex-col items-center gap-1.5 p-2 sm:p-3 rounded-xl transition-all cursor-pointer ${ isSel ? "shadow-2xs scale-102" : "opacity-60 hover:opacity-85" }`}
                             style={{
                               background: isSel ? "#F2EDE4" : "transparent",
                               border: isSel
@@ -661,7 +627,7 @@ export default function DiamondShapeDetailClient({
                               />
                             </div>
                             <span
-                              className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-center"
+                              className="text-[10px] sm:text-xs font-bold tracking-wider text-center"
                               style={{ color: isSel ? "#B8965A" : "#1A1009" }}
                             >
                               {grade.label.includes("FL")
@@ -723,9 +689,7 @@ export default function DiamondShapeDetailClient({
                             key={size.carat}
                             type="button"
                             onClick={() => setSelectedCaratIdx(idx)}
-                            className={`flex flex-col items-center gap-2 transition-all cursor-pointer ${
-                              isSel ? "scale-105 opacity-100" : "opacity-45 hover:opacity-80"
-                            }`}
+                            className={`flex flex-col items-center gap-2 transition-all cursor-pointer ${ isSel ? "scale-105 opacity-100" : "opacity-45 hover:opacity-80" }`}
                           >
                             <div
                               style={{
@@ -743,7 +707,7 @@ export default function DiamondShapeDetailClient({
                               />
                             </div>
                             <span
-                              className="text-[10px] uppercase font-bold tracking-wider"
+                              className="text-[10px] font-bold tracking-wider"
                               style={{ color: isSel ? "#B8965A" : "#8A7B6B" }}
                             >
                               {size.carat}
@@ -765,9 +729,7 @@ export default function DiamondShapeDetailClient({
                             key={size.carat}
                             type="button"
                             onClick={() => setSelectedCaratIdx(idx)}
-                            className={`flex flex-col items-center gap-1 p-2.5 rounded-xl border transition-all cursor-pointer ${
-                              isSel ? "shadow-2xs scale-102" : "opacity-65"
-                            }`}
+                            className={`flex flex-col items-center gap-1 p-2.5 rounded-xl border transition-all cursor-pointer ${ isSel ? "shadow-2xs scale-102" : "opacity-65" }`}
                             style={{
                               background: isSel ? "#F2EDE4" : "transparent",
                               borderColor: isSel ? "#B8965A" : "#E2D9CC",
@@ -836,7 +798,7 @@ export default function DiamondShapeDetailClient({
             <div className="bg-white rounded-2xl p-6 sm:p-8 border border-border/80 shadow-2xs">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-8">
                 <div>
-                  <span className="text-xs uppercase font-mono tracking-widest text-gold-dark font-semibold">
+                  <span className="text-xs font-mono tracking-widest text-gold-dark font-semibold">
                     Lab Parameters &amp; Geometry
                   </span>
                   <h3 className="font-display text-2xl sm:text-3xl font-bold text-ink mt-0.5">
@@ -954,7 +916,7 @@ export default function DiamondShapeDetailClient({
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-6">
             <div>
               <span
-                className="text-xs uppercase font-mono tracking-widest font-semibold"
+                className="text-xs font-mono tracking-widest font-semibold"
                 style={{ color: "#B8965A" }}
               >
                 Fine Mounting Profiles
@@ -993,7 +955,7 @@ export default function DiamondShapeDetailClient({
 
                 <div className="w-full text-center">
                   <span
-                    className="text-[10px] uppercase font-mono tracking-widest px-2.5 py-0.5 rounded-full inline-block mb-2 font-medium"
+                    className="text-[10px] font-mono tracking-widest px-2.5 py-0.5 rounded-full inline-block mb-2 font-medium"
                     style={{
                       background: "rgba(184,150,90,0.15)",
                       color: "#9E7A3E",
@@ -1046,7 +1008,7 @@ export default function DiamondShapeDetailClient({
 
                 <div className="w-full text-center">
                   <span
-                    className="text-[10px] uppercase font-mono tracking-widest px-2.5 py-0.5 rounded-full inline-block mb-2 font-medium"
+                    className="text-[10px] font-mono tracking-widest px-2.5 py-0.5 rounded-full inline-block mb-2 font-medium"
                     style={{
                       background: "rgba(184,150,90,0.15)",
                       color: "#9E7A3E",
@@ -1099,7 +1061,7 @@ export default function DiamondShapeDetailClient({
 
                 <div className="w-full text-center">
                   <span
-                    className="text-[10px] uppercase font-mono tracking-widest px-2.5 py-0.5 rounded-full inline-block mb-2 font-medium"
+                    className="text-[10px] font-mono tracking-widest px-2.5 py-0.5 rounded-full inline-block mb-2 font-medium"
                     style={{
                       background: "rgba(184,150,90,0.15)",
                       color: "#9E7A3E",
@@ -1152,7 +1114,7 @@ export default function DiamondShapeDetailClient({
 
                 <div className="w-full text-center">
                   <span
-                    className="text-[10px] uppercase font-mono tracking-widest px-2.5 py-0.5 rounded-full inline-block mb-2 font-medium"
+                    className="text-[10px] font-mono tracking-widest px-2.5 py-0.5 rounded-full inline-block mb-2 font-medium"
                     style={{
                       background: "rgba(184,150,90,0.15)",
                       color: "#9E7A3E",
@@ -1188,7 +1150,7 @@ export default function DiamondShapeDetailClient({
       <section className="py-12 border-t border-border/80 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-xl mx-auto mb-8">
-            <span className="text-xs uppercase font-mono tracking-widest text-wine font-semibold">
+            <span className="text-xs font-mono tracking-widest text-wine font-semibold">
               Complete Silhouette Compendium
             </span>
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-ink mt-0.5">
@@ -1206,11 +1168,7 @@ export default function DiamondShapeDetailClient({
                 <Link
                   key={item.slug}
                   href={`/guide/shape/${item.slug}`}
-                  className={`group p-3.5 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center ${
-                    isCurrent
-                      ? "bg-wine/5 border-wine shadow-md ring-1 ring-wine"
-                      : "bg-surface border-border/80 hover:border-gold/60 hover:shadow-md"
-                  }`}
+                  className={`group p-3.5 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center ${ isCurrent ? "bg-wine/5 border-wine shadow-md ring-1 ring-wine" : "bg-surface border-border/80 hover:border-gold/60 hover:shadow-md" }`}
                 >
                   <div className="relative w-14 h-14 sm:w-16 sm:h-16 mb-2.5 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center p-1.5 rounded-xl bg-surface-alt/40 border border-border/40">
                     <DiamondFacetSvg
@@ -1231,8 +1189,8 @@ export default function DiamondShapeDetailClient({
                   <span className="text-[10px] text-ink-muted mt-0.5">
                     {item.specs?.facetCount || "Brilliant Cut"}
                   </span>
-                  <span className="mt-1.5 text-[10px] text-wine font-medium">
-                    {isCurrent ? "Currently Viewing" : "View Guide →"}
+                  <span className="mt-1.5 text-[10px] text-wine font-medium inline-flex items-center gap-1">
+                    {isCurrent ? "Currently Viewing" : <>View Guide <ArrowRight className="w-2.5 h-2.5" /></>}
                   </span>
                 </Link>
               );
@@ -1250,7 +1208,7 @@ export default function DiamondShapeDetailClient({
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6">
               <div>
-                <span className="text-xs uppercase font-mono tracking-widest text-gold-dark font-semibold">
+                <span className="text-xs font-mono tracking-widest text-gold-dark font-semibold">
                   Handcrafted In 18K Gold &amp; Platinum
                 </span>
                 <h2 className="font-display text-2xl sm:text-3xl font-bold text-ink mt-0.5">
@@ -1263,8 +1221,9 @@ export default function DiamondShapeDetailClient({
                 size="sm"
                 href="/shop"
                 className="self-start sm:self-auto"
+                rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
               >
-                Explore Full Catalog →
+                Explore Full Catalog
               </Button>
             </div>
 
@@ -1293,7 +1252,7 @@ export default function DiamondShapeDetailClient({
                     </div>
 
                     <div className="p-3.5">
-                      <span className="text-[10px] uppercase tracking-wider text-ink-muted">
+                      <span className="text-[10px] tracking-wider text-ink-muted">
                         {product.category}
                       </span>
                       <h4 className="font-display text-xs sm:text-sm font-semibold text-ink line-clamp-1 mt-0.5">
@@ -1340,7 +1299,7 @@ export default function DiamondShapeDetailClient({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="rounded-3xl bg-gradient-to-r from-stone-900 via-wine-dark to-stone-950 text-white p-6 sm:p-10 border border-gold/30 shadow-xl relative overflow-hidden flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div className="max-w-xl space-y-2">
-              <span className="text-xs uppercase font-mono tracking-widest text-gold font-semibold">
+              <span className="text-xs font-mono tracking-widest text-gold font-semibold">
                 Bespoke Diamond Graders
               </span>
               <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-tight">

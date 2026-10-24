@@ -1,65 +1,67 @@
 "use client";
 
 import { useState } from "react";
-import Section from "@/components/common/Section";
-import SectionTitle from "@/components/common/SectionTitle";
-import Button from "@/components/ui/Button";
-import { useAppSelector } from "@/store/hooks";
 
 export default function Newsletter() {
-  const newsletter = useAppSelector((state) => state.siteContent.newsletter);
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <Section>
-      <div className="mx-auto flex max-w-[580px] flex-col items-center text-center px-4">
-        <SectionTitle
-          // tagline="BE THE FIRST TO KNOW"
-          title={newsletter.title}
-          description={newsletter.subtitle}
-          align="center"
-          className="mb-6 sm:mb-8"
-        />
-
-        <form
-          className="flex w-full flex-col sm:flex-row items-center gap-2.5 sm:gap-3 max-w-[540px]"
-          onSubmit={(event) => {
-            event.preventDefault();
-            setSubmitted(true);
-          }}
-        >
-          <div className="relative w-full flex-1">
-            <input
-              type="email"
-              required
-              placeholder={newsletter.placeholder || "Enter your email address"}
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              className="h-12 w-full rounded-full border border-neutral-300 bg-white px-5 text-body text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold shadow-xs"
-            />
+    <section className="w-full bg-[#141414] text-white py-10 sm:py-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-12">
+          {/* Left Side: Diamond Icon & Authenticity Callout */}
+          <div className="flex items-center gap-4 text-center lg:text-left">
+            <div className="w-12 h-12 rounded-full border border-[#B38E5D]/40 bg-[#1F1F1F] flex items-center justify-center text-[#B38E5D] shrink-0">
+              <svg className="w-6 h-6 text-[#B38E5D]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                <path d="M6 3h12l4 6-10 13L2 9z" />
+                <path d="M11 3L8 9l4 13 4-13-3-6" />
+                <path d="M2 9h20" />
+              </svg>
+            </div>
+            <div>
+              <span className="font-display text-[17px] sm:text-[19px] font-semibold text-white tracking-wide block">
+                100% Authentic
+              </span>
+              <span className="font-body text-[12.5px] sm:text-[13px] text-[#A69F96]">
+                Gold, silver, and bridal gems handcrafted for you
+              </span>
+            </div>
           </div>
 
-          <Button
-            type="submit"
-            variant="fill"
-            colorTheme="wine"
-            className="h-12 w-full sm:w-auto px-8 rounded-full font-semibold text-body uppercase tracking-wider shadow-md hover:shadow-lg shrink-0"
-          >
-            {newsletter.cta || "Subscribe"}
-          </Button>
-        </form>
-
-        {submitted ? (
-          <p className="text-caption text-wine font-medium mt-3">
-            Thank you for subscribing to Luxe Jewels updates!
-          </p>
-        ) : (
-          <p className="text-[11px] text-muted font-light mt-3">
-            By subscribing, you agree to our Privacy Policy. Unsubscribe anytime.
-          </p>
-        )}
+          {/* Right Side: Subscription Input Box */}
+          <div className="w-full lg:max-w-md">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                setSubmitted(true);
+              }}
+              className="flex items-center w-full bg-[#202020] border border-[#333333] rounded-full p-1.5 focus-within:border-[#B38E5D] transition-colors"
+            >
+              <input
+                type="email"
+                required
+                placeholder="Enter your email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-1 bg-transparent px-4 text-[13.5px] text-white placeholder:text-[#78716A] focus:outline-none"
+              />
+              <button
+                type="submit"
+                disabled={submitted}
+                className="px-6 py-2.5 rounded-full bg-[#B38E5D] hover:bg-[#9C7748] text-white text-[13px] font-medium tracking-wide shadow-xs transition-colors cursor-pointer shrink-0 disabled:opacity-85"
+              >
+                {submitted ? "Subscribed ✓" : "Subscribe"}
+              </button>
+            </form>
+            {submitted && (
+              <p className="text-[11.5px] text-[#B38E5D] mt-2 text-center lg:text-left">
+                Thank you for subscribing to Luxe Jewels updates!
+              </p>
+            )}
+          </div>
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }

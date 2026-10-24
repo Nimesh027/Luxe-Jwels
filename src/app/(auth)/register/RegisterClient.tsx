@@ -79,10 +79,10 @@ export default function RegisterClient() {
         {/* Top Brand & Mode Switcher */}
         <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-8">
           <div>
-            <span className="font-display text-h5 tracking-[0.25em] text-cream uppercase font-semibold">
+            <span className="font-display text-h5 tracking-[0.25em] text-cream font-semibold">
               LUXE JEWELS
             </span>
-            <p className="text-[11px] text-cream/50 tracking-wider uppercase mt-0.5 font-light">
+            <p className="text-[11px] text-cream/50 tracking-wider mt-0.5 font-light">
               Member Registration
             </p>
           </div>
@@ -238,7 +238,7 @@ export default function RegisterClient() {
             type="submit"
             variant="unstyled"
             disabled={isLoading}
-            className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold to-[#b59247] hover:from-[#dcb96b] hover:to-gold text-ink font-semibold text-caption uppercase tracking-[0.15em] transition-all duration-300 transform active:scale-[0.99] shadow-lg shadow-gold/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+            className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-gold to-[#b59247] hover:from-[#dcb96b] hover:to-gold text-ink font-semibold text-caption tracking-[0.15em] transition-all duration-300 transform active:scale-[0.99] shadow-lg shadow-gold/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
           >
             {isLoading ? (
               <>
@@ -270,7 +270,7 @@ export default function RegisterClient() {
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-white/10" />
           </div>
-          <span className="relative bg-[#161412] px-3 text-[11px] uppercase tracking-widest text-cream/40 font-light">
+          <span className="relative bg-[#161412] px-3 text-[11px] tracking-widest text-cream/40 font-light">
             Or Sign Up With
           </span>
         </div>

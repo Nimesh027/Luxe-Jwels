@@ -4,50 +4,33 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Section from "@/components/common/Section";
-import SectionTitle from "@/components/common/SectionTitle";
-import Button from "@/components/ui/Button";
-import QuantitySelector from "@/components/ui/QuantitySelector";
 import { useCart } from "@/hooks/useCart";
-import { useWishlist } from "@/hooks/useWishlist";
 import { formatPrice } from "@/lib/utils";
-import {
-  VisaBadge,
-  MastercardBadge,
-  AmexBadge,
-  PaypalBadge,
-  UpiBadge,
-  ApplePayBadge,
-} from "@/components/icons/PaymentIcons";
 
 export default function CartClient() {
   const router = useRouter();
-  const { items, subtotal, count, remove, setQuantity, clear } = useCart();
-  const { toggle: toggleWishlist, isWishlisted } = useWishlist();
-
+  const { items, subtotal, count, remove, setQuantity } = useCart();
+  const [savedForLater, setSavedForLater] = useState(false);
   const [promoCode, setPromoCode] = useState("");
   const [promoApplied, setPromoApplied] = useState(false);
   const [promoDiscount, setPromoDiscount] = useState(0);
   const [promoError, setPromoError] = useState("");
-  const [orderNote, setOrderNote] = useState("");
-  const [noteOpen, setNoteOpen] = useState(false);
 
   const handleApplyPromo = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!promoCode.trim()) return;
+    setPromoError("");
+    const code = promoCode.trim().toUpperCase();
 
-    if (promoCode.trim().toUpperCase() === "LUXE10") {
+    if (code === "LUXE10") {
       const discount = Math.round(subtotal * 0.1);
       setPromoDiscount(discount);
       setPromoApplied(true);
-      setPromoError("");
-    } else if (promoCode.trim().toUpperCase() === "WELCOME") {
-      const discount = 2000;
+    } else if (code === "WELCOME") {
+      const discount = Math.min(1000, subtotal);
       setPromoDiscount(discount);
       setPromoApplied(true);
-      setPromoError("");
     } else {
-      setPromoError("Invalid code. Try LUXE10 for 10% off!");
+      setPromoError("Invalid code. Try 'LUXE10' for 10% off or 'WELCOME'.");
     }
   };
 
@@ -60,407 +43,259 @@ export default function CartClient() {
 
   const finalTotal = Math.max(0, subtotal - promoDiscount);
 
-  // Empty Cart View
+  // If cart is completely empty
   if (items.length === 0) {
     return (
-      <Section className="py-16 sm:py-24 bg-white">
-        <div className="mx-auto flex max-w-lg flex-col items-center justify-center text-center px-4">
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#f6efe9] text-wine mb-6 shadow-xs border border-wine/10">
-            <svg className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <path d="M16 10a4 4 0 0 1-8 0" />
-            </svg>
+      <div className="w-full bg-[#FAF7F2] min-h-[60vh] flex items-center justify-center py-16 px-4">
+        <div className="text-center max-w-md">
+          <div className="w-16 h-16 rounded-full bg-white border border-[#EAE4DC] flex items-center justify-center mx-auto mb-4 text-[24px]">
+            🛍️
           </div>
-
-          <h1 className="font-display text-h2 font-medium text-ink tracking-tight mb-2.5">
-            Your shopping bag is empty
+          <h1 className="font-display text-[28px] font-medium text-[#141414] mb-2">
+            Your Cart is Empty
           </h1>
-          <p className="text-body text-muted font-light leading-relaxed mb-8 max-w-sm">
-            Discover our handcrafted collections of rings, necklaces, bracelets, and heirloom jewellery to start building your look.
+          <p className="font-body text-[14px] text-[#78716A] mb-6">
+            Looks like you haven&apos;t added any jewellery yet. Explore our handcrafted collections.
           </p>
-
-          <Button
-            href="/collections"
-            variant="fill"
-            colorTheme="wine"
-            size="lg"
-            className="rounded-full px-8 uppercase tracking-wider text-body font-semibold shadow-md hover:shadow-lg"
+          <Link
+            href="/shop"
+            className="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-[#B38E5D] hover:bg-[#9C7748] text-white text-[14px] font-medium tracking-wide shadow-md transition-colors"
           >
-            Explore Collections
-          </Button>
+            Start Shopping
+          </Link>
         </div>
-      </Section>
+      </div>
     );
   }
 
   return (
-    <div className="bg-[#fcfaf7] min-h-screen py-10 sm:py-14">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Page Header */}
-        <SectionTitle
-          title="Shopping Bag"
-          description="Review your chosen fine jewellery pieces before seamless insured checkout."
-          align="center"
-          className="mb-8 sm:mb-10"
-        />
+    <div className="w-full bg-[#FAF7F2] py-10 sm:py-14 min-h-screen">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        {/* Title */}
+        <h1 className="font-display text-[26px] sm:text-[32px] text-[#141414] font-medium mb-8">
+          Your Cart ({count} {count === 1 ? "item" : "items"})
+        </h1>
 
-        {/* Complimentary Insured Shipping Progress Banner */}
-        <div className="mb-8 rounded-2xl border border-gold/30 bg-gradient-to-r from-[#fffcf7] via-[#faf5ec] to-[#fffcf7] p-4 sm:p-5 shadow-2xs">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold-dark font-semibold text-small">
-                ✦
-              </div>
-              <div>
-                <p className="text-body font-semibold text-ink">
-                  You Have Unlocked Complimentary Insured Delivery!
-                </p>
-                <p className="text-[11px] sm:text-caption text-muted font-light">
-                  Includes certified hallmarking certificate & signature velvet presentation box.
-                </p>
-              </div>
-            </div>
-            <span className="shrink-0 rounded-full bg-gold/20 px-3 py-1 text-[11px] font-semibold text-gold-dark uppercase tracking-wider">
-              Free Shipping Applied
-            </span>
-          </div>
-        </div>
-
-        {/* Main 2-Column Cart Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
-          {/* Left Column: Cart Items List (8 cols) */}
-          <div className="lg:col-span-8 space-y-6">
-            <div className="rounded-2xl border border-neutral-200/80 bg-white p-5 sm:p-7 shadow-xs">
-              {/* Header Bar */}
-              <div className="hidden sm:grid grid-cols-12 border-b border-neutral-100 pb-3 text-caption uppercase tracking-wider font-semibold text-neutral-500">
-                <span className="col-span-6">Product</span>
-                <span className="col-span-2 text-center">Price</span>
-                <span className="col-span-2 text-center">Quantity</span>
-                <span className="col-span-2 text-right">Total</span>
-              </div>
-
-              {/* Items List */}
-              <div className="divide-y divide-neutral-100">
-                {items.map(({ product, quantity }) => {
-                  const saved = isWishlisted(product.id);
-
-                  return (
-                    <div
-                      key={product.id}
-                      className="py-5 sm:py-6 flex flex-col sm:grid sm:grid-cols-12 sm:items-center gap-4"
-                    >
-                      {/* Product Thumbnail & Details (6 cols on sm) */}
-                      <div className="sm:col-span-6 flex items-center gap-4">
-                        <div className="relative h-20 w-20 sm:h-24 sm:w-24 shrink-0 overflow-hidden rounded-xl border border-neutral-200/80 bg-neutral-50">
-                          <Link href={`/products/${product.slug}`}>
-                            <Image
-                              src={product.image}
-                              alt={product.name}
-                              fill
-                              sizes="96px"
-                              className="object-cover object-center transition-transform duration-500 hover:scale-105"
-                            />
-                          </Link>
-                        </div>
-
-                        <div className="flex-1 min-w-0">
-                          <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-gold">
-                            {product.category?.replace(/-/g, " ") || "Fine Jewellery"}
-                          </span>
-                          <Link href={`/products/${product.slug}`}>
-                            <h3 className="font-display text-body font-normal text-ink hover:text-wine transition-colors line-clamp-1 mt-0.5">
-                              {product.name}
-                            </h3>
-                          </Link>
-                          <p className="text-[11px] text-muted font-light mt-0.5">
-                            18K Solid Gold • Certified Hallmarked
-                          </p>
-
-                          {/* Mobile-only Price display */}
-                          <div className="sm:hidden mt-1.5 flex items-baseline gap-2">
-                            <span className="text-small font-semibold text-ink">
-                              {formatPrice(product.price * quantity)}
-                            </span>
-                            {quantity > 1 && (
-                              <span className="text-caption text-muted">
-                                ({formatPrice(product.price)} each)
-                              </span>
-                            )}
-                          </div>
-
-                          {/* Item Action Buttons with Theme Styling */}
-                          <div className="mt-3 flex items-center gap-2 pt-0.5">
-                            {/* Save to Wishlist Button */}
-                            <Button
-                              variant="unstyled"
-                              onClick={() => toggleWishlist(product)}
-                              className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium transition-all duration-200 cursor-pointer ${
-                                saved
-                                  ? "bg-wine/10 text-wine border border-wine/30 shadow-2xs"
-                                  : "bg-[#fbf7f2] text-neutral-600 hover:text-wine hover:bg-wine/5 border border-neutral-200/80"
-                              }`}
-                            >
-                              <svg
-                                className={`h-3.5 w-3.5 ${
-                                  saved ? "fill-wine text-wine" : "fill-none stroke-current"
-                                }`}
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.8"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                                />
-                              </svg>
-                              <span>{saved ? "Saved in Wishlist" : "Save for later"}</span>
-                            </Button>
-
-                            {/* Remove Item Button */}
-                            <Button
-                              variant="border"
-                              size="xs"
-                              rounded="full"
-                              onClick={() => remove(product.id)}
-                              className="!px-2.5 !py-1 text-[11px] font-medium !text-neutral-500 hover:!text-red-700 hover:!bg-red-50/80 !border-neutral-200/80"
-                              leftIcon={
-                                <svg
-                                  className="h-3.5 w-3.5"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                  strokeWidth="1.8"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                                  />
-                                </svg>
-                              }
-                            >
-                              Remove
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Desktop Unit Price (2 cols) */}
-                      <div className="hidden sm:block sm:col-span-2 text-center text-small font-medium text-ink">
-                        {formatPrice(product.price)}
-                      </div>
-
-                      {/* Quantity Controller (2 cols) */}
-                      <div className="sm:col-span-2 flex justify-start sm:justify-center">
-                        <QuantitySelector
-                          value={quantity}
-                          onChange={(newQty) => setQuantity(product.id, newQty)}
-                          size="sm"
-                        />
-                      </div>
-
-                      {/* Line Total (2 cols) */}
-                      <div className="hidden sm:block sm:col-span-2 text-right font-display text-body font-semibold text-ink">
-                        {formatPrice(product.price * quantity)}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Bottom Cart Bar */}
-              <div className="mt-4 pt-4 border-t border-neutral-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-caption">
-                <Link
-                  href="/collections"
-                  className="text-wine hover:text-wine-dark font-medium underline underline-offset-4 transition-colors"
-                >
-                  ← Continue Shopping
-                </Link>
-
-                <Button
-                  variant="unstyled"
-                  onClick={clear}
-                  className="text-neutral-400 hover:text-red-600 transition-colors cursor-pointer text-caption"
-                >
-                  Clear Entire Bag
-                </Button>
-              </div>
-            </div>
-
-            {/* Special Instructions & Gifting Note */}
-            <div className="rounded-2xl border border-neutral-200/80 bg-white p-5 sm:p-6 shadow-xs">
-              <Button
-                variant="unstyled"
-                onClick={() => setNoteOpen(!noteOpen)}
-                className="flex w-full items-center justify-between text-left text-body font-semibold text-ink cursor-pointer"
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* LEFT: Item List (7 cols) */}
+          <div className="lg:col-span-7 space-y-4">
+            {items.map(({ product, quantity }) => (
+              <div
+                key={product.id}
+                className="flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-2xl bg-white border border-[#EAE4DC] shadow-xs"
               >
-                <span className="inline-flex items-center gap-2">
-                  <span className="text-gold text-body">✍</span>
-                  <span>Add Gift Message or Custom Ring Sizing Note</span>
-                </span>
-                <span className="text-small">{noteOpen ? "−" : "+"}</span>
-              </Button>
-
-              {noteOpen && (
-                <div className="mt-3">
-                  <textarea
-                    rows={3}
-                    value={orderNote}
-                    onChange={(e) => setOrderNote(e.target.value)}
-                    placeholder="Provide special delivery instructions, custom engraving message, or gift card greetings..."
-                    className="w-full rounded-xl border border-neutral-300 bg-neutral-50 p-3 text-body text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+                {/* Thumbnail */}
+                <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-[#FAF7F2] border border-[#EAE4DC] shrink-0">
+                  <Image
+                    src={product.image || "/images/revamp/halo-ring.jpg"}
+                    alt={product.name}
+                    fill
+                    className="object-cover object-center"
                   />
-                  <p className="text-[11px] text-muted font-light mt-1.5">
-                    We will handwrite your note on our embossed gold foil stationery at no extra cost.
+                </div>
+
+                {/* Details */}
+                <div className="flex-1 min-w-0">
+                  <Link
+                    href={`/products/${product.slug}`}
+                    className="font-display text-[15px] sm:text-[17px] font-medium text-[#141414] hover:text-[#B38E5D] transition-colors line-clamp-1"
+                  >
+                    {product.name}
+                  </Link>
+                  <p className="font-body text-[12px] text-[#78716A] mt-0.5">
+                    Yellow Gold | Size 7
+                  </p>
+                  <p className="font-display text-[15px] sm:text-[16px] font-semibold text-[#141414] mt-1.5">
+                    {formatPrice(product.price)}
                   </p>
                 </div>
-              )}
+
+                {/* Quantity Stepper & Delete Button */}
+                <div className="flex flex-col sm:flex-row items-end sm:items-center gap-3">
+                  <div className="flex items-center border border-[#EAE4DC] rounded-lg bg-white overflow-hidden">
+                    <button
+                      type="button"
+                      onClick={() => setQuantity(product.id, Math.max(1, quantity - 1))}
+                      className="w-7 h-7 flex items-center justify-center text-[#78716A] hover:text-[#141414] hover:bg-[#FAF7F2] cursor-pointer"
+                    >
+                      −
+                    </button>
+                    <span className="w-8 text-center text-[13px] font-semibold text-[#141414]">
+                      {quantity}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setQuantity(product.id, quantity + 1)}
+                      className="w-7 h-7 flex items-center justify-center text-[#78716A] hover:text-[#141414] hover:bg-[#FAF7F2] cursor-pointer"
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => remove(product.id)}
+                    className="p-1.5 text-[#A69F96] hover:text-red-600 transition-colors cursor-pointer"
+                    aria-label="Remove item"
+                  >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            ))}
+
+            {/* Free Shipping & Secure Badges */}
+            <div className="grid grid-cols-2 gap-4 pt-4">
+              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-[#EAE4DC]">
+                <span className="text-[#B38E5D] text-lg">🚚</span>
+                <div>
+                  <p className="font-display text-[13.5px] font-semibold text-[#141414]">Free Shipping</p>
+                  <p className="text-[11.5px] text-[#78716A]">Orders above ₹2,999</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-[#EAE4DC]">
+                <span className="text-[#B38E5D] text-lg">🔒</span>
+                <div>
+                  <p className="font-display text-[13.5px] font-semibold text-[#141414]">Secure Payments</p>
+                  <p className="text-[11.5px] text-[#78716A]">100% Safe & Secure</p>
+                </div>
+              </div>
             </div>
 
-            {/* Assurance Badges Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="rounded-xl border border-neutral-200/60 bg-white p-3.5 text-center shadow-2xs">
-                <span className="text-h5 block mb-1">🛡️</span>
-                <p className="text-[11px] font-semibold text-ink">BIS Hallmarked</p>
-                <p className="text-[10px] text-muted">100% Certified Gold</p>
+            {/* "Still Deciding? Save your cart for later" Banner */}
+            <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-[#FAF0E4] via-[#FDF7EF] to-[#FAF0E4] border border-[#E8D8C3] flex items-center justify-between gap-4 mt-6">
+              <div>
+                <h3 className="font-display text-[16px] sm:text-[18px] font-semibold text-[#141414]">
+                  Still Deciding?
+                </h3>
+                <p className="font-body text-[12.5px] sm:text-[13px] text-[#78716A]">
+                  Save your cart for later and get notified on price updates.
+                </p>
               </div>
-              <div className="rounded-xl border border-neutral-200/60 bg-white p-3.5 text-center shadow-2xs">
-                <span className="text-h5 block mb-1">✈️</span>
-                <p className="text-[11px] font-semibold text-ink">Insured Shipping</p>
-                <p className="text-[10px] text-muted">Doorstep Delivery</p>
-              </div>
-              <div className="rounded-xl border border-neutral-200/60 bg-white p-3.5 text-center shadow-2xs">
-                <span className="text-h5 block mb-1">🔄</span>
-                <p className="text-[11px] font-semibold text-ink">30-Day Returns</p>
-                <p className="text-[10px] text-muted">Hassle-Free Exchange</p>
-              </div>
-              <div className="rounded-xl border border-neutral-200/60 bg-white p-3.5 text-center shadow-2xs">
-                <span className="text-h5 block mb-1">🎁</span>
-                <p className="text-[11px] font-semibold text-ink">Luxury Box</p>
-                <p className="text-[10px] text-muted">Signature Packaging</p>
-              </div>
+
+              <button
+                type="button"
+                onClick={() => setSavedForLater(true)}
+                className="px-5 py-2.5 rounded-xl bg-white border border-[#B38E5D] text-[#B38E5D] hover:bg-[#B38E5D] hover:text-white text-[13px] font-medium tracking-wide transition-colors cursor-pointer shrink-0"
+              >
+                {savedForLater ? "Cart Saved ✓" : "Save Cart"}
+              </button>
             </div>
           </div>
 
-          {/* Right Column: Order Summary & Checkout Card (4 cols) */}
-          <div className="lg:col-span-4">
-            <div className="sticky top-28 space-y-6">
-              <div className="rounded-2xl border border-neutral-200/80 bg-white p-6 shadow-xs">
-                <h2 className="font-display text-body font-semibold text-ink uppercase tracking-wider border-b border-neutral-100 pb-3 mb-4">
-                  Order Summary
-                </h2>
+          {/* RIGHT: Order Summary Card (5 cols) */}
+          <div className="lg:col-span-5">
+            <div className="bg-white rounded-2xl border border-[#EAE4DC] p-6 shadow-sm sticky top-28 space-y-5">
+              <h2 className="font-display text-[18px] font-semibold text-[#141414] pb-4 border-b border-[#EAE4DC]">
+                Order Summary
+              </h2>
 
-                {/* Subtotal Calculation */}
-                <div className="space-y-2.5 text-body text-neutral-600">
-                  <div className="flex justify-between">
-                    <span>Cart Subtotal ({count} items)</span>
-                    <span className="font-medium text-ink">{formatPrice(subtotal)}</span>
-                  </div>
-
-                  <div className="flex justify-between items-center">
-                    <span>Insured Delivery</span>
-                    <span className="font-semibold text-emerald-600 text-caption uppercase bg-emerald-50 px-2 py-0.5 rounded">
-                      FREE
-                    </span>
-                  </div>
-
-                  <div className="flex justify-between items-center">
-                    <span>Luxury Velvet Presentation Box</span>
-                    <span className="font-semibold text-emerald-600 text-caption uppercase bg-emerald-50 px-2 py-0.5 rounded">
-                      FREE
-                    </span>
-                  </div>
-
-                  {promoApplied && (
-                    <div className="flex justify-between text-emerald-600 font-medium">
-                      <span>Promo Discount ({promoCode.toUpperCase()})</span>
-                      <span>− {formatPrice(promoDiscount)}</span>
-                    </div>
-                  )}
-
-                  <div className="border-t border-neutral-100 pt-3 flex items-baseline justify-between text-body font-bold text-ink">
-                    <span>Estimated Total</span>
-                    <span className="font-display text-h4 text-wine font-bold">
-                      {formatPrice(finalTotal)}
-                    </span>
-                  </div>
+              <div className="space-y-3 text-[14px]">
+                <div className="flex justify-between text-[#5C554E]">
+                  <span>Subtotal ({count} {count === 1 ? "item" : "items"})</span>
+                  <span className="font-semibold text-[#141414]">{formatPrice(subtotal)}</span>
                 </div>
 
-                {/* Promo Code Input */}
-                <div className="mt-5 border-t border-neutral-100 pt-4">
-                  <label className="block text-[11px] font-semibold uppercase tracking-wider text-neutral-600 mb-1.5">
-                    Promotional Code
-                  </label>
-
-                  {promoApplied ? (
-                    <div className="flex items-center justify-between rounded-xl bg-emerald-50 border border-emerald-200 p-2.5 text-caption text-emerald-800">
-                      <span>Coupon &quot;{promoCode.toUpperCase()}&quot; Applied!</span>
-                      <Button
-                        variant="unstyled"
-                        onClick={handleRemovePromo}
-                        className="font-semibold text-emerald-900 hover:underline cursor-pointer text-caption"
-                      >
-                        Remove
-                      </Button>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleApplyPromo} className="flex gap-2">
-                      <input
-                        type="text"
-                        value={promoCode}
-                        onChange={(e) => setPromoCode(e.target.value)}
-                        placeholder="e.g. LUXE10"
-                        className="flex-1 rounded-xl border border-neutral-300 bg-neutral-50 px-3 py-2 text-caption text-ink placeholder:text-neutral-400 focus:border-gold focus:outline-none uppercase"
-                      />
-                      <Button
-                        type="submit"
-                        colorTheme="dark"
-                        size="xs"
-                        rounded="lg"
-                        className="font-semibold text-caption px-4"
-                      >
-                        Apply
-                      </Button>
-                    </form>
-                  )}
-
-                  {promoError && (
-                    <p className="mt-1 text-[11px] text-red-600 font-medium">{promoError}</p>
-                  )}
+                <div className="flex justify-between items-center text-[#5C554E]">
+                  <span>Insured Delivery</span>
+                  <span className="font-semibold text-[#227248] text-[12px] bg-emerald-50 px-2 py-0.5 rounded">
+                    FREE
+                  </span>
                 </div>
 
-                {/* Checkout CTA Button */}
-                <Button
-                  colorTheme="wine"
-                  size="md"
-                  rounded="full"
-                  fullWidth
-                  onClick={() => router.push("/checkout")}
-                  className="mt-6 uppercase font-semibold text-body tracking-wider shadow-md hover:shadow-lg"
-                  rightIcon={
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  }
+                <div className="flex justify-between items-center text-[#5C554E]">
+                  <span>Luxury Velvet Box</span>
+                  <span className="font-semibold text-[#227248] text-[12px] bg-emerald-50 px-2 py-0.5 rounded">
+                    FREE
+                  </span>
+                </div>
+
+                {promoApplied && (
+                  <div className="flex justify-between text-[#227248] font-medium">
+                    <span>Discount ({promoCode.toUpperCase()})</span>
+                    <span>&minus; {formatPrice(promoDiscount)}</span>
+                  </div>
+                )}
+
+                <div className="pt-3 border-t border-[#EAE4DC] flex items-baseline justify-between text-[16px]">
+                  <span className="font-semibold text-[#141414]">Total</span>
+                  <span className="font-display text-[22px] font-semibold text-[#B38E5D]">
+                    {formatPrice(finalTotal)}
+                  </span>
+                </div>
+              </div>
+
+              {/* Promo Code Input Form */}
+              <div className="pt-3 border-t border-[#EAE4DC]">
+                <label className="block text-[11px] font-semibold tracking-wider text-[#78716A] mb-2">
+                  Promotional Coupon
+                </label>
+
+                {promoApplied ? (
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-[12.5px] text-emerald-800">
+                    <span>Coupon &quot;{promoCode.toUpperCase()}&quot; Applied!</span>
+                    <button
+                      type="button"
+                      onClick={handleRemovePromo}
+                      className="font-semibold text-emerald-900 underline cursor-pointer"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleApplyPromo} className="flex gap-2">
+                    <input
+                      type="text"
+                      value={promoCode}
+                      onChange={(e) => setPromoCode(e.target.value)}
+                      placeholder="e.g. LUXE10 or WELCOME"
+                      className="flex-1 px-3 py-2 text-[13px] rounded-xl border border-[#EAE4DC] focus:border-[#B38E5D] focus:outline-none bg-[#FAF7F2]"
+                    />
+                    <button
+                      type="submit"
+                      className="px-4 py-2 rounded-xl bg-[#141414] hover:bg-[#2C2723] text-white text-[12.5px] font-medium tracking-wide transition-colors cursor-pointer"
+                    >
+                      Apply Code
+                    </button>
+                  </form>
+                )}
+
+                {promoError && (
+                  <p className="mt-1.5 text-[11px] text-red-600 font-medium">{promoError}</p>
+                )}
+              </div>
+
+              {/* Checkout CTA */}
+              <button
+                type="button"
+                onClick={() => router.push("/checkout")}
+                className="w-full py-3.5 rounded-xl bg-[#B38E5D] hover:bg-[#9C7748] text-white text-[14.5px] font-medium tracking-wide shadow-md transition-colors cursor-pointer text-center"
+              >
+                Proceed to Checkout
+              </button>
+
+              {/* Payment Security */}
+              <div className="pt-4 border-t border-[#EAE4DC] text-center">
+                <p className="text-[10px] tracking-wider font-semibold text-[#8C827A] mb-2">
+                  Guaranteed 100% Safe & Insured Checkout
+                </p>
+                <div className="flex items-center justify-center gap-2 text-[11px] text-[#78716A] flex-wrap">
+                  <span className="px-2 py-1 rounded bg-[#FAF7F2] border border-[#EAE4DC]">UPI</span>
+                  <span className="px-2 py-1 rounded bg-[#FAF7F2] border border-[#EAE4DC]">Cards</span>
+                  <span className="px-2 py-1 rounded bg-[#FAF7F2] border border-[#EAE4DC]">Net Banking</span>
+                  <span className="px-2 py-1 rounded bg-[#FAF7F2] border border-[#EAE4DC]">EMI</span>
+                </div>
+              </div>
+
+              <div className="text-center pt-2">
+                <Link
+                  href="/shop"
+                  className="text-[13px] text-[#78716A] hover:text-[#B38E5D] underline transition-colors"
                 >
-                  Proceed to Checkout
-                </Button>
-
-                {/* Trust & Payment Badges */}
-                <div className="mt-5 border-t border-neutral-100 pt-4 text-center">
-                  <p className="text-[10px] uppercase tracking-wider font-semibold text-neutral-400 mb-2.5">
-                    Guaranteed Safe & Secure Checkout
-                  </p>
-                  <div className="flex items-center justify-center gap-2 flex-wrap">
-                    <VisaBadge />
-                    <MastercardBadge />
-                    <AmexBadge />
-                    <PaypalBadge />
-                    <UpiBadge />
-                    <ApplePayBadge />
-                  </div>
-                </div>
+                  Continue Shopping
+                </Link>
               </div>
             </div>
           </div>

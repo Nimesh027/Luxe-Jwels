@@ -48,7 +48,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               <label
                 htmlFor={inputId}
                 className={cn(
-                  "block text-caption uppercase tracking-wider font-medium cursor-pointer",
+                  "block text-caption tracking-wider font-medium cursor-pointer",
                   isDark ? "text-cream/80" : "text-ink/80"
                 )}
               >

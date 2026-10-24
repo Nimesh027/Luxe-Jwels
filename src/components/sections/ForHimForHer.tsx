@@ -2,115 +2,77 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import Section from "@/components/common/Section";
-import SectionTitle from "@/components/common/SectionTitle";
-import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
-import { useAppSelector } from "@/store/hooks";
+
+const promoBanners = [
+  {
+    id: "designer-jewellery",
+    title: "Designer Jewellery",
+    subtitle: "For Every Occasion",
+    hasLine: true,
+    image: "/images/revamp/designer-jewellery-banner.jpg",
+    href: "/shop",
+    cta: "Shop Now",
+  },
+  {
+    id: "custom-jewellery",
+    title: "Custom Jewellery",
+    subtitle: "Bring Your Dream To Life",
+    hasLine: false,
+    image: "/images/revamp/custom-jewellery-banner.jpg",
+    href: "/contact",
+    cta: "Get Started",
+  },
+];
 
 export default function ForHimForHer() {
-  const tiles = useAppSelector((state) => state.siteContent.forHimForHer);
-
-  // Curated category highlights and tags for enhanced luxury context
-  const highlightsMap: Record<string, { badge: string; categories: string[] }> = {
-    "for-him": {
-      badge: "DISTINGUISHED & BOLD",
-      categories: ["Signet Rings", "Cuban Chains", "Onyx Bracelets"],
-    },
-    "for-her": {
-      badge: "GRACEFUL & RADIANT",
-      categories: ["Solitaire Rings", "Diamond Chokers", "Tennis Bracelets"],
-    },
-  };
-
   return (
-    <Section className="bg-white">
-      <SectionTitle
-        title="Curated for Him & Her"
-        description="Distinctive fine jewellery tailored for individuality and timeless elegance."
-        align="center"
-      />
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
-        {tiles.map((tile) => {
-          const meta = highlightsMap[tile.id] || {
-            badge: "FEATURED EDIT",
-            categories: ["Handcrafted", "Certified Gold", "Natural Diamonds"],
-          };
-
-          return (
-            <Link
-              key={tile.id}
-              href={tile.href}
-              className="group relative block min-h-[460px] sm:min-h-[500px] lg:min-h-[540px] w-full overflow-hidden rounded-3xl bg-ink text-cream shadow-md transition-all duration-500 hover:shadow-2xl"
+    <section className="w-full bg-[#FCFAF8] py-6 sm:py-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+          {promoBanners.map((banner) => (
+            <div
+              key={banner.id}
+              className="group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#110F0D] min-h-[190px] sm:min-h-[210px] md:min-h-[225px] lg:min-h-[240px] flex items-center p-6 sm:p-8 lg:p-9 shadow-md border border-[#2D2824]"
             >
-              {/* Background Image with Smooth Hover Zoom */}
-              <Image
-                src={tile.image}
-                alt={tile.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-hover:brightness-105"
-              />
-
-              {/* Multi-layered Vignette / Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/45 to-ink/20 transition-opacity duration-500 group-hover:opacity-90" />
-              <div className="absolute inset-0 bg-gradient-to-b from-ink/30 via-transparent to-transparent" />
-
-              {/* Subtle Gold Border Glow on Hover */}
-              <div className="absolute inset-0 rounded-3xl border border-white/10 transition-colors duration-500 group-hover:border-gold/50" />
+              {/* Background Image */}
+              <div className="absolute inset-0 z-0">
+                <Image
+                  src={banner.image}
+                  alt={banner.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover object-right sm:object-[85%_center] group-hover:scale-106 transition-transform duration-700 ease-out brightness-[0.92] contrast-[1.05]"
+                />
+                {/* Left Dark Warm Luxury Gradient for Pristine Text Readability */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#110F0D]/95 via-[#110F0D]/75 via-45% to-transparent w-full sm:w-[70%]" />
+              </div>
 
               {/* Content Overlay */}
-              <div className="relative z-10 flex h-full flex-col justify-between p-6 sm:p-8 lg:p-10">
-                {/* Top Row: Badge + Corner Arrow Indicator */}
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-2 rounded-full border border-cream/20 bg-ink/50 px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.2em] text-cream/90 backdrop-blur-md transition-colors duration-300 group-hover:border-gold/60 group-hover:text-gold">
-                    <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse" />
-                    {meta.badge}
-                  </span>
+              <div className="relative z-10 w-full max-w-[280px] sm:max-w-xs flex flex-col items-start text-left">
+                <h3 className="font-display text-[22px] sm:text-[25px] md:text-[27px] lg:text-[29px] text-white font-normal leading-[1.18] mb-1.5 drop-shadow-sm">
+                  {banner.title}
+                </h3>
 
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full border border-cream/20 bg-cream/10 text-cream backdrop-blur-md transition-all duration-300 group-hover:border-gold group-hover:bg-gold group-hover:text-ink group-hover:rotate-[-45deg]">
-                    <ArrowRightIcon className="h-4 w-4" />
-                  </span>
+                <div className="flex items-center gap-2 mb-4 sm:mb-5">
+                  <p className="font-body text-[12.5px] sm:text-[13.5px] text-[#DDD6CD]/90 font-light drop-shadow-xs">
+                    {banner.subtitle}
+                  </p>
+                  {banner.hasLine && (
+                    <span className="w-6 sm:w-8 h-[1px] bg-white/30 hidden sm:inline-block" />
+                  )}
                 </div>
 
-                {/* Bottom Details */}
-                <div className="flex flex-col gap-4">
-                  {/* Category Pills */}
-                  <div className="flex flex-wrap gap-2">
-                    {meta.categories.map((cat, idx) => (
-                      <span
-                        key={idx}
-                        className="rounded-full bg-cream/10 px-3 py-1 text-caption text-cream/80 backdrop-blur-xs transition-colors duration-300 group-hover:bg-cream/15 group-hover:text-cream"
-                      >
-                        {cat}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div>
-                    <h3 className="font-display text-h2 font-normal text-cream sm:text-h2 lg:text-h1">
-                      {tile.title}
-                    </h3>
-                    <div className="mt-2 flex items-center gap-3">
-                      <span className="h-[2px] w-8 bg-gold transition-all duration-500 group-hover:w-14" />
-                      <p className="text-small font-light tracking-wide text-cream/85 sm:text-body">
-                        {tile.tagline}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* CTA Button */}
-                  <div className="pt-2">
-                    <span className="inline-flex items-center gap-2.5 rounded-full bg-gold px-6 py-3 text-caption font-semibold uppercase tracking-wider text-ink shadow-lg shadow-gold/10 transition-all duration-300 group-hover:bg-cream group-hover:shadow-gold/25">
-                      <span>{tile.cta}</span>
-                      <ArrowRightIcon className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                    </span>
-                  </div>
-                </div>
+                <Link
+                  href={banner.href}
+                  className="inline-flex items-center justify-center px-5 sm:px-6 py-2 sm:py-2.5 rounded-full border border-white/45 hover:border-white bg-black/25 hover:bg-white text-white hover:text-[#141414] text-[12.5px] sm:text-[13px] font-medium tracking-wide backdrop-blur-xs transition-all duration-200 active:scale-[0.98]"
+                >
+                  {banner.cta}
+                </Link>
               </div>
-            </Link>
-          );
-        })}
+            </div>
+          ))}
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }

@@ -10,7 +10,7 @@ export default function DesignPhilosophy() {
           
           {/* Content Column */}
           <div className="space-y-6">
-            <span className="text-caption font-bold uppercase tracking-[0.25em] text-gold">
+            <span className="text-caption font-bold tracking-[0.25em] text-gold">
               Design Philosophy
             </span>
             <h2 className="font-display text-h3 sm:text-h2 font-semibold text-wine leading-tight">

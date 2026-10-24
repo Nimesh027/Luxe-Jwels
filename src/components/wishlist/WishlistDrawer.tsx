@@ -64,7 +64,7 @@ export default function WishlistDrawer() {
       <div className="w-full space-y-3">
         {/* Wishlist summary count */}
         <div className="flex items-baseline justify-between text-neutral-600">
-          <span className="text-[11px] uppercase tracking-wider font-semibold">
+          <span className="text-[11px] tracking-wider font-semibold">
             Saved Items
           </span>
           <span className="font-display text-small font-bold text-ink">
@@ -80,10 +80,10 @@ export default function WishlistDrawer() {
             size="sm"
             fullWidth
             onClick={handleAddAllToCart}
-            className="h-10 text-caption font-semibold uppercase tracking-wider shadow-md hover:shadow-lg cursor-pointer"
+            className="h-10 text-caption font-semibold tracking-wider shadow-md hover:shadow-lg cursor-pointer"
             leftIcon={<ShoppingBagIcon size={14} />}
           >
-            Move All To Cart
+            Move All to Cart
           </Button>
 
           <Button
@@ -93,7 +93,7 @@ export default function WishlistDrawer() {
             size="sm"
             fullWidth
             onClick={handleViewWishlist}
-            className="h-9 text-caption font-medium uppercase tracking-wider hover:!bg-neutral-100/80 !border-neutral-300 cursor-pointer"
+            className="h-9 text-caption font-medium tracking-wider hover:!bg-neutral-100/80 !border-neutral-300 cursor-pointer"
             rightIcon={<ChevronRightIcon size={14} strokeWidth={2.5} />}
           >
             View Full Wishlist
@@ -134,7 +134,7 @@ export default function WishlistDrawer() {
               closeDrawer();
               router.push("/collections");
             }}
-            className="text-caption font-semibold uppercase tracking-wider !text-cream hover:!bg-wine shadow-md hover:shadow-lg cursor-pointer"
+            className="text-caption font-semibold tracking-wider !text-cream hover:!bg-wine shadow-md hover:shadow-lg cursor-pointer"
           >
             Continue Shopping
           </Button>
@@ -203,11 +203,7 @@ export default function WishlistDrawer() {
                       rounded="full"
                       colorTheme={isAdded ? undefined : "dark"}
                       onClick={() => handleAddToCart(product)}
-                      className={`tracking-wider cursor-pointer ${
-                        isAdded
-                          ? "!bg-emerald-700 !text-white"
-                          : "!bg-ink !text-cream hover:!bg-wine"
-                      }`}
+                      className={`tracking-wider cursor-pointer ${ isAdded ? "!bg-emerald-700 !text-white" : "!bg-ink !text-cream hover:!bg-wine" }`}
                       leftIcon={
                         isAdded ? (
                           <CheckIcon size={12} strokeWidth={2.5} />

@@ -1,150 +1,96 @@
 "use client";
 
-import { useState, useEffect, memo } from "react";
-import Section from "@/components/common/Section";
-import SectionTitle from "@/components/common/SectionTitle";
-import ReviewCard from "@/components/common/ReviewCard";
-import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
-import Button from "@/components/ui/Button";
-import { useAppSelector } from "@/store/hooks";
+import { memo } from "react";
+
+const testimonials = [
+  {
+    id: "t-1",
+    name: "Pooja S.",
+    city: "Ahmedabad",
+    rating: 5,
+    quote: "The quality is amazing and delivery was on time. My wife loved it!",
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80",
+  },
+  {
+    id: "t-2",
+    name: "Rahul M.",
+    city: "Surat",
+    rating: 5,
+    quote: "Beautiful collection and excellent customer service. Highly recommended!",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80",
+  },
+  {
+    id: "t-3",
+    name: "Neha K.",
+    city: "Rajkot",
+    rating: 5,
+    quote: "Best place to buy genuine diamond jewellery online. Will shop again!",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80",
+  },
+  {
+    id: "t-4",
+    name: "Aakash P.",
+    city: "Mumbai",
+    rating: 5,
+    quote: "Exceptional hallmark purity and lifetime care guarantee. Truly luxurious unboxing.",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80",
+  },
+];
 
 function TestimonialsComponent() {
-  const testimonials = useAppSelector((state) => state.testimonials.items);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [itemsPerView, setItemsPerView] = useState(4);
-
-  const total = testimonials?.length || 0;
-
-  // Responsive items-per-view detection
-  useEffect(() => {
-    const updateItemsPerView = () => {
-      if (window.innerWidth < 640) {
-        setItemsPerView(1);
-      } else if (window.innerWidth < 1024) {
-        setItemsPerView(2);
-      } else {
-        setItemsPerView(4);
-      }
-    };
-
-    updateItemsPerView();
-    window.addEventListener("resize", updateItemsPerView);
-    return () => window.removeEventListener("resize", updateItemsPerView);
-  }, []);
-
-  const maxIndex = Math.max(0, total - itemsPerView);
-
-  // Auto-play interval
-  useEffect(() => {
-    if (isPaused || maxIndex <= 0) return;
-
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, 4500);
-
-    return () => clearInterval(interval);
-  }, [isPaused, maxIndex]);
-
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-  };
-
-  if (!testimonials || testimonials.length === 0) return null;
-
   return (
-    <Section className="py-16 sm:py-24 bg-surface border-y border-border/60 overflow-hidden">
-      <SectionTitle
-        title="HEAR FROM OUR HAPPY CUSTOMERS"
-        description="Voices of elegance and delight from our cherished patrons"
-        className="mb-8 sm:mb-12"
-      />
-
-      {/* Carousel Container */}
-      <div
-        className="relative px-3 sm:px-6"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
-        {/* Floating Left Carousel Navigation Arrow */}
-        <Button
-          variant="unstyled"
-          onClick={handlePrev}
-          aria-label="Previous customer reviews"
-          className="absolute left-0 sm:-left-3 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-neutral-200 bg-white/95 text-neutral-700 shadow-md hover:bg-neutral-50 hover:text-black transition-all cursor-pointer backdrop-blur-xs"
-        >
-          <ArrowRightIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4 rotate-180" />
-        </Button>
-
-        {/* Floating Right Carousel Navigation Arrow */}
-        <Button
-          variant="unstyled"
-          onClick={handleNext}
-          aria-label="Next customer reviews"
-          className="absolute right-0 sm:-right-3 top-1/2 -translate-y-1/2 z-20 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-neutral-200 bg-white/95 text-neutral-700 shadow-md hover:bg-neutral-50 hover:text-black transition-all cursor-pointer backdrop-blur-xs"
-        >
-          <ArrowRightIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-        </Button>
-
-        {/* Smooth Sliding Carousel Window */}
-        <div className="overflow-hidden py-2 -mx-2.5">
-          <div
-            className="flex transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
-            style={{
-              transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`,
-            }}
-          >
-            {testimonials.map((item) => (
-              <div
-                key={item.id}
-                className="w-full sm:w-1/2 lg:w-1/4 shrink-0 px-2.5 flex"
-              >
-                <ReviewCard
-                  name={item.name}
-                  rating={item.rating || 5}
-                  date={item.date}
-                  quote={item.quote}
-                  location={item.location}
-                  verified={false}
-                  className="w-full"
-                />
-              </div>
-            ))}
-          </div>
+    <section className="w-full bg-[#FAF7F2] py-12 sm:py-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-10 sm:mb-12">
+          <h2 className="font-display text-[26px] sm:text-[34px] md:text-[38px] text-[#141414] font-medium tracking-tight">
+            Loved by Thousands
+          </h2>
+          <p className="font-body text-[13.5px] sm:text-[15px] text-[#78716A] mt-1 font-normal">
+            Real stories, genuine delight from our cherished patrons
+          </p>
         </div>
 
-        {/* Dynamic Scaling Carousel Pagination Dots */}
-        <div className="mt-8 sm:mt-10 flex items-center justify-center gap-2 sm:gap-2.5 h-6">
-          {Array.from({ length: total }).map((_, idx) => {
-            const distance = Math.abs(idx - currentIndex);
-            const isActive = idx === currentIndex;
+        {/* 4 Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {testimonials.map((item) => (
+            <div
+              key={item.id}
+              className="flex flex-col justify-between bg-white rounded-2xl p-6 border border-[#EAE4DC] shadow-xs hover:shadow-md transition-shadow duration-300"
+            >
+              <div>
+                {/* 5 Star Rating */}
+                <div className="flex text-[#B38E5D] text-sm mb-3">
+                  {"★".repeat(item.rating)}
+                </div>
 
-            let sizeClasses = "w-[6px] h-[6px] bg-[#cbb281]/45 hover:bg-[#cbb281]/70";
-            if (isActive) {
-              sizeClasses = "w-[8px] h-[8px] bg-[#cbb281] shadow-xs scale-105";
-            } else if (distance === 1) {
-              sizeClasses = "w-[6px] h-[6px] bg-[#cbb281]/80 hover:bg-[#cbb281]";
-            } else if (distance === 2) {
-              sizeClasses = "w-[4px] h-[4px] bg-[#cbb281]/65 hover:bg-[#cbb281]/90";
-            }
+                {/* Quote */}
+                <p className="font-body text-[13.5px] sm:text-[14px] text-[#3A3530] leading-relaxed italic mb-6">
+                  &ldquo;{item.quote}&rdquo;
+                </p>
+              </div>
 
-            return (
-              <Button
-                key={idx}
-                variant="unstyled"
-                onClick={() => setCurrentIndex(Math.min(idx, maxIndex))}
-                aria-label={`Go to review ${idx + 1}`}
-                className={`rounded-full transition-all duration-300 cursor-pointer ${sizeClasses}`}
-              />
-            );
-          })}
+              {/* Customer Avatar & Location */}
+              <div className="flex items-center gap-3 pt-4 border-t border-[#F0EBE2]">
+                <img
+                  src={item.avatar}
+                  alt={item.name}
+                  className="w-10 h-10 rounded-full object-cover border border-[#E5DFD5]"
+                />
+                <div className="flex flex-col">
+                  <span className="font-display text-[14.5px] font-semibold text-[#141414] leading-snug">
+                    {item.name}
+                  </span>
+                  <span className="font-body text-[11.5px] text-[#8C827A]">
+                    {item.city}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    </Section>
+    </section>
   );
 }
 

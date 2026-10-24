@@ -8,6 +8,7 @@ import { SearchIcon, CloseIcon, ArrowRightIcon } from "@/components/icons";
 import { useAppSelector } from "@/store/hooks";
 import { cn } from "@/lib/utils";
 import Button from "@/components/ui/Button";
+import { JewelryIcon } from "./JewelryIcon";
 import {
   searchPlaceholdersData as ROTATING_PLACEHOLDERS,
   popularSearchesData,
@@ -17,13 +18,25 @@ import {
 interface SearchBarProps {
   className?: string;
   autoFocus?: boolean;
+  onClose?: () => void;
   onCloseMobile?: () => void;
   onOpenChange?: (open: boolean) => void;
 }
 
+const QUICK_CATEGORIES = [
+  { name: "Rings", href: "/category/rings" },
+  { name: "Necklaces", href: "/category/necklaces" },
+  { name: "Earrings", href: "/category/earrings" },
+  { name: "Bracelets", href: "/category/bracelets" },
+  { name: "Pendants", href: "/category/pendants" },
+  { name: "Men's Collection", href: "/category/mens-collection" },
+  { name: "Diamond Suites", href: "/collections/diamond-collection" },
+];
+
 function SearchBarComponent({
   className,
-  autoFocus = false,
+  autoFocus = true,
+  onClose,
   onCloseMobile,
   onOpenChange,
 }: SearchBarProps) {
@@ -32,47 +45,76 @@ function SearchBarComponent({
   const categories = useAppSelector((state) => state.categories.items);
 
   const [query, setQuery] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-  const [placeholderIndex, setPlaceholderIndex] = useState(0);
-  const [isFading, setIsFading] = useState(false);
+
+  // Dynamic Typewriter Animation State
+  const [typedText, setTypedText] = useState("");
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const updateIsOpen = (open: boolean) => {
-    setIsOpen(open);
-    onOpenChange?.(open);
+  const handleClose = () => {
+    onClose?.();
+    onCloseMobile?.();
+    onOpenChange?.(false);
   };
 
-  // Rotating placeholder effect
+  // Keyboard shortcut (ESC) & Body Scroll Lock
   useEffect(() => {
-    if (query) return;
-    const interval = setInterval(() => {
-      setIsFading(true);
-      setTimeout(() => {
-        setPlaceholderIndex((prev) => (prev + 1) % ROTATING_PLACEHOLDERS.length);
-        setIsFading(false);
-      }, 250);
-    }, 3200);
-
-    return () => clearInterval(interval);
-  }, [query]);
-
-  // Click outside to close dropdown
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        updateIsOpen(false);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        handleClose();
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
   }, []);
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  // Real Typewriter Effect (letter-by-letter typing, pause, backspacing, rotating)
+  useEffect(() => {
+    if (query) return;
+
+    const currentPhrase = ROTATING_PLACEHOLDERS[phraseIndex] || "";
+    let timeout: NodeJS.Timeout;
+
+    if (!isDeleting) {
+      // Typing forward
+      if (typedText.length < currentPhrase.length) {
+        timeout = setTimeout(() => {
+          setTypedText(currentPhrase.slice(0, typedText.length + 1));
+        }, 55); // natural human typing cadence
+      } else {
+        // Pause at the end of the phrase
+        timeout = setTimeout(() => {
+          setIsDeleting(true);
+        }, 2200); // 2.2s read time
+      }
+    } else {
+      // Deleting backward
+      if (typedText.length > 0) {
+        timeout = setTimeout(() => {
+          setTypedText(currentPhrase.slice(0, typedText.length - 1));
+        }, 25); // quick smooth backspace
+      } else {
+        // Switch to next suggestion phrase
+        setIsDeleting(false);
+        setPhraseIndex((prev) => (prev + 1) % ROTATING_PLACEHOLDERS.length);
+      }
+    }
+
+    return () => clearTimeout(timeout);
+  }, [typedText, isDeleting, phraseIndex, query]);
+
+  const handleSearchSubmit = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (!query.trim()) return;
-    updateIsOpen(false);
-    onCloseMobile?.();
+    handleClose();
     router.push(`/collections?search=${encodeURIComponent(query.trim())}`);
   };
 
@@ -92,89 +134,132 @@ function SearchBarComponent({
     : [];
 
   return (
-    <div ref={containerRef} className={cn("relative", className)}>
-      {/* Pill Search Input Form */}
-      <form
-        onSubmit={handleSearchSubmit}
-        className={cn(
-          "relative flex items-center w-full h-10 sm:h-11 px-4 sm:px-5 rounded-full border border-border bg-surface transition-all duration-200 shadow-xs",
-          "focus-within:border-wine/50 focus-within:ring-2 focus-within:ring-wine/10"
-        )}
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Search Luxe Jewels Catalog"
+      className={cn(
+        "fixed inset-0 z-[100] flex flex-col items-center justify-start p-3 sm:p-6 md:p-10 overflow-y-auto scrollbar-none bg-black/60 backdrop-blur-md animate-in fade-in duration-200",
+        className
+      )}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          handleClose();
+        }
+      }}
+    >
+      <div
+        ref={containerRef}
+        className="relative w-full max-w-4xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-[#EAE4DC] overflow-hidden my-auto sm:my-6 animate-in zoom-in-95 slide-in-from-top-4 duration-200"
       >
-        {/* Maroon Search Magnifying Glass Icon */}
-        <span className="text-wine mr-3 shrink-0 flex items-center select-none">
-          <SearchIcon size={16} />
-        </span>
-
-        {/* Dynamic Placeholder overlay if query is empty */}
-        {!query && (
-          <div className="absolute left-12 pointer-events-none flex items-center text-body select-none">
-            <span className="text-muted/60 font-normal">Search for&nbsp;</span>
-            <span
-              className={cn(
-                "text-muted/80 font-normal transition-opacity duration-200",
-                isFading ? "opacity-0" : "opacity-100"
-              )}
-            >
-              {ROTATING_PLACEHOLDERS[placeholderIndex]}
+        {/* 1. TOP UTILITY HEADER: Atelier Brand + ESC badge + Close Button */}
+        <div className="flex items-center justify-between px-5 sm:px-7 py-3.5 bg-[#FAF7F2] border-b border-[#EAE4DC]">
+          <div className="flex items-center gap-2">
+            <span className="text-[#B38E5D] text-xs">✦</span>
+            <span className="text-[11px] tracking-[0.2em] font-medium text-[#141414]">
+              Luxe Atelier Catalog Search
             </span>
           </div>
-        )}
 
-        {/* Actual Input */}
-        <input
-          ref={inputRef}
-          type="text"
-          value={query}
-          autoFocus={autoFocus}
-          onChange={(e) => {
-            setQuery(e.target.value);
-            updateIsOpen(true);
-          }}
-          onFocus={() => updateIsOpen(true)}
-          className="w-full h-full bg-transparent text-body text-ink placeholder-transparent focus:outline-none z-10 pr-2"
-        />
+          <div className="flex items-center gap-3">
+            <kbd className="hidden sm:inline-block text-[10.5px] tracking-wider text-[#78716A] bg-white border border-[#EAE4DC] px-2 py-0.5 rounded shadow-2xs">
+              ESC to close
+            </kbd>
+            <Button
+              variant="unstyled"
+              onClick={handleClose}
+              className="p-1.5 rounded-full text-[#78716A] hover:text-[#141414] hover:bg-white transition-colors cursor-pointer"
+              aria-label="Close search"
+            >
+              <CloseIcon size={18} />
+            </Button>
+          </div>
+        </div>
 
-        {/* Clear Button (when text is entered) */}
-        {query && (
-          <Button
-            variant="unstyled"
-            onClick={() => {
-              setQuery("");
-              inputRef.current?.focus();
-            }}
-            className="text-muted hover:text-ink text-caption p-1 z-10 cursor-pointer shrink-0"
-            aria-label="Clear search"
+        {/* 2. PROMINENT SEARCH INPUT FORM */}
+        <div className="p-4 sm:p-7 border-b border-[#EAE4DC] bg-gradient-to-b from-[#FAF7F2] to-white">
+          <form
+            onSubmit={handleSearchSubmit}
+            className="group relative flex items-center w-full h-14 sm:h-16 px-3.5 sm:px-5 rounded-2xl bg-white border-2 border-[#E8DFD3] hover:border-[#D5C6B3] focus-within:!border-[#B38E5D] focus-within:ring-4 focus-within:ring-[#B38E5D]/15 focus-within:shadow-[0_10px_35px_-8px_rgba(179,142,93,0.22)] transition-all duration-300 shadow-xs"
           >
-            <CloseIcon size={14} />
-          </Button>
-        )}
-      </form>
+            {/* Luxury Gold Search Icon Badge */}
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#FAF6F0] border border-[#EDE2D4] group-focus-within:border-[#B38E5D]/50 group-focus-within:bg-[#F7EFE3] flex items-center justify-center text-[#B38E5D] mr-3 sm:mr-3.5 shrink-0 shadow-2xs transition-colors duration-200">
+              <SearchIcon size={19} className="group-focus-within:scale-110 transition-transform duration-200" />
+            </div>
 
-      {/* Live Search Popup Dropdown */}
-      {isOpen && (
-        <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 sm:mt-3 w-[calc(100vw-24px)] max-w-[calc(100vw-24px)] sm:w-full sm:min-w-[480px] md:min-w-[540px] lg:min-w-[580px] sm:max-w-xl bg-surface border border-border/80 shadow-2xl rounded-2xl lg:rounded-3xl p-3.5 sm:p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-150 max-h-[80vh] overflow-y-auto">
+            {/* Dynamic Typewriter Placeholder */}
+            {!query && (
+              <div className="absolute left-16 sm:left-19 pointer-events-none flex items-center text-[15px] sm:text-[17px] text-[#78716A] select-none truncate pr-28 sm:pr-32">
+                <span className="font-light text-[#8A8177]">Search for&nbsp;</span>
+                <span className="text-[#141414] font-semibold tracking-tight">
+                  {typedText}
+                </span>
+                {/* Blinking Luxury Gold Cursor */}
+                <span className="inline-block w-[2px] h-4 sm:h-5 bg-[#B38E5D] ml-0.5 rounded-full animate-pulse" />
+              </div>
+            )}
+
+            {/* Main Text Input */}
+            <input
+              ref={inputRef}
+              type="text"
+              value={query}
+              autoFocus={autoFocus}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder=""
+              className="w-full h-full bg-transparent text-[15px] sm:text-[17px] text-[#141414] placeholder-transparent focus:outline-none z-10 pr-3 font-medium"
+            />
+
+            {/* Clear Input Button */}
+            {query && (
+              <button
+                type="button"
+                onClick={() => {
+                  setQuery("");
+                  inputRef.current?.focus();
+                }}
+                className="text-[#8C827A] hover:text-[#141414] p-1.5 rounded-full hover:bg-[#FAF7F2] mr-2 transition-colors cursor-pointer shrink-0 z-10"
+                aria-label="Clear search input"
+              >
+                <CloseIcon size={16} />
+              </button>
+            )}
+
+            {/* Action Submit Button */}
+            <button
+              type="submit"
+              className="shrink-0 z-10 inline-flex items-center gap-1.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-[#B38E5D] to-[#9C7748] hover:from-[#A67F4F] hover:to-[#8E693A] text-white text-[12.5px] sm:text-[13.5px] font-semibold tracking-wider transition-all duration-200 shadow-sm hover:shadow-md active:scale-[0.97] cursor-pointer"
+            >
+              <span>Search</span>
+              {query && (
+                <span className="hidden sm:inline-block text-[10px] bg-white/20 px-1.5 py-0.5 rounded text-white/90 font-mono">
+                  ↵
+                </span>
+              )}
+            </button>
+          </form>
+        </div>
+
+        {/* 3. MODAL BODY: DISCOVERY vs ACTIVE RESULTS */}
+        <div className="p-4 sm:p-6 md:p-7 max-h-[72vh] sm:max-h-[78vh] overflow-y-auto scrollbar-none bg-white">
           {query.trim() ? (
-            /* Filtered Search Results View when user types */
-            <div>
+            /* ACTIVE RESULTS STATE */
+            <div className="space-y-6">
               {/* Filtered Categories */}
               {filteredCategories.length > 0 && (
-                <div className="mb-4 pb-3 border-b border-border/60">
-                  <span className="text-caption font-semibold text-muted tracking-wide block mb-2">
-                    Categories
+                <div>
+                  <span className="text-[12px] font-semibold text-[#78716A] tracking-wider block mb-2.5">
+                    Matching Categories
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {filteredCategories.map((cat) => (
                       <Link
                         key={cat.id}
                         href={`/category/${cat.slug}`}
-                        onClick={() => {
-                          updateIsOpen(false);
-                          onCloseMobile?.();
-                        }}
-                        className="text-caption px-3.5 py-1.5 bg-cream hover:bg-wine-soft hover:text-wine rounded-full transition-colors font-medium text-ink flex items-center gap-1.5"
+                        onClick={handleClose}
+                        className="text-[13px] px-3.5 py-1.5 bg-[#FAF7F2] hover:bg-[#FAF7F2] hover:text-[#B38E5D] border border-[#EAE4DC] hover:border-[#B38E5D]/40 rounded-full transition-colors font-medium text-[#141414] flex items-center gap-1.5 shadow-2xs"
                       >
-                        <span className="text-gold">✦</span>
+                        <span className="text-[#B38E5D]">✦</span>
                         {cat.name}
                       </Link>
                     ))}
@@ -182,82 +267,132 @@ function SearchBarComponent({
                 </div>
               )}
 
-              {/* Filtered Products List */}
+              {/* Filtered Products */}
               <div>
-                <span className="text-caption font-semibold text-muted tracking-wide block mb-3">
-                  Matching Products ({filteredProducts.length})
-                </span>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[12px] font-semibold text-[#78716A] tracking-wider">
+                    Matching Pieces ({filteredProducts.length})
+                  </span>
+                  {filteredProducts.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => handleSearchSubmit()}
+                      className="text-[12px] font-semibold text-[#B38E5D] hover:text-[#9C7748] flex items-center gap-1 cursor-pointer"
+                    >
+                      <span>View All in Catalog</span>
+                      <ArrowRightIcon className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
 
                 {filteredProducts.length > 0 ? (
-                  <div className="space-y-2.5">
-                    {filteredProducts.slice(0, 5).map((product) => (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5">
+                    {filteredProducts.slice(0, 6).map((product) => (
                       <Link
                         key={product.id}
                         href={`/products/${product.slug}`}
-                        onClick={() => {
-                          updateIsOpen(false);
-                          onCloseMobile?.();
-                        }}
-                        className="flex items-center gap-3.5 p-2 rounded-xl hover:bg-cream transition-colors group"
+                        onClick={handleClose}
+                        className="group flex items-center gap-3.5 p-2.5 rounded-xl border border-[#EAE4DC] hover:border-[#B38E5D]/50 hover:bg-[#FAF7F2] transition-all duration-150"
                       >
-                        <div className="w-12 h-12 rounded-xl overflow-hidden bg-cream shrink-0 border border-border/60">
-                          <img
+                        <div className="relative w-14 h-14 rounded-lg overflow-hidden bg-[#FAF7F2] shrink-0 border border-[#EAE4DC]">
+                          <Image
                             src={product.image}
                             alt={product.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                            fill
+                            sizes="56px"
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h5 className="text-caption font-medium text-ink group-hover:text-wine truncate transition-colors">
+                          <p className="text-[13px] font-medium text-[#141414] group-hover:text-[#B38E5D] truncate transition-colors">
                             {product.name}
-                          </h5>
-                          <span className="text-caption font-semibold text-wine mt-0.5 block">
+                          </p>
+                          <span className="text-[11px] text-[#78716A] block truncate">
+                            {product.category}
+                          </span>
+                          <span className="text-[12.5px] font-semibold text-[#B38E5D] mt-0.5 block">
                             ₹{product.price.toLocaleString("en-IN")}
                           </span>
                         </div>
-                        <ArrowRightIcon className="w-4 h-4 text-muted/50 group-hover:text-wine group-hover:translate-x-1 transition-all shrink-0" />
+                        <ArrowRightIcon className="w-4 h-4 text-[#78716A]/60 group-hover:text-[#B38E5D] group-hover:translate-x-1 transition-all shrink-0" />
                       </Link>
                     ))}
-
-                    <div className="pt-3 text-center border-t border-border/60">
-                      <Button
-                        variant="unstyled"
-                        onClick={handleSearchSubmit}
-                        className="inline-flex items-center gap-1.5 text-caption font-semibold text-wine hover:text-wine-dark cursor-pointer mx-auto"
-                      >
-                        <span>View all results for &quot;{query}&quot;</span>
-                        <ArrowRightIcon className="w-3.5 h-3.5" />
-                      </Button>
-                    </div>
                   </div>
                 ) : (
-                  <div className="py-6 text-center text-caption text-muted">
-                    No matching jewellery found for &quot;{query}&quot;.
+                  <div className="py-12 text-center">
+                    <div className="w-12 h-12 rounded-full bg-[#FAF7F2] border border-[#EAE4DC] text-[#B38E5D] flex items-center justify-center mx-auto mb-3">
+                      <SearchIcon size={22} />
+                    </div>
+                    <p className="text-[15px] font-medium text-[#141414]">
+                      No matching jewellery found for &quot;{query}&quot;
+                    </p>
+                    <p className="text-[13px] text-[#78716A] mt-1 max-w-md mx-auto">
+                      Try searching by category (Rings, Necklaces), precious metal (18K, 22K), or diamond solitaire style.
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-2 mt-4">
+                      {["Rings", "Diamond Studs", "18K Gold", "Bridal Suites"].map((sug) => (
+                        <button
+                          key={sug}
+                          type="button"
+                          onClick={() => {
+                            setQuery(sug);
+                            inputRef.current?.focus();
+                          }}
+                          className="text-[12px] px-3 py-1 bg-[#FAF7F2] border border-[#EAE4DC] hover:border-[#B38E5D] rounded-full text-[#141414] transition-colors cursor-pointer"
+                        >
+                          {sug}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
             </div>
           ) : (
-            /* DEFAULT SEARCH VIEW */
-            <div className="space-y-5">
-              {/* SECTION 1: Popular Searches */}
+            /* DEFAULT / DISCOVERY STATE */
+            <div className="space-y-5 sm:space-y-6">
+              {/* SECTION 1: Explore Categories with Bespoke Jewelry Icons */}
               <div>
-                <span className="text-caption text-muted/80 font-normal block mb-2.5">
-                  Popular Searches
+                <span className="text-[11.5px] font-semibold text-[#78716A] tracking-wider block mb-3">
+                  Explore by Category
+                </span>
+                <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2.5">
+                  {QUICK_CATEGORIES.map((cat) => (
+                    <Link
+                      key={cat.name}
+                      href={cat.href}
+                      onClick={handleClose}
+                      className="group flex flex-col items-center justify-center p-3 rounded-xl border border-[#EAE4DC] bg-[#FAF7F2] hover:bg-white hover:border-[#B38E5D]/60 hover:shadow-sm transition-all duration-150 text-center"
+                    >
+                      <div className="transition-transform duration-200 group-hover:scale-110 mb-1.5 text-[#B38E5D]">
+                        <JewelryIcon name={cat.name} className="w-6 h-6 text-[#B38E5D]" />
+                      </div>
+                      <span className="text-[12px] font-medium text-[#141414] group-hover:text-[#B38E5D] transition-colors">
+                        {cat.name}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* SECTION 2: Popular Trending Searches */}
+              <div>
+                <span className="text-[11.5px] font-semibold text-[#78716A] tracking-wider block mb-2.5">
+                  Trending Searches
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {popularSearchesData.map((chip) => (
-                    <Button
+                    <button
                       key={chip.label}
-                      variant="unstyled"
+                      type="button"
                       onClick={() => {
                         setQuery(chip.label);
                         inputRef.current?.focus();
                       }}
-                      className="px-3.5 py-1.5 rounded-xl border border-border/80 bg-surface hover:border-wine/60 hover:text-wine text-ink text-caption font-normal transition-all duration-150 inline-flex items-center gap-1.5 cursor-pointer shadow-2xs hover:bg-wine-soft/30"
+                      className="px-3.5 py-1.5 rounded-full border border-[#EAE4DC] bg-[#FAF7F2] hover:border-[#B38E5D] hover:text-[#B38E5D] hover:bg-white text-[#141414] text-[12.5px] font-normal transition-all duration-150 inline-flex items-center gap-1.5 cursor-pointer shadow-2xs"
                     >
                       <svg
-                        className="w-3.5 h-3.5 text-muted/70 group-hover:text-wine"
+                        className="w-3.5 h-3.5 text-[#B38E5D]"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -269,58 +404,86 @@ function SearchBarComponent({
                         <polyline points="17 6 23 6 23 12" />
                       </svg>
                       <span>{chip.label}</span>
-                    </Button>
+                    </button>
                   ))}
                 </div>
               </div>
 
-              {/* SECTION 2: Trending Products */}
+              {/* SECTION 3: Curated Trending Pieces */}
               <div>
-                <span className="text-caption text-muted/80 font-normal block mb-2.5">
-                  Trending Products
-                </span>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[11.5px] font-semibold text-[#78716A] tracking-wider">
+                    Curated Trending Masterpieces
+                  </span>
+                  <Link
+                    href="/shop"
+                    onClick={handleClose}
+                    className="text-[12px] font-semibold text-[#B38E5D] hover:text-[#9C7748] flex items-center gap-1"
+                  >
+                    <span>View All</span>
+                    <ArrowRightIcon className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
                   {searchTrendingProductsData.map((item, idx) => (
                     <Link
                       key={idx}
                       href={item.href}
-                      onClick={() => {
-                        updateIsOpen(false);
-                        onCloseMobile?.();
-                      }}
-                      className="group block"
+                      onClick={handleClose}
+                      className="group block p-2.5 rounded-xl border border-[#EAE4DC] hover:border-[#B38E5D]/60 hover:shadow-md transition-all duration-200 bg-white"
                     >
-                      <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-cream border border-border/70 shadow-xs">
+                      <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-[#FAF7F2] border border-[#EAE4DC] mb-2">
                         <Image
                           src={item.image}
                           alt={item.title}
                           fill
-                          sizes="(max-width: 768px) 100px, 160px"
+                          sizes="(max-width: 768px) 150px, 200px"
                           className="object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
-                      <p className="font-body text-[11px] sm:text-caption text-ink/90 group-hover:text-wine mt-1.5 line-clamp-2 leading-tight transition-colors">
+                      <span className="text-[10px] tracking-wider text-[#B38E5D] font-semibold block">
+                        {item.metal}
+                      </span>
+                      <p className="font-display text-[13px] font-medium text-[#141414] group-hover:text-[#B38E5D] mt-0.5 line-clamp-1 leading-snug transition-colors">
                         {item.title}
+                      </p>
+                      <p className="text-[12.5px] font-semibold text-[#141414] mt-1">
+                        ₹{item.price.toLocaleString("en-IN")}
                       </p>
                     </Link>
                   ))}
                 </div>
               </div>
 
-              {/* SECTION 3: Bottom Store Banner */}
-              <div className="p-3.5 sm:p-4 rounded-2xl bg-[#faedf0] border border-[#f5dede] text-center shadow-xs">
-                <p className="font-display text-body text-ink leading-snug">
-                  <span className="text-ink/80 font-normal">Loved It Online? </span>
-                  <span className="text-wine font-semibold">Find It At A Luxe Store Near You!</span>
-                </p>
-                <p className="text-[10px] sm:text-[11px] text-muted/90 mt-0.5">
-                  Click &quot;Request Store Availability&quot; on your favourite product.
-                </p>
+              {/* SECTION 4: Atelier Store & Concierge Assistance Strip */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-[#FAF7F2] border border-[#EAE4DC] flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
+                <div className="flex items-center gap-3.5">
+                  <div className="w-10 h-10 rounded-full bg-white border border-[#EAE4DC] text-[#B38E5D] flex items-center justify-center shrink-0 shadow-2xs">
+                    ✦
+                  </div>
+                  <div>
+                    <p className="text-[13.5px] font-semibold text-[#141414] leading-tight">
+                      Looking for Bespoke Designs or Store Viewing?
+                    </p>
+                    <p className="text-[12px] text-[#78716A] mt-0.5">
+                      Connect with our Master Gemmologist for certified consultation and personal appointments.
+                    </p>
+                  </div>
+                </div>
+
+                <Link
+                  href="/contact"
+                  onClick={handleClose}
+                  className="shrink-0 px-5 py-2 rounded-full bg-[#B38E5D] hover:bg-[#9C7748] text-white text-[12.5px] font-medium tracking-wide shadow-2xs transition-colors cursor-pointer"
+                >
+                  Book Atelier Visit
+                </Link>
               </div>
             </div>
           )}
         </div>
-      )}
+      </div>
     </div>
   );
 }

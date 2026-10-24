@@ -123,7 +123,7 @@ export default function UserModals() {
               value={giftCardCode}
               onChange={(e) => setGiftCardCode(e.target.value)}
               placeholder="e.g. LUXE-GIFT-2026"
-              inputClassName="uppercase tracking-wider"
+              inputClassName=" tracking-wider"
               required
             />
             <Button
@@ -140,7 +140,7 @@ export default function UserModals() {
 
           {cardBalance !== null && (
             <div className="p-4 bg-wine/5 rounded-xl border border-wine/15 text-center space-y-1 animate-in fade-in duration-200">
-              <span className="text-[11px] text-muted uppercase tracking-wider font-semibold">Current Available Balance</span>
+              <span className="text-[11px] text-muted tracking-wider font-semibold">Current Available Balance</span>
               <p className="text-h3 font-display font-bold text-wine">₹{cardBalance.toLocaleString()}</p>
               <p className="text-[10px] text-emerald-700 font-medium">Valid until Dec 31, 2027 • Redeemable at Checkout</p>
             </div>

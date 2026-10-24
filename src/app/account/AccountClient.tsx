@@ -26,6 +26,9 @@ import {
   SmartphoneIcon,
   TruckIcon,
   CheckIcon,
+  TrashIcon,
+  EyeIcon,
+  ShieldCheckIcon,
 } from "@/components/icons";
 import type { Product } from "@/types";
 
@@ -374,7 +377,7 @@ export default function AccountClient() {
                 {navItems.find((n) => n.id === activeTab)?.icon}
               </span>
               <div>
-                <span className="text-[10px] text-muted uppercase font-bold tracking-wider block">Current Section</span>
+                <span className="text-[10px] text-muted font-bold tracking-wider block">Current Section</span>
                 <span className="font-display font-semibold text-wine text-small">
                   {navItems.find((n) => n.id === activeTab)?.label}
                 </span>
@@ -437,11 +440,7 @@ export default function AccountClient() {
                             setActiveTab(item.id);
                             setIsMobileMenuOpen(false);
                           }}
-                          className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-left text-caption font-semibold transition-all duration-150 cursor-pointer ${
-                            isActive
-                              ? "bg-[#80222F] text-white shadow-xs"
-                              : "text-ink/80 hover:bg-wine/5 hover:text-wine bg-neutral-50/50"
-                          }`}
+                          className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-left text-caption font-semibold transition-all duration-150 cursor-pointer ${ isActive ? "bg-[#80222F] text-white shadow-xs" : "text-ink/80 hover:bg-wine/5 hover:text-wine bg-neutral-50/50" }`}
                         >
                           <div className="flex items-center gap-3">
                             <span className={`shrink-0 ${isActive ? "text-white" : "text-wine"}`}>
@@ -504,11 +503,7 @@ export default function AccountClient() {
                       type="button"
                       variant="unstyled"
                       onClick={() => setActiveTab(item.id)}
-                      className={`w-full flex items-center justify-between px-5 py-3.5 text-left text-body font-medium transition-all duration-150 cursor-pointer ${
-                        isActive
-                          ? "bg-[#80222F] text-white font-semibold shadow-xs"
-                          : "text-ink/80 hover:bg-wine/5 hover:text-wine"
-                      }`}
+                      className={`w-full flex items-center justify-between px-5 py-3.5 text-left text-body font-medium transition-all duration-150 cursor-pointer ${ isActive ? "bg-[#80222F] text-white font-semibold shadow-xs" : "text-ink/80 hover:bg-wine/5 hover:text-wine" }`}
                     >
                       <div className="flex items-center gap-3">
                         <span className={`shrink-0 ${isActive ? "text-white" : "text-wine"}`}>
@@ -732,11 +727,7 @@ export default function AccountClient() {
                         type="button"
                         variant="unstyled"
                         onClick={() => setNewPaymentType("card")}
-                        className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition-all cursor-pointer flex items-center justify-center gap-2 ${
-                          newPaymentType === "card"
-                            ? "bg-wine text-white border-wine shadow-xs"
-                            : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5"
-                        }`}
+                        className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition-all cursor-pointer flex items-center justify-center gap-2 ${ newPaymentType === "card" ? "bg-wine text-white border-wine shadow-xs" : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5" }`}
                       >
                         <CreditCardIcon size={16} className={newPaymentType === "card" ? "text-white" : "text-wine"} />
                         <span>Card</span>
@@ -745,11 +736,7 @@ export default function AccountClient() {
                         type="button"
                         variant="unstyled"
                         onClick={() => setNewPaymentType("upi")}
-                        className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition-all cursor-pointer flex items-center justify-center gap-2 ${
-                          newPaymentType === "upi"
-                            ? "bg-wine text-white border-wine shadow-xs"
-                            : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5"
-                        }`}
+                        className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition-all cursor-pointer flex items-center justify-center gap-2 ${ newPaymentType === "upi" ? "bg-wine text-white border-wine shadow-xs" : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5" }`}
                       >
                         <SmartphoneIcon size={16} className={newPaymentType === "upi" ? "text-white" : "text-wine"} />
                         <span>UPI ID</span>
@@ -758,11 +745,7 @@ export default function AccountClient() {
                         type="button"
                         variant="unstyled"
                         onClick={() => setNewPaymentType("netbanking")}
-                        className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition-all cursor-pointer flex items-center justify-center gap-2 ${
-                          newPaymentType === "netbanking"
-                            ? "bg-wine text-white border-wine shadow-xs"
-                            : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5"
-                        }`}
+                        className={`py-2.5 px-3 rounded-xl text-caption sm:text-body font-semibold border transition-all cursor-pointer flex items-center justify-center gap-2 ${ newPaymentType === "netbanking" ? "bg-wine text-white border-wine shadow-xs" : "bg-surface text-ink/80 border-border hover:border-wine/40 hover:bg-wine/5" }`}
                       >
                         <BankIcon size={16} className={newPaymentType === "netbanking" ? "text-white" : "text-wine"} />
                         <span>NetBanking</span>
@@ -794,7 +777,7 @@ export default function AccountClient() {
                               value={newPaymentForm.cardHolder}
                               onChange={(e) => setNewPaymentForm({ ...newPaymentForm, cardHolder: e.target.value })}
                               placeholder="Name on card"
-                              className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150 uppercase"
+                              className="w-full px-3.5 py-2.5 rounded-xl border border-border bg-surface text-body text-ink placeholder:text-muted focus:outline-none focus:border-wine focus:ring-1 focus:ring-wine/20 transition-all duration-150"
                               required
                             />
                           </div>
@@ -923,20 +906,16 @@ export default function AccountClient() {
                     {paymentMethods.map((pm) => (
                       <div
                         key={pm.id}
-                        className={`rounded-2xl p-5 shadow-sm relative overflow-hidden flex flex-col justify-between space-y-4 border transition-all ${
-                          pm.type === "card"
-                            ? "bg-gradient-to-r from-slate-900 via-slate-800 to-zinc-900 text-white border-slate-700"
-                            : "bg-surface border-wine/25 text-ink hover:border-wine/40"
-                        }`}
+                        className={`rounded-2xl p-5 shadow-sm relative overflow-hidden flex flex-col justify-between space-y-4 border transition-all ${ pm.type === "card" ? "bg-gradient-to-r from-slate-900 via-slate-800 to-zinc-900 text-white border-slate-700" : "bg-surface border-wine/25 text-ink hover:border-wine/40" }`}
                       >
                         {/* Top Row: Bank Label & Default Badge */}
                         <div className="flex items-center justify-between">
-                          <span className={`text-caption font-semibold uppercase tracking-wider ${pm.type === "card" ? "text-slate-200" : "text-wine"}`}>
+                          <span className={`text-caption font-semibold tracking-wider ${pm.type === "card" ? "text-slate-200" : "text-wine"}`}>
                             {pm.bank}
                           </span>
                           <div className="flex items-center gap-2">
                             {pm.isDefault && (
-                              <span className="px-2 py-0.5 rounded-full bg-gold/20 text-gold-dark border border-gold/30 text-[10px] font-bold uppercase tracking-wider">
+                              <span className="px-2 py-0.5 rounded-full bg-gold/20 text-gold-dark border border-gold/30 text-[10px] font-bold tracking-wider">
                                 Default
                               </span>
                             )}
@@ -957,12 +936,12 @@ export default function AccountClient() {
                         {/* Cardholder & Actions Row */}
                         <div className={`pt-3 border-t flex items-center justify-between text-caption ${pm.type === "card" ? "border-slate-700/60" : "border-wine/15"}`}>
                           <div>
-                            <span className={`block text-[10px] uppercase font-semibold ${pm.type === "card" ? "text-slate-400" : "text-muted"}`}>Holder Name</span>
+                            <span className={`block text-[10px] font-semibold ${pm.type === "card" ? "text-slate-400" : "text-muted"}`}>Holder Name</span>
                             <span className="font-semibold">{pm.holder}</span>
                           </div>
                           {pm.expiry && (
                             <div>
-                              <span className={`block text-[10px] uppercase font-semibold ${pm.type === "card" ? "text-slate-400" : "text-muted"}`}>Expires</span>
+                              <span className={`block text-[10px] font-semibold ${pm.type === "card" ? "text-slate-400" : "text-muted"}`}>Expires</span>
                               <span className="font-mono font-medium">{pm.expiry}</span>
                             </div>
                           )}
@@ -972,11 +951,7 @@ export default function AccountClient() {
                                 type="button"
                                 variant="unstyled"
                                 onClick={() => handleSetDefaultPayment(pm.id)}
-                                className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all cursor-pointer ${
-                                  pm.type === "card"
-                                    ? "bg-slate-800 text-slate-200 hover:bg-slate-700 border border-slate-600"
-                                    : "bg-white border border-wine/30 text-wine hover:bg-wine hover:text-white"
-                                }`}
+                                className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all cursor-pointer ${ pm.type === "card" ? "bg-slate-800 text-slate-200 hover:bg-slate-700 border border-slate-600" : "bg-white border border-wine/30 text-wine hover:bg-wine hover:text-white" }`}
                               >
                                 Set Default
                               </Button>
@@ -985,11 +960,7 @@ export default function AccountClient() {
                               type="button"
                               variant="unstyled"
                               onClick={() => handleRemovePayment(pm.id)}
-                              className={`px-3 py-1.5 rounded-full text-caption font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5 ${
-                                pm.type === "card"
-                                  ? "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 hover:border-slate-500"
-                                  : "bg-white border border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-900"
-                              }`}
+                              className={`px-3 py-1.5 rounded-full text-caption font-medium transition-all duration-150 cursor-pointer shadow-2xs flex items-center gap-1.5 ${ pm.type === "card" ? "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 hover:border-slate-500" : "bg-white border border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-900" }`}
                               title="Remove Payment Method"
                             >
                               <svg className="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1180,17 +1151,15 @@ export default function AccountClient() {
                     {addresses.map((addr) => (
                       <div
                         key={addr.id}
-                        className={`rounded-2xl p-5 bg-surface shadow-xs space-y-3 relative border transition-all ${
-                          addr.isDefault ? "border-wine/50 bg-wine/5" : "border-border hover:border-wine/30"
-                        }`}
+                        className={`rounded-2xl p-5 bg-surface shadow-xs space-y-3 relative border transition-all ${ addr.isDefault ? "border-wine/50 bg-wine/5" : "border-border hover:border-wine/30" }`}
                       >
                         {/* Header Badges */}
                         <div className="flex items-center justify-between">
-                          <span className="px-2.5 py-0.5 bg-wine/10 text-wine rounded-full text-[10px] font-bold uppercase tracking-wider">
+                          <span className="px-2.5 py-0.5 bg-wine/10 text-wine rounded-full text-[10px] font-bold tracking-wider">
                             {addr.type}
                           </span>
                           {addr.isDefault && (
-                            <span className="px-2.5 py-0.5 bg-gold/20 text-gold-dark border border-gold/30 text-[10px] font-bold uppercase tracking-wider rounded-full">
+                            <span className="px-2.5 py-0.5 bg-gold/20 text-gold-dark border border-gold/30 text-[10px] font-bold tracking-wider rounded-full">
                               Default Shipping Address
                             </span>
                           )}
@@ -1276,10 +1245,8 @@ export default function AccountClient() {
                     {/* Continue Shopping Black Pill CTA Button */}
                     <Link
                       href="/collections"
-                      className="inline-flex items-center justify-center rounded-full bg-slate-950 text-white px-8 py-3.5 text-caption font-bold uppercase tracking-widest hover:bg-slate-800 transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer active:scale-95"
-                    >
-                      CONTINUE SHOPPING
-                    </Link>
+                      className="inline-flex items-center justify-center rounded-full bg-slate-950 text-white px-8 py-3.5 text-caption font-bold tracking-widest hover:bg-slate-800 transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer active:scale-95"
+                    >Continue Shopping</Link>
                   </div>
                 ) : (
                   /* HORIZONTAL WISHLIST PRODUCT CARDS LIST (MATCHING SCREENSHOT) */
@@ -1325,10 +1292,8 @@ export default function AccountClient() {
                                 colorTheme="dark"
                                 rounded="full"
                                 onClick={() => handleAddToCart(product)}
-                                className="px-5 font-bold uppercase tracking-wider shadow-xs hover:shadow-md"
-                              >
-                                ADD TO CART
-                              </Button>
+                                className="px-5 font-bold tracking-wider shadow-xs hover:shadow-md"
+                              >Add to Cart</Button>
                             </div>
                           </div>
                         </div>
@@ -1341,11 +1306,7 @@ export default function AccountClient() {
                           onClick={() => handleRemoveFromWishlist(product.id)}
                           className="text-gray-600 hover:!text-red-700 hover:!bg-red-50/80 !border-gray-300 self-start sm:self-center"
                           title="Remove from Wishlist"
-                          leftIcon={
-                            <svg className="w-3.5 h-3.5 text-gray-500 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6" />
-                            </svg>
-                          }
+                          leftIcon={<TrashIcon size={14} className="text-gray-500" />}
                         >
                           Remove
                         </Button>
@@ -1453,16 +1414,7 @@ export default function AccountClient() {
                           className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-wine p-1 cursor-pointer transition-colors"
                           title={showGiftCardPin ? "Hide PIN" : "Show PIN"}
                         >
-                          {showGiftCardPin ? (
-                            <svg className="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2">
-                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                              <circle cx="12" cy="12" r="3" />
-                            </svg>
-                          ) : (
-                            <svg className="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2">
-                              <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24M1 1l22 22" />
-                            </svg>
-                          )}
+                          <EyeIcon size={16} />
                         </Button>
                       </div>
 
@@ -1480,11 +1432,7 @@ export default function AccountClient() {
 
                     {/* Result Card */}
                     {giftCardCheckResult && (
-                      <div className={`p-4 rounded-xl border text-body animate-in fade-in duration-200 ${
-                        giftCardCheckResult.success
-                          ? "bg-emerald-50 border-emerald-200 text-emerald-900"
-                          : "bg-red-50 border-red-200 text-red-800"
-                      }`}>
+                      <div className={`p-4 rounded-xl border text-body animate-in fade-in duration-200 ${ giftCardCheckResult.success ? "bg-emerald-50 border-emerald-200 text-emerald-900" : "bg-red-50 border-red-200 text-red-800" }`}>
                         {giftCardCheckResult.success ? (
                           <div className="flex items-center justify-between">
                             <div>
@@ -1551,7 +1499,7 @@ export default function AccountClient() {
                   <div className="pt-6 border-t border-border space-y-6">
                     <div className="p-4 bg-wine/5 rounded-2xl border border-wine/15 flex flex-wrap items-center justify-between gap-4">
                       <div>
-                        <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold uppercase tracking-wider inline-flex items-center gap-1.5">
+                        <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold tracking-wider inline-flex items-center gap-1.5">
                           IN TRANSIT <TruckIcon size={12} className="shrink-0" />
                         </span>
                         <h4 className="font-display font-semibold text-wine text-small sm:text-body mt-1">
@@ -1562,33 +1510,33 @@ export default function AccountClient() {
                         </p>
                       </div>
                       <div className="text-right">
-                        <span className="text-[10px] uppercase font-bold text-muted tracking-wider block">Estimated Delivery</span>
+                        <span className="text-[10px] font-bold text-muted tracking-wider block">Estimated Delivery</span>
                         <span className="font-display font-bold text-wine text-small sm:text-body">Tomorrow by 5:00 PM</span>
                       </div>
                     </div>
 
                     {/* TIMELINE STEPPER */}
                     <div className="space-y-4 pt-2">
-                      <h4 className="text-[11px] font-bold uppercase tracking-wider text-muted">Shipment Journey</h4>
+                      <h4 className="text-[11px] font-bold tracking-wider text-muted">Shipment Journey</h4>
                       <div className="space-y-6 pt-1">
                         {[
                           {
                             title: "Order Placed & Certified",
                             desc: "Aug 26, 2026 • BIS Hallmark & IGI Diamond verification complete.",
                             status: "completed",
-                            icon: <CheckIcon size={12} />,
+                            icon: <ShieldCheckIcon size={13} />,
                           },
                           {
                             title: "Handed to BlueDart Express",
                             desc: "Aug 27, 2026 • Sealed in armored tamper-proof luxury vault box.",
                             status: "completed",
-                            icon: <CheckIcon size={12} />,
+                            icon: <PackageIcon size={13} />,
                           },
                           {
                             title: "Out for Delivery",
                             desc: "Aug 28, 2026 • Expected delivery by 5:00 PM (OTP signature required).",
                             status: "active",
-                            icon: <TruckIcon size={12} />,
+                            icon: <TruckIcon size={13} />,
                           },
                         ].map((step, idx, arr) => {
                           const isLast = idx === arr.length - 1;
@@ -1603,11 +1551,7 @@ export default function AccountClient() {
                               )}
 
                               {/* Step Icon Badge */}
-                              <div className={`relative z-10 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 shadow-xs ${
-                                step.status === "completed"
-                                  ? "bg-emerald-500 text-white"
-                                  : "bg-wine text-white ring-4 ring-wine/20 animate-pulse"
-                              }`}>
+                              <div className={`relative z-10 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 shadow-xs ${ step.status === "completed" ? "bg-emerald-500 text-white" : "bg-wine text-white ring-4 ring-wine/20 animate-pulse" }`}>
                                 {step.icon}
                               </div>
 

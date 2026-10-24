@@ -57,7 +57,7 @@ export default function Milestones() {
                 {/* Content Box */}
                 <div className={`ml-20 md:ml-0 md:w-1/2 ${isEven ? 'md:pl-16' : 'md:pr-16 md:text-right'} transition-transform duration-500 group-hover:-translate-y-2`}>
                   <div className="bg-white p-8 md:p-10 rounded-[2rem] border border-border/80 shadow-sm group-hover:shadow-xl group-hover:border-gold/30 transition-all duration-300 relative z-10">
-                    <div className="text-gold text-small font-bold uppercase mb-3 tracking-widest">{item.year}</div>
+                    <div className="text-gold text-small font-bold mb-3 tracking-widest">{item.year}</div>
                     <h3 className="font-display font-semibold text-h4 text-ink mb-4">
                       {item.title}
                     </h3>

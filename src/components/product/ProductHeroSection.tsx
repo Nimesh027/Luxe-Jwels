@@ -4,18 +4,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import {
+  HeartIcon,
   SafetyCertificateIcon,
-  ThunderboltIcon,
   ShoppingBagIcon,
+  ThunderboltIcon,
 } from "@/components/icons";
 import type { Product, Category } from "@/types";
 import Button from "@/components/ui/Button";
-import Rating from "@/components/ui/Rating";
-import QuantitySelector from "@/components/ui/QuantitySelector";
 import { useCart } from "@/hooks/useCart";
+import { useWishlist } from "@/hooks/useWishlist";
 import { formatPrice } from "@/lib/utils";
-import Section from "../common/Section";
-import Breadcrumbs, { BreadcrumbItem } from "@/components/common/Breadcrumbs";
+import Breadcrumbs from "@/components/common/Breadcrumbs";
 
 interface ProductHeroSectionProps {
   product: Product;
@@ -37,266 +36,246 @@ export default function ProductHeroSection({
   onOpenSizeGuide,
 }: ProductHeroSectionProps) {
   const { add } = useCart();
+  const { toggle, isWishlisted } = useWishlist();
+  const wishlisted = isWishlisted(product.id);
 
   const [quantity, setQuantity] = useState(1);
   const [selectedMetal, setSelectedMetal] = useState<"yellow" | "white" | "rose">("yellow");
-  const [selectedSize, setSelectedSize] = useState<string>("18 INCHES");
-  const [addEngraving, setAddEngraving] = useState(false);
-  const [engravingText, setEngravingText] = useState("");
+  const [selectedSize, setSelectedSize] = useState<number>(7);
+
+  const [isAdded, setIsAdded] = useState(false);
+
+  const sizes = [6, 7, 8, 9, 10, 11, 12];
+
+  const handleAddToCart = () => {
+    add(product, quantity);
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 2000);
+  };
+
+  const handleBuyNow = () => {
+    add(product, quantity);
+    window.location.href = "/cart";
+  };
 
   return (
-    <Section>
-      {/* Breadcrumb Navigation */}
-      <Breadcrumbs
-        items={[
-          ...(category ? [{ label: category.name, href: `/category/${category.slug}` }] : []),
-          { label: product.name },
-        ]}
-      />
-
-      {/* Hero Section Grid */}
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
-        {/* Left Column: Image Gallery (7 cols on lg) */}
-        <div className="lg:col-span-7 space-y-4">
-          <div className="flex flex-col-reverse gap-4 md:flex-row md:items-start w-full">
-            {/* Thumbnail Strip */}
-            <div className="flex gap-3 overflow-x-auto scroll-smooth shrink-0 md:w-20 md:flex-col md:overflow-y-visible [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-              {images.map((img, idx) => (
-                <Button
-                  key={idx}
-                  variant="unstyled"
-                  onClick={(e) => {
-                    onSelectImage(idx);
-                    e.currentTarget.scrollIntoView({
-                      behavior: "smooth",
-                      inline: "center",
-                      block: "nearest",
-                    });
-                  }}
-                  className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border-2 transition-all duration-200 cursor-pointer ${
-                    activeImageIndex === idx
-                      ? "border-wine shadow-md ring-2 ring-wine/20 scale-95"
-                      : "border-border/80 hover:border-gold opacity-75 hover:opacity-100 bg-white"
-                  }`}
-                >
-                  <Image
-                    src={img || "/images/product/diamond-ring.jpg"}
-                    alt={`${product.name} angle ${idx + 1}`}
-                    fill
-                    className="object-cover"
-                  />
-                </Button>
-              ))}
-            </div>
-
-            {/* Main Showcase Frame */}
-            <div
-              onClick={onOpenLightbox}
-              className="group relative aspect-[4/3] w-full min-h-[300px] sm:min-h-[380px] md:min-h-[440px] max-h-[460px] flex-1 min-w-0 cursor-zoom-in overflow-hidden rounded-3xl border border-border/80 bg-cream-dark shadow-sm transition-all hover:shadow-md"
-            >
-              <Image
-                src={images[activeImageIndex] || product.image || "/images/product/diamond-ring.jpg"}
-                alt={product.name}
-                fill
-                sizes="(max-width: 1024px) 100vw, 45vw"
-                priority
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-
-              {/* Floating Badges */}
-              <div className="absolute top-4 left-4 flex flex-col gap-2 z-10">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-wine/90 px-3.5 py-1 text-[11px] font-medium tracking-wide text-white backdrop-blur-md shadow-xs">
-                  <SafetyCertificateIcon size={14} /> 18K Hallmarked Gold
-                </span>
-                {product.compareAtPrice && (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-gold px-3.5 py-1 text-[11px] font-semibold tracking-wide text-ink shadow-xs">
-                    SAVE{" "}
-                    {Math.round(
-                      ((product.compareAtPrice - product.price) / product.compareAtPrice) * 100
-                    )}
-                    %
-                  </span>
-                )}
-              </div>
-            </div>
-          </div>
+    <section className="w-full bg-[#FAF7F2] py-6 sm:py-10 border-b border-[#EAE4DC]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Breadcrumbs */}
+        <div className="mb-6">
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: category?.name || "Rings", href: `/category/${category?.slug || "rings"}` },
+              { label: product.name },
+            ]}
+          />
         </div>
 
-        {/* Right Column: Product Info & Actions (5 cols on lg) */}
-        <div className="lg:col-span-5 flex flex-col gap-6">
-          <div>
-            {/* Category Pill & Rating */}
-            <div className="mb-2 flex items-center justify-between">
-              <span className="text-caption font-semibold uppercase tracking-widest text-gold-dark">
-                {category?.name || "Luxe Jewellery"}
-              </span>
-              <div className="flex items-center gap-1.5 text-caption text-muted">
-                <Rating value={5} />
-                <span className="font-semibold text-ink">4.9</span>
-                <span>(124 reviews)</span>
+        {/* 2-Column Product Detail Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* LEFT: Image Gallery with Main View & Thumbnail Strip */}
+          <div className="lg:col-span-6 flex flex-col gap-4">
+            {/* Main Image Frame */}
+            <div
+              onClick={onOpenLightbox}
+              className="relative aspect-square w-full rounded-2xl overflow-hidden bg-white border border-[#EAE4DC] shadow-sm cursor-zoom-in"
+            >
+              <Image
+                src={images[activeImageIndex] || product.image || "/images/revamp/halo-ring.jpg"}
+                alt={product.name}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-center"
+              />
+            </div>
+
+            {/* Thumbnail Gallery Strip */}
+            <div className="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-none">
+              {images.map((img, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => onSelectImage(idx)}
+                  className={`relative w-20 h-20 rounded-xl overflow-hidden border-2 bg-white transition-all cursor-pointer shrink-0 ${ activeImageIndex === idx ? "border-[#B38E5D] ring-2 ring-[#B38E5D]/30" : "border-[#EAE4DC] opacity-75 hover:opacity-100" }`}
+                >
+                  <Image
+                    src={img || product.image}
+                    alt={`${product.name} angle ${idx + 1}`}
+                    fill
+                    className="object-cover object-center"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* RIGHT: Buy Box Information & Selectors */}
+          <div className="lg:col-span-6 flex flex-col gap-5">
+            {/* Title & Star Rating */}
+            <div>
+              <h1 className="font-display text-[28px] sm:text-[34px] md:text-[38px] font-medium text-[#141414] leading-tight mb-2">
+                {product.name}
+              </h1>
+
+              <div className="flex items-center gap-2">
+                <div className="flex text-[#B38E5D] text-[14px]">
+                  {"★".repeat(5)}
+                </div>
+                <span className="font-display text-[15px] font-semibold text-[#141414]">
+                  4.8
+                </span>
+                <span className="text-[13px] text-[#8C827A]">
+                  (124 reviews)
+                </span>
               </div>
             </div>
 
-            {/* Product Title */}
-            <h1 className="font-display text-h2 font-medium text-ink md:text-h2">
-              {product.name}
-            </h1>
-          </div>
-
-          {/* Price Breakdown */}
-          <div className="rounded-2xl border border-border/80 bg-surface p-4 shadow-2xs">
-            <div className="flex items-baseline gap-3">
-              <span className="font-display text-h2 font-semibold text-wine">
+            {/* Price Row */}
+            <div className="flex items-baseline gap-3 py-2 border-y border-[#EAE4DC]">
+              <span className="font-display text-[26px] sm:text-[30px] font-semibold text-[#141414]">
                 {formatPrice(product.price)}
               </span>
               {product.compareAtPrice && (
-                <span className="text-h5 text-muted line-through">
+                <span className="font-body text-[16px] text-[#8C827A] line-through">
                   {formatPrice(product.compareAtPrice)}
                 </span>
               )}
               {product.compareAtPrice && (
-                <span className="rounded-md bg-emerald-100 px-2 py-0.5 text-caption font-bold text-emerald-800">
-                  Save {formatPrice(product.compareAtPrice - product.price)}
+                <span className="px-2 py-0.5 rounded text-[12px] font-semibold bg-[#227248]/10 text-[#227248]">
+                  28% OFF
                 </span>
               )}
             </div>
-            <p className="mt-1 text-caption text-muted">
-              Inclusive of all taxes. Free insured shipping across India.
-            </p>
 
-            {/* No-cost EMI Banner */}
-            <div className="mt-3 flex items-center gap-2 rounded-xl bg-wine-soft/60 px-3 py-2 text-caption text-wine font-medium">
-              <ThunderboltIcon size={16} />
-              <span>
-                Or 3 interest-free payments of{" "}
-                <strong>{formatPrice(Math.round(product.price / 3))}</strong> with Zest/Klarna.
-              </span>
-            </div>
-          </div>
-
-          {/* Metal Swatch Selection */}
-          <div>
-            <label className="mb-2 block text-caption font-semibold uppercase tracking-wider text-ink">
-              Select Metal Color:{" "}
-              <span className="font-normal text-muted capitalize">{selectedMetal} Gold</span>
-            </label>
-            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
-              <Button
-                variant="unstyled"
-                onClick={() => setSelectedMetal("yellow")}
-                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${
-                  selectedMetal === "yellow"
-                    ? "border-wine bg-wine/5 font-semibold text-wine shadow-xs"
-                    : "border-border text-ink hover:border-gold"
-                }`}
-              >
-                <span className="h-4 w-4 rounded-full bg-amber-400 border border-amber-600/30"></span>
-                Yellow Gold
-              </Button>
-              <Button
-                variant="unstyled"
-                onClick={() => setSelectedMetal("white")}
-                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${
-                  selectedMetal === "white"
-                    ? "border-wine bg-wine/5 font-semibold text-wine shadow-xs"
-                    : "border-border text-ink hover:border-gold"
-                }`}
-              >
-                <span className="h-4 w-4 rounded-full bg-slate-200 border border-slate-400/40"></span>
-                White Gold
-              </Button>
-              <Button
-                variant="unstyled"
-                onClick={() => setSelectedMetal("rose")}
-                className={`flex items-center gap-2 rounded-full border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${
-                  selectedMetal === "rose"
-                    ? "border-wine bg-wine/5 font-semibold text-wine shadow-xs"
-                    : "border-border text-ink hover:border-gold"
-                }`}
-              >
-                <span className="h-4 w-4 rounded-full bg-rose-300 border border-rose-500/40"></span>
-                Rose Gold
-              </Button>
-            </div>
-          </div>
-
-          {/* Size Selector */}
-          <div>
-            <div className="mb-2 flex items-center justify-between">
-              <label className="text-caption font-semibold uppercase tracking-wider text-ink">
-                Select Size / Length
-              </label>
-              <Button
-                variant="unstyled"
-                onClick={onOpenSizeGuide}
-                className="text-caption text-wine underline hover:text-wine-dark cursor-pointer"
-              >
-                Size Guide
-              </Button>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {["14 INCHES", "16 INCHES", "18 INCHES", "20 INCHES"].map((sz) => (
-                <Button
-                  key={sz}
-                  variant="unstyled"
-                  onClick={() => setSelectedSize(sz)}
-                  className={`rounded-xl border px-4 py-2 text-caption font-medium transition-all cursor-pointer ${
-                    selectedSize === sz
-                      ? "border-wine bg-wine text-white shadow-xs"
-                      : "border-border bg-white text-ink hover:border-gold"
-                  }`}
-                >
-                  {sz}
-                </Button>
-              ))}
-            </div>
-          </div>
-
-          {/* Custom Engraving Option */}
-          <div className="rounded-2xl border border-border/80 bg-surface p-4 shadow-2xs">
-            <label className="flex items-center gap-2 text-caption font-medium text-ink cursor-pointer">
-              <input
-                type="checkbox"
-                checked={addEngraving}
-                onChange={(e) => setAddEngraving(e.target.checked)}
-                className="accent-wine rounded cursor-pointer"
-              />
-              Add Free Custom Laser Engraving (Initial / Date)
-            </label>
-            {addEngraving && (
-              <div className="mt-3">
-                <input
-                  type="text"
-                  maxLength={12}
-                  placeholder="Enter up to 12 characters (e.g. A & K ❤️)"
-                  value={engravingText}
-                  onChange={(e) => setEngravingText(e.target.value)}
-                  className="w-full rounded-xl border border-border bg-cream/30 px-3.5 py-2 text-caption text-ink placeholder:text-muted/60 focus:border-wine focus:outline-none"
-                />
-                <span className="mt-1 block text-[10px] text-muted">
-                  {12 - engravingText.length} characters remaining
-                </span>
+            {/* 4 Feature Badges */}
+            <div className="grid grid-cols-2 gap-2 text-[12.5px] text-[#3A3530]">
+              <div className="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border border-[#EAE4DC]">
+                <span className="text-[#B38E5D]">💎</span>
+                <span>Certified Diamond</span>
               </div>
-            )}
-          </div>
+              <div className="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border border-[#EAE4DC]">
+                <span className="text-[#B38E5D]">✨</span>
+                <span>Lifetime Polish</span>
+              </div>
+              <div className="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border border-[#EAE4DC]">
+                <span className="text-[#B38E5D]">🚚</span>
+                <span>Free Shipping</span>
+              </div>
+              <div className="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border border-[#EAE4DC]">
+                <span className="text-[#B38E5D]">🔄</span>
+                <span>Easy 30-Day Return</span>
+              </div>
+            </div>
 
-          {/* Action Buttons: Quantity + Add To Cart */}
-          <div className="flex items-center gap-3">
-            {/* Quantity Control */}
-            <QuantitySelector value={quantity} onChange={setQuantity} size="lg" />
+            {/* Metal Selector */}
+            <div>
+              <label className="block text-[12.5px] font-semibold tracking-wider text-[#141414] mb-2">
+                Metal:{" "}
+                <span className="font-normal capitalize text-[#78716A]">
+                  {selectedMetal} Gold
+                </span>
+              </label>
+              <div className="flex items-center gap-2.5">
+                {[
+                  { id: "yellow", label: "Yellow Gold", color: "#E5C158" },
+                  { id: "white", label: "White Gold", color: "#E0E0E0" },
+                  { id: "rose", label: "Rose Gold", color: "#E8B298" },
+                ].map((metal) => (
+                  <button
+                    key={metal.id}
+                    type="button"
+                    onClick={() => setSelectedMetal(metal.id as any)}
+                    className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-[12.5px] font-medium transition-all cursor-pointer ${ selectedMetal === metal.id ? "border-[#B38E5D] bg-[#B38E5D]/10 text-[#B38E5D] font-semibold shadow-xs" : "border-[#EAE4DC] bg-white text-[#141414] hover:border-[#B38E5D]" }`}
+                  >
+                    <span
+                      className="w-3.5 h-3.5 rounded-full border border-black/20"
+                      style={{ backgroundColor: metal.color }}
+                    />
+                    <span>{metal.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
 
-            {/* Add to Cart */}
-            <Button
-              variant="dark"
-              leftIcon={<ShoppingBagIcon size={18} />}
-              className="flex-1 h-12 rounded-xl text-small font-medium shadow-sm hover:shadow-md cursor-pointer"
-              onClick={() => add(product, quantity)}
-            >
-              Add To Cart
-            </Button>
+            {/* Size Selector */}
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <label className="text-[12.5px] font-semibold tracking-wider text-[#141414]">
+                  Size
+                </label>
+                <button
+                  type="button"
+                  onClick={onOpenSizeGuide}
+                  className="text-[12px] text-[#B38E5D] hover:underline font-medium cursor-pointer"
+                >
+                  Size Guide
+                </button>
+              </div>
+              <div className="flex items-center gap-2 flex-wrap">
+                {sizes.map((sz) => (
+                  <button
+                    key={sz}
+                    type="button"
+                    onClick={() => setSelectedSize(sz)}
+                    className={`w-9 h-9 rounded-lg border text-[13px] font-medium transition-all cursor-pointer flex items-center justify-center ${ selectedSize === sz ? "border-[#B38E5D] bg-[#B38E5D] text-white shadow-xs" : "border-[#EAE4DC] bg-white text-[#141414] hover:border-[#B38E5D]" }`}
+                  >
+                    {sz}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Dual CTA Buttons: Add to Cart & Buy Now */}
+            <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                className="w-full sm:flex-1 py-3.5 px-6 rounded-xl bg-[#B38E5D] hover:bg-[#9C7748] text-white text-[14px] font-medium tracking-wide shadow-md transition-colors cursor-pointer text-center active:scale-[0.98]"
+              >
+                {isAdded ? "Added to Cart ✓" : "Add to Cart"}
+              </button>
+
+              <button
+                type="button"
+                onClick={handleBuyNow}
+                className="w-full sm:flex-1 py-3.5 px-6 rounded-xl bg-[#141414] hover:bg-[#252525] text-white text-[14px] font-medium tracking-wide shadow-md transition-colors cursor-pointer text-center"
+              >
+                Buy Now
+              </button>
+            </div>
+
+            {/* Secondary Actions: Wishlist & Share */}
+            <div className="flex items-center gap-6 pt-1 text-[13px] text-[#78716A]">
+              <button
+                type="button"
+                onClick={() => toggle(product)}
+                className="flex items-center gap-2 hover:text-[#B38E5D] cursor-pointer"
+              >
+                <HeartIcon size={16} filled={wishlisted} className={wishlisted ? "text-[#B38E5D]" : ""} />
+                <span>{wishlisted ? "In Wishlist" : "Add to Wishlist"}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  if (navigator.share) {
+                    navigator.share({ title: product.name, url: window.location.href });
+                  } else {
+                    navigator.clipboard.writeText(window.location.href);
+                    alert("Link copied to clipboard!");
+                  }
+                }}
+                className="flex items-center gap-2 hover:text-[#B38E5D] cursor-pointer"
+              >
+                <span>🔗</span>
+                <span>Share</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }

@@ -21,7 +21,7 @@ export default function FounderStory() {
           {/* CONTENT COLUMN */}
           <div className="order-1 lg:order-2 space-y-6">
             <div className="space-y-2">
-              <span className="text-caption font-bold uppercase tracking-[0.25em] text-gold">
+              <span className="text-caption font-bold tracking-[0.25em] text-gold">
                 Our Genesis
               </span>
               <h2 className="font-display text-h3 sm:text-h2 font-semibold text-wine leading-tight">
@@ -47,7 +47,7 @@ export default function FounderStory() {
               <p className="font-display text-h5 text-ink italic opacity-80">
                 "True luxury is not loud. It is the quiet confidence of exceptional craftsmanship."
               </p>
-              <span className="block mt-2 text-caption font-semibold uppercase tracking-widest text-wine">
+              <span className="block mt-2 text-caption font-semibold tracking-widest text-wine">
                 — The Founders
               </span>
             </div>

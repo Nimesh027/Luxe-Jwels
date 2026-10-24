@@ -1026,7 +1026,159 @@ export function BankIcon({ size = 18, className = "", ...props }: IconProps) {
   );
 }
 
+export function PlayIcon({ size = 20, className = "", ...props }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <polygon points="5 3 19 12 5 21 5 3" />
+    </svg>
+  );
+}
 
+// 44. LOG OUT ICON
+export function LogOutIcon({ size = 18, className = "", ...props }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+      <polyline points="16 17 21 12 16 7" />
+      <line x1="21" y1="12" x2="9" y2="12" />
+    </svg>
+  );
+}
 
+// 45. LOG IN ICON
+export function LogInIcon({ size = 18, className = "", ...props }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+      <polyline points="10 17 15 12 10 7" />
+      <line x1="15" y1="12" x2="3" y2="12" />
+    </svg>
+  );
+}
 
+// 46. HELP CIRCLE / FAQ ICON
+export function HelpCircleIcon({ size = 18, className = "", ...props }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+      <line x1="12" y1="17" x2="12.01" y2="17" />
+    </svg>
+  );
+}
 
+// 47. JEWELER LOUPE / AUTHENTICITY INSPECTION ICON
+export function JewelerLoupeIcon({ size = 20, className = "", ...props }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <circle cx="10" cy="10" r="7" />
+      <path d="m21 21-6-6" />
+      <path d="m8 8 2-1 2 1-2 4-2-4z" strokeWidth="1.3" />
+      <path d="M7 8h6" strokeWidth="1.3" />
+    </svg>
+  );
+}
+
+// 48. JEWELRY PRESENTATION BOX ICON
+export function JewelryBoxIcon({ size = 20, className = "", ...props }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M3 13h18v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7z" />
+      <path d="M3 13 6 4a2 2 0 0 1 2-1h8a2 2 0 0 1 2 1l3 9" />
+      <ellipse cx="12" cy="15" rx="5" ry="1.8" strokeWidth="1.4" />
+      <circle cx="12" cy="11.5" r="2.2" strokeWidth="1.4" />
+      <path d="m11 9.3 1-.8 1 .8" strokeWidth="1.4" />
+    </svg>
+  );
+}
+
+// 49. CONCIERGE / LUXURY CONSULTANT HEADSET ICON
+export function ConciergeHeadsetIcon({ size = 20, className = "", ...props }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10a9 9 0 0 1 18 0v9a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3" />
+      <path d="M18 19v1a2 2 0 0 1-2 2h-4" />
+      <circle cx="11" cy="22" r="1" fill="currentColor" />
+    </svg>
+  );
+}

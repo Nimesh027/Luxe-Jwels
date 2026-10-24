@@ -163,15 +163,15 @@ const ButtonComponent = forwardRef<HTMLButtonElement, ButtonProps>(function Butt
     // 4. Fill / Primary Variant (Default)
     switch (colorTheme) {
       case "gold":
-        return "bg-gold hover:bg-gold-light text-ink font-semibold shadow-xs hover:shadow-md";
+        return "bg-[#B38E5D] hover:bg-[#9C7748] text-white font-medium shadow-xs hover:shadow-md active:scale-[0.99]";
       case "dark":
-        return "bg-ink hover:bg-ink-soft text-cream font-medium shadow-xs hover:shadow-md";
+        return "bg-ink hover:bg-ink-soft text-white font-medium shadow-xs hover:shadow-md active:scale-[0.99]";
       case "light":
       case "cream":
-        return "bg-cream hover:bg-surface text-ink font-medium shadow-xs hover:shadow-md";
+        return "bg-white hover:bg-[#FAF7F2] text-ink border border-border font-medium shadow-xs hover:shadow-md";
       case "wine":
       default:
-        return "bg-wine hover:bg-wine-dark text-white font-medium shadow-wine/20 shadow-xs hover:shadow-md";
+        return "bg-[#B38E5D] hover:bg-[#9C7748] text-white font-medium shadow-xs hover:shadow-md active:scale-[0.99]";
     }
   };
 

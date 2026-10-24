@@ -57,7 +57,7 @@ export default function ProcessVisualizer({
             <span className="text-2xl font-bold font-display text-foreground tracking-tight">
               {pure}%
             </span>
-            <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-[#C5A059]">
+            <span className="text-[10px] font-bold tracking-[0.2em] text-[#C5A059]">
               Pure Metal
             </span>
           </div>
@@ -73,7 +73,7 @@ export default function ProcessVisualizer({
               <div className="text-xs font-bold text-foreground">
                 {pure}% Pure
               </div>
-              <div className="text-[10px] text-muted-foreground uppercase tracking-wider">
+              <div className="text-[10px] text-muted-foreground tracking-wider">
                 {category === "gold" ? "Elemental Gold" : "Fine Silver"}
               </div>
             </div>
@@ -85,14 +85,14 @@ export default function ProcessVisualizer({
               <div className="text-xs font-bold text-foreground">
                 {alloy}% Alloy
               </div>
-              <div className="text-[10px] text-muted-foreground uppercase tracking-wider">
+              <div className="text-[10px] text-muted-foreground tracking-wider">
                 Structural Matrix
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-4 px-3 py-1.5 rounded-full bg-[#C5A059]/10 text-[#C5A059] text-[11px] font-bold tracking-wider uppercase flex items-center gap-1.5">
+        <div className="mt-4 px-3 py-1.5 rounded-full bg-[#C5A059]/10 text-[#C5A059] text-[11px] font-bold tracking-wider flex items-center gap-1.5">
           <Award className="w-3.5 h-3.5" />
           Assay Stamp: {hallmark}
         </div>
@@ -110,7 +110,7 @@ export default function ProcessVisualizer({
 
     return (
       <div className="flex flex-col gap-3.5 p-6 bg-white border border-black/5 shadow-xs rounded-2xl w-full max-w-[440px] mx-auto">
-        <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059] text-center mb-1">
+        <div className="text-xs font-bold tracking-[0.2em] text-[#C5A059] text-center mb-1">
           Metallurgical Color Spectrum
         </div>
         <div className="space-y-3">
@@ -151,7 +151,7 @@ export default function ProcessVisualizer({
 
     return (
       <div className="flex flex-col items-center justify-center p-6 bg-white border border-black/5 shadow-xs rounded-2xl w-full max-w-[440px] mx-auto">
-        <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059] mb-4">
+        <div className="text-xs font-bold tracking-[0.2em] text-[#C5A059] mb-4">
           Vickers & Mohs Hardness Rating
         </div>
 
@@ -183,15 +183,15 @@ export default function ProcessVisualizer({
 
         <div className="mt-5 w-full grid grid-cols-3 gap-2 text-center pt-4 border-t border-black/5 text-[11px]">
           <div className="p-2 rounded-lg bg-stone-50 border border-black/5">
-            <div className="text-muted-foreground text-[10px] uppercase">Scratch</div>
+            <div className="text-muted-foreground text-[10px]">Scratch</div>
             <div className="font-bold text-foreground">High</div>
           </div>
           <div className="p-2 rounded-lg bg-stone-50 border border-black/5">
-            <div className="text-muted-foreground text-[10px] uppercase">Prong Hold</div>
+            <div className="text-muted-foreground text-[10px]">Prong Hold</div>
             <div className="font-bold text-foreground">Secure</div>
           </div>
           <div className="p-2 rounded-lg bg-stone-50 border border-black/5">
-            <div className="text-muted-foreground text-[10px] uppercase">Daily Wear</div>
+            <div className="text-muted-foreground text-[10px]">Daily Wear</div>
             <div className="font-bold text-foreground">Lifetime</div>
           </div>
         </div>
@@ -207,7 +207,7 @@ export default function ProcessVisualizer({
 
     return (
       <div className="flex flex-col items-center justify-center p-6 bg-white border border-black/5 shadow-xs rounded-2xl w-full max-w-[440px] mx-auto text-center">
-        <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059] mb-4">
+        <div className="text-xs font-bold tracking-[0.2em] text-[#C5A059] mb-4">
           Government Assay Hallmark Stamp
         </div>
 
@@ -222,7 +222,7 @@ export default function ProcessVisualizer({
             <div className="text-2xl font-bold font-mono tracking-widest text-[#E5C158]">
               {stampText}
             </div>
-            <div className="text-[10px] uppercase tracking-wider text-stone-400 font-mono">
+            <div className="text-[10px] tracking-wider text-stone-400 font-mono">
               {purity} • LUXE CERTIFIED
             </div>
           </div>
@@ -249,7 +249,7 @@ export default function ProcessVisualizer({
 
     return (
       <div className="flex flex-col items-center justify-center p-6 bg-white border border-black/5 shadow-xs rounded-2xl w-full max-w-[440px] mx-auto">
-        <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059] mb-4">
+        <div className="text-xs font-bold tracking-[0.2em] text-[#C5A059] mb-4">
           Atomic Crystal Lattice
         </div>
 
@@ -280,7 +280,7 @@ export default function ProcessVisualizer({
           <div className="text-xs text-muted-foreground mt-0.5">{element}</div>
         </div>
 
-        <div className="mt-4 px-3.5 py-1 rounded-full bg-stone-100 text-foreground text-[10px] font-mono uppercase tracking-wider">
+        <div className="mt-4 px-3.5 py-1 rounded-full bg-stone-100 text-foreground text-[10px] font-mono tracking-wider">
           Tetrahedral Covalent Bonding
         </div>
       </div>
@@ -294,7 +294,7 @@ export default function ProcessVisualizer({
 
     return (
       <div className="flex flex-col items-center justify-center p-6 bg-white border border-black/5 shadow-xs rounded-2xl w-full max-w-[440px] mx-auto">
-        <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059] mb-4">
+        <div className="text-xs font-bold tracking-[0.2em] text-[#C5A059] mb-4">
           Light Physics & Spectral Dispersion
         </div>
 
@@ -334,14 +334,14 @@ export default function ProcessVisualizer({
 
     return (
       <div className="flex flex-col items-center justify-center p-6 bg-white border border-black/5 shadow-xs rounded-2xl w-full max-w-[440px] mx-auto text-center">
-        <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059] mb-4">
+        <div className="text-xs font-bold tracking-[0.2em] text-[#C5A059] mb-4">
           Gemological Testing Response
         </div>
 
         {/* Diamond Tester Device Simulation */}
         <div className="w-full max-w-[280px] p-4 rounded-2xl bg-stone-900 text-white border border-stone-800 shadow-md">
           <div className="flex items-center justify-between mb-3 text-[10px] font-mono text-stone-400">
-            <span>THERMAL PROBE</span>
+            <span>Thermal Probe</span>
             <span className="flex items-center gap-1 text-emerald-400">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
               ACTIVE
@@ -352,14 +352,12 @@ export default function ProcessVisualizer({
             {[...Array(8)].map((_, i) => (
               <div
                 key={i}
-                className={`h-6 rounded-xs ${
-                  i < 6 ? "bg-emerald-500" : "bg-emerald-400 animate-pulse"
-                }`}
+                className={`h-6 rounded-xs ${ i < 6 ? "bg-emerald-500" : "bg-emerald-400 animate-pulse" }`}
               />
             ))}
           </div>
 
-          <div className="p-2.5 rounded-xl bg-black/60 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2">
+          <div className="p-2.5 rounded-xl bg-black/60 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-bold tracking-wider flex items-center justify-center gap-2">
             <Zap className="w-3.5 h-3.5" />
             {testerResponse}
           </div>
@@ -379,7 +377,7 @@ export default function ProcessVisualizer({
 
     return (
       <div className="flex flex-col items-center justify-center p-6 bg-white border border-black/5 shadow-xs rounded-2xl w-full max-w-[440px] mx-auto text-center">
-        <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059] mb-4">
+        <div className="text-xs font-bold tracking-[0.2em] text-[#C5A059] mb-4">
           Chemical Surface Protection
         </div>
 
