@@ -143,9 +143,8 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-gold);
-    outline-offset: 2px;
-    border-radius: 2px;
+   outline: none;
+   box-shadow: none;
   }
 
   img {

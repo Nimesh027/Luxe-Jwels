@@ -150,58 +150,74 @@ export default function ProductHeroSection({
 
           {/* Buy box */}
           <div className="lg:col-span-5">
-            <h1 className="font-display text-h2 font-semibold text-ink leading-tight">{product.name}</h1>
-
-            <a href="#reviews" className="mt-2 inline-flex items-center gap-2 text-[14px] text-muted hover:text-gold transition-colors">
-              <Rating value={4.8} size={15} />
-              <span className="font-semibold text-ink">4.8</span>
-              <span>(124 reviews)</span>
-            </a>
-
-            <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <span className="text-[28px] sm:text-[32px] font-semibold text-ink leading-none">
-                {formatPrice(product.price)}
+            <div className="flex flex-wrap items-center gap-2.5">
+              <span className="text-[12px] font-semibold uppercase tracking-[0.16em] text-gold">
+                {categoryCrumb.name}
               </span>
-              {discount > 0 && (
-                <>
-                  <span className="text-[17px] text-subtle line-through">{formatPrice(product.compareAtPrice!)}</span>
-                  <span className="rounded-[3px] bg-success/10 px-2 py-0.5 text-[13px] font-semibold text-success">
-                    {discount}% OFF
-                  </span>
-                </>
+              {product.badge && (
+                <span className="rounded-full bg-gold-soft px-2.5 py-0.5 text-[11.5px] font-semibold text-gold">
+                  {product.badge}
+                </span>
               )}
             </div>
-            <p className="mt-1.5 text-[13px] text-muted">Inclusive of all taxes</p>
 
-            <ul className="mt-5 space-y-2.5 border-y border-border py-5">
-              {ASSURANCES.map(({ icon: Icon, label }) => (
-                <li key={label} className="flex items-center gap-3 text-[14.5px] text-ink-soft">
-                  <Icon className="h-5 w-5 text-gold-warm shrink-0" />
-                  {label}
-                </li>
-              ))}
-            </ul>
+            <h1 className="mt-2 font-display text-h2 font-semibold text-ink leading-tight">{product.name}</h1>
 
-            <fieldset className="mt-5">
-              <legend className="mb-2.5 text-[14px] font-semibold text-ink">
+            <a href="#reviews" className="mt-2.5 inline-flex items-center gap-2 text-[14px] text-muted hover:text-gold transition-colors">
+              <Rating value={4.8} size={15} />
+              <span className="font-semibold text-ink">4.8</span>
+              <span className="h-3.5 w-px bg-border-strong" aria-hidden="true" />
+              <span className="underline-offset-4 hover:underline">124 reviews</span>
+            </a>
+
+            <div className="mt-5 rounded-[var(--radius-card)] border border-border bg-white px-5 py-4">
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className="text-[30px] sm:text-[34px] font-semibold text-ink leading-none tracking-tight">
+                  {formatPrice(product.price)}
+                </span>
+                {discount > 0 && (
+                  <span className="text-[16px] text-subtle line-through">{formatPrice(product.compareAtPrice!)}</span>
+                )}
+              </div>
+              <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[13px]">
+                {discount > 0 && (
+                  <span className="rounded-full bg-success/10 px-2.5 py-0.5 font-semibold text-success">
+                    Save {formatPrice(product.compareAtPrice! - product.price)} ({discount}% off)
+                  </span>
+                )}
+                <span className="text-muted">Inclusive of all taxes</span>
+              </div>
+            </div>
+
+            <fieldset className="mt-6">
+              <legend className="mb-3 text-[14px] font-semibold text-ink">
                 Metal: <span className="font-normal text-muted">{activeMetal.label}</span>
               </legend>
               <div className="grid grid-cols-3 gap-2.5">
-                {METALS.map((m) => (
-                  <button
-                    key={m.id}
-                    type="button"
-                    aria-pressed={metal === m.id}
-                    onClick={() => setMetal(m.id)}
-                    className={cn(
-                      "flex h-11 items-center justify-center gap-2 rounded-[var(--radius-btn)] border px-2 text-[13.5px] font-medium transition-colors cursor-pointer",
-                      metal === m.id ? "border-gold bg-gold-soft text-ink" : "border-border bg-white text-ink hover:border-border-strong"
-                    )}
-                  >
-                    <span className="h-3.5 w-3.5 shrink-0 rounded-full border border-black/15" style={{ backgroundColor: m.swatch }} />
-                    <span className="truncate">{m.label}</span>
-                  </button>
-                ))}
+                {METALS.map((m) => {
+                  const selected = metal === m.id;
+                  return (
+                    <button
+                      key={m.id}
+                      type="button"
+                      aria-pressed={selected}
+                      onClick={() => setMetal(m.id)}
+                      className={cn(
+                        "press flex flex-col items-center justify-center gap-2 rounded-[var(--radius-card)] border bg-white px-2 py-3 text-[13px] font-medium text-ink cursor-pointer",
+                        selected ? "border-gold ring-1 ring-gold" : "border-border hover:border-border-strong"
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          "h-7 w-7 shrink-0 rounded-full border border-black/10 shadow-inner ring-offset-2 ring-offset-white transition-shadow",
+                          selected ? "ring-2 ring-gold" : "ring-0"
+                        )}
+                        style={{ background: `radial-gradient(circle at 30% 30%, #fff8 0%, transparent 45%), ${m.swatch}` }}
+                      />
+                      <span className="truncate">{m.label}</span>
+                    </button>
+                  );
+                })}
               </div>
             </fieldset>
 
@@ -238,10 +254,31 @@ export default function ProductHeroSection({
               </fieldset>
             )}
 
-            <div className="mt-6 space-y-3">
-              <Button size="lg" fullWidth onClick={handleAddToCart} leftIcon={isAdded ? <CheckIcon size={18} /> : undefined}>
-                {isAdded ? "Added to Cart" : "Add to Cart"}
-              </Button>
+            <div className="mt-7 space-y-3">
+              <div className="flex gap-3">
+                <Button
+                  size="lg"
+                  fullWidth
+                  onClick={handleAddToCart}
+                  leftIcon={isAdded ? <CheckIcon size={18} /> : undefined}
+                  className="flex-1"
+                >
+                  {isAdded ? "Added to Cart" : "Add to Cart"}
+                </Button>
+                <button
+                  type="button"
+                  onClick={() => toggle(product)}
+                  aria-pressed={wishlisted}
+                  aria-label={wishlisted ? "Remove from wishlist" : "Add to wishlist"}
+                  title={wishlisted ? "In Wishlist" : "Add to Wishlist"}
+                  className={cn(
+                    "press flex w-13 shrink-0 items-center justify-center rounded-[var(--radius-btn)] border bg-white cursor-pointer",
+                    wishlisted ? "border-gold text-gold" : "border-border-strong text-ink hover:border-gold hover:text-gold"
+                  )}
+                >
+                  <HeartIcon size={20} filled={wishlisted} />
+                </button>
+              </div>
               <Button
                 size="lg"
                 colorTheme="dark"
@@ -255,22 +292,28 @@ export default function ProductHeroSection({
               </Button>
             </div>
 
-            <div className="mt-4 flex items-center gap-6 text-[14px] text-ink-soft">
-              <button
-                type="button"
-                onClick={() => toggle(product)}
-                aria-pressed={wishlisted}
-                className="inline-flex items-center gap-2 hover:text-gold transition-colors cursor-pointer"
-              >
-                <HeartIcon size={17} filled={wishlisted} className={wishlisted ? "text-gold" : undefined} />
-                {wishlisted ? "In Wishlist" : "Add to Wishlist"}
-              </button>
+            <ul className="mt-6 grid grid-cols-2 gap-2.5">
+              {ASSURANCES.map(({ icon: Icon, label }) => (
+                <li
+                  key={label}
+                  className="flex items-center gap-2.5 rounded-[var(--radius-card)] border border-border bg-white/70 px-3 py-2.5 text-[13.5px] text-ink-soft"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold-soft">
+                    <Icon className="h-4.5 w-4.5 text-gold-warm" />
+                  </span>
+                  {label}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-5 flex items-center justify-between border-t border-border pt-4 text-[13.5px] text-ink-soft">
+              <span className="text-muted">Need help choosing? Share this piece.</span>
               <button
                 type="button"
                 onClick={handleShare}
-                className="inline-flex items-center gap-2 hover:text-gold transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 font-medium hover:text-gold transition-colors cursor-pointer"
               >
-                <ShareIcon size={17} />
+                <ShareIcon size={16} />
                 <span aria-live="polite">{copied ? "Link copied" : "Share"}</span>
               </button>
             </div>

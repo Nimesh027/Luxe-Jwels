@@ -75,7 +75,7 @@ export default function ServiceStrip() {
         {assuranceItems.map(({ icon: Icon, title, subtitle }, idx) => (
           <li
             key={title}
-            className={`flex items-center gap-3 sm:gap-4 px-2 sm:px-4 lg:justify-center ${idx % 2 === 1 ? "border-l border-border" : ""} ${idx === 2 ? "lg:border-l" : ""}`}
+            className={`flex items-center gap-3 sm:gap-4 px-2 sm:px-4 lg:justify-center border-border ${idx % 2 === 1 ? "border-l" : ""} ${idx === 2 ? "lg:border-l" : ""}`}
           >
             <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-border bg-white text-gold-warm">
               <Icon className="w-6 h-6" />

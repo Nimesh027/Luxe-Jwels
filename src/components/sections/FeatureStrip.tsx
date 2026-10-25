@@ -22,7 +22,8 @@ export default function FeatureStrip({ className }: { className?: string }) {
             key={title}
             className={cn(
               "flex items-center gap-3 sm:gap-4 px-2 sm:px-4 lg:justify-center",
-              idx % 2 === 1 && "border-l border-border",
+              "border-border",
+              idx % 2 === 1 && "border-l",
               idx === 2 && "lg:border-l"
             )}
           >
