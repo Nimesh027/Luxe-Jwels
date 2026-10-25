@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { PlayIcon } from "@/components/icons";
+import { PlayIcon, ArrowRightIcon } from "@/components/icons";
 import ImageBanner from "@/components/common/ImageBanner";
 import VideoModal from "@/components/common/VideoModal";
 import Button from "@/components/ui/Button";
@@ -38,8 +38,15 @@ export default function ManufacturingBanner() {
           >
             Watch Video
           </Button>
-          <Button variant="text" colorTheme="light" size="sm" href="/manufacturing">
-            Discover the process →
+          <Button
+            variant="text"
+            colorTheme="light"
+            size="sm"
+            href="/manufacturing"
+            className="group"
+            rightIcon={<ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />}
+          >
+            Discover the process
           </Button>
         </ImageBanner>
       </div>

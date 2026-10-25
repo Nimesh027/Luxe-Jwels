@@ -66,6 +66,14 @@ interface AddressItem {
   isDefault: boolean;
 }
 
+const NET_BANKING_BANKS = [
+  { value: "State Bank of India", label: "State Bank of India (SBI)" },
+  { value: "HDFC Bank", label: "HDFC Bank" },
+  { value: "ICICI Bank", label: "ICICI Bank" },
+  { value: "Axis Bank", label: "Axis Bank" },
+  { value: "Kotak Mahindra Bank", label: "Kotak Mahindra Bank" },
+];
+
 export default function AccountClient() {
   const dispatch = useAppDispatch();
   const { user, isAuthenticated } = useAppSelector((state) => state.auth);
@@ -119,6 +127,11 @@ export default function AccountClient() {
     upiId: "",
     setAsDefault: true,
   });
+
+  // bankName is shared with the card form, so fall back to the first bank when it isn't one of these
+  const netBankingBank = NET_BANKING_BANKS.some((b) => b.value === newPaymentForm.bankName)
+    ? newPaymentForm.bankName
+    : NET_BANKING_BANKS[0].value;
 
   // Address Book State
   const [addresses, setAddresses] = useState<AddressItem[]>([]);
@@ -205,7 +218,7 @@ export default function AccountClient() {
       newPm = {
         id: `pm-${Date.now()}`,
         type: "netbanking",
-        bank: newPaymentForm.bankName || "State Bank of India",
+        bank: netBankingBank,
         title: "NetBanking",
         number: "Linked Savings Account",
         holder: newPaymentForm.cardHolder,
@@ -853,15 +866,9 @@ export default function AccountClient() {
                       <div className="space-y-4">
                         <Select
                           label="Select Bank"
-                          value={newPaymentForm.bankName || "State Bank of India"}
+                          value={netBankingBank}
                           onChange={(val) => setNewPaymentForm({ ...newPaymentForm, bankName: val })}
-                          options={[
-                            { value: "State Bank of India", label: "State Bank of India (SBI)" },
-                            { value: "HDFC Bank", label: "HDFC Bank" },
-                            { value: "ICICI Bank", label: "ICICI Bank" },
-                            { value: "Axis Bank", label: "Axis Bank" },
-                            { value: "Kotak Mahindra Bank", label: "Kotak Mahindra Bank" },
-                          ]}
+                          options={NET_BANKING_BANKS}
                           size="md"
                         />
                       </div>

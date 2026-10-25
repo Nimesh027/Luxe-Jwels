@@ -114,7 +114,7 @@ function SelectComponent({
         <div
           role="listbox"
           className={cn(
-            "absolute top-[calc(100%+6px)] z-50 min-w-[210px] w-full sm:w-max max-w-[290px] bg-white border border-border rounded-2xl shadow-xl overflow-hidden transition-[opacity,scale,translate,visibility] duration-200 ease-out",
+            "absolute top-[calc(100%+6px)] z-50 min-w-[210px] w-full bg-white border border-border rounded-2xl shadow-xl overflow-hidden transition-[opacity,scale,translate,visibility] duration-200 ease-out",
             align === "right" ? "right-0 origin-top-right" : "left-0 origin-top-left",
             open
               ? "opacity-100 scale-100 translate-y-0 pointer-events-auto visible"

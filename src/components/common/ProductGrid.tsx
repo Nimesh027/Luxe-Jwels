@@ -1,5 +1,6 @@
 import ProductCard from "@/components/common/ProductCard";
 import Button from "@/components/ui/Button";
+import { ArrowRightIcon } from "@/components/icons";
 import type { Product } from "@/types";
 
 interface ProductGridProps {
@@ -16,8 +17,14 @@ export default function ProductGrid({ title, products }: ProductGridProps) {
           <h2 className="font-display text-h3 font-semibold text-ink">
             {title} <span className="font-body text-[15px] font-normal text-muted">({products.length} items)</span>
           </h2>
-          <Button variant="text" size="sm" href="/shop" className="px-0">
-            All jewellery →
+          <Button
+            variant="text"
+            size="sm"
+            href="/shop"
+            className="group px-0"
+            rightIcon={<ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />}
+          >
+            All jewellery
           </Button>
         </div>
 

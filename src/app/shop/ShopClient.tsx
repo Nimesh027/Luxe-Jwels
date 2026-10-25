@@ -195,61 +195,6 @@ function ShopContent() {
 
       <div className="py-8 sm:py-10 lg:py-12">
         <div className="container">
-          {/* ── Toolbar ───────────────────────────────────────────── */}
-          <div className="flex items-center justify-between gap-4 mb-7 pb-5 border-b border-border/70">
-            {/* Mobile filter toggle */}
-            <Button
-              id="shop-filter-toggle"
-              onClick={() => setSidebarOpen(true)}
-              variant="border"
-              colorTheme="wine"
-              size="sm"
-              rounded="md"
-              className="lg:hidden"
-              leftIcon={
-                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="4" y1="6" x2="20" y2="6" /><line x1="7" y1="12" x2="17" y2="12" /><line x1="10" y1="18" x2="14" y2="18" />
-                </svg>
-              }
-              rightIcon={
-                activeFilterCount > 0 ? (
-                  <span className="bg-brand text-white text-[10.5px] font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">
-                    {activeFilterCount}
-                  </span>
-                ) : undefined
-              }
-            >
-              Filters
-            </Button>
-
-            {/* Product count — desktop */}
-            <p className="hidden lg:block text-[14px] text-muted">
-              Showing{" "}
-              <span className="font-semibold text-ink">{visibleProducts.length}</span>{" "}
-              of <span className="font-semibold text-ink">{products.length}</span>{" "}
-              {products.length === 1 ? "design" : "designs"}
-            </p>
-
-            {/* Product count — mobile */}
-            <p className="lg:hidden text-[13.5px] text-muted">
-              Showing <span className="font-semibold text-ink">{visibleProducts.length}</span> of{" "}
-              <span className="font-semibold text-ink">{products.length}</span>
-            </p>
-
-            {/* Sort dropdown */}
-            <div className="flex items-center gap-2.5">
-              <span className="text-[14px] text-muted hidden sm:block whitespace-nowrap">
-                Sort
-              </span>
-              <Select
-                options={SORT_OPTIONS}
-                value={activeSort}
-                onChange={(val) => setParam("sort", val)}
-                align="right"
-              />
-            </div>
-          </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* ── Desktop Sidebar — col-span-3 ─────────────────── */}
             <div className="hidden lg:block lg:col-span-3">
@@ -293,6 +238,57 @@ function ShopContent() {
 
             {/* ── Product Grid — col-span-9 ────────────────────── */}
             <div className="lg:col-span-9">
+              {/* ── Toolbar ───────────────────────────────────────── */}
+              <div className="mb-5 flex items-center justify-between gap-3 rounded-[var(--radius-card)] border border-border bg-white px-3 py-2.5 sm:px-4">
+                <div className="flex items-center gap-3">
+                  {/* Mobile filter toggle */}
+                  <Button
+                    id="shop-filter-toggle"
+                    onClick={() => setSidebarOpen(true)}
+                    variant="border"
+                    colorTheme="wine"
+                    size="sm"
+                    rounded="md"
+                    className="lg:hidden"
+                    leftIcon={
+                      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="4" y1="6" x2="20" y2="6" /><line x1="7" y1="12" x2="17" y2="12" /><line x1="10" y1="18" x2="14" y2="18" />
+                      </svg>
+                    }
+                    rightIcon={
+                      activeFilterCount > 0 ? (
+                        <span className="bg-brand text-white text-[10.5px] font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">
+                          {activeFilterCount}
+                        </span>
+                      ) : undefined
+                    }
+                  >
+                    Filters
+                  </Button>
+
+                  <p className="text-[13.5px] sm:text-[14px] text-muted">
+                    <span className="font-semibold text-ink">{products.length}</span>{" "}
+                    {products.length === 1 ? "design" : "designs"}
+                    <span className="hidden sm:inline">
+                      {" "}· showing <span className="font-medium text-ink">{visibleProducts.length}</span>
+                    </span>
+                  </p>
+                </div>
+
+                {/* Sort dropdown */}
+                <div className="flex items-center gap-2.5">
+                  <span className="text-[13.5px] text-muted hidden sm:block whitespace-nowrap">
+                    Sort by
+                  </span>
+                  <Select
+                    options={SORT_OPTIONS}
+                    value={activeSort}
+                    onChange={(val) => setParam("sort", val)}
+                    align="right"
+                  />
+                </div>
+              </div>
+
               {/* Active Filter Chips */}
               {activeFilterCount > 0 && (
                 <div className="flex flex-wrap items-center gap-2 mb-6 p-3 bg-surface border border-border rounded-[var(--radius-card)]">
@@ -385,7 +381,7 @@ function ShopContent() {
               ) : (
                 <>
                   {/* Products Grid */}
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-5 sm:grid-cols-3 xl:grid-cols-4">
+                  <div className="grid grid-cols-2 gap-3 sm:gap-5 sm:grid-cols-3">
                     {visibleProducts.map((product) => (
                       <ProductCard key={product.id} product={product} />
                     ))}

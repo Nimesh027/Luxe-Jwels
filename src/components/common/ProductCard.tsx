@@ -36,8 +36,8 @@ function ProductCardComponent({
   const badge = product.isBestseller ? "Bestseller" : product.isMostSold ? "New" : null;
 
   return (
-    <article className="group relative flex h-full flex-col">
-      <div className="relative aspect-square overflow-hidden rounded-[var(--radius-card)] border border-border bg-cream-dark">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-border bg-white transition-[box-shadow,border-color,translate] duration-300 ease-out hover:-translate-y-0.5 hover:border-border-strong hover:shadow-lift">
+      <div className="relative aspect-square overflow-hidden bg-cream-dark">
         <Link href={href} tabIndex={-1} aria-hidden="true" className="block h-full w-full">
           <Image
             src={product.image}
@@ -52,8 +52,8 @@ function ProductCardComponent({
         {badge && (
           <span
             className={cn(
-              "pointer-events-none absolute left-2.5 top-2.5 rounded-[3px] px-2 py-1 text-[11px] font-semibold leading-none tracking-wide",
-              badge === "New" ? "bg-ink text-white" : "bg-white text-ink shadow-xs"
+              "pointer-events-none absolute left-2.5 top-2.5 rounded-full px-2.5 py-1 text-[10.5px] font-semibold uppercase leading-none tracking-[0.08em]",
+              badge === "New" ? "bg-ink text-white" : "bg-white/95 text-gold shadow-xs"
             )}
           >
             {badge}
@@ -91,29 +91,31 @@ function ProductCardComponent({
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col pt-3">
-        <h3 className="font-body text-[14.5px] sm:text-[15px] font-medium leading-snug text-ink line-clamp-2 min-h-[2.6em]">
+      <div className="flex flex-1 flex-col px-3 pb-3.5 pt-3 sm:px-4 sm:pb-4">
+        {showRating && (
+          <div className="flex items-center gap-1.5">
+            <Rating value={4.8} size={12} />
+            <span className="text-[12px] text-muted">(124)</span>
+          </div>
+        )}
+
+        <h3 className="mt-1.5 mb-3 font-body text-[14px] sm:text-[15px] font-medium leading-snug text-ink line-clamp-2 min-h-[2.6em]">
           <Link href={href} className="hover:text-gold transition-colors">
             {product.name}
           </Link>
         </h3>
 
-        <div className="mt-1.5 flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+        <div className="mt-auto flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-border pt-2.5">
           <span className="text-[16px] sm:text-[17px] font-semibold text-ink">{formatPrice(product.price)}</span>
           {discount > 0 && (
             <>
-              <span className="text-[13px] text-subtle line-through">{formatPrice(product.compareAtPrice!)}</span>
-              <span className="text-[12.5px] font-semibold text-success">{discount}% off</span>
+              <span className="text-[12.5px] text-subtle line-through">{formatPrice(product.compareAtPrice!)}</span>
+              <span className="rounded-full bg-success/10 px-1.5 py-0.5 text-[11px] font-semibold leading-none text-success">
+                {discount}% off
+              </span>
             </>
           )}
         </div>
-
-        {showRating && (
-          <div className="mt-1.5 flex items-center gap-1.5">
-            <Rating value={4.8} size={13} />
-            <span className="text-[12.5px] text-muted">(124)</span>
-          </div>
-        )}
       </div>
     </article>
   );

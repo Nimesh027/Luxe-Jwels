@@ -16,6 +16,7 @@ import {
   HelpCircleIcon,
   LogOutIcon,
   LogInIcon,
+  ArrowRightIcon,
 } from "@/components/icons";
 
 export default function UserDrawer() {
@@ -58,7 +59,9 @@ export default function UserDrawer() {
                 <p className="font-display text-h6 font-semibold tracking-wide text-white lowercase leading-tight">
                   {displayName}
                 </p>
-                <p className="text-[11px] text-white/80 font-medium">Manage Profile & Account &rarr;</p>
+                <p className="flex items-center gap-1 text-[11px] text-white/80 font-medium">
+                  Manage Profile & Account <ArrowRightIcon className="h-3 w-3" />
+                </p>
               </div>
             </div>
 

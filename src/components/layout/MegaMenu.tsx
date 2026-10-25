@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { MegaMenuData } from "@/types";
 import JewelryIcon from "./JewelryIcon";
+import { ArrowRightIcon } from "@/components/icons";
 import { cn } from "@/lib/utils";
 
 interface MegaMenuProps {
@@ -148,9 +149,7 @@ export default function MegaMenu({ data, onClose }: MegaMenuProps) {
                 </p>
                 <div className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-gold mt-2 transition-colors duration-150">
                   <span>{activeTab.featuredCard.ctaLabel}</span>
-                  <span className="text-[11px] transform group-hover:translate-x-1 transition-transform">
-                    &rarr;
-                  </span>
+                  <ArrowRightIcon className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                 </div>
               </Link>
             </div>

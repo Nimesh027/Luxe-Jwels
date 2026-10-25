@@ -91,43 +91,36 @@ function JewelleryDetailsTabsComponent({ product }: JewelleryDetailsTabsProps) {
         )}
 
         {activeTab === "specifications" && (
-          <div className="max-w-2xl text-[14px] text-ink-soft">
-            <table className="w-full border-collapse">
-              <tbody>
-                <tr className="border-b border-border py-2.5">
-                  <td className="py-2.5 font-medium text-muted">Metal Purity</td>
-                  <td className="py-2.5 text-right font-semibold">18K BIS Hallmarked</td>
-                </tr>
-                <tr className="border-b border-border py-2.5">
-                  <td className="py-2.5 font-medium text-muted">Diamond Clarity</td>
-                  <td className="py-2.5 text-right font-semibold">VVS - VS Natural</td>
-                </tr>
-                <tr className="border-b border-border py-2.5">
-                  <td className="py-2.5 font-medium text-muted">Diamond Color</td>
-                  <td className="py-2.5 text-right font-semibold">E - F Near Colorless</td>
-                </tr>
-                <tr className="border-b border-border py-2.5">
-                  <td className="py-2.5 font-medium text-muted">Certification</td>
-                  <td className="py-2.5 text-right font-semibold">IGI / SGL Certified</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-12 text-[14px]">
+            {[
+              ["Metal Purity", "18K BIS Hallmarked"],
+              ["Diamond Clarity", "VVS - VS Natural"],
+              ["Diamond Color", "E - F Near Colorless"],
+              ["Certification", "IGI / SGL Certified"],
+            ].map(([label, value]) => (
+              <div key={label} className="flex items-center justify-between gap-4 border-b border-border py-3.5">
+                <dt className="font-medium text-muted">{label}</dt>
+                <dd className="text-right font-semibold text-ink-soft">{value}</dd>
+              </div>
+            ))}
+          </dl>
         )}
 
         {activeTab === "shipping" && (
-          <div className="max-w-2xl text-[14px] text-muted space-y-3 font-light leading-relaxed">
-            <p>
-              • <strong>Complimentary Insured Shipping:</strong> All orders are delivered via insured express courier with tamper-proof packaging.
-            </p>
-            <p>
-              • <strong>30-Day Hassle-Free Returns:</strong> If you are not completely satisfied, return the jewellery in its original condition within 30 days for a full refund or exchange.
-            </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-[14px] leading-relaxed">
+            <div className="rounded-[var(--radius-card)] border border-border bg-cream/60 p-5">
+              <p className="font-semibold text-ink">Complimentary Insured Shipping</p>
+              <p className="mt-1.5 text-muted">All orders are delivered via insured express courier with tamper-proof packaging.</p>
+            </div>
+            <div className="rounded-[var(--radius-card)] border border-border bg-cream/60 p-5">
+              <p className="font-semibold text-ink">30-Day Hassle-Free Returns</p>
+              <p className="mt-1.5 text-muted">If you are not completely satisfied, return the jewellery in its original condition within 30 days for a full refund or exchange.</p>
+            </div>
           </div>
         )}
 
         {activeTab === "reviews" && (
-          <div className="max-w-2xl text-[14px] text-ink-soft space-y-4">
+          <div className="text-[14px] text-ink-soft space-y-4">
             <div className="p-4 rounded-xl bg-cream border border-border">
               <Rating value={5} size={13} className="mb-1" />
               <p className="italic text-muted">&ldquo;Simply magnificent sparkle. Arrived beautifully packed with all certification cards.&rdquo;</p>
